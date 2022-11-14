@@ -1,0 +1,62 @@
+# Git URL : https://github.com/realm/SwiftLint
+# Reference : https://realm.github.io/SwiftLint/index.html
+excluded:
+  - SpaceCapsuleTests/*
+  - SpaceCapsuleUITests/*
+  
+analyzer_rules:
+  - unused_declaration
+  - unused_import
+  
+opt_in_rules:
+  - anyobject_protocol
+  - closure_end_indentation
+  - closure_spacing
+  - collection_alignment
+  - contains_over_first_not_nil
+  - empty_count
+  - empty_string
+  - extension_access_modifier
+  - fatal_error_message
+  - first_where
+  - force_unwrapping
+  - identifier_name
+  - joined_default_parameter
+  - last_where
+  - literal_expression_end_indentation
+  - lower_acl_than_parent
+  - operator_usage_whitespace
+  - overridden_super_call
+  - override_in_extension
+  - pattern_matching_keywords
+  - prohibited_super_call
+  - redundant_nil_coalescing
+  - sorted_first_last
+  - static_operator
+  - unavailable_function
+  - unneeded_parentheses_in_closure_argument
+  - untyped_error_in_catch
+  - vertical_parameter_alignment_on_call
+  - yoda_condition
+  
+disabled_rules:
+  - orphaned_doc_comment
+  - empty_xctest_method
+  - redundant_type_annotation
+  - number_separator
+  - trailing_comma
+  - sorted_imports
+  - file_header
+  - trailing_whitespace
+
+# Customized Configurable Rules
+line_length: 200
+force_cast: error
+nesting:
+  type_level:
+    warning: 3
+  statement_level:
+    warning: 3
+function_body_length:
+  warning: 30
+  error: 35

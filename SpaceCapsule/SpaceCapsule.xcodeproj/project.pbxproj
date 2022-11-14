@@ -140,6 +140,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0D6CA35B292216A400E02393 /* Build configuration list for PBXNativeTarget "SpaceCapsule" */;
 			buildPhases = (
+				0D6CA36C29221A2900E02393 /* SwiftLint Script */,
 				0D6CA32D292216A300E02393 /* Sources */,
 				0D6CA32E292216A300E02393 /* Frameworks */,
 				0D6CA32F292216A300E02393 /* Resources */,
@@ -267,6 +268,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0D6CA36C29221A2900E02393 /* SwiftLint Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "SwiftLint Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nexport PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"Warning: SwiftLint not installed!!\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0D6CA32D292216A300E02393 /* Sources */ = {
