@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		0D6CA335292216A300E02393 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D6CA334292216A300E02393 /* AppDelegate.swift */; };
 		0D6CA337292216A300E02393 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D6CA336292216A300E02393 /* SceneDelegate.swift */; };
-		0D6CA339292216A300E02393 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D6CA338292216A300E02393 /* ViewController.swift */; };
 		0D6CA33E292216A400E02393 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D6CA33D292216A400E02393 /* Assets.xcassets */; };
 		0D6CA341292216A400E02393 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D6CA33F292216A400E02393 /* LaunchScreen.storyboard */; };
 		0D6CA34C292216A400E02393 /* SpaceCapsuleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D6CA34B292216A400E02393 /* SpaceCapsuleTests.swift */; };
@@ -21,6 +20,7 @@
 		0D707D5129222BEB00380B14 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 0D707D5029222BEB00380B14 /* FirebaseAuth */; };
 		0D707D5329222BEB00380B14 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 0D707D5229222BEB00380B14 /* FirebaseFirestore */; };
 		0D707D5529222BEB00380B14 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 0D707D5429222BEB00380B14 /* FirebaseStorage */; };
+		28049CE529236EEC002389BD /* CapsuleAccessCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28049CE429236EEC002389BD /* CapsuleAccessCoordinator.swift */; };
 		288A8E922923244D000229D2 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288A8E912923244D000229D2 /* Coordinator.swift */; };
 		288A8E97292359CF000229D2 /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288A8E96292359CF000229D2 /* AuthCoordinator.swift */; };
 		288A8E9B29235A6E000229D2 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288A8E9A29235A6E000229D2 /* SignInView.swift */; };
@@ -68,8 +68,8 @@
 		288A8EFB292360A4000229D2 /* CapsuleDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288A8EFA292360A4000229D2 /* CapsuleDetailViewController.swift */; };
 		288A8EFD292360AB000229D2 /* CapsuleDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288A8EFC292360AB000229D2 /* CapsuleDetailViewModel.swift */; };
 		288A8EFF292360BC000229D2 /* CapsuleDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288A8EFE292360BC000229D2 /* CapsuleDetailCoordinator.swift */; };
-		288A8F012923623B000229D2 /* CapsuleAccessCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288A8F002923623B000229D2 /* CapsuleAccessCoordinator.swift */; };
 		288A8F03292362CC000229D2 /* CapsuleAddCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288A8F02292362CC000229D2 /* CapsuleAddCoordinator.swift */; };
+		288A8F0529236505000229D2 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288A8F0429236505000229D2 /* AppCoordinator.swift */; };
 		289F776B2922330C00B66FDB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 289F776A2922330B00B66FDB /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
@@ -94,7 +94,6 @@
 		0D6CA331292216A300E02393 /* SpaceCapsule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceCapsule.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D6CA334292216A300E02393 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0D6CA336292216A300E02393 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		0D6CA338292216A300E02393 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		0D6CA33D292216A400E02393 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0D6CA340292216A400E02393 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0D6CA342292216A400E02393 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -103,6 +102,7 @@
 		0D6CA351292216A400E02393 /* SpaceCapsuleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpaceCapsuleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D6CA355292216A400E02393 /* SpaceCapsuleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceCapsuleUITests.swift; sourceTree = "<group>"; };
 		0D6CA357292216A400E02393 /* SpaceCapsuleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceCapsuleUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		28049CE429236EEC002389BD /* CapsuleAccessCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleAccessCoordinator.swift; sourceTree = "<group>"; };
 		288A8E912923244D000229D2 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		288A8E96292359CF000229D2 /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 		288A8E9A29235A6E000229D2 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
@@ -150,8 +150,8 @@
 		288A8EFA292360A4000229D2 /* CapsuleDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleDetailViewController.swift; sourceTree = "<group>"; };
 		288A8EFC292360AB000229D2 /* CapsuleDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleDetailViewModel.swift; sourceTree = "<group>"; };
 		288A8EFE292360BC000229D2 /* CapsuleDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleDetailCoordinator.swift; sourceTree = "<group>"; };
-		288A8F002923623B000229D2 /* CapsuleAccessCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CapsuleAccessCoordinator.swift; path = ../../../../../../../../../Documents/CapsuleAccessCoordinator.swift; sourceTree = "<group>"; };
 		288A8F02292362CC000229D2 /* CapsuleAddCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleAddCoordinator.swift; sourceTree = "<group>"; };
+		288A8F0429236505000229D2 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		289F776A2922330B00B66FDB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -211,7 +211,6 @@
 			children = (
 				289F776A2922330B00B66FDB /* GoogleService-Info.plist */,
 				0D6CA342292216A400E02393 /* Info.plist */,
-				0D6CA338292216A300E02393 /* ViewController.swift */,
 				0D6CA33F292216A400E02393 /* LaunchScreen.storyboard */,
 				0D6CA33D292216A400E02393 /* Assets.xcassets */,
 				288A8E902923242D000229D2 /* App */,
@@ -243,6 +242,7 @@
 			children = (
 				0D6CA334292216A300E02393 /* AppDelegate.swift */,
 				0D6CA336292216A300E02393 /* SceneDelegate.swift */,
+				288A8F0429236505000229D2 /* AppCoordinator.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -258,7 +258,6 @@
 		288A8E9429235989000229D2 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
-				288A8EED29236013000229D2 /* CapsuleAccess */,
 				288A8E95292359A6000229D2 /* Auth */,
 				288A8EAA29235B0E000229D2 /* TabBar */,
 			);
@@ -301,11 +300,12 @@
 			isa = PBXGroup;
 			children = (
 				288A8EAF29235B46000229D2 /* TabBarCoordinator.swift */,
-				288A8EAE29235B33000229D2 /* Profile */,
-				288A8EAD29235B2C000229D2 /* CapsuleList */,
-				288A8EAC29235B25000229D2 /* CapsuleMap */,
 				288A8EAB29235B1F000229D2 /* Home */,
+				288A8EAD29235B2C000229D2 /* CapsuleList */,
 				288A8ED129235C0B000229D2 /* CapsuleAdd */,
+				288A8EAC29235B25000229D2 /* CapsuleMap */,
+				288A8EAE29235B33000229D2 /* Profile */,
+				288A8EED29236013000229D2 /* CapsuleAccess */,
 			);
 			path = TabBar;
 			sourceTree = "<group>";
@@ -401,7 +401,7 @@
 		288A8EED29236013000229D2 /* CapsuleAccess */ = {
 			isa = PBXGroup;
 			children = (
-				288A8F002923623B000229D2 /* CapsuleAccessCoordinator.swift */,
+				28049CE429236EEC002389BD /* CapsuleAccessCoordinator.swift */,
 				288A8EEE29236055000229D2 /* CapsuleOpen */,
 				288A8EEF29236061000229D2 /* CapsuleDetail */,
 			);
@@ -607,6 +607,7 @@
 				288A8EF32923607D000229D2 /* CapsuleOpenViewController.swift in Sources */,
 				288A8EE429235E4D000229D2 /* CapsuleLocateCoordinator.swift in Sources */,
 				288A8EE029235E36000229D2 /* CapsuleLocateViewController.swift in Sources */,
+				28049CE529236EEC002389BD /* CapsuleAccessCoordinator.swift in Sources */,
 				288A8EBE29235B97000229D2 /* CapsuleListViewModel.swift in Sources */,
 				288A8EEC29236005000229D2 /* CapsuleCloseCoordinator.swift in Sources */,
 				288A8EA929235AFC000229D2 /* NicknameCoordinator.swift in Sources */,
@@ -630,7 +631,6 @@
 				288A8ECE29235BEF000229D2 /* HomeViewModel.swift in Sources */,
 				288A8EFD292360AB000229D2 /* CapsuleDetailViewModel.swift in Sources */,
 				288A8EE229235E3F000229D2 /* CapsuleLocateViewModel.swift in Sources */,
-				288A8F012923623B000229D2 /* CapsuleAccessCoordinator.swift in Sources */,
 				288A8EB229235B5A000229D2 /* ProfileView.swift in Sources */,
 				288A8ED029235BF9000229D2 /* HomeCoordinator.swift in Sources */,
 				288A8EA529235AE8000229D2 /* NicknameViewController.swift in Sources */,
@@ -640,13 +640,13 @@
 				288A8ECC29235BE9000229D2 /* HomeViewController.swift in Sources */,
 				288A8EB029235B46000229D2 /* TabBarCoordinator.swift in Sources */,
 				288A8EB629235B69000229D2 /* ProfileViewModel.swift in Sources */,
-				0D6CA339292216A300E02393 /* ViewController.swift in Sources */,
 				288A8EDE29235E2D000229D2 /* CapsuleLocateView.swift in Sources */,
 				0D6CA335292216A300E02393 /* AppDelegate.swift in Sources */,
 				288A8EC029235BA5000229D2 /* CapsuleListCoordinator.swift in Sources */,
 				288A8EB829235B77000229D2 /* ProfileCoordinator.swift in Sources */,
 				288A8F03292362CC000229D2 /* CapsuleAddCoordinator.swift in Sources */,
 				288A8EBC29235B8E000229D2 /* CapsuleListViewController.swift in Sources */,
+				288A8F0529236505000229D2 /* AppCoordinator.swift in Sources */,
 				288A8EF72923608F000229D2 /* CapsuleOpenCoordinator.swift in Sources */,
 				0D6CA337292216A300E02393 /* SceneDelegate.swift in Sources */,
 			);
