@@ -21,6 +21,10 @@
 		0D707D5329222BEB00380B14 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 0D707D5229222BEB00380B14 /* FirebaseFirestore */; };
 		0D707D5529222BEB00380B14 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 0D707D5429222BEB00380B14 /* FirebaseStorage */; };
 		28049CE529236EEC002389BD /* CapsuleAccessCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28049CE429236EEC002389BD /* CapsuleAccessCoordinator.swift */; };
+		28049CE729237B2B002389BD /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28049CE629237B2B002389BD /* BaseViewController.swift */; };
+		28049CE929237BB2002389BD /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28049CE829237BB2002389BD /* BaseView.swift */; };
+		28049CEB29237E96002389BD /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28049CEA29237E96002389BD /* BaseViewModel.swift */; };
+		28049CED29238216002389BD /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28049CEC29238216002389BD /* Bindable.swift */; };
 		288A8E922923244D000229D2 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288A8E912923244D000229D2 /* Coordinator.swift */; };
 		288A8E97292359CF000229D2 /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288A8E96292359CF000229D2 /* AuthCoordinator.swift */; };
 		288A8E9B29235A6E000229D2 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288A8E9A29235A6E000229D2 /* SignInView.swift */; };
@@ -103,6 +107,10 @@
 		0D6CA355292216A400E02393 /* SpaceCapsuleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceCapsuleUITests.swift; sourceTree = "<group>"; };
 		0D6CA357292216A400E02393 /* SpaceCapsuleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceCapsuleUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		28049CE429236EEC002389BD /* CapsuleAccessCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleAccessCoordinator.swift; sourceTree = "<group>"; };
+		28049CE629237B2B002389BD /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		28049CE829237BB2002389BD /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		28049CEA29237E96002389BD /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
+		28049CEC29238216002389BD /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
 		288A8E912923244D000229D2 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		288A8E96292359CF000229D2 /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 		288A8E9A29235A6E000229D2 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
@@ -237,6 +245,31 @@
 			path = SpaceCapsuleUITests;
 			sourceTree = "<group>";
 		};
+		28049CEE2923825A002389BD /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				28049CEA29237E96002389BD /* BaseViewModel.swift */,
+				28049CEC29238216002389BD /* Bindable.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		28049CEF292382BB002389BD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				28049CE829237BB2002389BD /* BaseView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		28049CF0292382C7002389BD /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				28049CE629237B2B002389BD /* BaseViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		288A8E902923242D000229D2 /* App */ = {
 			isa = PBXGroup;
 			children = (
@@ -251,6 +284,9 @@
 			isa = PBXGroup;
 			children = (
 				288A8E912923244D000229D2 /* Coordinator.swift */,
+				28049CEF292382BB002389BD /* View */,
+				28049CF0292382C7002389BD /* ViewController */,
+				28049CEE2923825A002389BD /* ViewModel */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -598,6 +634,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				288A8ECA29235BDC000229D2 /* HomeView.swift in Sources */,
+				28049CEB29237E96002389BD /* BaseViewModel.swift in Sources */,
 				288A8EFF292360BC000229D2 /* CapsuleDetailCoordinator.swift in Sources */,
 				288A8EFB292360A4000229D2 /* CapsuleDetailViewController.swift in Sources */,
 				288A8EF529236086000229D2 /* CapsuleOpenViewModel.swift in Sources */,
@@ -612,6 +649,7 @@
 				288A8EEC29236005000229D2 /* CapsuleCloseCoordinator.swift in Sources */,
 				288A8EA929235AFC000229D2 /* NicknameCoordinator.swift in Sources */,
 				288A8EE629235FD5000229D2 /* CapsuleCloseView.swift in Sources */,
+				28049CE729237B2B002389BD /* BaseViewController.swift in Sources */,
 				288A8ED329235C65000229D2 /* CapsuleCreateView.swift in Sources */,
 				288A8E9D29235A80000229D2 /* SignInViewController.swift in Sources */,
 				288A8E9B29235A6E000229D2 /* SignInView.swift in Sources */,
@@ -629,6 +667,7 @@
 				288A8EA129235AA1000229D2 /* SignInCoordinator.swift in Sources */,
 				288A8ED929235C83000229D2 /* CapsuleCreateCoordinator.swift in Sources */,
 				288A8ECE29235BEF000229D2 /* HomeViewModel.swift in Sources */,
+				28049CE929237BB2002389BD /* BaseView.swift in Sources */,
 				288A8EFD292360AB000229D2 /* CapsuleDetailViewModel.swift in Sources */,
 				288A8EE229235E3F000229D2 /* CapsuleLocateViewModel.swift in Sources */,
 				288A8EB229235B5A000229D2 /* ProfileView.swift in Sources */,
@@ -644,6 +683,7 @@
 				0D6CA335292216A300E02393 /* AppDelegate.swift in Sources */,
 				288A8EC029235BA5000229D2 /* CapsuleListCoordinator.swift in Sources */,
 				288A8EB829235B77000229D2 /* ProfileCoordinator.swift in Sources */,
+				28049CED29238216002389BD /* Bindable.swift in Sources */,
 				288A8F03292362CC000229D2 /* CapsuleAddCoordinator.swift in Sources */,
 				288A8EBC29235B8E000229D2 /* CapsuleListViewController.swift in Sources */,
 				288A8F0529236505000229D2 /* AppCoordinator.swift in Sources */,
