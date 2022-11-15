@@ -12,10 +12,6 @@ protocol Bindable {
     var output: ViewModelOutput { get }
 }
 
-protocol ViewModelInput {
-    
-}
+protocol ViewModelInput { }
 
-protocol ViewModelOutput {
-    
-}
+protocol ViewModelOutput { }
