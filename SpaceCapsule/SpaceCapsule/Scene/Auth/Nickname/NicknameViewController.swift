@@ -19,12 +19,6 @@ final class NicknameViewController: UIViewController, BaseViewController {
         bind()
     }
 
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-
-//        viewModel?.coordinator?.parent?.children.popLast()
-    }
-
     func bind() {
         guard let nicknameView = view as? NicknameView,
               let viewModel else {
