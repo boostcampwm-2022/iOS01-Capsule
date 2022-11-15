@@ -10,9 +10,4 @@ import RxSwift
 
 protocol BaseViewModel: AnyObject {
     var disposeBag: DisposeBag { get }
-
 }
-
-
-
-
