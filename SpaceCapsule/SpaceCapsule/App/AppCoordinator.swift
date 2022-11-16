@@ -30,7 +30,7 @@ final class AppCoordinator: Coordinator {
     }
 
     private func moveToTabBar() {
-        let tabBarController = UITabBarController()
+        let tabBarController = CustomTabBarController()
         let tabBarCoordinator = TabBarCoordinator(tabBarController: tabBarController)
         children.append(tabBarCoordinator)
         tabBarCoordinator.parent = self

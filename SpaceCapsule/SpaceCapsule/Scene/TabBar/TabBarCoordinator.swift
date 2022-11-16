@@ -11,9 +11,9 @@ final class TabBarCoordinator: Coordinator {
     var parent: Coordinator?
     var children: [Coordinator] = []
     var navigationController: UINavigationController?
-    var tabBarController: UITabBarController
+    var tabBarController: CustomTabBarController
 
-    init(tabBarController: UITabBarController) {
+    init(tabBarController: CustomTabBarController) {
         self.tabBarController = tabBarController
     }
 
@@ -38,6 +38,7 @@ final class TabBarCoordinator: Coordinator {
 
     private func secondTabBarItem() {
         let capsuleMapItem = UITabBarItem(title: "지도", image: .mapFill, tag: 1)
+        capsuleMapItem.standardAppearance?.backgroundColor = .red
         let capsuleMapCoordinator = CapsuleMapCoordinator()
 
         children.append(capsuleMapCoordinator)

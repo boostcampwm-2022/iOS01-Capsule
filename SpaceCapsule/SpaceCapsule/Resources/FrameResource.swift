@@ -15,4 +15,6 @@ enum FrameResource {
     
     static let buttonHeight: CGFloat = 50.0
     static let textFieldHeight: CGFloat = 50.0
+    
+    static let addCapsuleButtonSize: CGFloat = 50.0
 }
