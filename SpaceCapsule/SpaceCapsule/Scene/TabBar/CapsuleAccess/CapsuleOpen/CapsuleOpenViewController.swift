@@ -11,13 +11,23 @@ import UIKit
 
 final class CapsuleOpenViewController: UIViewController, BaseViewController {
     var disposeBag = DisposeBag()
+    var viewModel: CapsuleOpenViewModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.backgroundColor = .themeBackground
+        bind()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        
+        super.viewWillDisappear(animated)
+        viewModel?.input.popViewController.onNext(Void())
+        
     }
 
     func bind() {
+        guard let viewModel else {return}
     }
 }
