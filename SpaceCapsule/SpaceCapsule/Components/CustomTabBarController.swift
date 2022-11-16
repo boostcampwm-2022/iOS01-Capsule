@@ -13,6 +13,7 @@ import UIKit
 // TODO: - add final keyword
 class CustomTabBarController: UITabBarController {
     let disposeBag = DisposeBag()
+    var coordinator: TabBarCoordinator?
 
     lazy var centerButton: UIButton = {
         let button = UIButton()
@@ -46,7 +47,8 @@ class CustomTabBarController: UITabBarController {
 
     private func bindCenterButton() {
         centerButton.rx.tap
-            .bind { print("가짜몰입") }
+            .withUnretained(self)
+            .bind { _ in self.coordinator?.moveToCapsuleAdd() }
             .disposed(by: disposeBag)
     }
 

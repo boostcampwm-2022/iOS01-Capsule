@@ -12,5 +12,20 @@ class CapsuleAddCoordinator: Coordinator {
     var children: [Coordinator] = []
     var navigationController: UINavigationController?
 
-    func start() { }
+    init() {
+        navigationController = .init()
+    }
+
+    func start() {
+        showCapsuleCreate()
+    }
+
+    private func showCapsuleCreate() {
+        let capsuleCreateCoordinator = CapsuleCreateCoordinator(navigationController: navigationController)
+        children.append(capsuleCreateCoordinator)
+        capsuleCreateCoordinator.parent = self
+        capsuleCreateCoordinator.start()
+    }
+    
+   
 }
