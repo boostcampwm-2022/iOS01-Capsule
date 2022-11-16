@@ -24,7 +24,7 @@ final class KakaoAPIManager {
     func getRequest(for apiType: APIType, with urlString: String) throws -> URLRequest {
         guard let url = URL(string: "\(baseURLString)\(apiType.path)") else { throw NetworkError.failedConvertingStringToUrl }
         var request = URLRequest(url: url)
-        request.httpMethod = httpMethod
+        request.httpMethod = RequestType.GET
         request.setValue("KakaoAK \(Key.kakao)", forHTTPHeaderField: "Authorization")
         return request
     }
