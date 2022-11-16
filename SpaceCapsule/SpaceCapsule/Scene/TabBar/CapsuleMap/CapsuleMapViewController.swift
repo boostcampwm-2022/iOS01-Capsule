@@ -63,6 +63,7 @@ final class CapsuleMapViewController: UIViewController, BaseViewController, MKMa
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
         
+        capsuleMapView.map.delegate = self
         capsuleMapView.map.mapType = MKMapType.standard
         capsuleMapView.map.showsUserLocation = true
         capsuleMapView.map.setUserTrackingMode(.follow, animated: true)
@@ -98,5 +99,20 @@ final class CapsuleMapViewController: UIViewController, BaseViewController, MKMa
             }
     }
     
-    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        guard !(annotation is MKUserLocation) else { // 어노테이션이 유저의 현재 뷰가 아님을 보장
+            return nil
+        }
+        
+        var annotationView = capsuleMapView.map.dequeueReusableAnnotationView(withIdentifier: "spaceCapsule")
+        if annotationView == nil {
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "spaceCapsule")
+            annotationView?.canShowCallout = true // tap이 가능한지
+        } else {
+            annotationView?.annotation = annotation
+        }
+        annotationView?.image = UIImage(systemName: "circle")
+        
+        return annotationView
+    }
 }
