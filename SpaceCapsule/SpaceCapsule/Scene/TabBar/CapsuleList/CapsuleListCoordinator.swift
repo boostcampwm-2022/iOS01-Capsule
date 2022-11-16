@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CapsuleListCoordinator: Coordinator {
+final class CapsuleListCoordinator: Coordinator {
     var parent: Coordinator?
     var children: [Coordinator] = []
     var navigationController: UINavigationController?
