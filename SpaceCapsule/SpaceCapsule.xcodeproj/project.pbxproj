@@ -28,6 +28,7 @@
 		0D90DAF929239A81000DCC84 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D90DAF829239A81000DCC84 /* UIImage+.swift */; };
 		0D90DAFE29239CA0000DCC84 /* OwnglyphHaesomChae.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0D90DAFD29239C9F000DCC84 /* OwnglyphHaesomChae.otf */; };
 		0D9D672E292486780038F529 /* ThemeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9D672D292486780038F529 /* ThemeLabel.swift */; };
+		0D9D67312924945D0038F529 /* FrameResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9D67302924945D0038F529 /* FrameResource.swift */; };
 		28049CE529236EEC002389BD /* CapsuleAccessCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28049CE429236EEC002389BD /* CapsuleAccessCoordinator.swift */; };
 		28049CE729237B2B002389BD /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28049CE629237B2B002389BD /* BaseViewController.swift */; };
 		28049CE929237BB2002389BD /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28049CE829237BB2002389BD /* BaseView.swift */; };
@@ -119,6 +120,7 @@
 		0D90DAF829239A81000DCC84 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		0D90DAFD29239C9F000DCC84 /* OwnglyphHaesomChae.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = OwnglyphHaesomChae.otf; sourceTree = "<group>"; };
 		0D9D672D292486780038F529 /* ThemeLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeLabel.swift; sourceTree = "<group>"; };
+		0D9D67302924945D0038F529 /* FrameResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameResource.swift; sourceTree = "<group>"; };
 		28049CE429236EEC002389BD /* CapsuleAccessCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleAccessCoordinator.swift; sourceTree = "<group>"; };
 		28049CE629237B2B002389BD /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		28049CE829237BB2002389BD /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
@@ -240,13 +242,14 @@
 				59F567F72923BE1E00F756B2 /* SpaceCapsule.entitlements */,
 				0D90DAF5292397BF000DCC84 /* Extensions */,
 				0D6CA342292216A400E02393 /* Info.plist */,
-				0D6CA33D292216A400E02393 /* Assets.xcassets */,
 				0D6CA33F292216A400E02393 /* LaunchScreen.storyboard */,
+				0D6CA33D292216A400E02393 /* Assets.xcassets */,
 				288A8E902923242D000229D2 /* App */,
 				288A8E93292328AE000229D2 /* Base */,
 				0D46DEFC2923E4800045400A /* Components */,
 				0D90DAF5292397BF000DCC84 /* Extensions */,
 				0D90DAFA29239BD3000DCC84 /* Fonts */,
+				0D9D672F292493F00038F529 /* Resources */,
 				288A8E9429235989000229D2 /* Scene */,
 			);
 			path = SpaceCapsule;
@@ -285,6 +288,14 @@
 				0D90DAFD29239C9F000DCC84 /* OwnglyphHaesomChae.otf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		0D9D672F292493F00038F529 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0D9D67302924945D0038F529 /* FrameResource.swift */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		28049CEE2923825A002389BD /* ViewModel */ = {
@@ -704,6 +715,7 @@
 				288A8EEA29235FF1000229D2 /* CapsuleCloseViewModel.swift in Sources */,
 				288A8EF92923609C000229D2 /* CapsuleDetailView.swift in Sources */,
 				288A8E97292359CF000229D2 /* AuthCoordinator.swift in Sources */,
+				0D9D67312924945D0038F529 /* FrameResource.swift in Sources */,
 				288A8EC429235BB7000229D2 /* CapsuleMapViewController.swift in Sources */,
 				288A8EC829235BCE000229D2 /* CapsuleMapCoordinator.swift in Sources */,
 				288A8E922923244D000229D2 /* Coordinator.swift in Sources */,

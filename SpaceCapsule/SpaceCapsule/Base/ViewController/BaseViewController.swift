@@ -12,9 +12,3 @@ protocol BaseViewController: AnyObject {
     var disposeBag: DisposeBag { get }
     func bind()
 }
-
-//extension BaseViewController {
-//    func configureBackgroundColor() {
-//        self.view.backgroundColor = .themeBackground
-//    }
-//}
