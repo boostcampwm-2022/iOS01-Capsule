@@ -12,9 +12,18 @@ import UIKit
 
 final class CapsuleMapViewController: UIViewController, BaseViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     var disposeBag = DisposeBag()
-    var viewModel: CapsuleMapViewModel?
+    var viewModel: CapsuleMapViewModel
     let capsuleMapView = CapsuleMapView()
     let locationManager = CLLocationManager()
+
+    init(viewModel: CapsuleMapViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func loadView() {
         view = capsuleMapView
@@ -26,10 +35,26 @@ final class CapsuleMapViewController: UIViewController, BaseViewController, MKMa
         configure()
         goToCurrentLocation()
         bind()
+        viewModel.fetchAnnotations()
     }
     
     func bind() {
-        return
+        
+        viewModel.input.annotations
+            .bind { coordinates in
+                coordinates.forEach { coordinate in
+                    self.addAnnotation(coordinate: coordinate)
+                }
+            }
+            .disposed(by: disposeBag)
+        
+    }
+    
+    func addAnnotation(coordinate: CLLocationCoordinate2D) {
+        let pin = MKPointAnnotation()
+        pin.coordinate = coordinate
+        pin.title = "캡슐 이름"
+        capsuleMapView.map.addAnnotation(pin)
     }
     
     private func configure() {
@@ -72,4 +97,6 @@ final class CapsuleMapViewController: UIViewController, BaseViewController, MKMa
                 print("GPS: Default")
             }
     }
+    
+    
 }
