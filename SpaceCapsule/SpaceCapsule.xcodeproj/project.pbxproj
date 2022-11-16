@@ -30,6 +30,7 @@
 		0D9D672E292486780038F529 /* ThemeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9D672D292486780038F529 /* ThemeLabel.swift */; };
 		0D9D67312924945D0038F529 /* FrameResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9D67302924945D0038F529 /* FrameResource.swift */; };
 		0DCB22912924BF71002CB095 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0DCB22902924BF70002CB095 /* GoogleService-Info.plist */; };
+		0DCB22932924CE58002CB095 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCB22922924CE58002CB095 /* CustomTabBarController.swift */; };
 		28049CE529236EEC002389BD /* CapsuleAccessCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28049CE429236EEC002389BD /* CapsuleAccessCoordinator.swift */; };
 		28049CE729237B2B002389BD /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28049CE629237B2B002389BD /* BaseViewController.swift */; };
 		28049CE929237BB2002389BD /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28049CE829237BB2002389BD /* BaseView.swift */; };
@@ -122,6 +123,7 @@
 		0D9D672D292486780038F529 /* ThemeLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeLabel.swift; sourceTree = "<group>"; };
 		0D9D67302924945D0038F529 /* FrameResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameResource.swift; sourceTree = "<group>"; };
 		0DCB22902924BF70002CB095 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		0DCB22922924CE58002CB095 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		28049CE429236EEC002389BD /* CapsuleAccessCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleAccessCoordinator.swift; sourceTree = "<group>"; };
 		28049CE629237B2B002389BD /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		28049CE829237BB2002389BD /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
@@ -210,7 +212,8 @@
 		0D46DEFC2923E4800045400A /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				0D9D672D292486780038F529 /* ThemeLabel.swift */,
+				0DCB22922924CE58002CB095 /* CustomTabBarController.swift */,
+				0DCB22942924CE61002CB095 /* Theme */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -295,6 +298,14 @@
 				0D9D67302924945D0038F529 /* FrameResource.swift */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		0DCB22942924CE61002CB095 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				0D9D672D292486780038F529 /* ThemeLabel.swift */,
+			);
+			path = Theme;
 			sourceTree = "<group>";
 		};
 		28049CEE2923825A002389BD /* ViewModel */ = {
@@ -720,6 +731,7 @@
 				288A8E922923244D000229D2 /* Coordinator.swift in Sources */,
 				288A8EE829235FE2000229D2 /* CapsuleCloseViewController.swift in Sources */,
 				288A8EB429235B62000229D2 /* ProfileViewController.swift in Sources */,
+				0DCB22932924CE58002CB095 /* CustomTabBarController.swift in Sources */,
 				288A8EC229235BAF000229D2 /* CapsuleMapView.swift in Sources */,
 				288A8EA129235AA1000229D2 /* SignInCoordinator.swift in Sources */,
 				288A8ED929235C83000229D2 /* CapsuleCreateCoordinator.swift in Sources */,
