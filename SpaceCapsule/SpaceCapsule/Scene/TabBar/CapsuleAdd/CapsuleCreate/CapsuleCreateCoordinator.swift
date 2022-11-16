@@ -19,13 +19,13 @@ final class CapsuleCreateCoordinator: Coordinator {
     func start() {
         let capsuleCreateViewController = CapsuleCreateViewController()
         let capsuleCreateViewModel = CapsuleCreateViewModel()
-        
+
         capsuleCreateViewController.viewModel = capsuleCreateViewModel
         capsuleCreateViewModel.coordinator = self
-        
+
         navigationController?.setViewControllers([capsuleCreateViewController], animated: true)
     }
-    
+
     func finish() {
         parent?.navigationController?.dismiss(animated: true)
     }

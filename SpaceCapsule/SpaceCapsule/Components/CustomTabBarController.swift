@@ -10,7 +10,6 @@ import RxSwift
 import SnapKit
 import UIKit
 
-// TODO: - add final keyword
 class CustomTabBarController: UITabBarController {
     let disposeBag = DisposeBag()
     var coordinator: TabBarCoordinator?
