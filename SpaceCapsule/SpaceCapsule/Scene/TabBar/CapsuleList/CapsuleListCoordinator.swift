@@ -26,8 +26,10 @@ final class CapsuleListCoordinator: Coordinator {
     }
 
     func showCapsuleOpen() {
-        let capsuleOpenViewController = CapsuleOpenViewController()
-        navigationController?.pushViewController(capsuleOpenViewController, animated: true)
+        let capsuleOpenCoordinator = CapsuleOpenCoordinator(navigationController: navigationController)
+        capsuleOpenCoordinator.parent = parent
+        capsuleOpenCoordinator.start()
+        // children append?
 
         if let parent = parent as? TabBarCoordinator {
             parent.tabBarWillHide(true)
