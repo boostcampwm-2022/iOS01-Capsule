@@ -9,14 +9,9 @@ import SnapKit
 import UIKit
 
 final class NicknameView: UIView, BaseView {
-    let nicknameLabel: UILabel = {
-        let label = UILabel()
-        label.text = "닉네임"
-        label.font = .themeFont(ofSize: 20)
-        label.textColor = .themeGray300
+    // MARK: - UIComponents
 
-        return label
-    }()
+    let nicknameLabel = ThemeLabel(text: "닉네임", size: 20, color: .themeGray300)
 
     let nicknameTextField: UITextField = {
         let textField = UITextField()
@@ -40,6 +35,8 @@ final class NicknameView: UIView, BaseView {
         return button
     }()
 
+    // MARK: - Lifecycle
+
     override init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -48,9 +45,12 @@ final class NicknameView: UIView, BaseView {
         makeConstraints()
     }
 
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    // MARK: - Methods
 
     func configure() {
         backgroundColor = .themeBackground
