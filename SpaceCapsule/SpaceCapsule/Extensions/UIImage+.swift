@@ -16,7 +16,7 @@ extension UIImage {
     static let mapFill = UIImage(systemName: "map.fill")
     static let gridFill = UIImage(systemName: "circle.grid.2x2.fill")
     static let profileFill = UIImage(systemName: "person.fill")
-    static let addCapsuleFill = UIImage(systemName: "plus.circle.fill")
+    static let addCapsuleFill = UIImage(systemName: "plus")
 
     static let addImage = UIImage(systemName: "plus.square.on.square")
     static let mapPin = UIImage(systemName: "mappin.and.ellipse")
