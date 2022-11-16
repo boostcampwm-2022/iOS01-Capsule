@@ -6,10 +6,9 @@
 //
 
 import Foundation
-
 import UIKit
 
-class ProfileCoordinator: Coordinator {
+final class ProfileCoordinator: Coordinator {
     var parent: Coordinator?
     var children: [Coordinator] = []
     var navigationController: UINavigationController?

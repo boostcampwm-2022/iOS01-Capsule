@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CapsuleListViewController: UIViewController {
+final class CapsuleListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         

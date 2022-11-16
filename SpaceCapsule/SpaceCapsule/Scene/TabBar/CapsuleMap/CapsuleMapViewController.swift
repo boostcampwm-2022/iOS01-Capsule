@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CapsuleMapViewController: UIViewController {
+final class CapsuleMapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 

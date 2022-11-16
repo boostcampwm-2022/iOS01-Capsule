@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HomeCoordinator: Coordinator {
+final class HomeCoordinator: Coordinator {
     var parent: Coordinator?
     var children: [Coordinator] = []
     var navigationController: UINavigationController?
