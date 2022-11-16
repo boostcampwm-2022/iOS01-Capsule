@@ -26,6 +26,10 @@ final class TabBarCoordinator: Coordinator {
         tabBarController.viewControllers = children.compactMap { $0.navigationController }
         tabBarController.setUpCenterButton()
     }
+    
+    func tabBarWillHide(_ visible: Bool) {
+        tabBarController.tabBar.isHidden = visible
+    }
 
     func moveToCapsuleAdd() {
         let capsuleAddCoordinator = CapsuleAddCoordinator()

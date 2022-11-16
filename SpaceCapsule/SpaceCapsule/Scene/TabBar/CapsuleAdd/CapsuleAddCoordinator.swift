@@ -26,6 +26,4 @@ final class CapsuleAddCoordinator: Coordinator {
         capsuleCreateCoordinator.parent = self
         capsuleCreateCoordinator.start()
     }
-    
-   
 }
