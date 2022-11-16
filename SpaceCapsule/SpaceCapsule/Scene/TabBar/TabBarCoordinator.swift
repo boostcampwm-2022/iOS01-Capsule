@@ -27,7 +27,7 @@ final class TabBarCoordinator: Coordinator {
     }
 
     private func firstTabBarItem() {
-        let homeItem = UITabBarItem(title: "홈", image: UIImage(systemName: "house.fill"), tag: 0)
+        let homeItem = UITabBarItem(title: "홈", image: .homeFill, tag: 0)
         let homeCoordinator = HomeCoordinator()
 
         children.append(homeCoordinator)
@@ -37,7 +37,7 @@ final class TabBarCoordinator: Coordinator {
     }
 
     private func secondTabBarItem() {
-        let capsuleMapItem = UITabBarItem(title: "지도", image: UIImage(systemName: "map.fill"), tag: 1)
+        let capsuleMapItem = UITabBarItem(title: "지도", image: .mapFill, tag: 1)
         let capsuleMapCoordinator = CapsuleMapCoordinator()
 
         children.append(capsuleMapCoordinator)
@@ -47,7 +47,7 @@ final class TabBarCoordinator: Coordinator {
     }
 
     private func thirdTabBarItem() {
-        let capsuleListItem = UITabBarItem(title: "목록", image: UIImage(systemName: "circle.grid.2x2.fill"), tag: 2)
+        let capsuleListItem = UITabBarItem(title: "목록", image: .gridFill, tag: 2)
         let capsuleListCoordinator = CapsuleListCoordinator()
 
         children.append(capsuleListCoordinator)
@@ -57,7 +57,7 @@ final class TabBarCoordinator: Coordinator {
     }
 
     private func fourthTabBarItem() {
-        let profileItem = UITabBarItem(title: "프로필", image: UIImage(systemName: "person.fill"), tag: 3)
+        let profileItem = UITabBarItem(title: "프로필", image: .profileFill, tag: 3)
         let profileCoordinator = ProfileCoordinator()
 
         children.append(profileCoordinator)
