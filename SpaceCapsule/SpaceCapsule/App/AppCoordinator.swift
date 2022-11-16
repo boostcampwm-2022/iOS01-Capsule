@@ -9,19 +9,17 @@ import UIKit
 
 final class AppCoordinator: Coordinator {
     var parent: Coordinator?
-    
     var children: [Coordinator] = []
-    
     var navigationController: UINavigationController?
-    
+
     var rootViewController: UIViewController?
-    
+
     func start() {
         // TODO: 분기처리 하기!
-        moveToAuth()
-        
+//        moveToAuth()
+        moveToTabBar()
     }
-    
+
     private func moveToAuth() {
         let navigationController = UINavigationController()
         let authCoordinator = AuthCoordinator(navigationController: navigationController)
@@ -30,9 +28,13 @@ final class AppCoordinator: Coordinator {
         authCoordinator.start()
         rootViewController = navigationController
     }
-    
+
     private func moveToTabBar() {
-       
+        let tabBarController = UITabBarController()
+        let tabBarCoordinator = TabBarCoordinator(tabBarController: tabBarController)
+        children.append(tabBarCoordinator)
+        tabBarCoordinator.parent = self
+        tabBarCoordinator.start()
+        rootViewController = tabBarController
     }
-    
 }
