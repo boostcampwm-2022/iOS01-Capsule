@@ -18,8 +18,8 @@ final class AppCoordinator: Coordinator {
     
     func start() {
         // TODO: 분기처리 하기!
-        moveToAuth()
-        
+        // moveToAuth()
+        moveToLocation()
     }
     
     private func moveToAuth() {
@@ -33,6 +33,12 @@ final class AppCoordinator: Coordinator {
     
     private func moveToTabBar() {
        
+    }
+    
+    // MARK: 임시 ViewController - 삭제 필요
+    private func moveToLocation() {
+        let locationController = LocationViewController()
+        rootViewController = locationController
     }
     
 }
