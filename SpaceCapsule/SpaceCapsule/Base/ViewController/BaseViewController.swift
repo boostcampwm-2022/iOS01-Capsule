@@ -5,7 +5,7 @@
 //  Created by young june Park on 2022/11/15.
 //
 
-import Foundation
+import UIKit
 import RxSwift
 
 protocol BaseViewController: AnyObject {

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D46DEFA2923E1180045400A /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D46DEF92923E1180045400A /* UIFont+.swift */; };
 		0D6CA335292216A300E02393 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D6CA334292216A300E02393 /* AppDelegate.swift */; };
 		0D6CA337292216A300E02393 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D6CA336292216A300E02393 /* SceneDelegate.swift */; };
 		0D6CA33E292216A400E02393 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D6CA33D292216A400E02393 /* Assets.xcassets */; };
@@ -23,6 +24,12 @@
 		0D90DAEF29238B77000DCC84 /* CapsuleLocateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D90DAEE29238B77000DCC84 /* CapsuleLocateView.swift */; };
 		0D90DAF129238B85000DCC84 /* CapsuleLocateCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D90DAF029238B85000DCC84 /* CapsuleLocateCoordinator.swift */; };
 		0D90DAF329238B90000DCC84 /* CapsuleCloseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D90DAF229238B90000DCC84 /* CapsuleCloseCoordinator.swift */; };
+		0D90DAF7292397CF000DCC84 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D90DAF6292397CF000DCC84 /* UIColor+.swift */; };
+		0D90DAF929239A81000DCC84 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D90DAF829239A81000DCC84 /* UIImage+.swift */; };
+		0D90DAFE29239CA0000DCC84 /* OwnglyphHaesomChae.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0D90DAFD29239C9F000DCC84 /* OwnglyphHaesomChae.otf */; };
+		0D9D672E292486780038F529 /* ThemeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9D672D292486780038F529 /* ThemeLabel.swift */; };
+		0D9D67312924945D0038F529 /* FrameResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9D67302924945D0038F529 /* FrameResource.swift */; };
+		0DCB22912924BF71002CB095 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0DCB22902924BF70002CB095 /* GoogleService-Info.plist */; };
 		28049CE529236EEC002389BD /* CapsuleAccessCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28049CE429236EEC002389BD /* CapsuleAccessCoordinator.swift */; };
 		28049CE729237B2B002389BD /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28049CE629237B2B002389BD /* BaseViewController.swift */; };
 		28049CE929237BB2002389BD /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28049CE829237BB2002389BD /* BaseView.swift */; };
@@ -74,7 +81,6 @@
 		288A8EFF292360BC000229D2 /* CapsuleDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288A8EFE292360BC000229D2 /* CapsuleDetailCoordinator.swift */; };
 		288A8F03292362CC000229D2 /* CapsuleAddCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288A8F02292362CC000229D2 /* CapsuleAddCoordinator.swift */; };
 		288A8F0529236505000229D2 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288A8F0429236505000229D2 /* AppCoordinator.swift */; };
-		59F567F92923C1B100F756B2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 59F567F82923C1B100F756B2 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +101,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0D46DEF92923E1180045400A /* UIFont+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
 		0D6CA331292216A300E02393 /* SpaceCapsule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceCapsule.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D6CA334292216A300E02393 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0D6CA336292216A300E02393 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -109,6 +116,12 @@
 		0D90DAEE29238B77000DCC84 /* CapsuleLocateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleLocateView.swift; sourceTree = "<group>"; };
 		0D90DAF029238B85000DCC84 /* CapsuleLocateCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleLocateCoordinator.swift; sourceTree = "<group>"; };
 		0D90DAF229238B90000DCC84 /* CapsuleCloseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleCloseCoordinator.swift; sourceTree = "<group>"; };
+		0D90DAF6292397CF000DCC84 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		0D90DAF829239A81000DCC84 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
+		0D90DAFD29239C9F000DCC84 /* OwnglyphHaesomChae.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = OwnglyphHaesomChae.otf; sourceTree = "<group>"; };
+		0D9D672D292486780038F529 /* ThemeLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeLabel.swift; sourceTree = "<group>"; };
+		0D9D67302924945D0038F529 /* FrameResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameResource.swift; sourceTree = "<group>"; };
+		0DCB22902924BF70002CB095 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		28049CE429236EEC002389BD /* CapsuleAccessCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleAccessCoordinator.swift; sourceTree = "<group>"; };
 		28049CE629237B2B002389BD /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		28049CE829237BB2002389BD /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
@@ -161,7 +174,6 @@
 		288A8F02292362CC000229D2 /* CapsuleAddCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleAddCoordinator.swift; sourceTree = "<group>"; };
 		288A8F0429236505000229D2 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		59F567F72923BE1E00F756B2 /* SpaceCapsule.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SpaceCapsule.entitlements; sourceTree = "<group>"; };
-		59F567F82923C1B100F756B2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +207,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0D46DEFC2923E4800045400A /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				0D9D672D292486780038F529 /* ThemeLabel.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		0D6CA328292216A300E02393 = {
 			isa = PBXGroup;
 			children = (
@@ -218,13 +238,17 @@
 		0D6CA333292216A300E02393 /* SpaceCapsule */ = {
 			isa = PBXGroup;
 			children = (
-				59F567F82923C1B100F756B2 /* GoogleService-Info.plist */,
+				0DCB22902924BF70002CB095 /* GoogleService-Info.plist */,
 				59F567F72923BE1E00F756B2 /* SpaceCapsule.entitlements */,
 				0D6CA342292216A400E02393 /* Info.plist */,
 				0D6CA33F292216A400E02393 /* LaunchScreen.storyboard */,
 				0D6CA33D292216A400E02393 /* Assets.xcassets */,
 				288A8E902923242D000229D2 /* App */,
 				288A8E93292328AE000229D2 /* Base */,
+				0D46DEFC2923E4800045400A /* Components */,
+				0D90DAF5292397BF000DCC84 /* Extensions */,
+				0D90DAFA29239BD3000DCC84 /* Fonts */,
+				0D9D672F292493F00038F529 /* Resources */,
 				288A8E9429235989000229D2 /* Scene */,
 			);
 			path = SpaceCapsule;
@@ -245,6 +269,32 @@
 				0D6CA357292216A400E02393 /* SpaceCapsuleUITestsLaunchTests.swift */,
 			);
 			path = SpaceCapsuleUITests;
+			sourceTree = "<group>";
+		};
+		0D90DAF5292397BF000DCC84 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				0D90DAF6292397CF000DCC84 /* UIColor+.swift */,
+				0D90DAF829239A81000DCC84 /* UIImage+.swift */,
+				0D46DEF92923E1180045400A /* UIFont+.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		0D90DAFA29239BD3000DCC84 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				0D90DAFD29239C9F000DCC84 /* OwnglyphHaesomChae.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		0D9D672F292493F00038F529 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0D9D67302924945D0038F529 /* FrameResource.swift */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		28049CEE2923825A002389BD /* ViewModel */ = {
@@ -587,8 +637,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				0D6CA341292216A400E02393 /* LaunchScreen.storyboard in Resources */,
+				0DCB22912924BF71002CB095 /* GoogleService-Info.plist in Resources */,
 				0D6CA33E292216A400E02393 /* Assets.xcassets in Resources */,
-				59F567F92923C1B100F756B2 /* GoogleService-Info.plist in Resources */,
+				0D90DAFE29239CA0000DCC84 /* OwnglyphHaesomChae.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -643,22 +694,27 @@
 				288A8EA329235ADE000229D2 /* NicknameView.swift in Sources */,
 				288A8EBA29235B86000229D2 /* CapsuleListView.swift in Sources */,
 				288A8ED729235C77000229D2 /* CapsuleCreateViewModel.swift in Sources */,
+				0D9D672E292486780038F529 /* ThemeLabel.swift in Sources */,
 				288A8EF32923607D000229D2 /* CapsuleOpenViewController.swift in Sources */,
 				288A8EE029235E36000229D2 /* CapsuleLocateViewController.swift in Sources */,
 				28049CE529236EEC002389BD /* CapsuleAccessCoordinator.swift in Sources */,
+				0D46DEFA2923E1180045400A /* UIFont+.swift in Sources */,
 				288A8EBE29235B97000229D2 /* CapsuleListViewModel.swift in Sources */,
 				288A8EA929235AFC000229D2 /* NicknameCoordinator.swift in Sources */,
 				288A8EE629235FD5000229D2 /* CapsuleCloseView.swift in Sources */,
+				0D90DAF7292397CF000DCC84 /* UIColor+.swift in Sources */,
 				28049CE729237B2B002389BD /* BaseViewController.swift in Sources */,
 				0D90DAF329238B90000DCC84 /* CapsuleCloseCoordinator.swift in Sources */,
 				288A8ED329235C65000229D2 /* CapsuleCreateView.swift in Sources */,
 				288A8E9D29235A80000229D2 /* SignInViewController.swift in Sources */,
+				0D90DAF929239A81000DCC84 /* UIImage+.swift in Sources */,
 				288A8E9B29235A6E000229D2 /* SignInView.swift in Sources */,
 				288A8ED529235C6F000229D2 /* CapsuleCreateViewController.swift in Sources */,
 				288A8EC629235BBD000229D2 /* CapsuleMapViewModel.swift in Sources */,
 				288A8EEA29235FF1000229D2 /* CapsuleCloseViewModel.swift in Sources */,
 				288A8EF92923609C000229D2 /* CapsuleDetailView.swift in Sources */,
 				288A8E97292359CF000229D2 /* AuthCoordinator.swift in Sources */,
+				0D9D67312924945D0038F529 /* FrameResource.swift in Sources */,
 				288A8EC429235BB7000229D2 /* CapsuleMapViewController.swift in Sources */,
 				288A8EC829235BCE000229D2 /* CapsuleMapCoordinator.swift in Sources */,
 				288A8E922923244D000229D2 /* Coordinator.swift in Sources */,
