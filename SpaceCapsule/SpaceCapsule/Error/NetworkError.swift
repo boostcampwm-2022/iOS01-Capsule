@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+enum NetworkError: Error {
+    case failedConvertingStringToUrl
+    case decodingError
+}

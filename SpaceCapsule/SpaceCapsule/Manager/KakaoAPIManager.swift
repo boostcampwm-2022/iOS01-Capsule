@@ -8,6 +8,8 @@
 import Foundation
 
 final class KakaoAPIManager {
+    static let shared = KakaoAPIManager()
+    
     private let baseURLString = "https://dapi.kakao.com/v2/local"
     
     enum APIType {
@@ -21,7 +23,7 @@ final class KakaoAPIManager {
         }
     }
     
-    func getRequest(for apiType: APIType, with urlString: String) throws -> URLRequest {
+    func getRequest(for apiType: APIType) throws -> URLRequest {
         guard let url = URL(string: "\(baseURLString)\(apiType.path)") else { throw NetworkError.failedConvertingStringToUrl }
         var request = URLRequest(url: url)
         request.httpMethod = RequestType.GET

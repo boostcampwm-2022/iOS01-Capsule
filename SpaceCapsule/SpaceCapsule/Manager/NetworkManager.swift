@@ -12,7 +12,7 @@ import RxSwift
 final class NetworkManager {
     static let shared = NetworkManager()
     
-    func send<T: Codable>(request: URLRequest) -> Observable<Result<T, CapsuleError>> {
+    func send<T: Codable>(request: URLRequest) -> Observable<Result<T, NetworkError>> {
         return URLSession.shared.rx.data(request: request)
             .map { data in
                 do {
