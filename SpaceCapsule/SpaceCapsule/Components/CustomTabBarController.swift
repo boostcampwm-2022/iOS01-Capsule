@@ -5,32 +5,35 @@
 //  Created by 장재훈 on 2022/11/16.
 //
 
+import RxCocoa
+import RxSwift
 import SnapKit
 import UIKit
 
 // TODO: - add final keyword
-class CustomTabBarController: UITabBarController, UITabBarControllerDelegate {
-    private let centerButtonView: UIImageView = {
-        let imageView = UIImageView(image: .addCapsuleFill)
-        imageView.tintColor = .themeColor200
+class CustomTabBarController: UITabBarController {
+    let disposeBag = DisposeBag()
 
-        return imageView
+    lazy var centerButton: UIButton = {
+        let button = UIButton()
+        button.frame.size = CGSize(
+            width: FrameResource.addCapsuleButtonSize,
+            height: FrameResource.addCapsuleButtonSize
+        )
+
+        button.setImage(.addCapsuleFill, for: .normal)
+        button.backgroundColor = .themeColor200
+        button.tintColor = .white
+        button.layer.cornerRadius = FrameResource.addCapsuleButtonSize / 2
+
+        return button
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        delegate = self
-
+        bindCenterButton()
         configureAppearance()
-//        setUpCenterButton()
-    }
-
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let location = touches.first?.location(in: view) {
-            print(location)
-            print(centerButtonView.frame)
-        }
     }
 
     private func configureAppearance() {
@@ -41,9 +44,20 @@ class CustomTabBarController: UITabBarController, UITabBarControllerDelegate {
         UITabBarItem.appearance().setTitleTextAttributes([.font: UIFont.themeFont(ofSize: 13)], for: .normal)
     }
 
-    
+    private func bindCenterButton() {
+        centerButton.rx.tap
+            .bind { print("가짜몰입") }
+            .disposed(by: disposeBag)
+    }
 
-    @objc private func tappedCenterButton(_ gesture: UITapGestureRecognizer) {
-        print("Hello!!")
+    func setUpCenterButton() {
+        tabBar.addSubview(centerButton)
+
+        centerButton.snp.makeConstraints {
+            $0.centerX.equalTo(tabBar.snp.centerX)
+            $0.centerY.equalTo(tabBar.snp.top)
+            $0.width.equalTo(FrameResource.addCapsuleButtonSize)
+            $0.height.equalTo(FrameResource.addCapsuleButtonSize)
+        }
     }
 }

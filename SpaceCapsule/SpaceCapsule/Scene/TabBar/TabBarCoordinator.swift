@@ -24,6 +24,7 @@ final class TabBarCoordinator: Coordinator {
         fourthTabBarItem()
 
         tabBarController.viewControllers = children.compactMap { $0.navigationController }
+        tabBarController.setUpCenterButton()
     }
 
     private func firstTabBarItem() {
