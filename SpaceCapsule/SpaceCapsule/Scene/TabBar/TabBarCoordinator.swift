@@ -27,7 +27,23 @@ final class TabBarCoordinator: Coordinator {
         tabBarController.setUpCenterButton()
     }
 
-    private func firstTabBarItem() {
+    func moveToCapsuleAdd() {
+        let capsuleAddCoordinator = CapsuleAddCoordinator()
+
+        children.append(capsuleAddCoordinator)
+        capsuleAddCoordinator.parent = self
+        capsuleAddCoordinator.start()
+        
+        if let controller = capsuleAddCoordinator.navigationController {
+            controller.modalPresentationStyle = .fullScreen
+            tabBarController.present(controller, animated: true)
+        }
+    }
+}
+
+// Setting Up TabBarItems
+private extension TabBarCoordinator {
+    func firstTabBarItem() {
         let homeItem = UITabBarItem(title: "홈", image: .homeFill, tag: 0)
         let homeCoordinator = HomeCoordinator()
 
@@ -37,7 +53,7 @@ final class TabBarCoordinator: Coordinator {
         homeCoordinator.navigationController?.tabBarItem = homeItem
     }
 
-    private func secondTabBarItem() {
+    func secondTabBarItem() {
         let capsuleMapItem = UITabBarItem(title: "지도", image: .mapFill, tag: 1)
         capsuleMapItem.standardAppearance?.backgroundColor = .red
         let capsuleMapCoordinator = CapsuleMapCoordinator()
@@ -48,7 +64,7 @@ final class TabBarCoordinator: Coordinator {
         capsuleMapCoordinator.navigationController?.tabBarItem = capsuleMapItem
     }
 
-    private func thirdTabBarItem() {
+    func thirdTabBarItem() {
         let capsuleListItem = UITabBarItem(title: "목록", image: .gridFill, tag: 2)
         let capsuleListCoordinator = CapsuleListCoordinator()
 
@@ -58,7 +74,7 @@ final class TabBarCoordinator: Coordinator {
         capsuleListCoordinator.navigationController?.tabBarItem = capsuleListItem
     }
 
-    private func fourthTabBarItem() {
+    func fourthTabBarItem() {
         let profileItem = UITabBarItem(title: "프로필", image: .profileFill, tag: 3)
         let profileCoordinator = ProfileCoordinator()
 
