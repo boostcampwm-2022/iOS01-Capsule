@@ -64,23 +64,23 @@ final class NicknameView: UIView, BaseView {
 
     func makeConstraints() {
         nicknameTextField.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(16)
-            $0.trailing.equalToSuperview().offset(-16)
+            $0.leading.equalToSuperview().offset(FrameResource.horizontalPadding)
+            $0.trailing.equalToSuperview().offset(-FrameResource.horizontalPadding)
             $0.centerY.equalToSuperview()
-            $0.height.equalTo(50)
+            $0.height.equalTo(FrameResource.textFieldHeight)
         }
 
         nicknameLabel.snp.makeConstraints {
             $0.bottom.equalTo(nicknameTextField.snp.top).offset(-10)
-            $0.leading.equalToSuperview().offset(16)
-            $0.trailing.equalToSuperview().offset(-16)
+            $0.leading.equalToSuperview().offset(FrameResource.horizontalPadding)
+            $0.trailing.equalToSuperview().offset(-FrameResource.horizontalPadding)
         }
 
         doneButton.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(16)
-            $0.trailing.equalToSuperview().offset(-16)
-            $0.bottom.equalToSuperview().multipliedBy(0.9)
-            $0.height.equalTo(50)
+            $0.leading.equalToSuperview().offset(FrameResource.horizontalPadding)
+            $0.trailing.equalToSuperview().offset(-FrameResource.horizontalPadding)
+            $0.bottom.equalToSuperview().offset(-FrameResource.bottomPadding)
+            $0.height.equalTo(FrameResource.buttonHeight)
         }
     }
 }

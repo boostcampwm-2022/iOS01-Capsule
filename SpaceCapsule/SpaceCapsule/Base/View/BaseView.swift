@@ -5,11 +5,10 @@
 //  Created by young june Park on 2022/11/15.
 //
 
-import Foundation
+import UIKit
 
-protocol BaseView: AnyObject {
+protocol BaseView: UIView {
     func configure()
     func addSubViews()
     func makeConstraints()
-    
 }
