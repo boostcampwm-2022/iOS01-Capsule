@@ -31,15 +31,9 @@ class AuthCoordinator: Coordinator {
     }
 
     func moveToNickname() {
-        let nicknameViewController = NicknameViewController()
-        let nicknameViewModel = NickNameViewModel()
         let nicknameCoordinator = NicknameCoordinator(navigationController: navigationController)
-
-        nicknameViewController.viewModel = nicknameViewModel
-        nicknameViewModel.coordinator = nicknameCoordinator
         nicknameCoordinator.parent = self
 
         children.append(nicknameCoordinator)
-        navigationController?.pushViewController(nicknameViewController, animated: true)
     }
 }

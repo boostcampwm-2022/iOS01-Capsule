@@ -19,17 +19,16 @@ class CapsuleOpenCoordinator: Coordinator {
     func start() {
         let capsuleOpenViewController = CapsuleOpenViewController()
         let capsuleOpenViewModel = CapsuleOpenViewModel()
-        capsuleOpenViewController.viewModel = capsuleOpenViewModel
+
         capsuleOpenViewModel.coordinator = self
+        capsuleOpenViewController.viewModel = capsuleOpenViewModel
 
         navigationController?.pushViewController(capsuleOpenViewController, animated: true)
     }
-    
+
     func finish() {
-        // children removeLast?
-        print(#function)
+        parent?.children.removeLast()
         if let parent = parent as? TabBarCoordinator {
-            print("hello")
             parent.tabBarWillHide(false)
         }
     }

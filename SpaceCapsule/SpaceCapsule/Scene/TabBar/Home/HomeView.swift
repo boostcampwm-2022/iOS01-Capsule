@@ -5,4 +5,10 @@
 //  Created by young june Park on 2022/11/15.
 //
 
-import Foundation
+import UIKit
+
+final class HomeView: UIView, BaseView {
+    func configure() {}
+    func addSubViews() {}
+    func makeConstraints() {}
+}

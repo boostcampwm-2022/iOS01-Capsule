@@ -19,15 +19,11 @@ final class CapsuleOpenViewController: UIViewController, BaseViewController {
         view.backgroundColor = .themeBackground
         bind()
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
-        
         super.viewWillDisappear(animated)
-        viewModel?.input.popViewController.onNext(Void())
-        
+        viewModel?.input.popViewController.onNext(())
     }
 
-    func bind() {
-        guard let viewModel else {return}
-    }
+    func bind() { }
 }

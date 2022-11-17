@@ -20,22 +20,22 @@ final class CapsuleListCoordinator: Coordinator {
         let capsuleListViewController = CapsuleListViewController()
         let capsuleListViewModel = CapsuleListViewModel()
 
-        capsuleListViewController.viewModel = capsuleListViewModel
         capsuleListViewModel.coordinator = self
+        capsuleListViewController.viewModel = capsuleListViewModel
+
         navigationController?.setViewControllers([capsuleListViewController], animated: true)
     }
 
     func showCapsuleOpen() {
         let capsuleOpenCoordinator = CapsuleOpenCoordinator(navigationController: navigationController)
+
         capsuleOpenCoordinator.parent = parent
         capsuleOpenCoordinator.start()
-        // children append?
+
+        children.append(capsuleOpenCoordinator)
 
         if let parent = parent as? TabBarCoordinator {
             parent.tabBarWillHide(true)
         }
-    }
-
-    func finish() {
     }
 }

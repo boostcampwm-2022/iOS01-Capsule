@@ -22,8 +22,10 @@ final class CapsuleAddCoordinator: Coordinator {
 
     private func showCapsuleCreate() {
         let capsuleCreateCoordinator = CapsuleCreateCoordinator(navigationController: navigationController)
-        children.append(capsuleCreateCoordinator)
+        
         capsuleCreateCoordinator.parent = self
         capsuleCreateCoordinator.start()
+
+        children.append(capsuleCreateCoordinator)
     }
 }

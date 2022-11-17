@@ -20,8 +20,8 @@ final class CapsuleCreateCoordinator: Coordinator {
         let capsuleCreateViewController = CapsuleCreateViewController()
         let capsuleCreateViewModel = CapsuleCreateViewModel()
 
-        capsuleCreateViewController.viewModel = capsuleCreateViewModel
         capsuleCreateViewModel.coordinator = self
+        capsuleCreateViewController.viewModel = capsuleCreateViewModel
 
         navigationController?.setViewControllers([capsuleCreateViewController], animated: true)
     }
