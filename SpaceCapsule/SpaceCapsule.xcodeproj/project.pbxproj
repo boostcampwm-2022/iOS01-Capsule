@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0D09A6E92925F8F400D4ED33 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D09A6E82925F8F400D4ED33 /* CustomTabBar.swift */; };
 		0D46DEFA2923E1180045400A /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D46DEF92923E1180045400A /* UIFont+.swift */; };
 		0D6CA335292216A300E02393 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D6CA334292216A300E02393 /* AppDelegate.swift */; };
 		0D6CA337292216A300E02393 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D6CA336292216A300E02393 /* SceneDelegate.swift */; };
@@ -103,7 +102,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0D09A6E82925F8F400D4ED33 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		0D46DEF92923E1180045400A /* UIFont+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
 		0D6CA331292216A300E02393 /* SpaceCapsule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceCapsule.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D6CA334292216A300E02393 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -215,7 +213,6 @@
 			isa = PBXGroup;
 			children = (
 				0DCB22922924CE58002CB095 /* CustomTabBarController.swift */,
-				0D09A6E82925F8F400D4ED33 /* CustomTabBar.swift */,
 				0DCB22942924CE61002CB095 /* Theme */,
 			);
 			path = Components;
@@ -758,7 +755,6 @@
 				28049CED29238216002389BD /* Bindable.swift in Sources */,
 				288A8F03292362CC000229D2 /* CapsuleAddCoordinator.swift in Sources */,
 				288A8EBC29235B8E000229D2 /* CapsuleListViewController.swift in Sources */,
-				0D09A6E92925F8F400D4ED33 /* CustomTabBar.swift in Sources */,
 				288A8F0529236505000229D2 /* AppCoordinator.swift in Sources */,
 				288A8EF72923608F000229D2 /* CapsuleOpenCoordinator.swift in Sources */,
 				0D6CA337292216A300E02393 /* SceneDelegate.swift in Sources */,
