@@ -33,6 +33,7 @@ class AuthCoordinator: Coordinator {
     func moveToNickname() {
         let nicknameCoordinator = NicknameCoordinator(navigationController: navigationController)
         nicknameCoordinator.parent = self
+        nicknameCoordinator.start()
 
         children.append(nicknameCoordinator)
     }

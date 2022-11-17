@@ -27,7 +27,7 @@ class CapsuleOpenCoordinator: Coordinator {
     }
 
     func finish() {
-        parent?.children.removeLast()
+        parent?.children.popLast()
         if let parent = parent as? TabBarCoordinator {
             parent.tabBarWillHide(false)
         }

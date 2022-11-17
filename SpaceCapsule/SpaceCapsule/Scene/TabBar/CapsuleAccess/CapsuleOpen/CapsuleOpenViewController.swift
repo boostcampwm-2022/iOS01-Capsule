@@ -21,8 +21,8 @@ final class CapsuleOpenViewController: UIViewController, BaseViewController {
     }
 
     override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
         viewModel?.input.popViewController.onNext(())
+        super.viewWillDisappear(animated)
     }
 
     func bind() { }
