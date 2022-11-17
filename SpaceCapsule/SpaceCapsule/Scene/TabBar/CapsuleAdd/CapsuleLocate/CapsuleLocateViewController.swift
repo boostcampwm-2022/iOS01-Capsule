@@ -52,31 +52,33 @@ final class CapsuleLocateViewController: UIViewController, BaseViewController {
     }
     
     private func configure() {
+        configureLocationManager()
+        configureMap()
+        configureGesture()
+    }
+    
+    private func configureLocationManager() {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
-        
+    }
+    
+    private func configureMap() {
         capsuleMapView.map.delegate = self
         capsuleMapView.map.mapType = MKMapType.standard
-        
-        addGesture()
     }
     
     private func goToCurrentLocation() {
         guard let center = locationManager.location?.coordinate else {
             return
         }
-        print(center)
         
         let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
         let region = MKCoordinateRegion(center: center, span: span)
         capsuleMapView.map.setRegion(region, animated: true)
     }
 
-    private func getLocationUsagePermission() {
-        locationManager.requestWhenInUseAuthorization()
-    }
 }
 
 extension CapsuleLocateViewController: MKMapViewDelegate, CLLocationManagerDelegate {
@@ -88,10 +90,10 @@ extension CapsuleLocateViewController: MKMapViewDelegate, CLLocationManagerDeleg
                 goToCurrentLocation()
             case .restricted, .notDetermined:
                 print("GPS 권한 설정되지 않음")
-                getLocationUsagePermission()
+                locationManager.requestWhenInUseAuthorization()
             case .denied:
                 print("GPS 권한 요청 거부됨")
-                getLocationUsagePermission()
+                locationManager.requestWhenInUseAuthorization()
             default:
                 print("GPS: Default")
             }
@@ -117,38 +119,49 @@ extension CapsuleLocateViewController: MKMapViewDelegate, CLLocationManagerDeleg
         return annotationView
     }
     
-    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        let alertController = UIAlertController(title: "캡슐입니다", message: "해당 캡슐로 이동할까요?", preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        let acceptAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-        alertController.addAction(cancelAction)
-        alertController.addAction(acceptAction)
-        present(alertController, animated: true, completion: nil)
-    }
-    
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated: Bool) {
-        // TODO: 이 시점에 주소 업데이트
+        let coordinate = mapView.region.center
+        
+        do {
+            let request = try KakaoAPIManager.shared.getRequest(for: .coordToAddress((x: String(coordinate.longitude),
+                                                                        y: String(coordinate.latitude))))
+            let result: Observable<Result<KakaoResponse, NetworkError>> = NetworkManager.shared.send(request: request)
+            result
+                .map { result -> [Document] in
+                    switch result {
+                    case let .success(value):
+                        return value.documents
+                    case let .failure(error):
+                        print(error)
+                        return []
+                    }
+                }
+                .subscribe(onNext: {
+                    let address = $0.first?.address
+                    print("\(address?.region1DepthName ?? "") \(address?.region2DepthName ?? "")")
+                })
+                .disposed(by: disposeBag)
+        } catch {
+            print(error)
+        }
     }
 }
 
 extension CapsuleLocateViewController: UIGestureRecognizerDelegate {
-    private func addGesture() {
+    private func configureGesture() {
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(drag(sender:)))
         panGesture.delegate = self
         capsuleMapView.map.addGestureRecognizer(panGesture)
     }
     
     @objc func drag(sender: UIPanGestureRecognizer) {
-        // TODO: 커서 뷰 색 변경
         switch sender.state {
         case .began:
             capsuleMapView.cursor.backgroundColor = .green
-        case .cancelled:
-            capsuleMapView.cursor.backgroundColor = .red
-        case .ended:
+        case .ended, .cancelled:
             capsuleMapView.cursor.backgroundColor = .red
         default:
-            print("unknown")
+            break
         }
     }
     
