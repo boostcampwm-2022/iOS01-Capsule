@@ -12,7 +12,7 @@ import CoreLocation
 
 final class CapsuleMapViewModel: BaseViewModel {
     var disposeBag: DisposeBag = DisposeBag()
-    // var coordinator: CapsuleMapCoordinator?
+     var coordinator: CapsuleMapCoordinator?
 
     var input = Input()
     var output = Output()
