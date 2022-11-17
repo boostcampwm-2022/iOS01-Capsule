@@ -32,11 +32,23 @@ final class CapsuleMapViewModel: BaseViewModel {
     
     func fetchAnnotations() {
         let coordinates: [CLLocationCoordinate2D] = [
-            CLLocationCoordinate2D(latitude: 37.6426688, longitude: 126.8319094),
-            CLLocationCoordinate2D(latitude: 37.644479, longitude: 126.832957),
-            CLLocationCoordinate2D(latitude: 37.644288, longitude: 126.834035),
-            CLLocationCoordinate2D(latitude: 37.642940, longitude: 126.831594)
+            CLLocationCoordinate2D(latitude: 37.582867, longitude: 126.027869),
+            CLLocationCoordinate2D(latitude: 37.582458, longitude: 127.028570),
+            CLLocationCoordinate2D(latitude: 37.582651, longitude: 127.030218)
         ]
         input.annotations.accept(coordinates)
+    }
+    
+    func isOpenable(currentCoordinate: CLLocationCoordinate2D, targetCoordinate: CLLocationCoordinate2D) -> Bool {
+        let currentLocation = CLLocation(latitude: currentCoordinate.latitude, longitude: currentCoordinate.longitude)
+        let targetLocation = CLLocation(latitude: targetCoordinate.latitude, longitude: targetCoordinate.longitude)
+        
+        let distance = currentLocation.distance(from: targetLocation)
+        if distance < 100.0 {
+            print("openable capsule")
+            return true
+        }
+        print("not openable capsule")
+        return false
     }
 }
