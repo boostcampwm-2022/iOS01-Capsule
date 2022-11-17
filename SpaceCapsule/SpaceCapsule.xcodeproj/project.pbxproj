@@ -82,6 +82,13 @@
 		288A8EFF292360BC000229D2 /* CapsuleDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288A8EFE292360BC000229D2 /* CapsuleDetailCoordinator.swift */; };
 		288A8F03292362CC000229D2 /* CapsuleAddCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288A8F02292362CC000229D2 /* CapsuleAddCoordinator.swift */; };
 		288A8F0529236505000229D2 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288A8F0429236505000229D2 /* AppCoordinator.swift */; };
+		28F405472925E2B500F30E2C /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F405462925E2B500F30E2C /* Key.swift */; };
+		4A05D0EC2924C04200A2EF50 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A05D0EB2924C04200A2EF50 /* GoogleService-Info.plist */; };
+		4A05D1052925CF2A00A2EF50 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A05D1042925CF2A00A2EF50 /* NetworkError.swift */; };
+		4A05D1082925CF4400A2EF50 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A05D1072925CF4400A2EF50 /* NetworkManager.swift */; };
+		4A9E913F2925D50D00B7CC5C /* KakaoAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E913E2925D50D00B7CC5C /* KakaoAPIManager.swift */; };
+		4A9E91442925D51B00B7CC5C /* KakaoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E91422925D51B00B7CC5C /* KakaoResponse.swift */; };
+		4A9E91452925D51B00B7CC5C /* RequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E91432925D51B00B7CC5C /* RequestType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -175,6 +182,13 @@
 		288A8EFE292360BC000229D2 /* CapsuleDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleDetailCoordinator.swift; sourceTree = "<group>"; };
 		288A8F02292362CC000229D2 /* CapsuleAddCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleAddCoordinator.swift; sourceTree = "<group>"; };
 		288A8F0429236505000229D2 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		28F405462925E2B500F30E2C /* Key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
+		4A05D0EB2924C04200A2EF50 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4A05D1042925CF2A00A2EF50 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		4A05D1072925CF4400A2EF50 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		4A9E913E2925D50D00B7CC5C /* KakaoAPIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KakaoAPIManager.swift; sourceTree = "<group>"; };
+		4A9E91422925D51B00B7CC5C /* KakaoResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KakaoResponse.swift; sourceTree = "<group>"; };
+		4A9E91432925D51B00B7CC5C /* RequestType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestType.swift; sourceTree = "<group>"; };
 		59F567F72923BE1E00F756B2 /* SpaceCapsule.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SpaceCapsule.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -241,7 +255,11 @@
 		0D6CA333292216A300E02393 /* SpaceCapsule */ = {
 			isa = PBXGroup;
 			children = (
-				0DCB22902924BF70002CB095 /* GoogleService-Info.plist */,
+				28F405452925E2A600F30E2C /* Private */,
+				4A9E91402925D51B00B7CC5C /* Model */,
+				4A05D1062925CF2F00A2EF50 /* Manager */,
+				4A05D1032925CF1800A2EF50 /* Error */,
+				4A05D0EB2924C04200A2EF50 /* GoogleService-Info.plist */,
 				59F567F72923BE1E00F756B2 /* SpaceCapsule.entitlements */,
 				0D6CA342292216A400E02393 /* Info.plist */,
 				0D6CA33F292216A400E02393 /* LaunchScreen.storyboard */,
@@ -357,6 +375,7 @@
 		288A8E9429235989000229D2 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				4A05D0ED2924C30200A2EF50 /* Temp */,
 				288A8E95292359A6000229D2 /* Auth */,
 				288A8EAA29235B0E000229D2 /* TabBar */,
 			);
@@ -529,6 +548,55 @@
 			path = CapsuleDetail;
 			sourceTree = "<group>";
 		};
+		28F405452925E2A600F30E2C /* Private */ = {
+			isa = PBXGroup;
+			children = (
+				28F405462925E2B500F30E2C /* Key.swift */,
+			);
+			path = Private;
+			sourceTree = "<group>";
+		};
+		4A05D0ED2924C30200A2EF50 /* Temp */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Temp;
+			sourceTree = "<group>";
+		};
+		4A05D1032925CF1800A2EF50 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				4A05D1042925CF2A00A2EF50 /* NetworkError.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
+		4A05D1062925CF2F00A2EF50 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				4A05D1072925CF4400A2EF50 /* NetworkManager.swift */,
+				4A9E913E2925D50D00B7CC5C /* KakaoAPIManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		4A9E91402925D51B00B7CC5C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4A9E91412925D51B00B7CC5C /* Response */,
+				4A9E91432925D51B00B7CC5C /* RequestType.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4A9E91412925D51B00B7CC5C /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				4A9E91422925D51B00B7CC5C /* KakaoResponse.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -648,9 +716,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				0D6CA341292216A400E02393 /* LaunchScreen.storyboard in Resources */,
-				0DCB22912924BF71002CB095 /* GoogleService-Info.plist in Resources */,
 				0D6CA33E292216A400E02393 /* Assets.xcassets in Resources */,
 				0D90DAFE29239CA0000DCC84 /* OwnglyphHaesomChae.otf in Resources */,
+				4A05D0EC2924C04200A2EF50 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -717,16 +785,20 @@
 				28049CE729237B2B002389BD /* BaseViewController.swift in Sources */,
 				0D90DAF329238B90000DCC84 /* CapsuleCloseCoordinator.swift in Sources */,
 				288A8ED329235C65000229D2 /* CapsuleCreateView.swift in Sources */,
+				4A05D1082925CF4400A2EF50 /* NetworkManager.swift in Sources */,
 				288A8E9D29235A80000229D2 /* SignInViewController.swift in Sources */,
 				0D90DAF929239A81000DCC84 /* UIImage+.swift in Sources */,
 				288A8E9B29235A6E000229D2 /* SignInView.swift in Sources */,
 				288A8ED529235C6F000229D2 /* CapsuleCreateViewController.swift in Sources */,
+				28F405472925E2B500F30E2C /* Key.swift in Sources */,
 				288A8EC629235BBD000229D2 /* CapsuleMapViewModel.swift in Sources */,
+				4A9E91452925D51B00B7CC5C /* RequestType.swift in Sources */,
 				288A8EEA29235FF1000229D2 /* CapsuleCloseViewModel.swift in Sources */,
 				288A8EF92923609C000229D2 /* CapsuleDetailView.swift in Sources */,
 				288A8E97292359CF000229D2 /* AuthCoordinator.swift in Sources */,
 				0D9D67312924945D0038F529 /* FrameResource.swift in Sources */,
 				288A8EC429235BB7000229D2 /* CapsuleMapViewController.swift in Sources */,
+				4A9E91442925D51B00B7CC5C /* KakaoResponse.swift in Sources */,
 				288A8EC829235BCE000229D2 /* CapsuleMapCoordinator.swift in Sources */,
 				288A8E922923244D000229D2 /* Coordinator.swift in Sources */,
 				288A8EE829235FE2000229D2 /* CapsuleCloseViewController.swift in Sources */,
@@ -734,6 +806,7 @@
 				0DCB22932924CE58002CB095 /* CustomTabBarController.swift in Sources */,
 				288A8EC229235BAF000229D2 /* CapsuleMapView.swift in Sources */,
 				288A8EA129235AA1000229D2 /* SignInCoordinator.swift in Sources */,
+				4A9E913F2925D50D00B7CC5C /* KakaoAPIManager.swift in Sources */,
 				288A8ED929235C83000229D2 /* CapsuleCreateCoordinator.swift in Sources */,
 				288A8ECE29235BEF000229D2 /* HomeViewModel.swift in Sources */,
 				28049CE929237BB2002389BD /* BaseView.swift in Sources */,
@@ -743,6 +816,7 @@
 				288A8ED029235BF9000229D2 /* HomeCoordinator.swift in Sources */,
 				288A8EA529235AE8000229D2 /* NicknameViewController.swift in Sources */,
 				288A8EF129236075000229D2 /* CapsuleOpenView.swift in Sources */,
+				4A05D1052925CF2A00A2EF50 /* NetworkError.swift in Sources */,
 				288A8E9F29235A91000229D2 /* SignInViewModel.swift in Sources */,
 				0D90DAF129238B85000DCC84 /* CapsuleLocateCoordinator.swift in Sources */,
 				288A8EA729235AF1000229D2 /* NicknameViewModel.swift in Sources */,

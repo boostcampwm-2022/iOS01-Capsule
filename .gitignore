@@ -4,6 +4,9 @@
 ### Firebase
 SpaceCapsule/SpaceCapsule/GoogleService-Info.plist
 
+### API Key
+SpaceCapsule/SpaceCapsule/Private/*
+
 ### CocoaPods ###
 ## CocoaPods GitIgnore Template
 
