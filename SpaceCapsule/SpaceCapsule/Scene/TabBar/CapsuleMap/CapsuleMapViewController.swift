@@ -173,4 +173,5 @@ final class CapsuleMapViewController: UIViewController, BaseViewController, MKMa
         }
         return MKOverlayRenderer(overlay: overlay)
     }
+
 }

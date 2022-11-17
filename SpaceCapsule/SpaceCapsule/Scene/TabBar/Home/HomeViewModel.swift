@@ -6,3 +6,15 @@
 //
 
 import Foundation
+import RxSwift
+
+final class HomeViewModel: BaseViewModel {
+    var disposeBag = DisposeBag()
+    var coordinator: HomeCoordinator?
+    
+    init() {
+        
+    }
+    
+    func bind() {}
+}
