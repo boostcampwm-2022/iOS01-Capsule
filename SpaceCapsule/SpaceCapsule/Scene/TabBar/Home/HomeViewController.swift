@@ -14,6 +14,7 @@ final class HomeViewController: UIViewController, BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .themeColor300
     }
     
     func bind() {}

@@ -10,7 +10,7 @@ import RxSwift
 import SnapKit
 import UIKit
 
-class CustomTabBarController: UITabBarController {
+@objc class CustomTabBarController: UITabBarController {
     let disposeBag = DisposeBag()
     var coordinator: TabBarCoordinator?
 
@@ -31,6 +31,8 @@ class CustomTabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        delegate = self
 
         bindCenterButton()
         configureAppearance()
@@ -56,9 +58,21 @@ class CustomTabBarController: UITabBarController {
 
         centerButton.snp.makeConstraints {
             $0.centerX.equalTo(tabBar.snp.centerX)
-            $0.centerY.equalTo(tabBar.snp.top)
+            $0.centerY.equalTo(tabBar.snp.top).offset(10)
             $0.width.equalTo(FrameResource.addCapsuleButtonSize)
             $0.height.equalTo(FrameResource.addCapsuleButtonSize)
         }
+    }
+}
+
+extension CustomTabBarController: UITabBarControllerDelegate {
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        guard let selectedIndex = tabBarController.viewControllers?.firstIndex(of: viewController) else {
+            return true
+        }
+
+        if selectedIndex == 2 { return false }
+
+        return true
     }
 }

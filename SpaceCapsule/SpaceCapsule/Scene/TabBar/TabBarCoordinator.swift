@@ -20,6 +20,7 @@ final class TabBarCoordinator: Coordinator {
     func start() {
         firstTabBarItem()
         secondTabBarItem()
+        centerTabBarItem()
         thirdTabBarItem()
         fourthTabBarItem()
 
@@ -44,6 +45,14 @@ final class TabBarCoordinator: Coordinator {
             controller.modalPresentationStyle = .fullScreen
             tabBarController.present(controller, animated: true)
         }
+    }
+
+    private func centerTabBarItem() {
+        let centerItem = UITabBarItem(title: nil, image: nil, selectedImage: nil)
+        let emptyCoordinator = CapsuleAddCoordinator()
+        emptyCoordinator.navigationController?.tabBarItem = centerItem
+        
+        children.append(emptyCoordinator)
     }
 }
 
