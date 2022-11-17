@@ -11,6 +11,7 @@ import RxSwift
 import UIKit
 
 final class CapsuleLocateViewController: UIViewController, BaseViewController {
+
     var disposeBag = DisposeBag()
     var viewModel: CapsuleLocateViewModel
     let capsuleMapView = CapsuleLocateView()
@@ -49,6 +50,16 @@ final class CapsuleLocateViewController: UIViewController, BaseViewController {
     }
     
     func bind() {
+        viewModel.input.isDragging
+            .withUnretained(self)
+            .bind { owner, isDragging in
+                if isDragging {
+                    owner.capsuleMapView.cursor.backgroundColor = .lightGray
+                } else {
+                    owner.capsuleMapView.cursor.backgroundColor = .green
+                    
+                }
+            }.disposed(by: disposeBag)
     }
     
     private func configure() {
@@ -145,6 +156,8 @@ extension CapsuleLocateViewController: MKMapViewDelegate, CLLocationManagerDeleg
             print(error)
         }
     }
+    
+    
 }
 
 extension CapsuleLocateViewController: UIGestureRecognizerDelegate {
@@ -157,9 +170,9 @@ extension CapsuleLocateViewController: UIGestureRecognizerDelegate {
     @objc func drag(sender: UIPanGestureRecognizer) {
         switch sender.state {
         case .began:
-            capsuleMapView.cursor.backgroundColor = .green
+            viewModel.input.isDragging.accept(true)
         case .ended, .cancelled:
-            capsuleMapView.cursor.backgroundColor = .red
+            viewModel.input.isDragging.accept(false)
         default:
             break
         }
