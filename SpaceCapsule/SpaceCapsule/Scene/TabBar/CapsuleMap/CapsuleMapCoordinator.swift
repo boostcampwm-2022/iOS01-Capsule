@@ -18,6 +18,11 @@ final class CapsuleMapCoordinator: Coordinator {
 
     func start() {
         let capsuleMapViewController = CapsuleMapViewController()
+        let capsuleMapViewModel = CapsuleMapViewModel()
+
+        capsuleMapViewModel.coordinator = self
+        capsuleMapViewController.viewModel = capsuleMapViewModel
+
         navigationController?.setViewControllers([capsuleMapViewController], animated: true)
     }
 }

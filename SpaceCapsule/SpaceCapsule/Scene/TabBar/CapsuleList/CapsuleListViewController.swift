@@ -20,9 +20,10 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
         
         view.backgroundColor = .secondarySystemBackground
         
-        // 임시
+        
         bind()
         
+        // 임시
         nextButton.title = "다음"
         navigationItem.rightBarButtonItem = nextButton
         
