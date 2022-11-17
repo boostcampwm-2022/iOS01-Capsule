@@ -59,6 +59,12 @@ final class CapsuleMapViewController: UIViewController, BaseViewController, MKMa
             .disposed(by: disposeBag)
     }
     
+    private func addCircleLocation(at center: CLLocationCoordinate2D) {
+        capsuleMapView.map.removeOverlays(capsuleMapView.map.overlays)
+        let circle = MKCircle(center: center, radius: 10)
+        capsuleMapView.map.addOverlay(circle)
+    }
+    
     private func removeAnnotations() {
         if !capsuleMapView.map.annotations.isEmpty {
             let annotations = capsuleMapView.map.annotations
@@ -85,6 +91,7 @@ final class CapsuleMapViewController: UIViewController, BaseViewController, MKMa
         capsuleMapView.map.mapType = MKMapType.standard
         capsuleMapView.map.showsUserLocation = true
         capsuleMapView.map.setUserTrackingMode(.follow, animated: true)
+        capsuleMapView.map.isZoomEnabled = false
     }
     
     private func goToCurrentLocation() {
@@ -144,5 +151,23 @@ final class CapsuleMapViewController: UIViewController, BaseViewController, MKMa
         alertController.addAction(cancelAction)
         alertController.addAction(acceptAction)
         present(alertController, animated: true, completion: nil)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let center = locations.last?.coordinate else {
+            print("location 위치 인식 안돼ㅁ")
+            return
+        }
+        addCircleLocation(at: center)
+    }
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        if let circleOverlay = overlay as? MKCircle {
+            let circleRenderer = MKCircleRenderer(overlay: circleOverlay)
+            circleRenderer.fillColor = .white
+            circleRenderer.alpha = 0.2
+            circleRenderer.strokeColor = .black
+            return circleRenderer
+        }
+        return MKOverlayRenderer(overlay: overlay)
     }
 }
