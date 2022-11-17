@@ -6,3 +6,11 @@
 //
 
 import Foundation
+import RxSwift
+
+final class ProfileViewModel: BaseViewModel {
+    var disposeBag = DisposeBag()
+    var coordinator: ProfileCoordinator?
+
+    func bind() {}
+}

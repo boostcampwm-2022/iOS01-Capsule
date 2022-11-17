@@ -16,7 +16,15 @@ final class NicknameCoordinator: Coordinator {
         self.navigationController = navigationController
     }
 
-    func start() {}
+    func start() {
+        let nicknameViewController = NicknameViewController()
+        let nicknameViewModel = NickNameViewModel()
+        
+        nicknameViewModel.coordinator = self
+        nicknameViewController.viewModel = nicknameViewModel
+        
+        navigationController?.pushViewController(nicknameViewController, animated: true)
+    }
 
     func didFinish() {
         parent?.children.removeLast()

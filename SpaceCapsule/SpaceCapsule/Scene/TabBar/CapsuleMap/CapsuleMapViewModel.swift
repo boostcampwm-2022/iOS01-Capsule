@@ -6,3 +6,13 @@
 //
 
 import Foundation
+import RxSwift
+
+final class CapsuleMapViewModel: BaseViewModel {
+    var disposeBag = DisposeBag()
+    var coordinator: CapsuleMapCoordinator?
+
+    init() {}
+
+    func bind() {}
+}

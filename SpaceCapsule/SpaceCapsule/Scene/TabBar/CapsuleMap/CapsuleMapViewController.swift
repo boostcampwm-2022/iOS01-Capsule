@@ -5,4 +5,20 @@
 //  Created by young june Park on 2022/11/15.
 //
 
-import Foundation
+import RxSwift
+import UIKit
+
+final class CapsuleMapViewController: UIViewController, BaseViewController {
+    var disposeBag = DisposeBag()
+    var viewModel: CapsuleMapViewModel?
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        view.backgroundColor = .systemBackground
+
+        bind()
+    }
+
+    func bind() {}
+}
