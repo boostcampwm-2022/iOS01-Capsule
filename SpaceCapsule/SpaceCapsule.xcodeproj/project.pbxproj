@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0D46DEFA2923E1180045400A /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D46DEF92923E1180045400A /* UIFont+.swift */; };
+		0D4C1134292745A400B1C2B6 /* UICollectionViewCell+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4C1133292745A400B1C2B6 /* UICollectionViewCell+.swift */; };
 		0D6CA335292216A300E02393 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D6CA334292216A300E02393 /* AppDelegate.swift */; };
 		0D6CA337292216A300E02393 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D6CA336292216A300E02393 /* SceneDelegate.swift */; };
 		0D6CA33E292216A400E02393 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D6CA33D292216A400E02393 /* Assets.xcassets */; };
@@ -109,6 +110,7 @@
 
 /* Begin PBXFileReference section */
 		0D46DEF92923E1180045400A /* UIFont+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
+		0D4C1133292745A400B1C2B6 /* UICollectionViewCell+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+.swift"; sourceTree = "<group>"; };
 		0D6CA331292216A300E02393 /* SpaceCapsule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceCapsule.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D6CA334292216A300E02393 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0D6CA336292216A300E02393 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -304,6 +306,7 @@
 				0D90DAF6292397CF000DCC84 /* UIColor+.swift */,
 				0D90DAF829239A81000DCC84 /* UIImage+.swift */,
 				0D46DEF92923E1180045400A /* UIFont+.swift */,
+				0D4C1133292745A400B1C2B6 /* UICollectionViewCell+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -381,7 +384,6 @@
 		288A8E9429235989000229D2 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
-				4A05D0ED2924C30200A2EF50 /* Temp */,
 				288A8E95292359A6000229D2 /* Auth */,
 				288A8EAA29235B0E000229D2 /* TabBar */,
 			);
@@ -552,13 +554,6 @@
 				288A8EFE292360BC000229D2 /* CapsuleDetailCoordinator.swift */,
 			);
 			path = CapsuleDetail;
-			sourceTree = "<group>";
-		};
-		4A05D0ED2924C30200A2EF50 /* Temp */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Temp;
 			sourceTree = "<group>";
 		};
 		4A05D1032925CF1800A2EF50 /* Error */ = {
@@ -819,6 +814,7 @@
 				0D90DAF129238B85000DCC84 /* CapsuleLocateCoordinator.swift in Sources */,
 				288A8EA729235AF1000229D2 /* NicknameViewModel.swift in Sources */,
 				288A8ECC29235BE9000229D2 /* HomeViewController.swift in Sources */,
+				0D4C1134292745A400B1C2B6 /* UICollectionViewCell+.swift in Sources */,
 				288A8EB029235B46000229D2 /* TabBarCoordinator.swift in Sources */,
 				288A8EB629235B69000229D2 /* ProfileViewModel.swift in Sources */,
 				0D6CA335292216A300E02393 /* AppDelegate.swift in Sources */,

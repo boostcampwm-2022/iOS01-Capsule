@@ -17,6 +17,14 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
         return button
     }()
 
+    private let doneButton: UIBarButtonItem = {
+        let button = UIBarButtonItem()
+        button.tintColor = .themeBlack
+        button.title = "완료"
+
+        return button
+    }()
+
     var disposeBag = DisposeBag()
     var viewModel: CapsuleCreateViewModel?
 
@@ -25,9 +33,8 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
 
         view.backgroundColor = .themeBackground
 
-        navigationItem.leftBarButtonItem = closeButton
-        
         bind()
+        setUpNavigation()
     }
 
     func bind() {
@@ -36,5 +43,11 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
         closeButton.rx.tap
             .bind(to: viewModel.input.close)
             .disposed(by: disposeBag)
+    }
+
+    private func setUpNavigation() {
+        navigationItem.title = "캡슐 추가"
+        navigationItem.leftBarButtonItem = closeButton
+        navigationItem.rightBarButtonItem = doneButton
     }
 }
