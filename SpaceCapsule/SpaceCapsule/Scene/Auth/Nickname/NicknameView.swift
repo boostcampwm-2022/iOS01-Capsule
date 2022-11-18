@@ -84,3 +84,15 @@ final class NicknameView: UIView, BaseView {
         }
     }
 }
+
+#if canImport(SwiftUI) && DEBUG
+    import SwiftUI
+    struct Preview: PreviewProvider {
+        static var previews: some View {
+            UIViewPreview {
+                NicknameView()
+            }
+            .previewLayout(.sizeThatFits)
+        }
+    }
+#endif

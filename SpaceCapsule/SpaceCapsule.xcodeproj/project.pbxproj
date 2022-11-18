@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0D46DEFA2923E1180045400A /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D46DEF92923E1180045400A /* UIFont+.swift */; };
 		0D4C1134292745A400B1C2B6 /* UICollectionViewCell+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4C1133292745A400B1C2B6 /* UICollectionViewCell+.swift */; };
+		0D4C11372927489D00B1C2B6 /* UIViewPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4C11362927489D00B1C2B6 /* UIViewPreview.swift */; };
+		0D4C11392927495900B1C2B6 /* UIViewControllerPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4C11382927495900B1C2B6 /* UIViewControllerPreview.swift */; };
 		0D6CA335292216A300E02393 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D6CA334292216A300E02393 /* AppDelegate.swift */; };
 		0D6CA337292216A300E02393 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D6CA336292216A300E02393 /* SceneDelegate.swift */; };
 		0D6CA33E292216A400E02393 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D6CA33D292216A400E02393 /* Assets.xcassets */; };
@@ -111,6 +113,8 @@
 /* Begin PBXFileReference section */
 		0D46DEF92923E1180045400A /* UIFont+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
 		0D4C1133292745A400B1C2B6 /* UICollectionViewCell+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+.swift"; sourceTree = "<group>"; };
+		0D4C11362927489D00B1C2B6 /* UIViewPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewPreview.swift; sourceTree = "<group>"; };
+		0D4C11382927495900B1C2B6 /* UIViewControllerPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerPreview.swift; sourceTree = "<group>"; };
 		0D6CA331292216A300E02393 /* SpaceCapsule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceCapsule.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D6CA334292216A300E02393 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0D6CA336292216A300E02393 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -232,6 +236,15 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		0D4C11352927489200B1C2B6 /* Preview */ = {
+			isa = PBXGroup;
+			children = (
+				0D4C11362927489D00B1C2B6 /* UIViewPreview.swift */,
+				0D4C11382927495900B1C2B6 /* UIViewControllerPreview.swift */,
+			);
+			path = Preview;
+			sourceTree = "<group>";
+		};
 		0D6CA328292216A300E02393 = {
 			isa = PBXGroup;
 			children = (
@@ -255,20 +268,21 @@
 		0D6CA333292216A300E02393 /* SpaceCapsule */ = {
 			isa = PBXGroup;
 			children = (
-				0D8AD3EF29264C9700AA305D /* Private */,
-				4A9E91402925D51B00B7CC5C /* Model */,
-				4A05D1062925CF2F00A2EF50 /* Manager */,
-				4A05D1032925CF1800A2EF50 /* Error */,
-				4A05D0EB2924C04200A2EF50 /* GoogleService-Info.plist */,
 				59F567F72923BE1E00F756B2 /* SpaceCapsule.entitlements */,
+				4A05D0EB2924C04200A2EF50 /* GoogleService-Info.plist */,
 				0D6CA342292216A400E02393 /* Info.plist */,
 				0D6CA33F292216A400E02393 /* LaunchScreen.storyboard */,
 				0D6CA33D292216A400E02393 /* Assets.xcassets */,
 				288A8E902923242D000229D2 /* App */,
 				288A8E93292328AE000229D2 /* Base */,
 				0D46DEFC2923E4800045400A /* Components */,
+				4A05D1032925CF1800A2EF50 /* Error */,
 				0D90DAF5292397BF000DCC84 /* Extensions */,
 				0D90DAFA29239BD3000DCC84 /* Fonts */,
+				4A05D1062925CF2F00A2EF50 /* Manager */,
+				4A9E91402925D51B00B7CC5C /* Model */,
+				0D4C11352927489200B1C2B6 /* Preview */,
+				0D8AD3EF29264C9700AA305D /* Private */,
 				0D9D672F292493F00038F529 /* Resources */,
 				288A8E9429235989000229D2 /* Scene */,
 			);
@@ -805,8 +819,10 @@
 				28049CE929237BB2002389BD /* BaseView.swift in Sources */,
 				288A8EFD292360AB000229D2 /* CapsuleDetailViewModel.swift in Sources */,
 				288A8EE229235E3F000229D2 /* CapsuleLocateViewModel.swift in Sources */,
+				0D4C11372927489D00B1C2B6 /* UIViewPreview.swift in Sources */,
 				288A8EB229235B5A000229D2 /* ProfileView.swift in Sources */,
 				288A8ED029235BF9000229D2 /* HomeCoordinator.swift in Sources */,
+				0D4C11392927495900B1C2B6 /* UIViewControllerPreview.swift in Sources */,
 				288A8EA529235AE8000229D2 /* NicknameViewController.swift in Sources */,
 				288A8EF129236075000229D2 /* CapsuleOpenView.swift in Sources */,
 				4A05D1052925CF2A00A2EF50 /* NetworkError.swift in Sources */,
