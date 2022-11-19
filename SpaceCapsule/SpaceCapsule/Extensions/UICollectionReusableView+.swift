@@ -1,13 +1,13 @@
 //
-//  UICollectionViewCell.swift
+//  UICollectionReusableView+.swift
 //  SpaceCapsule
 //
-//  Created by 장재훈 on 2022/11/18.
+//  Created by 장재훈 on 2022/11/19.
 //
 
 import UIKit
 
-extension UICollectionViewCell {
+extension UICollectionReusableView {
     static var identifier: String {
         String(describing: self)
     }

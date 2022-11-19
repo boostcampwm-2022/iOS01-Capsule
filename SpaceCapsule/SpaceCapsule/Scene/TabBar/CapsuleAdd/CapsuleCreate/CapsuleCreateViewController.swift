@@ -53,8 +53,8 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
         viewModel.output.imageData
             .bind(
                 to: mainView.imageCollectionView.rx.items(
-                    cellIdentifier: CapsuleCreateCollectionViewCell.identifier,
-                    cellType: CapsuleCreateCollectionViewCell.self
+                    cellIdentifier: AddImageCollectionViewCell.identifier,
+                    cellType: AddImageCollectionViewCell.self
                 )
             ) { _, item, cell in
                 cell.configure(item: item)

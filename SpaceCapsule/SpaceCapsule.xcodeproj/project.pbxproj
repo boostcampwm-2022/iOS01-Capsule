@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0D46DEFA2923E1180045400A /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D46DEF92923E1180045400A /* UIFont+.swift */; };
-		0D4C1134292745A400B1C2B6 /* UICollectionViewCell+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4C1133292745A400B1C2B6 /* UICollectionViewCell+.swift */; };
 		0D4C11372927489D00B1C2B6 /* UIViewPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4C11362927489D00B1C2B6 /* UIViewPreview.swift */; };
 		0D4C11392927495900B1C2B6 /* UIViewControllerPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4C11382927495900B1C2B6 /* UIViewControllerPreview.swift */; };
 		0D6CA335292216A300E02393 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D6CA334292216A300E02393 /* AppDelegate.swift */; };
@@ -34,6 +33,10 @@
 		0D9D672E292486780038F529 /* ThemeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9D672D292486780038F529 /* ThemeLabel.swift */; };
 		0D9D67312924945D0038F529 /* FrameResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9D67302924945D0038F529 /* FrameResource.swift */; };
 		0DA6610D292778BE00CF3563 /* ThemeTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA6610C292778BE00CF3563 /* ThemeTextField.swift */; };
+		0DA9F6912928E9B900454932 /* AddImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA9F6902928E9B900454932 /* AddImageCollectionViewCell.swift */; };
+		0DA9F6932928E9CB00454932 /* AddImageCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA9F6922928E9CB00454932 /* AddImageCollectionView.swift */; };
+		0DA9F6952928EA4900454932 /* AddImageCollectionViewFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA9F6942928EA4900454932 /* AddImageCollectionViewFooter.swift */; };
+		0DA9F6972928EB9000454932 /* UICollectionReusableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA9F6962928EB9000454932 /* UICollectionReusableView+.swift */; };
 		0DCB22932924CE58002CB095 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCB22922924CE58002CB095 /* CustomTabBarController.swift */; };
 		28049CE529236EEC002389BD /* CapsuleAccessCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28049CE429236EEC002389BD /* CapsuleAccessCoordinator.swift */; };
 		28049CE729237B2B002389BD /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28049CE629237B2B002389BD /* BaseViewController.swift */; };
@@ -113,7 +116,6 @@
 
 /* Begin PBXFileReference section */
 		0D46DEF92923E1180045400A /* UIFont+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
-		0D4C1133292745A400B1C2B6 /* UICollectionViewCell+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+.swift"; sourceTree = "<group>"; };
 		0D4C11362927489D00B1C2B6 /* UIViewPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewPreview.swift; sourceTree = "<group>"; };
 		0D4C11382927495900B1C2B6 /* UIViewControllerPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerPreview.swift; sourceTree = "<group>"; };
 		0D6CA331292216A300E02393 /* SpaceCapsule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceCapsule.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -137,6 +139,10 @@
 		0D9D672D292486780038F529 /* ThemeLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeLabel.swift; sourceTree = "<group>"; };
 		0D9D67302924945D0038F529 /* FrameResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameResource.swift; sourceTree = "<group>"; };
 		0DA6610C292778BE00CF3563 /* ThemeTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeTextField.swift; sourceTree = "<group>"; };
+		0DA9F6902928E9B900454932 /* AddImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		0DA9F6922928E9CB00454932 /* AddImageCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddImageCollectionView.swift; sourceTree = "<group>"; };
+		0DA9F6942928EA4900454932 /* AddImageCollectionViewFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddImageCollectionViewFooter.swift; sourceTree = "<group>"; };
+		0DA9F6962928EB9000454932 /* UICollectionReusableView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionReusableView+.swift"; sourceTree = "<group>"; };
 		0DCB22922924CE58002CB095 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		28049CE429236EEC002389BD /* CapsuleAccessCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleAccessCoordinator.swift; sourceTree = "<group>"; };
 		28049CE629237B2B002389BD /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -322,7 +328,7 @@
 				0D90DAF6292397CF000DCC84 /* UIColor+.swift */,
 				0D90DAF829239A81000DCC84 /* UIImage+.swift */,
 				0D46DEF92923E1180045400A /* UIFont+.swift */,
-				0D4C1133292745A400B1C2B6 /* UICollectionViewCell+.swift */,
+				0DA9F6962928EB9000454932 /* UICollectionReusableView+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -341,6 +347,16 @@
 				0D9D67302924945D0038F529 /* FrameResource.swift */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		0DA9F68F2928E95C00454932 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				0DA9F6902928E9B900454932 /* AddImageCollectionViewCell.swift */,
+				0DA9F6922928E9CB00454932 /* AddImageCollectionView.swift */,
+				0DA9F6942928EA4900454932 /* AddImageCollectionViewFooter.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		0DCB22942924CE61002CB095 /* Theme */ = {
@@ -533,6 +549,7 @@
 		288A8EDC29235DDF000229D2 /* CapsuleCreate */ = {
 			isa = PBXGroup;
 			children = (
+				0DA9F68F2928E95C00454932 /* Components */,
 				288A8ED229235C65000229D2 /* CapsuleCreateView.swift */,
 				288A8ED429235C6F000229D2 /* CapsuleCreateViewController.swift */,
 				288A8ED629235C77000229D2 /* CapsuleCreateViewModel.swift */,
@@ -776,11 +793,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				288A8ECA29235BDC000229D2 /* HomeView.swift in Sources */,
+				0DA9F6972928EB9000454932 /* UICollectionReusableView+.swift in Sources */,
 				28049CEB29237E96002389BD /* BaseViewModel.swift in Sources */,
 				288A8EFF292360BC000229D2 /* CapsuleDetailCoordinator.swift in Sources */,
 				288A8EFB292360A4000229D2 /* CapsuleDetailViewController.swift in Sources */,
 				288A8EF529236086000229D2 /* CapsuleOpenViewModel.swift in Sources */,
 				288A8EA329235ADE000229D2 /* NicknameView.swift in Sources */,
+				0DA9F6952928EA4900454932 /* AddImageCollectionViewFooter.swift in Sources */,
 				288A8EBA29235B86000229D2 /* CapsuleListView.swift in Sources */,
 				288A8ED729235C77000229D2 /* CapsuleCreateViewModel.swift in Sources */,
 				0D9D672E292486780038F529 /* ThemeLabel.swift in Sources */,
@@ -817,6 +836,7 @@
 				288A8EC229235BAF000229D2 /* CapsuleMapView.swift in Sources */,
 				288A8EA129235AA1000229D2 /* SignInCoordinator.swift in Sources */,
 				4A9E913F2925D50D00B7CC5C /* KakaoAPIManager.swift in Sources */,
+				0DA9F6932928E9CB00454932 /* AddImageCollectionView.swift in Sources */,
 				288A8ED929235C83000229D2 /* CapsuleCreateCoordinator.swift in Sources */,
 				288A8ECE29235BEF000229D2 /* HomeViewModel.swift in Sources */,
 				28049CE929237BB2002389BD /* BaseView.swift in Sources */,
@@ -833,10 +853,10 @@
 				0D90DAF129238B85000DCC84 /* CapsuleLocateCoordinator.swift in Sources */,
 				288A8EA729235AF1000229D2 /* NicknameViewModel.swift in Sources */,
 				288A8ECC29235BE9000229D2 /* HomeViewController.swift in Sources */,
-				0D4C1134292745A400B1C2B6 /* UICollectionViewCell+.swift in Sources */,
 				0DA6610D292778BE00CF3563 /* ThemeTextField.swift in Sources */,
 				288A8EB029235B46000229D2 /* TabBarCoordinator.swift in Sources */,
 				288A8EB629235B69000229D2 /* ProfileViewModel.swift in Sources */,
+				0DA9F6912928E9B900454932 /* AddImageCollectionViewCell.swift in Sources */,
 				0D6CA335292216A300E02393 /* AppDelegate.swift in Sources */,
 				288A8EC029235BA5000229D2 /* CapsuleListCoordinator.swift in Sources */,
 				288A8EB829235B77000229D2 /* ProfileCoordinator.swift in Sources */,
