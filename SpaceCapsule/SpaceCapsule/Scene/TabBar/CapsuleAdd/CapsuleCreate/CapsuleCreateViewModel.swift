@@ -14,9 +14,15 @@ final class CapsuleCreateViewModel: BaseViewModel {
     var coordinator: CapsuleCreateCoordinator?
 
     var input = Input()
+    var output = Output()
     
     struct Input {
         var close = PublishSubject<Void>()
+    }
+    
+    struct Output {
+        // 임시 데이터 형식
+        var imageData = BehaviorRelay<[String]>(value: ["logoWithBG", "logoWithText", "logo"])
     }
     
     init() {

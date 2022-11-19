@@ -13,17 +13,7 @@ final class NicknameView: UIView, BaseView {
 
     let nicknameLabel = ThemeLabel(text: "닉네임", size: 20, color: .themeGray300)
 
-    let nicknameTextField: UITextField = {
-        let textField = UITextField()
-        textField.layer.borderWidth = 1
-        textField.layer.borderColor = UIColor.themeGray300?.cgColor
-        textField.layer.cornerRadius = 10
-        textField.font = .themeFont(ofSize: 20)
-
-        textField.backgroundColor = .themeGray100
-
-        return textField
-    }()
+    let nicknameTextField = ThemeTextField()
 
     let doneButton: UIButton = {
         let button = UIButton()
@@ -87,7 +77,7 @@ final class NicknameView: UIView, BaseView {
 
 #if canImport(SwiftUI) && DEBUG
     import SwiftUI
-    struct Preview: PreviewProvider {
+    struct NicknameViewPreview: PreviewProvider {
         static var previews: some View {
             UIViewPreview {
                 NicknameView()
