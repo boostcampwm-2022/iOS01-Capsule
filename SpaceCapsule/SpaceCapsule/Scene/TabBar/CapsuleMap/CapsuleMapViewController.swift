@@ -58,6 +58,40 @@ final class CapsuleMapViewController: UIViewController, BaseViewController, MKMa
             }
             .disposed(by: disposeBag)
         
+        //MARK: 여기 추가
+        locationManager.rx.didChangeAuthorization.asObservable()
+            .withUnretained(self)
+            .subscribe(onNext: { owner, status in
+                owner.implementStatus(status)
+            })
+            .disposed(by: disposeBag)
+        
+        
+        locationManager.rx.didUpdateLocations.asObservable()
+            .withUnretained(self)
+            .subscribe(onNext: { owner, locations in
+                if let location = locations.last {
+                    owner.addCircleLocation(at: location.coordinate)
+                }
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func implementStatus(_ status: CLAuthorizationStatus) {
+        switch status {
+        case .authorizedAlways, .authorizedWhenInUse:
+            print("GPS 권한 설정됨")
+            locationManager.startUpdatingLocation()
+            goToCurrentLocation()
+        case .restricted, .notDetermined:
+            print("GPS 권한 설정되지 않음")
+            getLocationUsagePermission()
+        case .denied:
+            print("GPS 권한 요청 거부됨")
+            getLocationUsagePermission()
+        default:
+            print("GPS: Default")
+        }
     }
     
     private func addCircleLocation(at center: CLLocationCoordinate2D) {
@@ -83,7 +117,6 @@ final class CapsuleMapViewController: UIViewController, BaseViewController, MKMa
     }
     
     private func configure() {
-        locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
@@ -106,23 +139,6 @@ final class CapsuleMapViewController: UIViewController, BaseViewController, MKMa
     
     private func getLocationUsagePermission() {
         locationManager.requestWhenInUseAuthorization()
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        switch status {
-        case .authorizedAlways, .authorizedWhenInUse:
-            print("GPS 권한 설정됨")
-            locationManager.startUpdatingLocation()
-            goToCurrentLocation()
-        case .restricted, .notDetermined:
-            print("GPS 권한 설정되지 않음")
-            getLocationUsagePermission()
-        case .denied:
-            print("GPS 권한 요청 거부됨")
-            getLocationUsagePermission()
-        default:
-            print("GPS: Default")
-        }
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -155,14 +171,6 @@ final class CapsuleMapViewController: UIViewController, BaseViewController, MKMa
         present(alertController, animated: true, completion: nil)
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let center = locations.last?.coordinate else {
-            print("location 위치 인식 안돼ㅁ")
-            return
-        }
-        addCircleLocation(at: center)
-    }
-    
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if let circleOverlay = overlay as? MKCircle {
             let circleRenderer = MKCircleRenderer(overlay: circleOverlay)
@@ -173,5 +181,4 @@ final class CapsuleMapViewController: UIViewController, BaseViewController, MKMa
         }
         return MKOverlayRenderer(overlay: overlay)
     }
-
 }
