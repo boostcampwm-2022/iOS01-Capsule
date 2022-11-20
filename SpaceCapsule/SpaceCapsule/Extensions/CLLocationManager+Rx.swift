@@ -14,9 +14,9 @@ import CoreLocation
 class RxCLLocationManagerDelegateProxy: DelegateProxy<CLLocationManager, CLLocationManagerDelegate>, CLLocationManagerDelegate, DelegateProxyType {
     
     static func registerKnownImplementations() {
-        self.register { (manager) -> RxCLLocationManagerDelegateProxy in
-               RxCLLocationManagerDelegateProxy(parentObject: manager, delegateProxy: self)
-           }
+        self.register { manager -> RxCLLocationManagerDelegateProxy in
+            RxCLLocationManagerDelegateProxy(parentObject: manager, delegateProxy: self)
+        }
     }
     
     static func currentDelegate(for object: CLLocationManager) -> CLLocationManagerDelegate? {
