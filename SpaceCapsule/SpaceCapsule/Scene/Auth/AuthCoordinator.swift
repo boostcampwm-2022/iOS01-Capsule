@@ -7,39 +7,42 @@
 
 import UIKit
 
-class AuthCoordinator: Coordinator {
+final class AuthCoordinator: Coordinator {
     var parent: Coordinator?
     var children: [Coordinator] = []
     var navigationController: UINavigationController?
-
-    init(navigationController: UINavigationController) {
+    
+    var flow: AuthFlow = .signInFlow
+    
+    init(navigationController: UINavigationController?) {
         self.navigationController = navigationController
     }
-
+    
     func start() {
-        configure()
+        switch flow {
+        case .signInFlow:
+            moveToSignIn()
+        case.nicknameFlow:
+            moveToNickname()
+        }
     }
-
-    func configure() {
-        moveToSignIn()
-//        moveToNickname()
-    }
-
+    
     func moveToSignIn() {
-        let signInViewController = SignInViewController()
-        navigationController?.pushViewController(signInViewController, animated: true)
+        let signInCoordinator = SignInCoordinator(navigationController: navigationController)
+        signInCoordinator.parent = self
+        signInCoordinator.start()
+        children.append(signInCoordinator)
     }
-
+    
     func moveToNickname() {
-        let nicknameViewController = NicknameViewController()
-        let nicknameViewModel = NickNameViewModel()
         let nicknameCoordinator = NicknameCoordinator(navigationController: navigationController)
-
-        nicknameViewController.viewModel = nicknameViewModel
-        nicknameViewModel.coordinator = nicknameCoordinator
         nicknameCoordinator.parent = self
-
+        nicknameCoordinator.start()
         children.append(nicknameCoordinator)
-        navigationController?.pushViewController(nicknameViewController, animated: true)
+    }
+    
+    func moveToTabBar() {
+        guard let parent = self.parent as? AppCoordinator else { return }
+        parent.moveToTabBar()
     }
 }
