@@ -27,5 +27,3 @@ extension KingReceiverCompatible {
         KingReceiverWrapper(self)
     }
 }
-
-

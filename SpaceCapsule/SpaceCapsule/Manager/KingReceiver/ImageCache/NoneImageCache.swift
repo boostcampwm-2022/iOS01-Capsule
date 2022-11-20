@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// 캐싱 안할경우 그냥 ..
 final class NoneImageCache: ImageCache {
     func fetch(with url: URL, completion: @escaping (Data?) -> Void) {
         fetchImageData(with: url, completion: completion)

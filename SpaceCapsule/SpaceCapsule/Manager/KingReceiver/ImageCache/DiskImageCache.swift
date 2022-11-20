@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Caches 폴더에 이미지 캐싱
 final class DiskImageCache: ImageCache {
     private let cacheDirectory: URL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
 
@@ -34,6 +35,7 @@ final class DiskImageCache: ImageCache {
         }
     }
 
+    /// url 그대로 파일명 삼아 캐싱
     func path(for url: URL) -> URL {
         let fileName = url.absoluteString.replacingOccurrences(of: "/", with: "_")
         return cacheDirectory.appending(path: fileName)

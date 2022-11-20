@@ -248,9 +248,9 @@
 		0D071119292A4FF500068098 /* ImageCache */ = {
 			isa = PBXGroup;
 			children = (
-				0D071121292A503600068098 /* DiskImageCache.swift */,
 				0D07111D292A501C00068098 /* ImageCache.swift */,
 				0D07111B292A501200068098 /* ImageCacheFactory.swift */,
+				0D071121292A503600068098 /* DiskImageCache.swift */,
 				0D07111F292A502900068098 /* MemoryImageCache.swift */,
 				0D071123292A504000068098 /* NoneImageCache.swift */,
 			);

@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// 메모리 -> `NSCache` 에 캐싱
 final class MemoryImageCache: ImageCache {
     private let cache = NSCache<NSString, NSData>()
 

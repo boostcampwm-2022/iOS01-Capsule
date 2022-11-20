@@ -10,6 +10,7 @@ import UIKit
 extension UIImageView: KingReceiverCompatible {}
 
 extension KingReceiverWrapper where Base: UIImageView {
+    /// `UIImageView.kr.setImage` 처럼 사용 가능
     func setImage(
         with absoluteURL: String,
         placeholder: UIImage? = nil,
@@ -37,16 +38,13 @@ extension KingReceiverWrapper where Base: UIImageView {
                 }
 
                 base.image = resizing ?
-                    resizeImage(data: data, to: base.frame.size, scale: scale)
-                    : UIImage(data: data)
-
-                if resizing {
-                } else {
-                }
+                    resizeImage(data: data, to: base.frame.size, scale: scale) :
+                    UIImage(data: data)
             }
         }
     }
 
+    /// 로딩 indicator 시작
     private func start(indicator: UIActivityIndicatorView?) {
         guard let indicator else {
             return
@@ -66,11 +64,14 @@ extension KingReceiverWrapper where Base: UIImageView {
         indicator.startAnimating()
     }
 
+    /// 로딩 indicator 종료
     private func stop(indicator: UIActivityIndicatorView?) {
         indicator?.stopAnimating()
         indicator?.removeFromSuperview()
     }
 
+    /// 이미지 스케일링, `scale` 낮은 값일수록 저화질
+    /// thumbnail 만 보여줘야 하거나 blur 처리되는 부분에서 사용 가능
     private func resizeImage(data: Data, to targetSize: CGSize, scale: CGFloat) -> UIImage? {
         let imageSourceOptions = [kCGImageSourceShouldCache: false] as CFDictionary
         guard let imageSource = CGImageSourceCreateWithData(data as CFData, imageSourceOptions) else { return nil }
