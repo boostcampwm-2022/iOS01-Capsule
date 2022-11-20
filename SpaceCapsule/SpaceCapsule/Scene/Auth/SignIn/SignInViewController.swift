@@ -5,56 +5,42 @@
 //  Created by young june Park on 2022/11/15.
 //
 
-import UIKit
-
+import RxSwift
+import RxCocoa
+import FirebaseAuth
 import AuthenticationServices
 import CryptoKit
-import Firebase
-import FirebaseAuth
-import FirebaseFirestore
 
-final class SignInViewController: UIViewController {
+final class SignInViewController: UIViewController, BaseViewController {
     // MARK: - Properties
+    private let signInView = SignInView()
+    var viewModel: SignInViewModel?
+    var disposeBag = DisposeBag()
+    
     fileprivate var currentNonce: String?
     
-    lazy var appleButton: ASAuthorizationAppleIDButton = {
-        var appleButton: ASAuthorizationAppleIDButton = ASAuthorizationAppleIDButton(type: .signIn, style: .black)
-        appleButton.addTarget(self, action: #selector(touchUpAppleButton(_:)), for: .touchUpInside)
-        appleButton.layer.cornerRadius = 7
-        appleButton.clipsToBounds = true
-        return appleButton
-    }()
+    // MARK: - Lifecycles
+    override func loadView() {
+        view = signInView
+    }
     
-    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        
-        
-        configUI()
-        setupAutoLayout()
+        bind()
     }
     
-    // MARK: - Custom Method
-    func configUI() {
-        view.backgroundColor = .white
+    // MARK: - Rx
+    func bind() {
+        signInView.appleSignInButton.rx
+            .controlEvent(.touchUpInside)
+            .subscribe(onNext: { [weak self] _ in
+                self?.appleSignInButtonDidTap()
+            })
+            .disposed(by: disposeBag)
     }
     
-    func setupAutoLayout() {
-        view.addSubview(appleButton)
-        appleButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            appleButton.centerXAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerXAnchor),
-            appleButton.centerYAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerYAnchor),
-            appleButton.heightAnchor.constraint(equalToConstant: 40),
-            appleButton.widthAnchor.constraint(equalToConstant: 180)
-        ])
-    }
-    
-    // MARK: - Apple 로그인
-    @objc func touchUpAppleButton(_ sender: UIButton) {
+    // MARK: - Apple SignIn
+    func appleSignInButtonDidTap() {
         let request = createAppleIDRequest()
         let authorizationController = ASAuthorizationController(authorizationRequests: [request])
         print("애플로그인")
@@ -63,38 +49,44 @@ final class SignInViewController: UIViewController {
         authorizationController.performRequests()
     }
     
+    // TODO: @available << 이거 왜 표시하는 거임?
     @available(iOS 13, *)
     func createAppleIDRequest() -> ASAuthorizationAppleIDRequest {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
-        let request = appleIDProvider.createRequest()
+        let appleIDRequest = appleIDProvider.createRequest()
         // 애플로그인은 사용자에게서 2가지 정보를 요구함
-        request.requestedScopes = [.fullName, .email]
-
+        appleIDRequest.requestedScopes = [.fullName, .email]
+        
         let nonce = randomNonceString()
-        request.nonce = sha256(nonce)
+        appleIDRequest.nonce = sha256(nonce)
         currentNonce = nonce
         
-        return request
+        return appleIDRequest
     }
     
     @available(iOS 13, *)
     private func sha256(_ input: String) -> String {
-      let inputData = Data(input.utf8)
-      let hashedData = SHA256.hash(data: inputData)
-      let hashString = hashedData.compactMap {
-        return String(format: "%02x", $0)
-      }.joined()
-
-      return hashString
+        let inputData = Data(input.utf8)
+        let hashedData = SHA256.hash(data: inputData)
+        let hashString = hashedData.compactMap {
+            String(format: "%02x", $0)
+        }.joined()
+        
+        return hashString
     }
     
-    // MARK: - @objc
+    // MARK: - @objc Functions
+    
+    // MARK: - Custom Methods
 }
 
 // MARK: - ASAuthorizationControllerDelegate
 @available(iOS 13.0, *)
 extension SignInViewController: ASAuthorizationControllerDelegate {
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+    func authorizationController(
+        controller: ASAuthorizationController,
+        didCompleteWithAuthorization authorization: ASAuthorization
+    ) {
         if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
             // 몇 가지 표준 키 검사를 수행
             // 1. 현재 nonce가 설정되어 있는지 확인
@@ -115,6 +107,7 @@ extension SignInViewController: ASAuthorizationControllerDelegate {
             }
             
             // nonce와 IDToken을 사용하여 OAuth 공급자에게 방금 로그인한 사용자를 나타내는 자격증명을 생성하도록 요청
+            // Initialize a Firebase credential.
             let credential = OAuthProvider.credential(withProviderID: "apple.com",
                                                       idToken: idTokenString,
                                                       rawNonce: nonce)
@@ -122,20 +115,21 @@ extension SignInViewController: ASAuthorizationControllerDelegate {
             // 이 자격증명을 사용하여 Firebase에 로그인할 것이다.
             // Firebase는 자격증명을 확인하고 유효한 경우 사용자를 로그인시켜 줄 것이다.
             // 새 사용자인 경우에 Firebase는 ID 토큰에 제공된 정보를 사용하여 새 사용자 계정을 만들 것이다.
-            FirebaseAuth.Auth.auth().signIn(with: credential) { [weak self] (authDataResult, error) in
+            // Sign in with Firebase.
+            Auth.auth().signIn(with: credential) { [weak self] authResult, error in
                 guard let self = self else { return }
+
                 // 인증 결과에서 Firebase 사용자를 검색하고 사용자 정보를 표시할 수 있다.
-                if let user = authDataResult?.user {
-                    print("애플 로그인 성공!", user.uid, user.email ?? "-")
-                    let vc = NicknameViewController()
-//                    vc.name = user.email ?? "애플로그인 가입자"
-                    vc.modalPresentationStyle = .fullScreen
-                    self.present(vc, animated: true, completion: nil)
-                }
-                
-                if error != nil {
-                    print(error?.localizedDescription ?? "error" as Any)
+                if let error = error {
+                    print(error.localizedDescription)
+                    UserDefaultsManager.saveData(data: false, key: .isSignedIn)
                     return
+                }
+
+                if let user = authResult?.user {
+                    print("애플 로그인 성공!", user.uid, user.email ?? "-")
+                    UserDefaultsManager.saveData(data: true, key: .isSignedIn)
+                    self.viewModel?.checkRegistration(uid: user.uid)
                 }
             }
         }
@@ -144,46 +138,52 @@ extension SignInViewController: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         // Handle error.
         print("Sign in with Apple errored: \(error)")
-      }
+    }
 }
 
 // MARK: - ASAuthorizationControllerPresentationContextProviding
-@available(iOS 13.0, *)
 extension SignInViewController: ASAuthorizationControllerPresentationContextProviding {
+    // presentation context UI를 어디에 띄울지 가장 적합한 뷰 앵커를 반환한다.
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
-        return self.view.window!
+        return self.view.window ?? ASPresentationAnchor()
     }
 }
 
-// Adapted from https://auth0.com/docs/api-auth/tutorials/nonce#generate-a-cryptographically-random-nonce
-private func randomNonceString(length: Int = 32) -> String {
-  precondition(length > 0)
-  let charset: Array<Character> =
-      Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
-  var result = ""
-  var remainingLength = length
-
-  while remainingLength > 0 {
-    let randoms: [UInt8] = (0 ..< 16).map { _ in
-      var random: UInt8 = 0
-      let errorCode = SecRandomCopyBytes(kSecRandomDefault, 1, &random)
-      if errorCode != errSecSuccess {
-        fatalError("Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)")
-      }
-      return random
+// MARK: - randomNonceString()
+extension SignInViewController {
+    // TODO: randomNonceString()는 어디에 두어야 하는 것인가? VC 안쪽? VC 바깥쪽?
+    // Adapted from https://auth0.com/docs/api-auth/tutorials/nonce#generate-a-cryptographically-random-nonce
+    private func randomNonceString(length: Int = 32) -> String {
+        precondition(length > 0)
+        let charset: [Character] =
+        Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
+        var result = ""
+        var remainingLength = length
+        
+        while remainingLength > 0 {
+            let randoms: [UInt8] = (0 ..< 16).map { _ in
+                var random: UInt8 = 0
+                let errorCode = SecRandomCopyBytes(kSecRandomDefault, 1, &random)
+                if errorCode != errSecSuccess {
+                    fatalError(
+                        "Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)"
+                    )
+                }
+                return random
+            }
+            
+            randoms.forEach { random in
+                if remainingLength == 0 {
+                    return
+                }
+                
+                if random < charset.count {
+                    result.append(charset[Int(random)])
+                    remainingLength -= 1
+                }
+            }
+        }
+        
+        return result
     }
-
-    randoms.forEach { random in
-      if remainingLength == 0 {
-        return
-      }
-
-      if random < charset.count {
-        result.append(charset[Int(random)])
-        remainingLength -= 1
-      }
-    }
-  }
-
-  return result
 }
