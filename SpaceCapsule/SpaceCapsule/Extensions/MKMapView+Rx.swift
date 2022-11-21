@@ -14,7 +14,7 @@ import MapKit
 class RxMKMapViewDelegateProxy: DelegateProxy<MKMapView, MKMapViewDelegate>, MKMapViewDelegate, DelegateProxyType {
     static func registerKnownImplementations() {
         self.register { mapView -> RxMKMapViewDelegateProxy in
-               RxMKMapViewDelegateProxy(parentObject: mapView, delegateProxy: self)
+            RxMKMapViewDelegateProxy(parentObject: mapView, delegateProxy: self)
         }
     }
     

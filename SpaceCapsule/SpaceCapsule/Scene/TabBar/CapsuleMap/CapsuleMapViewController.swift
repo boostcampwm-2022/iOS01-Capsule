@@ -10,11 +10,12 @@ import MapKit
 import RxSwift
 import UIKit
 
-final class CapsuleMapViewController: UIViewController, BaseViewController, MKMapViewDelegate {
+final class CapsuleMapViewController: UIViewController, BaseViewController {
     var disposeBag = DisposeBag()
     var viewModel: CapsuleMapViewModel
     let capsuleMapView = CapsuleMapView()
     let locationManager = CLLocationManager()
+    var annotationsToMonitor = [CustomAnnotation]()
     
     init(viewModel: CapsuleMapViewModel) {
         self.viewModel = viewModel
@@ -33,6 +34,10 @@ final class CapsuleMapViewController: UIViewController, BaseViewController, MKMa
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        capsuleMapView.map.register(CustomAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
+//        capsuleMapView.map.rx.setDelegate(self)
+//            .disposed(by: disposeBag)
+
         configure()
         goToCurrentLocation()
         bind()
@@ -70,7 +75,8 @@ final class CapsuleMapViewController: UIViewController, BaseViewController, MKMa
             .withUnretained(self)
             .subscribe(onNext: { owner, locations in
                 if let location = locations.last {
-                    //owner.addCircleLocation(at: location.coordinate)
+                    owner.capsuleMapView.map.removeAnnotations(owner.annotationsToMonitor)
+                    owner.addAnnotations(coordinates: owner.annotationsToMonitor.map{ $0.coordinate })
                 }
             })
             .disposed(by: disposeBag)
@@ -83,7 +89,6 @@ final class CapsuleMapViewController: UIViewController, BaseViewController, MKMa
                 owner.presentToDetailAlert()
             })
             .disposed(by: disposeBag)
-
     }
     
     private func implementStatus(_ status: CLAuthorizationStatus) {
@@ -120,11 +125,27 @@ final class CapsuleMapViewController: UIViewController, BaseViewController, MKMa
     }
     
     private func addAnnotations(coordinates: [CLLocationCoordinate2D]) {
+        let currentPos = locationManager.location
+        print("현재위치: \(currentPos?.coordinate)여기 호출됨!")
+        annotationsToMonitor = []
         for coordinate in coordinates {
-            let pin = MKPointAnnotation()
-            pin.coordinate = coordinate
-            pin.title = "캡슐 이름"
-            capsuleMapView.map.addAnnotation(pin)
+            let annotation = CustomAnnotation()
+            annotation.coordinate = coordinate
+            annotation.title = "캡슐 열기"
+            annotation.pinImage = UIImage(systemName: "circle")
+            let distance = currentPos?.distance(from: CLLocation(latitude: coordinate.latitude,
+                                                  longitude: coordinate.longitude))
+            
+            if let distance = distance,
+               distance <= 1000 {
+                print("\(coordinate)의 현재위치로부터의 거리는 \(distance)입니다.")
+                annotationsToMonitor.append(annotation)
+                if distance <= 200 {
+                    annotation.isOpenable = true
+                }
+            }
+            
+            capsuleMapView.map.addAnnotation(annotation)
         }
     }
     
@@ -143,7 +164,8 @@ final class CapsuleMapViewController: UIViewController, BaseViewController, MKMa
         guard let center = locationManager.location?.coordinate else {
             return
         }
-        let span = MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
+        
+        let span = MKCoordinateSpan(latitudeDelta: 0.04, longitudeDelta: 0.04)
         let region = MKCoordinateRegion(center: center, span: span)
         capsuleMapView.map.setRegion(region, animated: true)
     }

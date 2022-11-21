@@ -34,7 +34,7 @@ final class CapsuleMapViewModel: BaseViewModel {
         let coordinates: [CLLocationCoordinate2D] = [
             CLLocationCoordinate2D(latitude: 37.582867, longitude: 126.027869),
             CLLocationCoordinate2D(latitude: 37.582458, longitude: 127.028570),
-            CLLocationCoordinate2D(latitude: 37.582651, longitude: 127.030218)
+            CLLocationCoordinate2D(latitude: 37.583582861128654, longitude: 127.03053024855035),
         ]
         input.annotations.accept(coordinates)
     }

@@ -156,8 +156,6 @@ extension CapsuleLocateViewController: MKMapViewDelegate, CLLocationManagerDeleg
             print(error)
         }
     }
-    
-    
 }
 
 extension CapsuleLocateViewController: UIGestureRecognizerDelegate {
