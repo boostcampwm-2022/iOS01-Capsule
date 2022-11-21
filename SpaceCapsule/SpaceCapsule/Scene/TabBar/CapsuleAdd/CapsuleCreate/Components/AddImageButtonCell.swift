@@ -9,19 +9,23 @@ import SnapKit
 import UIKit
 
 class AddImageButtonCell: UICollectionViewCell {
-    let addImageButton: UIButton = {
-        let button = UIButton()
-        button.setImage(.addImage, for: .normal)
-        button.tintColor = .themeColor300
 
-        return button
+    let addImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = .addImage
+        imageView.tintColor = .themeGray300
+        
+        return imageView
     }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        layer.borderWidth = 1
-        layer.borderColor = UIColor.black.cgColor
+        layer.cornerRadius = FrameResource.commonCornerRadius
+        layer.borderWidth = FrameResource.commonBorderWidth
+        layer.borderColor = UIColor.themeGray300?.cgColor
+        
+        backgroundColor = .themeGray100
 
         addSubViews()
         makeConstraints()
@@ -33,12 +37,13 @@ class AddImageButtonCell: UICollectionViewCell {
     }
 
     private func addSubViews() {
-        addSubview(addImageButton)
+        addSubview(addImageView)
     }
 
     private func makeConstraints() {
-        addImageButton.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+        addImageView.snp.makeConstraints {
+            $0.size.equalTo(50)
+            $0.center.equalToSuperview()
         }
     }
 }

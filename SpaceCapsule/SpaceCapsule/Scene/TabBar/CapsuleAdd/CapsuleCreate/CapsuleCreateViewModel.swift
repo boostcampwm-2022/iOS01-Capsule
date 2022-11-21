@@ -22,14 +22,7 @@ final class CapsuleCreateViewModel: BaseViewModel {
 
     struct Output {
         // 임시 데이터 형식
-        var imageData = BehaviorRelay<[AddImageCollectionView.Cell]>(
-            value: [
-                .image(data: "logo"),
-                .image(data: "logoWithBG"),
-                .image(data: "logoWithText"),
-                .addButton,
-            ]
-        )
+        var imageData = BehaviorRelay<[AddImageCollectionView.Cell]>(value: [.addButton])
     }
 
     init() {
@@ -42,5 +35,13 @@ final class CapsuleCreateViewModel: BaseViewModel {
                 self?.coordinator?.finish()
             })
             .disposed(by: disposeBag)
+    }
+
+    func addImage(data: Data) {
+        let imageValues = output.imageData.value
+
+        if !imageValues.compactMap({ $0.data }).contains(data) {
+            output.imageData.accept([.image(data: data)] + imageValues)
+        }
     }
 }

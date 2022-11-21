@@ -13,7 +13,7 @@ final class CapsuleCreateView: UIView, BaseView {
     private let mainStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 30
+        stackView.spacing = 40
 
         return stackView
     }()

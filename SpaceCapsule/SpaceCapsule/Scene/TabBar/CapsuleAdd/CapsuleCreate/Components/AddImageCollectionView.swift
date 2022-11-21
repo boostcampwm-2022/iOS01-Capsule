@@ -9,10 +9,10 @@ import UIKit
 
 final class AddImageCollectionView: UICollectionView {
     enum Cell: Hashable {
-        case image(data: String)
+        case image(data: Data)
         case addButton
 
-        var data: String? {
+        var data: Data? {
             switch self {
             case let .image(data):
                 return data

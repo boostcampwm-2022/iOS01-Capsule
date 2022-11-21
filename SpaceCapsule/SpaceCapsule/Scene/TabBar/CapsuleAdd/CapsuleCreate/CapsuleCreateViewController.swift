@@ -5,6 +5,7 @@
 //  Created by young june Park on 2022/11/15.
 //
 
+import PhotosUI
 import RxCocoa
 import RxSwift
 import UIKit
@@ -31,6 +32,7 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
 
     var disposeBag = DisposeBag()
     var viewModel: CapsuleCreateViewModel?
+    var imagePicker: PHPickerViewController?
 
     private var imageCollectionDataSource: UICollectionViewDiffableDataSource<Section, Item>!
 
@@ -44,6 +46,7 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
 
         view.backgroundColor = .themeBackground
 
+        setUpImagePicker()
         setUpNavigation()
         addSubViews()
         makeConstraints()
@@ -62,6 +65,18 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
         viewModel.output.imageData
             .subscribe(onNext: { [weak self] items in
                 self?.applyImageCollectionSnapshot(items: items)
+            })
+            .disposed(by: disposeBag)
+
+        mainView.imageCollectionView.rx.itemSelected
+            .subscribe(onNext: { [weak self] indexPath in
+
+                if self?.mainView.imageCollectionView.cellForItem(at: indexPath) is AddImageButtonCell,
+                   let imagePicker = self?.imagePicker {
+                    print("image")
+                    self?.present(imagePicker, animated: true)
+                }
+
             })
             .disposed(by: disposeBag)
     }
@@ -93,6 +108,16 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
         navigationItem.title = "캡슐 추가"
         navigationItem.leftBarButtonItem = closeButton
         navigationItem.rightBarButtonItem = doneButton
+    }
+
+    // PHPicker 설정
+    private func setUpImagePicker() {
+        var configuration = PHPickerConfiguration()
+        configuration.selectionLimit = 10
+        configuration.filter = .images
+
+        imagePicker = PHPickerViewController(configuration: configuration)
+        imagePicker?.delegate = self
     }
 }
 
@@ -127,6 +152,32 @@ extension CapsuleCreateViewController {
         snapshot.appendSections([.main])
         snapshot.appendItems(items, toSection: .main)
         imageCollectionDataSource?.apply(snapshot)
+    }
+}
+
+extension CapsuleCreateViewController: PHPickerViewControllerDelegate {
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        picker.dismiss(animated: true)
+
+        results.forEach {
+            let itemProvider = $0.itemProvider
+            guard itemProvider.canLoadObject(ofClass: UIImage.self) else {
+                return
+            }
+
+            itemProvider.loadObject(ofClass: UIImage.self) { [weak self] image, _ in
+                DispatchQueue.global().async {
+                    guard let selectedImage = image as? UIImage,
+                          let data = selectedImage.pngData() else {
+                        return
+                    }
+
+                    DispatchQueue.main.async {
+                        self?.viewModel?.addImage(data: data)
+                    }
+                }
+            }
+        }
     }
 }
 

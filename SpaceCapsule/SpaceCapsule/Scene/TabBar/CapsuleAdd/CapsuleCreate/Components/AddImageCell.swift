@@ -11,14 +11,16 @@ import UIKit
 final class AddImageCell: UICollectionViewCell {
     let imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleToFill
+        imageView.contentMode = .scaleAspectFit
 
         return imageView
     }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-
+        
+        backgroundColor = .themeBlack
+        
         addSubViews()
         makeConstraints()
     }
@@ -28,8 +30,8 @@ final class AddImageCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configure(item: String) {
-        imageView.image = UIImage(named: item)
+    func configure(item: Data) {
+        imageView.image = UIImage(data: item)
     }
 
     private func addSubViews() {
@@ -38,10 +40,7 @@ final class AddImageCell: UICollectionViewCell {
 
     private func makeConstraints() {
         imageView.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.bottom.equalToSuperview()
-            $0.leading.equalToSuperview()
-            $0.trailing.equalToSuperview()
+            $0.edges.equalToSuperview()
         }
     }
 }
