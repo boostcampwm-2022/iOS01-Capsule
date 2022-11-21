@@ -32,15 +32,24 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
     var disposeBag = DisposeBag()
     var viewModel: CapsuleCreateViewModel?
 
+    private var imageCollectionDataSource: UICollectionViewDiffableDataSource<Section, Item>!
+
+    typealias Item = AddImageCollectionView.Cell
+    private enum Section {
+        case main
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.backgroundColor = .themeBackground
 
-        bind()
         setUpNavigation()
         addSubViews()
         makeConstraints()
+        applyImageCollectionDataSource()
+
+        bind()
     }
 
     func bind() {
@@ -51,14 +60,9 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
             .disposed(by: disposeBag)
 
         viewModel.output.imageData
-            .bind(
-                to: mainView.imageCollectionView.rx.items(
-                    cellIdentifier: AddImageCollectionViewCell.identifier,
-                    cellType: AddImageCollectionViewCell.self
-                )
-            ) { _, item, cell in
-                cell.configure(item: item)
-            }
+            .subscribe(onNext: { [weak self] items in
+                self?.applyImageCollectionSnapshot(items: items)
+            })
             .disposed(by: disposeBag)
     }
 
@@ -89,6 +93,40 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
         navigationItem.title = "캡슐 추가"
         navigationItem.leftBarButtonItem = closeButton
         navigationItem.rightBarButtonItem = doneButton
+    }
+}
+
+extension CapsuleCreateViewController {
+    private func applyImageCollectionDataSource() {
+        imageCollectionDataSource = UICollectionViewDiffableDataSource<Section, Item>(collectionView: mainView.imageCollectionView, cellProvider: { collectionView, indexPath, item in
+
+            switch item {
+            case .image:
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddImageCell.identifier, for: indexPath) as? AddImageCell,
+                      let itemData = item.data else {
+                    return UICollectionViewCell()
+                }
+
+                cell.configure(item: itemData)
+
+                return cell
+
+            case .addButton:
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddImageButtonCell.identifier, for: indexPath) as? AddImageButtonCell else {
+                    return UICollectionViewCell()
+                }
+
+                return cell
+            }
+
+        })
+    }
+
+    private func applyImageCollectionSnapshot(items: [AddImageCollectionView.Cell]) {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(items, toSection: .main)
+        imageCollectionDataSource?.apply(snapshot)
     }
 }
 

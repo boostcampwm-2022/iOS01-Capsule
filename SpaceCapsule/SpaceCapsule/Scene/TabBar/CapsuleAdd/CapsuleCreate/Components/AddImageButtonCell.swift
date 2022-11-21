@@ -8,36 +8,37 @@
 import SnapKit
 import UIKit
 
-class AddImageCollectionViewFooter: UICollectionReusableView {
+class AddImageButtonCell: UICollectionViewCell {
     let addImageButton: UIButton = {
         let button = UIButton()
         button.setImage(.addImage, for: .normal)
+        button.tintColor = .themeColor300
 
         return button
     }()
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
+        layer.borderWidth = 1
+        layer.borderColor = UIColor.black.cgColor
+
         addSubViews()
         makeConstraints()
     }
-    
+
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     private func addSubViews() {
         addSubview(addImageButton)
     }
-    
+
     private func makeConstraints() {
         addImageButton.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.bottom.equalToSuperview()
-            $0.leading.equalToSuperview()
-            $0.trailing.equalToSuperview()
+            $0.edges.equalToSuperview()
         }
     }
 }

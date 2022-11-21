@@ -8,7 +8,7 @@
 import SnapKit
 import UIKit
 
-final class AddImageCollectionViewCell: UICollectionViewCell {
+final class AddImageCell: UICollectionViewCell {
     let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleToFill

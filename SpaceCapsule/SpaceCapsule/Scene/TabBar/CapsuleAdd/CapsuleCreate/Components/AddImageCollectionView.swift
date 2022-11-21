@@ -8,18 +8,31 @@
 import UIKit
 
 final class AddImageCollectionView: UICollectionView {
+    enum Cell: Hashable {
+        case image(data: String)
+        case addButton
+        
+        var data: String? {
+            switch self {
+            case .image(let data):
+                return data
+            case .addButton:
+                return nil
+            }
+        }
+    }
+    
     required init(frame: CGRect) {
         super.init(frame: frame, collectionViewLayout: AddImageCollectionView.layout())
-
+        
         register(
-            AddImageCollectionViewCell.self,
-            forCellWithReuseIdentifier: AddImageCollectionViewCell.identifier
+            AddImageCell.self,
+            forCellWithReuseIdentifier: AddImageCell.identifier
         )
-
+        
         register(
-            AddImageCollectionViewFooter.self,
-            forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
-            withReuseIdentifier: AddImageCollectionViewFooter.identifier
+            AddImageButtonCell.self,
+            forCellWithReuseIdentifier: AddImageButtonCell.identifier
         )
     }
 
