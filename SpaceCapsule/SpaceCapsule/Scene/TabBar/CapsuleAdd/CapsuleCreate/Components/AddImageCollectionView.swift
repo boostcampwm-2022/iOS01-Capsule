@@ -11,25 +11,27 @@ final class AddImageCollectionView: UICollectionView {
     enum Cell: Hashable {
         case image(data: String)
         case addButton
-        
+
         var data: String? {
             switch self {
-            case .image(let data):
+            case let .image(data):
                 return data
             case .addButton:
                 return nil
             }
         }
     }
-    
+
     required init(frame: CGRect) {
         super.init(frame: frame, collectionViewLayout: AddImageCollectionView.layout())
-        
+
+        backgroundColor = .clear
+
         register(
             AddImageCell.self,
             forCellWithReuseIdentifier: AddImageCell.identifier
         )
-        
+
         register(
             AddImageButtonCell.self,
             forCellWithReuseIdentifier: AddImageButtonCell.identifier
@@ -54,20 +56,9 @@ final class AddImageCollectionView: UICollectionView {
         )
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
 
-        let footerSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalHeight(1),
-            heightDimension: .fractionalHeight(1)
-        )
-        let footer = NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: footerSize,
-            elementKind: UICollectionView.elementKindSectionFooter,
-            alignment: .bottom
-        )
-
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .groupPagingCentered
         section.interGroupSpacing = 20
-        section.boundarySupplementaryItems = [footer]
 
         let layout = UICollectionViewCompositionalLayout(section: section)
 

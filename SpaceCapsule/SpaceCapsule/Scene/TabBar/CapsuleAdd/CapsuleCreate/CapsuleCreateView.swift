@@ -9,7 +9,16 @@ import SnapKit
 import UIKit
 
 final class CapsuleCreateView: UIView, BaseView {
-    private let mainStackView = UIStackView()
+    private let spacing = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 30))
+    private let mainStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 30
+
+        return stackView
+    }()
+
+    private let inputWrapperView = UIView()
     private let inputStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -17,10 +26,10 @@ final class CapsuleCreateView: UIView, BaseView {
         return stackView
     }()
 
-    let titleLabel = ThemeLabel(text: "캡슐 이름", size: FrameResource.fontSize100, color: .themeGray300)
-    let locationLabel = ThemeLabel(text: "위치", size: FrameResource.fontSize100, color: .themeGray300)
-    let dateLabel = ThemeLabel(text: "추억 날짜", size: FrameResource.fontSize100, color: .themeGray300)
-    let descriptionLabel = ThemeLabel(text: "내용", size: FrameResource.fontSize100, color: .themeGray300)
+    let titleLabel = ThemeLabel(text: "캡슐 이름", size: 22, color: .themeGray300)
+    let locationLabel = ThemeLabel(text: "위치", size: 22, color: .themeGray300)
+    let dateLabel = ThemeLabel(text: "추억 날짜", size: 22, color: .themeGray300)
+    let descriptionLabel = ThemeLabel(text: "내용", size: 22, color: .themeGray300)
 
     let titleTextField = ThemeTextField()
     let locationSelectView = SelectButton(text: "주소를 선택하세요")
@@ -59,7 +68,6 @@ final class CapsuleCreateView: UIView, BaseView {
 
     func addSubViews() {
         [
-            imageCollectionView,
             titleLabel,
             titleTextField,
             locationLabel,
@@ -67,12 +75,19 @@ final class CapsuleCreateView: UIView, BaseView {
             dateLabel,
             dateSelectView,
             descriptionLabel,
-            descriptionTextView
+            descriptionTextView,
+            spacing,
         ].forEach {
             inputStackView.addArrangedSubview($0)
         }
 
-        addSubview(inputStackView)
+        inputWrapperView.addSubview(inputStackView)
+
+        [spacing, imageCollectionView, inputWrapperView].forEach {
+            mainStackView.addArrangedSubview($0)
+        }
+
+        addSubview(mainStackView)
     }
 
     func makeConstraints() {
@@ -80,16 +95,40 @@ final class CapsuleCreateView: UIView, BaseView {
             $0.height.equalTo(250)
         }
 
-        inputStackView.snp.makeConstraints {
+        mainStackView.snp.makeConstraints {
             $0.edges.equalToSuperview()
+        }
+
+        inputStackView.snp.makeConstraints {
+            $0.top.bottom.equalToSuperview()
+            $0.leading.equalToSuperview().offset(FrameResource.horizontalPadding)
+            $0.trailing.equalToSuperview().offset(-FrameResource.horizontalPadding)
         }
 
         titleTextField.snp.makeConstraints {
             $0.height.equalTo(FrameResource.textFieldHeight)
         }
-        
+
         descriptionTextView.snp.makeConstraints {
-            $0.height.equalTo(300)
+            $0.height.equalTo(200)
+        }
+
+        [
+            titleTextField,
+            locationSelectView,
+            dateSelectView,
+            descriptionTextView,
+        ].forEach {
+            inputStackView.setCustomSpacing(20, after: $0)
+        }
+
+        [
+            titleLabel,
+            locationLabel,
+            dateLabel,
+            descriptionLabel,
+        ].forEach {
+            inputStackView.setCustomSpacing(8, after: $0)
         }
     }
 

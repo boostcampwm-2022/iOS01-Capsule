@@ -12,7 +12,7 @@ class SelectButton: UIView {
     private let label = ThemeLabel(size: FrameResource.fontSize100, color: .themeGray300)
     private let icon: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = .chevronRight
+        imageView.image = .triangleDown
         imageView.tintColor = .themeGray300
 
         return imageView
