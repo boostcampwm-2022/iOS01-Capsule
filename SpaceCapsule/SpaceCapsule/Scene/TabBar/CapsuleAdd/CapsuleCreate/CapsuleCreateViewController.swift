@@ -85,17 +85,27 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
             })
             .disposed(by: disposeBag)
 
-        mainView
-            .titleTextField.rx.text
+        mainView.titleTextField.rx.text
             .orEmpty
             .bind(to: viewModel.input.title)
             .disposed(by: disposeBag)
 
-        mainView
-            .descriptionTextView.rx.text
+        mainView.descriptionTextView.rx.text
             .orEmpty
             .bind(to: viewModel.input.description)
             .disposed(by: disposeBag)
+
+        mainView.dateSelectView.eventHandler = { [weak self] in
+            let datePickerVC = DatePickerViewController()
+            datePickerVC.modalPresentationStyle = .pageSheet
+
+            if let sheet = datePickerVC.sheetPresentationController {
+                sheet.detents = [.medium()]
+                sheet.prefersGrabberVisible = true
+            }
+
+            self?.present(datePickerVC, animated: true)
+        }
     }
 
     private func addSubViews() {
