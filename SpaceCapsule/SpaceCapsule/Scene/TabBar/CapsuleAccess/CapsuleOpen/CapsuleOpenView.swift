@@ -15,6 +15,7 @@ final class CapsuleOpenView: UIView, BaseView {
         imageView.layer.cornerRadius = FrameResource.capsuleThumbnailCornerRadius
         imageView.clipsToBounds = true
         imageView.image = UIImage.logoWithBG
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     
@@ -106,7 +107,7 @@ final class CapsuleOpenView: UIView, BaseView {
     }
     
     private func applyBlurEffect() {
-        let blurEffect = UIBlurEffect(style: .regular)
+        let blurEffect = UIBlurEffect(style: .light)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.layer.cornerRadius = FrameResource.capsuleThumbnailCornerRadius
         blurEffectView.clipsToBounds = true
@@ -145,13 +146,29 @@ final class CapsuleOpenView: UIView, BaseView {
     }
     
     func animate() {
-        UIView.animate(withDuration: 1, delay: 0, options: [.curveEaseInOut]) {
-            self.thumbnailImageContainerView.transform = CGAffineTransform(translationX: 0, y: -950)
-            self.thumbnailImageContainerView.layoutIfNeeded()
-        }
+        UIView.animate(withDuration: 1.0, animations: {
+            self.thumbnailImageContainerView.center.y = (self.frame.height * (2 / 5))
+        }, completion: { _ in
+            UIView.animate(withDuration: 1, delay: 0, options: [.repeat, .autoreverse]) {
+                self.thumbnailImageContainerView.transform = .init(translationX: 0, y: 20)
+            }
+        })
     }
     
     func shakeAnimate() {
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
+        let animation = CABasicAnimation(keyPath: "position")
+        animation.duration = 0.05
+        animation.repeatCount = 5
+        animation.autoreverses = true
+        animation.fromValue = CGPoint(
+            x: thumbnailImageContainerView.center.x - 4.0,
+            y: thumbnailImageContainerView.center.y
+        )
+        animation.toValue = CGPoint(
+            x: thumbnailImageContainerView.center.x + 4.0,
+            y: thumbnailImageContainerView.center.y
+        )
+        thumbnailImageContainerView.layer.add(animation, forKey: "position")
     }
 }

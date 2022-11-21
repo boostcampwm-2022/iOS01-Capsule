@@ -37,7 +37,7 @@ final class CapsuleCloseView: UIView, BaseView {
     var closeButton = {
         let button = UIButton()
         button.titleLabel?.font = .themeFont(ofSize: 20)
-        button.setTitle("닫기", for: .normal)
+        button.setTitle("완료", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .themeColor200
         button.layer.cornerRadius = FrameResource.commonCornerRadius
@@ -106,7 +106,7 @@ final class CapsuleCloseView: UIView, BaseView {
     }
     
     private func applyBlurEffect() {
-        let blurEffect = UIBlurEffect(style: .regular)
+        let blurEffect = UIBlurEffect(style: .light)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.layer.cornerRadius = FrameResource.capsuleThumbnailCornerRadius
         blurEffectView.clipsToBounds = true
@@ -141,6 +141,12 @@ final class CapsuleCloseView: UIView, BaseView {
         dateLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.centerY.equalToSuperview().multipliedBy(1.2)
+        }
+    }
+    
+    func animate() {
+        UIView.animate(withDuration: 1, delay: 0, options: [.repeat, .autoreverse]) {
+            self.thumbnailImageContainerView.transform = .init(translationX: 0, y: 20)
         }
     }
 
