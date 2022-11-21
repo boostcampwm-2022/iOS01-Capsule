@@ -18,9 +18,9 @@ final class NicknameView: UIView, BaseView {
     let doneButton: UIButton = {
         let button = UIButton()
         button.setTitle("완료", for: .normal)
-        button.titleLabel?.font = .themeFont(ofSize: 20)
+        button.titleLabel?.font = .themeFont(ofSize: FrameResource.fontSize100)
         button.backgroundColor = .themeColor200
-        button.layer.cornerRadius = 10
+        button.layer.cornerRadius = FrameResource.commonCornerRadius
 
         return button
     }()

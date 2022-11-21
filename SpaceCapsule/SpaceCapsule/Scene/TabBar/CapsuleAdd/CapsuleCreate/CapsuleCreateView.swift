@@ -23,6 +23,18 @@ final class CapsuleCreateView: UIView, BaseView {
     let descriptionLabel = ThemeLabel(text: "내용", size: FrameResource.fontSize100, color: .themeGray300)
 
     let titleTextField = ThemeTextField()
+    let locationSelectView = SelectButton(text: "주소를 선택하세요")
+    let dateSelectView = SelectButton(text: "날짜를 선택하세요")
+    let descriptionTextView: UITextView = {
+        let textView = UITextView()
+        textView.layer.borderColor = UIColor.themeGray300?.cgColor
+        textView.layer.borderWidth = FrameResource.commonBorderWidth
+        textView.layer.cornerRadius = FrameResource.commonCornerRadius
+        textView.textContainerInset = UIEdgeInsets(top: 15, left: 10, bottom: 15, right: 10)
+        textView.font = .themeFont(ofSize: FrameResource.fontSize100)
+
+        return textView
+    }()
 
     lazy var imageCollectionView = AddImageCollectionView(frame: frame)
     private let sampleImages: [UIImage?] = [.logoWithBG, .logoWithText, .logo]
@@ -33,6 +45,7 @@ final class CapsuleCreateView: UIView, BaseView {
         configure()
         addSubViews()
         makeConstraints()
+        handleEvents()
     }
 
     @available(*, unavailable)
@@ -50,8 +63,11 @@ final class CapsuleCreateView: UIView, BaseView {
             titleLabel,
             titleTextField,
             locationLabel,
+            locationSelectView,
             dateLabel,
+            dateSelectView,
             descriptionLabel,
+            descriptionTextView
         ].forEach {
             inputStackView.addArrangedSubview($0)
         }
@@ -65,15 +81,21 @@ final class CapsuleCreateView: UIView, BaseView {
         }
 
         inputStackView.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.bottom.equalToSuperview()
-            $0.leading.equalToSuperview()
-            $0.trailing.equalToSuperview()
+            $0.edges.equalToSuperview()
         }
 
         titleTextField.snp.makeConstraints {
             $0.height.equalTo(FrameResource.textFieldHeight)
         }
+        
+        descriptionTextView.snp.makeConstraints {
+            $0.height.equalTo(300)
+        }
+    }
+
+    private func handleEvents() {
+        locationSelectView.eventHandler = { print("location tapped") }
+        dateSelectView.eventHandler = { print("date tapped") }
     }
 }
 

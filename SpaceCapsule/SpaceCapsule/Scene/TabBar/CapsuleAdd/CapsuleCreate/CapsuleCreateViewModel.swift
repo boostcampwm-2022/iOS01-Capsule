@@ -22,12 +22,14 @@ final class CapsuleCreateViewModel: BaseViewModel {
 
     struct Output {
         // 임시 데이터 형식
-        var imageData = BehaviorRelay<[
-            AddImageCollectionView.Cell]>(value: [.image(data: "logo"),
-            .image(data: "logoWithBG"),
-            .image(data: "logoWithText"),
-            .addButton
-        ])
+        var imageData = BehaviorRelay<[AddImageCollectionView.Cell]>(
+            value: [
+                .image(data: "logo"),
+                .image(data: "logoWithBG"),
+                .image(data: "logoWithText"),
+                .addButton,
+            ]
+        )
     }
 
     init() {
