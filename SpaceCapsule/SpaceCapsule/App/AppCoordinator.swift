@@ -63,11 +63,12 @@ final class AppCoordinator: Coordinator {
     }
     
     private func checkRegistration(uid: String) {
+        
         guard let isRegistered = UserDefaultsManager<Bool>.loadData(key: .isRegistered) else {
             moveToAuth(authFlow: .nicknameFlow)
             return
         }
-        
+                
         if isRegistered {
             print("isRegistered: \(isRegistered)")
             moveToTabBar()
@@ -101,7 +102,7 @@ final class AppCoordinator: Coordinator {
         window?.rootViewController = navigationController
     }
 
-    private func moveToTabBar() {
+    func moveToTabBar() {
         let tabBarController = CustomTabBarController()
         let tabBarCoordinator = TabBarCoordinator(tabBarController: tabBarController)
         tabBarCoordinator.parent = self
@@ -110,6 +111,6 @@ final class AppCoordinator: Coordinator {
         tabBarController.coordinator = tabBarCoordinator
 
         children.append(tabBarCoordinator)
-        rootViewController = tabBarController
+        window?.rootViewController = tabBarController
     }
 }
