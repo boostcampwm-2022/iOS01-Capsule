@@ -14,14 +14,16 @@ final class CapsuleOpenViewController: UIViewController, BaseViewController {
     var viewModel: CapsuleOpenViewModel?
     let capsuleOpenView = CapsuleOpenView()
     
-    override func loadView() {
-        view = capsuleOpenView
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        view = capsuleOpenView
         bind()
         viewModel?.output.isOpenable.onNext(true)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        capsuleOpenView.animate()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -45,6 +47,9 @@ final class CapsuleOpenViewController: UIViewController, BaseViewController {
             .withUnretained(self)
             .bind { weakSelf, isOpenable in
                 if isOpenable {
+                    // 애니메이션 적용과
+                    // 진동
+                    weakSelf.capsuleOpenView.shakeAnimate()
                     weakSelf.moveToCapsuleDetail()
                 } else {
                     weakSelf.showAlert()
@@ -56,7 +61,6 @@ final class CapsuleOpenViewController: UIViewController, BaseViewController {
             .subscribe(on: MainScheduler.instance)
             .withUnretained(self)
             .subscribe(onNext: { weakSelf, isOpenable in
-                print("unOpenable", isOpenable)
                 if isOpenable == false {
                     weakSelf.capsuleOpenView.applyUnOpenableEffect()
                 }
@@ -66,7 +70,8 @@ final class CapsuleOpenViewController: UIViewController, BaseViewController {
     }
     
     private func moveToCapsuleDetail() {
-        print("moveToCapsuleDetail")
+        print("move to CapsuleDetail 화면")
+        // viewModel?.coordinator?.moveToCapsuleDetail()
     }
     
     private func showAlert() {

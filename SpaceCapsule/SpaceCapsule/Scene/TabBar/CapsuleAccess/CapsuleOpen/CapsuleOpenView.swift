@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import AVFoundation
 
 final class CapsuleOpenView: UIView, BaseView {
     var thumbnailImageView = {
@@ -144,8 +145,13 @@ final class CapsuleOpenView: UIView, BaseView {
     }
     
     func animate() {
-        UIView.animate(withDuration: 1, delay: 1, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.5, options: .curveEaseInOut) {
-                self.thumbnailImageContainerView.transform = CGAffineTransform(translationX: 0, y: -950)
+        UIView.animate(withDuration: 1, delay: 0, options: [.curveEaseInOut]) {
+            self.thumbnailImageContainerView.transform = CGAffineTransform(translationX: 0, y: -950)
+            self.thumbnailImageContainerView.layoutIfNeeded()
         }
+    }
+    
+    func shakeAnimate() {
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
     }
 }
