@@ -82,6 +82,9 @@
 		288A8EFF292360BC000229D2 /* CapsuleDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288A8EFE292360BC000229D2 /* CapsuleDetailCoordinator.swift */; };
 		288A8F03292362CC000229D2 /* CapsuleAddCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288A8F02292362CC000229D2 /* CapsuleAddCoordinator.swift */; };
 		288A8F0529236505000229D2 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288A8F0429236505000229D2 /* AppCoordinator.swift */; };
+		59427A3A29262BB2002657C3 /* FirebaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59427A3929262BB2002657C3 /* FirebaseAuthManager.swift */; };
+		59427A3C292656CA002657C3 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59427A3B292656CA002657C3 /* FirestoreManager.swift */; };
+		59427A3E29290085002657C3 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59427A3D29290085002657C3 /* UserDefaultsManager.swift */; };
 		4A05D0EC2924C04200A2EF50 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A05D0EB2924C04200A2EF50 /* GoogleService-Info.plist */; };
 		4A05D1052925CF2A00A2EF50 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A05D1042925CF2A00A2EF50 /* NetworkError.swift */; };
 		4A05D1082925CF4400A2EF50 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A05D1072925CF4400A2EF50 /* NetworkManager.swift */; };
@@ -181,6 +184,9 @@
 		288A8EFE292360BC000229D2 /* CapsuleDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleDetailCoordinator.swift; sourceTree = "<group>"; };
 		288A8F02292362CC000229D2 /* CapsuleAddCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleAddCoordinator.swift; sourceTree = "<group>"; };
 		288A8F0429236505000229D2 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		59427A3929262BB2002657C3 /* FirebaseAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthManager.swift; sourceTree = "<group>"; };
+		59427A3B292656CA002657C3 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
+		59427A3D29290085002657C3 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		4A05D0EB2924C04200A2EF50 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4A05D1042925CF2A00A2EF50 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		4A05D1072925CF4400A2EF50 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -234,9 +240,9 @@
 			isa = PBXGroup;
 			children = (
 				0D6CA333292216A300E02393 /* SpaceCapsule */,
+				0D6CA332292216A300E02393 /* Products */,
 				0D6CA34A292216A400E02393 /* SpaceCapsuleTests */,
 				0D6CA354292216A400E02393 /* SpaceCapsuleUITests */,
-				0D6CA332292216A300E02393 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -255,18 +261,19 @@
 			children = (
 				0D8AD3EF29264C9700AA305D /* Private */,
 				4A9E91402925D51B00B7CC5C /* Model */,
-				4A05D1062925CF2F00A2EF50 /* Manager */,
 				4A05D1032925CF1800A2EF50 /* Error */,
 				4A05D0EB2924C04200A2EF50 /* GoogleService-Info.plist */,
 				59F567F72923BE1E00F756B2 /* SpaceCapsule.entitlements */,
-				0D6CA342292216A400E02393 /* Info.plist */,
 				0D6CA33F292216A400E02393 /* LaunchScreen.storyboard */,
+				0DCB22902924BF70002CB095 /* GoogleService-Info.plist */,
+				0D6CA342292216A400E02393 /* Info.plist */,
 				0D6CA33D292216A400E02393 /* Assets.xcassets */,
 				288A8E902923242D000229D2 /* App */,
 				288A8E93292328AE000229D2 /* Base */,
 				0D46DEFC2923E4800045400A /* Components */,
 				0D90DAF5292397BF000DCC84 /* Extensions */,
 				0D90DAFA29239BD3000DCC84 /* Fonts */,
+				59427A3829262B0C002657C3 /* Manager */,
 				0D9D672F292493F00038F529 /* Resources */,
 				288A8E9429235989000229D2 /* Scene */,
 			);
@@ -401,10 +408,10 @@
 		288A8E98292359E4000229D2 /* SignIn */ = {
 			isa = PBXGroup;
 			children = (
+				288A8EA029235AA1000229D2 /* SignInCoordinator.swift */,
 				288A8E9A29235A6E000229D2 /* SignInView.swift */,
 				288A8E9C29235A80000229D2 /* SignInViewController.swift */,
 				288A8E9E29235A91000229D2 /* SignInViewModel.swift */,
-				288A8EA029235AA1000229D2 /* SignInCoordinator.swift */,
 			);
 			path = SignIn;
 			sourceTree = "<group>";
@@ -412,10 +419,10 @@
 		288A8E9929235A02000229D2 /* Nickname */ = {
 			isa = PBXGroup;
 			children = (
+				288A8EA829235AFC000229D2 /* NicknameCoordinator.swift */,
 				288A8EA229235ADE000229D2 /* NicknameView.swift */,
 				288A8EA429235AE8000229D2 /* NicknameViewController.swift */,
 				288A8EA629235AF1000229D2 /* NicknameViewModel.swift */,
-				288A8EA829235AFC000229D2 /* NicknameCoordinator.swift */,
 			);
 			path = Nickname;
 			sourceTree = "<group>";
@@ -572,6 +579,9 @@
 		4A05D1062925CF2F00A2EF50 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+      	59427A3929262BB2002657C3 /* FirebaseAuthManager.swift */,
+				59427A3B292656CA002657C3 /* FirestoreManager.swift */,
+				59427A3D29290085002657C3 /* UserDefaultsManager.swift */,
 				4A05D1072925CF4400A2EF50 /* NetworkManager.swift */,
 				4A9E913E2925D50D00B7CC5C /* KakaoAPIManager.swift */,
 			);
@@ -767,7 +777,9 @@
 				28049CEB29237E96002389BD /* BaseViewModel.swift in Sources */,
 				288A8EFF292360BC000229D2 /* CapsuleDetailCoordinator.swift in Sources */,
 				288A8EFB292360A4000229D2 /* CapsuleDetailViewController.swift in Sources */,
+				59427A3A29262BB2002657C3 /* FirebaseAuthManager.swift in Sources */,
 				288A8EF529236086000229D2 /* CapsuleOpenViewModel.swift in Sources */,
+				59427A3E29290085002657C3 /* UserDefaultsManager.swift in Sources */,
 				288A8EA329235ADE000229D2 /* NicknameView.swift in Sources */,
 				288A8EBA29235B86000229D2 /* CapsuleListView.swift in Sources */,
 				288A8ED729235C77000229D2 /* CapsuleCreateViewModel.swift in Sources */,
@@ -811,6 +823,7 @@
 				288A8EFD292360AB000229D2 /* CapsuleDetailViewModel.swift in Sources */,
 				288A8EE229235E3F000229D2 /* CapsuleLocateViewModel.swift in Sources */,
 				288A8EB229235B5A000229D2 /* ProfileView.swift in Sources */,
+				59427A3C292656CA002657C3 /* FirestoreManager.swift in Sources */,
 				288A8ED029235BF9000229D2 /* HomeCoordinator.swift in Sources */,
 				288A8EA529235AE8000229D2 /* NicknameViewController.swift in Sources */,
 				288A8EF129236075000229D2 /* CapsuleOpenView.swift in Sources */,

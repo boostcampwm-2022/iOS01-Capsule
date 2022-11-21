@@ -5,4 +5,37 @@
 //  Created by young june Park on 2022/11/15.
 //
 
-import Foundation
+import UIKit
+
+final class SignInCoordinator: Coordinator {
+    var parent: Coordinator?
+    var children: [Coordinator] = []
+    var navigationController: UINavigationController?
+    
+    var signInViewController: SignInViewController
+    
+    init(navigationController: UINavigationController?) {
+        self.navigationController = navigationController
+        self.signInViewController = SignInViewController()
+    }
+    
+    func start() {
+        signInViewController.viewModel = SignInViewModel(coordinator: self)
+        navigationController?.pushViewController(signInViewController, animated: true)
+//        navigationController?.setViewControllers([signInViewController], animated: true)
+    }
+    
+    func didFinish() {
+        _ = parent?.children.popLast()
+    }
+    
+    func moveToNickname() {
+        guard let parent = self.parent as? AuthCoordinator else { return }
+        parent.moveToNickname()
+    }
+    
+    func moveToTabBar() {
+        guard let parent = self.parent as? AuthCoordinator else { return }
+        parent.moveToTabBar()
+    }
+}

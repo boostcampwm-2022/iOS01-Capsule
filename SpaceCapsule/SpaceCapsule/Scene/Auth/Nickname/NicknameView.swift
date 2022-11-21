@@ -10,7 +10,7 @@ import UIKit
 
 final class NicknameView: UIView, BaseView {
     // MARK: - UIComponents
-
+    
     let nicknameLabel = ThemeLabel(text: "닉네임", size: 20, color: .themeGray300)
 
     let nicknameTextField: UITextField = {
@@ -19,9 +19,7 @@ final class NicknameView: UIView, BaseView {
         textField.layer.borderColor = UIColor.themeGray300?.cgColor
         textField.layer.cornerRadius = 10
         textField.font = .themeFont(ofSize: 20)
-
         textField.backgroundColor = .themeGray100
-
         return textField
     }()
 
@@ -35,11 +33,10 @@ final class NicknameView: UIView, BaseView {
         return button
     }()
 
-    // MARK: - Lifecycle
-
+    // MARK: - Lifecycles
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-
         configure()
         addSubViews()
         makeConstraints()
@@ -51,7 +48,7 @@ final class NicknameView: UIView, BaseView {
     }
 
     // MARK: - Methods
-
+    
     func configure() {
         backgroundColor = .themeBackground
     }
