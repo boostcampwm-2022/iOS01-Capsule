@@ -21,6 +21,7 @@
 		0D707D5129222BEB00380B14 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 0D707D5029222BEB00380B14 /* FirebaseAuth */; };
 		0D707D5329222BEB00380B14 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 0D707D5229222BEB00380B14 /* FirebaseFirestore */; };
 		0D707D5529222BEB00380B14 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 0D707D5429222BEB00380B14 /* FirebaseStorage */; };
+		0D8AD3F129264CA800AA305D /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AD3F029264CA800AA305D /* Key.swift */; };
 		0D90DAEF29238B77000DCC84 /* CapsuleLocateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D90DAEE29238B77000DCC84 /* CapsuleLocateView.swift */; };
 		0D90DAF129238B85000DCC84 /* CapsuleLocateCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D90DAF029238B85000DCC84 /* CapsuleLocateCoordinator.swift */; };
 		0D90DAF329238B90000DCC84 /* CapsuleCloseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D90DAF229238B90000DCC84 /* CapsuleCloseCoordinator.swift */; };
@@ -29,7 +30,7 @@
 		0D90DAFE29239CA0000DCC84 /* OwnglyphHaesomChae.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0D90DAFD29239C9F000DCC84 /* OwnglyphHaesomChae.otf */; };
 		0D9D672E292486780038F529 /* ThemeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9D672D292486780038F529 /* ThemeLabel.swift */; };
 		0D9D67312924945D0038F529 /* FrameResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9D67302924945D0038F529 /* FrameResource.swift */; };
-		0DCB22912924BF71002CB095 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0DCB22902924BF70002CB095 /* GoogleService-Info.plist */; };
+		0DCB22932924CE58002CB095 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCB22922924CE58002CB095 /* CustomTabBarController.swift */; };
 		28049CE529236EEC002389BD /* CapsuleAccessCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28049CE429236EEC002389BD /* CapsuleAccessCoordinator.swift */; };
 		28049CE729237B2B002389BD /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28049CE629237B2B002389BD /* BaseViewController.swift */; };
 		28049CE929237BB2002389BD /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28049CE829237BB2002389BD /* BaseView.swift */; };
@@ -84,6 +85,12 @@
 		59427A3A29262BB2002657C3 /* FirebaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59427A3929262BB2002657C3 /* FirebaseAuthManager.swift */; };
 		59427A3C292656CA002657C3 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59427A3B292656CA002657C3 /* FirestoreManager.swift */; };
 		59427A3E29290085002657C3 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59427A3D29290085002657C3 /* UserDefaultsManager.swift */; };
+		4A05D0EC2924C04200A2EF50 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A05D0EB2924C04200A2EF50 /* GoogleService-Info.plist */; };
+		4A05D1052925CF2A00A2EF50 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A05D1042925CF2A00A2EF50 /* NetworkError.swift */; };
+		4A05D1082925CF4400A2EF50 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A05D1072925CF4400A2EF50 /* NetworkManager.swift */; };
+		4A9E913F2925D50D00B7CC5C /* KakaoAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E913E2925D50D00B7CC5C /* KakaoAPIManager.swift */; };
+		4A9E91442925D51B00B7CC5C /* KakaoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E91422925D51B00B7CC5C /* KakaoResponse.swift */; };
+		4A9E91452925D51B00B7CC5C /* RequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E91432925D51B00B7CC5C /* RequestType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -116,6 +123,7 @@
 		0D6CA351292216A400E02393 /* SpaceCapsuleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpaceCapsuleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D6CA355292216A400E02393 /* SpaceCapsuleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceCapsuleUITests.swift; sourceTree = "<group>"; };
 		0D6CA357292216A400E02393 /* SpaceCapsuleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceCapsuleUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		0D8AD3F029264CA800AA305D /* Key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
 		0D90DAEE29238B77000DCC84 /* CapsuleLocateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleLocateView.swift; sourceTree = "<group>"; };
 		0D90DAF029238B85000DCC84 /* CapsuleLocateCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleLocateCoordinator.swift; sourceTree = "<group>"; };
 		0D90DAF229238B90000DCC84 /* CapsuleCloseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleCloseCoordinator.swift; sourceTree = "<group>"; };
@@ -124,7 +132,7 @@
 		0D90DAFD29239C9F000DCC84 /* OwnglyphHaesomChae.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = OwnglyphHaesomChae.otf; sourceTree = "<group>"; };
 		0D9D672D292486780038F529 /* ThemeLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeLabel.swift; sourceTree = "<group>"; };
 		0D9D67302924945D0038F529 /* FrameResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameResource.swift; sourceTree = "<group>"; };
-		0DCB22902924BF70002CB095 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		0DCB22922924CE58002CB095 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		28049CE429236EEC002389BD /* CapsuleAccessCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleAccessCoordinator.swift; sourceTree = "<group>"; };
 		28049CE629237B2B002389BD /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		28049CE829237BB2002389BD /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
@@ -179,6 +187,12 @@
 		59427A3929262BB2002657C3 /* FirebaseAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthManager.swift; sourceTree = "<group>"; };
 		59427A3B292656CA002657C3 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		59427A3D29290085002657C3 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		4A05D0EB2924C04200A2EF50 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4A05D1042925CF2A00A2EF50 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		4A05D1072925CF4400A2EF50 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		4A9E913E2925D50D00B7CC5C /* KakaoAPIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KakaoAPIManager.swift; sourceTree = "<group>"; };
+		4A9E91422925D51B00B7CC5C /* KakaoResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KakaoResponse.swift; sourceTree = "<group>"; };
+		4A9E91432925D51B00B7CC5C /* RequestType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestType.swift; sourceTree = "<group>"; };
 		59F567F72923BE1E00F756B2 /* SpaceCapsule.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SpaceCapsule.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -216,7 +230,8 @@
 		0D46DEFC2923E4800045400A /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				0D9D672D292486780038F529 /* ThemeLabel.swift */,
+				0DCB22922924CE58002CB095 /* CustomTabBarController.swift */,
+				0DCB22942924CE61002CB095 /* Theme */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -244,6 +259,10 @@
 		0D6CA333292216A300E02393 /* SpaceCapsule */ = {
 			isa = PBXGroup;
 			children = (
+				0D8AD3EF29264C9700AA305D /* Private */,
+				4A9E91402925D51B00B7CC5C /* Model */,
+				4A05D1032925CF1800A2EF50 /* Error */,
+				4A05D0EB2924C04200A2EF50 /* GoogleService-Info.plist */,
 				59F567F72923BE1E00F756B2 /* SpaceCapsule.entitlements */,
 				0D6CA33F292216A400E02393 /* LaunchScreen.storyboard */,
 				0DCB22902924BF70002CB095 /* GoogleService-Info.plist */,
@@ -278,6 +297,14 @@
 			path = SpaceCapsuleUITests;
 			sourceTree = "<group>";
 		};
+		0D8AD3EF29264C9700AA305D /* Private */ = {
+			isa = PBXGroup;
+			children = (
+				0D8AD3F029264CA800AA305D /* Key.swift */,
+			);
+			path = Private;
+			sourceTree = "<group>";
+		};
 		0D90DAF5292397BF000DCC84 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -302,6 +329,14 @@
 				0D9D67302924945D0038F529 /* FrameResource.swift */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		0DCB22942924CE61002CB095 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				0D9D672D292486780038F529 /* ThemeLabel.swift */,
+			);
+			path = Theme;
 			sourceTree = "<group>";
 		};
 		28049CEE2923825A002389BD /* ViewModel */ = {
@@ -353,6 +388,7 @@
 		288A8E9429235989000229D2 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				4A05D0ED2924C30200A2EF50 /* Temp */,
 				288A8E95292359A6000229D2 /* Auth */,
 				288A8EAA29235B0E000229D2 /* TabBar */,
 			);
@@ -525,14 +561,48 @@
 			path = CapsuleDetail;
 			sourceTree = "<group>";
 		};
-		59427A3829262B0C002657C3 /* Manager */ = {
+		4A05D0ED2924C30200A2EF50 /* Temp */ = {
 			isa = PBXGroup;
 			children = (
-				59427A3929262BB2002657C3 /* FirebaseAuthManager.swift */,
+			);
+			path = Temp;
+			sourceTree = "<group>";
+		};
+		4A05D1032925CF1800A2EF50 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				4A05D1042925CF2A00A2EF50 /* NetworkError.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
+		4A05D1062925CF2F00A2EF50 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+      	59427A3929262BB2002657C3 /* FirebaseAuthManager.swift */,
 				59427A3B292656CA002657C3 /* FirestoreManager.swift */,
 				59427A3D29290085002657C3 /* UserDefaultsManager.swift */,
+				4A05D1072925CF4400A2EF50 /* NetworkManager.swift */,
+				4A9E913E2925D50D00B7CC5C /* KakaoAPIManager.swift */,
 			);
 			path = Manager;
+			sourceTree = "<group>";
+		};
+		4A9E91402925D51B00B7CC5C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4A9E91412925D51B00B7CC5C /* Response */,
+				4A9E91432925D51B00B7CC5C /* RequestType.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4A9E91412925D51B00B7CC5C /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				4A9E91422925D51B00B7CC5C /* KakaoResponse.swift */,
+			);
+			path = Response;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -654,9 +724,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				0D6CA341292216A400E02393 /* LaunchScreen.storyboard in Resources */,
-				0DCB22912924BF71002CB095 /* GoogleService-Info.plist in Resources */,
 				0D6CA33E292216A400E02393 /* Assets.xcassets in Resources */,
 				0D90DAFE29239CA0000DCC84 /* OwnglyphHaesomChae.otf in Resources */,
+				4A05D0EC2924C04200A2EF50 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -725,22 +795,28 @@
 				28049CE729237B2B002389BD /* BaseViewController.swift in Sources */,
 				0D90DAF329238B90000DCC84 /* CapsuleCloseCoordinator.swift in Sources */,
 				288A8ED329235C65000229D2 /* CapsuleCreateView.swift in Sources */,
+				4A05D1082925CF4400A2EF50 /* NetworkManager.swift in Sources */,
 				288A8E9D29235A80000229D2 /* SignInViewController.swift in Sources */,
 				0D90DAF929239A81000DCC84 /* UIImage+.swift in Sources */,
 				288A8E9B29235A6E000229D2 /* SignInView.swift in Sources */,
 				288A8ED529235C6F000229D2 /* CapsuleCreateViewController.swift in Sources */,
+				0D8AD3F129264CA800AA305D /* Key.swift in Sources */,
 				288A8EC629235BBD000229D2 /* CapsuleMapViewModel.swift in Sources */,
+				4A9E91452925D51B00B7CC5C /* RequestType.swift in Sources */,
 				288A8EEA29235FF1000229D2 /* CapsuleCloseViewModel.swift in Sources */,
 				288A8EF92923609C000229D2 /* CapsuleDetailView.swift in Sources */,
 				288A8E97292359CF000229D2 /* AuthCoordinator.swift in Sources */,
 				0D9D67312924945D0038F529 /* FrameResource.swift in Sources */,
 				288A8EC429235BB7000229D2 /* CapsuleMapViewController.swift in Sources */,
+				4A9E91442925D51B00B7CC5C /* KakaoResponse.swift in Sources */,
 				288A8EC829235BCE000229D2 /* CapsuleMapCoordinator.swift in Sources */,
 				288A8E922923244D000229D2 /* Coordinator.swift in Sources */,
 				288A8EE829235FE2000229D2 /* CapsuleCloseViewController.swift in Sources */,
 				288A8EB429235B62000229D2 /* ProfileViewController.swift in Sources */,
+				0DCB22932924CE58002CB095 /* CustomTabBarController.swift in Sources */,
 				288A8EC229235BAF000229D2 /* CapsuleMapView.swift in Sources */,
 				288A8EA129235AA1000229D2 /* SignInCoordinator.swift in Sources */,
+				4A9E913F2925D50D00B7CC5C /* KakaoAPIManager.swift in Sources */,
 				288A8ED929235C83000229D2 /* CapsuleCreateCoordinator.swift in Sources */,
 				288A8ECE29235BEF000229D2 /* HomeViewModel.swift in Sources */,
 				28049CE929237BB2002389BD /* BaseView.swift in Sources */,
@@ -751,6 +827,7 @@
 				288A8ED029235BF9000229D2 /* HomeCoordinator.swift in Sources */,
 				288A8EA529235AE8000229D2 /* NicknameViewController.swift in Sources */,
 				288A8EF129236075000229D2 /* CapsuleOpenView.swift in Sources */,
+				4A05D1052925CF2A00A2EF50 /* NetworkError.swift in Sources */,
 				288A8E9F29235A91000229D2 /* SignInViewModel.swift in Sources */,
 				0D90DAF129238B85000DCC84 /* CapsuleLocateCoordinator.swift in Sources */,
 				288A8EA729235AF1000229D2 /* NicknameViewModel.swift in Sources */,

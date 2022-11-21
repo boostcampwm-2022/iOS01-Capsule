@@ -100,13 +100,16 @@ final class AppCoordinator: Coordinator {
         children.append(authCoordinator)
         window?.rootViewController = navigationController
     }
-    
-    func moveToTabBar() {
-        // TODO: 임시로 화면 전환한거임! 리팩토링 해야함!
-        let tabBarViewController = HomeViewController()
-        window?.rootViewController = tabBarViewController
-        
-        children.removeAll()
+
+    private func moveToTabBar() {
+        let tabBarController = CustomTabBarController()
+        let tabBarCoordinator = TabBarCoordinator(tabBarController: tabBarController)
+        tabBarCoordinator.parent = self
+        tabBarCoordinator.start()
+
+        tabBarController.coordinator = tabBarCoordinator
+
+        children.append(tabBarCoordinator)
+        rootViewController = tabBarController
     }
-    
 }

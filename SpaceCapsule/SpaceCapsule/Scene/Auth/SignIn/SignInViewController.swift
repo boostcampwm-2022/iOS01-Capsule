@@ -117,6 +117,7 @@ extension SignInViewController: ASAuthorizationControllerDelegate {
             // 새 사용자인 경우에 Firebase는 ID 토큰에 제공된 정보를 사용하여 새 사용자 계정을 만들 것이다.
             // Sign in with Firebase.
             Auth.auth().signIn(with: credential) { [weak self] authResult, error in
+
                 guard let self = self else { return }
 
                 // 인증 결과에서 Firebase 사용자를 검색하고 사용자 정보를 표시할 수 있다.

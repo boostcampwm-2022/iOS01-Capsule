@@ -5,4 +5,24 @@
 //  Created by young june Park on 2022/11/15.
 //
 
-import Foundation
+import UIKit
+
+final class CapsuleMapCoordinator: Coordinator {
+    var parent: Coordinator?
+    var children: [Coordinator] = []
+    var navigationController: UINavigationController?
+
+    init() {
+        navigationController = .init()
+    }
+
+    func start() {
+        let capsuleMapViewModel = CapsuleMapViewModel()
+        let capsuleMapViewController = CapsuleMapViewController(viewModel: capsuleMapViewModel)
+
+        capsuleMapViewModel.coordinator = self
+        capsuleMapViewController.viewModel = capsuleMapViewModel
+
+        navigationController?.setViewControllers([capsuleMapViewController], animated: true)
+    }
+}

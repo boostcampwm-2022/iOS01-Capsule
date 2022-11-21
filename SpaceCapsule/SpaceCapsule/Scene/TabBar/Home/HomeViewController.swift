@@ -6,12 +6,16 @@
 //
 
 import UIKit
+import RxSwift
 
-final class HomeViewController: UIViewController {
+final class HomeViewController: UIViewController, BaseViewController {
+    var disposeBag = DisposeBag()
+    var viewModel: HomeViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
+        view.backgroundColor = .themeColor300
     }
     
+    func bind() {}
 }
