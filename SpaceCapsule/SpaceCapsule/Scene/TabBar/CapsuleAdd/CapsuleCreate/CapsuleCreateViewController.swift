@@ -62,7 +62,12 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
             .bind(to: viewModel.input.close)
             .disposed(by: disposeBag)
 
-        viewModel.output.imageData
+        doneButton.rx.tap
+            .asObservable()
+            .subscribe(viewModel.input.done)
+            .disposed(by: disposeBag)
+
+        viewModel.input.imageData
             .subscribe(onNext: { [weak self] items in
                 self?.applyImageCollectionSnapshot(items: items)
             })
@@ -78,6 +83,18 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
                 }
 
             })
+            .disposed(by: disposeBag)
+
+        mainView
+            .titleTextField.rx.text
+            .orEmpty
+            .bind(to: viewModel.input.title)
+            .disposed(by: disposeBag)
+
+        mainView
+            .descriptionTextView.rx.text
+            .orEmpty
+            .bind(to: viewModel.input.description)
             .disposed(by: disposeBag)
     }
 

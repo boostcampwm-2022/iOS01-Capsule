@@ -45,15 +45,3 @@ final class NicknameViewController: UIViewController, BaseViewController {
             .disposed(by: disposeBag)
     }
 }
-
-// SwiftUI Preview
-#if canImport(SwiftUI) && DEBUG
-    import SwiftUI
-    struct NicknameViewControllerPreview: PreviewProvider {
-        static var previews: some View {
-            NicknameViewController()
-                .showPreview()
-                .previewDevice(PreviewDevice(rawValue: "iPhone 14"))
-        }
-    }
-#endif
