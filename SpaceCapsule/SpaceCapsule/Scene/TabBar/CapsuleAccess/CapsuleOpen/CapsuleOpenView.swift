@@ -9,14 +9,21 @@ import UIKit
 import SnapKit
 
 final class CapsuleOpenView: UIView, BaseView {
-    
     var thumbnailImageView = {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = FrameResource.capsuleThumbnailCornerRadius
-        imageView.backgroundColor = .themeGray300
-        imageView.image = UIImage.logoWithBG
         imageView.clipsToBounds = true
+        imageView.image = UIImage.logoWithBG
         return imageView
+    }()
+    
+    var thumbnailImageContainerView = {
+        let view = UIView()
+        view.layer.shadowOffset = CGSize(width: 4, height: 4)
+        view.layer.shadowRadius = 4
+        view.layer.shadowOpacity = 0.5
+        view.layer.cornerRadius = FrameResource.capsuleThumbnailCornerRadius
+        return view
     }()
     
     var descriptionLabel = {
@@ -57,17 +64,22 @@ final class CapsuleOpenView: UIView, BaseView {
     }
 
     func addSubViews() {
-        [thumbnailImageView, descriptionLabel, openButton].forEach {
+        [thumbnailImageContainerView, descriptionLabel, openButton].forEach {
             addSubview($0)
         }
+        thumbnailImageContainerView.addSubview(thumbnailImageView)
     }
 
     func makeConstraints() {
-        thumbnailImageView.snp.makeConstraints {
+        thumbnailImageContainerView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.centerY.equalToSuperview().multipliedBy(0.8)
             $0.width.equalTo(FrameResource.capsuleThumbnailWidth)
             $0.height.equalTo(FrameResource.capsuleThumbnailHeigth)
+        }
+        
+        thumbnailImageView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
         }
         
         descriptionLabel.snp.makeConstraints {
