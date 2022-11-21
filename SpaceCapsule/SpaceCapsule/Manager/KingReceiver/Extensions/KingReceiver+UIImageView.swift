@@ -44,6 +44,10 @@ extension KingReceiverWrapper where Base: UIImageView {
         }
     }
 
+    func setImage(with data: Data, scale: CGFloat = 1) {
+        base.image = resizeImage(data: data, to: base.frame.size, scale: scale)
+    }
+
     /// 로딩 indicator 시작
     private func start(indicator: UIActivityIndicatorView?) {
         guard let indicator else {
