@@ -73,7 +73,7 @@ final class CapsuleOpenView: UIView, BaseView {
     func makeConstraints() {
         thumbnailImageContainerView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.centerY.equalToSuperview().multipliedBy(0.8)
+            $0.centerY.equalToSuperview().multipliedBy(3)
             $0.width.equalTo(FrameResource.capsuleThumbnailWidth)
             $0.height.equalTo(FrameResource.capsuleThumbnailHeigth)
         }
@@ -84,13 +84,13 @@ final class CapsuleOpenView: UIView, BaseView {
         
         descriptionLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(thumbnailImageView.snp.bottom).offset(50)
+            $0.bottom.equalTo(openButton.snp.top).offset(-FrameResource.buttonHeight)
         }
         
         openButton.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(FrameResource.horizontalPadding)
             $0.trailing.equalToSuperview().offset(-FrameResource.horizontalPadding)
-            $0.top.equalTo(descriptionLabel.snp.bottom).offset(50)
+            $0.bottom.equalToSuperview().offset(-FrameResource.buttonHeight)
             $0.height.equalTo(FrameResource.buttonHeight)
         }
     }
@@ -140,6 +140,12 @@ final class CapsuleOpenView: UIView, BaseView {
         dateLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.centerY.equalToSuperview().multipliedBy(1.2)
+        }
+    }
+    
+    func animate() {
+        UIView.animate(withDuration: 1, delay: 1, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.5, options: .curveEaseInOut) {
+                self.thumbnailImageContainerView.transform = CGAffineTransform(translationX: 0, y: -950)
         }
     }
 }
