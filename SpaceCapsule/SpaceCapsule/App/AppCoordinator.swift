@@ -42,9 +42,8 @@ final class AppCoordinator: Coordinator {
     }
     
     func start() {
-        // TODO: 첫 로딩화면 만들기
-        let loadingViewController = UIViewController()
-        loadingViewController.view.backgroundColor = .themeColor200
+        // MARK: 앱 실행 시 로딩 화면
+        let loadingViewController = LoadingViewController()
         window?.rootViewController = loadingViewController
         window?.makeKeyAndVisible()
         

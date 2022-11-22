@@ -1,28 +1,23 @@
 //
-//  SignInView.swift
+//  LoadingView.swift
 //  SpaceCapsule
 //
-//  Created by young june Park on 2022/11/15.
+//  Created by 김민중 on 2022/11/21.
 //
 
 import UIKit
 import SnapKit
-import AuthenticationServices
 
-final class SignInView: UIView, BaseView {
+final class LoadingView: UIView, BaseView {
     // MARK: - UIComponents
     lazy var logoWithTextView: UIView = {
         var imageView = UIImageView()
         imageView.image = UIImage.logoWithText
         return imageView
     }()
-        
-    lazy var appleSignInButton: ASAuthorizationAppleIDButton = {
-        var appleIDButton: ASAuthorizationAppleIDButton = ASAuthorizationAppleIDButton(type: .signIn, style: .black)
-        return appleIDButton
-    }()
     
     // MARK: - Lifecycles
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -36,12 +31,13 @@ final class SignInView: UIView, BaseView {
     }
     
     // MARK: - Methods
+    
     func configure() {
         backgroundColor = .themeColor100
     }
     
     func addSubViews() {
-        [logoWithTextView, appleSignInButton].forEach {
+        [logoWithTextView].forEach {
             addSubview($0)
         }
     }
@@ -51,13 +47,6 @@ final class SignInView: UIView, BaseView {
             $0.width.height.equalTo(FrameResource.logoWithTextSize)
             $0.centerX.equalToSuperview()
             $0.centerY.equalToSuperview()
-        }
-        
-        appleSignInButton.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(FrameResource.horizontalPadding)
-            $0.trailing.equalToSuperview().offset(-FrameResource.horizontalPadding)
-            $0.bottom.equalToSuperview().offset(-FrameResource.bottomPadding)
-            $0.height.equalTo(FrameResource.buttonHeight)
         }
     }
 }

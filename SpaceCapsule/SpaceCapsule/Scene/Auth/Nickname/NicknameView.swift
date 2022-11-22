@@ -29,7 +29,6 @@ final class NicknameView: UIView, BaseView {
         button.titleLabel?.font = .themeFont(ofSize: 20)
         button.backgroundColor = .themeColor200
         button.layer.cornerRadius = 10
-
         return button
     }()
 
