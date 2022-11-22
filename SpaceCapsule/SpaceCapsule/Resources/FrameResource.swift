@@ -21,4 +21,7 @@ enum FrameResource {
     static let capsuleThumbnailWidth: CGFloat = 267.0
     static let capsuleThumbnailHeigth: CGFloat = 440.0
     static let capsuleThumbnailCornerRadius: CGFloat = 120.0
+    
+    static let capsuleCellWidth: CGFloat = 135.0
+    static let capsuleCellHeight: CGFloat = 210.0
 }

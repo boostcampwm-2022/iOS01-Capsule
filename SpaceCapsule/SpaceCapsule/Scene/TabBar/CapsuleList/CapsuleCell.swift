@@ -7,7 +7,12 @@
 
 import UIKit
 import SnapKit
-import RxSwift
+
+struct CapsuleCellModel: Hashable {
+    let uuid: UUID
+    let imageData: Data
+    let closeDate: String
+}
 
 final class CapsuleCell: UICollectionViewCell {
     static let identifier = "CapsuleCell"
@@ -35,6 +40,7 @@ final class CapsuleCell: UICollectionViewCell {
         makeConstraints()
     }
     
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -59,7 +65,7 @@ final class CapsuleCell: UICollectionViewCell {
         }
     }
     // TODO: 객체를 인자로 받고 셀을 업데이트 해야 한다.
-    func configureCell() {
+    func configure() {
         
     }
     
