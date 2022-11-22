@@ -83,12 +83,11 @@ final class CapsuleCell: UICollectionViewCell {
     func configure(capsuleCellModel: CapsuleCellModel) {
         thumbnailImageView.image = capsuleCellModel.thumbnailImage
         descriptionLabel.text = "\(capsuleCellModel.memoryDate)\n\(capsuleCellModel.address)에서"
-        if capsuleCellModel.isOpenable {
+        thumbnailImageView.subviews.forEach {
+            $0.removeFromSuperview()
+        }
+        if capsuleCellModel.isOpenable == false {
             applyUnOpenableEffect(closeDate: capsuleCellModel.closedDate)
-        } else {
-            thumbnailImageView.subviews.forEach {
-                $0.removeFromSuperview()
-            }
         }
     }
     
