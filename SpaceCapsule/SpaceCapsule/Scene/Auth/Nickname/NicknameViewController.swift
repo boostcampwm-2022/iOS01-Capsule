@@ -5,9 +5,9 @@
 //  Created by young june Park on 2022/11/15.
 //
 
-import UIKit
-import RxSwift
 import FirebaseAuth
+import RxSwift
+import UIKit
 
 final class NicknameViewController: UIViewController, BaseViewController {
     // MARK: - Properties
