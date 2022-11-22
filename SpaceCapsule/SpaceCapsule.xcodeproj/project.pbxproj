@@ -48,6 +48,7 @@
 		28049CE929237BB2002389BD /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28049CE829237BB2002389BD /* BaseView.swift */; };
 		28049CEB29237E96002389BD /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28049CEA29237E96002389BD /* BaseViewModel.swift */; };
 		28049CED29238216002389BD /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28049CEC29238216002389BD /* Bindable.swift */; };
+		2807BC0B292C658000288A5D /* CapsuleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2807BC0A292C658000288A5D /* CapsuleCell.swift */; };
 		288A8E922923244D000229D2 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288A8E912923244D000229D2 /* Coordinator.swift */; };
 		288A8E97292359CF000229D2 /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288A8E96292359CF000229D2 /* AuthCoordinator.swift */; };
 		288A8E9B29235A6E000229D2 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288A8E9A29235A6E000229D2 /* SignInView.swift */; };
@@ -164,6 +165,7 @@
 		28049CE829237BB2002389BD /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		28049CEA29237E96002389BD /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		28049CEC29238216002389BD /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
+		2807BC0A292C658000288A5D /* CapsuleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleCell.swift; sourceTree = "<group>"; };
 		288A8E912923244D000229D2 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		288A8E96292359CF000229D2 /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 		288A8E9A29235A6E000229D2 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
@@ -553,6 +555,7 @@
 		288A8EAD29235B2C000229D2 /* CapsuleList */ = {
 			isa = PBXGroup;
 			children = (
+				2807BC0A292C658000288A5D /* CapsuleCell.swift */,
 				288A8EB929235B86000229D2 /* CapsuleListView.swift */,
 				288A8EBB29235B8E000229D2 /* CapsuleListViewController.swift */,
 				288A8EBD29235B97000229D2 /* CapsuleListViewModel.swift */,
@@ -899,6 +902,7 @@
 				288A8ED029235BF9000229D2 /* HomeCoordinator.swift in Sources */,
 				288A8EA529235AE8000229D2 /* NicknameViewController.swift in Sources */,
 				288A8EF129236075000229D2 /* CapsuleOpenView.swift in Sources */,
+				2807BC0B292C658000288A5D /* CapsuleCell.swift in Sources */,
 				4A05D1052925CF2A00A2EF50 /* NetworkError.swift in Sources */,
 				288A8E9F29235A91000229D2 /* SignInViewModel.swift in Sources */,
 				0D24C1FB292B84DD00007E75 /* UserDefaultsManager.swift in Sources */,
