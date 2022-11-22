@@ -100,6 +100,7 @@
 		599C1A26292C9C1F00517E93 /* FirebaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C1A1A292C9C1F00517E93 /* FirebaseAuthManager.swift */; };
 		599C1A27292C9C1F00517E93 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C1A1B292C9C1F00517E93 /* FirestoreManager.swift */; };
 		599C1A2A292C9CCD00517E93 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C1A29292C9CCD00517E93 /* Key.swift */; };
+		599C1A2C292C9F5B00517E93 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 599C1A2B292C9F5B00517E93 /* .swiftlint.yml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -235,6 +236,7 @@
 		599C1A1A292C9C1F00517E93 /* FirebaseAuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseAuthManager.swift; sourceTree = "<group>"; };
 		599C1A1B292C9C1F00517E93 /* FirestoreManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		599C1A29292C9CCD00517E93 /* Key.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
+		599C1A2B292C9F5B00517E93 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		59F567F72923BE1E00F756B2 /* SpaceCapsule.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SpaceCapsule.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -281,6 +283,7 @@
 		0D6CA328292216A300E02393 = {
 			isa = PBXGroup;
 			children = (
+				599C1A2B292C9F5B00517E93 /* .swiftlint.yml */,
 				0D6CA333292216A300E02393 /* SpaceCapsule */,
 				0D6CA332292216A300E02393 /* Products */,
 				0D6CA34A292216A400E02393 /* SpaceCapsuleTests */,
@@ -822,6 +825,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				599C1A2C292C9F5B00517E93 /* .swiftlint.yml in Resources */,
 				0D6CA341292216A400E02393 /* LaunchScreen.storyboard in Resources */,
 				0D6CA33E292216A400E02393 /* Assets.xcassets in Resources */,
 				0D90DAFE29239CA0000DCC84 /* OwnglyphHaesomChae.otf in Resources */,
