@@ -18,7 +18,7 @@ final class CapsuleMapCoordinator: Coordinator {
 
     func start() {
         let capsuleMapViewModel = CapsuleMapViewModel()
-        let capsuleMapViewController = CapsuleMapViewController(viewModel: capsuleMapViewModel)
+        let capsuleMapViewController = CapsuleMapViewController()
 
         capsuleMapViewModel.coordinator = self
         capsuleMapViewController.viewModel = capsuleMapViewModel

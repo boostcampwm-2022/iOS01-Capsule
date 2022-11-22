@@ -47,4 +47,11 @@ extension Reactive where Base: CLLocationManager {
                 return param[1] as? [CLLocation] ?? []
             }
     }
+    
+    var willExitMonitoringRegion: Observable<CLRegion?> {
+        return delegate.methodInvoked(#selector(CLLocationManagerDelegate.locationManager(_:didExitRegion:)))
+            .map { param in
+                return param[1] as? CLRegion
+            }
+    }
 }
