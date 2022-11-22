@@ -96,11 +96,11 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
             .disposed(by: disposeBag)
 
         mainView.dateSelectView.eventHandler = { [weak self] in
-            self?.viewModel?.input.datePicker.onNext(())
+            self?.viewModel?.input.tapDatePicker.onNext(())
         }
         
         mainView.locationSelectView.eventHandler = { [weak self] in
-            self?.viewModel?.input.capsuleLocate.onNext(())
+            self?.viewModel?.input.tapCapsuleLocate.onNext(())
         }
     }
 

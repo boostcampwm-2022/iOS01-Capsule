@@ -16,7 +16,7 @@ final class DatePickerCoordinator: Coordinator {
     init(navigationController: UINavigationController?) {
         self.navigationController = navigationController
     }
-    
+
     func start() {
         let datePickerViewController = DatePickerViewController()
         let datePickerViewModel = DatePickerViewModel()
@@ -26,14 +26,19 @@ final class DatePickerCoordinator: Coordinator {
         datePickerViewController.modalPresentationStyle = .pageSheet
 
         if let sheet = datePickerViewController.sheetPresentationController {
-            sheet.detents = [.medium()]
+            sheet.detents = [.medium(), .large()]
             sheet.prefersGrabberVisible = true
         }
 
         navigationController?.present(datePickerViewController, animated: true)
     }
-    
-    func finish () {
-        parent?.children.popLast()
+
+    func done(dateString: String) {
+        guard let parent = parent as? CapsuleAddCoordinator else {
+            return
+        }
+
+        parent.dateStringObserver.onNext(dateString)
+        parent.children.popLast()
     }
 }

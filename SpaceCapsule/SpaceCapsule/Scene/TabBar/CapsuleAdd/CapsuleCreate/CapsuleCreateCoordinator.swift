@@ -5,6 +5,7 @@
 //  Created by young june Park on 2022/11/15.
 //
 
+import RxSwift
 import UIKit
 
 final class CapsuleCreateCoordinator: Coordinator {
@@ -31,19 +32,35 @@ final class CapsuleCreateCoordinator: Coordinator {
     }
 
     func showDatePicker() {
-        let datePickerCoordinator = DatePickerCoordinator(navigationController: navigationController)
-        datePickerCoordinator.parent = self
-        datePickerCoordinator.start()
-        
-        children.append(datePickerCoordinator)
+        guard let parent = parent as? CapsuleAddCoordinator else {
+            return
+        }
+
+        parent.showDatePicker()
     }
-    
+
     func showCapsuleLocate() {
-        let capsuleLocateCoordinator = CapsuleLocateCoordinator(navigationController: navigationController)
-        capsuleLocateCoordinator.parent = self
-        capsuleLocateCoordinator.start()
-        
-        children.append(capsuleLocateCoordinator)
+        guard let parent = parent as? CapsuleAddCoordinator else {
+            return
+        }
+
+        parent.showCapsuleLocate()
+    }
+
+    func addressObserver() -> Observable<Address>? {
+        guard let parent = parent as? CapsuleAddCoordinator else {
+            return nil
+        }
+
+        return parent.addressObserver.asObservable()
+    }
+
+    func dateStringObserver() -> Observable<String>? {
+        guard let parent = parent as? CapsuleAddCoordinator else {
+            return nil
+        }
+
+        return parent.dateStringObserver.asObservable()
     }
 
     func finish() {

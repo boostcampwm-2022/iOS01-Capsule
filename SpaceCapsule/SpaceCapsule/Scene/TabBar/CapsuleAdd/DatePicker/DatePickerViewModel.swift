@@ -17,6 +17,7 @@ final class DatePickerViewModel: BaseViewModel {
 
     struct Input {
         var viewWillDisappear = PublishSubject<Void>()
+        var dateString = PublishSubject<String>()
     }
 
     init() {
@@ -24,10 +25,18 @@ final class DatePickerViewModel: BaseViewModel {
     }
 
     func bind() {
-        input.viewWillDisappear.asObservable()
+        input.viewWillDisappear
+            .withLatestFrom(input.dateString)
             .subscribe(onNext: { [weak self] in
-                self?.coordinator?.finish()
+                self?.coordinator?.done(dateString: $0)
             })
             .disposed(by: disposeBag)
+        
+        
+//        input.dateString
+//            .subscribe(onNext: { [weak self] in
+//                self?.coordinator?.done(dateString: $0)
+//            })
+//            .disposed(by: disposeBag)
     }
 }
