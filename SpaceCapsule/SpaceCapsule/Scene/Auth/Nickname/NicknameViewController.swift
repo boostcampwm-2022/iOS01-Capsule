@@ -40,6 +40,12 @@ final class NicknameViewController: UIViewController, BaseViewController {
             .bind(to: viewModel.input.doneButtonTapped)
             .disposed(by: disposeBag)
         
+        nicknameView
+            .tapGesture.rx.event.bind(onNext: { [weak self] _ in
+                self?.view.endEditing(true)
+            })
+            .disposed(by: disposeBag)
+        
         // MARK: 이건 지워도 될 듯?
         viewModel.input
             .doneButtonTapped
