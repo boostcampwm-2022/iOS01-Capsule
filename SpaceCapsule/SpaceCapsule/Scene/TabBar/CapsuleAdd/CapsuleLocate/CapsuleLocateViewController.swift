@@ -31,17 +31,13 @@ final class CapsuleLocateViewController: UIViewController, BaseViewController {
         bind()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        goToCurrentLocation()
-    }
-
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         locationManager.stopUpdatingLocation()
     }
 
     func bind() {
+        // Drag
         viewModel?.input.isDragging
             .withUnretained(self)
             .bind { owner, isDragging in
@@ -51,6 +47,27 @@ final class CapsuleLocateViewController: UIViewController, BaseViewController {
                     owner.mainView.cursor.backgroundColor = .green
                 }
             }.disposed(by: disposeBag)
+
+        // 주소
+        viewModel?.output.fullAddress
+            .subscribe(onNext: { [weak self] in
+                self?.mainView.locationLabel.text = $0 ?? "해당 지역의 주소를 불러올 수 없습니다."
+            })
+            .disposed(by: disposeBag)
+
+        // 취소
+        mainView.cancelButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel?.input.cancel.onNext(())
+            })
+            .disposed(by: disposeBag)
+        
+        // 완료
+        mainView.doneButton.rx.tap
+            .subscribe(onNext: {[weak self] in
+                self?.viewModel?.input.done.onNext(())
+            })
+            .disposed(by: disposeBag)
     }
 
     private func configure() {
@@ -78,6 +95,7 @@ final class CapsuleLocateViewController: UIViewController, BaseViewController {
 
         let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
         let region = MKCoordinateRegion(center: center, span: span)
+
         mainView.locateMap.setRegion(region, animated: true)
     }
 }
@@ -102,54 +120,10 @@ extension CapsuleLocateViewController: MKMapViewDelegate, CLLocationManagerDeleg
         }
     }
 
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        guard !(annotation is MKUserLocation) else { // 어노테이션이 유저의 현재 뷰가 아님을 보장
-            return nil
-        }
-
-        var annotationView = mainView.locateMap.dequeueReusableAnnotationView(withIdentifier: "spaceCapsule")
-        if annotationView == nil {
-            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "spaceCapsule")
-            annotationView?.canShowCallout = true // tap이 가능한지
-            annotationView?.backgroundColor = .themeColor100
-            let btn = UIButton(type: .detailDisclosure)
-            annotationView?.rightCalloutAccessoryView = btn
-        } else {
-            annotationView?.annotation = annotation
-        }
-        annotationView?.image = UIImage(systemName: "circle")
-
-        return annotationView
-    }
-
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated: Bool) {
         let coordinate = mapView.region.center
 
-        do {
-            let request = try KakaoAPIManager.shared.getRequest(for: .coordToAddress((x: String(coordinate.longitude),
-                                                                                      y: String(coordinate.latitude))))
-            let result: Observable<Result<KakaoResponse, NetworkError>> = NetworkManager.shared.send(request: request)
-            result
-                .map { result -> [Document] in
-                    switch result {
-                    case let .success(value):
-                        return value.documents
-                    case let .failure(error):
-                        print(error)
-                        return []
-                    }
-                }
-                .observe(on: MainScheduler())
-                .subscribe(onNext: { [weak self] in
-                    let address = $0.first?.address
-                    self?.mainView.locationLabel.text = address?.addressName
-//                    print(address?.addressName)
-//                    print("\(address?.region1DepthName ?? "") \(address?.region2DepthName ?? "")")
-                })
-                .disposed(by: disposeBag)
-        } catch {
-            print(error)
-        }
+        viewModel?.fetchLocation(x: coordinate.longitude, y: coordinate.latitude)
     }
 }
 
@@ -159,6 +133,7 @@ extension CapsuleLocateViewController: UIGestureRecognizerDelegate {
     private func configureGesture() {
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(drag(sender:)))
         panGesture.delegate = self
+
         mainView.locateMap.addGestureRecognizer(panGesture)
     }
 
