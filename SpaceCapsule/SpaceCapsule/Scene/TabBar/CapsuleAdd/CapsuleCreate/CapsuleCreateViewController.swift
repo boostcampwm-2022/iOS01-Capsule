@@ -96,15 +96,12 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
             .disposed(by: disposeBag)
 
         mainView.dateSelectView.eventHandler = { [weak self] in
-            let datePickerVC = DatePickerViewController()
-            datePickerVC.modalPresentationStyle = .pageSheet
-
-            if let sheet = datePickerVC.sheetPresentationController {
-                sheet.detents = [.medium()]
-                sheet.prefersGrabberVisible = true
-            }
-
-            self?.present(datePickerVC, animated: true)
+            self?.viewModel?.input.datePicker.onNext(())
+        }
+        
+        mainView.locationSelectView.eventHandler = { [weak self] in
+            print("hello")
+            self?.viewModel?.input.capsuleLocate.onNext(())
         }
     }
 

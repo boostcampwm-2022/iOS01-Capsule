@@ -9,12 +9,11 @@ import SnapKit
 import UIKit
 
 class AddImageButtonCell: UICollectionViewCell {
-
     let addImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = .addImage
         imageView.tintColor = .themeGray300
-        
+
         return imageView
     }()
 
@@ -24,7 +23,7 @@ class AddImageButtonCell: UICollectionViewCell {
         layer.cornerRadius = FrameResource.commonCornerRadius
         layer.borderWidth = FrameResource.commonBorderWidth
         layer.borderColor = UIColor.themeGray300?.cgColor
-        
+
         backgroundColor = .themeGray100
 
         addSubViews()

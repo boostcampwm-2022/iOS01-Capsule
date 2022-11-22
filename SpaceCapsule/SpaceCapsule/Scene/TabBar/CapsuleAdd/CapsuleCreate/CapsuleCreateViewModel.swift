@@ -32,6 +32,8 @@ final class CapsuleCreateViewModel: BaseViewModel {
         var imageData = BehaviorRelay<[AddImageCollectionView.Cell]>(value: [.addButton])
         var title = PublishSubject<String>()
         var description = PublishSubject<String>()
+        var datePicker = PublishSubject<Void>()
+        var capsuleLocate = PublishSubject<Void>()
 
         var capsuleDataObservable: Observable<Capsule> {
             Observable.combineLatest(title.asObservable(), description.asObservable()) { title, description in
@@ -48,12 +50,14 @@ final class CapsuleCreateViewModel: BaseViewModel {
     }
 
     private func bind() {
+        // 닫기
         input.close.asObservable()
             .subscribe(onNext: { [weak self] in
                 self?.coordinator?.finish()
             })
             .disposed(by: disposeBag)
 
+        // 완료
         input.done
             .withLatestFrom(input.capsuleDataObservable)
 //            .flatMapLatest { capsule in
@@ -62,6 +66,20 @@ final class CapsuleCreateViewModel: BaseViewModel {
             .subscribe(onNext: { event in
                 print(event.title)
                 print(event.description)
+            })
+            .disposed(by: disposeBag)
+        
+        // 날짜선택
+        input.datePicker.asObservable()
+            .subscribe(onNext: { [weak self] in
+                self?.coordinator?.showDatePicker()
+            })
+            .disposed(by: disposeBag)
+        
+        // 위치선택
+        input.capsuleLocate.asObservable()
+            .subscribe(onNext: { [weak self] in
+                self?.coordinator?.showCapsuleLocate()
             })
             .disposed(by: disposeBag)
     }

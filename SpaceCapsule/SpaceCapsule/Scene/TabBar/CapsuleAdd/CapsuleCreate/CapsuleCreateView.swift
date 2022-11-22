@@ -54,7 +54,6 @@ final class CapsuleCreateView: UIView, BaseView {
         configure()
         addSubViews()
         makeConstraints()
-        handleEvents()
     }
 
     @available(*, unavailable)
@@ -130,11 +129,6 @@ final class CapsuleCreateView: UIView, BaseView {
         ].forEach {
             inputStackView.setCustomSpacing(8, after: $0)
         }
-    }
-
-    private func handleEvents() {
-        locationSelectView.eventHandler = { print("location tapped") }
-        dateSelectView.eventHandler = { print("date tapped") }
     }
 }
 

@@ -20,6 +20,8 @@
 		0D6CA366292218EB00E02393 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 0D6CA365292218EB00E02393 /* RxCocoa */; };
 		0D6CA368292218EB00E02393 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0D6CA367292218EB00E02393 /* RxSwift */; };
 		0D6CA36B2922197D00E02393 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0D6CA36A2922197D00E02393 /* SnapKit */; };
+		0D706137292C630D0077787E /* DatePickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D706136292C630D0077787E /* DatePickerViewModel.swift */; };
+		0D706139292C63140077787E /* DatePickerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D706138292C63140077787E /* DatePickerCoordinator.swift */; };
 		0D707D5129222BEB00380B14 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 0D707D5029222BEB00380B14 /* FirebaseAuth */; };
 		0D707D5329222BEB00380B14 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 0D707D5229222BEB00380B14 /* FirebaseFirestore */; };
 		0D707D5529222BEB00380B14 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 0D707D5429222BEB00380B14 /* FirebaseStorage */; };
@@ -131,6 +133,8 @@
 		0D6CA351292216A400E02393 /* SpaceCapsuleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpaceCapsuleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D6CA355292216A400E02393 /* SpaceCapsuleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceCapsuleUITests.swift; sourceTree = "<group>"; };
 		0D6CA357292216A400E02393 /* SpaceCapsuleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceCapsuleUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		0D706136292C630D0077787E /* DatePickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewModel.swift; sourceTree = "<group>"; };
+		0D706138292C63140077787E /* DatePickerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerCoordinator.swift; sourceTree = "<group>"; };
 		0D77D7C8292B5D490038D054 /* SelectButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectButton.swift; sourceTree = "<group>"; };
 		0D8AD3F029264CA800AA305D /* Key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
 		0D90DAEE29238B77000DCC84 /* CapsuleLocateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleLocateView.swift; sourceTree = "<group>"; };
@@ -318,6 +322,16 @@
 			path = SpaceCapsuleUITests;
 			sourceTree = "<group>";
 		};
+		0D706135292C5E950077787E /* DatePicker */ = {
+			isa = PBXGroup;
+			children = (
+				0DE786E0292BBDEC007EF260 /* DatePickerViewController.swift */,
+				0D706136292C630D0077787E /* DatePickerViewModel.swift */,
+				0D706138292C63140077787E /* DatePickerCoordinator.swift */,
+			);
+			path = DatePicker;
+			sourceTree = "<group>";
+		};
 		0D8AD3EF29264C9700AA305D /* Private */ = {
 			isa = PBXGroup;
 			children = (
@@ -359,7 +373,6 @@
 				0DA9F6902928E9B900454932 /* AddImageCell.swift */,
 				0DA9F6922928E9CB00454932 /* AddImageCollectionView.swift */,
 				0DA9F6942928EA4900454932 /* AddImageButtonCell.swift */,
-				0DE786E0292BBDEC007EF260 /* DatePickerViewController.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -523,9 +536,10 @@
 			isa = PBXGroup;
 			children = (
 				288A8F02292362CC000229D2 /* CapsuleAddCoordinator.swift */,
+				288A8EDA29235DD3000229D2 /* CapsuleClose */,
 				288A8EDC29235DDF000229D2 /* CapsuleCreate */,
 				288A8EDB29235DD8000229D2 /* CapsuleLocate */,
-				288A8EDA29235DD3000229D2 /* CapsuleClose */,
+				0D706135292C5E950077787E /* DatePicker */,
 			);
 			path = CapsuleAdd;
 			sourceTree = "<group>";
@@ -555,11 +569,11 @@
 		288A8EDC29235DDF000229D2 /* CapsuleCreate */ = {
 			isa = PBXGroup;
 			children = (
-				0DA9F68F2928E95C00454932 /* Components */,
+				288A8ED829235C83000229D2 /* CapsuleCreateCoordinator.swift */,
 				288A8ED229235C65000229D2 /* CapsuleCreateView.swift */,
 				288A8ED429235C6F000229D2 /* CapsuleCreateViewController.swift */,
 				288A8ED629235C77000229D2 /* CapsuleCreateViewModel.swift */,
-				288A8ED829235C83000229D2 /* CapsuleCreateCoordinator.swift */,
+				0DA9F68F2928E95C00454932 /* Components */,
 			);
 			path = CapsuleCreate;
 			sourceTree = "<group>";
@@ -822,6 +836,7 @@
 				288A8ED329235C65000229D2 /* CapsuleCreateView.swift in Sources */,
 				4A05D1082925CF4400A2EF50 /* NetworkManager.swift in Sources */,
 				288A8E9D29235A80000229D2 /* SignInViewController.swift in Sources */,
+				0D706137292C630D0077787E /* DatePickerViewModel.swift in Sources */,
 				0D90DAF929239A81000DCC84 /* UIImage+.swift in Sources */,
 				0DE786E1292BBDEC007EF260 /* DatePickerViewController.swift in Sources */,
 				288A8E9B29235A6E000229D2 /* SignInView.swift in Sources */,
@@ -848,6 +863,7 @@
 				288A8ED929235C83000229D2 /* CapsuleCreateCoordinator.swift in Sources */,
 				288A8ECE29235BEF000229D2 /* HomeViewModel.swift in Sources */,
 				28049CE929237BB2002389BD /* BaseView.swift in Sources */,
+				0D706139292C63140077787E /* DatePickerCoordinator.swift in Sources */,
 				288A8EFD292360AB000229D2 /* CapsuleDetailViewModel.swift in Sources */,
 				288A8EE229235E3F000229D2 /* CapsuleLocateViewModel.swift in Sources */,
 				0D4C11372927489D00B1C2B6 /* UIViewPreview.swift in Sources */,

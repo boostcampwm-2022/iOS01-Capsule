@@ -17,6 +17,10 @@ final class CapsuleCreateCoordinator: Coordinator {
     }
 
     func start() {
+        showCapsuleCreate()
+    }
+
+    func showCapsuleCreate() {
         let capsuleCreateViewController = CapsuleCreateViewController()
         let capsuleCreateViewModel = CapsuleCreateViewModel()
 
@@ -24,6 +28,22 @@ final class CapsuleCreateCoordinator: Coordinator {
         capsuleCreateViewController.viewModel = capsuleCreateViewModel
 
         navigationController?.setViewControllers([capsuleCreateViewController], animated: true)
+    }
+
+    func showDatePicker() {
+        let datePickerCoordinator = DatePickerCoordinator(navigationController: navigationController)
+        datePickerCoordinator.parent = self
+        datePickerCoordinator.start()
+        
+        children.append(datePickerCoordinator)
+    }
+    
+    func showCapsuleLocate() {
+        let capsuleLocateCoordinator = CapsuleLocateCoordinator(navigationController: navigationController)
+        capsuleLocateCoordinator.parent = self
+        capsuleLocateCoordinator.start()
+        
+        children.append(capsuleLocateCoordinator)
     }
 
     func finish() {
