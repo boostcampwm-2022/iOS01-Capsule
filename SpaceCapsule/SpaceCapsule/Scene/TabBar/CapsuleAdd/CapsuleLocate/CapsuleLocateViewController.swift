@@ -125,6 +125,7 @@ extension CapsuleLocateViewController: MKMapViewDelegate, CLLocationManagerDeleg
 
         viewModel?.fetchLocation(x: coordinate.longitude, y: coordinate.latitude)
     }
+
 }
 
 // MARK: - Gesture Recognizer

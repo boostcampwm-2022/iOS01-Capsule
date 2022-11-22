@@ -10,7 +10,8 @@ import UIKit
 
 final class NicknameView: UIView, BaseView {
     // MARK: - UIComponents
-
+    let tapGesture = UITapGestureRecognizer()
+    
     let nicknameLabel = ThemeLabel(text: "닉네임", size: 20, color: .themeGray300)
 
     let nicknameTextField = ThemeTextField()
@@ -21,15 +22,13 @@ final class NicknameView: UIView, BaseView {
         button.titleLabel?.font = .themeFont(ofSize: FrameResource.fontSize100)
         button.backgroundColor = .themeColor200
         button.layer.cornerRadius = FrameResource.commonCornerRadius
-
         return button
     }()
 
-    // MARK: - Lifecycle
-
+    // MARK: - Lifecycles
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-
         configure()
         addSubViews()
         makeConstraints()
@@ -41,9 +40,10 @@ final class NicknameView: UIView, BaseView {
     }
 
     // MARK: - Methods
-
+    
     func configure() {
         backgroundColor = .themeBackground
+        self.addGestureRecognizer(tapGesture)
     }
 
     func addSubViews() {
