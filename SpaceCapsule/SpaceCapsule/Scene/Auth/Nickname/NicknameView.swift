@@ -10,6 +10,7 @@ import UIKit
 
 final class NicknameView: UIView, BaseView {
     // MARK: - UIComponents
+    let tapGesture = UITapGestureRecognizer()
     
     let nicknameLabel = ThemeLabel(text: "닉네임", size: 20, color: .themeGray300)
 
@@ -50,6 +51,7 @@ final class NicknameView: UIView, BaseView {
     
     func configure() {
         backgroundColor = .themeBackground
+        self.addGestureRecognizer(tapGesture)
     }
 
     func addSubViews() {
