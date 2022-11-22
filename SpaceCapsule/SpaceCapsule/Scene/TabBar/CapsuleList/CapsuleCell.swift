@@ -11,6 +11,7 @@ import SnapKit
 struct CapsuleCellModel: Hashable {
     let uuid: UUID
     let thumbnailImage: UIImage?
+    let address: String
     let closedDate: String
     let memoryDate: String
     let isOpenable: Bool
@@ -36,6 +37,13 @@ final class CapsuleCell: UICollectionViewCell {
         return view
     }()
     
+    var descriptionLabel = {
+        let label = ThemeLabel(text: "xxxx년 x월 x일\nxx시 xx구에서", size: 16, color: .themeBlack)
+        label.numberOfLines = 2
+        label.textAlignment = .center
+        return label
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview()
@@ -49,7 +57,7 @@ final class CapsuleCell: UICollectionViewCell {
     
     func addSubview() {
         thumbnailImageContainerView.addSubview(thumbnailImageView)
-        [thumbnailImageContainerView].forEach {
+        [thumbnailImageContainerView, descriptionLabel].forEach {
             self.contentView.addSubview($0)
         }
     }
@@ -65,10 +73,16 @@ final class CapsuleCell: UICollectionViewCell {
         thumbnailImageView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
+        
+        descriptionLabel.snp.makeConstraints {
+            $0.top.equalTo(thumbnailImageContainerView.snp.bottom).offset(10)
+            $0.centerX.equalToSuperview()
+        }
     }
-    // TODO: 객체를 인자로 받고 셀을 업데이트 해야 한다.
+
     func configure(capsuleCellModel: CapsuleCellModel) {
         thumbnailImageView.image = capsuleCellModel.thumbnailImage
+        descriptionLabel.text = "\(capsuleCellModel.memoryDate)\n\(capsuleCellModel.address)에서"
         if capsuleCellModel.isOpenable {
             applyUnOpenableEffect(closeDate: capsuleCellModel.closedDate)
         } else {
@@ -110,13 +124,13 @@ final class CapsuleCell: UICollectionViewCell {
     }
     
     private func applyCapsuleDate(closeDate: String) {
-        let dateLabel = ThemeLabel(text: "밀봉시간:\(closeDate)", size: 18, color: .themeGray300)
+        let dateLabel = ThemeLabel(text: "밀봉시간:\(closeDate)", size: 13, color: .themeGray300)
         dateLabel.textAlignment = .center
         thumbnailImageView.addSubview(dateLabel)
         
         dateLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.centerY.equalToSuperview().multipliedBy(1.2)
+            $0.centerY.equalToSuperview().multipliedBy(1.4)
         }
     }
 }
