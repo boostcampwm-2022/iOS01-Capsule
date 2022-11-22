@@ -21,7 +21,6 @@
 		0D707D5129222BEB00380B14 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 0D707D5029222BEB00380B14 /* FirebaseAuth */; };
 		0D707D5329222BEB00380B14 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 0D707D5229222BEB00380B14 /* FirebaseFirestore */; };
 		0D707D5529222BEB00380B14 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 0D707D5429222BEB00380B14 /* FirebaseStorage */; };
-		0D8AD3F129264CA800AA305D /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AD3F029264CA800AA305D /* Key.swift */; };
 		0D90DAEF29238B77000DCC84 /* CapsuleLocateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D90DAEE29238B77000DCC84 /* CapsuleLocateView.swift */; };
 		0D90DAF129238B85000DCC84 /* CapsuleLocateCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D90DAF029238B85000DCC84 /* CapsuleLocateCoordinator.swift */; };
 		0D90DAF329238B90000DCC84 /* CapsuleCloseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D90DAF229238B90000DCC84 /* CapsuleCloseCoordinator.swift */; };
@@ -91,6 +90,9 @@
 		4A05D1052925CF2A00A2EF50 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A05D1042925CF2A00A2EF50 /* NetworkError.swift */; };
 		4A9E91442925D51B00B7CC5C /* KakaoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E91422925D51B00B7CC5C /* KakaoResponse.swift */; };
 		4A9E91452925D51B00B7CC5C /* RequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E91432925D51B00B7CC5C /* RequestType.swift */; };
+		599C19D0292B4AAE00517E93 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C19CF292B4AAD00517E93 /* Key.swift */; };
+		599C19D2292B82D000517E93 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C19D1292B82D000517E93 /* LoadingViewController.swift */; };
+		599C19D4292B838D00517E93 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C19D3292B838D00517E93 /* LoadingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,7 +125,6 @@
 		0D6CA351292216A400E02393 /* SpaceCapsuleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpaceCapsuleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D6CA355292216A400E02393 /* SpaceCapsuleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceCapsuleUITests.swift; sourceTree = "<group>"; };
 		0D6CA357292216A400E02393 /* SpaceCapsuleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceCapsuleUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		0D8AD3F029264CA800AA305D /* Key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
 		0D90DAEE29238B77000DCC84 /* CapsuleLocateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleLocateView.swift; sourceTree = "<group>"; };
 		0D90DAF029238B85000DCC84 /* CapsuleLocateCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleLocateCoordinator.swift; sourceTree = "<group>"; };
 		0D90DAF229238B90000DCC84 /* CapsuleCloseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleCloseCoordinator.swift; sourceTree = "<group>"; };
@@ -198,6 +199,9 @@
 		59427A3929262BB2002657C3 /* FirebaseAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthManager.swift; sourceTree = "<group>"; };
 		59427A3B292656CA002657C3 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		59427A3D29290085002657C3 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		599C19CF292B4AAD00517E93 /* Key.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
+		599C19D1292B82D000517E93 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Loading\U0010ViewController.swift"; sourceTree = "<group>"; };
+		599C19D3292B838D00517E93 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		59F567F72923BE1E00F756B2 /* SpaceCapsule.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SpaceCapsule.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -265,20 +269,20 @@
 		0D6CA333292216A300E02393 /* SpaceCapsule */ = {
 			isa = PBXGroup;
 			children = (
+				599C19CC292B4A6900517E93 /* Private */,
 				59F567F72923BE1E00F756B2 /* SpaceCapsule.entitlements */,
 				4A05D0EB2924C04200A2EF50 /* GoogleService-Info.plist */,
 				0D6CA342292216A400E02393 /* Info.plist */,
 				0D6CA33D292216A400E02393 /* Assets.xcassets */,
+				0D6CA33F292216A400E02393 /* LaunchScreen.storyboard */,
 				288A8E902923242D000229D2 /* App */,
 				288A8E93292328AE000229D2 /* Base */,
 				0D46DEFC2923E4800045400A /* Components */,
 				4A05D1032925CF1800A2EF50 /* Error */,
 				0D90DAF5292397BF000DCC84 /* Extensions */,
 				0D90DAFA29239BD3000DCC84 /* Fonts */,
-				0D6CA33F292216A400E02393 /* LaunchScreen.storyboard */,
 				0DF39274292B209E00FA0153 /* Manager */,
 				4A9E91402925D51B00B7CC5C /* Model */,
-				0D8AD3EF29264C9700AA305D /* Private */,
 				0D9D672F292493F00038F529 /* Resources */,
 				288A8E9429235989000229D2 /* Scene */,
 			);
@@ -300,14 +304,6 @@
 				0D6CA357292216A400E02393 /* SpaceCapsuleUITestsLaunchTests.swift */,
 			);
 			path = SpaceCapsuleUITests;
-			sourceTree = "<group>";
-		};
-		0D8AD3EF29264C9700AA305D /* Private */ = {
-			isa = PBXGroup;
-			children = (
-				0D8AD3F029264CA800AA305D /* Key.swift */,
-			);
-			path = Private;
 			sourceTree = "<group>";
 		};
 		0D90DAF5292397BF000DCC84 /* Extensions */ = {
@@ -399,6 +395,8 @@
 				0D6CA334292216A300E02393 /* AppDelegate.swift */,
 				0D6CA336292216A300E02393 /* SceneDelegate.swift */,
 				288A8F0429236505000229D2 /* AppCoordinator.swift */,
+				599C19D3292B838D00517E93 /* LoadingView.swift */,
+				599C19D1292B82D000517E93 /* LoadingViewController.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -614,6 +612,14 @@
 			path = Response;
 			sourceTree = "<group>";
 		};
+		599C19CC292B4A6900517E93 /* Private */ = {
+			isa = PBXGroup;
+			children = (
+				599C19CF292B4AAD00517E93 /* Key.swift */,
+			);
+			path = Private;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -796,6 +802,7 @@
 				28049CE529236EEC002389BD /* CapsuleAccessCoordinator.swift in Sources */,
 				0D46DEFA2923E1180045400A /* UIFont+.swift in Sources */,
 				288A8EBE29235B97000229D2 /* CapsuleListViewModel.swift in Sources */,
+				599C19D0292B4AAE00517E93 /* Key.swift in Sources */,
 				0DF3927D292B20AE00FA0153 /* FirestoreManager.swift in Sources */,
 				288A8EA929235AFC000229D2 /* NicknameCoordinator.swift in Sources */,
 				288A8EE629235FD5000229D2 /* CapsuleCloseView.swift in Sources */,
@@ -808,7 +815,6 @@
 				0D90DAF929239A81000DCC84 /* UIImage+.swift in Sources */,
 				288A8E9B29235A6E000229D2 /* SignInView.swift in Sources */,
 				288A8ED529235C6F000229D2 /* CapsuleCreateViewController.swift in Sources */,
-				0D8AD3F129264CA800AA305D /* Key.swift in Sources */,
 				288A8EC629235BBD000229D2 /* CapsuleMapViewModel.swift in Sources */,
 				4A9E91452925D51B00B7CC5C /* RequestType.swift in Sources */,
 				288A8EEA29235FF1000229D2 /* CapsuleCloseViewModel.swift in Sources */,
@@ -818,6 +824,7 @@
 				288A8EC429235BB7000229D2 /* CapsuleMapViewController.swift in Sources */,
 				4A9E91442925D51B00B7CC5C /* KakaoResponse.swift in Sources */,
 				288A8EC829235BCE000229D2 /* CapsuleMapCoordinator.swift in Sources */,
+				599C19D2292B82D000517E93 /* LoadingViewController.swift in Sources */,
 				288A8E922923244D000229D2 /* Coordinator.swift in Sources */,
 				288A8EE829235FE2000229D2 /* CapsuleCloseViewController.swift in Sources */,
 				288A8EB429235B62000229D2 /* ProfileViewController.swift in Sources */,
@@ -845,6 +852,7 @@
 				288A8EC029235BA5000229D2 /* CapsuleListCoordinator.swift in Sources */,
 				288A8EB829235B77000229D2 /* ProfileCoordinator.swift in Sources */,
 				28049CED29238216002389BD /* Bindable.swift in Sources */,
+				599C19D4292B838D00517E93 /* LoadingView.swift in Sources */,
 				288A8F03292362CC000229D2 /* CapsuleAddCoordinator.swift in Sources */,
 				0DF3927A292B20AE00FA0153 /* FirebaseAuthManager.swift in Sources */,
 				0DF3927C292B20AE00FA0153 /* UserDefaultsManager.swift in Sources */,
@@ -1025,8 +1033,12 @@
 				DEVELOPMENT_TEAM = 4G6ZD4247R;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SpaceCapsule/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "공간캡슐";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "This application requires location services to work";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "This application requires location services to work";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Location is required to find out where you are";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -1037,9 +1049,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.boostcamp.BoogieSpaceCapsule;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1054,8 +1069,12 @@
 				DEVELOPMENT_TEAM = 4G6ZD4247R;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SpaceCapsule/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "공간캡슐";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "This application requires location services to work";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "This application requires location services to work";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Location is required to find out where you are";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -1066,9 +1085,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.boostcamp.BoogieSpaceCapsule;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

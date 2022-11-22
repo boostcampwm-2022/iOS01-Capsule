@@ -20,7 +20,6 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
         
         view.backgroundColor = .secondarySystemBackground
         
-        
         bind()
         
         // 임시

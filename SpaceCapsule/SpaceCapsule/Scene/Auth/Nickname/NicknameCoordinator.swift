@@ -26,7 +26,7 @@ final class NicknameCoordinator: Coordinator {
     }
 
     func didFinish() {
-        parent?.children.popLast()
+        _ = parent?.children.popLast()
     }
     
     func moveToTabBar() {
