@@ -20,6 +20,7 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view = capsuleListView
+        addSortBarButton()
         configureCollectionView()
         bind()
         fetchCapsules()
@@ -33,6 +34,10 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
         
         capsuleListView.collectionView.rx.itemSelected.bind { indexPath in
            print(indexPath)
+        }.disposed(by: disposeBag)
+        
+        capsuleListView.sortBarButtonItem.rx.tap.bind {
+            // 
         }.disposed(by: disposeBag)
     }
     
@@ -59,6 +64,12 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
         snapshot.appendSections([0])
         snapshot.appendItems(capsuleCellModels, toSection: 0)
         dataSource.apply(snapshot, animatingDifferences: true)
+    }
+    
+    private func addSortBarButton() {
+        let sortBarButton = UIBarButtonItem(customView: capsuleListView.sortBarButtonItem)
+        sortBarButton.customView?.isUserInteractionEnabled = true
+        navigationItem.rightBarButtonItem = sortBarButton
     }
 }
 

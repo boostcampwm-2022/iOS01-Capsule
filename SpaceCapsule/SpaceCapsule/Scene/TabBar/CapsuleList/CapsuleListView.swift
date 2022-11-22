@@ -9,7 +9,17 @@ import UIKit
 import SnapKit
 
 final class CapsuleListView: UIView, BaseView {
-    
+    let sortBarButtonItem = {
+        let button = UIButton()
+        button.titleLabel?.font = .themeFont(ofSize: 15)
+        button.setTitle("가까운 순", for: .normal)
+        button.setTitleColor(.themeBlack, for: .normal)
+        button.setImage(.sort, for: .normal)
+        button.tintColor = .themeBlack
+        button.semanticContentAttribute = .forceRightToLeft
+        return button
+    }()
+
     let collectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
         collectionView.register(CapsuleCell.self, forCellWithReuseIdentifier: CapsuleCell.identifier)
@@ -39,7 +49,7 @@ final class CapsuleListView: UIView, BaseView {
         let collectionViewFlowLayout = UICollectionViewFlowLayout()
         collectionViewFlowLayout.scrollDirection = .vertical
         collectionViewFlowLayout.minimumLineSpacing = 10
-        collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+        collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 10, left: 20, bottom: 0, right: 20)
         collectionView.collectionViewLayout = collectionViewFlowLayout
     }
     

@@ -8,6 +8,7 @@
 import Foundation
 
 enum FrameResource {
+    static let verticalPadding: CGFloat = 10.0
     static let horizontalPadding: CGFloat = 20.0
     static let bottomPadding: CGFloat = 50.0
     
