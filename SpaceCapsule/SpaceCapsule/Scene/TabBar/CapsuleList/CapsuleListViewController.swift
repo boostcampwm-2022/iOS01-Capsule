@@ -37,17 +37,17 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
         snapshot.appendSections([0])
         // viewModel
         let capsuleCellModels: [CapsuleCellModel] = [
-            CapsuleCellModel(uuid: UUID(), thumbnailImage: .logoWithText, closedDate: "123", memoryDate: "11/22/22", isOpenable: true),
-            CapsuleCellModel(uuid: UUID(), thumbnailImage: .logoWithText, closedDate: "234", memoryDate: "11/22/22", isOpenable: true),
-            CapsuleCellModel(uuid: UUID(), thumbnailImage: .logoWithText, closedDate: "345", memoryDate: "11/22/22", isOpenable: false),
-            CapsuleCellModel(uuid: UUID(), thumbnailImage: .logoWithText, closedDate: "456", memoryDate: "11/22/22", isOpenable: true),
-            CapsuleCellModel(uuid: UUID(), thumbnailImage: .logoWithText, closedDate: "567", memoryDate: "11/22/22", isOpenable: false),
-            CapsuleCellModel(uuid: UUID(), thumbnailImage: .logoWithText, closedDate: "678", memoryDate: "11/22/22", isOpenable: true),
-            CapsuleCellModel(uuid: UUID(), thumbnailImage: .logoWithText, closedDate: "789", memoryDate: "11/22/22", isOpenable: false),
-            CapsuleCellModel(uuid: UUID(), thumbnailImage: .logoWithText, closedDate: "809", memoryDate: "11/22/22", isOpenable: false),
-            CapsuleCellModel(uuid: UUID(), thumbnailImage: .logoWithText, closedDate: "90", memoryDate: "11/22/22", isOpenable: true),
-            CapsuleCellModel(uuid: UUID(), thumbnailImage: .logoWithText, closedDate: "0-=", memoryDate: "11/22/22", isOpenable: true),
-            CapsuleCellModel(uuid: UUID(), thumbnailImage: .logoWithText, closedDate: "asfa", memoryDate: "11/22/22", isOpenable: false)
+            CapsuleCellModel(uuid: UUID(), thumbnailImage: .logoWithText, address: "서울시 광진구", closedDate: "123", memoryDate: "11/22/22", isOpenable: true),
+            CapsuleCellModel(uuid: UUID(), thumbnailImage: .logoWithText, address: "서울시 광진구", closedDate: "234", memoryDate: "11/22/22", isOpenable: true),
+            CapsuleCellModel(uuid: UUID(), thumbnailImage: .logoWithText, address: "서울시 광진구", closedDate: "345", memoryDate: "11/22/22", isOpenable: false),
+            CapsuleCellModel(uuid: UUID(), thumbnailImage: .logoWithText, address: "서울시 광진구", closedDate: "456", memoryDate: "11/22/22", isOpenable: true),
+            CapsuleCellModel(uuid: UUID(), thumbnailImage: .logoWithText, address: "서울시 광진구", closedDate: "567", memoryDate: "11/22/22", isOpenable: false),
+            CapsuleCellModel(uuid: UUID(), thumbnailImage: .logoWithText, address: "서울시 광진구", closedDate: "678", memoryDate: "11/22/22", isOpenable: true),
+            CapsuleCellModel(uuid: UUID(), thumbnailImage: .logoWithText, address: "서울시 광진구", closedDate: "789", memoryDate: "11/22/22", isOpenable: false),
+            CapsuleCellModel(uuid: UUID(), thumbnailImage: .logoWithText, address: "서울시 광진구", closedDate: "809", memoryDate: "11/22/22", isOpenable: false),
+            CapsuleCellModel(uuid: UUID(), thumbnailImage: .logoWithText, address: "서울시 광진구", closedDate: "90", memoryDate: "11/22/22", isOpenable: true),
+            CapsuleCellModel(uuid: UUID(), thumbnailImage: .logoWithText, address: "서울시 광진구", closedDate: "0-=", memoryDate: "11/22/22", isOpenable: true),
+            CapsuleCellModel(uuid: UUID(), thumbnailImage: .logoWithText, address: "서울시 광진구", closedDate: "asfa", memoryDate: "11/22/22", isOpenable: false)
         ]
         viewModel?.input.capsuleCellModels.onNext(capsuleCellModels)
     }
@@ -70,6 +70,6 @@ extension CapsuleListViewController: UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewlayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: FrameResource.capsuleCellWidth, height: FrameResource.capsuleCellHeight)
+        return CGSize(width: FrameResource.capsuleCellWidth, height: FrameResource.capsuleCellHeight + FrameResource.bottomPadding)
     }
 }
