@@ -13,15 +13,18 @@ import UIKit
 final class CapsuleLocateViewController: UIViewController, BaseViewController {
     var disposeBag = DisposeBag()
     var viewModel: CapsuleLocateViewModel?
-    let capsuleMapView = CapsuleLocateView()
+
+    let mainView = CapsuleLocateView()
     let locationManager = CLLocationManager()
 
     override func loadView() {
-        view = capsuleMapView
+        view = mainView
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        view.backgroundColor = .white
 
         configure()
         goToCurrentLocation()
@@ -43,9 +46,9 @@ final class CapsuleLocateViewController: UIViewController, BaseViewController {
             .withUnretained(self)
             .bind { owner, isDragging in
                 if isDragging {
-                    owner.capsuleMapView.cursor.backgroundColor = .lightGray
+                    owner.mainView.cursor.backgroundColor = .lightGray
                 } else {
-                    owner.capsuleMapView.cursor.backgroundColor = .green
+                    owner.mainView.cursor.backgroundColor = .green
                 }
             }.disposed(by: disposeBag)
     }
@@ -64,8 +67,8 @@ final class CapsuleLocateViewController: UIViewController, BaseViewController {
     }
 
     private func configureMap() {
-        capsuleMapView.map.delegate = self
-        capsuleMapView.map.mapType = MKMapType.standard
+        mainView.locateMap.delegate = self
+        mainView.locateMap.mapType = MKMapType.standard
     }
 
     private func goToCurrentLocation() {
@@ -75,9 +78,11 @@ final class CapsuleLocateViewController: UIViewController, BaseViewController {
 
         let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
         let region = MKCoordinateRegion(center: center, span: span)
-        capsuleMapView.map.setRegion(region, animated: true)
+        mainView.locateMap.setRegion(region, animated: true)
     }
 }
+
+// MARK: - MKMapView, CLLocationManager
 
 extension CapsuleLocateViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -102,7 +107,7 @@ extension CapsuleLocateViewController: MKMapViewDelegate, CLLocationManagerDeleg
             return nil
         }
 
-        var annotationView = capsuleMapView.map.dequeueReusableAnnotationView(withIdentifier: "spaceCapsule")
+        var annotationView = mainView.locateMap.dequeueReusableAnnotationView(withIdentifier: "spaceCapsule")
         if annotationView == nil {
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "spaceCapsule")
             annotationView?.canShowCallout = true // tap이 가능한지
@@ -134,9 +139,12 @@ extension CapsuleLocateViewController: MKMapViewDelegate, CLLocationManagerDeleg
                         return []
                     }
                 }
-                .subscribe(onNext: {
+                .observe(on: MainScheduler())
+                .subscribe(onNext: { [weak self] in
                     let address = $0.first?.address
-                    print("\(address?.region1DepthName ?? "") \(address?.region2DepthName ?? "")")
+                    self?.mainView.locationLabel.text = address?.addressName
+//                    print(address?.addressName)
+//                    print("\(address?.region1DepthName ?? "") \(address?.region2DepthName ?? "")")
                 })
                 .disposed(by: disposeBag)
         } catch {
@@ -145,11 +153,13 @@ extension CapsuleLocateViewController: MKMapViewDelegate, CLLocationManagerDeleg
     }
 }
 
+// MARK: - Gesture Recognizer
+
 extension CapsuleLocateViewController: UIGestureRecognizerDelegate {
     private func configureGesture() {
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(drag(sender:)))
         panGesture.delegate = self
-        capsuleMapView.map.addGestureRecognizer(panGesture)
+        mainView.locateMap.addGestureRecognizer(panGesture)
     }
 
     @objc func drag(sender: UIPanGestureRecognizer) {

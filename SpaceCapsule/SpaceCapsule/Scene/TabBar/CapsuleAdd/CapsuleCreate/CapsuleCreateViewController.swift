@@ -100,7 +100,6 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
         }
         
         mainView.locationSelectView.eventHandler = { [weak self] in
-            print("hello")
             self?.viewModel?.input.capsuleLocate.onNext(())
         }
     }
