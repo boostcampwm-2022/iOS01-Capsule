@@ -7,18 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0D24C1F9292B84DD00007E75 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D24C1F4292B84DD00007E75 /* FirestoreManager.swift */; };
-		0D24C1FA292B84DD00007E75 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D24C1F5292B84DD00007E75 /* NetworkManager.swift */; };
-		0D24C1FB292B84DD00007E75 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D24C1F6292B84DD00007E75 /* UserDefaultsManager.swift */; };
-		0D24C1FC292B84DD00007E75 /* FirebaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D24C1F7292B84DD00007E75 /* FirebaseAuthManager.swift */; };
-		0D24C1FD292B84DD00007E75 /* KakaoAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D24C1F8292B84DD00007E75 /* KakaoAPIManager.swift */; };
-		0D24C200292B84EB00007E75 /* KingReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D24C1FF292B84EB00007E75 /* KingReceiver.swift */; };
-		0D24C203292B84F700007E75 /* KingReceiver+UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D24C202292B84F600007E75 /* KingReceiver+UIImageView.swift */; };
-		0D24C20A292B850400007E75 /* DiskImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D24C205292B850400007E75 /* DiskImageCache.swift */; };
-		0D24C20B292B850400007E75 /* MemoryImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D24C206292B850400007E75 /* MemoryImageCache.swift */; };
-		0D24C20C292B850400007E75 /* ImageCacheFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D24C207292B850400007E75 /* ImageCacheFactory.swift */; };
-		0D24C20D292B850400007E75 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D24C208292B850400007E75 /* ImageCache.swift */; };
-		0D24C20E292B850400007E75 /* NoneImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D24C209292B850400007E75 /* NoneImageCache.swift */; };
 		0D46DEFA2923E1180045400A /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D46DEF92923E1180045400A /* UIFont+.swift */; };
 		0D6CA335292216A300E02393 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D6CA334292216A300E02393 /* AppDelegate.swift */; };
 		0D6CA337292216A300E02393 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D6CA336292216A300E02393 /* SceneDelegate.swift */; };
@@ -97,9 +85,21 @@
 		4A05D1052925CF2A00A2EF50 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A05D1042925CF2A00A2EF50 /* NetworkError.swift */; };
 		4A9E91442925D51B00B7CC5C /* KakaoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E91422925D51B00B7CC5C /* KakaoResponse.swift */; };
 		4A9E91452925D51B00B7CC5C /* RequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E91432925D51B00B7CC5C /* RequestType.swift */; };
-		599C19D0292B4AAE00517E93 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C19CF292B4AAD00517E93 /* Key.swift */; };
 		599C19D2292B82D000517E93 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C19D1292B82D000517E93 /* LoadingViewController.swift */; };
 		599C19D4292B838D00517E93 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C19D3292B838D00517E93 /* LoadingView.swift */; };
+		599C1A1C292C9C1F00517E93 /* KakaoAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C1A0D292C9C1F00517E93 /* KakaoAPIManager.swift */; };
+		599C1A1D292C9C1F00517E93 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C1A0E292C9C1F00517E93 /* NetworkManager.swift */; };
+		599C1A1E292C9C1F00517E93 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C1A0F292C9C1F00517E93 /* UserDefaultsManager.swift */; };
+		599C1A1F292C9C1F00517E93 /* KingReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C1A11292C9C1F00517E93 /* KingReceiver.swift */; };
+		599C1A20292C9C1F00517E93 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C1A13292C9C1F00517E93 /* ImageCache.swift */; };
+		599C1A21292C9C1F00517E93 /* MemoryImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C1A14292C9C1F00517E93 /* MemoryImageCache.swift */; };
+		599C1A22292C9C1F00517E93 /* NoneImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C1A15292C9C1F00517E93 /* NoneImageCache.swift */; };
+		599C1A23292C9C1F00517E93 /* ImageCacheFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C1A16292C9C1F00517E93 /* ImageCacheFactory.swift */; };
+		599C1A24292C9C1F00517E93 /* DiskImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C1A17292C9C1F00517E93 /* DiskImageCache.swift */; };
+		599C1A25292C9C1F00517E93 /* KingReceiver+UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C1A19292C9C1F00517E93 /* KingReceiver+UIImageView.swift */; };
+		599C1A26292C9C1F00517E93 /* FirebaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C1A1A292C9C1F00517E93 /* FirebaseAuthManager.swift */; };
+		599C1A27292C9C1F00517E93 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C1A1B292C9C1F00517E93 /* FirestoreManager.swift */; };
+		599C1A2A292C9CCD00517E93 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C1A29292C9CCD00517E93 /* Key.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -220,9 +220,21 @@
 		59427A3929262BB2002657C3 /* FirebaseAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthManager.swift; sourceTree = "<group>"; };
 		59427A3B292656CA002657C3 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		59427A3D29290085002657C3 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
-		599C19CF292B4AAD00517E93 /* Key.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
 		599C19D1292B82D000517E93 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Loading\U0010ViewController.swift"; sourceTree = "<group>"; };
 		599C19D3292B838D00517E93 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		599C1A0D292C9C1F00517E93 /* KakaoAPIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KakaoAPIManager.swift; sourceTree = "<group>"; };
+		599C1A0E292C9C1F00517E93 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		599C1A0F292C9C1F00517E93 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		599C1A11292C9C1F00517E93 /* KingReceiver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KingReceiver.swift; sourceTree = "<group>"; };
+		599C1A13292C9C1F00517E93 /* ImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		599C1A14292C9C1F00517E93 /* MemoryImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryImageCache.swift; sourceTree = "<group>"; };
+		599C1A15292C9C1F00517E93 /* NoneImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoneImageCache.swift; sourceTree = "<group>"; };
+		599C1A16292C9C1F00517E93 /* ImageCacheFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCacheFactory.swift; sourceTree = "<group>"; };
+		599C1A17292C9C1F00517E93 /* DiskImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiskImageCache.swift; sourceTree = "<group>"; };
+		599C1A19292C9C1F00517E93 /* KingReceiver+UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KingReceiver+UIImageView.swift"; sourceTree = "<group>"; };
+		599C1A1A292C9C1F00517E93 /* FirebaseAuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseAuthManager.swift; sourceTree = "<group>"; };
+		599C1A1B292C9C1F00517E93 /* FirestoreManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
+		599C1A29292C9CCD00517E93 /* Key.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
 		59F567F72923BE1E00F756B2 /* SpaceCapsule.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SpaceCapsule.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -257,49 +269,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0D24C1F3292B84C800007E75 /* Manager */ = {
-			isa = PBXGroup;
-			children = (
-				0D24C1F7292B84DD00007E75 /* FirebaseAuthManager.swift */,
-				0D24C1F4292B84DD00007E75 /* FirestoreManager.swift */,
-				0D24C1F8292B84DD00007E75 /* KakaoAPIManager.swift */,
-				0D24C1F5292B84DD00007E75 /* NetworkManager.swift */,
-				0D24C1F6292B84DD00007E75 /* UserDefaultsManager.swift */,
-				0D24C1FE292B84DF00007E75 /* KingReceiver */,
-			);
-			path = Manager;
-			sourceTree = "<group>";
-		};
-		0D24C1FE292B84DF00007E75 /* KingReceiver */ = {
-			isa = PBXGroup;
-			children = (
-				0D24C1FF292B84EB00007E75 /* KingReceiver.swift */,
-				0D24C201292B84ED00007E75 /* Extensions */,
-				0D24C204292B84F900007E75 /* ImageCache */,
-			);
-			path = KingReceiver;
-			sourceTree = "<group>";
-		};
-		0D24C201292B84ED00007E75 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				0D24C202292B84F600007E75 /* KingReceiver+UIImageView.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		0D24C204292B84F900007E75 /* ImageCache */ = {
-			isa = PBXGroup;
-			children = (
-				0D24C205292B850400007E75 /* DiskImageCache.swift */,
-				0D24C208292B850400007E75 /* ImageCache.swift */,
-				0D24C207292B850400007E75 /* ImageCacheFactory.swift */,
-				0D24C206292B850400007E75 /* MemoryImageCache.swift */,
-				0D24C209292B850400007E75 /* NoneImageCache.swift */,
-			);
-			path = ImageCache;
-			sourceTree = "<group>";
-		};
 		0D46DEFC2923E4800045400A /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -333,11 +302,11 @@
 		0D6CA333292216A300E02393 /* SpaceCapsule */ = {
 			isa = PBXGroup;
 			children = (
-				599C19CC292B4A6900517E93 /* Private */,
+				599C1A28292C9CA800517E93 /* Key */,
+				599C1A0C292C9C1F00517E93 /* Manager */,
 				59F567F72923BE1E00F756B2 /* SpaceCapsule.entitlements */,
 				4A05D0EB2924C04200A2EF50 /* GoogleService-Info.plist */,
 				0D6CA342292216A400E02393 /* Info.plist */,
-				0D6CA33F292216A400E02393 /* LaunchScreen.storyboard */,
 				0D6CA33D292216A400E02393 /* Assets.xcassets */,
 				0D6CA33F292216A400E02393 /* LaunchScreen.storyboard */,
 				288A8E902923242D000229D2 /* App */,
@@ -346,7 +315,6 @@
 				4A05D1032925CF1800A2EF50 /* Error */,
 				0D90DAF5292397BF000DCC84 /* Extensions */,
 				0D90DAFA29239BD3000DCC84 /* Fonts */,
-				0DF39274292B209E00FA0153 /* Manager */,
 				4A9E91402925D51B00B7CC5C /* Model */,
 				0D9D672F292493F00038F529 /* Resources */,
 				288A8E9429235989000229D2 /* Scene */,
@@ -420,6 +388,18 @@
 				0D071117292A4FEC00068098 /* KingReceiver.swift */,
 				0D07111B292A501200068098 /* ImageCacheFactory.swift */,
 				0D071121292A503600068098 /* DiskImageCache.swift */,
+				0D24C209292B850400007E75 /* NoneImageCache.swift */,
+				0D24C205292B850400007E75 /* DiskImageCache.swift */,
+				0D24C207292B850400007E75 /* ImageCacheFactory.swift */,
+				0D24C1F8292B84DD00007E75 /* KakaoAPIManager.swift */,
+				0D24C1F4292B84DD00007E75 /* FirestoreManager.swift */,
+				0D24C208292B850400007E75 /* ImageCache.swift */,
+				0D24C1FF292B84EB00007E75 /* KingReceiver.swift */,
+				0D24C206292B850400007E75 /* MemoryImageCache.swift */,
+				0D24C1F5292B84DD00007E75 /* NetworkManager.swift */,
+				0D24C1F6292B84DD00007E75 /* UserDefaultsManager.swift */,
+				0D24C202292B84F600007E75 /* KingReceiver+UIImageView.swift */,
+				0D24C1F7292B84DD00007E75 /* FirebaseAuthManager.swift */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -672,12 +652,56 @@
 			path = Response;
 			sourceTree = "<group>";
 		};
-		599C19CC292B4A6900517E93 /* Private */ = {
+		599C1A0C292C9C1F00517E93 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
-				599C19CF292B4AAD00517E93 /* Key.swift */,
+				599C1A0D292C9C1F00517E93 /* KakaoAPIManager.swift */,
+				599C1A0E292C9C1F00517E93 /* NetworkManager.swift */,
+				599C1A0F292C9C1F00517E93 /* UserDefaultsManager.swift */,
+				599C1A10292C9C1F00517E93 /* KingReceiver */,
+				599C1A1A292C9C1F00517E93 /* FirebaseAuthManager.swift */,
+				599C1A1B292C9C1F00517E93 /* FirestoreManager.swift */,
 			);
-			path = Private;
+			name = Manager;
+			path = SpaceCapsule/Manager;
+			sourceTree = SOURCE_ROOT;
+		};
+		599C1A10292C9C1F00517E93 /* KingReceiver */ = {
+			isa = PBXGroup;
+			children = (
+				599C1A11292C9C1F00517E93 /* KingReceiver.swift */,
+				599C1A12292C9C1F00517E93 /* ImageCache */,
+				599C1A18292C9C1F00517E93 /* Extensions */,
+			);
+			path = KingReceiver;
+			sourceTree = "<group>";
+		};
+		599C1A12292C9C1F00517E93 /* ImageCache */ = {
+			isa = PBXGroup;
+			children = (
+				599C1A13292C9C1F00517E93 /* ImageCache.swift */,
+				599C1A14292C9C1F00517E93 /* MemoryImageCache.swift */,
+				599C1A15292C9C1F00517E93 /* NoneImageCache.swift */,
+				599C1A16292C9C1F00517E93 /* ImageCacheFactory.swift */,
+				599C1A17292C9C1F00517E93 /* DiskImageCache.swift */,
+			);
+			path = ImageCache;
+			sourceTree = "<group>";
+		};
+		599C1A18292C9C1F00517E93 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				599C1A19292C9C1F00517E93 /* KingReceiver+UIImageView.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		599C1A28292C9CA800517E93 /* Key */ = {
+			isa = PBXGroup;
+			children = (
+				599C1A29292C9CCD00517E93 /* Key.swift */,
+			);
+			path = Key;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -848,30 +872,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0D24C20E292B850400007E75 /* NoneImageCache.swift in Sources */,
 				288A8ECA29235BDC000229D2 /* HomeView.swift in Sources */,
 				28049CEB29237E96002389BD /* BaseViewModel.swift in Sources */,
 				288A8EFF292360BC000229D2 /* CapsuleDetailCoordinator.swift in Sources */,
-				0D24C20A292B850400007E75 /* DiskImageCache.swift in Sources */,
 				288A8EFB292360A4000229D2 /* CapsuleDetailViewController.swift in Sources */,
 				288A8EF529236086000229D2 /* CapsuleOpenViewModel.swift in Sources */,
 				288A8EA329235ADE000229D2 /* NicknameView.swift in Sources */,
 				288A8EBA29235B86000229D2 /* CapsuleListView.swift in Sources */,
 				288A8ED729235C77000229D2 /* CapsuleCreateViewModel.swift in Sources */,
-				0D24C20C292B850400007E75 /* ImageCacheFactory.swift in Sources */,
 				0D9D672E292486780038F529 /* ThemeLabel.swift in Sources */,
 				288A8EF32923607D000229D2 /* CapsuleOpenViewController.swift in Sources */,
 				288A8EE029235E36000229D2 /* CapsuleLocateViewController.swift in Sources */,
+				599C1A1C292C9C1F00517E93 /* KakaoAPIManager.swift in Sources */,
 				28049CE529236EEC002389BD /* CapsuleAccessCoordinator.swift in Sources */,
 				0D46DEFA2923E1180045400A /* UIFont+.swift in Sources */,
 				288A8EBE29235B97000229D2 /* CapsuleListViewModel.swift in Sources */,
-				599C19D0292B4AAE00517E93 /* Key.swift in Sources */,
-				0DF3927D292B20AE00FA0153 /* FirestoreManager.swift in Sources */,
+				599C1A1D292C9C1F00517E93 /* NetworkManager.swift in Sources */,
 				288A8EA929235AFC000229D2 /* NicknameCoordinator.swift in Sources */,
 				288A8EE629235FD5000229D2 /* CapsuleCloseView.swift in Sources */,
 				0D90DAF7292397CF000DCC84 /* UIColor+.swift in Sources */,
+				599C1A27292C9C1F00517E93 /* FirestoreManager.swift in Sources */,
 				28049CE729237B2B002389BD /* BaseViewController.swift in Sources */,
-				0D24C1FD292B84DD00007E75 /* KakaoAPIManager.swift in Sources */,
 				0D90DAF329238B90000DCC84 /* CapsuleCloseCoordinator.swift in Sources */,
 				288A8ED329235C65000229D2 /* CapsuleCreateView.swift in Sources */,
 				288A8E9D29235A80000229D2 /* SignInViewController.swift in Sources */,
@@ -880,20 +901,20 @@
 				288A8ED529235C6F000229D2 /* CapsuleCreateViewController.swift in Sources */,
 				288A8EC629235BBD000229D2 /* CapsuleMapViewModel.swift in Sources */,
 				4A9E91452925D51B00B7CC5C /* RequestType.swift in Sources */,
-				0D24C1F9292B84DD00007E75 /* FirestoreManager.swift in Sources */,
 				288A8EEA29235FF1000229D2 /* CapsuleCloseViewModel.swift in Sources */,
 				288A8EF92923609C000229D2 /* CapsuleDetailView.swift in Sources */,
-				0D24C20D292B850400007E75 /* ImageCache.swift in Sources */,
+				599C1A26292C9C1F00517E93 /* FirebaseAuthManager.swift in Sources */,
+				599C1A22292C9C1F00517E93 /* NoneImageCache.swift in Sources */,
 				288A8E97292359CF000229D2 /* AuthCoordinator.swift in Sources */,
 				0D9D67312924945D0038F529 /* FrameResource.swift in Sources */,
+				599C1A2A292C9CCD00517E93 /* Key.swift in Sources */,
 				288A8EC429235BB7000229D2 /* CapsuleMapViewController.swift in Sources */,
 				4A9E91442925D51B00B7CC5C /* KakaoResponse.swift in Sources */,
-				0D24C200292B84EB00007E75 /* KingReceiver.swift in Sources */,
+				599C1A1E292C9C1F00517E93 /* UserDefaultsManager.swift in Sources */,
 				288A8EC829235BCE000229D2 /* CapsuleMapCoordinator.swift in Sources */,
 				599C19D2292B82D000517E93 /* LoadingViewController.swift in Sources */,
 				288A8E922923244D000229D2 /* Coordinator.swift in Sources */,
 				288A8EE829235FE2000229D2 /* CapsuleCloseViewController.swift in Sources */,
-				0D24C20B292B850400007E75 /* MemoryImageCache.swift in Sources */,
 				288A8EB429235B62000229D2 /* ProfileViewController.swift in Sources */,
 				0DCB22932924CE58002CB095 /* CustomTabBarController.swift in Sources */,
 				288A8EC229235BAF000229D2 /* CapsuleMapView.swift in Sources */,
@@ -901,34 +922,36 @@
 				288A8ED929235C83000229D2 /* CapsuleCreateCoordinator.swift in Sources */,
 				288A8ECE29235BEF000229D2 /* HomeViewModel.swift in Sources */,
 				28049CE929237BB2002389BD /* BaseView.swift in Sources */,
-				0D24C1FA292B84DD00007E75 /* NetworkManager.swift in Sources */,
 				288A8EFD292360AB000229D2 /* CapsuleDetailViewModel.swift in Sources */,
 				288A8EE229235E3F000229D2 /* CapsuleLocateViewModel.swift in Sources */,
 				288A8EB229235B5A000229D2 /* ProfileView.swift in Sources */,
+				599C1A1F292C9C1F00517E93 /* KingReceiver.swift in Sources */,
 				288A8ED029235BF9000229D2 /* HomeCoordinator.swift in Sources */,
+				599C1A25292C9C1F00517E93 /* KingReceiver+UIImageView.swift in Sources */,
+				599C1A21292C9C1F00517E93 /* MemoryImageCache.swift in Sources */,
 				288A8EA529235AE8000229D2 /* NicknameViewController.swift in Sources */,
 				288A8EF129236075000229D2 /* CapsuleOpenView.swift in Sources */,
+				599C1A23292C9C1F00517E93 /* ImageCacheFactory.swift in Sources */,
 				4A05D1052925CF2A00A2EF50 /* NetworkError.swift in Sources */,
 				288A8E9F29235A91000229D2 /* SignInViewModel.swift in Sources */,
-				0D24C1FB292B84DD00007E75 /* UserDefaultsManager.swift in Sources */,
 				0D90DAF129238B85000DCC84 /* CapsuleLocateCoordinator.swift in Sources */,
 				288A8EA729235AF1000229D2 /* NicknameViewModel.swift in Sources */,
 				288A8ECC29235BE9000229D2 /* HomeViewController.swift in Sources */,
 				288A8EB029235B46000229D2 /* TabBarCoordinator.swift in Sources */,
+				599C1A20292C9C1F00517E93 /* ImageCache.swift in Sources */,
 				288A8EB629235B69000229D2 /* ProfileViewModel.swift in Sources */,
 				0D6CA335292216A300E02393 /* AppDelegate.swift in Sources */,
 				288A8EC029235BA5000229D2 /* CapsuleListCoordinator.swift in Sources */,
-				0D24C203292B84F700007E75 /* KingReceiver+UIImageView.swift in Sources */,
 				288A8EB829235B77000229D2 /* ProfileCoordinator.swift in Sources */,
 				28049CED29238216002389BD /* Bindable.swift in Sources */,
 				599C19D4292B838D00517E93 /* LoadingView.swift in Sources */,
 				288A8F03292362CC000229D2 /* CapsuleAddCoordinator.swift in Sources */,
-				0D24C1FC292B84DD00007E75 /* FirebaseAuthManager.swift in Sources */,
 				288A8EBC29235B8E000229D2 /* CapsuleListViewController.swift in Sources */,
 				288A8F0529236505000229D2 /* AppCoordinator.swift in Sources */,
 				288A8EF72923608F000229D2 /* CapsuleOpenCoordinator.swift in Sources */,
 				0D6CA337292216A300E02393 /* SceneDelegate.swift in Sources */,
 				0D90DAEF29238B77000DCC84 /* CapsuleLocateView.swift in Sources */,
+				599C1A24292C9C1F00517E93 /* DiskImageCache.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
