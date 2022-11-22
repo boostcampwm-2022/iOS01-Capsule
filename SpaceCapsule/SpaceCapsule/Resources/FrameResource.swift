@@ -19,4 +19,8 @@ enum FrameResource {
     static let textFieldHeight: CGFloat = 50.0
     
     static let addCapsuleButtonSize: CGFloat = 50.0
+    
+    static let capsuleThumbnailWidth: CGFloat = 267.0
+    static let capsuleThumbnailHeigth: CGFloat = 440.0
+    static let capsuleThumbnailCornerRadius: CGFloat = 120.0
 }

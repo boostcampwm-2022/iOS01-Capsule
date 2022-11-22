@@ -14,9 +14,15 @@ class CapsuleOpenViewModel: BaseViewModel {
     var coordinator: CapsuleOpenCoordinator?
 
     var input = Input()
+    var output = Output()
 
     struct Input {
         var popViewController = PublishSubject<Void>()
+        var openButtonTapped = PublishSubject<Void>()
+    }
+    
+    struct Output {
+        var isOpenable = PublishSubject<Bool>()
     }
 
     init() {
