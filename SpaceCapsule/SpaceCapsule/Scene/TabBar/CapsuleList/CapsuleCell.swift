@@ -10,8 +10,10 @@ import SnapKit
 
 struct CapsuleCellModel: Hashable {
     let uuid: UUID
-    let imageData: Data
-    let closeDate: String
+    let thumbnailImage: UIImage?
+    let closedDate: String
+    let memoryDate: String
+    let isOpenable: Bool
 }
 
 final class CapsuleCell: UICollectionViewCell {
@@ -19,7 +21,7 @@ final class CapsuleCell: UICollectionViewCell {
     
     var thumbnailImageView = {
         let imageView = UIImageView()
-        imageView.layer.cornerRadius = FrameResource.capsuleThumbnailCornerRadius
+        imageView.layer.cornerRadius = FrameResource.capsuleCellWidth / 2
         imageView.clipsToBounds = true
         imageView.image = UIImage.logoWithBG
         return imageView
@@ -30,7 +32,7 @@ final class CapsuleCell: UICollectionViewCell {
         view.layer.shadowOffset = CGSize(width: 4, height: 4)
         view.layer.shadowRadius = 4
         view.layer.shadowOpacity = 0.5
-        view.layer.cornerRadius = FrameResource.capsuleThumbnailCornerRadius
+        view.layer.cornerRadius = FrameResource.capsuleCellWidth / 2
         return view
     }()
     
@@ -56,8 +58,8 @@ final class CapsuleCell: UICollectionViewCell {
         thumbnailImageContainerView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.centerY.equalToSuperview().multipliedBy(0.8)
-            $0.width.equalTo(FrameResource.capsuleThumbnailWidth)
-            $0.height.equalTo(FrameResource.capsuleThumbnailHeigth)
+            $0.width.equalTo(FrameResource.capsuleCellWidth)
+            $0.height.equalTo(FrameResource.capsuleCellHeight)
         }
         
         thumbnailImageView.snp.makeConstraints {
@@ -65,22 +67,28 @@ final class CapsuleCell: UICollectionViewCell {
         }
     }
     // TODO: 객체를 인자로 받고 셀을 업데이트 해야 한다.
-    func configure() {
-        
+    func configure(capsuleCellModel: CapsuleCellModel) {
+        thumbnailImageView.image = capsuleCellModel.thumbnailImage
+        if capsuleCellModel.isOpenable {
+            applyUnOpenableEffect(closeDate: capsuleCellModel.closedDate)
+        } else {
+            thumbnailImageView.subviews.forEach {
+                $0.removeFromSuperview()
+            }
+        }
     }
     
-    func applyUnOpenableEffect() {
+    func applyUnOpenableEffect(closeDate: String) {
         applyBlurEffect()
         applyLockImage()
-        applyCapsuleDate()
+        applyCapsuleDate(closeDate: closeDate)
     }
     
     private func applyBlurEffect() {
         let blurEffect = UIBlurEffect(style: .light)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.layer.cornerRadius = FrameResource.capsuleThumbnailCornerRadius
+        blurEffectView.layer.cornerRadius = FrameResource.capsuleCellWidth / 2
         blurEffectView.clipsToBounds = true
-    
         thumbnailImageView.addSubview(blurEffectView)
         
         blurEffectView.snp.makeConstraints {
@@ -93,7 +101,6 @@ final class CapsuleCell: UICollectionViewCell {
         let lockImageView = UIImageView()
         lockImageView.image = UIImage(systemName: "lock.fill")
         lockImageView.tintColor = .themeGray300
-        
         thumbnailImageView.addSubview(lockImageView)
         
         lockImageView.snp.makeConstraints {
@@ -102,10 +109,9 @@ final class CapsuleCell: UICollectionViewCell {
         }
     }
     
-    private func applyCapsuleDate() {
-        let dateLabel = ThemeLabel(text: "밀봉시간:xxxx년 x월 x일", size: 18, color: .themeGray300)
+    private func applyCapsuleDate(closeDate: String) {
+        let dateLabel = ThemeLabel(text: "밀봉시간:\(closeDate)", size: 18, color: .themeGray300)
         dateLabel.textAlignment = .center
-        
         thumbnailImageView.addSubview(dateLabel)
         
         dateLabel.snp.makeConstraints {

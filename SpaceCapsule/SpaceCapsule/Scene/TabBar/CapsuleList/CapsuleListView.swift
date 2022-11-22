@@ -11,9 +11,9 @@ import SnapKit
 final class CapsuleListView: UIView, BaseView {
     
     let collectionView = {
-        let collectionView = UICollectionView()
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        // collectionView.regi 아이템 셀
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
+        collectionView.register(CapsuleCell.self, forCellWithReuseIdentifier: CapsuleCell.identifier)
+        collectionView.showsVerticalScrollIndicator = false
         return collectionView
     }()
     
@@ -31,12 +31,15 @@ final class CapsuleListView: UIView, BaseView {
     
     func configure() {
         backgroundColor = .themeBackground
+        collectionView.backgroundColor = .themeBackground
         configureFlowLayout()
     }
     
     func configureFlowLayout() {
         let collectionViewFlowLayout = UICollectionViewFlowLayout()
         collectionViewFlowLayout.scrollDirection = .vertical
+        collectionViewFlowLayout.minimumLineSpacing = 10
+        collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         collectionView.collectionViewLayout = collectionViewFlowLayout
     }
     
