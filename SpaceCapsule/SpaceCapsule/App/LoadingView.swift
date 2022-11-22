@@ -10,7 +10,7 @@ import SnapKit
 
 final class LoadingView: UIView, BaseView {
     // MARK: - UIComponents
-    lazy var logoWithTextView: UIView = {
+    lazy var logoWithTextView: UIImageView = {
         var imageView = UIImageView()
         imageView.image = UIImage.logoWithText
         return imageView
