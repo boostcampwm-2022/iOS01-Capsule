@@ -8,7 +8,9 @@
 import Foundation
 
 enum FrameResource {
-    static let horizontalPadding: CGFloat = 20.0
+    static let logoWithTextSize: CGFloat = 320.0
+    
+    static let horizontalPadding: CGFloat = 30.0
     static let bottomPadding: CGFloat = 50.0
     
     static let commonCornerRadius: CGFloat = 10.0
