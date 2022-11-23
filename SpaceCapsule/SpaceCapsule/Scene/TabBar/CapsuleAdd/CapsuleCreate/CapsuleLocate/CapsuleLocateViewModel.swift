@@ -26,6 +26,13 @@ final class CapsuleLocateViewModel: BaseViewModel {
         var address = PublishSubject<Address>()
         var fullAddress = PublishRelay<String?>()
         var simpleAddress = PublishSubject<String>()
+        var geopoint = PublishSubject<GeoPoint>()
+
+        var locationObservable: Observable<(address: Address, geopoint: GeoPoint)> {
+            Observable.combineLatest(address, geopoint) { address, geopoint in
+                (address: address, geopoint: geopoint)
+            }
+        }
     }
 
     init() {
@@ -40,11 +47,24 @@ final class CapsuleLocateViewModel: BaseViewModel {
             .disposed(by: disposeBag)
 
         input.done
-            .withLatestFrom(output.address)
-            .subscribe(onNext: { [weak self] in
-                self?.coordinator?.done(address: $0)
+            .withLatestFrom(output.locationObservable)
+            .subscribe(onNext: { [weak self] address, geopoint in
+                self?.coordinator?.done(address: address, geopoint: geopoint)
             })
             .disposed(by: disposeBag)
+        
+        output.geopoint
+            .subscribe(onNext: { [weak self] in
+                self?.fetchLocation(x: $0.longitude, y: $0.latitude)
+            })
+            .disposed(by: disposeBag)
+        
+//        input.done
+//            .withLatestFrom(output.address)
+//            .subscribe(onNext: { [weak self] in
+//                self?.coordinator?.done(address: $0)
+//            })
+//            .disposed(by: disposeBag)
     }
 
     func fetchLocation(x: Double, y: Double) {

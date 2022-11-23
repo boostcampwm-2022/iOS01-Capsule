@@ -15,9 +15,6 @@ final class CapsuleAddCoordinator: Coordinator {
 
     var disposeBag = DisposeBag()
 
-    var addressObserver = PublishSubject<Address>()
-    var dateStringObserver = PublishSubject<String>()
-
     init() {
         navigationController = .init()
     }
@@ -32,21 +29,5 @@ final class CapsuleAddCoordinator: Coordinator {
         capsuleCreateCoordinator.start()
 
         children.append(capsuleCreateCoordinator)
-    }
-
-    func showDatePicker() {
-        let datePickerCoordinator = DatePickerCoordinator(navigationController: navigationController)
-        datePickerCoordinator.parent = self
-        datePickerCoordinator.start()
-
-        children.append(datePickerCoordinator)
-    }
-
-    func showCapsuleLocate() {
-        let capsuleLocateCoordinator = CapsuleLocateCoordinator(navigationController: navigationController)
-        capsuleLocateCoordinator.parent = self
-        capsuleLocateCoordinator.start()
-
-        children.append(capsuleLocateCoordinator)
     }
 }

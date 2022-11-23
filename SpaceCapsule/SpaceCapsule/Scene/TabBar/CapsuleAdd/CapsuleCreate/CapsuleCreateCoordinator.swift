@@ -13,6 +13,12 @@ final class CapsuleCreateCoordinator: Coordinator {
     var children: [Coordinator] = []
     var navigationController: UINavigationController?
 
+    var disposeBag = DisposeBag()
+
+    var addressObserver: PublishSubject<Address>?
+    var geopointObserver: PublishSubject<GeoPoint>?
+    var dateStringObserver: BehaviorSubject<String>?
+
     init(navigationController: UINavigationController?) {
         self.navigationController = navigationController
     }
@@ -28,39 +34,27 @@ final class CapsuleCreateCoordinator: Coordinator {
         capsuleCreateViewModel.coordinator = self
         capsuleCreateViewController.viewModel = capsuleCreateViewModel
 
+        addressObserver = capsuleCreateViewModel.input.addressObserver
+        geopointObserver = capsuleCreateViewModel.input.geopointObserver
+        dateStringObserver = capsuleCreateViewModel.input.dateStringObserver
+
         navigationController?.setViewControllers([capsuleCreateViewController], animated: true)
     }
 
     func showDatePicker() {
-        guard let parent = parent as? CapsuleAddCoordinator else {
-            return
-        }
+        let datePickerCoordinator = DatePickerCoordinator(navigationController: navigationController)
+        datePickerCoordinator.parent = self
+        datePickerCoordinator.start()
 
-        parent.showDatePicker()
+        children.append(datePickerCoordinator)
     }
 
     func showCapsuleLocate() {
-        guard let parent = parent as? CapsuleAddCoordinator else {
-            return
-        }
+        let capsuleLocateCoordinator = CapsuleLocateCoordinator(navigationController: navigationController)
+        capsuleLocateCoordinator.parent = self
+        capsuleLocateCoordinator.start()
 
-        parent.showCapsuleLocate()
-    }
-
-    func addressObserver() -> Observable<Address>? {
-        guard let parent = parent as? CapsuleAddCoordinator else {
-            return nil
-        }
-
-        return parent.addressObserver.asObservable()
-    }
-
-    func dateStringObserver() -> Observable<String>? {
-        guard let parent = parent as? CapsuleAddCoordinator else {
-            return nil
-        }
-
-        return parent.dateStringObserver.asObservable()
+        children.append(capsuleLocateCoordinator)
     }
 
     func finish() {

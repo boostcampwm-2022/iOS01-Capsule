@@ -7,23 +7,22 @@
 
 import Foundation
 
-struct Capsule {
-    let uuid: String = UUID().uuidString
+struct Capsule: Codable {
+    var uuid: String = UUID().uuidString
     let userId: String
 
     let images: [String]
     let title: String
     let description: String
 
-//    let address: String
-//    let geoPoint: GeoPoint
-//    let memoryDate: String
-//    let closedDate: String
-
+    let address: String
+    let geopoint: GeoPoint
+    let memoryDate: String
+    var closedDate: String = Date().dateTimeString
     let openCount: Int
 }
 
-struct GeoPoint {
+struct GeoPoint: Codable {
     let latitude: Double
     let longitude: Double
 }

@@ -41,12 +41,13 @@ final class CapsuleLocateCoordinator: Coordinator {
         parent?.children.popLast()
     }
 
-    func done(address: Address) {
-        guard let parent = parent as? CapsuleAddCoordinator else {
+    func done(address: Address, geopoint: GeoPoint) {
+        guard let parent = parent as? CapsuleCreateCoordinator else {
             return
         }
 
-        parent.addressObserver.onNext(address)
+        parent.addressObserver?.onNext(address)
+        parent.geopointObserver?.onNext(geopoint)
         finish()
     }
 }

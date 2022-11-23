@@ -31,12 +31,5 @@ final class DatePickerViewModel: BaseViewModel {
                 self?.coordinator?.done(dateString: $0)
             })
             .disposed(by: disposeBag)
-        
-        
-//        input.dateString
-//            .subscribe(onNext: { [weak self] in
-//                self?.coordinator?.done(dateString: $0)
-//            })
-//            .disposed(by: disposeBag)
     }
 }

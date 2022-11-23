@@ -25,21 +25,31 @@ final class CapsuleCreateViewModel: BaseViewModel {
 
         var tapDatePicker = PublishSubject<Void>()
         var tapCapsuleLocate = PublishSubject<Void>()
-        
+
         var urlDict = BehaviorSubject<[Int: URL]>(value: [:])
         var urlArray = PublishSubject<[String]>()
+
+        var addressObserver = PublishSubject<Address>()
+        var geopointObserver = PublishSubject<GeoPoint>()
+        var dateStringObserver = BehaviorSubject<String>(value: Date().dateString)
 
         var capsuleDataObservable: Observable<Capsule> {
             Observable.combineLatest(
                 title.asObservable(),
                 description.asObservable(),
-                urlArray.asObservable()
-            ) { title, description, urlArray in
+                urlArray.asObservable(),
+                addressObserver.asObservable(),
+                geopointObserver.asObservable(),
+                dateStringObserver.asObservable()
+            ) { title, description, urlArray, address, geopoint, dateString in
                 Capsule(
                     userId: FirebaseAuthManager.shared.currentUser?.uid ?? "",
                     images: urlArray,
                     title: title,
                     description: description,
+                    address: address.addressName,
+                    geopoint: geopoint,
+                    memoryDate: dateString,
                     openCount: 0
                 )
             }
@@ -47,7 +57,6 @@ final class CapsuleCreateViewModel: BaseViewModel {
     }
 
     struct Output {
-        
     }
 
     init() {
@@ -66,8 +75,11 @@ final class CapsuleCreateViewModel: BaseViewModel {
         input.urlArray
             .withLatestFrom(input.capsuleDataObservable)
             .subscribe(onNext: { capsule in
+                
+                print("upload!!!")
+                
                 FirestoreManager.shared.uploadCapsule(uid: FirebaseAuthManager.shared.currentUser!.uid, capsule: capsule) { error in
-                    if let error = error {
+                    if let error {
                         print(" 업로드 안됨 에러남")
                     }
                 }
@@ -76,7 +88,9 @@ final class CapsuleCreateViewModel: BaseViewModel {
 
         input.urlDict
             .subscribe(onNext: { [weak self] dict in
+                print("...")
                 if dict.count == self?.input.imageData.value.compactMap({ $0.data }).count {
+                    print("url dict to array")
                     let sortedArray = dict
                         .sorted(by: { $0.key < $1.key })
                         .compactMap { $0.value.absoluteString }
@@ -90,6 +104,7 @@ final class CapsuleCreateViewModel: BaseViewModel {
             .withLatestFrom(input.imageData)
             .compactMap { $0.compactMap { $0.data } }
             .subscribe(onNext: { data in
+                print("done tapped")
                 data.enumerated().forEach { index, dataValue in
                     FirebaseStorageManager.shared.upload(data: dataValue)
                         .subscribe(onNext: { [weak self] in
@@ -120,8 +135,6 @@ final class CapsuleCreateViewModel: BaseViewModel {
                 self?.coordinator?.showCapsuleLocate()
             })
             .disposed(by: disposeBag)
-
-        // address Observable in coordinator
     }
 
     func addImage(data: Data) {

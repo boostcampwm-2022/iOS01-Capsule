@@ -5,9 +5,9 @@
 //  Created by 장재훈 on 2022/11/21.
 //
 
+import RxSwift
 import SnapKit
 import UIKit
-import RxSwift
 
 final class DatePickerViewController: UIViewController {
     var datePicker: UIDatePicker = UIDatePicker()
@@ -48,13 +48,8 @@ final class DatePickerViewController: UIViewController {
             $0.bottom.equalToSuperview()
         }
     }
-    
+
     @objc private func dateChanged(_ sender: UIDatePicker) {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy년 MM월 dd일"
-        
-        let selectedDate = formatter.string(from: sender.date)
-        
-        viewModel?.input.dateString.onNext(selectedDate)
+        viewModel?.input.dateString.onNext(sender.date.dateString)
     }
 }

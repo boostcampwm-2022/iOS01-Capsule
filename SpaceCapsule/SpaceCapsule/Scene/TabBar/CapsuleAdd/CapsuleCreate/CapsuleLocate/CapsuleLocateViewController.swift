@@ -61,10 +61,10 @@ final class CapsuleLocateViewController: UIViewController, BaseViewController {
                 self?.viewModel?.input.cancel.onNext(())
             })
             .disposed(by: disposeBag)
-        
+
         // 완료
         mainView.doneButton.rx.tap
-            .subscribe(onNext: {[weak self] in
+            .subscribe(onNext: { [weak self] in
                 self?.viewModel?.input.done.onNext(())
             })
             .disposed(by: disposeBag)
@@ -123,9 +123,10 @@ extension CapsuleLocateViewController: MKMapViewDelegate, CLLocationManagerDeleg
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated: Bool) {
         let coordinate = mapView.region.center
 
-        viewModel?.fetchLocation(x: coordinate.longitude, y: coordinate.latitude)
+        viewModel?.output.geopoint.onNext(
+            GeoPoint(latitude: coordinate.latitude, longitude: coordinate.longitude)
+        )
     }
-
 }
 
 // MARK: - Gesture Recognizer

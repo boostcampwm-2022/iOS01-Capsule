@@ -5,9 +5,9 @@
 //  Created by 김민중 on 2022/11/17.
 //
 
+import FirebaseFirestore
 import Foundation
 import RxSwift
-import FirebaseFirestore
 
 struct UserInfo: Codable {
     let email: String?
@@ -17,9 +17,9 @@ struct UserInfo: Codable {
 class FirestoreManager {
     static let shared = FirestoreManager()
     private let database = Firestore.firestore()
-    
+
     private init() { }
-    
+
     func fetchUserInfo(of uid: String) -> Observable<UserInfo> {
         return Observable.create { emitter in
             self.database.collection("users").document(uid).getDocument { documentSnapshot, error in
@@ -42,22 +42,21 @@ class FirestoreManager {
                     emitter.onCompleted()
                 }
             }
-            
+
             return Disposables.create { }
         }
     }
-    
+
     private func dictionaryToObject<T: Decodable>(type: T.Type, dictionary: [String: Any]?) -> T? {
         guard let data = try? JSONSerialization.data(withJSONObject: dictionary as Any) else { return nil }
         guard let object = try? JSONDecoder().decode(T.self, from: data) else { return nil }
         return object
     }
-    
+
     func registerUserInfo(uid: String, userInfo: UserInfo, completion: @escaping (Error?) -> Void) {
-        database.collection("users").document(uid).setData([
-            "email": userInfo.email as Any,
-            "nickname": userInfo.nickname as Any
-        ], merge: true) { error in
+        guard let dict = userInfo.toDict else { return }
+
+        database.collection("users").document(uid).setData(dict, merge: true) { error in
             if let error = error {
                 completion(error)
             } else {
@@ -65,11 +64,11 @@ class FirestoreManager {
             }
         }
     }
-    
+
     func uploadCapsule(uid: String, capsule: Capsule, completion: @escaping (Error?) -> Void) {
         // TODO: users uid capsule 배열에 append 해야함
         database.collection("users").document(uid).setData([
-            "capsule": capsule.uuid
+            "capsule": capsule.uuid,
         ], merge: true) { error in
             if let error = error {
                 completion(error)
@@ -77,17 +76,18 @@ class FirestoreManager {
                 completion(nil)
             }
         }
-        
-        database.collection("capsules").document(capsule.uuid).setData([
-            "title": capsule.title,
-            "description": capsule.description,
-            "imageUrls": capsule.images
-        ]) { error in
-            if let error = error {
-                completion(error)
-            } else {
-                completion(nil)
+
+        guard let dict = capsule.toDict else { return }
+
+        database
+            .collection("capsules")
+            .document(capsule.uuid)
+            .setData(dict) { error in
+                if let error = error {
+                    completion(error)
+                } else {
+                    completion(nil)
+                }
             }
-        }
     }
 }

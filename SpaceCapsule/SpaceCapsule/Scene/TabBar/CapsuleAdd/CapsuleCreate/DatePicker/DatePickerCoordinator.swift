@@ -26,7 +26,7 @@ final class DatePickerCoordinator: Coordinator {
         datePickerViewController.modalPresentationStyle = .pageSheet
 
         if let sheet = datePickerViewController.sheetPresentationController {
-            sheet.detents = [.medium(), .large()]
+            sheet.detents = [.medium()]
             sheet.prefersGrabberVisible = true
         }
 
@@ -34,11 +34,11 @@ final class DatePickerCoordinator: Coordinator {
     }
 
     func done(dateString: String) {
-        guard let parent = parent as? CapsuleAddCoordinator else {
+        guard let parent = parent as? CapsuleCreateCoordinator else {
             return
         }
 
-        parent.dateStringObserver.onNext(dateString)
+        parent.dateStringObserver?.onNext(dateString)
         parent.children.popLast()
     }
 }
