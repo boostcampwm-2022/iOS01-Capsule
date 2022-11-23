@@ -29,13 +29,13 @@ class FirestoreManager {
                     return
                 } else {
                     guard let snapshot = documentSnapshot?.data() else {
-                        print("Error Snapshot: \(AuthError.noSnapshot)")
-                        emitter.onError(AuthError.noSnapshot)
+                        print("Error Snapshot: \(FBAuthError.noSnapshot)")
+                        emitter.onError(FBAuthError.noSnapshot)
                         return
                     }
                     guard let userInfo = self.dictionaryToObject(type: UserInfo.self, dictionary: snapshot) else {
-                        print("Error UserInfo: \(AuthError.decodeError)")
-                        emitter.onError(AuthError.decodeError)
+                        print("Error UserInfo: \(FBAuthError.decodeError)")
+                        emitter.onError(FBAuthError.decodeError)
                         return
                     }
                     emitter.onNext(userInfo)
@@ -58,6 +58,31 @@ class FirestoreManager {
             "email": userInfo.email as Any,
             "nickname": userInfo.nickname as Any
         ], merge: true) { error in
+            if let error = error {
+                completion(error)
+            } else {
+                completion(nil)
+            }
+        }
+    }
+    
+    func uploadCapsule(uid: String, capsule: Capsule, completion: @escaping (Error?) -> Void) {
+        // TODO: users uid capsule 배열에 append 해야함
+        database.collection("users").document(uid).setData([
+            "capsule": capsule.uuid
+        ], merge: true) { error in
+            if let error = error {
+                completion(error)
+            } else {
+                completion(nil)
+            }
+        }
+        
+        database.collection("capsules").document(capsule.uuid).setData([
+            "title": capsule.title,
+            "description": capsule.description,
+            "imageUrls": capsule.images
+        ]) { error in
             if let error = error {
                 completion(error)
             } else {

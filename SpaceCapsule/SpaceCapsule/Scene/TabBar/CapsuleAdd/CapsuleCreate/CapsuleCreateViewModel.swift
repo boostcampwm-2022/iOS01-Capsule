@@ -9,16 +9,6 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-final class Capsule {
-    let title: String
-    let description: String
-
-    init(title: String, description: String) {
-        self.title = title
-        self.description = description
-    }
-}
-
 final class CapsuleCreateViewModel: BaseViewModel {
     var disposeBag = DisposeBag()
     var coordinator: CapsuleCreateCoordinator?
@@ -35,15 +25,29 @@ final class CapsuleCreateViewModel: BaseViewModel {
 
         var tapDatePicker = PublishSubject<Void>()
         var tapCapsuleLocate = PublishSubject<Void>()
+        
+        var urlDict = BehaviorSubject<[Int: URL]>(value: [:])
+        var urlArray = PublishSubject<[String]>()
 
         var capsuleDataObservable: Observable<Capsule> {
-            Observable.combineLatest(title.asObservable(), description.asObservable()) { title, description in
-                Capsule(title: title, description: description)
+            Observable.combineLatest(
+                title.asObservable(),
+                description.asObservable(),
+                urlArray.asObservable()
+            ) { title, description, urlArray in
+                Capsule(
+                    userId: FirebaseAuthManager.shared.currentUser?.uid ?? "",
+                    images: urlArray,
+                    title: title,
+                    description: description,
+                    openCount: 0
+                )
             }
         }
     }
 
     struct Output {
+        
     }
 
     init() {
@@ -59,14 +63,47 @@ final class CapsuleCreateViewModel: BaseViewModel {
             .disposed(by: disposeBag)
 
         // 완료
-        input.done
+        input.urlArray
             .withLatestFrom(input.capsuleDataObservable)
-//            .flatMapLatest { capsule in
-//                capsule
-//            }
-            .subscribe(onNext: { event in
-                print(event.title)
-                print(event.description)
+            .subscribe(onNext: { capsule in
+                FirestoreManager.shared.uploadCapsule(uid: FirebaseAuthManager.shared.currentUser!.uid, capsule: capsule) { error in
+                    if let error = error {
+                        print(" 업로드 안됨 에러남")
+                    }
+                }
+            })
+            .disposed(by: disposeBag)
+
+        input.urlDict
+            .subscribe(onNext: { [weak self] dict in
+                if dict.count == self?.input.imageData.value.compactMap({ $0.data }).count {
+                    let sortedArray = dict
+                        .sorted(by: { $0.key < $1.key })
+                        .compactMap { $0.value.absoluteString }
+
+                    self?.input.urlArray.onNext(sortedArray)
+                }
+            })
+            .disposed(by: disposeBag)
+
+        input.done
+            .withLatestFrom(input.imageData)
+            .compactMap { $0.compactMap { $0.data } }
+            .subscribe(onNext: { data in
+                data.enumerated().forEach { index, dataValue in
+                    FirebaseStorageManager.shared.upload(data: dataValue)
+                        .subscribe(onNext: { [weak self] in
+                            guard let urlDictSubject = self?.input.urlDict,
+                                  var urlDict = try? urlDictSubject.value() else {
+                                return
+                            }
+
+                            urlDict[index] = $0
+                            urlDictSubject.onNext(urlDict)
+
+                        })
+                        .disposed(by: self.disposeBag)
+                }
             })
             .disposed(by: disposeBag)
 
@@ -83,7 +120,7 @@ final class CapsuleCreateViewModel: BaseViewModel {
                 self?.coordinator?.showCapsuleLocate()
             })
             .disposed(by: disposeBag)
-        
+
         // address Observable in coordinator
     }
 

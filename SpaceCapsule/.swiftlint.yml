@@ -59,7 +59,7 @@ nesting:
     warning: 3
 function_body_length:
   warning: 30
-  error: 35
+  error: 150
 
 identifier_name:
     excluded:

@@ -22,6 +22,7 @@
 		0D6CA36B2922197D00E02393 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0D6CA36A2922197D00E02393 /* SnapKit */; };
 		0D706137292C630D0077787E /* DatePickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D706136292C630D0077787E /* DatePickerViewModel.swift */; };
 		0D706139292C63140077787E /* DatePickerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D706138292C63140077787E /* DatePickerCoordinator.swift */; };
+		0D70613E292CD24D0077787E /* FirebaseStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D70613D292CD24D0077787E /* FirebaseStorageManager.swift */; };
 		0D707D5129222BEB00380B14 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 0D707D5029222BEB00380B14 /* FirebaseAuth */; };
 		0D707D5329222BEB00380B14 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 0D707D5229222BEB00380B14 /* FirebaseFirestore */; };
 		0D707D5529222BEB00380B14 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 0D707D5429222BEB00380B14 /* FirebaseStorage */; };
@@ -39,6 +40,9 @@
 		0DA9F6932928E9CB00454932 /* AddImageCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA9F6922928E9CB00454932 /* AddImageCollectionView.swift */; };
 		0DA9F6952928EA4900454932 /* AddImageButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA9F6942928EA4900454932 /* AddImageButtonCell.swift */; };
 		0DA9F6972928EB9000454932 /* UICollectionReusableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA9F6962928EB9000454932 /* UICollectionReusableView+.swift */; };
+		0DB746AA292DE94B005FF249 /* FBAuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB746A9292DE94B005FF249 /* FBAuthError.swift */; };
+		0DB746AC292DE965005FF249 /* FBStorageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB746AB292DE965005FF249 /* FBStorageError.swift */; };
+		0DB746AE292DF8F6005FF249 /* Capsule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB746AD292DF8F6005FF249 /* Capsule.swift */; };
 		0DCB22932924CE58002CB095 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCB22922924CE58002CB095 /* CustomTabBarController.swift */; };
 		0DE786E1292BBDEC007EF260 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE786E0292BBDEC007EF260 /* DatePickerViewController.swift */; };
 		28049CE529236EEC002389BD /* CapsuleAccessCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28049CE429236EEC002389BD /* CapsuleAccessCoordinator.swift */; };
@@ -154,19 +158,20 @@
 		0D46DEF92923E1180045400A /* UIFont+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
 		0D4C11362927489D00B1C2B6 /* UIViewPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewPreview.swift; sourceTree = "<group>"; };
 		0D4C11382927495900B1C2B6 /* UIViewControllerPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerPreview.swift; sourceTree = "<group>"; };
-		0D6CA331292216A300E02393 /* SpaceCapsule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceCapsule.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D6CA334292216A300E02393 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0D6CA336292216A300E02393 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		0D6CA33D292216A400E02393 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0D6CA340292216A400E02393 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0D6CA342292216A400E02393 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0D6CA347292216A400E02393 /* SpaceCapsuleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpaceCapsuleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D6CA34B292216A400E02393 /* SpaceCapsuleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceCapsuleTests.swift; sourceTree = "<group>"; };
-		0D6CA351292216A400E02393 /* SpaceCapsuleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpaceCapsuleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D6CA355292216A400E02393 /* SpaceCapsuleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceCapsuleUITests.swift; sourceTree = "<group>"; };
 		0D6CA357292216A400E02393 /* SpaceCapsuleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceCapsuleUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		0D706136292C630D0077787E /* DatePickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewModel.swift; sourceTree = "<group>"; };
 		0D706138292C63140077787E /* DatePickerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerCoordinator.swift; sourceTree = "<group>"; };
+		0D70613D292CD24D0077787E /* FirebaseStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorageManager.swift; sourceTree = "<group>"; };
+		0D706142292CF5050077787E /* SpaceCapsule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceCapsule.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0D706143292CF5050077787E /* SpaceCapsuleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpaceCapsuleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0D706144292CF5050077787E /* SpaceCapsuleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpaceCapsuleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D77D7C8292B5D490038D054 /* SelectButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectButton.swift; sourceTree = "<group>"; };
 		0D90DAEE29238B77000DCC84 /* CapsuleLocateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleLocateView.swift; sourceTree = "<group>"; };
 		0D90DAF029238B85000DCC84 /* CapsuleLocateCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleLocateCoordinator.swift; sourceTree = "<group>"; };
@@ -181,6 +186,9 @@
 		0DA9F6922928E9CB00454932 /* AddImageCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddImageCollectionView.swift; sourceTree = "<group>"; };
 		0DA9F6942928EA4900454932 /* AddImageButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddImageButtonCell.swift; sourceTree = "<group>"; };
 		0DA9F6962928EB9000454932 /* UICollectionReusableView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionReusableView+.swift"; sourceTree = "<group>"; };
+		0DB746A9292DE94B005FF249 /* FBAuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBAuthError.swift; sourceTree = "<group>"; };
+		0DB746AB292DE965005FF249 /* FBStorageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBStorageError.swift; sourceTree = "<group>"; };
+		0DB746AD292DF8F6005FF249 /* Capsule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Capsule.swift; sourceTree = "<group>"; };
 		0DCB22922924CE58002CB095 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		0DE786E0292BBDEC007EF260 /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
 		28049CE429236EEC002389BD /* CapsuleAccessCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleAccessCoordinator.swift; sourceTree = "<group>"; };
@@ -328,41 +336,33 @@
 			children = (
 				599C1A2B292C9F5B00517E93 /* .swiftlint.yml */,
 				0D6CA333292216A300E02393 /* SpaceCapsule */,
-				0D6CA332292216A300E02393 /* Products */,
 				0D6CA34A292216A400E02393 /* SpaceCapsuleTests */,
 				0D6CA354292216A400E02393 /* SpaceCapsuleUITests */,
 				0DF3926E292B201600FA0153 /* Recovered References */,
+				0D706142292CF5050077787E /* SpaceCapsule.app */,
+				0D706143292CF5050077787E /* SpaceCapsuleTests.xctest */,
+				0D706144292CF5050077787E /* SpaceCapsuleUITests.xctest */,
 			);
-			sourceTree = "<group>";
-		};
-		0D6CA332292216A300E02393 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				0D6CA331292216A300E02393 /* SpaceCapsule.app */,
-				0D6CA347292216A400E02393 /* SpaceCapsuleTests.xctest */,
-				0D6CA351292216A400E02393 /* SpaceCapsuleUITests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		0D6CA333292216A300E02393 /* SpaceCapsule */ = {
 			isa = PBXGroup;
 			children = (
-				599C1A35292CC99900517E93 /* Manager */,
-				599C1A32292CC92300517E93 /* Key */,
 				59F567F72923BE1E00F756B2 /* SpaceCapsule.entitlements */,
 				4A05D0EB2924C04200A2EF50 /* GoogleService-Info.plist */,
 				0D6CA342292216A400E02393 /* Info.plist */,
 				0D6CA33D292216A400E02393 /* Assets.xcassets */,
-				0D6CA33F292216A400E02393 /* LaunchScreen.storyboard */,
 				288A8E902923242D000229D2 /* App */,
 				288A8E93292328AE000229D2 /* Base */,
 				0D46DEFC2923E4800045400A /* Components */,
 				4A05D1032925CF1800A2EF50 /* Error */,
 				0D90DAF5292397BF000DCC84 /* Extensions */,
 				0D90DAFA29239BD3000DCC84 /* Fonts */,
+				0D6CA33F292216A400E02393 /* LaunchScreen.storyboard */,
+				599C1A35292CC99900517E93 /* Manager */,
 				4A9E91402925D51B00B7CC5C /* Model */,
 				0D4C11352927489200B1C2B6 /* Preview */,
+				599C1A32292CC92300517E93 /* Private */,
 				0D9D672F292493F00038F529 /* Resources */,
 				288A8E9429235989000229D2 /* Scene */,
 			);
@@ -394,6 +394,16 @@
 				0D706138292C63140077787E /* DatePickerCoordinator.swift */,
 			);
 			path = DatePicker;
+			sourceTree = "<group>";
+		};
+		0D70613C292CD23A0077787E /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				599C1A43292CC99900517E93 /* FirebaseAuthManager.swift */,
+				599C1A44292CC99900517E93 /* FirestoreManager.swift */,
+				0D70613D292CD24D0077787E /* FirebaseStorageManager.swift */,
+			);
+			path = Firebase;
 			sourceTree = "<group>";
 		};
 		0D90DAF5292397BF000DCC84 /* Extensions */ = {
@@ -715,6 +725,8 @@
 			isa = PBXGroup;
 			children = (
 				4A05D1042925CF2A00A2EF50 /* NetworkError.swift */,
+				0DB746A9292DE94B005FF249 /* FBAuthError.swift */,
+				0DB746AB292DE965005FF249 /* FBStorageError.swift */,
 			);
 			path = Error;
 			sourceTree = "<group>";
@@ -724,6 +736,7 @@
 			children = (
 				4A9E91412925D51B00B7CC5C /* Response */,
 				4A9E91432925D51B00B7CC5C /* RequestType.swift */,
+				0DB746AD292DF8F6005FF249 /* Capsule.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -736,12 +749,12 @@
 			path = Response;
 			sourceTree = "<group>";
 		};
-		599C1A32292CC92300517E93 /* Key */ = {
+		599C1A32292CC92300517E93 /* Private */ = {
 			isa = PBXGroup;
 			children = (
 				599C1A33292CC94F00517E93 /* Key.swift */,
 			);
-			path = Key;
+			path = Private;
 			sourceTree = "<group>";
 		};
 		599C1A35292CC99900517E93 /* Manager */ = {
@@ -750,9 +763,8 @@
 				599C1A36292CC99900517E93 /* KakaoAPIManager.swift */,
 				599C1A37292CC99900517E93 /* NetworkManager.swift */,
 				599C1A38292CC99900517E93 /* UserDefaultsManager.swift */,
+				0D70613C292CD23A0077787E /* Firebase */,
 				599C1A39292CC99900517E93 /* KingReceiver */,
-				599C1A43292CC99900517E93 /* FirebaseAuthManager.swift */,
-				599C1A44292CC99900517E93 /* FirestoreManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -813,7 +825,7 @@
 				0D707D5429222BEB00380B14 /* FirebaseStorage */,
 			);
 			productName = SpaceCapsule;
-			productReference = 0D6CA331292216A300E02393 /* SpaceCapsule.app */;
+			productReference = 0D706142292CF5050077787E /* SpaceCapsule.app */;
 			productType = "com.apple.product-type.application";
 		};
 		0D6CA346292216A400E02393 /* SpaceCapsuleTests */ = {
@@ -831,7 +843,7 @@
 			);
 			name = SpaceCapsuleTests;
 			productName = SpaceCapsuleTests;
-			productReference = 0D6CA347292216A400E02393 /* SpaceCapsuleTests.xctest */;
+			productReference = 0D706143292CF5050077787E /* SpaceCapsuleTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		0D6CA350292216A400E02393 /* SpaceCapsuleUITests */ = {
@@ -849,7 +861,7 @@
 			);
 			name = SpaceCapsuleUITests;
 			productName = SpaceCapsuleUITests;
-			productReference = 0D6CA351292216A400E02393 /* SpaceCapsuleUITests.xctest */;
+			productReference = 0D706144292CF5050077787E /* SpaceCapsuleUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -889,7 +901,7 @@
 				0D6CA3692922197D00E02393 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				0D707D4F29222BEB00380B14 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
-			productRefGroup = 0D6CA332292216A300E02393 /* Products */;
+			productRefGroup = 0D6CA328292216A300E02393;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -963,8 +975,10 @@
 				288A8EFF292360BC000229D2 /* CapsuleDetailCoordinator.swift in Sources */,
 				288A8EFB292360A4000229D2 /* CapsuleDetailViewController.swift in Sources */,
 				288A8EF529236086000229D2 /* CapsuleOpenViewModel.swift in Sources */,
+				0DB746AC292DE965005FF249 /* FBStorageError.swift in Sources */,
 				288A8EA329235ADE000229D2 /* NicknameView.swift in Sources */,
 				0DA9F6952928EA4900454932 /* AddImageButtonCell.swift in Sources */,
+				0D70613E292CD24D0077787E /* FirebaseStorageManager.swift in Sources */,
 				288A8EBA29235B86000229D2 /* CapsuleListView.swift in Sources */,
 				288A8ED729235C77000229D2 /* CapsuleCreateViewModel.swift in Sources */,
 				0D9D672E292486780038F529 /* ThemeLabel.swift in Sources */,
@@ -998,7 +1012,9 @@
 				0D9D67312924945D0038F529 /* FrameResource.swift in Sources */,
 				288A8EC429235BB7000229D2 /* CapsuleMapViewController.swift in Sources */,
 				4A9E91442925D51B00B7CC5C /* KakaoResponse.swift in Sources */,
+				0DB746AA292DE94B005FF249 /* FBAuthError.swift in Sources */,
 				599C1A34292CC95000517E93 /* Key.swift in Sources */,
+				0DB746AE292DF8F6005FF249 /* Capsule.swift in Sources */,
 				288A8EC829235BCE000229D2 /* CapsuleMapCoordinator.swift in Sources */,
 				599C19D2292B82D000517E93 /* LoadingViewController.swift in Sources */,
 				599C1A4A292CC99A00517E93 /* MemoryImageCache.swift in Sources */,

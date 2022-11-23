@@ -13,7 +13,7 @@ enum AuthFlow {
     case nicknameFlow
 }
 
-enum AuthError: LocalizedError {
+enum FirebaseAuthError: LocalizedError {
     case noSnapshot
     case decodeError
     
