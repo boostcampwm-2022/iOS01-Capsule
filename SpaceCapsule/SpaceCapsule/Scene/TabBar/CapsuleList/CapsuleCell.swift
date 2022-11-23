@@ -46,7 +46,7 @@ final class CapsuleCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addSubview()
+        addSubviews()
         makeConstraints()
     }
     
@@ -55,7 +55,7 @@ final class CapsuleCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func addSubview() {
+    func addSubviews() {
         thumbnailImageContainerView.addSubview(thumbnailImageView)
         [thumbnailImageContainerView, descriptionLabel].forEach {
             self.contentView.addSubview($0)

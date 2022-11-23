@@ -22,8 +22,29 @@ final class SortPolicySelectionCoordinator: Coordinator {
 
         sortPolicySelectionViewModel.coordinator = self
         sortPolicySelectionViewController.viewModel = sortPolicySelectionViewModel
+        sortPolicySelectionViewController.modalPresentationStyle = .pageSheet
 
-        navigationController?.setViewControllers([sortPolicySelectionViewController], animated: true)
+        if let sheet = sortPolicySelectionViewController.sheetPresentationController {
+            
+            sheet.detents = [
+                .custom { _ in
+                    return 200
+                }
+            ]
+            
+            sheet.prefersGrabberVisible = true
+        }
+
+        navigationController?.present(sortPolicySelectionViewController, animated: true)
+    }
+
+    func done(dateString: String) {
+        guard let parent = parent as? CapsuleListCoordinator else {
+            return
+        }
+
+        // parent.dateStringObserver.onNext(dateString)
+        parent.children.popLast()
     }
 
 }

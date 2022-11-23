@@ -11,11 +11,12 @@ import UIKit
 final class SortPolicySelectionViewController: UIViewController, BaseViewController {
     var disposeBag = DisposeBag()
     var viewModel: SortPolicySelectionViewModel?
-    var dataSource: [String] = ["1", "2", "3"]
+    var dataSource: [SortPolicy] = [.nearest, .furthest, .latest, .oldest]
     let cellIdentifier: String = "cell"
     let tableView = {
         let tableView = UITableView()
         tableView.backgroundColor = .white
+        tableView.separatorStyle = .none
         return tableView
     }()
     
@@ -30,23 +31,29 @@ final class SortPolicySelectionViewController: UIViewController, BaseViewControl
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureSheet()
-        view = tableView
-        tableView.delegate = self
-        tableView.dataSource = self
+        configure()
+        addSubViews()
+        makeConstraints()
+        
         bind()
     }
+    private func configure() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(SortPolicyCell.self, forCellReuseIdentifier: SortPolicyCell.identifier)
+        tableView.register(SortPolicyHeaderView.self, forHeaderFooterViewReuseIdentifier: SortPolicyHeaderView.identifier)
+    }
     
-    func bind() {}
-    private func configureSheet() {
-        if let sheet = sheetPresentationController {
-            sheet.detents = [.medium(), .large()]
-            sheet.selectedDetentIdentifier = .medium
-            sheet.largestUndimmedDetentIdentifier = .medium
-            sheet.prefersScrollingExpandsWhenScrolledToEdge = false
-            sheet.prefersGrabberVisible = true
+    private func addSubViews() {
+        view.addSubview(tableView)
+    }
+    
+    private func makeConstraints() {
+        tableView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
         }
     }
+    func bind() {}
 }
 
 extension SortPolicySelectionViewController: UITableViewDelegate, UITableViewDataSource {
@@ -55,9 +62,23 @@ extension SortPolicySelectionViewController: UITableViewDelegate, UITableViewDat
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-        cell.textLabel?.text = dataSource[indexPath.row]
-
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: SortPolicyCell.identifier, for: indexPath) as? SortPolicyCell else {
+            return UITableViewCell()
+        }
+        cell.configure(sortPolicy: dataSource[indexPath.row])
+        cell.selectionStyle = .none
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 30
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: SortPolicyHeaderView.identifier) else {
+            return UIView()
+        }
+        return header
+    }
+    
 }
