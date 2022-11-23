@@ -51,6 +51,4 @@ final class SortPolicyHeaderView: UITableViewHeaderFooterView {
         }
     }
 
-  
-    
 }
