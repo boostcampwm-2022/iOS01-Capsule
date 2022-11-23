@@ -37,7 +37,7 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
         }.disposed(by: disposeBag)
         
         capsuleListView.sortBarButtonItem.rx.tap.bind {
-            // 
+            self.viewModel?.coordinator?.showSortPolicySelection()
         }.disposed(by: disposeBag)
     }
     

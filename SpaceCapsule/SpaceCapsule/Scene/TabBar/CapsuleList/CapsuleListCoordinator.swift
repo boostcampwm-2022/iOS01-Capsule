@@ -40,4 +40,17 @@ final class CapsuleListCoordinator: Coordinator {
             parent.tabBarWillHide(true)
         }
     }
+    
+    func showSortPolicySelection() {
+        let sortPolicySelectionCoordinator = SortPolicySelectionCoordinator(navigationController: navigationController)
+        
+        sortPolicySelectionCoordinator.parent = parent
+        sortPolicySelectionCoordinator.start()
+        
+        children.append(sortPolicySelectionCoordinator)
+        
+        if let parent = parent as? TabBarCoordinator {
+            parent.tabBarWillHide(true)
+        }
+    }
 }
