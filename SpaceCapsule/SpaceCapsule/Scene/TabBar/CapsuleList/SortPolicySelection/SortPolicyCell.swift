@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 enum SortPolicy: String {
-    case nearest = "가까운 순(기본)"
+    case nearest = "가까운 순"
     case furthest = "멀리 있는 순"
     case latest = "최신 순"
     case oldest = "오래된 순"
@@ -20,6 +20,7 @@ final class SortPolicyCell: UITableViewCell {
     
     var descriptionLabel = {
         let label = ThemeLabel(text: "가까운 순(기본)", size: 24, color: .themeBlack)
+        label.isUserInteractionEnabled = true
         return label
     }()
     
@@ -51,4 +52,12 @@ final class SortPolicyCell: UITableViewCell {
         descriptionLabel.text = sortPolicy.rawValue
     }
     
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        if selected {
+            descriptionLabel.textColor = .themeColor300
+        } else {
+            descriptionLabel.textColor = .themeBlack
+        }
+    }
 }

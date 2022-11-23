@@ -23,26 +23,44 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
         addSortBarButton()
         configureCollectionView()
         bind()
+        viewModel?.input.sortPolicy.onNext(.nearest)
         fetchCapsules()
     }
     
     func bind() {
         guard let viewModel else {return}
-        viewModel.input.capsuleCellModels.bind { capsuleCellModels in
-            self.applySnapshot(capsuleCellModels: capsuleCellModels)
-        }.disposed(by: disposeBag)
+        viewModel.input.capsuleCellModels
+            .withUnretained(self)
+            .bind { weakSelf, capsuleCellModels in
+                weakSelf.applySnapshot(capsuleCellModels: capsuleCellModels)
+            }
+            .disposed(by: disposeBag)
         
-        capsuleListView.collectionView.rx.itemSelected.bind { indexPath in
-           print(indexPath)
-        }.disposed(by: disposeBag)
+        viewModel.input.sortPolicy
+            .withUnretained(self)
+            .bind { weakSelf, sortPolicy in
+                print("capsule List should be sorted by", sortPolicy)
+            }
+            .disposed(by: disposeBag)
         
-        capsuleListView.sortBarButtonItem.rx.tap.bind {
-            self.viewModel?.coordinator?.showSortPolicySelection()
-        }.disposed(by: disposeBag)
+        capsuleListView.collectionView.rx.itemSelected
+            .withUnretained(self)
+            .bind { weakSelf, indexPath in
+                print(indexPath)
+            }
+            .disposed(by: disposeBag)
+        
+        capsuleListView.sortBarButtonItem.rx.tap
+            .withLatestFrom(viewModel.input.sortPolicy)
+            .withUnretained(self)
+            .bind { weakSelf, sortPolicy in
+                weakSelf.viewModel?.coordinator?.showSortPolicySelection(sortPolicy: sortPolicy)
+            }
+            .disposed(by: disposeBag)
+        
     }
     
     private func fetchCapsules() {
-        // viewModel
         let capsuleCellModels: [CapsuleCellModel] = [
             CapsuleCellModel(uuid: UUID(), thumbnailImage: .logoWithText, address: "서울시 광진구", closedDate: "123", memoryDate: "1", isOpenable: true),
             CapsuleCellModel(uuid: UUID(), thumbnailImage: .logoWithText, address: "서울시 광진구", closedDate: "234", memoryDate: "2", isOpenable: true),

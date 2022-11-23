@@ -12,7 +12,7 @@ final class CapsuleListView: UIView, BaseView {
     let sortBarButtonItem = {
         let button = UIButton()
         button.titleLabel?.font = .themeFont(ofSize: 15)
-        button.setTitle("가까운 순", for: .normal)
+        button.setTitle(SortPolicy.nearest.rawValue, for: .normal)
         button.setTitleColor(.themeBlack, for: .normal)
         button.setImage(.sort, for: .normal)
         button.tintColor = .themeBlack

@@ -17,13 +17,13 @@ final class CapsuleListViewModel: BaseViewModel {
 
     struct Input {
         var capsuleCellModels = PublishSubject<[CapsuleCellModel]>()
+        var sortPolicy = PublishSubject<SortPolicy>()
     }
 
     init() {
         bind()
     }
 
-    private func bind() {
-    }
+    private func bind() {}
     
 }

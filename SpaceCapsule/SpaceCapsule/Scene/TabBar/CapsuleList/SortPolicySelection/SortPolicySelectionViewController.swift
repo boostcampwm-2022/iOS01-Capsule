@@ -6,6 +6,7 @@
 //
 
 import RxSwift
+import RxCocoa
 import UIKit
 
 final class SortPolicySelectionViewController: UIViewController, BaseViewController {
@@ -13,6 +14,8 @@ final class SortPolicySelectionViewController: UIViewController, BaseViewControl
     var viewModel: SortPolicySelectionViewModel?
     var dataSource: [SortPolicy] = [.nearest, .furthest, .latest, .oldest]
     let cellIdentifier: String = "cell"
+    var lastSortPolicy: SortPolicy = .nearest
+    
     let tableView = {
         let tableView = UITableView()
         tableView.backgroundColor = .white
@@ -20,8 +23,10 @@ final class SortPolicySelectionViewController: UIViewController, BaseViewControl
         return tableView
     }()
     
-    init() {
+    init(lastSortPolicy: SortPolicy) {
         super.init(nibName: nil, bundle: nil)
+        print(lastSortPolicy)
+        self.lastSortPolicy = lastSortPolicy
     }
     
     @available(*, unavailable)
@@ -34,9 +39,15 @@ final class SortPolicySelectionViewController: UIViewController, BaseViewControl
         configure()
         addSubViews()
         makeConstraints()
-        
         bind()
+        viewModel?.input.sortPolicy.onNext(lastSortPolicy)
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        viewModel?.input.viewWillDisappear.onNext(())
+        super.viewWillDisappear(animated)
+    }
+    
     private func configure() {
         tableView.delegate = self
         tableView.dataSource = self
@@ -53,7 +64,24 @@ final class SortPolicySelectionViewController: UIViewController, BaseViewControl
             $0.edges.equalToSuperview()
         }
     }
-    func bind() {}
+    
+    func bind() {
+        viewModel?.input.sortPolicy
+            .withUnretained(self)
+            .bind(onNext: { weakSelf, sortPolicy in
+                if let row = weakSelf.dataSource.firstIndex(of: sortPolicy) {
+                    weakSelf.tableView.selectRow(at: [0, row], animated: true, scrollPosition: .none)
+                }
+            })
+            .disposed(by: disposeBag)
+        tableView.rx.itemSelected
+            .withUnretained(self)
+            .bind { weakSelf, indexPath in
+                let sortPolicy = weakSelf.dataSource[indexPath.row]
+                weakSelf.viewModel?.input.sortPolicy.onNext(sortPolicy)
+            }
+            .disposed(by: disposeBag)
+    }
 }
 
 extension SortPolicySelectionViewController: UITableViewDelegate, UITableViewDataSource {
@@ -71,7 +99,7 @@ extension SortPolicySelectionViewController: UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 30
+        return 40
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -80,5 +108,4 @@ extension SortPolicySelectionViewController: UITableViewDelegate, UITableViewDat
         }
         return header
     }
-    
 }
