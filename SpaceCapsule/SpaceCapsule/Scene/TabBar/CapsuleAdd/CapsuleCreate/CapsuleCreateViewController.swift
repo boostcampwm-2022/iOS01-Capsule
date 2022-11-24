@@ -60,23 +60,26 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
     }
 
     func bind() {
-        guard let viewModel else { return }
-
         closeButton.rx.tap
-            .bind(to: viewModel.input.close)
+            .withUnretained(self)
+            .subscribe(onNext: { weakSelf, event in
+                weakSelf.viewModel?.input.close.onNext(event)
+            })
             .disposed(by: disposeBag)
 
         doneButton.rx.tap
             .asObservable()
-            .subscribe(viewModel.input.done)
-            .disposed(by: disposeBag)
-
-        viewModel.input.imageData
-            .subscribe(onNext: { [weak self] items in
-                self?.mainView.imageCollectionView.applySnapshot(items: items)
+            .withUnretained(self)
+            .subscribe(onNext: { weakSelf, event in
+                weakSelf.viewModel?.input.done.onNext(event)
             })
             .disposed(by: disposeBag)
 
+        bindView()
+        bindViewModel()
+    }
+
+    private func bindView() {
         mainView.imageCollectionView.rx.itemSelected
             .subscribe(onNext: { [weak self] indexPath in
                 if self?.mainView.imageCollectionView.cellForItem(at: indexPath) is AddImageButtonCell,
@@ -88,12 +91,18 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
 
         mainView.titleTextField.rx.text
             .orEmpty
-            .bind(to: viewModel.input.title)
+            .withUnretained(self)
+            .bind(onNext: { weakSelf, title in
+                weakSelf.viewModel?.input.title.onNext(title)
+            })
             .disposed(by: disposeBag)
 
         mainView.descriptionTextView.rx.text
             .orEmpty
-            .bind(to: viewModel.input.description)
+            .withUnretained(self)
+            .bind(onNext: { weakSelf, description in
+                weakSelf.viewModel?.input.description.onNext(description)
+            })
             .disposed(by: disposeBag)
 
         mainView.dateSelectView.eventHandler = { [weak self] in
@@ -105,6 +114,28 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
             self?.view.endEditing(true)
             self?.viewModel?.input.tapCapsuleLocate.onNext(())
         }
+    }
+
+    private func bindViewModel() {
+        viewModel?.input.imageData
+            .subscribe(onNext: { [weak self] items in
+                self?.mainView.imageCollectionView.applySnapshot(items: items)
+            })
+            .disposed(by: disposeBag)
+
+        viewModel?.input.addressObserver
+            .withUnretained(self)
+            .subscribe(onNext: { weakSelf, address in
+                weakSelf.mainView.locationSelectView.setText(address.addressName)
+            })
+            .disposed(by: disposeBag)
+
+        viewModel?.input.dateStringObserver
+            .withUnretained(self)
+            .subscribe(onNext: { weakSelf, dateString in
+                weakSelf.mainView.dateSelectView.setText(dateString)
+            })
+            .disposed(by: disposeBag)
     }
 
     private func addSubViews() {

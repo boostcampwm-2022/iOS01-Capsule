@@ -81,7 +81,7 @@ final class CapsuleCreateViewModel: BaseViewModel {
 
                 FirestoreManager.shared.uploadCapsule(uid: uid, capsule: capsule) { error in
                     if let error {
-                        print("업로드 안됨 에러남")
+                        print("업로드 안됨 에러남 \(error)")
                     }
                 }
             })

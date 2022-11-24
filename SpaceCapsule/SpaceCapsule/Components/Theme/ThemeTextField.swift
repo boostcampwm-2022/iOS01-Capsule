@@ -8,9 +8,16 @@
 import UIKit
 
 class ThemeTextField: UITextField {
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-
+    convenience init(placeholder: String?) {
+        self.init()
+//        self.placeholder = placeholder
+        
+        attributedPlaceholder = NSAttributedString(
+            string: placeholder ?? "",
+            attributes: [.foregroundColor: UIColor.themeGray200]
+        )
+        
+        textColor = .themeBlack
         layer.borderColor = UIColor.themeGray300?.cgColor
         layer.borderWidth = FrameResource.commonBorderWidth
         layer.cornerRadius = FrameResource.commonCornerRadius
@@ -18,11 +25,6 @@ class ThemeTextField: UITextField {
         backgroundColor = .themeGray100
 
         insertPadding()
-    }
-
-    @available(*, unavailable)
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 
     private func insertPadding() {

@@ -12,6 +12,8 @@ final class DatePickerCoordinator: Coordinator {
     var parent: Coordinator?
     var children: [Coordinator] = []
     var navigationController: UINavigationController?
+    
+    var selectedDate: Date?
 
     init(navigationController: UINavigationController?) {
         self.navigationController = navigationController
@@ -23,6 +25,7 @@ final class DatePickerCoordinator: Coordinator {
 
         datePickerViewModel.coordinator = self
         datePickerViewController.viewModel = datePickerViewModel
+        datePickerViewController.configure(date: selectedDate)
         datePickerViewController.modalPresentationStyle = .pageSheet
 
         if let sheet = datePickerViewController.sheetPresentationController {

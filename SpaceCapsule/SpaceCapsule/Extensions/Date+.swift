@@ -8,17 +8,28 @@
 import Foundation
 
 extension Date {
-    var dateString: String {
+    static var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy년 MM월 dd일"
+        formatter.locale = Locale(identifier: "ko_KR")
 
-        return formatter.string(from: self)
+        return formatter
+    }
+
+    static var dateTimeFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy년 MM월 dd일 HH:mm:ss"
+        formatter.locale = Locale(identifier: "ko_KR")
+
+        return formatter
+    }
+
+    var dateString: String {
+        Date.dateFormatter.string(from: self)
     }
 
     var dateTimeString: String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy년 MM월 dd일 HH:mm:ss"
-
-        return formatter.string(from: self)
+        Date.dateTimeFormatter.string(from: self)
     }
+
 }

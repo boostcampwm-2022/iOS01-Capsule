@@ -44,6 +44,13 @@ final class CapsuleCreateCoordinator: Coordinator {
     func showDatePicker() {
         let datePickerCoordinator = DatePickerCoordinator(navigationController: navigationController)
         datePickerCoordinator.parent = self
+
+        if let dateString = try? dateStringObserver?.value() {
+            datePickerCoordinator.selectedDate = Date.dateFormatter.date(from: dateString)
+        } else {
+            datePickerCoordinator.selectedDate = Date()
+        }
+
         datePickerCoordinator.start()
 
         children.append(datePickerCoordinator)

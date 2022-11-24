@@ -18,7 +18,7 @@ final class DatePickerViewController: UIViewController {
 
         view.backgroundColor = .white
 
-        configure()
+//        configure()
         addSubViews()
         makeConstraints()
     }
@@ -26,9 +26,11 @@ final class DatePickerViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         viewModel?.input.viewWillDisappear.onNext(())
+        datePicker.removeTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
     }
 
-    func configure() {
+    func configure(date: Date?) {
+        datePicker.date = date ?? Date()
         datePicker.preferredDatePickerStyle = .inline
         datePicker.datePickerMode = .date
         datePicker.locale = Locale(identifier: "ko-KR")
@@ -50,6 +52,7 @@ final class DatePickerViewController: UIViewController {
     }
 
     @objc private func dateChanged(_ sender: UIDatePicker) {
+        print(sender.date)
         viewModel?.input.dateString.onNext(sender.date.dateString)
     }
 }

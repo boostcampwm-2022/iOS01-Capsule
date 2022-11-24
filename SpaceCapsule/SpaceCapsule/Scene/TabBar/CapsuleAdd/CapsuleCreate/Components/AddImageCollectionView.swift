@@ -8,7 +8,7 @@
 import UIKit
 
 final class AddImageCollectionView: UICollectionView {
-    private var imageDataSource: UICollectionViewDiffableDataSource<Section, Item>!
+    private var imageDataSource: UICollectionViewDiffableDataSource<Section, Item>?
 
     typealias Item = AddImageCollectionView.Cell
 
