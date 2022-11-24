@@ -11,7 +11,7 @@ final class SortPolicySelectionCoordinator: Coordinator {
     var parent: Coordinator?
     var children: [Coordinator] = []
     var navigationController: UINavigationController?
-    var lastSortPolicy: SortPolicy = .nearest
+    var currentSortPolicy: SortPolicy = .nearest
     
     init(navigationController: UINavigationController?) {
         self.navigationController = navigationController
@@ -20,14 +20,14 @@ final class SortPolicySelectionCoordinator: Coordinator {
     func start() {
         let sortPolicySelectionViewModel = SortPolicySelectionViewModel()
         sortPolicySelectionViewModel.coordinator = self
-        let sortPolicySelectionViewController = SortPolicySelectionViewController(lastSortPolicy: lastSortPolicy)
+        let sortPolicySelectionViewController = SortPolicySelectionViewController(currentSortPolicy: currentSortPolicy)
         sortPolicySelectionViewController.viewModel = sortPolicySelectionViewModel
         
         sortPolicySelectionViewController.modalPresentationStyle = .pageSheet
         if let sheet = sortPolicySelectionViewController.sheetPresentationController {
             sheet.detents = [
                 .custom { _ in
-                    return 250
+                    return FrameResource.sortPolicySelectionSheetHeight
                 }
             ]
             sheet.prefersGrabberVisible = true

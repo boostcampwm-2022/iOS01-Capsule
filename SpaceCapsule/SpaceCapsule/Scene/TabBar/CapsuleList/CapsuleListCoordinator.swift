@@ -7,7 +7,6 @@
 
 import UIKit
 import RxSwift
-import RxRelay
 
 final class CapsuleListCoordinator: Coordinator {
     var parent: Coordinator?
@@ -50,7 +49,7 @@ final class CapsuleListCoordinator: Coordinator {
     func showSortPolicySelection(sortPolicy: SortPolicy) {
         let sortPolicySelectionCoordinator = SortPolicySelectionCoordinator(navigationController: navigationController)
         
-        sortPolicySelectionCoordinator.lastSortPolicy = sortPolicy
+        sortPolicySelectionCoordinator.currentSortPolicy = sortPolicy
         sortPolicySelectionCoordinator.parent = self
         sortPolicySelectionCoordinator.start()
         

@@ -12,20 +12,19 @@ import UIKit
 final class SortPolicySelectionViewController: UIViewController, BaseViewController {
     var disposeBag = DisposeBag()
     var viewModel: SortPolicySelectionViewModel?
-    var dataSource: [SortPolicy] = [.nearest, .furthest, .latest, .oldest]
-    let cellIdentifier: String = "cell"
-    var lastSortPolicy: SortPolicy = .nearest
+    private var dataSource: [SortPolicy] = SortPolicy.allCases
+    private var currentSortPolicy: SortPolicy = .nearest
     
-    let tableView = {
+    private let tableView = {
         let tableView = UITableView()
         tableView.backgroundColor = .white
         tableView.separatorStyle = .none
         return tableView
     }()
     
-    init(lastSortPolicy: SortPolicy) {
+    init(currentSortPolicy: SortPolicy) {
         super.init(nibName: nil, bundle: nil)
-        self.lastSortPolicy = lastSortPolicy
+        self.currentSortPolicy = currentSortPolicy
     }
     
     @available(*, unavailable)
@@ -39,7 +38,7 @@ final class SortPolicySelectionViewController: UIViewController, BaseViewControl
         addSubViews()
         makeConstraints()
         bind()
-        viewModel?.input.sortPolicy.onNext(lastSortPolicy)
+        viewModel?.input.sortPolicy.onNext(currentSortPolicy)
     }
     
     override func viewWillDisappear(_ animated: Bool) {

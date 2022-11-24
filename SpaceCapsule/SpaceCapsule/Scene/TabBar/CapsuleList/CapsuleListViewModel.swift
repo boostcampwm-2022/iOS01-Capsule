@@ -13,8 +13,8 @@ import RxSwift
 final class CapsuleListViewModel: BaseViewModel {
     var disposeBag = DisposeBag()
     var coordinator: CapsuleListCoordinator?
-    let currentLocation = CLLocationCoordinate2D(latitude: 37.582867, longitude: 126.027869)
-    let capsuleCellModels: [CapsuleCellModel] = [
+    private let currentLocation = CLLocationCoordinate2D(latitude: 37.582867, longitude: 126.027869)
+    private let capsuleCellModels: [CapsuleCellModel] = [
         CapsuleCellModel(uuid: UUID(),
                          thumbnailImage: .logoWithText,
                          address: "서울시 광진구",
@@ -121,9 +121,9 @@ final class CapsuleListViewModel: BaseViewModel {
         input.capsuleCellModels.onNext(capsuleCellModels)
     }
     
-    func sort(capsuleCellModels: [CapsuleCellModel], by: SortPolicy) {
+    func sort(capsuleCellModels: [CapsuleCellModel], by sortPolicy: SortPolicy) {
         var models = capsuleCellModels
-        switch by {
+        switch sortPolicy {
         case .nearest:
             models = capsuleCellModels.sorted {
                 $0.distance(from: currentLocation) < $1.distance(from: currentLocation)

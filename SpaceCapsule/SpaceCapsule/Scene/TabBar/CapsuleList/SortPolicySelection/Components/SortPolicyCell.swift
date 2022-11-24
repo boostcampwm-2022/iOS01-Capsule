@@ -8,18 +8,27 @@
 import UIKit
 import SnapKit
 
-enum SortPolicy: String {
-    case nearest = "가까운 순"
-    case furthest = "멀리 있는 순"
-    case latest = "최신 순"
-    case oldest = "오래된 순"
+enum SortPolicy: String, CustomStringConvertible, CaseIterable {
+    case nearest
+    case furthest
+    case latest
+    case oldest
+    
+    var description: String {
+        switch self {
+        case .nearest: return "가까운 순"
+        case .furthest: return "멀리 있는 순"
+        case .latest: return "최신 순"
+        case .oldest: return "오래된 순"
+        }
+    }
 }
 
 final class SortPolicyCell: UITableViewCell {
     static let identifier = "SortPolicyCell"
     
     var descriptionLabel = {
-        let label = ThemeLabel(text: "가까운 순(기본)", size: 24, color: .themeBlack)
+        let label = ThemeLabel(text: SortPolicy.nearest.description, size: 24, color: .themeBlack)
         label.isUserInteractionEnabled = true
         return label
     }()
@@ -35,13 +44,13 @@ final class SortPolicyCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func addSubview() {
+    private func addSubview() {
         [descriptionLabel].forEach {
             self.contentView.addSubview($0)
         }
     }
     
-    func makeConstraints() {
+    private func makeConstraints() {
         descriptionLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(FrameResource.horizontalPadding)
             $0.top.equalToSuperview().offset(FrameResource.verticalPadding)
@@ -49,15 +58,11 @@ final class SortPolicyCell: UITableViewCell {
     }
 
     func configure(sortPolicy: SortPolicy) {
-        descriptionLabel.text = sortPolicy.rawValue
+        descriptionLabel.text = sortPolicy.description
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        if selected {
-            descriptionLabel.textColor = .themeColor300
-        } else {
-            descriptionLabel.textColor = .themeBlack
-        }
+        descriptionLabel.textColor = selected ? .themeColor300 : .themeBlack
     }
 }

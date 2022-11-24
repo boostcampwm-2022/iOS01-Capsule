@@ -14,8 +14,8 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
     var viewModel: CapsuleListViewModel?
     let capsuleListView = CapsuleListView()
     
-    var dataSource: UICollectionViewDiffableDataSource<Int, CapsuleCellModel>!
-    var snapshot = NSDiffableDataSourceSnapshot<Int, CapsuleCellModel>()
+    private var dataSource: UICollectionViewDiffableDataSource<Int, CapsuleCellModel>?
+    private var snapshot = NSDiffableDataSourceSnapshot<Int, CapsuleCellModel>()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -35,7 +35,9 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
     }
     
     func bind() {
-        guard let viewModel else {return}
+        guard let viewModel else {
+            return
+        }
         viewModel.input.capsuleCellModels
             .withUnretained(self)
             .bind { weakSelf, capsuleCellModels in
@@ -53,7 +55,7 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
         capsuleListView.collectionView.rx.itemSelected
             .withUnretained(self)
             .bind { _, indexPath in
-                print(indexPath)
+                // TODO: 캡슐 오픈 화면 연동
             }
             .disposed(by: disposeBag)
         
@@ -67,11 +69,11 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
         
     }
     
-    func applySnapshot(capsuleCellModels: [CapsuleCellModel]) {
+    private func applySnapshot(capsuleCellModels: [CapsuleCellModel]) {
         snapshot.deleteAllItems()
         snapshot.appendSections([0])
         snapshot.appendItems(capsuleCellModels, toSection: 0)
-        dataSource.apply(snapshot, animatingDifferences: true)
+        dataSource?.apply(snapshot, animatingDifferences: true)
     }
     
     private func addSortBarButton() {

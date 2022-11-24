@@ -12,7 +12,7 @@ final class CapsuleListView: UIView, BaseView {
     let sortBarButtonItem = {
         let button = UIButton()
         button.titleLabel?.font = .themeFont(ofSize: 15)
-        button.setTitle(SortPolicy.nearest.rawValue, for: .normal)
+        button.setTitle(SortPolicy.nearest.description, for: .normal)
         button.setTitleColor(.themeBlack, for: .normal)
         button.setImage(.sort, for: .normal)
         button.tintColor = .themeBlack
@@ -27,8 +27,8 @@ final class CapsuleListView: UIView, BaseView {
         return collectionView
     }()
     
-    init() {
-        super.init(frame: .zero)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         configure()
         addSubViews()
         makeConstraints()
