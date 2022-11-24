@@ -19,8 +19,9 @@ final class FirebaseStorageManager {
         let metadata = StorageMetadata()
         metadata.contentType = "image/png"
 
+        let uid = FirebaseAuthManager.shared.currentUser?.uid ?? "unknownUser"
         let fileName = UUID().uuidString
-        let firebaseReference = storage.reference().child("images/\(fileName)")
+        let firebaseReference = storage.reference().child("images/\(uid)/\(fileName)")
 
         return Observable.create { emitter in
             firebaseReference.putData(data, metadata: metadata) { _, error in

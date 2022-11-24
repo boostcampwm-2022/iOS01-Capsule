@@ -27,7 +27,7 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
         return button
     }()
 
-    private let scrollView = UIScrollView()
+    private let scrollView = CustomScrollView()
     private let mainView = CapsuleCreateView()
 
     var disposeBag = DisposeBag()
@@ -52,7 +52,17 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
         makeConstraints()
         applyImageCollectionDataSource()
 
+        addTapGestureRecognizer()
+        scrollView.addKeyboardNotification()
+
         bind()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        removeTapGestureRecognizer()
+        scrollView.removeKeyboardNotification()
     }
 
     func bind() {
@@ -98,7 +108,7 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
         mainView.dateSelectView.eventHandler = { [weak self] in
             self?.viewModel?.input.tapDatePicker.onNext(())
         }
-        
+
         mainView.locationSelectView.eventHandler = { [weak self] in
             self?.viewModel?.input.tapCapsuleLocate.onNext(())
         }
@@ -111,18 +121,11 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
 
     private func makeConstraints() {
         scrollView.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.bottom.equalToSuperview()
-            $0.leading.equalToSuperview()
-            $0.trailing.equalToSuperview()
+            $0.edges.equalToSuperview()
         }
 
         mainView.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.bottom.equalToSuperview()
-            $0.leading.equalToSuperview()
-            $0.trailing.equalToSuperview()
-
+            $0.edges.equalToSuperview()
             $0.width.equalToSuperview()
         }
     }
@@ -203,15 +206,3 @@ extension CapsuleCreateViewController: PHPickerViewControllerDelegate {
         }
     }
 }
-
-// SwiftUI Preview
-#if canImport(SwiftUI) && DEBUG
-    import SwiftUI
-    struct CapsuleCreateViewControllerPreview: PreviewProvider {
-        static var previews: some View {
-            CapsuleCreateViewController()
-                .showPreview()
-                .previewDevice(PreviewDevice(rawValue: "iPhone 14"))
-        }
-    }
-#endif
