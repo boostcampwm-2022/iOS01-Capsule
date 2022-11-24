@@ -66,10 +66,6 @@ final class CapsuleCreateView: UIView, BaseView {
         fatalError("init(coder:) has not been implemented")
     }
 
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        endEditing(true)
-//    }
-
     // MARK: - Methods
 
     func configure() {

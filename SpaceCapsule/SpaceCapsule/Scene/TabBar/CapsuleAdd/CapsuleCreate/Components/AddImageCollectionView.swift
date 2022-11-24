@@ -8,6 +8,14 @@
 import UIKit
 
 final class AddImageCollectionView: UICollectionView {
+    private var imageDataSource: UICollectionViewDiffableDataSource<Section, Item>!
+
+    typealias Item = AddImageCollectionView.Cell
+
+    private enum Section {
+        case main
+    }
+
     enum Cell: Hashable {
         case image(data: Data)
         case addButton
@@ -41,6 +49,38 @@ final class AddImageCollectionView: UICollectionView {
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    func applyDataSource() {
+        imageDataSource = UICollectionViewDiffableDataSource<Section, Item>(collectionView: self, cellProvider: { collectionView, indexPath, item in
+
+            switch item {
+            case .image:
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddImageCell.identifier, for: indexPath) as? AddImageCell,
+                      let itemData = item.data else {
+                    return UICollectionViewCell()
+                }
+
+                cell.configure(data: itemData)
+
+                return cell
+
+            case .addButton:
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddImageButtonCell.identifier, for: indexPath) as? AddImageButtonCell else {
+                    return UICollectionViewCell()
+                }
+
+                return cell
+            }
+
+        })
+    }
+
+    func applySnapshot(items: [AddImageCollectionView.Cell]) {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(items, toSection: .main)
+        imageDataSource?.apply(snapshot)
     }
 
     private static func layout() -> UICollectionViewCompositionalLayout {
