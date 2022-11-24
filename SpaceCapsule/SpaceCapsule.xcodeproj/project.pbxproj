@@ -43,6 +43,7 @@
 		0D9D672E292486780038F529 /* ThemeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9D672D292486780038F529 /* ThemeLabel.swift */; };
 		0D9D67312924945D0038F529 /* FrameResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9D67302924945D0038F529 /* FrameResource.swift */; };
 		0DCB22932924CE58002CB095 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCB22922924CE58002CB095 /* CustomTabBarController.swift */; };
+		2800F97A292F1F060069EE7F /* CapsuleCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2800F979292F1F060069EE7F /* CapsuleCellModel.swift */; };
 		28049CE529236EEC002389BD /* CapsuleAccessCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28049CE429236EEC002389BD /* CapsuleAccessCoordinator.swift */; };
 		28049CE729237B2B002389BD /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28049CE629237B2B002389BD /* BaseViewController.swift */; };
 		28049CE929237BB2002389BD /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28049CE829237BB2002389BD /* BaseView.swift */; };
@@ -165,6 +166,7 @@
 		0D9D672D292486780038F529 /* ThemeLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeLabel.swift; sourceTree = "<group>"; };
 		0D9D67302924945D0038F529 /* FrameResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameResource.swift; sourceTree = "<group>"; };
 		0DCB22922924CE58002CB095 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
+		2800F979292F1F060069EE7F /* CapsuleCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleCellModel.swift; sourceTree = "<group>"; };
 		28049CE429236EEC002389BD /* CapsuleAccessCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleAccessCoordinator.swift; sourceTree = "<group>"; };
 		28049CE629237B2B002389BD /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		28049CE829237BB2002389BD /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
@@ -452,6 +454,7 @@
 			isa = PBXGroup;
 			children = (
 				2807BC0A292C658000288A5D /* CapsuleCell.swift */,
+				2800F979292F1F060069EE7F /* CapsuleCellModel.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -583,11 +586,11 @@
 			isa = PBXGroup;
 			children = (
 				28C8C97A292DC2C0005615BB /* SortPolicySelection */,
-				2800F978292E4BE30069EE7F /* Components */,
 				288A8EB929235B86000229D2 /* CapsuleListView.swift */,
 				288A8EBB29235B8E000229D2 /* CapsuleListViewController.swift */,
 				288A8EBD29235B97000229D2 /* CapsuleListViewModel.swift */,
 				288A8EBF29235BA5000229D2 /* CapsuleListCoordinator.swift */,
+				2800F978292E4BE30069EE7F /* Components */,
 			);
 			path = CapsuleList;
 			sourceTree = "<group>";
@@ -682,10 +685,10 @@
 		28C8C97A292DC2C0005615BB /* SortPolicySelection */ = {
 			isa = PBXGroup;
 			children = (
-				2800F976292E4BBB0069EE7F /* Components */,
 				28C8C97B292DC35F005615BB /* SortPolicySelectionViewController.swift */,
 				28C8C97D292DC371005615BB /* SortPolicySelectionViewModel.swift */,
 				28C8C97F292DC382005615BB /* SortPolicySelectionCoordinator.swift */,
+				2800F976292E4BBB0069EE7F /* Components */,
 			);
 			path = SortPolicySelection;
 			sourceTree = "<group>";
@@ -958,6 +961,7 @@
 				288A8EC029235BA5000229D2 /* CapsuleListCoordinator.swift in Sources */,
 				0D24C203292B84F700007E75 /* KingReceiver+UIImageView.swift in Sources */,
 				288A8EB829235B77000229D2 /* ProfileCoordinator.swift in Sources */,
+				2800F97A292F1F060069EE7F /* CapsuleCellModel.swift in Sources */,
 				28049CED29238216002389BD /* Bindable.swift in Sources */,
 				288A8F03292362CC000229D2 /* CapsuleAddCoordinator.swift in Sources */,
 				0D24C1FC292B84DD00007E75 /* FirebaseAuthManager.swift in Sources */,
