@@ -29,6 +29,7 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
 
     private let scrollView = CustomScrollView()
     private let mainView = CapsuleCreateView()
+    private let indicatorView = LoadingIndicatorView()
 
     var disposeBag = DisposeBag()
     var viewModel: CapsuleCreateViewModel?
@@ -136,6 +137,30 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
                 weakSelf.mainView.dateSelectView.setText(dateString)
             })
             .disposed(by: disposeBag)
+        
+        viewModel?.output.indicatorState
+            .withUnretained(self)
+            .subscribe(onNext: { weakSelf, state in
+                if state {
+                    weakSelf.addIndicatorView()
+                } else {
+                    weakSelf.removeIndicatorView()
+                }
+                
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func addIndicatorView() {
+        view.addSubview(indicatorView)
+        
+        indicatorView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+    }
+    
+    private func removeIndicatorView() {
+        indicatorView.removeFromSuperview()
     }
 
     private func addSubViews() {

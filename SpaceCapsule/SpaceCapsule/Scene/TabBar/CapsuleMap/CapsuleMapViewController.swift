@@ -65,14 +65,14 @@ final class CapsuleMapViewController: UIViewController, BaseViewController, MKMa
         let circle = MKCircle(center: center, radius: 100)
         capsuleMapView.map.addOverlay(circle)
     }
-    
+
     private func removeAnnotations() {
         if !capsuleMapView.map.annotations.isEmpty {
             let annotations = capsuleMapView.map.annotations
             capsuleMapView.map.removeAnnotations(annotations)
         }
     }
-    
+
     private func addAnnotations(coordinates: [CLLocationCoordinate2D]) {
         for coordinate in coordinates {
             let pin = MKPointAnnotation()
@@ -94,7 +94,7 @@ final class CapsuleMapViewController: UIViewController, BaseViewController, MKMa
         capsuleMapView.map.setUserTrackingMode(.follow, animated: true)
         // capsuleMapView.map.isZoomEnabled = false
     }
-    
+//
     private func goToCurrentLocation() {
         guard let center = locationManager.location?.coordinate else {
             return
@@ -103,11 +103,11 @@ final class CapsuleMapViewController: UIViewController, BaseViewController, MKMa
         let region = MKCoordinateRegion(center: center, span: span)
         capsuleMapView.map.setRegion(region, animated: true)
     }
-    
+
     private func getLocationUsagePermission() {
         locationManager.requestWhenInUseAuthorization()
     }
-    
+
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
         case .authorizedAlways, .authorizedWhenInUse:
@@ -124,12 +124,12 @@ final class CapsuleMapViewController: UIViewController, BaseViewController, MKMa
             print("GPS: Default")
         }
     }
-    
+
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         guard !(annotation is MKUserLocation) else { // 어노테이션이 유저의 현재 뷰가 아님을 보장
             return nil
         }
-        
+
         var annotationView = capsuleMapView.map.dequeueReusableAnnotationView(withIdentifier: "spaceCapsule")
         if annotationView == nil {
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "spaceCapsule")
@@ -140,12 +140,12 @@ final class CapsuleMapViewController: UIViewController, BaseViewController, MKMa
         } else {
             annotationView?.annotation = annotation
         }
-        
+
         annotationView?.image = UIImage(systemName: "circle")
-        
+
         return annotationView
     }
-    
+
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         let alertController = UIAlertController(title: "캡슐입니다", message: "해당 캡슐로 이동할까요?", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -154,7 +154,7 @@ final class CapsuleMapViewController: UIViewController, BaseViewController, MKMa
         alertController.addAction(acceptAction)
         present(alertController, animated: true, completion: nil)
     }
-    
+
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let center = locations.last?.coordinate else {
             print("location 위치 인식 안돼ㅁ")
@@ -162,7 +162,7 @@ final class CapsuleMapViewController: UIViewController, BaseViewController, MKMa
         }
         addCircleLocation(at: center)
     }
-    
+
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if let circleOverlay = overlay as? MKCircle {
             let circleRenderer = MKCircleRenderer(overlay: circleOverlay)

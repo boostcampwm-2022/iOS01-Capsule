@@ -57,6 +57,7 @@ final class CapsuleCreateViewModel: BaseViewModel {
     }
 
     struct Output {
+        let indicatorState = BehaviorSubject<Bool>(value: false)
     }
 
     init() {
@@ -74,28 +75,33 @@ final class CapsuleCreateViewModel: BaseViewModel {
         // 완료
         input.urlArray
             .withLatestFrom(input.capsuleDataObservable)
-            .subscribe(onNext: { capsule in
+            .withUnretained(self)
+            .subscribe(onNext: { weakSelf, capsule in
                 guard let uid = FirebaseAuthManager.shared.currentUser?.uid else {
                     return
                 }
 
                 FirestoreManager.shared.uploadCapsule(uid: uid, capsule: capsule) { error in
-                    if let error {
-                        print("업로드 안됨 에러남 \(error)")
+                    weakSelf.output.indicatorState.onNext(false)
+                    
+                    guard error == nil else {
+                        return
                     }
+                    
+                    weakSelf.coordinator?.showCapsuleClose()
                 }
             })
             .disposed(by: disposeBag)
 
         input.urlDict
             .subscribe(onNext: { [weak self] dict in
-                print("...")
+                print("url dict -> url array 호출")
                 if dict.count == self?.input.imageData.value.compactMap({ $0.data }).count {
-                    print("url dict to array")
                     let sortedArray = dict
                         .sorted(by: { $0.key < $1.key })
                         .compactMap { $0.value.absoluteString }
-
+                    
+                    print("흠냐")
                     self?.input.urlArray.onNext(sortedArray)
                 }
             })
@@ -104,8 +110,11 @@ final class CapsuleCreateViewModel: BaseViewModel {
         input.done
             .withLatestFrom(input.imageData)
             .compactMap { $0.compactMap { $0.data } }
-            .subscribe(onNext: { data in
-                print("done tapped")
+            .withUnretained(self)
+            .subscribe(onNext: { weakSelf, data in
+
+                weakSelf.output.indicatorState.onNext(true)
+
                 data.enumerated().forEach { index, dataValue in
                     FirebaseStorageManager.shared.upload(data: dataValue)
                         .subscribe(onNext: { [weak self] in

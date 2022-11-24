@@ -64,6 +64,14 @@ final class CapsuleCreateCoordinator: Coordinator {
         children.append(capsuleLocateCoordinator)
     }
 
+    func showCapsuleClose() {
+        guard let parent = parent as? CapsuleAddCoordinator else {
+            return
+        }
+
+        parent.showCapsuleClose()
+    }
+
     func finish() {
         parent?.navigationController?.dismiss(animated: true)
     }

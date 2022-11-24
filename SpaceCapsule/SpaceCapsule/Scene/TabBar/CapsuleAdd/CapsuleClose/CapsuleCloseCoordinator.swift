@@ -23,26 +23,12 @@ class CapsuleCloseCoordinator: Coordinator {
         capsuleCloseViewModel.coordinator = self
         capsuleCloseViewController.viewModel = capsuleCloseViewModel
 
-        navigationController?.pushViewController(capsuleCloseViewController, animated: true)
+        parent?.children.popLast()
+        navigationController?.setViewControllers([capsuleCloseViewController], animated: true)
     }
 
     func finish() {
-        _ = parent?.children.popLast()
-        if let parent = parent as? TabBarCoordinator {
-            parent.tabBarWillHide(false)
-        }
+        parent?.children.popLast()
+        navigationController?.dismiss(animated: true)
     }
-    
-//    func moveToCapsuleDetail() {
-//        let capsuleDetailCoordinator = CapsuleDetailCoordinator()
-//        capsuleDetailCoordinator.parent = self
-//        capsuleDetailCoordinator.start()
-//
-//        children.append(capsuleDetailCoordinator)
-//
-//        if let controller = capsuleDetailCoordinator.navigationController {
-//            controller.modalPresentationStyle = .fullScreen
-//            tabBarController.present(controller, animated: true)
-//        }
-//    }
 }

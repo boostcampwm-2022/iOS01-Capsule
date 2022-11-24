@@ -30,4 +30,12 @@ final class CapsuleAddCoordinator: Coordinator {
 
         children.append(capsuleCreateCoordinator)
     }
+    
+    func showCapsuleClose() {
+        let capsuleCloseCoordinator = CapsuleCloseCoordinator(navigationController: navigationController)
+        capsuleCloseCoordinator.parent = self
+        capsuleCloseCoordinator.start()
+        
+        children.append(capsuleCloseCoordinator)
+    }
 }

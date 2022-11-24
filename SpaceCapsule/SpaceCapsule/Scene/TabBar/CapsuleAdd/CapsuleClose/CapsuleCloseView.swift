@@ -41,6 +41,7 @@ final class CapsuleCloseView: UIView, BaseView {
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .themeColor200
         button.layer.cornerRadius = FrameResource.commonCornerRadius
+        
         return button
     }()
     

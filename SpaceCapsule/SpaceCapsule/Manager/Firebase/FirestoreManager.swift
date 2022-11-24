@@ -73,11 +73,11 @@ class FirestoreManager {
             .collection("users")
             .document(uid)
             .updateData(["capsules": FieldValue.arrayUnion([capsule.uuid])]) { error in
-                if let error = error {
-                    completion(error)
-                } else {
-                    completion(nil)
-                }
+//                if let error = error {
+//                    completion(error)
+//                } else {
+//                    completion(nil)
+//                }
             }
 
         guard let dict = capsule.toDict else { return }
