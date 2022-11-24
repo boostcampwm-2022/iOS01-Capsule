@@ -56,26 +56,29 @@ class FirestoreManager {
     func registerUserInfo(uid: String, userInfo: UserInfo, completion: @escaping (Error?) -> Void) {
         guard let dict = userInfo.toDict else { return }
 
-        database.collection("users").document(uid).setData(dict, merge: true) { error in
-            if let error = error {
-                completion(error)
-            } else {
-                completion(nil)
+        database
+            .collection("users")
+            .document(uid)
+            .setData(dict, merge: true) { error in
+                if let error = error {
+                    completion(error)
+                } else {
+                    completion(nil)
+                }
             }
-        }
     }
 
     func uploadCapsule(uid: String, capsule: Capsule, completion: @escaping (Error?) -> Void) {
-        // TODO: users uid capsule 배열에 append 해야함
-        database.collection("users").document(uid).setData([
-            "capsule": capsule.uuid,
-        ], merge: true) { error in
-            if let error = error {
-                completion(error)
-            } else {
-                completion(nil)
+        database
+            .collection("users")
+            .document(uid)
+            .updateData(["capsules": FieldValue.arrayUnion([capsule.uuid])]) { error in
+                if let error = error {
+                    completion(error)
+                } else {
+                    completion(nil)
+                }
             }
-        }
 
         guard let dict = capsule.toDict else { return }
 
