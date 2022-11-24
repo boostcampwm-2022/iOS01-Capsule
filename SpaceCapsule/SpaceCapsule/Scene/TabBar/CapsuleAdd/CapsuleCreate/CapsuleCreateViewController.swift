@@ -52,7 +52,7 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
         makeConstraints()
         applyImageCollectionDataSource()
 
-//        addTapGestureRecognizer()
+        addTapGestureRecognizer()
         scrollView.addKeyboardNotification()
 
         bind()
@@ -61,7 +61,7 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-//        removeTapGestureRecognizer()
+        removeTapGestureRecognizer()
         scrollView.removeKeyboardNotification()
     }
 
@@ -85,13 +85,10 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
 
         mainView.imageCollectionView.rx.itemSelected
             .subscribe(onNext: { [weak self] indexPath in
-
                 if self?.mainView.imageCollectionView.cellForItem(at: indexPath) is AddImageButtonCell,
                    let imagePicker = self?.imagePicker {
-                    print("image")
                     self?.present(imagePicker, animated: true)
                 }
-
             })
             .disposed(by: disposeBag)
 
@@ -106,10 +103,12 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
             .disposed(by: disposeBag)
 
         mainView.dateSelectView.eventHandler = { [weak self] in
+            self?.view.endEditing(true)
             self?.viewModel?.input.tapDatePicker.onNext(())
         }
 
         mainView.locationSelectView.eventHandler = { [weak self] in
+            self?.view.endEditing(true)
             self?.viewModel?.input.tapCapsuleLocate.onNext(())
         }
     }

@@ -9,6 +9,8 @@ import SnapKit
 import UIKit
 
 final class CapsuleCreateView: UIView, BaseView {
+    // MARK: - UI Components
+
     private let spacing = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 30))
     private let mainStackView: UIStackView = {
         let stackView = UIStackView()
@@ -49,6 +51,8 @@ final class CapsuleCreateView: UIView, BaseView {
     lazy var imageCollectionView = AddImageCollectionView(frame: frame)
     private let sampleImages: [UIImage?] = [.logoWithBG, .logoWithText, .logo]
 
+    // MARK: - LifeCycle
+
     override init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -61,6 +65,12 @@ final class CapsuleCreateView: UIView, BaseView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        endEditing(true)
+//    }
+
+    // MARK: - Methods
 
     func configure() {
         backgroundColor = .themeBackground
@@ -132,15 +142,3 @@ final class CapsuleCreateView: UIView, BaseView {
         }
     }
 }
-
-#if canImport(SwiftUI) && DEBUG
-    import SwiftUI
-    struct CapsuleCreateViewPreview: PreviewProvider {
-        static var previews: some View {
-            UIViewPreview {
-                CapsuleCreateView()
-            }
-            .previewLayout(.sizeThatFits)
-        }
-    }
-#endif

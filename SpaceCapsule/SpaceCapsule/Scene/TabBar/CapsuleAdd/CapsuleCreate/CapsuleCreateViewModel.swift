@@ -75,12 +75,13 @@ final class CapsuleCreateViewModel: BaseViewModel {
         input.urlArray
             .withLatestFrom(input.capsuleDataObservable)
             .subscribe(onNext: { capsule in
-                
-                print("upload!!!")
-                
-                FirestoreManager.shared.uploadCapsule(uid: FirebaseAuthManager.shared.currentUser!.uid, capsule: capsule) { error in
+                guard let uid = FirebaseAuthManager.shared.currentUser?.uid else {
+                    return
+                }
+
+                FirestoreManager.shared.uploadCapsule(uid: uid, capsule: capsule) { error in
                     if let error {
-                        print(" 업로드 안됨 에러남")
+                        print("업로드 안됨 에러남")
                     }
                 }
             })

@@ -46,8 +46,8 @@
 		0DB746B0292E1CC0005FF249 /* Encodable+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB746AF292E1CC0005FF249 /* Encodable+.swift */; };
 		0DB746B4292E268A005FF249 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB746B3292E268A005FF249 /* Date+.swift */; };
 		0DCB22932924CE58002CB095 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCB22922924CE58002CB095 /* CustomTabBarController.swift */; };
-		0DD83D0D292F15C00020F15C /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD83D0C292F15C00020F15C /* UIViewController+.swift */; };
 		0DD83D0F292F1BAD0020F15C /* CustomScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD83D0E292F1BAD0020F15C /* CustomScrollView.swift */; };
+		0DD83D11292F2EC80020F15C /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD83D10292F2EC80020F15C /* UIViewController+.swift */; };
 		0DE786E1292BBDEC007EF260 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE786E0292BBDEC007EF260 /* DatePickerViewController.swift */; };
 		28049CE529236EEC002389BD /* CapsuleAccessCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28049CE429236EEC002389BD /* CapsuleAccessCoordinator.swift */; };
 		28049CE729237B2B002389BD /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28049CE629237B2B002389BD /* BaseViewController.swift */; };
@@ -177,8 +177,8 @@
 		0DD83D07292F0D390020F15C /* SpaceCapsule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceCapsule.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DD83D08292F0D390020F15C /* SpaceCapsuleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = SpaceCapsuleTests.xctest; path = "/Users/trumanfromkorea/Develop/Boostcamp/Membership/iOS01-Capsule/SpaceCapsule/build/Debug-iphoneos/SpaceCapsuleTests.xctest"; sourceTree = "<absolute>"; };
 		0DD83D09292F0D390020F15C /* SpaceCapsuleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = SpaceCapsuleUITests.xctest; path = "/Users/trumanfromkorea/Develop/Boostcamp/Membership/iOS01-Capsule/SpaceCapsule/build/Debug-iphoneos/SpaceCapsuleUITests.xctest"; sourceTree = "<absolute>"; };
-		0DD83D0C292F15C00020F15C /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		0DD83D0E292F1BAD0020F15C /* CustomScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScrollView.swift; sourceTree = "<group>"; };
+		0DD83D10292F2EC80020F15C /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		0DE786E0292BBDEC007EF260 /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
 		28049CE429236EEC002389BD /* CapsuleAccessCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleAccessCoordinator.swift; sourceTree = "<group>"; };
 		28049CE629237B2B002389BD /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -380,10 +380,10 @@
 			isa = PBXGroup;
 			children = (
 				0D90DAF6292397CF000DCC84 /* UIColor+.swift */,
-				0DD83D0C292F15C00020F15C /* UIViewController+.swift */,
 				0D90DAF829239A81000DCC84 /* UIImage+.swift */,
 				0D46DEF92923E1180045400A /* UIFont+.swift */,
 				0DB746B3292E268A005FF249 /* Date+.swift */,
+				0DD83D10292F2EC80020F15C /* UIViewController+.swift */,
 				0DB746AF292E1CC0005FF249 /* Encodable+.swift */,
 				0DA9F6962928EB9000454932 /* UICollectionReusableView+.swift */,
 			);
@@ -926,7 +926,6 @@
 				0D90DAF7292397CF000DCC84 /* UIColor+.swift in Sources */,
 				599C1A4B292CC99A00517E93 /* NoneImageCache.swift in Sources */,
 				28049CE729237B2B002389BD /* BaseViewController.swift in Sources */,
-				0DD83D0D292F15C00020F15C /* UIViewController+.swift in Sources */,
 				0D90DAF329238B90000DCC84 /* CapsuleCloseCoordinator.swift in Sources */,
 				288A8ED329235C65000229D2 /* CapsuleCreateView.swift in Sources */,
 				288A8E9D29235A80000229D2 /* SignInViewController.swift in Sources */,
@@ -940,6 +939,7 @@
 				288A8EC629235BBD000229D2 /* CapsuleMapViewModel.swift in Sources */,
 				0D77D7C9292B5D490038D054 /* SelectButton.swift in Sources */,
 				4A9E91452925D51B00B7CC5C /* RequestType.swift in Sources */,
+				0DD83D11292F2EC80020F15C /* UIViewController+.swift in Sources */,
 				288A8EEA29235FF1000229D2 /* CapsuleCloseViewModel.swift in Sources */,
 				288A8EF92923609C000229D2 /* CapsuleDetailView.swift in Sources */,
 				0D9D67312924945D0038F529 /* FrameResource.swift in Sources */,
