@@ -17,14 +17,21 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
     var dataSource: UICollectionViewDiffableDataSource<Int, CapsuleCellModel>!
     var snapshot = NSDiffableDataSourceSnapshot<Int, CapsuleCellModel>()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let parent = viewModel?.coordinator?.parent as? TabBarCoordinator {
+            parent.tabBarWillHide(false)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view = capsuleListView
         addSortBarButton()
         configureCollectionView()
         bind()
+        viewModel?.fetchCapsules()
         viewModel?.input.sortPolicy.onNext(.nearest)
-        fetchCapsules()
     }
     
     func bind() {
@@ -37,15 +44,15 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
             .disposed(by: disposeBag)
         
         viewModel.input.sortPolicy
-            .withUnretained(self)
-            .bind { weakSelf, sortPolicy in
-                print("capsule List should be sorted by", sortPolicy)
-            }
+            .withLatestFrom(viewModel.input.capsuleCellModels, resultSelector: { sortPolicy, capsuleCellModels in
+                self.viewModel?.sort(capsuleCellModels: capsuleCellModels, by: sortPolicy)
+            })
+            .bind(onNext: {})
             .disposed(by: disposeBag)
         
         capsuleListView.collectionView.rx.itemSelected
             .withUnretained(self)
-            .bind { weakSelf, indexPath in
+            .bind { _, indexPath in
                 print(indexPath)
             }
             .disposed(by: disposeBag)
@@ -58,23 +65,6 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
             }
             .disposed(by: disposeBag)
         
-    }
-    
-    private func fetchCapsules() {
-        let capsuleCellModels: [CapsuleCellModel] = [
-            CapsuleCellModel(uuid: UUID(), thumbnailImage: .logoWithText, address: "서울시 광진구", closedDate: "123", memoryDate: "1", isOpenable: true),
-            CapsuleCellModel(uuid: UUID(), thumbnailImage: .logoWithText, address: "서울시 광진구", closedDate: "234", memoryDate: "2", isOpenable: true),
-            CapsuleCellModel(uuid: UUID(), thumbnailImage: .logoWithText, address: "서울시 광진구", closedDate: "345", memoryDate: "3", isOpenable: false),
-            CapsuleCellModel(uuid: UUID(), thumbnailImage: .logoWithText, address: "서울시 광진구", closedDate: "456", memoryDate: "4", isOpenable: true),
-            CapsuleCellModel(uuid: UUID(), thumbnailImage: .logoWithText, address: "서울시 광진구", closedDate: "567", memoryDate: "5", isOpenable: false),
-            CapsuleCellModel(uuid: UUID(), thumbnailImage: .logoWithText, address: "서울시 광진구", closedDate: "678", memoryDate: "6", isOpenable: true),
-            CapsuleCellModel(uuid: UUID(), thumbnailImage: .logoWithText, address: "서울시 광진구", closedDate: "789", memoryDate: "7", isOpenable: false),
-            CapsuleCellModel(uuid: UUID(), thumbnailImage: .logoWithText, address: "서울시 광진구", closedDate: "809", memoryDate: "8", isOpenable: false),
-            CapsuleCellModel(uuid: UUID(), thumbnailImage: .logoWithText, address: "서울시 광진구", closedDate: "90", memoryDate: "9", isOpenable: true),
-            CapsuleCellModel(uuid: UUID(), thumbnailImage: .logoWithText, address: "서울시 광진구", closedDate: "0-=", memoryDate: "10", isOpenable: true),
-            CapsuleCellModel(uuid: UUID(), thumbnailImage: .logoWithText, address: "서울시 광진구", closedDate: "asfa", memoryDate: "11", isOpenable: false)
-        ]
-        viewModel?.input.capsuleCellModels.onNext(capsuleCellModels)
     }
     
     func applySnapshot(capsuleCellModels: [CapsuleCellModel]) {

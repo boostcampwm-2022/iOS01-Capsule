@@ -25,7 +25,6 @@ final class SortPolicySelectionViewController: UIViewController, BaseViewControl
     
     init(lastSortPolicy: SortPolicy) {
         super.init(nibName: nil, bundle: nil)
-        print(lastSortPolicy)
         self.lastSortPolicy = lastSortPolicy
     }
     

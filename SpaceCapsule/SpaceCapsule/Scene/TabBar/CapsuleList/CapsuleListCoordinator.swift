@@ -55,10 +55,6 @@ final class CapsuleListCoordinator: Coordinator {
         sortPolicySelectionCoordinator.start()
         
         children.append(sortPolicySelectionCoordinator)
-        
-        if let parent = parent as? TabBarCoordinator {
-            parent.tabBarWillHide(true)
-        }
     }
     
 }
