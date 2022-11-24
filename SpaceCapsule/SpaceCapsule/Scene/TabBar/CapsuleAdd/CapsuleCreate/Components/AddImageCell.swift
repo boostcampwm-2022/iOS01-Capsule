@@ -30,8 +30,8 @@ final class AddImageCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configure(item: Data) {
-        imageView.image = UIImage(data: item)
+    func configure(data: Data) {
+        imageView.kr.setImage(with: data, size: frame.size.width)
     }
 
     private func addSubViews() {

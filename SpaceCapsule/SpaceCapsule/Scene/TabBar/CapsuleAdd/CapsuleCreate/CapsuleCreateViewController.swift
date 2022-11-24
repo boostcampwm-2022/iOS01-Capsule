@@ -52,7 +52,7 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
         makeConstraints()
         applyImageCollectionDataSource()
 
-        addTapGestureRecognizer()
+//        addTapGestureRecognizer()
         scrollView.addKeyboardNotification()
 
         bind()
@@ -61,7 +61,7 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        removeTapGestureRecognizer()
+//        removeTapGestureRecognizer()
         scrollView.removeKeyboardNotification()
     }
 
@@ -158,7 +158,7 @@ extension CapsuleCreateViewController {
                     return UICollectionViewCell()
                 }
 
-                cell.configure(item: itemData)
+                cell.configure(data: itemData)
 
                 return cell
 

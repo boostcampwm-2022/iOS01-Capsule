@@ -36,16 +36,18 @@ extension KingReceiverWrapper where Base: UIImageView {
                     base.image = placeholder
                     return
                 }
-
-                base.image = resizing ?
-                    resizeImage(data: data, to: base.frame.size, scale: scale) :
-                    UIImage(data: data)
+                
+                if resizing {
+                    base.image = UIImage.resize(data: data, to: base.frame.size, scale: scale)
+                } else {
+                    base.image = UIImage(data: data)
+                }
             }
         }
     }
 
-    func setImage(with data: Data, scale: CGFloat = 1) {
-        base.image = resizeImage(data: data, to: base.frame.size, scale: scale)
+    func setImage(with data: Data, size: CGFloat) {
+        base.image = UIImage(data: data)?.resize(size)
     }
 
     /// 로딩 indicator 시작
@@ -72,26 +74,5 @@ extension KingReceiverWrapper where Base: UIImageView {
     private func stop(indicator: UIActivityIndicatorView?) {
         indicator?.stopAnimating()
         indicator?.removeFromSuperview()
-    }
-
-    /// 이미지 스케일링, `scale` 낮은 값일수록 저화질
-    /// thumbnail 만 보여줘야 하거나 blur 처리되는 부분에서 사용 가능
-    private func resizeImage(data: Data, to targetSize: CGSize, scale: CGFloat) -> UIImage? {
-        let imageSourceOptions = [kCGImageSourceShouldCache: false] as CFDictionary
-        guard let imageSource = CGImageSourceCreateWithData(data as CFData, imageSourceOptions) else { return nil }
-
-        let maxDimension = max(targetSize.width, targetSize.height) * scale
-        let resizingOptions = [
-            kCGImageSourceCreateThumbnailFromImageAlways: true,
-            kCGImageSourceShouldCacheImmediately: true,
-            kCGImageSourceCreateThumbnailWithTransform: true,
-            kCGImageSourceThumbnailMaxPixelSize: maxDimension,
-        ] as CFDictionary
-
-        guard let resizedImage = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, resizingOptions) else {
-            return nil
-        }
-
-        return UIImage(cgImage: resizedImage)
     }
 }

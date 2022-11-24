@@ -36,6 +36,7 @@ final class CapsuleCreateView: UIView, BaseView {
     let dateSelectView = SelectButton(text: "날짜를 선택하세요")
     let descriptionTextView: UITextView = {
         let textView = UITextView()
+        textView.backgroundColor = .themeGray100
         textView.layer.borderColor = UIColor.themeGray300?.cgColor
         textView.layer.borderWidth = FrameResource.commonBorderWidth
         textView.layer.cornerRadius = FrameResource.commonCornerRadius
