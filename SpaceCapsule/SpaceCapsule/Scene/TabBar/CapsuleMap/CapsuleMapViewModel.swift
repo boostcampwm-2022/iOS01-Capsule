@@ -18,8 +18,8 @@ final class CapsuleMapViewModel: BaseViewModel {
     var output = Output()
     
     struct Input: ViewModelInput {
-        // 캡슐 마커 fetchEvent
         var annotations = PublishRelay<[CLLocationCoordinate2D]>()
+        
         // 캡슐 마커 touchEvent
     }
     struct Output: ViewModelOutput {}
@@ -33,22 +33,16 @@ final class CapsuleMapViewModel: BaseViewModel {
     func fetchAnnotations() {
         let coordinates: [CLLocationCoordinate2D] = [
             CLLocationCoordinate2D(latitude: 37.582867, longitude: 126.027869),
-            CLLocationCoordinate2D(latitude: 37.582458, longitude: 127.028570),
-            CLLocationCoordinate2D(latitude: 37.583582861128654, longitude: 127.03053024855035),
+            CLLocationCoordinate2D(latitude: 37.402458, longitude: 127.028570),
+            CLLocationCoordinate2D(latitude: 37.583582861128654, longitude: 127.0205424855035),
+            CLLocationCoordinate2D(latitude: 37.581583861128454, longitude: 127.0306024855031),
+            CLLocationCoordinate2D(latitude: 37.587542861128354, longitude: 127.03933024855032),
+            CLLocationCoordinate2D(latitude: 37.583522861128547, longitude: 127.03813024855033),
+            CLLocationCoordinate2D(latitude: 37.583572861128602, longitude: 127.02753024855034),
+            CLLocationCoordinate2D(latitude: 37.583562861128644, longitude: 127.03953024855036),
+            CLLocationCoordinate2D(latitude: 37.584552861128254, longitude: 127.0153024855037),
+            CLLocationCoordinate2D(latitude: 37.589582861128354, longitude: 127.09053024855055)
         ]
         input.annotations.accept(coordinates)
-    }
-    
-    func isOpenable(currentCoordinate: CLLocationCoordinate2D, targetCoordinate: CLLocationCoordinate2D) -> Bool {
-        let currentLocation = CLLocation(latitude: currentCoordinate.latitude, longitude: currentCoordinate.longitude)
-        let targetLocation = CLLocation(latitude: targetCoordinate.latitude, longitude: targetCoordinate.longitude)
-        
-        let distance = currentLocation.distance(from: targetLocation)
-        if distance < 100.0 {
-            print("openable capsule")
-            return true
-        }
-        print("not openable capsule")
-        return false
     }
 }

@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 import MapKit
 
-class RxMKMapViewDelegateProxy: DelegateProxy<MKMapView, MKMapViewDelegate>, MKMapViewDelegate, DelegateProxyType {
+final class RxMKMapViewDelegateProxy: DelegateProxy<MKMapView, MKMapViewDelegate>, MKMapViewDelegate, DelegateProxyType {
     static func registerKnownImplementations() {
         self.register { mapView -> RxMKMapViewDelegateProxy in
             RxMKMapViewDelegateProxy(parentObject: mapView, delegateProxy: self)

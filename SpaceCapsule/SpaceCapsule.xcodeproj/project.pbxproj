@@ -55,7 +55,6 @@
 		288A8EBC29235B8E000229D2 /* CapsuleListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288A8EBB29235B8E000229D2 /* CapsuleListViewController.swift */; };
 		288A8EBE29235B97000229D2 /* CapsuleListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288A8EBD29235B97000229D2 /* CapsuleListViewModel.swift */; };
 		288A8EC029235BA5000229D2 /* CapsuleListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288A8EBF29235BA5000229D2 /* CapsuleListCoordinator.swift */; };
-		288A8EC229235BAF000229D2 /* CapsuleMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288A8EC129235BAF000229D2 /* CapsuleMapView.swift */; };
 		288A8EC429235BB7000229D2 /* CapsuleMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288A8EC329235BB7000229D2 /* CapsuleMapViewController.swift */; };
 		288A8EC629235BBD000229D2 /* CapsuleMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288A8EC529235BBD000229D2 /* CapsuleMapViewModel.swift */; };
 		288A8EC829235BCE000229D2 /* CapsuleMapCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288A8EC729235BCE000229D2 /* CapsuleMapCoordinator.swift */; };
@@ -85,11 +84,13 @@
 		4A05D0EC2924C04200A2EF50 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A05D0EB2924C04200A2EF50 /* GoogleService-Info.plist */; };
 		4A05D1052925CF2A00A2EF50 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A05D1042925CF2A00A2EF50 /* NetworkError.swift */; };
 		4A05D1082925CF4400A2EF50 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A05D1072925CF4400A2EF50 /* NetworkManager.swift */; };
+		4A1FEFF8292F1F1200A935BB /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1FEFF7292F1F1200A935BB /* CustomAnnotation.swift */; };
 		4A9E913F2925D50D00B7CC5C /* KakaoAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E913E2925D50D00B7CC5C /* KakaoAPIManager.swift */; };
 		4A9E91442925D51B00B7CC5C /* KakaoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E91422925D51B00B7CC5C /* KakaoResponse.swift */; };
 		4A9E91452925D51B00B7CC5C /* RequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E91432925D51B00B7CC5C /* RequestType.swift */; };
 		4A9E9147292A2A5A00B7CC5C /* CLLocationManager+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E9146292A2A5A00B7CC5C /* CLLocationManager+Rx.swift */; };
 		4A9E9149292A383900B7CC5C /* MKMapView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E9148292A383900B7CC5C /* MKMapView+Rx.swift */; };
+		4AF16AE7292B1F8400787C5C /* CustomAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF16AE6292B1F8400787C5C /* CustomAnnotationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -156,7 +157,6 @@
 		288A8EBB29235B8E000229D2 /* CapsuleListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleListViewController.swift; sourceTree = "<group>"; };
 		288A8EBD29235B97000229D2 /* CapsuleListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleListViewModel.swift; sourceTree = "<group>"; };
 		288A8EBF29235BA5000229D2 /* CapsuleListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleListCoordinator.swift; sourceTree = "<group>"; };
-		288A8EC129235BAF000229D2 /* CapsuleMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleMapView.swift; sourceTree = "<group>"; };
 		288A8EC329235BB7000229D2 /* CapsuleMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleMapViewController.swift; sourceTree = "<group>"; };
 		288A8EC529235BBD000229D2 /* CapsuleMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleMapViewModel.swift; sourceTree = "<group>"; };
 		288A8EC729235BCE000229D2 /* CapsuleMapCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleMapCoordinator.swift; sourceTree = "<group>"; };
@@ -186,11 +186,14 @@
 		4A05D0EB2924C04200A2EF50 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4A05D1042925CF2A00A2EF50 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		4A05D1072925CF4400A2EF50 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		4A1FEFF7292F1F1200A935BB /* CustomAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
 		4A9E913E2925D50D00B7CC5C /* KakaoAPIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KakaoAPIManager.swift; sourceTree = "<group>"; };
 		4A9E91422925D51B00B7CC5C /* KakaoResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KakaoResponse.swift; sourceTree = "<group>"; };
 		4A9E91432925D51B00B7CC5C /* RequestType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestType.swift; sourceTree = "<group>"; };
 		4A9E9146292A2A5A00B7CC5C /* CLLocationManager+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationManager+Rx.swift"; sourceTree = "<group>"; };
 		4A9E9148292A383900B7CC5C /* MKMapView+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKMapView+Rx.swift"; sourceTree = "<group>"; };
+		4AF16AE6292B1F8400787C5C /* CustomAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotationView.swift; sourceTree = "<group>"; };
+		4AF16AE8292B6B5C00787C5C /* running.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = running.gpx; sourceTree = "<group>"; };
 		59F567F72923BE1E00F756B2 /* SpaceCapsule.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SpaceCapsule.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -229,6 +232,8 @@
 			isa = PBXGroup;
 			children = (
 				0DCB22922924CE58002CB095 /* CustomTabBarController.swift */,
+				4A1FEFF7292F1F1200A935BB /* CustomAnnotation.swift */,
+				4AF16AE6292B1F8400787C5C /* CustomAnnotationView.swift */,
 				0DCB22942924CE61002CB095 /* Theme */,
 			);
 			path = Components;
@@ -298,6 +303,7 @@
 			isa = PBXGroup;
 			children = (
 				0D8AD3F029264CA800AA305D /* Key.swift */,
+				4AF16AE8292B6B5C00787C5C /* running.gpx */,
 			);
 			path = Private;
 			sourceTree = "<group>";
@@ -387,7 +393,6 @@
 		288A8E9429235989000229D2 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
-				4A05D0ED2924C30200A2EF50 /* Temp */,
 				288A8E95292359A6000229D2 /* Auth */,
 				288A8EAA29235B0E000229D2 /* TabBar */,
 			);
@@ -454,7 +459,6 @@
 		288A8EAC29235B25000229D2 /* CapsuleMap */ = {
 			isa = PBXGroup;
 			children = (
-				288A8EC129235BAF000229D2 /* CapsuleMapView.swift */,
 				288A8EC329235BB7000229D2 /* CapsuleMapViewController.swift */,
 				288A8EC529235BBD000229D2 /* CapsuleMapViewModel.swift */,
 				288A8EC729235BCE000229D2 /* CapsuleMapCoordinator.swift */,
@@ -558,13 +562,6 @@
 				288A8EFE292360BC000229D2 /* CapsuleDetailCoordinator.swift */,
 			);
 			path = CapsuleDetail;
-			sourceTree = "<group>";
-		};
-		4A05D0ED2924C30200A2EF50 /* Temp */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Temp;
 			sourceTree = "<group>";
 		};
 		4A05D1032925CF1800A2EF50 /* Error */ = {
@@ -772,6 +769,7 @@
 				288A8ECA29235BDC000229D2 /* HomeView.swift in Sources */,
 				28049CEB29237E96002389BD /* BaseViewModel.swift in Sources */,
 				288A8EFF292360BC000229D2 /* CapsuleDetailCoordinator.swift in Sources */,
+				4AF16AE7292B1F8400787C5C /* CustomAnnotationView.swift in Sources */,
 				288A8EFB292360A4000229D2 /* CapsuleDetailViewController.swift in Sources */,
 				288A8EF529236086000229D2 /* CapsuleOpenViewModel.swift in Sources */,
 				288A8EA329235ADE000229D2 /* NicknameView.swift in Sources */,
@@ -779,6 +777,7 @@
 				288A8ED729235C77000229D2 /* CapsuleCreateViewModel.swift in Sources */,
 				0D9D672E292486780038F529 /* ThemeLabel.swift in Sources */,
 				288A8EF32923607D000229D2 /* CapsuleOpenViewController.swift in Sources */,
+				4A1FEFF8292F1F1200A935BB /* CustomAnnotation.swift in Sources */,
 				288A8EE029235E36000229D2 /* CapsuleLocateViewController.swift in Sources */,
 				28049CE529236EEC002389BD /* CapsuleAccessCoordinator.swift in Sources */,
 				0D46DEFA2923E1180045400A /* UIFont+.swift in Sources */,
@@ -809,7 +808,6 @@
 				288A8EB429235B62000229D2 /* ProfileViewController.swift in Sources */,
 				0DCB22932924CE58002CB095 /* CustomTabBarController.swift in Sources */,
 				4A9E9147292A2A5A00B7CC5C /* CLLocationManager+Rx.swift in Sources */,
-				288A8EC229235BAF000229D2 /* CapsuleMapView.swift in Sources */,
 				288A8EA129235AA1000229D2 /* SignInCoordinator.swift in Sources */,
 				4A9E913F2925D50D00B7CC5C /* KakaoAPIManager.swift in Sources */,
 				288A8ED929235C83000229D2 /* CapsuleCreateCoordinator.swift in Sources */,
@@ -1016,6 +1014,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1045,6 +1044,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
