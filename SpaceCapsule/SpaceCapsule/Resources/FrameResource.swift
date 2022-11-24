@@ -27,4 +27,5 @@ enum FrameResource {
     static let capsuleCellHeight: CGFloat = 210.0
     
     static let sortPolicySelectionSheetHeight: CGFloat = 250.0
+    static let sortPolicySelectionCellHeight: CGFloat = 40.0
 }
