@@ -12,13 +12,16 @@ class CapsuleCloseCoordinator: Coordinator {
     var children: [Coordinator] = []
     var navigationController: CustomNavigationController?
 
-    init(navigationController: CustomNavigationController?) {
+    var capsule: Capsule
+
+    init(navigationController: CustomNavigationController?, capsule: Capsule) {
         self.navigationController = navigationController
+        self.capsule = capsule
     }
 
     func start() {
         let capsuleCloseViewController = CapsuleCloseViewController()
-        let capsuleCloseViewModel = CapsuleCloseViewModel()
+        let capsuleCloseViewModel = CapsuleCloseViewModel(capsule: capsule)
 
         capsuleCloseViewModel.coordinator = self
         capsuleCloseViewController.viewModel = capsuleCloseViewModel

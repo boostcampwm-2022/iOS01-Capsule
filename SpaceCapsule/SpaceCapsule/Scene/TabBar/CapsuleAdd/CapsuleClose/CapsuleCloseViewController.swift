@@ -12,25 +12,38 @@ import UIKit
 final class CapsuleCloseViewController: UIViewController, BaseViewController {
     var disposeBag = DisposeBag()
     var viewModel: CapsuleCloseViewModel?
-    let capsuleCloseView = CapsuleCloseView()
+    let mainView = CapsuleCloseView()
 
     override func loadView() {
-        view = capsuleCloseView
+        view = mainView
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         bind()
+
+        if let capsule = viewModel?.output.capsule {
+            mainView.configure(item:
+                CapsuleCloseView.Item(
+                    closedDateString: capsule.closedDate,
+                    memoryDateString: capsule.memoryDate,
+                    address: capsule.address,
+                    thumbnailImageURL: capsule.images[0]
+                )
+            )
+        }
+
+        print(viewModel?.output.capsule)
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        capsuleCloseView.animate()
+        mainView.animate()
     }
 
     func bind() {
-        capsuleCloseView.closeButton.rx.tap
+        mainView.closeButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel?.input.closeButtonTapped.onNext(())
             })

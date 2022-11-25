@@ -77,7 +77,7 @@ final class CapsuleOpenView: UIView, BaseView {
             $0.centerX.equalToSuperview()
             $0.centerY.equalToSuperview().multipliedBy(3)
             $0.width.equalTo(FrameResource.capsuleThumbnailWidth)
-            $0.height.equalTo(FrameResource.capsuleThumbnailHeigth)
+            $0.height.equalTo(FrameResource.capsuleThumbnailHeight)
         }
         
         thumbnailImageView.snp.makeConstraints {

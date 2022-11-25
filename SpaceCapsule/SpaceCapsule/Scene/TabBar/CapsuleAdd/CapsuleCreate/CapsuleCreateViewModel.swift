@@ -65,34 +65,6 @@ final class CapsuleCreateViewModel: BaseViewModel {
     }
 
     private func bind() {
-        // 닫기
-        input.close.asObservable()
-            .subscribe(onNext: { [weak self] in
-                self?.coordinator?.finish()
-            })
-            .disposed(by: disposeBag)
-
-        // 완료
-        input.urlArray
-            .withLatestFrom(input.capsuleDataObservable)
-            .withUnretained(self)
-            .subscribe(onNext: { weakSelf, capsule in
-                guard let uid = FirebaseAuthManager.shared.currentUser?.uid else {
-                    return
-                }
-
-                FirestoreManager.shared.uploadCapsule(uid: uid, capsule: capsule) { error in
-                    weakSelf.output.indicatorState.onNext(false)
-
-                    guard error == nil else {
-                        return
-                    }
-
-                    weakSelf.coordinator?.showCapsuleClose()
-                }
-            })
-            .disposed(by: disposeBag)
-
         input.urlDict
             .subscribe(onNext: { [weak self] dict in
                 if dict.count == self?.input.imageData.value.compactMap({ $0.data }).count {
@@ -105,6 +77,55 @@ final class CapsuleCreateViewModel: BaseViewModel {
             })
             .disposed(by: disposeBag)
 
+        input.urlArray
+            .withLatestFrom(input.capsuleDataObservable)
+            .withUnretained(self)
+            .subscribe(onNext: { weakSelf, capsule in
+                guard let uid = FirebaseAuthManager.shared.currentUser?.uid else {
+                    return
+                }
+
+                FirestoreManager.shared.uploadCapsule(uid: uid, capsule: capsule) { error in
+                    weakSelf.output.indicatorState.onNext(false)
+
+                    guard error == nil else { return }
+
+                    weakSelf.coordinator?.showCapsuleClose(capsule: capsule)
+                }
+            })
+            .disposed(by: disposeBag)
+
+        bindInput()
+        bindOutput()
+    }
+
+    private func bindOutput() {
+        // 로딩 indicator
+        output.indicatorState
+            .withUnretained(self)
+            .subscribe(onNext: { weakSelf, state in
+                guard let coordinator = weakSelf.coordinator else {
+                    return
+                }
+
+                if state {
+                    coordinator.startIndicator()
+                } else {
+                    coordinator.stopIndicator()
+                }
+            })
+            .disposed(by: disposeBag)
+    }
+
+    private func bindInput() {
+        // 닫기
+        input.close.asObservable()
+            .subscribe(onNext: { [weak self] in
+                self?.coordinator?.finish()
+            })
+            .disposed(by: disposeBag)
+
+        // 완료 버튼 클릭
         input.done
             .withLatestFrom(input.imageData)
             .compactMap { $0.compactMap { $0.data } }
@@ -123,7 +144,6 @@ final class CapsuleCreateViewModel: BaseViewModel {
 
                             urlDict[index] = $0
                             urlDictSubject.onNext(urlDict)
-
                         })
                         .disposed(by: self.disposeBag)
                 }
@@ -141,22 +161,6 @@ final class CapsuleCreateViewModel: BaseViewModel {
         input.tapCapsuleLocate.asObservable()
             .subscribe(onNext: { [weak self] in
                 self?.coordinator?.showCapsuleLocate()
-            })
-            .disposed(by: disposeBag)
-
-        bindOutput()
-    }
-
-    private func bindOutput() {
-        output.indicatorState
-            .withUnretained(self)
-            .subscribe(onNext: { weakSelf, state in
-                guard let coordinator = weakSelf.coordinator else {
-                    return
-                }
-
-                if state { coordinator.startIndicator() }
-                else { coordinator.stopIndicator() }
             })
             .disposed(by: disposeBag)
     }

@@ -19,11 +19,15 @@ class CapsuleCloseViewModel: BaseViewModel {
     struct Input {
         var closeButtonTapped = PublishSubject<Void>()
     }
-    
-    struct Output {}
 
-    init() {
+    struct Output {
+        var capsule: Capsule?
+    }
+
+    init(capsule: Capsule) {
         bind()
+
+        output.capsule = capsule
     }
 
     private func bind() {

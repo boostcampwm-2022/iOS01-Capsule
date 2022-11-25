@@ -64,12 +64,12 @@ final class CapsuleCreateCoordinator: Coordinator {
         children.append(capsuleLocateCoordinator)
     }
 
-    func showCapsuleClose() {
+    func showCapsuleClose(capsule: Capsule) {
         guard let parent = parent as? CapsuleAddCoordinator else {
             return
         }
 
-        parent.showCapsuleClose()
+        parent.showCapsuleClose(capsule: capsule)
     }
 
     func finish() {
@@ -77,20 +77,10 @@ final class CapsuleCreateCoordinator: Coordinator {
     }
 
     func startIndicator() {
-        guard let navigation = navigationController as? CustomNavigationController else {
-            print("failed start")
-            return
-        }
-
-        navigation.addIndicatorView()
+        navigationController?.addIndicatorView()
     }
 
     func stopIndicator() {
-        guard let navigation = navigationController as? CustomNavigationController else {
-            print("failed stopㅎ")
-            return
-        }
-
-        navigation.removeIndicatorView()
+        navigationController?.removeIndicatorView()
     }
 }
