@@ -17,6 +17,7 @@ final class CustomAnnotationView: MKAnnotationView {
     
     override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
+        centerOffset = CGPoint(x: 0, y: -frame.size.height / 2)
         configure()
         update(for: annotation)
     }
@@ -34,7 +35,14 @@ final class CustomAnnotationView: MKAnnotationView {
     }
     
     func update(for annotation: MKAnnotation?) {
-        image = (annotation as? CustomAnnotation)?.pinImage
-        backgroundColor = ((annotation as? CustomAnnotation)?.isOpenable ?? true) ? UIColor.systemRed : UIColor.systemGray
+        let pinImage: UIImage?
+        let resizingSize = CGSize(width: 40, height: 35)
+
+        UIGraphicsBeginImageContext(resizingSize)
+        pinImage = (annotation as? CustomAnnotation)?.pinImage
+        pinImage?.draw(in: CGRect(origin: .zero, size: resizingSize))
+
+        let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
+        image = resizedImage
     }
 }

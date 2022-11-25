@@ -10,9 +10,12 @@ import MapKit
 
 final class CustomAnnotation: MKPointAnnotation {
     weak var annotationView: CustomAnnotationView?
-    var pinImage = UIImage(systemName: "circle")
     var isOpenable: Bool = false {
         didSet { annotationView?.update(for: self) }
+    }
+    
+    var pinImage: UIImage? {
+        return isOpenable ? UIImage(named: "logo") : UIImage(named: "logoGray")
     }
     
     init(coordinate: CLLocationCoordinate2D) {
