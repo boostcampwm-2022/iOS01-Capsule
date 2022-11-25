@@ -83,11 +83,11 @@ final class CapsuleCreateViewModel: BaseViewModel {
 
                 FirestoreManager.shared.uploadCapsule(uid: uid, capsule: capsule) { error in
                     weakSelf.output.indicatorState.onNext(false)
-                    
+
                     guard error == nil else {
                         return
                     }
-                    
+
                     weakSelf.coordinator?.showCapsuleClose()
                 }
             })
@@ -95,13 +95,11 @@ final class CapsuleCreateViewModel: BaseViewModel {
 
         input.urlDict
             .subscribe(onNext: { [weak self] dict in
-                print("url dict -> url array 호출")
                 if dict.count == self?.input.imageData.value.compactMap({ $0.data }).count {
                     let sortedArray = dict
                         .sorted(by: { $0.key < $1.key })
                         .compactMap { $0.value.absoluteString }
-                    
-                    print("흠냐")
+
                     self?.input.urlArray.onNext(sortedArray)
                 }
             })
@@ -143,6 +141,22 @@ final class CapsuleCreateViewModel: BaseViewModel {
         input.tapCapsuleLocate.asObservable()
             .subscribe(onNext: { [weak self] in
                 self?.coordinator?.showCapsuleLocate()
+            })
+            .disposed(by: disposeBag)
+
+        bindOutput()
+    }
+
+    private func bindOutput() {
+        output.indicatorState
+            .withUnretained(self)
+            .subscribe(onNext: { weakSelf, state in
+                guard let coordinator = weakSelf.coordinator else {
+                    return
+                }
+
+                if state { coordinator.startIndicator() }
+                else { coordinator.stopIndicator() }
             })
             .disposed(by: disposeBag)
     }

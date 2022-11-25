@@ -30,7 +30,7 @@ enum FirebaseAuthError: LocalizedError {
 final class AppCoordinator: Coordinator {
     var parent: Coordinator?
     var children: [Coordinator] = []
-    var navigationController: UINavigationController?
+    var navigationController: CustomNavigationController?
     
     var window: UIWindow?
     
@@ -91,7 +91,7 @@ final class AppCoordinator: Coordinator {
     }
     
     func moveToAuth(authFlow: AuthFlow) {
-        let navigationController = UINavigationController()
+        let navigationController = CustomNavigationController()
         let authCoordinator = AuthCoordinator(navigationController: navigationController)
         authCoordinator.parent = self
         authCoordinator.flow = authFlow

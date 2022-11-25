@@ -9,6 +9,15 @@ import UIKit
 
 // 키보드 높이에 맞게 scroll 가능한
 final class CustomScrollView: UIScrollView {
+//    override init(frame: CGRect) {
+//        super.init(frame: frame)
+//
+//    }
+//
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+
     func addKeyboardNotification() {
         NotificationCenter.default.addObserver(
             self,
@@ -45,12 +54,12 @@ final class CustomScrollView: UIScrollView {
         }
 
         let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
-        self.contentInset = contentInsets
-        self.scrollIndicatorInsets = contentInsets
+        contentInset = contentInsets
+        scrollIndicatorInsets = contentInsets
     }
 
     @objc private func keyboardWillHide(notification: NSNotification) {
-        self.contentInset = .zero
-        self.scrollIndicatorInsets = .zero
+        contentInset = .zero
+        scrollIndicatorInsets = .zero
     }
 }

@@ -11,11 +11,11 @@ import UIKit
 final class CapsuleLocateCoordinator: Coordinator {
     var parent: Coordinator?
     var children: [Coordinator] = []
-    var navigationController: UINavigationController?
+    var navigationController: CustomNavigationController?
 
     var viewController: CapsuleLocateViewController?
 
-    init(navigationController: UINavigationController?) {
+    init(navigationController: CustomNavigationController?) {
         self.navigationController = navigationController
     }
 

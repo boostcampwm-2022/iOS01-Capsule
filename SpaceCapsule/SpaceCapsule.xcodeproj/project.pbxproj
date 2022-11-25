@@ -35,6 +35,7 @@
 		0D90DAFE29239CA0000DCC84 /* OwnglyphHaesomChae.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0D90DAFD29239C9F000DCC84 /* OwnglyphHaesomChae.otf */; };
 		0D9D672E292486780038F529 /* ThemeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9D672D292486780038F529 /* ThemeLabel.swift */; };
 		0D9D67312924945D0038F529 /* FrameResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9D67302924945D0038F529 /* FrameResource.swift */; };
+		0DA05E1D29308B8400B08FA5 /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA05E1C29308B8400B08FA5 /* CustomNavigationController.swift */; };
 		0DA6610D292778BE00CF3563 /* ThemeTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA6610C292778BE00CF3563 /* ThemeTextField.swift */; };
 		0DA9F6912928E9B900454932 /* AddImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA9F6902928E9B900454932 /* AddImageCell.swift */; };
 		0DA9F6932928E9CB00454932 /* AddImageCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA9F6922928E9CB00454932 /* AddImageCollectionView.swift */; };
@@ -164,6 +165,9 @@
 		0D90DAFD29239C9F000DCC84 /* OwnglyphHaesomChae.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = OwnglyphHaesomChae.otf; sourceTree = "<group>"; };
 		0D9D672D292486780038F529 /* ThemeLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeLabel.swift; sourceTree = "<group>"; };
 		0D9D67302924945D0038F529 /* FrameResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameResource.swift; sourceTree = "<group>"; };
+		0DA05E1A29308B2D00B08FA5 /* SpaceCapsuleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpaceCapsuleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0DA05E1B29308B2D00B08FA5 /* SpaceCapsuleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpaceCapsuleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0DA05E1C29308B8400B08FA5 /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
 		0DA6610C292778BE00CF3563 /* ThemeTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeTextField.swift; sourceTree = "<group>"; };
 		0DA9F6902928E9B900454932 /* AddImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddImageCell.swift; sourceTree = "<group>"; };
 		0DA9F6922928E9CB00454932 /* AddImageCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddImageCollectionView.swift; sourceTree = "<group>"; };
@@ -176,8 +180,6 @@
 		0DB746B3292E268A005FF249 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		0DCB22922924CE58002CB095 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		0DD83D07292F0D390020F15C /* SpaceCapsule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceCapsule.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		0DD83D08292F0D390020F15C /* SpaceCapsuleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = SpaceCapsuleTests.xctest; path = "/Users/trumanfromkorea/Develop/Boostcamp/Membership/iOS01-Capsule/SpaceCapsule/build/Debug-iphoneos/SpaceCapsuleTests.xctest"; sourceTree = "<absolute>"; };
-		0DD83D09292F0D390020F15C /* SpaceCapsuleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = SpaceCapsuleUITests.xctest; path = "/Users/trumanfromkorea/Develop/Boostcamp/Membership/iOS01-Capsule/SpaceCapsule/build/Debug-iphoneos/SpaceCapsuleUITests.xctest"; sourceTree = "<absolute>"; };
 		0DD83D0E292F1BAD0020F15C /* CustomScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScrollView.swift; sourceTree = "<group>"; };
 		0DD83D10292F2EC80020F15C /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		0DD83D12292F51960020F15C /* LoadingIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicatorView.swift; sourceTree = "<group>"; };
@@ -290,9 +292,10 @@
 		0D46DEFC2923E4800045400A /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				0DA05E1C29308B8400B08FA5 /* CustomNavigationController.swift */,
 				0DD83D0E292F1BAD0020F15C /* CustomScrollView.swift */,
-				0DD83D12292F51960020F15C /* LoadingIndicatorView.swift */,
 				0DCB22922924CE58002CB095 /* CustomTabBarController.swift */,
+				0DD83D12292F51960020F15C /* LoadingIndicatorView.swift */,
 				0DCB22942924CE61002CB095 /* Theme */,
 			);
 			path = Components;
@@ -315,6 +318,8 @@
 				0D6CA34A292216A400E02393 /* SpaceCapsuleTests */,
 				0D6CA354292216A400E02393 /* SpaceCapsuleUITests */,
 				0DD83D07292F0D390020F15C /* SpaceCapsule.app */,
+				0DA05E1A29308B2D00B08FA5 /* SpaceCapsuleTests.xctest */,
+				0DA05E1B29308B2D00B08FA5 /* SpaceCapsuleUITests.xctest */,
 			);
 			sourceTree = "<group>";
 		};
@@ -776,7 +781,7 @@
 			);
 			name = SpaceCapsuleTests;
 			productName = SpaceCapsuleTests;
-			productReference = 0DD83D08292F0D390020F15C /* SpaceCapsuleTests.xctest */;
+			productReference = 0DA05E1A29308B2D00B08FA5 /* SpaceCapsuleTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		0D6CA350292216A400E02393 /* SpaceCapsuleUITests */ = {
@@ -794,7 +799,7 @@
 			);
 			name = SpaceCapsuleUITests;
 			productName = SpaceCapsuleUITests;
-			productReference = 0DD83D09292F0D390020F15C /* SpaceCapsuleUITests.xctest */;
+			productReference = 0DA05E1B29308B2D00B08FA5 /* SpaceCapsuleUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -976,6 +981,7 @@
 				288A8EB229235B5A000229D2 /* ProfileView.swift in Sources */,
 				599C1A48292CC99A00517E93 /* KingReceiver.swift in Sources */,
 				599C1A49292CC99A00517E93 /* ImageCache.swift in Sources */,
+				0DA05E1D29308B8400B08FA5 /* CustomNavigationController.swift in Sources */,
 				288A8ED029235BF9000229D2 /* HomeCoordinator.swift in Sources */,
 				0D4C11392927495900B1C2B6 /* UIViewControllerPreview.swift in Sources */,
 				288A8EA529235AE8000229D2 /* NicknameViewController.swift in Sources */,

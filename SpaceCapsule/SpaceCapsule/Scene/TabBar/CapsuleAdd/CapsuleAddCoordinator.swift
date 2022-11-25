@@ -11,12 +11,12 @@ import UIKit
 final class CapsuleAddCoordinator: Coordinator {
     var parent: Coordinator?
     var children: [Coordinator] = []
-    var navigationController: UINavigationController?
+    var navigationController: CustomNavigationController?
 
     var disposeBag = DisposeBag()
 
     init() {
-        navigationController = .init()
+        navigationController = CustomNavigationController()
     }
 
     func start() {

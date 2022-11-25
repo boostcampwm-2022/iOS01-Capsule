@@ -25,7 +25,7 @@ final class LoadingIndicatorView: UIView, BaseView {
     }
     
     func configure() {
-        backgroundColor = .themeGray300?.withAlphaComponent(0.5)
+        backgroundColor = .black.withAlphaComponent(0.3)
         indicator.startAnimating()
         indicator.color = .themeColor300
     }

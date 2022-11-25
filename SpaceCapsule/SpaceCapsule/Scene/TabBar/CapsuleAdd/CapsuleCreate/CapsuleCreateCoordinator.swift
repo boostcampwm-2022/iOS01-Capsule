@@ -11,7 +11,7 @@ import UIKit
 final class CapsuleCreateCoordinator: Coordinator {
     var parent: Coordinator?
     var children: [Coordinator] = []
-    var navigationController: UINavigationController?
+    var navigationController: CustomNavigationController?
 
     var disposeBag = DisposeBag()
 
@@ -19,7 +19,7 @@ final class CapsuleCreateCoordinator: Coordinator {
     var geopointObserver: PublishSubject<GeoPoint>?
     var dateStringObserver: BehaviorSubject<String>?
 
-    init(navigationController: UINavigationController?) {
+    init(navigationController: CustomNavigationController?) {
         self.navigationController = navigationController
     }
 
@@ -74,5 +74,23 @@ final class CapsuleCreateCoordinator: Coordinator {
 
     func finish() {
         parent?.navigationController?.dismiss(animated: true)
+    }
+
+    func startIndicator() {
+        guard let navigation = navigationController as? CustomNavigationController else {
+            print("failed start")
+            return
+        }
+
+        navigation.addIndicatorView()
+    }
+
+    func stopIndicator() {
+        guard let navigation = navigationController as? CustomNavigationController else {
+            print("failed stopㅎ")
+            return
+        }
+
+        navigation.removeIndicatorView()
     }
 }
