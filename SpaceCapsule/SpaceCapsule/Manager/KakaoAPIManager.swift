@@ -12,6 +12,8 @@ final class KakaoAPIManager {
     
     private let baseURLString = "https://dapi.kakao.com/v2/local"
     
+    private init () {}
+    
     enum APIType {
         case coordToAddress(Coord)
         typealias Coord = (x: String, y: String)

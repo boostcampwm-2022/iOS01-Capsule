@@ -52,11 +52,11 @@ final class CapsuleLocateViewController: UIViewController, BaseViewController {
     func bind() {
         viewModel.input.isDragging
             .withUnretained(self)
-            .bind { owner, isDragging in
+            .bind { weakSelf, isDragging in
                 if isDragging {
-                    owner.capsuleMapView.cursor.backgroundColor = .lightGray
+                    weakSelf.capsuleMapView.cursor.backgroundColor = .lightGray
                 } else {
-                    owner.capsuleMapView.cursor.backgroundColor = .green
+                    weakSelf.capsuleMapView.cursor.backgroundColor = .green
                     
                 }
             }.disposed(by: disposeBag)

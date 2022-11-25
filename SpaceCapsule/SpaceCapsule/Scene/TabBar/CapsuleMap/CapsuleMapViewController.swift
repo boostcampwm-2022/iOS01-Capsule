@@ -66,16 +66,16 @@ final class CapsuleMapViewController: UIViewController, BaseViewController {
     private func bindNotification() {
         NotificationCenter.default.rx.notification(UIApplication.didEnterBackgroundNotification)
             .withUnretained(self)
-            .subscribe(onNext: { owner, _ in
-                owner.locationManager.stopUpdatingLocation()
+            .subscribe(onNext: { weakSelf, _ in
+                weakSelf.locationManager.stopUpdatingLocation()
             })
             .disposed(by: disposeBag)
         
         NotificationCenter.default.rx.notification(UIApplication.willEnterForegroundNotification)
             .withUnretained(self)
             .subscribe(on: MainScheduler.instance)
-            .subscribe(onNext: { owner, _ in
-                owner.locationManager.startUpdatingLocation()
+            .subscribe(onNext: { weakSelf, _ in
+                weakSelf.locationManager.startUpdatingLocation()
             })
             .disposed(by: disposeBag)
     }
@@ -83,40 +83,40 @@ final class CapsuleMapViewController: UIViewController, BaseViewController {
     func bind() {
         locationManager.rx.didChangeAuthorization.asObservable()
             .withUnretained(self)
-            .subscribe(onNext: { owner, status in
-                owner.implementStatus(status)
+            .subscribe(onNext: { weakSelf, status in
+                weakSelf.implementStatus(status)
             })
             .disposed(by: disposeBag)
         
         viewModel?.input.annotations
             .withUnretained(self)
-            .bind { owner, coordinates in
-                owner.removeAllAnnotations()
-                owner.addInitialAnnotations(coordinates: coordinates)
+            .bind { weakSelf, coordinates in
+                weakSelf.removeAllAnnotations()
+                weakSelf.addInitialAnnotations(coordinates: coordinates)
             }
             .disposed(by: disposeBag)
     
         locationManager.rx.didUpdateLocations.asObservable()
             .withUnretained(self)
-            .subscribe(onNext: { owner, _ in
-                owner.markIfOpenable()
-                if let coordinate = owner.locationManager.location?.coordinate {
-                    owner.addCircleLocation(at: coordinate)
+            .subscribe(onNext: { weakSelf, _ in
+                weakSelf.markIfOpenable()
+                if let coordinate = weakSelf.locationManager.location?.coordinate {
+                    weakSelf.addCircleLocation(at: coordinate)
                 }
             })
             .disposed(by: disposeBag)
         
         locationManager.rx.willExitMonitoringRegion.asObservable()
             .withUnretained(self)
-            .subscribe(onNext: { owner, region in
-                owner.resetMonitoringRegion(from: region)
+            .subscribe(onNext: { weakSelf, region in
+                weakSelf.resetMonitoringRegion(from: region)
             })
             .disposed(by: disposeBag)
         
         capsuleMapView.rx.calloutAccessoryControlTapped.asObservable()
             .withUnretained(self)
-            .subscribe(onNext: { owner, _ in
-                owner.presentToDetailAlert()
+            .subscribe(onNext: { weakSelf, _ in
+                weakSelf.presentToDetailAlert()
             })
             .disposed(by: disposeBag)
     }
