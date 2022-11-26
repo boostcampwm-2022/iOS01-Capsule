@@ -52,52 +52,26 @@ final class CapsuleLocateViewModel: BaseViewModel {
                 self?.coordinator?.done(address: address, geopoint: geopoint)
             })
             .disposed(by: disposeBag)
-        
+
         output.geopoint
             .subscribe(onNext: { [weak self] in
-                self?.fetchLocation(x: $0.longitude, y: $0.latitude)
+                self?.fetchLocation(latitude: $0.latitude, longitude: $0.longitude)
             })
             .disposed(by: disposeBag)
-        
-//        input.done
-//            .withLatestFrom(output.address)
-//            .subscribe(onNext: { [weak self] in
-//                self?.coordinator?.done(address: $0)
-//            })
-//            .disposed(by: disposeBag)
     }
 
-    func fetchLocation(x: Double, y: Double) {
-        do {
-            let locationRequest = try KakaoAPIManager.shared.getRequest(for: .coordToAddress((x: String(x), y: String(y))))
-
-            let observable: Observable<Result<KakaoResponse, NetworkError>> = NetworkManager.shared.send(request: locationRequest)
-
-            observable
-                .map { result -> [Document] in
-                    switch result {
-                    case let .success(value):
-                        return value.documents
-
-                    case let .failure(error):
-                        print(error)
-                        return []
-                    }
+    func fetchLocation(latitude: Double, longitude: Double) {
+        LocationManager.shared
+            .reverseGeocode(with: GeoPoint(latitude: latitude, longitude: longitude))
+            .subscribe(
+                onNext: { [weak self] address in
+                    self?.output.fullAddress.accept(address.full)
+                    self?.output.simpleAddress.onNext(address.simple)
+                },
+                onError: { [weak self] error in
+                    self?.output.fullAddress.accept(error.localizedDescription)
                 }
-                .observe(on: MainScheduler())
-                .subscribe(onNext: { [weak self] in
-                    let address = $0.first?.address
-
-                    if let address {
-                        self?.output.address.onNext(address)
-                    }
-
-                    self?.output.fullAddress.accept(address?.addressName)
-                    self?.output.simpleAddress.onNext("\(address?.region1DepthName ?? "") \(address?.region2DepthName ?? "")")
-                })
-                .disposed(by: disposeBag)
-        } catch {
-            print(error)
-        }
+            )
+            .disposed(by: disposeBag)
     }
 }

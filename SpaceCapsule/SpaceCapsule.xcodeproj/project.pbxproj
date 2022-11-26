@@ -49,6 +49,9 @@
 		0DCEED2D29320B28006EB2B4 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCEED2C29320B28006EB2B4 /* UILabel+.swift */; };
 		0DCEED2F29320EAB006EB2B4 /* CustomCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCEED2E29320EAB006EB2B4 /* CustomCodable.swift */; };
 		0DCEED312932101B006EB2B4 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCEED302932101B006EB2B4 /* UserInfo.swift */; };
+		0DCEED332932177F006EB2B4 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCEED322932177F006EB2B4 /* LocationManager.swift */; };
+		0DCEED3529324188006EB2B4 /* LocationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCEED3429324188006EB2B4 /* LocationError.swift */; };
+		0DCEED372932538F006EB2B4 /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCEED362932538F006EB2B4 /* Array+.swift */; };
 		0DD83D0F292F1BAD0020F15C /* CustomScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD83D0E292F1BAD0020F15C /* CustomScrollView.swift */; };
 		0DD83D11292F2EC80020F15C /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD83D10292F2EC80020F15C /* UIViewController+.swift */; };
 		0DD83D13292F51960020F15C /* LoadingIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD83D12292F51960020F15C /* LoadingIndicatorView.swift */; };
@@ -183,6 +186,9 @@
 		0DCEED2C29320B28006EB2B4 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		0DCEED2E29320EAB006EB2B4 /* CustomCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCodable.swift; sourceTree = "<group>"; };
 		0DCEED302932101B006EB2B4 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		0DCEED322932177F006EB2B4 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		0DCEED3429324188006EB2B4 /* LocationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationError.swift; sourceTree = "<group>"; };
+		0DCEED362932538F006EB2B4 /* Array+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+.swift"; sourceTree = "<group>"; };
 		0DD83D07292F0D390020F15C /* SpaceCapsule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceCapsule.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DD83D0E292F1BAD0020F15C /* CustomScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScrollView.swift; sourceTree = "<group>"; };
 		0DD83D10292F2EC80020F15C /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
@@ -398,6 +404,7 @@
 				0DB746B3292E268A005FF249 /* Date+.swift */,
 				0DD83D10292F2EC80020F15C /* UIViewController+.swift */,
 				0DA9F6962928EB9000454932 /* UICollectionReusableView+.swift */,
+				0DCEED362932538F006EB2B4 /* Array+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -668,6 +675,7 @@
 			isa = PBXGroup;
 			children = (
 				4A05D1042925CF2A00A2EF50 /* NetworkError.swift */,
+				0DCEED3429324188006EB2B4 /* LocationError.swift */,
 				0DB746A9292DE94B005FF249 /* FBAuthError.swift */,
 				0DB746AB292DE965005FF249 /* FBStorageError.swift */,
 			);
@@ -709,6 +717,7 @@
 				599C1A38292CC99900517E93 /* UserDefaultsManager.swift */,
 				0D70613C292CD23A0077787E /* Firebase */,
 				599C1A39292CC99900517E93 /* KingReceiver */,
+				0DCEED322932177F006EB2B4 /* LocationManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -913,6 +922,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				599C1A51292CCB4500517E93 /* AuthCoordinator.swift in Sources */,
+				0DCEED372932538F006EB2B4 /* Array+.swift in Sources */,
 				288A8ECA29235BDC000229D2 /* HomeView.swift in Sources */,
 				0DA9F6972928EB9000454932 /* UICollectionReusableView+.swift in Sources */,
 				28049CEB29237E96002389BD /* BaseViewModel.swift in Sources */,
@@ -924,6 +934,7 @@
 				0DCEED2F29320EAB006EB2B4 /* CustomCodable.swift in Sources */,
 				288A8EA329235ADE000229D2 /* NicknameView.swift in Sources */,
 				0DA9F6952928EA4900454932 /* AddImageButtonCell.swift in Sources */,
+				0DCEED332932177F006EB2B4 /* LocationManager.swift in Sources */,
 				0D70613E292CD24D0077787E /* FirebaseStorageManager.swift in Sources */,
 				288A8EBA29235B86000229D2 /* CapsuleListView.swift in Sources */,
 				288A8ED729235C77000229D2 /* CapsuleCreateViewModel.swift in Sources */,
@@ -953,6 +964,7 @@
 				599C1A4C292CC99A00517E93 /* ImageCacheFactory.swift in Sources */,
 				288A8E9B29235A6E000229D2 /* SignInView.swift in Sources */,
 				288A8ED529235C6F000229D2 /* CapsuleCreateViewController.swift in Sources */,
+				0DCEED3529324188006EB2B4 /* LocationError.swift in Sources */,
 				288A8EC629235BBD000229D2 /* CapsuleMapViewModel.swift in Sources */,
 				0D77D7C9292B5D490038D054 /* SelectButton.swift in Sources */,
 				4A9E91452925D51B00B7CC5C /* RequestType.swift in Sources */,

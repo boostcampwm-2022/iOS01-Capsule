@@ -76,18 +76,6 @@ final class CapsuleLocateViewController: UIViewController, BaseViewController {
         configureGesture()
     }
 
-    private func configureLocationManager() {
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
-    }
-
-    private func configureMap() {
-        mainView.locateMap.delegate = self
-        mainView.locateMap.mapType = MKMapType.standard
-    }
-
     private func goToCurrentLocation() {
         guard let center = locationManager.location?.coordinate else {
             return
@@ -100,9 +88,16 @@ final class CapsuleLocateViewController: UIViewController, BaseViewController {
     }
 }
 
-// MARK: - MKMapView, CLLocationManager
+// MARK: - CLLocationManager
 
-extension CapsuleLocateViewController: MKMapViewDelegate, CLLocationManagerDelegate {
+extension CapsuleLocateViewController: CLLocationManagerDelegate {
+    private func configureLocationManager() {
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+    }
+
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
         case .authorizedAlways, .authorizedWhenInUse:
@@ -118,6 +113,15 @@ extension CapsuleLocateViewController: MKMapViewDelegate, CLLocationManagerDeleg
         default:
             print("GPS: Default")
         }
+    }
+}
+
+// MARK: - MKMapView
+
+extension CapsuleLocateViewController: MKMapViewDelegate {
+    private func configureMap() {
+        mainView.locateMap.delegate = self
+        mainView.locateMap.mapType = MKMapType.standard
     }
 
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated: Bool) {
