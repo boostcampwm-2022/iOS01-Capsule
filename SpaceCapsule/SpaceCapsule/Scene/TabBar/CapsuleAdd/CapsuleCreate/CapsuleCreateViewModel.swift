@@ -47,7 +47,8 @@ final class CapsuleCreateViewModel: BaseViewModel {
                     images: urlArray,
                     title: title,
                     description: description,
-                    address: address.addressName,
+                    address: address.full,
+                    simpleAddress: address.simple,
                     geopoint: geopoint,
                     memoryDate: date,
                     openCount: 0

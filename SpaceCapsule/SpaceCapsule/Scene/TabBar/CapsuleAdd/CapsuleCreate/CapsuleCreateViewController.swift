@@ -127,7 +127,7 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
         viewModel?.input.addressObserver
             .withUnretained(self)
             .subscribe(onNext: { weakSelf, address in
-                weakSelf.mainView.locationSelectView.setText(address.addressName)
+                weakSelf.mainView.locationSelectView.setText(address.full)
             })
             .disposed(by: disposeBag)
 

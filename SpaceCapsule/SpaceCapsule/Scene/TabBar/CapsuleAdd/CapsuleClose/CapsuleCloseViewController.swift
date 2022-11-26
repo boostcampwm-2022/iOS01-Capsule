@@ -28,13 +28,11 @@ final class CapsuleCloseViewController: UIViewController, BaseViewController {
                 CapsuleCloseView.Item(
                     closedDateString: capsule.closedDate.dateTimeString,
                     memoryDateString: capsule.memoryDate.dateString,
-                    address: capsule.address,
+                    address: capsule.simpleAddress,
                     thumbnailImageURL: capsule.images[0]
                 )
             )
         }
-
-        print(viewModel?.output.capsule)
     }
 
     override func viewDidAppear(_ animated: Bool) {

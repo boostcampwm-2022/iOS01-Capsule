@@ -65,6 +65,7 @@ final class CapsuleLocateViewModel: BaseViewModel {
             .reverseGeocode(with: GeoPoint(latitude: latitude, longitude: longitude))
             .subscribe(
                 onNext: { [weak self] address in
+                    self?.output.address.onNext(Address(full: address.full, simple: address.simple))
                     self?.output.fullAddress.accept(address.full)
                     self?.output.simpleAddress.onNext(address.simple)
                 },

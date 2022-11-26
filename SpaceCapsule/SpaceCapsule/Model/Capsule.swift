@@ -16,6 +16,7 @@ struct Capsule: CustomCodable {
     let description: String
 
     let address: String
+    let simpleAddress: String
     let geopoint: GeoPoint
     let memoryDate: Date
     var closedDate: Date = Date()
@@ -29,6 +30,7 @@ struct Capsule: CustomCodable {
             "title": title,
             "description": description,
             "address": address,
+            "simpleAddress": simpleAddress,
             "geopoint": geopoint.dictData,
             "memoryDate": memoryDate,
             "closedDate": closedDate,

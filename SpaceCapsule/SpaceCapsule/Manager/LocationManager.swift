@@ -9,7 +9,7 @@ import CoreLocation
 import Foundation
 import RxSwift
 
-struct LocationAddress {
+struct Address {
     let full: String
     let simple: String
 }
@@ -22,7 +22,7 @@ final class LocationManager {
     private let geocoder = CLGeocoder()
     private let locale = Locale(identifier: "ko_KR")
 
-    func reverseGeocode(with point: GeoPoint) -> Observable<LocationAddress> {
+    func reverseGeocode(with point: GeoPoint) -> Observable<Address> {
         let location = CLLocation(latitude: point.latitude, longitude: point.longitude)
 
         return Observable.create { emitter in
@@ -52,7 +52,7 @@ final class LocationManager {
                 let fullAddress = separated.joined(separator: " ")
                 let simpleAddress = "\(separated[safe: 0] ?? "") \(separated[safe: 1] ?? "")"
 
-                emitter.onNext(LocationAddress(full: fullAddress, simple: simpleAddress))
+                emitter.onNext(Address(full: fullAddress, simple: simpleAddress))
             }
 
             return Disposables.create {}
