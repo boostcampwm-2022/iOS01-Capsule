@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Capsule: Codable {
+struct Capsule: CustomCodable {
     var uuid: String = UUID().uuidString
     let userId: String
 
@@ -20,9 +20,34 @@ struct Capsule: Codable {
     let memoryDate: String
     var closedDate: String = Date().dateTimeString
     let openCount: Int
+
+    let sampleDate: Date = Date()
+
+    var dictData: [String: Any] {
+        [
+            "uuid": uuid,
+            "userId": userId,
+            "images": images,
+            "title": title,
+            "description": description,
+            "address": address,
+            "geopoint": geopoint.dictData,
+            "memoryDate": memoryDate,
+            "closedDate": closedDate,
+            "openCount": openCount,
+            "sampleDate": sampleDate,
+        ]
+    }
 }
 
-struct GeoPoint: Codable {
+struct GeoPoint: CustomCodable {
     let latitude: Double
     let longitude: Double
+
+    var dictData: [String: Any] {
+        [
+            "latitude": latitude,
+            "longitude": longitude,
+        ]
+    }
 }

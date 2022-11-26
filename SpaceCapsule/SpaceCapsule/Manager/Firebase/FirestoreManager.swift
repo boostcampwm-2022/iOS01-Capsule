@@ -9,11 +9,6 @@ import FirebaseFirestore
 import Foundation
 import RxSwift
 
-struct UserInfo: Codable {
-    let email: String?
-    let nickname: String?
-}
-
 class FirestoreManager {
     static let shared = FirestoreManager()
     private let database = Firestore.firestore()
@@ -48,18 +43,19 @@ class FirestoreManager {
     }
 
     private func dictionaryToObject<T: Decodable>(type: T.Type, dictionary: [String: Any]?) -> T? {
-        guard let data = try? JSONSerialization.data(withJSONObject: dictionary as Any) else { return nil }
-        guard let object = try? JSONDecoder().decode(T.self, from: data) else { return nil }
+        guard let data = try? JSONSerialization.data(withJSONObject: dictionary as Any),
+              let object = try? JSONDecoder().decode(T.self, from: data) else {
+            return nil
+        }
+
         return object
     }
 
     func registerUserInfo(uid: String, userInfo: UserInfo, completion: @escaping (Error?) -> Void) {
-        guard let dict = userInfo.toDict else { return }
-
         database
             .collection("users")
             .document(uid)
-            .setData(dict, merge: true) { error in
+            .setData(userInfo.dictData, merge: true) { error in
                 if let error = error {
                     completion(error)
                 } else {
@@ -72,7 +68,7 @@ class FirestoreManager {
         database
             .collection("users")
             .document(uid)
-            .updateData(["capsules": FieldValue.arrayUnion([capsule.uuid])]) { error in
+            .updateData(["capsules": FieldValue.arrayUnion([capsule.uuid])]) { _ in
 //                if let error = error {
 //                    completion(error)
 //                } else {
@@ -80,12 +76,10 @@ class FirestoreManager {
 //                }
             }
 
-        guard let dict = capsule.toDict else { return }
-
         database
             .collection("capsules")
             .document(capsule.uuid)
-            .setData(dict) { error in
+            .setData(capsule.dictData) { error in
                 if let error = error {
                     completion(error)
                 } else {

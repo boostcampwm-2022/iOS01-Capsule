@@ -54,7 +54,7 @@ final class CapsuleCloseView: UIView, BaseView {
     private let closedDateLabel = ThemeLabel(size: 18, color: .themeGray200)
 
     private let descriptionLabel = {
-        let label = ThemeLabel(text: "xxxx년 x월 x일\nxx시 xx구 에서의\n추억을 담은 캡슐", size: 28, color: .themeGray300)
+        let label = ThemeLabel(size: 28, color: .themeGray300)
         label.numberOfLines = 3
         label.textAlignment = .center
         return label
@@ -92,7 +92,16 @@ final class CapsuleCloseView: UIView, BaseView {
     }
 
     func configure(item: Item) {
-        closedDateLabel.text = item.closedDateString
+        closedDateLabel.text = "밀봉시간: \(item.closedDateString)"
+
+        descriptionLabel.text = """
+        \(item.memoryDateString)
+        \(item.address) 에서의
+        추억이 담긴 캡슐을 보관하였습니다.
+        """
+        
+        descriptionLabel.asFontColor(targetStringList: [item.memoryDateString, item.address], size: 28, color: .themeGray400)
+
         thumbnailImageView.kr.setImage(with: item.thumbnailImageURL, scale: 0.5)
     }
 
