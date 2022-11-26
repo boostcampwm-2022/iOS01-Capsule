@@ -5,9 +5,9 @@
 //  Created by young june Park on 2022/11/15.
 //
 
-import UIKit
-import RxSwift
 import FirebaseAuth
+import RxSwift
+import UIKit
 
 final class NicknameViewController: UIViewController, BaseViewController {
     // MARK: - Properties
@@ -38,6 +38,12 @@ final class NicknameViewController: UIViewController, BaseViewController {
         nicknameView
             .doneButton.rx.tap
             .bind(to: viewModel.input.doneButtonTapped)
+            .disposed(by: disposeBag)
+        
+        nicknameView
+            .tapGesture.rx.event.bind(onNext: { [weak self] _ in
+                self?.view.endEditing(true)
+            })
             .disposed(by: disposeBag)
         
         // MARK: 이건 지워도 될 듯?

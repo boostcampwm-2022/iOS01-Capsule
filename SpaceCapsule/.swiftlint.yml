@@ -60,3 +60,8 @@ nesting:
 function_body_length:
   warning: 30
   error: 35
+
+identifier_name:
+    excluded:
+        - x
+        - y
