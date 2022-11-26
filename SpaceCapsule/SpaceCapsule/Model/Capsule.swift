@@ -17,11 +17,9 @@ struct Capsule: CustomCodable {
 
     let address: String
     let geopoint: GeoPoint
-    let memoryDate: String
-    var closedDate: String = Date().dateTimeString
+    let memoryDate: Date
+    var closedDate: Date = Date()
     let openCount: Int
-
-    let sampleDate: Date = Date()
 
     var dictData: [String: Any] {
         [
@@ -35,7 +33,6 @@ struct Capsule: CustomCodable {
             "memoryDate": memoryDate,
             "closedDate": closedDate,
             "openCount": openCount,
-            "sampleDate": sampleDate,
         ]
     }
 }

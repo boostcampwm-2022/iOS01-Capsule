@@ -52,7 +52,6 @@ final class DatePickerViewController: UIViewController {
     }
 
     @objc private func dateChanged(_ sender: UIDatePicker) {
-        print(sender.date)
-        viewModel?.input.dateString.onNext(sender.date.dateString)
+        viewModel?.input.date.onNext(sender.date)
     }
 }

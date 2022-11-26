@@ -26,8 +26,8 @@ final class CapsuleCloseViewController: UIViewController, BaseViewController {
         if let capsule = viewModel?.output.capsule {
             mainView.configure(item:
                 CapsuleCloseView.Item(
-                    closedDateString: capsule.closedDate,
-                    memoryDateString: capsule.memoryDate,
+                    closedDateString: capsule.closedDate.dateTimeString,
+                    memoryDateString: capsule.memoryDate.dateString,
                     address: capsule.address,
                     thumbnailImageURL: capsule.images[0]
                 )

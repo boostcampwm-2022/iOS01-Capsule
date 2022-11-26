@@ -131,10 +131,10 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
             })
             .disposed(by: disposeBag)
 
-        viewModel?.input.dateStringObserver
+        viewModel?.input.dateObserver
             .withUnretained(self)
-            .subscribe(onNext: { weakSelf, dateString in
-                weakSelf.mainView.dateSelectView.setText(dateString)
+            .subscribe(onNext: { weakSelf, date in
+                weakSelf.mainView.dateSelectView.setText(date.dateString)
             })
             .disposed(by: disposeBag)
     }

@@ -36,12 +36,12 @@ final class DatePickerCoordinator: Coordinator {
         navigationController?.present(datePickerViewController, animated: true)
     }
 
-    func done(dateString: String) {
+    func done(date: Date) {
         guard let parent = parent as? CapsuleCreateCoordinator else {
             return
         }
 
-        parent.dateStringObserver?.onNext(dateString)
+        parent.dateObserver?.onNext(date)
         parent.children.popLast()
     }
 }

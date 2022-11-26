@@ -31,7 +31,7 @@ final class CapsuleCreateViewModel: BaseViewModel {
 
         var addressObserver = PublishSubject<Address>()
         var geopointObserver = PublishSubject<GeoPoint>()
-        var dateStringObserver = BehaviorSubject<String>(value: Date().dateString)
+        var dateObserver = BehaviorSubject<Date>(value: Date())
 
         var capsuleDataObservable: Observable<Capsule> {
             Observable.combineLatest(
@@ -40,8 +40,8 @@ final class CapsuleCreateViewModel: BaseViewModel {
                 urlArray.asObservable(),
                 addressObserver.asObservable(),
                 geopointObserver.asObservable(),
-                dateStringObserver.asObservable()
-            ) { title, description, urlArray, address, geopoint, dateString in
+                dateObserver.asObservable()
+            ) { title, description, urlArray, address, geopoint, date in
                 Capsule(
                     userId: FirebaseAuthManager.shared.currentUser?.uid ?? "",
                     images: urlArray,
@@ -49,7 +49,7 @@ final class CapsuleCreateViewModel: BaseViewModel {
                     description: description,
                     address: address.addressName,
                     geopoint: geopoint,
-                    memoryDate: dateString,
+                    memoryDate: date,
                     openCount: 0
                 )
             }
