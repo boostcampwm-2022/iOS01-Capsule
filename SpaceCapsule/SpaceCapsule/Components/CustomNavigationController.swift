@@ -18,6 +18,7 @@ final class CustomNavigationController: UINavigationController {
 
     private func applyThemeStyle() {
         UIBarButtonItem.appearance().setTitleTextAttributes([.font: UIFont.themeFont(ofSize: 25)], for: .normal)
+        UIBarButtonItem.appearance().setTitleTextAttributes([.font: UIFont.themeFont(ofSize: 25)], for: .disabled)
 
         navigationBar.titleTextAttributes = [.font: UIFont.themeFont(ofSize: 25)]
 

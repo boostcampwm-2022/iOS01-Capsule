@@ -27,6 +27,7 @@ final class CapsuleLocateViewModel: BaseViewModel {
         var fullAddress = PublishRelay<String?>()
         var simpleAddress = PublishSubject<String>()
         var geopoint = PublishSubject<GeoPoint>()
+        var doneButtonState = BehaviorRelay<Bool>(value: false)
 
         var locationObservable: Observable<(address: Address, geopoint: GeoPoint)> {
             Observable.combineLatest(address, geopoint) { address, geopoint in
@@ -65,11 +66,13 @@ final class CapsuleLocateViewModel: BaseViewModel {
             .reverseGeocode(with: GeoPoint(latitude: latitude, longitude: longitude))
             .subscribe(
                 onNext: { [weak self] address in
+                    self?.output.doneButtonState.accept(true)
                     self?.output.address.onNext(Address(full: address.full, simple: address.simple))
                     self?.output.fullAddress.accept(address.full)
                     self?.output.simpleAddress.onNext(address.simple)
                 },
                 onError: { [weak self] error in
+                    self?.output.doneButtonState.accept(false)
                     self?.output.fullAddress.accept(error.localizedDescription)
                 }
             )

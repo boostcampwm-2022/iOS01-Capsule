@@ -132,7 +132,6 @@ final class CapsuleCreateViewModel: BaseViewModel {
             .compactMap { $0.compactMap { $0.data } }
             .withUnretained(self)
             .subscribe(onNext: { weakSelf, data in
-
                 weakSelf.output.indicatorState.onNext(true)
 
                 data.enumerated().forEach { index, dataValue in
@@ -164,6 +163,16 @@ final class CapsuleCreateViewModel: BaseViewModel {
                 self?.coordinator?.showCapsuleLocate()
             })
             .disposed(by: disposeBag)
+    }
+
+    func isValid() -> Observable<Bool> {
+        Observable.combineLatest(
+            input.title.asObservable(),
+            input.description.asObservable(),
+            input.imageData.asObservable()
+        ) { title, description, imageData in
+            !title.isEmpty && !description.isEmpty && imageData.count > 1
+        }
     }
 
     func addImage(data: Data) {

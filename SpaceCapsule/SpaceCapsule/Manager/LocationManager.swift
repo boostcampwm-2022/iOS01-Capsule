@@ -44,8 +44,6 @@ final class LocationManager {
                     return
                 }
 
-                print(placemark.description)
-
                 var separated = validInfo.components(separatedBy: " ")
                 separated.removeFirst()
 

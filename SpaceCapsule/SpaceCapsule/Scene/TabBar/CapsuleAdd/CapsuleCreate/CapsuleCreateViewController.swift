@@ -137,6 +137,13 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
                 weakSelf.mainView.dateSelectView.setText(date.dateString)
             })
             .disposed(by: disposeBag)
+        
+        viewModel?.isValid()
+            .withUnretained(self)
+            .subscribe(onNext: { weakSelf, state in
+                weakSelf.navigationItem.rightBarButtonItem?.isEnabled = state
+            })
+            .disposed(by: disposeBag)
     }
 
     private func addSubViews() {
@@ -159,6 +166,7 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
         navigationItem.title = "캡슐 추가"
         navigationItem.leftBarButtonItem = closeButton
         navigationItem.rightBarButtonItem = doneButton
+        navigationItem.rightBarButtonItem?.isEnabled = false
     }
 
     // PHPicker 설정

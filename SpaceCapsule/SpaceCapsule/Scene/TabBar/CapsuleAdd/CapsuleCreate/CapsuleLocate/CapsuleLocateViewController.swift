@@ -48,6 +48,14 @@ final class CapsuleLocateViewController: UIViewController, BaseViewController {
                 }
             }.disposed(by: disposeBag)
 
+        viewModel?.output.doneButtonState
+            .withUnretained(self)
+            .subscribe(onNext: { weakSelf, state in
+                weakSelf.mainView.doneButton.isEnabled = state
+                weakSelf.mainView.doneButton.backgroundColor = state ? .themeColor200 : .themeGray200
+            })
+            .disposed(by: disposeBag)
+
         // 주소
         viewModel?.output.fullAddress
             .subscribe(onNext: { [weak self] in
