@@ -29,7 +29,7 @@ final class CapsuleCell: UICollectionViewCell {
     }()
     
     var descriptionLabel = {
-        let label = ThemeLabel(text: "xxxx년 x월 x일\nxx시 xx구에서", size: 16, color: .themeBlack)
+        let label = ThemeLabel(text: "xxxx년 x월 x일\nxx시 xx구에서", size: FrameResource.fontSize80, color: .themeBlack)
         label.numberOfLines = 2
         label.textAlignment = .center
         return label
@@ -114,7 +114,7 @@ final class CapsuleCell: UICollectionViewCell {
     }
     
     private func applyCapsuleDate(closeDate: String) {
-        let dateLabel = ThemeLabel(text: "밀봉시간:\(closeDate)", size: 13, color: .themeGray300)
+        let dateLabel = ThemeLabel(text: "밀봉시간:\(closeDate)", size: FrameResource.fontSize80, color: .themeGray300)
         dateLabel.textAlignment = .center
         thumbnailImageView.addSubview(dateLabel)
         

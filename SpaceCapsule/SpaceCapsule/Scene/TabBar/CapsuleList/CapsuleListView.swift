@@ -11,7 +11,7 @@ import SnapKit
 final class CapsuleListView: UIView, BaseView {
     let sortBarButtonItem = {
         let button = UIButton()
-        button.titleLabel?.font = .themeFont(ofSize: 15)
+        button.titleLabel?.font = .themeFont(ofSize: FrameResource.fontSize80)
         button.setTitle(SortPolicy.nearest.description, for: .normal)
         button.setTitleColor(.themeBlack, for: .normal)
         button.setImage(.sort, for: .normal)

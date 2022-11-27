@@ -12,7 +12,7 @@ final class SortPolicyCell: UITableViewCell {
     static let identifier = "SortPolicyCell"
     
     var descriptionLabel = {
-        let label = ThemeLabel(text: SortPolicy.nearest.description, size: 24, color: .themeBlack)
+        let label = ThemeLabel(text: SortPolicy.nearest.description, size: FrameResource.fontSize120, color: .themeBlack)
         label.isUserInteractionEnabled = true
         return label
     }()
