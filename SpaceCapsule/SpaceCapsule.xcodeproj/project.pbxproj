@@ -42,6 +42,7 @@
 		0DCB22932924CE58002CB095 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCB22922924CE58002CB095 /* CustomTabBarController.swift */; };
 		0DE786E1292BBDEC007EF260 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE786E0292BBDEC007EF260 /* DatePickerViewController.swift */; };
 		2800F97A292F1F060069EE7F /* CapsuleCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2800F979292F1F060069EE7F /* CapsuleCellModel.swift */; };
+		2803EA3A29339B2C00589399 /* SortPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2803EA3929339B2C00589399 /* SortPolicy.swift */; };
 		28049CE529236EEC002389BD /* CapsuleAccessCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28049CE429236EEC002389BD /* CapsuleAccessCoordinator.swift */; };
 		28049CE729237B2B002389BD /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28049CE629237B2B002389BD /* BaseViewController.swift */; };
 		28049CE929237BB2002389BD /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28049CE829237BB2002389BD /* BaseView.swift */; };
@@ -191,6 +192,7 @@
 		0DCB22922924CE58002CB095 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		0DE786E0292BBDEC007EF260 /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
 		2800F979292F1F060069EE7F /* CapsuleCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleCellModel.swift; sourceTree = "<group>"; };
+		2803EA3929339B2C00589399 /* SortPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortPolicy.swift; sourceTree = "<group>"; };
 		28049CE429236EEC002389BD /* CapsuleAccessCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleAccessCoordinator.swift; sourceTree = "<group>"; };
 		28049CE629237B2B002389BD /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		28049CE829237BB2002389BD /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
@@ -505,6 +507,7 @@
 			children = (
 				28C8C983292DF4EA005615BB /* SortPolicyHeaderView.swift */,
 				28C8C981292DEECD005615BB /* SortPolicyCell.swift */,
+				2803EA3929339B2C00589399 /* SortPolicy.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1047,6 +1050,7 @@
 				28C8C97E292DC371005615BB /* SortPolicySelectionViewModel.swift in Sources */,
 				288A8EC429235BB7000229D2 /* CapsuleMapViewController.swift in Sources */,
 				4A9E91442925D51B00B7CC5C /* KakaoResponse.swift in Sources */,
+				2803EA3A29339B2C00589399 /* SortPolicy.swift in Sources */,
 				599C1A34292CC95000517E93 /* Key.swift in Sources */,
 				288A8EC829235BCE000229D2 /* CapsuleMapCoordinator.swift in Sources */,
 				599C19D2292B82D000517E93 /* LoadingViewController.swift in Sources */,
