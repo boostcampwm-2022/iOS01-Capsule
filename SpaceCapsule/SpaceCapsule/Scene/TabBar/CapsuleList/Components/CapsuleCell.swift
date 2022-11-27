@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 final class CapsuleCell: UICollectionViewCell {
-    static let identifier = "CapsuleCell"
+    static let cellIdentifier = "CapsuleCell"
     
     var thumbnailImageView = {
         let imageView = UIImageView()

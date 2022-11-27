@@ -22,7 +22,7 @@ final class CapsuleListView: UIView, BaseView {
 
     let collectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
-        collectionView.register(CapsuleCell.self, forCellWithReuseIdentifier: CapsuleCell.identifier)
+        collectionView.register(CapsuleCell.self, forCellWithReuseIdentifier: CapsuleCell.cellIdentifier)
         collectionView.showsVerticalScrollIndicator = false
         return collectionView
     }()
