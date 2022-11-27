@@ -40,8 +40,8 @@
 		0DA9F6952928EA4900454932 /* AddImageButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA9F6942928EA4900454932 /* AddImageButtonCell.swift */; };
 		0DA9F6972928EB9000454932 /* UICollectionReusableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA9F6962928EB9000454932 /* UICollectionReusableView+.swift */; };
 		0DCB22932924CE58002CB095 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCB22922924CE58002CB095 /* CustomTabBarController.swift */; };
-		2800F97A292F1F060069EE7F /* CapsuleCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2800F979292F1F060069EE7F /* CapsuleCellModel.swift */; };
 		0DE786E1292BBDEC007EF260 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE786E0292BBDEC007EF260 /* DatePickerViewController.swift */; };
+		2800F97A292F1F060069EE7F /* CapsuleCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2800F979292F1F060069EE7F /* CapsuleCellModel.swift */; };
 		28049CE529236EEC002389BD /* CapsuleAccessCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28049CE429236EEC002389BD /* CapsuleAccessCoordinator.swift */; };
 		28049CE729237B2B002389BD /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28049CE629237B2B002389BD /* BaseViewController.swift */; };
 		28049CE929237BB2002389BD /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28049CE829237BB2002389BD /* BaseView.swift */; };
@@ -189,8 +189,8 @@
 		0DA9F6942928EA4900454932 /* AddImageButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddImageButtonCell.swift; sourceTree = "<group>"; };
 		0DA9F6962928EB9000454932 /* UICollectionReusableView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionReusableView+.swift"; sourceTree = "<group>"; };
 		0DCB22922924CE58002CB095 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
-		2800F979292F1F060069EE7F /* CapsuleCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleCellModel.swift; sourceTree = "<group>"; };
 		0DE786E0292BBDEC007EF260 /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
+		2800F979292F1F060069EE7F /* CapsuleCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleCellModel.swift; sourceTree = "<group>"; };
 		28049CE429236EEC002389BD /* CapsuleAccessCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleAccessCoordinator.swift; sourceTree = "<group>"; };
 		28049CE629237B2B002389BD /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		28049CE829237BB2002389BD /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
@@ -363,7 +363,7 @@
 			isa = PBXGroup;
 			children = (
 				599C1A35292CC99900517E93 /* Manager */,
-				599C1A32292CC92300517E93 /* Key */,
+				599C1A32292CC92300517E93 /* Private */,
 				59F567F72923BE1E00F756B2 /* SpaceCapsule.entitlements */,
 				4A05D0EB2924C04200A2EF50 /* GoogleService-Info.plist */,
 				0D6CA342292216A400E02393 /* Info.plist */,
@@ -781,12 +781,12 @@
 			path = Response;
 			sourceTree = "<group>";
 		};
-		599C1A32292CC92300517E93 /* Key */ = {
+		599C1A32292CC92300517E93 /* Private */ = {
 			isa = PBXGroup;
 			children = (
 				599C1A33292CC94F00517E93 /* Key.swift */,
 			);
-			path = Key;
+			path = Private;
 			sourceTree = "<group>";
 		};
 		599C1A35292CC99900517E93 /* Manager */ = {
@@ -1006,7 +1006,6 @@
 				0DA9F6972928EB9000454932 /* UICollectionReusableView+.swift in Sources */,
 				28049CEB29237E96002389BD /* BaseViewModel.swift in Sources */,
 				288A8EFF292360BC000229D2 /* CapsuleDetailCoordinator.swift in Sources */,
-				0D24C20A292B850400007E75 /* DiskImageCache.swift in Sources */,
 				28C8C980292DC382005615BB /* SortPolicySelectionCoordinator.swift in Sources */,
 				288A8EFB292360A4000229D2 /* CapsuleDetailViewController.swift in Sources */,
 				288A8EF529236086000229D2 /* CapsuleOpenViewModel.swift in Sources */,
@@ -1043,9 +1042,7 @@
 				4A9E91452925D51B00B7CC5C /* RequestType.swift in Sources */,
 				288A8EEA29235FF1000229D2 /* CapsuleCloseViewModel.swift in Sources */,
 				288A8EF92923609C000229D2 /* CapsuleDetailView.swift in Sources */,
-				0D24C20D292B850400007E75 /* ImageCache.swift in Sources */,
 				28C8C982292DEECD005615BB /* SortPolicyCell.swift in Sources */,
-				288A8E97292359CF000229D2 /* AuthCoordinator.swift in Sources */,
 				0D9D67312924945D0038F529 /* FrameResource.swift in Sources */,
 				28C8C97E292DC371005615BB /* SortPolicySelectionViewModel.swift in Sources */,
 				288A8EC429235BB7000229D2 /* CapsuleMapViewController.swift in Sources */,
