@@ -17,21 +17,21 @@ class CapsuleCloseViewModel: BaseViewModel {
     var output = Output()
 
     struct Input {
-        var closeButtonTapped = PublishSubject<Void>()
+        var tapClose = PublishSubject<Void>()
     }
 
     struct Output {
-        var capsule: Capsule?
+        var capsule = BehaviorSubject<Capsule?>(value: nil)
     }
 
     init(capsule: Capsule) {
         bind()
 
-        output.capsule = capsule
+        output.capsule.onNext(capsule)
     }
 
     private func bind() {
-        input.closeButtonTapped
+        input.tapClose
             .subscribe(onNext: { [weak self] in
                 self?.coordinator?.finish()
             })

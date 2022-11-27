@@ -46,8 +46,8 @@ final class CapsuleLocateCoordinator: Coordinator {
             return
         }
 
-        parent.addressObserver?.onNext(address)
-        parent.geopointObserver?.onNext(geopoint)
+        parent.address?.onNext(address)
+        parent.geopoint?.onNext(geopoint)
         finish()
     }
 }

@@ -13,7 +13,7 @@ final class CapsuleCloseView: UIView, BaseView {
     struct Item {
         let closedDateString: String
         let memoryDateString: String
-        let address: String
+        let simpleAddress: String
         let thumbnailImageURL: String
     }
 
@@ -27,9 +27,9 @@ final class CapsuleCloseView: UIView, BaseView {
 
     private let thumbnailImageContainerView = {
         let view = UIView()
-        view.layer.shadowOffset = CGSize(width: 4, height: 4)
-        view.layer.shadowRadius = 4
-        view.layer.shadowOpacity = 0.5
+        view.layer.shadowOffset = FrameResource.shadowOffset
+        view.layer.shadowRadius = FrameResource.shadowRadius
+        view.layer.shadowOpacity = FrameResource.shadowOpacity
         view.layer.cornerRadius = FrameResource.capsuleThumbnailWidth / 2
         return view
     }()
@@ -51,10 +51,10 @@ final class CapsuleCloseView: UIView, BaseView {
         return imageView
     }()
 
-    private let closedDateLabel = ThemeLabel(size: 18, color: .themeGray200)
+    private let closedDateLabel = ThemeLabel(size: FrameResource.fontSize90, color: .themeGray200)
 
     private let descriptionLabel = {
-        let label = ThemeLabel(size: 28, color: .themeGray300)
+        let label = ThemeLabel(size: FrameResource.fontSize140, color: .themeGray300)
         label.numberOfLines = 3
         label.textAlignment = .center
         return label
@@ -62,7 +62,7 @@ final class CapsuleCloseView: UIView, BaseView {
 
     let closeButton = {
         let button = UIButton()
-        button.titleLabel?.font = .themeFont(ofSize: 20)
+        button.titleLabel?.font = .themeFont(ofSize: FrameResource.fontSize100)
         button.setTitle("완료", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .themeColor200
@@ -96,13 +96,17 @@ final class CapsuleCloseView: UIView, BaseView {
 
         descriptionLabel.text = """
         \(item.memoryDateString)
-        \(item.address) 에서의
+        \(item.simpleAddress) 에서의
         추억이 담긴 캡슐을 보관하였습니다.
         """
-        
-        descriptionLabel.asFontColor(targetStringList: [item.memoryDateString, item.address], size: 28, color: .themeGray400)
 
-        thumbnailImageView.kr.setImage(with: item.thumbnailImageURL, scale: 0.5)
+        descriptionLabel.asFontColor(
+            targetStringList: [item.memoryDateString, item.simpleAddress],
+            size: FrameResource.fontSize140,
+            color: .themeGray400
+        )
+
+        thumbnailImageView.kr.setImage(with: item.thumbnailImageURL, scale: FrameResource.closedImageScale)
     }
 
     func addSubViews() {
@@ -125,12 +129,12 @@ final class CapsuleCloseView: UIView, BaseView {
 
         closedImageView.snp.makeConstraints {
             $0.center.equalToSuperview()
-            $0.width.height.equalTo(50)
+            $0.width.height.equalTo(FrameResource.closedIconSize)
         }
 
         closedDateLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(closedImageView.snp.bottom).offset(10)
+            $0.top.equalTo(closedImageView.snp.bottom).offset(FrameResource.closedDateOffset)
         }
 
         thumbnailImageContainerView.snp.makeConstraints {
@@ -159,7 +163,7 @@ final class CapsuleCloseView: UIView, BaseView {
 
     func animate() {
         UIView.animate(withDuration: 1, delay: 0, options: [.repeat, .autoreverse]) {
-            self.thumbnailImageContainerView.transform = .init(translationX: 0, y: 20)
+            self.thumbnailImageContainerView.transform = .init(translationX: 0, y: FrameResource.floatingOffsetY)
         }
     }
 }

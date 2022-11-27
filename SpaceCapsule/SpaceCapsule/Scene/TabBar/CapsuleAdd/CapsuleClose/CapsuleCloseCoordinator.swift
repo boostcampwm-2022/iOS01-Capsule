@@ -26,7 +26,6 @@ class CapsuleCloseCoordinator: Coordinator {
         capsuleCloseViewModel.coordinator = self
         capsuleCloseViewController.viewModel = capsuleCloseViewModel
 
-        parent?.children.popLast()
         navigationController?.setViewControllers([capsuleCloseViewController], animated: true)
     }
 

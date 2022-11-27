@@ -41,7 +41,7 @@ final class DatePickerCoordinator: Coordinator {
             return
         }
 
-        parent.dateObserver?.onNext(date)
+        parent.date?.onNext(date)
         parent.children.popLast()
     }
 }

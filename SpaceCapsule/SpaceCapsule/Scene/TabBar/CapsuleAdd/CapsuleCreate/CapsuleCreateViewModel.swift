@@ -16,49 +16,58 @@ final class CapsuleCreateViewModel: BaseViewModel {
     var input = Input()
     var output = Output()
 
-    struct Input {
-        var close = PublishSubject<Void>()
-        var done = PublishSubject<Void>()
-        var imageData = BehaviorRelay<[AddImageCollectionView.Cell]>(value: [.addButton])
-        var title = PublishSubject<String>()
-        var description = PublishSubject<String>()
+    lazy var capsuleDataObservable: Observable<Capsule> = {
+        Observable.combineLatest(
+            input.title.asObservable(),
+            input.description.asObservable(),
+            input.imageUrlArray.asObservable(),
+            output.address.asObservable(),
+            output.geopoint.asObservable(),
+            output.memoryDate.asObservable()
+        ) { title, description, urlArray, address, geopoint, date in
+            Capsule(
+                userId: FirebaseAuthManager.shared.currentUser?.uid ?? "",
+                images: urlArray,
+                title: title,
+                description: description,
+                address: address.full,
+                simpleAddress: address.simple,
+                geopoint: geopoint,
+                memoryDate: date,
+                openCount: 0
+            )
+        }
+    }()
 
+    lazy var isFieldValid: Observable<Bool> = {
+        Observable.combineLatest(
+            input.title.asObservable(),
+            input.description.asObservable(),
+            input.imageData.asObservable()
+        ) { title, description, imageData in
+            !title.isEmpty && !description.isEmpty && imageData.count > 1
+        }
+    }()
+
+    struct Input {
+        var tapClose = PublishSubject<Void>()
+        var tapDone = PublishSubject<Void>()
         var tapDatePicker = PublishSubject<Void>()
         var tapCapsuleLocate = PublishSubject<Void>()
 
-        var urlDict = BehaviorSubject<[Int: URL]>(value: [:])
-        var urlArray = PublishSubject<[String]>()
+        var title = PublishSubject<String>()
+        var description = PublishSubject<String>()
 
-        var addressObserver = PublishSubject<Address>()
-        var geopointObserver = PublishSubject<GeoPoint>()
-        var dateObserver = BehaviorSubject<Date>(value: Date())
-
-        var capsuleDataObservable: Observable<Capsule> {
-            Observable.combineLatest(
-                title.asObservable(),
-                description.asObservable(),
-                urlArray.asObservable(),
-                addressObserver.asObservable(),
-                geopointObserver.asObservable(),
-                dateObserver.asObservable()
-            ) { title, description, urlArray, address, geopoint, date in
-                Capsule(
-                    userId: FirebaseAuthManager.shared.currentUser?.uid ?? "",
-                    images: urlArray,
-                    title: title,
-                    description: description,
-                    address: address.full,
-                    simpleAddress: address.simple,
-                    geopoint: geopoint,
-                    memoryDate: date,
-                    openCount: 0
-                )
-            }
-        }
+        var imageData = BehaviorRelay<[AddImageCollectionView.Cell]>(value: [.addButton])
+        var imageUrlDict = BehaviorSubject<[Int: URL]>(value: [:])
+        var imageUrlArray = PublishSubject<[String]>()
     }
 
     struct Output {
         let indicatorState = BehaviorSubject<Bool>(value: false)
+        var address = PublishSubject<Address>()
+        var geopoint = PublishSubject<GeoPoint>()
+        var memoryDate = BehaviorSubject<Date>(value: Date())
     }
 
     init() {
@@ -66,20 +75,20 @@ final class CapsuleCreateViewModel: BaseViewModel {
     }
 
     private func bind() {
-        input.urlDict
+        input.imageUrlDict
             .subscribe(onNext: { [weak self] dict in
                 if dict.count == self?.input.imageData.value.compactMap({ $0.data }).count {
                     let sortedArray = dict
                         .sorted(by: { $0.key < $1.key })
                         .compactMap { $0.value.absoluteString }
 
-                    self?.input.urlArray.onNext(sortedArray)
+                    self?.input.imageUrlArray.onNext(sortedArray)
                 }
             })
             .disposed(by: disposeBag)
 
-        input.urlArray
-            .withLatestFrom(input.capsuleDataObservable)
+        input.imageUrlArray
+            .withLatestFrom(capsuleDataObservable)
             .withUnretained(self)
             .subscribe(onNext: { weakSelf, capsule in
                 guard let uid = FirebaseAuthManager.shared.currentUser?.uid else {
@@ -120,14 +129,14 @@ final class CapsuleCreateViewModel: BaseViewModel {
 
     private func bindInput() {
         // 닫기
-        input.close.asObservable()
+        input.tapClose.asObservable()
             .subscribe(onNext: { [weak self] in
                 self?.coordinator?.finish()
             })
             .disposed(by: disposeBag)
 
         // 완료 버튼 클릭
-        input.done
+        input.tapDone
             .withLatestFrom(input.imageData)
             .compactMap { $0.compactMap { $0.data } }
             .withUnretained(self)
@@ -137,7 +146,7 @@ final class CapsuleCreateViewModel: BaseViewModel {
                 data.enumerated().forEach { index, dataValue in
                     FirebaseStorageManager.shared.upload(data: dataValue)
                         .subscribe(onNext: { [weak self] in
-                            guard let urlDictSubject = self?.input.urlDict,
+                            guard let urlDictSubject = self?.input.imageUrlDict,
                                   var urlDict = try? urlDictSubject.value() else {
                                 return
                             }
@@ -163,16 +172,6 @@ final class CapsuleCreateViewModel: BaseViewModel {
                 self?.coordinator?.showCapsuleLocate()
             })
             .disposed(by: disposeBag)
-    }
-
-    func isValid() -> Observable<Bool> {
-        Observable.combineLatest(
-            input.title.asObservable(),
-            input.description.asObservable(),
-            input.imageData.asObservable()
-        ) { title, description, imageData in
-            !title.isEmpty && !description.isEmpty && imageData.count > 1
-        }
     }
 
     func addImage(data: Data) {

@@ -64,7 +64,7 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
         closeButton.rx.tap
             .withUnretained(self)
             .subscribe(onNext: { weakSelf, event in
-                weakSelf.viewModel?.input.close.onNext(event)
+                weakSelf.viewModel?.input.tapClose.onNext(event)
             })
             .disposed(by: disposeBag)
 
@@ -72,11 +72,12 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
             .asObservable()
             .withUnretained(self)
             .subscribe(onNext: { weakSelf, event in
-                weakSelf.viewModel?.input.done.onNext(event)
+                weakSelf.viewModel?.input.tapDone.onNext(event)
             })
             .disposed(by: disposeBag)
 
         bindView()
+        bindDescriptionTextView()
         bindViewModel()
     }
 
@@ -98,14 +99,7 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
             })
             .disposed(by: disposeBag)
 
-        mainView.descriptionTextView.rx.text
-            .orEmpty
-            .withUnretained(self)
-            .bind(onNext: { weakSelf, description in
-                weakSelf.viewModel?.input.description.onNext(description)
-            })
-            .disposed(by: disposeBag)
-
+        // delegate 적용 후 rx 로 변경할수 있으려나 ㅇㅅㅇ
         mainView.dateSelectView.eventHandler = { [weak self] in
             self?.view.endEditing(true)
             self?.viewModel?.input.tapDatePicker.onNext(())
@@ -117,6 +111,36 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
         }
     }
 
+    private func bindDescriptionTextView() {
+        mainView.descriptionTextView.rx.didBeginEditing
+            .subscribe(onNext: { [weak self] in
+                if self?.mainView.descriptionTextView.text == self?.mainView.descriptionPlaceholder {
+                    self?.mainView.descriptionTextView.text = nil
+                    self?.mainView.descriptionTextView.textColor = .themeBlack
+                }
+            })
+            .disposed(by: disposeBag)
+
+        mainView.descriptionTextView.rx.didEndEditing
+            .subscribe(onNext: { [weak self] in
+                guard let text = self?.mainView.descriptionTextView.text,
+                      !text.isEmpty else {
+                    self?.mainView.descriptionTextView.text = self?.mainView.descriptionPlaceholder
+                    self?.mainView.descriptionTextView.textColor = .themeGray200
+                    return
+                }
+            })
+            .disposed(by: disposeBag)
+
+        mainView.descriptionTextView.rx.text
+            .orEmpty
+            .withUnretained(self)
+            .bind(onNext: { weakSelf, description in
+                weakSelf.viewModel?.input.description.onNext(description)
+            })
+            .disposed(by: disposeBag)
+    }
+
     private func bindViewModel() {
         viewModel?.input.imageData
             .subscribe(onNext: { [weak self] items in
@@ -124,21 +148,21 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
             })
             .disposed(by: disposeBag)
 
-        viewModel?.input.addressObserver
+        viewModel?.output.address
             .withUnretained(self)
             .subscribe(onNext: { weakSelf, address in
                 weakSelf.mainView.locationSelectView.setText(address.full)
             })
             .disposed(by: disposeBag)
 
-        viewModel?.input.dateObserver
+        viewModel?.output.memoryDate
             .withUnretained(self)
             .subscribe(onNext: { weakSelf, date in
                 weakSelf.mainView.dateSelectView.setText(date.dateString)
             })
             .disposed(by: disposeBag)
-        
-        viewModel?.isValid()
+
+        viewModel?.isFieldValid
             .withUnretained(self)
             .subscribe(onNext: { weakSelf, state in
                 weakSelf.navigationItem.rightBarButtonItem?.isEnabled = state

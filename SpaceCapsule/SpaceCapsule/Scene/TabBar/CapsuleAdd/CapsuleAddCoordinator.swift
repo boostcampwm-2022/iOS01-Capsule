@@ -16,7 +16,7 @@ final class CapsuleAddCoordinator: Coordinator {
     var disposeBag = DisposeBag()
 
     init() {
-        navigationController = CustomNavigationController()
+        navigationController = .init()
     }
 
     func start() {
@@ -40,6 +40,7 @@ final class CapsuleAddCoordinator: Coordinator {
         capsuleCloseCoordinator.parent = self
         capsuleCloseCoordinator.start()
         
+        children.popLast()
         children.append(capsuleCloseCoordinator)
     }
 }

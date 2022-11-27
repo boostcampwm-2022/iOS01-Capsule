@@ -22,17 +22,6 @@ final class CapsuleCloseViewController: UIViewController, BaseViewController {
         super.viewDidLoad()
 
         bind()
-
-        if let capsule = viewModel?.output.capsule {
-            mainView.configure(item:
-                CapsuleCloseView.Item(
-                    closedDateString: capsule.closedDate.dateTimeString,
-                    memoryDateString: capsule.memoryDate.dateString,
-                    address: capsule.simpleAddress,
-                    thumbnailImageURL: capsule.images[0]
-                )
-            )
-        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -43,7 +32,22 @@ final class CapsuleCloseViewController: UIViewController, BaseViewController {
     func bind() {
         mainView.closeButton.rx.tap
             .subscribe(onNext: { [weak self] in
-                self?.viewModel?.input.closeButtonTapped.onNext(())
+                self?.viewModel?.input.tapClose.onNext(())
+            })
+            .disposed(by: disposeBag)
+
+        viewModel?.output.capsule
+            .compactMap { $0 }
+            .withUnretained(self)
+            .subscribe(onNext: { weakSelf, capsule in
+                weakSelf.mainView.configure(item:
+                    CapsuleCloseView.Item(
+                        closedDateString: capsule.closedDate.dateTimeString,
+                        memoryDateString: capsule.memoryDate.dateString,
+                        simpleAddress: capsule.simpleAddress,
+                        thumbnailImageURL: capsule.images[safe: 0] ?? ""
+                    )
+                )
             })
             .disposed(by: disposeBag)
     }

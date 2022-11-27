@@ -15,9 +15,9 @@ final class CapsuleCreateCoordinator: Coordinator {
 
     var disposeBag = DisposeBag()
 
-    var addressObserver: PublishSubject<Address>?
-    var geopointObserver: PublishSubject<GeoPoint>?
-    var dateObserver: BehaviorSubject<Date>?
+    var address: PublishSubject<Address>?
+    var geopoint: PublishSubject<GeoPoint>?
+    var date: BehaviorSubject<Date>?
 
     init(navigationController: CustomNavigationController?) {
         self.navigationController = navigationController
@@ -34,9 +34,9 @@ final class CapsuleCreateCoordinator: Coordinator {
         capsuleCreateViewModel.coordinator = self
         capsuleCreateViewController.viewModel = capsuleCreateViewModel
 
-        addressObserver = capsuleCreateViewModel.input.addressObserver
-        geopointObserver = capsuleCreateViewModel.input.geopointObserver
-        dateObserver = capsuleCreateViewModel.input.dateObserver
+        address = capsuleCreateViewModel.output.address
+        geopoint = capsuleCreateViewModel.output.geopoint
+        date = capsuleCreateViewModel.output.memoryDate
 
         navigationController?.setViewControllers([capsuleCreateViewController], animated: true)
     }
@@ -45,7 +45,7 @@ final class CapsuleCreateCoordinator: Coordinator {
         let datePickerCoordinator = DatePickerCoordinator(navigationController: navigationController)
         datePickerCoordinator.parent = self
 
-        if let date = try? dateObserver?.value() {
+        if let date = try? date?.value() {
             datePickerCoordinator.selectedDate = date
         } else {
             datePickerCoordinator.selectedDate = Date()
