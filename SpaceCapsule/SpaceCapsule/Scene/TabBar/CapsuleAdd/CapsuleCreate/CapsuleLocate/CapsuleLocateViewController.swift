@@ -24,8 +24,6 @@ final class CapsuleLocateViewController: UIViewController, BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .white
-
         configure()
         goToCurrentLocation()
         bind()
@@ -59,7 +57,7 @@ final class CapsuleLocateViewController: UIViewController, BaseViewController {
         // 주소
         viewModel?.output.fullAddress
             .subscribe(onNext: { [weak self] in
-                self?.mainView.locationLabel.text = $0 ?? "해당 지역의 주소를 불러올 수 없습니다."
+                self?.mainView.locationLabel.text = $0 ?? LocationError.invalidGeopoint.errorDescription
             })
             .disposed(by: disposeBag)
 
@@ -79,6 +77,8 @@ final class CapsuleLocateViewController: UIViewController, BaseViewController {
     }
 
     private func configure() {
+        view.backgroundColor = .white
+
         configureLocationManager()
         configureMap()
         configureGesture()

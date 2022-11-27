@@ -204,6 +204,7 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
     }
 }
 
+// TODO: - rx extension 으로 뺀다음 present 부분도 coordinator 로 옮겨도 되려나~
 extension CapsuleCreateViewController: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         picker.dismiss(animated: true)
@@ -217,7 +218,7 @@ extension CapsuleCreateViewController: PHPickerViewControllerDelegate {
             itemProvider.loadObject(ofClass: UIImage.self) { [weak self] image, _ in
                 DispatchQueue.global().async {
                     guard let selectedImage = image as? UIImage,
-                          let data = selectedImage.pngData() else {
+                          let data = selectedImage.jpegData(compressionQuality: 0.2) else {
                         return
                     }
 

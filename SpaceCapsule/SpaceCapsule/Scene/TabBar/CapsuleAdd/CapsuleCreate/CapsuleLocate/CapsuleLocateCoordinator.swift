@@ -37,8 +37,8 @@ final class CapsuleLocateCoordinator: Coordinator {
     }
 
     func finish() {
-        viewController?.dismiss(animated: true)
         parent?.children.popLast()
+        viewController?.dismiss(animated: true)
     }
 
     func done(address: Address, geopoint: GeoPoint) {

@@ -12,7 +12,7 @@ final class DatePickerCoordinator: Coordinator {
     var parent: Coordinator?
     var children: [Coordinator] = []
     var navigationController: CustomNavigationController?
-    
+
     var selectedDate: Date?
 
     init(navigationController: CustomNavigationController?) {

@@ -18,7 +18,6 @@ final class DatePickerViewController: UIViewController {
 
         view.backgroundColor = .white
 
-//        configure()
         addSubViews()
         makeConstraints()
     }
@@ -44,9 +43,9 @@ final class DatePickerViewController: UIViewController {
 
     func makeConstraints() {
         datePicker.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(20)
-            $0.leading.equalToSuperview().offset(20)
-            $0.trailing.equalToSuperview().offset(-20)
+            $0.top.equalToSuperview().offset(FrameResource.spacing200)
+            $0.leading.equalToSuperview().offset(FrameResource.horizontalPadding)
+            $0.trailing.equalToSuperview().offset(-FrameResource.horizontalPadding)
             $0.bottom.equalToSuperview()
         }
     }

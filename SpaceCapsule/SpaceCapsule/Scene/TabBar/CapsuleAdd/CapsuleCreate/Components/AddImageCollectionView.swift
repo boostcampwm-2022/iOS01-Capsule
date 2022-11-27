@@ -98,7 +98,7 @@ final class AddImageCollectionView: UICollectionView {
 
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .groupPagingCentered
-        section.interGroupSpacing = 20
+        section.interGroupSpacing = FrameResource.spacing200
 
         let layout = UICollectionViewCompositionalLayout(section: section)
 

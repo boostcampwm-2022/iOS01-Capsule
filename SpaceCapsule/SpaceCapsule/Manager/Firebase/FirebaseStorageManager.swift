@@ -17,7 +17,7 @@ final class FirebaseStorageManager {
 
     func upload(data: Data) -> Observable<URL> {
         let metadata = StorageMetadata()
-        metadata.contentType = "image/png"
+        metadata.contentType = "image/jpeg"
 
         let uid = FirebaseAuthManager.shared.currentUser?.uid ?? "unknownUser"
         let fileName = UUID().uuidString

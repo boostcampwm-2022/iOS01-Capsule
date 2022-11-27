@@ -21,9 +21,9 @@ enum FrameResource {
     static let textFieldHeight: CGFloat = 40.0
     static let textViewHeight: CGFloat = 200.0
 
-    static let spacing400: CGFloat = 40.0
-    static let spacing200: CGFloat = 20.0
     static let spacing80: CGFloat = 8.0
+    static let spacing200: CGFloat = 20.0
+    static let spacing400: CGFloat = 40.0
 
     static let textViewVPadding: CGFloat = 15
     static let textViewHPadding: CGFloat = 10
@@ -34,6 +34,7 @@ enum FrameResource {
     static let fontSize90: CGFloat = 18.0
     static let fontSize100: CGFloat = 20.0
     static let fontSize110: CGFloat = 22.0
+    static let fontSize120: CGFloat = 24.0
     static let fontSize140: CGFloat = 28.0
 
     static let capsuleThumbnailWidth: CGFloat = 267.0
@@ -49,4 +50,6 @@ enum FrameResource {
     static let closedDateOffset: CGFloat = 10.0
 
     static let floatingOffsetY: CGFloat = 20.0
+    
+    static let locationIconSize: CGFloat = 30.0
 }

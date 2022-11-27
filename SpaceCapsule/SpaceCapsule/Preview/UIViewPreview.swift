@@ -26,3 +26,16 @@
         }
     }
 #endif
+
+//#if canImport(SwiftUI) && DEBUG
+//    import SwiftUI
+//    // Preview 이름
+//    struct ViewPreview: PreviewProvider {
+//        static var previews: some View {
+//            UIViewPreview {
+//                View() // View 인스턴스
+//            }
+//            .previewLayout(.sizeThatFits)
+//        }
+//    }
+//#endif
