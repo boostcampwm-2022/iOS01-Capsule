@@ -505,9 +505,9 @@
 		2800F976292E4BBB0069EE7F /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				28C8C983292DF4EA005615BB /* SortPolicyHeaderView.swift */,
-				28C8C981292DEECD005615BB /* SortPolicyCell.swift */,
 				2803EA3929339B2C00589399 /* SortPolicy.swift */,
+				28C8C981292DEECD005615BB /* SortPolicyCell.swift */,
+				28C8C983292DF4EA005615BB /* SortPolicyHeaderView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";

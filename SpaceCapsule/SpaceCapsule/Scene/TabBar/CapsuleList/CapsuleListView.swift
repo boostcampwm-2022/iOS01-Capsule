@@ -48,8 +48,12 @@ final class CapsuleListView: UIView, BaseView {
     func configureFlowLayout() {
         let collectionViewFlowLayout = UICollectionViewFlowLayout()
         collectionViewFlowLayout.scrollDirection = .vertical
-        collectionViewFlowLayout.minimumLineSpacing = 10
-        collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 10, left: 20, bottom: 0, right: 20)
+        collectionViewFlowLayout.minimumLineSpacing = FrameResource.verticalPadding
+        collectionViewFlowLayout.sectionInset = UIEdgeInsets(
+            top: FrameResource.verticalPadding,
+            left: FrameResource.capsuleHorizontalInset,
+            bottom: 0,
+            right: FrameResource.capsuleHorizontalInset)
         collectionView.collectionViewLayout = collectionViewFlowLayout
     }
     

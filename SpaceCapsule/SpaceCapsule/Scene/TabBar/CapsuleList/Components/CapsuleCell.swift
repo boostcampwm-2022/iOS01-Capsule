@@ -66,7 +66,7 @@ final class CapsuleCell: UICollectionViewCell {
         }
         
         descriptionLabel.snp.makeConstraints {
-            $0.top.equalTo(thumbnailImageContainerView.snp.bottom).offset(10)
+            $0.top.equalTo(thumbnailImageContainerView.snp.bottom).offset(FrameResource.verticalPadding)
             $0.centerX.equalToSuperview()
         }
     }
