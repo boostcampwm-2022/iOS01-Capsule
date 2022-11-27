@@ -9,7 +9,6 @@ import Foundation
 
 enum FrameResource {
     static let verticalPadding: CGFloat = 10.0
-    static let horizontalPadding: CGFloat = 20.0
     static let logoWithTextSize: CGFloat = 320.0
     
     static let horizontalPadding: CGFloat = 30.0
