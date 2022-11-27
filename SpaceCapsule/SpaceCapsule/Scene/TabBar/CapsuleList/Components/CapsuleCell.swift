@@ -109,7 +109,7 @@ final class CapsuleCell: UICollectionViewCell {
         
         lockImageView.snp.makeConstraints {
             $0.center.equalToSuperview()
-            $0.width.height.equalTo(50)
+            $0.width.height.equalTo(thumbnailImageView.snp.width).multipliedBy(0.3)
         }
     }
     
