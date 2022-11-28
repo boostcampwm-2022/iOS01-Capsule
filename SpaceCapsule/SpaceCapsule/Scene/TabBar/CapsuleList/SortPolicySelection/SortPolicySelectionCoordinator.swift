@@ -10,10 +10,10 @@ import UIKit
 final class SortPolicySelectionCoordinator: Coordinator {
     var parent: Coordinator?
     var children: [Coordinator] = []
-    var navigationController: UINavigationController?
+    var navigationController: CustomNavigationController?
     var currentSortPolicy: SortPolicy = .nearest
     
-    init(navigationController: UINavigationController?) {
+    init(navigationController: CustomNavigationController?) {
         self.navigationController = navigationController
     }
     

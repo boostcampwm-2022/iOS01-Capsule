@@ -24,8 +24,6 @@ final class CapsuleLocateViewController: UIViewController, BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .white
-
         configure()
         goToCurrentLocation()
         bind()
@@ -48,10 +46,18 @@ final class CapsuleLocateViewController: UIViewController, BaseViewController {
                 }
             }.disposed(by: disposeBag)
 
+        viewModel?.output.doneButtonState
+            .withUnretained(self)
+            .subscribe(onNext: { weakSelf, state in
+                weakSelf.mainView.doneButton.isEnabled = state
+                weakSelf.mainView.doneButton.backgroundColor = state ? .themeColor200 : .themeGray200
+            })
+            .disposed(by: disposeBag)
+
         // 주소
         viewModel?.output.fullAddress
             .subscribe(onNext: { [weak self] in
-                self?.mainView.locationLabel.text = $0 ?? "해당 지역의 주소를 불러올 수 없습니다."
+                self?.mainView.locationLabel.text = $0 ?? LocationError.invalidGeopoint.errorDescription
             })
             .disposed(by: disposeBag)
 
@@ -61,31 +67,21 @@ final class CapsuleLocateViewController: UIViewController, BaseViewController {
                 self?.viewModel?.input.cancel.onNext(())
             })
             .disposed(by: disposeBag)
-        
+
         // 완료
         mainView.doneButton.rx.tap
-            .subscribe(onNext: {[weak self] in
+            .subscribe(onNext: { [weak self] in
                 self?.viewModel?.input.done.onNext(())
             })
             .disposed(by: disposeBag)
     }
 
     private func configure() {
+        view.backgroundColor = .white
+
         configureLocationManager()
         configureMap()
         configureGesture()
-    }
-
-    private func configureLocationManager() {
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
-    }
-
-    private func configureMap() {
-        mainView.locateMap.delegate = self
-        mainView.locateMap.mapType = MKMapType.standard
     }
 
     private func goToCurrentLocation() {
@@ -100,9 +96,16 @@ final class CapsuleLocateViewController: UIViewController, BaseViewController {
     }
 }
 
-// MARK: - MKMapView, CLLocationManager
+// MARK: - CLLocationManager
 
-extension CapsuleLocateViewController: MKMapViewDelegate, CLLocationManagerDelegate {
+extension CapsuleLocateViewController: CLLocationManagerDelegate {
+    private func configureLocationManager() {
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+    }
+
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
         case .authorizedAlways, .authorizedWhenInUse:
@@ -119,11 +122,22 @@ extension CapsuleLocateViewController: MKMapViewDelegate, CLLocationManagerDeleg
             print("GPS: Default")
         }
     }
+}
+
+// MARK: - MKMapView
+
+extension CapsuleLocateViewController: MKMapViewDelegate {
+    private func configureMap() {
+        mainView.locateMap.delegate = self
+        mainView.locateMap.mapType = MKMapType.standard
+    }
 
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated: Bool) {
         let coordinate = mapView.region.center
 
-        viewModel?.fetchLocation(x: coordinate.longitude, y: coordinate.latitude)
+        viewModel?.output.geopoint.onNext(
+            GeoPoint(latitude: coordinate.latitude, longitude: coordinate.longitude)
+        )
     }
 }
 

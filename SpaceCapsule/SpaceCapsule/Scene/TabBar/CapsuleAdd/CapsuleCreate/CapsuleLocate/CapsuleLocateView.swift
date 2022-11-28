@@ -24,13 +24,13 @@ final class CapsuleLocateView: UIView, BaseView {
     let cancelButton: UIButton = {
         let button = UIButton()
         button.setTitle("취소", for: .normal)
-        button.titleLabel?.font = .themeFont(ofSize: 24)
+        button.titleLabel?.font = .themeFont(ofSize: FrameResource.fontSize120)
         button.setTitleColor(.themeBlack, for: .normal)
 
         return button
     }()
 
-    let titleLabel = ThemeLabel(text: "캡슐 위치 선택", size: 24, color: .themeBlack)
+    let titleLabel = ThemeLabel(text: "캡슐 위치 선택", size: FrameResource.fontSize120, color: .themeBlack)
 
     let locateMap: MKMapView = {
         let mapView = MKMapView()
@@ -54,7 +54,7 @@ final class CapsuleLocateView: UIView, BaseView {
         return imageView
     }()
 
-    let locationLabel = ThemeLabel(text: "화양동", size: 22, color: .themeGray400)
+    let locationLabel = ThemeLabel(size: FrameResource.fontSize110, color: .themeGray400)
 
     let doneButton: UIButton = {
         let button = UIButton()
@@ -107,13 +107,13 @@ final class CapsuleLocateView: UIView, BaseView {
     func makeConstraints() {
         cursor.snp.makeConstraints {
             $0.center.equalToSuperview()
-            $0.height.width.equalTo(20)
+            $0.height.width.equalTo(20) // 바뀔것 같아서 수정안함!
         }
 
         cancelButton.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(FrameResource.horizontalPadding)
-            $0.top.equalToSuperview().offset(20)
-            $0.bottom.equalToSuperview().offset(-20)
+            $0.top.equalToSuperview().offset(FrameResource.horizontalPadding)
+            $0.bottom.equalToSuperview().offset(-FrameResource.spacing200)
         }
 
         titleLabel.snp.makeConstraints {
@@ -123,20 +123,20 @@ final class CapsuleLocateView: UIView, BaseView {
 
         locationIcon.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(FrameResource.horizontalPadding)
-            $0.top.equalToSuperview().offset(20)
-            $0.size.equalTo(30)
+            $0.top.equalToSuperview().offset(FrameResource.spacing200)
+            $0.size.equalTo(FrameResource.locationIconSize)
         }
 
         locationLabel.snp.makeConstraints {
             $0.centerY.equalTo(locationIcon.snp.centerY)
-            $0.leading.equalTo(locationIcon.snp.trailing).offset(20)
+            $0.leading.equalTo(locationIcon.snp.trailing).offset(FrameResource.horizontalPadding)
             $0.trailing.equalToSuperview().offset(-FrameResource.horizontalPadding)
         }
 
         doneButton.snp.makeConstraints {
             $0.leading.equalTo(FrameResource.horizontalPadding)
             $0.trailing.equalTo(-FrameResource.horizontalPadding)
-            $0.top.equalTo(locationIcon.snp.bottom).offset(20)
+            $0.top.equalTo(locationIcon.snp.bottom).offset(FrameResource.spacing200)
             $0.bottom.equalToSuperview().offset(-FrameResource.bottomPadding)
             $0.height.equalTo(FrameResource.buttonHeight)
         }
@@ -146,15 +146,3 @@ final class CapsuleLocateView: UIView, BaseView {
         }
     }
 }
-
-#if canImport(SwiftUI) && DEBUG
-    import SwiftUI
-    struct CapsuleLocateViewPreview: PreviewProvider {
-        static var previews: some View {
-            UIViewPreview {
-                CapsuleLocateView()
-            }
-            .previewLayout(.sizeThatFits)
-        }
-    }
-#endif

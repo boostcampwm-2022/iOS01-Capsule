@@ -11,9 +11,11 @@ import UIKit
 final class DatePickerCoordinator: Coordinator {
     var parent: Coordinator?
     var children: [Coordinator] = []
-    var navigationController: UINavigationController?
+    var navigationController: CustomNavigationController?
 
-    init(navigationController: UINavigationController?) {
+    var selectedDate: Date?
+
+    init(navigationController: CustomNavigationController?) {
         self.navigationController = navigationController
     }
 
@@ -23,22 +25,23 @@ final class DatePickerCoordinator: Coordinator {
 
         datePickerViewModel.coordinator = self
         datePickerViewController.viewModel = datePickerViewModel
+        datePickerViewController.configure(date: selectedDate)
         datePickerViewController.modalPresentationStyle = .pageSheet
 
         if let sheet = datePickerViewController.sheetPresentationController {
-            sheet.detents = [.medium(), .large()]
+            sheet.detents = [.medium()]
             sheet.prefersGrabberVisible = true
         }
 
         navigationController?.present(datePickerViewController, animated: true)
     }
 
-    func done(dateString: String) {
-        guard let parent = parent as? CapsuleAddCoordinator else {
+    func done(date: Date) {
+        guard let parent = parent as? CapsuleCreateCoordinator else {
             return
         }
 
-        parent.dateStringObserver.onNext(dateString)
+        parent.date?.onNext(date)
         parent.children.popLast()
     }
 }

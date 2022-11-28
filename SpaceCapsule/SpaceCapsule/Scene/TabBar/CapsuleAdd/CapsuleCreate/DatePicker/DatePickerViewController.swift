@@ -5,9 +5,9 @@
 //  Created by 장재훈 on 2022/11/21.
 //
 
+import RxSwift
 import SnapKit
 import UIKit
-import RxSwift
 
 final class DatePickerViewController: UIViewController {
     var datePicker: UIDatePicker = UIDatePicker()
@@ -18,7 +18,6 @@ final class DatePickerViewController: UIViewController {
 
         view.backgroundColor = .white
 
-        configure()
         addSubViews()
         makeConstraints()
     }
@@ -26,9 +25,11 @@ final class DatePickerViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         viewModel?.input.viewWillDisappear.onNext(())
+        datePicker.removeTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
     }
 
-    func configure() {
+    func configure(date: Date?) {
+        datePicker.date = date ?? Date()
         datePicker.preferredDatePickerStyle = .inline
         datePicker.datePickerMode = .date
         datePicker.locale = Locale(identifier: "ko-KR")
@@ -42,19 +43,14 @@ final class DatePickerViewController: UIViewController {
 
     func makeConstraints() {
         datePicker.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(20)
-            $0.leading.equalToSuperview().offset(20)
-            $0.trailing.equalToSuperview().offset(-20)
+            $0.top.equalToSuperview().offset(FrameResource.spacing200)
+            $0.leading.equalToSuperview().offset(FrameResource.horizontalPadding)
+            $0.trailing.equalToSuperview().offset(-FrameResource.horizontalPadding)
             $0.bottom.equalToSuperview()
         }
     }
-    
+
     @objc private func dateChanged(_ sender: UIDatePicker) {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy년 MM월 dd일"
-        
-        let selectedDate = formatter.string(from: sender.date)
-        
-        viewModel?.input.dateString.onNext(selectedDate)
+        viewModel?.input.date.onNext(sender.date)
     }
 }

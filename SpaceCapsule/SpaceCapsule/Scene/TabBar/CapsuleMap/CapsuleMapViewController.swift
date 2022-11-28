@@ -11,20 +11,27 @@ import RxSwift
 import UIKit
 
 final class CapsuleMapViewController: UIViewController, BaseViewController {
+    struct Settings {
+        static let openableRange: Double = 100
+        static let monitoringRange: Double = 1000
+        static let monitoringUpdateRange: Double = 850
+        static let locationUpdateRange: Double = 5
+    }
+
     let disposeBag = DisposeBag()
     var viewModel: CapsuleMapViewModel?
+
     private let capsuleMapView = MKMapView()
     private let locationManager = CLLocationManager()
-    private var annotationsToMonitor = [CustomAnnotation]() { didSet { markIfOpenable()} }
-    private let mapSettings: (openableRange: Double, monitoringRange: Double, toUpdateRange: Double) = (100, 1000, 500)
-    
+    private var annotationsToMonitor = [CustomAnnotation]() { didSet { markIfOpenable() } }
+
     private var smallOverlay: MKCircle?
     private var bigOverlay: MKCircle?
-    
+
     deinit {
         capsuleMapView.delegate = nil
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
@@ -34,17 +41,17 @@ final class CapsuleMapViewController: UIViewController, BaseViewController {
         goToCurrentLocation()
         viewModel?.fetchAnnotations()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         locationManager.startUpdatingLocation()
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         locationManager.stopUpdatingLocation()
     }
-    
+
     private func configure() {
         view.addSubview(capsuleMapView)
         capsuleMapView.delegate = self
@@ -53,16 +60,16 @@ final class CapsuleMapViewController: UIViewController, BaseViewController {
         capsuleMapView.setUserTrackingMode(.follow, animated: true)
 
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.distanceFilter = 10
+        locationManager.distanceFilter = Settings.locationUpdateRange
         locationManager.requestWhenInUseAuthorization()
     }
-    
+
     private func addConstraints() {
         capsuleMapView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
     }
-    
+
     private func bindNotification() {
         NotificationCenter.default.rx.notification(UIApplication.didEnterBackgroundNotification)
             .withUnretained(self)
@@ -70,7 +77,7 @@ final class CapsuleMapViewController: UIViewController, BaseViewController {
                 weakSelf.locationManager.stopUpdatingLocation()
             })
             .disposed(by: disposeBag)
-        
+
         NotificationCenter.default.rx.notification(UIApplication.willEnterForegroundNotification)
             .withUnretained(self)
             .subscribe(on: MainScheduler.instance)
@@ -79,7 +86,7 @@ final class CapsuleMapViewController: UIViewController, BaseViewController {
             })
             .disposed(by: disposeBag)
     }
-    
+
     func bind() {
         locationManager.rx.didChangeAuthorization.asObservable()
             .withUnretained(self)
@@ -87,7 +94,7 @@ final class CapsuleMapViewController: UIViewController, BaseViewController {
                 weakSelf.implementStatus(status)
             })
             .disposed(by: disposeBag)
-        
+
         viewModel?.input.annotations
             .withUnretained(self)
             .bind { weakSelf, coordinates in
@@ -95,7 +102,7 @@ final class CapsuleMapViewController: UIViewController, BaseViewController {
                 weakSelf.addInitialAnnotations(coordinates: coordinates)
             }
             .disposed(by: disposeBag)
-    
+
         locationManager.rx.didUpdateLocations.asObservable()
             .withUnretained(self)
             .subscribe(onNext: { weakSelf, _ in
@@ -105,14 +112,14 @@ final class CapsuleMapViewController: UIViewController, BaseViewController {
                 }
             })
             .disposed(by: disposeBag)
-        
+
         locationManager.rx.willExitMonitoringRegion.asObservable()
             .withUnretained(self)
             .subscribe(onNext: { weakSelf, region in
                 weakSelf.resetMonitoringRegion(from: region)
             })
             .disposed(by: disposeBag)
-        
+
         capsuleMapView.rx.calloutAccessoryControlTapped.asObservable()
             .withUnretained(self)
             .subscribe(onNext: { weakSelf, _ in
@@ -120,7 +127,7 @@ final class CapsuleMapViewController: UIViewController, BaseViewController {
             })
             .disposed(by: disposeBag)
     }
-    
+
     private func implementStatus(_ status: CLAuthorizationStatus) {
         switch status {
         case .authorizedAlways, .authorizedWhenInUse:
@@ -137,7 +144,7 @@ final class CapsuleMapViewController: UIViewController, BaseViewController {
             print("GPS: Default")
         }
     }
-    
+
     private func goToCurrentLocation() {
         guard let center = locationManager.location?.coordinate else { return }
         let span = MKCoordinateSpan(latitudeDelta: 0.04, longitudeDelta: 0.04)
@@ -146,7 +153,7 @@ final class CapsuleMapViewController: UIViewController, BaseViewController {
 
         resetMonitoringRegion(from: nil)
     }
-    
+
     private func presentToDetailAlert() {
         let alertController = UIAlertController(title: "캡슐입니다", message: "해당 캡슐로 이동할까요?", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -155,13 +162,14 @@ final class CapsuleMapViewController: UIViewController, BaseViewController {
         alertController.addAction(acceptAction)
         present(alertController, animated: true, completion: nil)
     }
-    
+
     private func removeAllAnnotations() {
         let annotations = capsuleMapView.annotations
         capsuleMapView.removeAnnotations(annotations)
     }
-    
+
     // MARK: 처음 Annotation 그릴 때 사용
+
     private func addInitialAnnotations(coordinates: [CLLocationCoordinate2D]) {
         let annotations = coordinates.map { CustomAnnotation(coordinate: $0) }
         updateAnnotationsToMonitor(annotations)
@@ -171,43 +179,43 @@ final class CapsuleMapViewController: UIViewController, BaseViewController {
     private func updateAnnotationsToMonitor(_ annotations: [CustomAnnotation]) {
         guard let currentPos = locationManager.location else { return }
         annotationsToMonitor = annotations.filter { currentPos.distance(from: CLLocation(latitude: $0.coordinate.latitude,
-                                                                                         longitude: $0.coordinate.longitude)) <= mapSettings.monitoringRange
+                                                                                         longitude: $0.coordinate.longitude)) <= Settings.monitoringRange
         }
     }
-    
+
     // MARK: Region 업데이트 및 AnnotationsToMonitor 새로 계산
+
     private func resetMonitoringRegion(from previousRegion: CLRegion?) {
         guard let center = locationManager.location?.coordinate else { return }
-        
+
         let customAnnotations = capsuleMapView.annotations.compactMap { $0 as? CustomAnnotation }
         updateAnnotationsToMonitor(customAnnotations)
-        
+
         if let previousRegion = previousRegion {
             locationManager.stopMonitoring(for: previousRegion)
         }
-        
-        let newRegion = CLCircularRegion(center: center, radius: mapSettings.toUpdateRange, identifier: "regionsToMonitor")
+
+        let newRegion = CLCircularRegion(center: center, radius: Settings.monitoringUpdateRange, identifier: "regionsToMonitor")
         newRegion.notifyOnExit = true
-        
+
         locationManager.startMonitoring(for: newRegion)
-        
+
         if let bigOverlay = bigOverlay {
             capsuleMapView.removeOverlay(bigOverlay)
         }
-        let bigCircle = MKCircle(center: center, radius: mapSettings.monitoringRange)
+        let bigCircle = MKCircle(center: center, radius: Settings.monitoringRange)
         capsuleMapView.addOverlay(bigCircle)
         bigOverlay = bigCircle
-        
     }
-    
+
     private func markIfOpenable() {
         guard let currentLocation = locationManager.location else { return }
-        
+
         annotationsToMonitor
             .forEach {
                 let location = currentLocation.distance(from: CLLocation(latitude: $0.coordinate.latitude,
                                                                          longitude: $0.coordinate.longitude))
-                $0.isOpenable = (location <= mapSettings.openableRange) ? true : false
+                $0.isOpenable = (location <= Settings.openableRange) ? true : false
             }
     }
 }
@@ -218,12 +226,12 @@ extension CapsuleMapViewController: MKMapViewDelegate {
         if let previousOverlay = smallOverlay {
             capsuleMapView.removeOverlay(previousOverlay)
         }
-        
-        let circle = MKCircle(center: center, radius: mapSettings.openableRange)
+
+        let circle = MKCircle(center: center, radius: Settings.openableRange)
         capsuleMapView.addOverlay(circle)
         smallOverlay = circle
     }
-    
+
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if let circleOverlay = overlay as? MKCircle {
             let circleRenderer = MKCircleRenderer(overlay: circleOverlay)
@@ -234,7 +242,7 @@ extension CapsuleMapViewController: MKMapViewDelegate {
         }
         return MKOverlayRenderer(overlay: overlay)
     }
-    
+
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         switch annotation {
         case is CustomAnnotation:

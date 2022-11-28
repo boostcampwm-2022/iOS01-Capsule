@@ -10,9 +10,9 @@ import UIKit
 class CapsuleOpenCoordinator: Coordinator {
     var parent: Coordinator?
     var children: [Coordinator] = []
-    var navigationController: UINavigationController?
+    var navigationController: CustomNavigationController?
 
-    init(navigationController: UINavigationController?) {
+    init(navigationController: CustomNavigationController?) {
         self.navigationController = navigationController
     }
 

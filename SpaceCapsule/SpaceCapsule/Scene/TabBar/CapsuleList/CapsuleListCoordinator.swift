@@ -11,7 +11,8 @@ import RxSwift
 final class CapsuleListCoordinator: Coordinator {
     var parent: Coordinator?
     var children: [Coordinator] = []
-    var navigationController: UINavigationController?
+    var navigationController: CustomNavigationController?
+
     var disposeBag = DisposeBag()
     var sortPolicyObserver = PublishSubject<SortPolicy>()
     

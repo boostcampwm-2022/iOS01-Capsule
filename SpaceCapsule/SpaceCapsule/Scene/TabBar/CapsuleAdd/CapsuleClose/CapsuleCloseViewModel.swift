@@ -17,18 +17,21 @@ class CapsuleCloseViewModel: BaseViewModel {
     var output = Output()
 
     struct Input {
-        var popViewController = PublishSubject<Void>()
-        var closeButtonTapped = PublishSubject<Void>()
+        var tapClose = PublishSubject<Void>()
     }
-    
-    struct Output {}
 
-    init() {
+    struct Output {
+        var capsule = BehaviorSubject<Capsule?>(value: nil)
+    }
+
+    init(capsule: Capsule) {
         bind()
+
+        output.capsule.onNext(capsule)
     }
 
     private func bind() {
-        input.popViewController.asObservable()
+        input.tapClose
             .subscribe(onNext: { [weak self] in
                 self?.coordinator?.finish()
             })

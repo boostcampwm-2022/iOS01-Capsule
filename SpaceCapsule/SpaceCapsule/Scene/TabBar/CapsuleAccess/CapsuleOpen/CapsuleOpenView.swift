@@ -77,7 +77,7 @@ final class CapsuleOpenView: UIView, BaseView {
             $0.centerX.equalToSuperview()
             $0.centerY.equalToSuperview().multipliedBy(3)
             $0.width.equalTo(FrameResource.capsuleThumbnailWidth)
-            $0.height.equalTo(FrameResource.capsuleThumbnailHeigth)
+            $0.height.equalTo(FrameResource.capsuleThumbnailHeight)
         }
         
         thumbnailImageView.snp.makeConstraints {
@@ -147,6 +147,7 @@ final class CapsuleOpenView: UIView, BaseView {
     
     func animate() {
         UIView.animate(withDuration: 1.0, animations: {
+            self.layoutIfNeeded()
             self.thumbnailImageContainerView.center.y = (self.frame.height * (2 / 5))
         }, completion: { _ in
             UIView.animate(withDuration: 1, delay: 0, options: [.repeat, .autoreverse]) {

@@ -10,7 +10,7 @@ import UIKit
 final class TabBarCoordinator: Coordinator {
     var parent: Coordinator?
     var children: [Coordinator] = []
-    var navigationController: UINavigationController?
+    var navigationController: CustomNavigationController?
     var tabBarController: CustomTabBarController
 
     init(tabBarController: CustomTabBarController) {

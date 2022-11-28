@@ -9,7 +9,7 @@ import SnapKit
 import UIKit
 
 class SelectButton: UIView {
-    private let label = ThemeLabel(size: FrameResource.fontSize100, color: .themeGray300)
+    private let label = ThemeLabel(size: FrameResource.fontSize100, color: .themeGray400)
     private let icon: UIImageView = {
         let imageView = UIImageView()
         imageView.image = .triangleDown
@@ -37,6 +37,10 @@ class SelectButton: UIView {
 
     @objc private func tapGestureEvent(_ sender: UITapGestureRecognizer) {
         eventHandler?()
+    }
+    
+    func setText(_ text: String) {
+        label.text = text
     }
 
     private func addSubViews() {

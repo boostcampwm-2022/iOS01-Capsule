@@ -10,11 +10,11 @@ import UIKit
 final class SignInCoordinator: Coordinator {
     var parent: Coordinator?
     var children: [Coordinator] = []
-    var navigationController: UINavigationController?
+    var navigationController: CustomNavigationController?
     
     var signInViewController: SignInViewController
     
-    init(navigationController: UINavigationController?) {
+    init(navigationController: CustomNavigationController?) {
         self.navigationController = navigationController
         self.signInViewController = SignInViewController()
     }

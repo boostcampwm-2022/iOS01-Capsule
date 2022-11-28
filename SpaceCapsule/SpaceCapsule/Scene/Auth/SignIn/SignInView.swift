@@ -54,8 +54,8 @@ final class SignInView: UIView, BaseView {
         }
         
         appleSignInButton.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(FrameResource.horizontalPadding)
-            $0.trailing.equalToSuperview().offset(-FrameResource.horizontalPadding)
+            $0.leading.equalToSuperview().offset(FrameResource.signInButtonPadding)
+            $0.trailing.equalToSuperview().offset(-FrameResource.signInButtonPadding)
             $0.bottom.equalToSuperview().offset(-FrameResource.bottomPadding)
             $0.height.equalTo(FrameResource.buttonHeight)
         }

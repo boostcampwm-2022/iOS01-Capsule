@@ -11,9 +11,15 @@ import UIKit
 final class CapsuleCreateCoordinator: Coordinator {
     var parent: Coordinator?
     var children: [Coordinator] = []
-    var navigationController: UINavigationController?
+    var navigationController: CustomNavigationController?
 
-    init(navigationController: UINavigationController?) {
+    var disposeBag = DisposeBag()
+
+    var address: PublishSubject<Address>?
+    var geopoint: PublishSubject<GeoPoint>?
+    var date: BehaviorSubject<Date>?
+
+    init(navigationController: CustomNavigationController?) {
         self.navigationController = navigationController
     }
 
@@ -28,42 +34,53 @@ final class CapsuleCreateCoordinator: Coordinator {
         capsuleCreateViewModel.coordinator = self
         capsuleCreateViewController.viewModel = capsuleCreateViewModel
 
+        address = capsuleCreateViewModel.output.address
+        geopoint = capsuleCreateViewModel.output.geopoint
+        date = capsuleCreateViewModel.output.memoryDate
+
         navigationController?.setViewControllers([capsuleCreateViewController], animated: true)
     }
 
     func showDatePicker() {
-        guard let parent = parent as? CapsuleAddCoordinator else {
-            return
+        let datePickerCoordinator = DatePickerCoordinator(navigationController: navigationController)
+        datePickerCoordinator.parent = self
+
+        if let date = try? date?.value() {
+            datePickerCoordinator.selectedDate = date
+        } else {
+            datePickerCoordinator.selectedDate = Date()
         }
 
-        parent.showDatePicker()
+        datePickerCoordinator.start()
+
+        children.append(datePickerCoordinator)
     }
 
     func showCapsuleLocate() {
+        let capsuleLocateCoordinator = CapsuleLocateCoordinator(navigationController: navigationController)
+        capsuleLocateCoordinator.parent = self
+        capsuleLocateCoordinator.start()
+
+        children.append(capsuleLocateCoordinator)
+    }
+
+    func showCapsuleClose(capsule: Capsule) {
         guard let parent = parent as? CapsuleAddCoordinator else {
             return
         }
 
-        parent.showCapsuleLocate()
-    }
-
-    func addressObserver() -> Observable<Address>? {
-        guard let parent = parent as? CapsuleAddCoordinator else {
-            return nil
-        }
-
-        return parent.addressObserver.asObservable()
-    }
-
-    func dateStringObserver() -> Observable<String>? {
-        guard let parent = parent as? CapsuleAddCoordinator else {
-            return nil
-        }
-
-        return parent.dateStringObserver.asObservable()
+        parent.showCapsuleClose(capsule: capsule)
     }
 
     func finish() {
         parent?.navigationController?.dismiss(animated: true)
+    }
+
+    func startIndicator() {
+        navigationController?.addIndicatorView()
+    }
+
+    func stopIndicator() {
+        navigationController?.removeIndicatorView()
     }
 }

@@ -11,11 +11,11 @@ import UIKit
 final class CapsuleLocateCoordinator: Coordinator {
     var parent: Coordinator?
     var children: [Coordinator] = []
-    var navigationController: UINavigationController?
+    var navigationController: CustomNavigationController?
 
     var viewController: CapsuleLocateViewController?
 
-    init(navigationController: UINavigationController?) {
+    init(navigationController: CustomNavigationController?) {
         self.navigationController = navigationController
     }
 
@@ -37,16 +37,17 @@ final class CapsuleLocateCoordinator: Coordinator {
     }
 
     func finish() {
-        viewController?.dismiss(animated: true)
         parent?.children.popLast()
+        viewController?.dismiss(animated: true)
     }
 
-    func done(address: Address) {
-        guard let parent = parent as? CapsuleAddCoordinator else {
+    func done(address: Address, geopoint: GeoPoint) {
+        guard let parent = parent as? CapsuleCreateCoordinator else {
             return
         }
 
-        parent.addressObserver.onNext(address)
+        parent.address?.onNext(address)
+        parent.geopoint?.onNext(geopoint)
         finish()
     }
 }

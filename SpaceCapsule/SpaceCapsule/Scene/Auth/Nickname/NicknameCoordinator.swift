@@ -10,11 +10,11 @@ import UIKit
 final class NicknameCoordinator: Coordinator {
     var parent: Coordinator?
     var children: [Coordinator] = []
-    var navigationController: UINavigationController?
+    var navigationController: CustomNavigationController?
 
     var nicknameViewController: NicknameViewController
     
-    init(navigationController: UINavigationController?) {
+    init(navigationController: CustomNavigationController?) {
         self.navigationController = navigationController
         self.nicknameViewController = NicknameViewController()
     }

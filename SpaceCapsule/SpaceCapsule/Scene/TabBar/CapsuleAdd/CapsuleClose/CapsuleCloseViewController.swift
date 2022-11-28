@@ -12,40 +12,43 @@ import UIKit
 final class CapsuleCloseViewController: UIViewController, BaseViewController {
     var disposeBag = DisposeBag()
     var viewModel: CapsuleCloseViewModel?
-    let capsuleCloseView = CapsuleCloseView()
-    
+    let mainView = CapsuleCloseView()
+
+    override func loadView() {
+        view = mainView
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        view = capsuleCloseView
+
         bind()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        capsuleCloseView.animate()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        viewModel?.input.popViewController.onNext(())
-        super.viewWillDisappear(animated)
+        mainView.animate()
     }
 
     func bind() {
-        guard let viewModel = self.viewModel else {
-            // TODO: 예외처리
-            return
-        }
-        capsuleCloseView.closeButton.rx.tap
-            .bind {
-                viewModel.input.closeButtonTapped.onNext(())
-            }
+        mainView.closeButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel?.input.tapClose.onNext(())
+            })
             .disposed(by: disposeBag)
-        
-        viewModel.input.closeButtonTapped
+
+        viewModel?.output.capsule
+            .compactMap { $0 }
             .withUnretained(self)
-            .bind { weakSelf in
-                print("close button tapped")
-            }
+            .subscribe(onNext: { weakSelf, capsule in
+                weakSelf.mainView.configure(item:
+                    CapsuleCloseView.Item(
+                        closedDateString: capsule.closedDate.dateTimeString,
+                        memoryDateString: capsule.memoryDate.dateString,
+                        simpleAddress: capsule.simpleAddress,
+                        thumbnailImageURL: capsule.images[safe: 0] ?? ""
+                    )
+                )
+            })
             .disposed(by: disposeBag)
     }
 }

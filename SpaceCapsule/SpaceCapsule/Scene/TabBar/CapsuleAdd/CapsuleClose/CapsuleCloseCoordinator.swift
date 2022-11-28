@@ -10,39 +10,27 @@ import UIKit
 class CapsuleCloseCoordinator: Coordinator {
     var parent: Coordinator?
     var children: [Coordinator] = []
-    var navigationController: UINavigationController?
+    var navigationController: CustomNavigationController?
 
-    init(navigationController: UINavigationController?) {
+    var capsule: Capsule
+
+    init(navigationController: CustomNavigationController?, capsule: Capsule) {
         self.navigationController = navigationController
+        self.capsule = capsule
     }
 
     func start() {
         let capsuleCloseViewController = CapsuleCloseViewController()
-        let capsuleCloseViewModel = CapsuleCloseViewModel()
+        let capsuleCloseViewModel = CapsuleCloseViewModel(capsule: capsule)
 
         capsuleCloseViewModel.coordinator = self
         capsuleCloseViewController.viewModel = capsuleCloseViewModel
 
-        navigationController?.pushViewController(capsuleCloseViewController, animated: true)
+        navigationController?.setViewControllers([capsuleCloseViewController], animated: true)
     }
 
     func finish() {
-        _ = parent?.children.popLast()
-        if let parent = parent as? TabBarCoordinator {
-            parent.tabBarWillHide(false)
-        }
+        parent?.children.popLast()
+        navigationController?.dismiss(animated: true)
     }
-    
-//    func moveToCapsuleDetail() {
-//        let capsuleDetailCoordinator = CapsuleDetailCoordinator()
-//        capsuleDetailCoordinator.parent = self
-//        capsuleDetailCoordinator.start()
-//
-//        children.append(capsuleDetailCoordinator)
-//
-//        if let controller = capsuleDetailCoordinator.navigationController {
-//            controller.modalPresentationStyle = .fullScreen
-//            tabBarController.present(controller, animated: true)
-//        }
-//    }
 }

@@ -11,7 +11,7 @@ import UIKit
 final class ProfileCoordinator: Coordinator {
     var parent: Coordinator?
     var children: [Coordinator] = []
-    var navigationController: UINavigationController?
+    var navigationController: CustomNavigationController?
 
     init() {
         navigationController = .init()

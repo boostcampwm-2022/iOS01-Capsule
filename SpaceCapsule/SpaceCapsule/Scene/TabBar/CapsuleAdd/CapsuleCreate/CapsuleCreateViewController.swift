@@ -27,19 +27,13 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
         return button
     }()
 
-    private let scrollView = UIScrollView()
+    private let scrollView = CustomScrollView()
     private let mainView = CapsuleCreateView()
+    private let indicatorView = LoadingIndicatorView()
 
     var disposeBag = DisposeBag()
     var viewModel: CapsuleCreateViewModel?
     var imagePicker: PHPickerViewController?
-
-    private var imageCollectionDataSource: UICollectionViewDiffableDataSource<Section, Item>!
-
-    typealias Item = AddImageCollectionView.Cell
-    private enum Section {
-        case main
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,58 +44,130 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
         setUpNavigation()
         addSubViews()
         makeConstraints()
-        applyImageCollectionDataSource()
+
+        mainView.imageCollectionView.applyDataSource()
+
+        addTapGestureRecognizer()
+        scrollView.addKeyboardNotification()
 
         bind()
     }
 
-    func bind() {
-        guard let viewModel else { return }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
 
+        removeTapGestureRecognizer()
+        scrollView.removeKeyboardNotification()
+    }
+
+    func bind() {
         closeButton.rx.tap
-            .bind(to: viewModel.input.close)
+            .withUnretained(self)
+            .subscribe(onNext: { weakSelf, event in
+                weakSelf.viewModel?.input.tapClose.onNext(event)
+            })
             .disposed(by: disposeBag)
 
         doneButton.rx.tap
             .asObservable()
-            .subscribe(viewModel.input.done)
-            .disposed(by: disposeBag)
-
-        viewModel.input.imageData
-            .subscribe(onNext: { [weak self] items in
-                self?.applyImageCollectionSnapshot(items: items)
+            .withUnretained(self)
+            .subscribe(onNext: { weakSelf, event in
+                weakSelf.viewModel?.input.tapDone.onNext(event)
             })
             .disposed(by: disposeBag)
 
+        bindView()
+        bindDescriptionTextView()
+        bindViewModel()
+    }
+
+    private func bindView() {
         mainView.imageCollectionView.rx.itemSelected
             .subscribe(onNext: { [weak self] indexPath in
-
                 if self?.mainView.imageCollectionView.cellForItem(at: indexPath) is AddImageButtonCell,
                    let imagePicker = self?.imagePicker {
-                    print("image")
                     self?.present(imagePicker, animated: true)
                 }
-
             })
             .disposed(by: disposeBag)
 
         mainView.titleTextField.rx.text
             .orEmpty
-            .bind(to: viewModel.input.title)
+            .withUnretained(self)
+            .bind(onNext: { weakSelf, title in
+                weakSelf.viewModel?.input.title.onNext(title)
+            })
+            .disposed(by: disposeBag)
+
+        // delegate 적용 후 rx 로 변경할수 있으려나 ㅇㅅㅇ
+        mainView.dateSelectView.eventHandler = { [weak self] in
+            self?.view.endEditing(true)
+            self?.viewModel?.input.tapDatePicker.onNext(())
+        }
+
+        mainView.locationSelectView.eventHandler = { [weak self] in
+            self?.view.endEditing(true)
+            self?.viewModel?.input.tapCapsuleLocate.onNext(())
+        }
+    }
+
+    private func bindDescriptionTextView() {
+        mainView.descriptionTextView.rx.didBeginEditing
+            .subscribe(onNext: { [weak self] in
+                if self?.mainView.descriptionTextView.text == self?.mainView.descriptionPlaceholder {
+                    self?.mainView.descriptionTextView.text = nil
+                    self?.mainView.descriptionTextView.textColor = .themeBlack
+                }
+            })
+            .disposed(by: disposeBag)
+
+        mainView.descriptionTextView.rx.didEndEditing
+            .subscribe(onNext: { [weak self] in
+                guard let text = self?.mainView.descriptionTextView.text,
+                      !text.isEmpty else {
+                    self?.mainView.descriptionTextView.text = self?.mainView.descriptionPlaceholder
+                    self?.mainView.descriptionTextView.textColor = .themeGray200
+                    return
+                }
+            })
             .disposed(by: disposeBag)
 
         mainView.descriptionTextView.rx.text
             .orEmpty
-            .bind(to: viewModel.input.description)
+            .withUnretained(self)
+            .bind(onNext: { weakSelf, description in
+                weakSelf.viewModel?.input.description.onNext(description)
+            })
+            .disposed(by: disposeBag)
+    }
+
+    private func bindViewModel() {
+        viewModel?.input.imageData
+            .subscribe(onNext: { [weak self] items in
+                self?.mainView.imageCollectionView.applySnapshot(items: items)
+            })
             .disposed(by: disposeBag)
 
-        mainView.dateSelectView.eventHandler = { [weak self] in
-            self?.viewModel?.input.tapDatePicker.onNext(())
-        }
-        
-        mainView.locationSelectView.eventHandler = { [weak self] in
-            self?.viewModel?.input.tapCapsuleLocate.onNext(())
-        }
+        viewModel?.output.address
+            .withUnretained(self)
+            .subscribe(onNext: { weakSelf, address in
+                weakSelf.mainView.locationSelectView.setText(address.full)
+            })
+            .disposed(by: disposeBag)
+
+        viewModel?.output.memoryDate
+            .withUnretained(self)
+            .subscribe(onNext: { weakSelf, date in
+                weakSelf.mainView.dateSelectView.setText(date.dateString)
+            })
+            .disposed(by: disposeBag)
+
+        viewModel?.isFieldValid
+            .withUnretained(self)
+            .subscribe(onNext: { weakSelf, state in
+                weakSelf.navigationItem.rightBarButtonItem?.isEnabled = state
+            })
+            .disposed(by: disposeBag)
     }
 
     private func addSubViews() {
@@ -111,18 +177,11 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
 
     private func makeConstraints() {
         scrollView.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.bottom.equalToSuperview()
-            $0.leading.equalToSuperview()
-            $0.trailing.equalToSuperview()
+            $0.edges.equalToSuperview()
         }
 
         mainView.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.bottom.equalToSuperview()
-            $0.leading.equalToSuperview()
-            $0.trailing.equalToSuperview()
-
+            $0.edges.equalToSuperview()
             $0.width.equalToSuperview()
         }
     }
@@ -131,6 +190,7 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
         navigationItem.title = "캡슐 추가"
         navigationItem.leftBarButtonItem = closeButton
         navigationItem.rightBarButtonItem = doneButton
+        navigationItem.rightBarButtonItem?.isEnabled = false
     }
 
     // PHPicker 설정
@@ -144,40 +204,7 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
     }
 }
 
-extension CapsuleCreateViewController {
-    private func applyImageCollectionDataSource() {
-        imageCollectionDataSource = UICollectionViewDiffableDataSource<Section, Item>(collectionView: mainView.imageCollectionView, cellProvider: { collectionView, indexPath, item in
-
-            switch item {
-            case .image:
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddImageCell.identifier, for: indexPath) as? AddImageCell,
-                      let itemData = item.data else {
-                    return UICollectionViewCell()
-                }
-
-                cell.configure(item: itemData)
-
-                return cell
-
-            case .addButton:
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddImageButtonCell.identifier, for: indexPath) as? AddImageButtonCell else {
-                    return UICollectionViewCell()
-                }
-
-                return cell
-            }
-
-        })
-    }
-
-    private func applyImageCollectionSnapshot(items: [AddImageCollectionView.Cell]) {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
-        snapshot.appendSections([.main])
-        snapshot.appendItems(items, toSection: .main)
-        imageCollectionDataSource?.apply(snapshot)
-    }
-}
-
+// TODO: - rx extension 으로 뺀다음 present 부분도 coordinator 로 옮겨도 되려나~
 extension CapsuleCreateViewController: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         picker.dismiss(animated: true)
@@ -191,7 +218,7 @@ extension CapsuleCreateViewController: PHPickerViewControllerDelegate {
             itemProvider.loadObject(ofClass: UIImage.self) { [weak self] image, _ in
                 DispatchQueue.global().async {
                     guard let selectedImage = image as? UIImage,
-                          let data = selectedImage.pngData() else {
+                          let data = selectedImage.jpegData(compressionQuality: 0.2) else {
                         return
                     }
 
@@ -203,15 +230,3 @@ extension CapsuleCreateViewController: PHPickerViewControllerDelegate {
         }
     }
 }
-
-// SwiftUI Preview
-#if canImport(SwiftUI) && DEBUG
-    import SwiftUI
-    struct CapsuleCreateViewControllerPreview: PreviewProvider {
-        static var previews: some View {
-            CapsuleCreateViewController()
-                .showPreview()
-                .previewDevice(PreviewDevice(rawValue: "iPhone 14"))
-        }
-    }
-#endif
