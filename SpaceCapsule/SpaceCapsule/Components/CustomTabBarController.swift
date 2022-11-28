@@ -43,7 +43,7 @@ import UIKit
         tabBar.tintColor = .themeColor300
         tabBar.unselectedItemTintColor = .themeGray200
 
-        UITabBarItem.appearance().setTitleTextAttributes([.font: UIFont.themeFont(ofSize: 13)], for: .normal)
+        UITabBarItem.appearance().setTitleTextAttributes([.font: UIFont.themeFont(ofSize: 13) as Any], for: .normal)
     }
 
     private func bindCenterButton() {

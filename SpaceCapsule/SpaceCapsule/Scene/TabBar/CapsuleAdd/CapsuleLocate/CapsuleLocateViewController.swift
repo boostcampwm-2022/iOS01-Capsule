@@ -11,172 +11,144 @@ import RxSwift
 import UIKit
 
 final class CapsuleLocateViewController: UIViewController, BaseViewController {
-
     var disposeBag = DisposeBag()
-    var viewModel: CapsuleLocateViewModel
-    let capsuleMapView = CapsuleLocateView()
+    var viewModel: CapsuleLocateViewModel?
+
+    let mainView = CapsuleLocateView()
     let locationManager = CLLocationManager()
-    
-    init(viewModel: CapsuleLocateViewModel) {
-        self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    @available(*, unavailable)
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
+
     override func loadView() {
-        view = capsuleMapView
+        view = mainView
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        view.backgroundColor = .white
+
         configure()
         goToCurrentLocation()
         bind()
     }
-   
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        goToCurrentLocation()
-    }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         locationManager.stopUpdatingLocation()
     }
-    
+
     func bind() {
-        viewModel.input.isDragging
+        // Drag
+        viewModel?.input.isDragging
             .withUnretained(self)
             .bind { weakSelf, isDragging in
                 if isDragging {
                     weakSelf.capsuleMapView.cursor.backgroundColor = .lightGray
                 } else {
                     weakSelf.capsuleMapView.cursor.backgroundColor = .green
-                    
                 }
             }.disposed(by: disposeBag)
+
+        // 주소
+        viewModel?.output.fullAddress
+            .subscribe(onNext: { [weak self] in
+                self?.mainView.locationLabel.text = $0 ?? "해당 지역의 주소를 불러올 수 없습니다."
+            })
+            .disposed(by: disposeBag)
+
+        // 취소
+        mainView.cancelButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel?.input.cancel.onNext(())
+            })
+            .disposed(by: disposeBag)
+        
+        // 완료
+        mainView.doneButton.rx.tap
+            .subscribe(onNext: {[weak self] in
+                self?.viewModel?.input.done.onNext(())
+            })
+            .disposed(by: disposeBag)
     }
-    
+
     private func configure() {
         configureLocationManager()
         configureMap()
         configureGesture()
     }
-    
+
     private func configureLocationManager() {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
     }
-    
+
     private func configureMap() {
-        capsuleMapView.map.delegate = self
-        capsuleMapView.map.mapType = MKMapType.standard
+        mainView.locateMap.delegate = self
+        mainView.locateMap.mapType = MKMapType.standard
     }
-    
+
     private func goToCurrentLocation() {
         guard let center = locationManager.location?.coordinate else {
             return
         }
-        
+
         let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
         let region = MKCoordinateRegion(center: center, span: span)
-        capsuleMapView.map.setRegion(region, animated: true)
-    }
 
+        mainView.locateMap.setRegion(region, animated: true)
+    }
 }
+
+// MARK: - MKMapView, CLLocationManager
 
 extension CapsuleLocateViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-            switch status {
-            case .authorizedAlways, .authorizedWhenInUse:
-                print("GPS 권한 설정됨")
-                locationManager.startUpdatingLocation()
-                goToCurrentLocation()
-            case .restricted, .notDetermined:
-                print("GPS 권한 설정되지 않음")
-                locationManager.requestWhenInUseAuthorization()
-            case .denied:
-                print("GPS 권한 요청 거부됨")
-                locationManager.requestWhenInUseAuthorization()
-            default:
-                print("GPS: Default")
-            }
-    }
-    
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        guard !(annotation is MKUserLocation) else { // 어노테이션이 유저의 현재 뷰가 아님을 보장
-            return nil
+        switch status {
+        case .authorizedAlways, .authorizedWhenInUse:
+            print("GPS 권한 설정됨")
+            locationManager.startUpdatingLocation()
+            goToCurrentLocation()
+        case .restricted, .notDetermined:
+            print("GPS 권한 설정되지 않음")
+            locationManager.requestWhenInUseAuthorization()
+        case .denied:
+            print("GPS 권한 요청 거부됨")
+            locationManager.requestWhenInUseAuthorization()
+        default:
+            print("GPS: Default")
         }
-        
-        var annotationView = capsuleMapView.map.dequeueReusableAnnotationView(withIdentifier: "spaceCapsule")
-        if annotationView == nil {
-            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "spaceCapsule")
-            annotationView?.canShowCallout = true // tap이 가능한지
-            annotationView?.backgroundColor = .themeColor100
-            let btn = UIButton(type: .detailDisclosure)
-            annotationView?.rightCalloutAccessoryView = btn
-        } else {
-            annotationView?.annotation = annotation
-        }
-        annotationView?.image = UIImage(systemName: "circle")
-        
-        return annotationView
     }
-    
+
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated: Bool) {
         let coordinate = mapView.region.center
-        
-        do {
-            let request = try KakaoAPIManager.shared.getRequest(for: .coordToAddress((x: String(coordinate.longitude),
-                                                                        y: String(coordinate.latitude))))
-            let result: Observable<Result<KakaoResponse, NetworkError>> = NetworkManager.shared.send(request: request)
-            result
-                .map { result -> [Document] in
-                    switch result {
-                    case let .success(value):
-                        return value.documents
-                    case let .failure(error):
-                        print(error)
-                        return []
-                    }
-                }
-                .subscribe(onNext: {
-                    let address = $0.first?.address
-                    print("\(address?.region1DepthName ?? "") \(address?.region2DepthName ?? "")")
-                })
-                .disposed(by: disposeBag)
-        } catch {
-            print(error)
-        }
+
+        viewModel?.fetchLocation(x: coordinate.longitude, y: coordinate.latitude)
     }
 }
+
+// MARK: - Gesture Recognizer
 
 extension CapsuleLocateViewController: UIGestureRecognizerDelegate {
     private func configureGesture() {
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(drag(sender:)))
         panGesture.delegate = self
-        capsuleMapView.map.addGestureRecognizer(panGesture)
+
+        mainView.locateMap.addGestureRecognizer(panGesture)
     }
-    
+
     @objc func drag(sender: UIPanGestureRecognizer) {
         switch sender.state {
         case .began:
-            viewModel.input.isDragging.accept(true)
+            viewModel?.input.isDragging.accept(true)
         case .ended, .cancelled:
-            viewModel.input.isDragging.accept(false)
+            viewModel?.input.isDragging.accept(false)
         default:
             break
         }
     }
-    
+
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-       return true
+        return true
     }
 }

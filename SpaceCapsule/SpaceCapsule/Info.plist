@@ -29,5 +29,10 @@
 			</array>
 		</dict>
 	</dict>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>nearby-interaction</string>
+		<string>processing</string>
+	</array>
 </dict>
 </plist>
