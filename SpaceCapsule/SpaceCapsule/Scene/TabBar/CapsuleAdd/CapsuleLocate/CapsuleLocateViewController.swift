@@ -40,11 +40,11 @@ final class CapsuleLocateViewController: UIViewController, BaseViewController {
         // Drag
         viewModel?.input.isDragging
             .withUnretained(self)
-            .bind { owner, isDragging in
+            .bind { weakSelf, isDragging in
                 if isDragging {
-                    owner.mainView.cursor.backgroundColor = .lightGray
+                    weakSelf.capsuleMapView.cursor.backgroundColor = .lightGray
                 } else {
-                    owner.mainView.cursor.backgroundColor = .green
+                    weakSelf.capsuleMapView.cursor.backgroundColor = .green
                 }
             }.disposed(by: disposeBag)
 
@@ -125,7 +125,6 @@ extension CapsuleLocateViewController: MKMapViewDelegate, CLLocationManagerDeleg
 
         viewModel?.fetchLocation(x: coordinate.longitude, y: coordinate.latitude)
     }
-
 }
 
 // MARK: - Gesture Recognizer

@@ -11,6 +11,8 @@ final class KakaoAPIManager {
     static let shared = KakaoAPIManager()
 
     private let baseURLString = "https://dapi.kakao.com/v2/local"
+    
+    private init () {}
 
     enum APIType {
         case coordToAddress(Coord)
