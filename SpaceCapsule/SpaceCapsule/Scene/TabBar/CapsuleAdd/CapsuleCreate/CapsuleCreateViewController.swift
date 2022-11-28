@@ -84,9 +84,8 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
     private func bindView() {
         mainView.imageCollectionView.rx.itemSelected
             .subscribe(onNext: { [weak self] indexPath in
-                if self?.mainView.imageCollectionView.cellForItem(at: indexPath) is AddImageButtonCell,
-                   let imagePicker = self?.imagePicker {
-                    self?.present(imagePicker, animated: true)
+                if self?.mainView.imageCollectionView.cellForItem(at: indexPath) is AddImageButtonCell {
+                    self?.checkAccessForPHPicker()
                 }
             })
             .disposed(by: disposeBag)
@@ -201,6 +200,36 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
 
         imagePicker = PHPickerViewController(configuration: configuration)
         imagePicker?.delegate = self
+    }
+
+    private func checkAccessForPHPicker() {
+        guard let imagePicker else {
+            return
+        }
+
+        switch PHPhotoLibrary.authorizationStatus(for: .readWrite) {
+        case .authorized, .limited:
+            present(imagePicker, animated: true)
+
+        case .notDetermined:
+            PHPhotoLibrary.requestAuthorization(for: .readWrite) { [weak self] status in
+                switch status {
+                case .authorized, .limited:
+                    DispatchQueue.main.async {
+                        self?.present(imagePicker, animated: true)
+                    }
+                case .notDetermined, .restricted, .denied:
+                    print("앨범 접근이 필요합니다.")
+                @unknown default:
+                    print("\(#function) unknown error")
+                }
+            }
+
+        case .denied, .restricted:
+            print("앨범 접근이 필요합니다.")
+        @unknown default:
+            print("\(#function) unknown error")
+        }
     }
 }
 
