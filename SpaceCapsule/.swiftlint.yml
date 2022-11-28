@@ -48,6 +48,7 @@ disabled_rules:
   - sorted_imports
   - file_header
   - trailing_whitespace
+  - large_tuple
 
 # Customized Configurable Rules
 line_length: 200

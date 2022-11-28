@@ -8,6 +8,7 @@
 import Foundation
 
 enum FrameResource {
+    static let verticalPadding: CGFloat = 10.0
     static let logoWithTextSize: CGFloat = 320.0
 
     static let horizontalPadding: CGFloat = 20.0
@@ -31,6 +32,7 @@ enum FrameResource {
     static let addCapsuleButtonSize: CGFloat = 50.0
     static let addImageViewSize: CGFloat = 250.0
 
+    static let fontSize80: CGFloat = 16.0
     static let fontSize90: CGFloat = 18.0
     static let fontSize100: CGFloat = 20.0
     static let fontSize110: CGFloat = 22.0
@@ -52,4 +54,15 @@ enum FrameResource {
     static let floatingOffsetY: CGFloat = 20.0
     
     static let locationIconSize: CGFloat = 30.0
+    
+    static let capsuleCellWidth: CGFloat = 135.0
+    static let capsuleCellHeight: CGFloat = 210.0
+    static let capsuleHorizontalInset: CGFloat = 10.0
+    
+    static let capsuleCellShadowOffset: CGSize = CGSize(width: 4, height: 4)
+    static let capsuleCellShadowRadius: CGFloat = 4.0
+    static let capsuleCellShadowOpacity: CGFloat = 0.3
+    
+    static let sortPolicySelectionSheetHeight: CGFloat = 250.0
+    static let sortPolicySelectionCellHeight: CGFloat = 40.0
 }

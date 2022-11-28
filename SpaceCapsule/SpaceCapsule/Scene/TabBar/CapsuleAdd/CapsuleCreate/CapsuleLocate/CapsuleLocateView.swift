@@ -146,4 +146,3 @@ final class CapsuleLocateView: UIView, BaseView {
         }
     }
 }
-

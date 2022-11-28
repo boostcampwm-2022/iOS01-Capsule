@@ -27,7 +27,7 @@
     }
 #endif
 
-//#if canImport(SwiftUI) && DEBUG
+// #if canImport(SwiftUI) && DEBUG
 //    import SwiftUI
 //    // Preview 이름
 //    struct ViewPreview: PreviewProvider {
@@ -38,4 +38,4 @@
 //            .previewLayout(.sizeThatFits)
 //        }
 //    }
-//#endif
+// #endif

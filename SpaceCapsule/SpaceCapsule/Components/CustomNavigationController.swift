@@ -17,11 +17,11 @@ final class CustomNavigationController: UINavigationController {
     }
 
     private func applyThemeStyle() {
-        UIBarButtonItem.appearance().setTitleTextAttributes([.font: UIFont.themeFont(ofSize: 25)], for: .normal)
-        UIBarButtonItem.appearance().setTitleTextAttributes([.font: UIFont.themeFont(ofSize: 25)], for: .disabled)
-        UIBarButtonItem.appearance().setTitleTextAttributes([.font: UIFont.themeFont(ofSize: 25)], for: .selected)
+        UIBarButtonItem.appearance().setTitleTextAttributes([.font: UIFont.themeFont(ofSize: 25) as Any], for: .normal)
+        UIBarButtonItem.appearance().setTitleTextAttributes([.font: UIFont.themeFont(ofSize: 25) as Any], for: .disabled)
+        UIBarButtonItem.appearance().setTitleTextAttributes([.font: UIFont.themeFont(ofSize: 25) as Any], for: .highlighted)
 
-        navigationBar.titleTextAttributes = [.font: UIFont.themeFont(ofSize: 25)]
+        navigationBar.titleTextAttributes = [.font: UIFont.themeFont(ofSize: 25) as Any]
         navigationBar.tintColor = .themeBlack
     }
 
