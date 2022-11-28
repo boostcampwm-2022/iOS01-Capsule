@@ -32,7 +32,7 @@ final class KakaoAPIManager {
         
         var request = URLRequest(url: url)
         request.httpMethod = RequestType.GET
-        request.setValue("KakaoAK \(Key.kakao)", forHTTPHeaderField: "Authorization")
+//        request.setValue("KakaoAK \(Key.kakao)", forHTTPHeaderField: "Authorization")
         
         return request
     }

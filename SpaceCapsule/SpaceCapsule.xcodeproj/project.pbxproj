@@ -101,11 +101,11 @@
 		4A05D0EC2924C04200A2EF50 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A05D0EB2924C04200A2EF50 /* GoogleService-Info.plist */; };
 		4A05D1052925CF2A00A2EF50 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A05D1042925CF2A00A2EF50 /* NetworkError.swift */; };
 		4A1FEFF8292F1F1200A935BB /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1FEFF7292F1F1200A935BB /* CustomAnnotation.swift */; };
+		4A9E91442925D51B00B7CC5C /* KakaoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E91422925D51B00B7CC5C /* KakaoResponse.swift */; };
+		4A9E91452925D51B00B7CC5C /* RequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E91432925D51B00B7CC5C /* RequestType.swift */; };
 		4A9E9147292A2A5A00B7CC5C /* CLLocationManager+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E9146292A2A5A00B7CC5C /* CLLocationManager+Rx.swift */; };
 		4A9E9149292A383900B7CC5C /* MKMapView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E9148292A383900B7CC5C /* MKMapView+Rx.swift */; };
 		4AF16AE7292B1F8400787C5C /* CustomAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF16AE6292B1F8400787C5C /* CustomAnnotationView.swift */; };
-		4A9E91442925D51B00B7CC5C /* KakaoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E91422925D51B00B7CC5C /* KakaoResponse.swift */; };
-		4A9E91452925D51B00B7CC5C /* RequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E91432925D51B00B7CC5C /* RequestType.swift */; };
 		599C19D2292B82D000517E93 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C19D1292B82D000517E93 /* LoadingViewController.swift */; };
 		599C19D4292B838D00517E93 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C19D3292B838D00517E93 /* LoadingView.swift */; };
 		599C1A2C292C9F5B00517E93 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 599C1A2B292C9F5B00517E93 /* .swiftlint.yml */; };
@@ -162,6 +162,7 @@
 		0D24C207292B850400007E75 /* ImageCacheFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCacheFactory.swift; sourceTree = "<group>"; };
 		0D24C208292B850400007E75 /* ImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		0D24C209292B850400007E75 /* NoneImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoneImageCache.swift; sourceTree = "<group>"; };
+		0D2B7AB92934594400CE34E3 /* running.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = running.gpx; sourceTree = "<group>"; };
 		0D46DEF92923E1180045400A /* UIFont+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
 		0D4C11362927489D00B1C2B6 /* UIViewPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewPreview.swift; sourceTree = "<group>"; };
 		0D4C11382927495900B1C2B6 /* UIViewControllerPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerPreview.swift; sourceTree = "<group>"; };
@@ -262,7 +263,6 @@
 		4A9E9146292A2A5A00B7CC5C /* CLLocationManager+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationManager+Rx.swift"; sourceTree = "<group>"; };
 		4A9E9148292A383900B7CC5C /* MKMapView+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKMapView+Rx.swift"; sourceTree = "<group>"; };
 		4AF16AE6292B1F8400787C5C /* CustomAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotationView.swift; sourceTree = "<group>"; };
-		4AF16AE8292B6B5C00787C5C /* running.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = running.gpx; sourceTree = "<group>"; };
 		59427A3929262BB2002657C3 /* FirebaseAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthManager.swift; sourceTree = "<group>"; };
 		59427A3B292656CA002657C3 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		59427A3D29290085002657C3 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
@@ -378,6 +378,7 @@
 				59F567F72923BE1E00F756B2 /* SpaceCapsule.entitlements */,
 				4A05D0EB2924C04200A2EF50 /* GoogleService-Info.plist */,
 				0D6CA342292216A400E02393 /* Info.plist */,
+				0D2B7AB92934594400CE34E3 /* running.gpx */,
 				0D6CA33D292216A400E02393 /* Assets.xcassets */,
 				0D6CA33F292216A400E02393 /* LaunchScreen.storyboard */,
 				288A8E902923242D000229D2 /* App */,
@@ -414,8 +415,6 @@
 		0D706135292C5E950077787E /* DatePicker */ = {
 			isa = PBXGroup;
 			children = (
-				0D8AD3F029264CA800AA305D /* Key.swift */,
-				4AF16AE8292B6B5C00787C5C /* running.gpx */,
 				0DE786E0292BBDEC007EF260 /* DatePickerViewController.swift */,
 				0D706136292C630D0077787E /* DatePickerViewModel.swift */,
 				0D706138292C63140077787E /* DatePickerCoordinator.swift */,

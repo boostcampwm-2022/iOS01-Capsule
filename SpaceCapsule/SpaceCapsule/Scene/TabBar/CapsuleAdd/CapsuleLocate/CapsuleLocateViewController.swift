@@ -42,9 +42,9 @@ final class CapsuleLocateViewController: UIViewController, BaseViewController {
             .withUnretained(self)
             .bind { weakSelf, isDragging in
                 if isDragging {
-                    weakSelf.capsuleMapView.cursor.backgroundColor = .lightGray
+                    weakSelf.mainView.cursor.backgroundColor = .lightGray
                 } else {
-                    weakSelf.capsuleMapView.cursor.backgroundColor = .green
+                    weakSelf.mainView.cursor.backgroundColor = .green
                 }
             }.disposed(by: disposeBag)
 
