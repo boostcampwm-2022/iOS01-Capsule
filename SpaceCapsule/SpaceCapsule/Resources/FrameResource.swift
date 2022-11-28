@@ -65,4 +65,6 @@ enum FrameResource {
     
     static let sortPolicySelectionSheetHeight: CGFloat = 250.0
     static let sortPolicySelectionCellHeight: CGFloat = 40.0
+    
+    static let userTrackingButtonSize: CGFloat = 50.0
 }

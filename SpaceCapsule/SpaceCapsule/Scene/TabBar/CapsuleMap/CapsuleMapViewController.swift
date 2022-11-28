@@ -21,9 +21,11 @@ final class CapsuleMapViewController: UIViewController, BaseViewController {
     let disposeBag = DisposeBag()
     var viewModel: CapsuleMapViewModel?
 
-    private let capsuleMapView = MKMapView()
+    private let capsuleMapView = CustomMapView()
     private let locationManager = CLLocationManager()
-    private var annotationsToMonitor = [CustomAnnotation]() { didSet { markIfOpenable() } }
+    private var annotationsToMonitor = [CustomAnnotation]() {
+        didSet { markIfOpenable() }
+    }
 
     private var smallOverlay: MKCircle?
     private var bigOverlay: MKCircle?
@@ -34,6 +36,7 @@ final class CapsuleMapViewController: UIViewController, BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         configure()
         addConstraints()
         bindNotification()
@@ -66,7 +69,9 @@ final class CapsuleMapViewController: UIViewController, BaseViewController {
 
     private func addConstraints() {
         capsuleMapView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.horizontalEdges.equalToSuperview()
+            $0.top.equalToSuperview()
+            $0.bottom.equalTo(view.safeAreaLayoutGuide)
         }
     }
 

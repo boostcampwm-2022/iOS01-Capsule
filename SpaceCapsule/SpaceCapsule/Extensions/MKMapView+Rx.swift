@@ -35,9 +35,9 @@ extension Reactive where Base: MKMapView {
     var calloutAccessoryControlTapped: Observable<(MKMapView, MKAnnotationView, UIButton)> {
         return delegate.methodInvoked(#selector(MKMapViewDelegate.mapView(_:annotationView:calloutAccessoryControlTapped:)))
             .map { param in
-                if let mapview = param[0] as? MKMapView,
-                   let annotationView = param[1] as? MKAnnotationView,
-                   let button = param[2] as? UIButton {
+                if let mapview = param[safe: 0] as? MKMapView,
+                   let annotationView = param[safe: 1] as? MKAnnotationView,
+                   let button = param[safe: 2] as? UIButton {
                     return (mapview, annotationView, button)
                 }
                 return (MKMapView(), MKAnnotationView(), UIButton())
