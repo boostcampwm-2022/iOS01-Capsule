@@ -21,7 +21,7 @@ final class CapsuleCell: UICollectionViewCell {
     
     var thumbnailImageContainerView = {
         let view = UIView()
-        view.layer.shadowOffset = FrameResource.capsuleCellShadowOffest
+        view.layer.shadowOffset = FrameResource.capsuleCellShadowOffset
         view.layer.shadowRadius = FrameResource.capsuleCellShadowRadius
         view.layer.shadowOpacity = Float(FrameResource.capsuleCellShadowOpacity)
         view.layer.cornerRadius = FrameResource.capsuleCellWidth / 2
