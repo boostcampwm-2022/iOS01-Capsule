@@ -8,27 +8,11 @@
 import UIKit
 import SnapKit
 
-enum SortPolicy: String, CustomStringConvertible, CaseIterable {
-    case nearest
-    case furthest
-    case latest
-    case oldest
-    
-    var description: String {
-        switch self {
-        case .nearest: return "가까운 순"
-        case .furthest: return "멀리 있는 순"
-        case .latest: return "최신 순"
-        case .oldest: return "오래된 순"
-        }
-    }
-}
-
 final class SortPolicyCell: UITableViewCell {
     static let identifier = "SortPolicyCell"
     
     var descriptionLabel = {
-        let label = ThemeLabel(text: SortPolicy.nearest.description, size: 24, color: .themeBlack)
+        let label = ThemeLabel(text: SortPolicy.nearest.description, size: FrameResource.fontSize120, color: .themeBlack)
         label.isUserInteractionEnabled = true
         return label
     }()

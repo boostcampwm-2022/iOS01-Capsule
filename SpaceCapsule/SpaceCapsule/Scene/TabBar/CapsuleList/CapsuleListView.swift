@@ -11,7 +11,7 @@ import SnapKit
 final class CapsuleListView: UIView, BaseView {
     let sortBarButtonItem = {
         let button = UIButton()
-        button.titleLabel?.font = .themeFont(ofSize: 15)
+        button.titleLabel?.font = .themeFont(ofSize: FrameResource.fontSize80)
         button.setTitle(SortPolicy.nearest.description, for: .normal)
         button.setTitleColor(.themeBlack, for: .normal)
         button.setImage(.sort, for: .normal)
@@ -48,8 +48,12 @@ final class CapsuleListView: UIView, BaseView {
     func configureFlowLayout() {
         let collectionViewFlowLayout = UICollectionViewFlowLayout()
         collectionViewFlowLayout.scrollDirection = .vertical
-        collectionViewFlowLayout.minimumLineSpacing = 10
-        collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 10, left: 20, bottom: 0, right: 20)
+        collectionViewFlowLayout.minimumLineSpacing = FrameResource.verticalPadding
+        collectionViewFlowLayout.sectionInset = UIEdgeInsets(
+            top: FrameResource.verticalPadding,
+            left: FrameResource.capsuleHorizontalInset,
+            bottom: 0,
+            right: FrameResource.capsuleHorizontalInset)
         collectionView.collectionViewLayout = collectionViewFlowLayout
     }
     

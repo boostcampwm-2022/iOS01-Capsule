@@ -30,7 +30,7 @@ final class CapsuleListCoordinator: Coordinator {
         
         navigationController?.setViewControllers([capsuleListViewController], animated: true)
         navigationController?.navigationBar.topItem?.title = "목록"
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.themeFont(ofSize: 24) as Any]
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.themeFont(ofSize: FrameResource.fontSize120) as Any]
     }
     
     func showCapsuleOpen() {

@@ -21,15 +21,15 @@ final class CapsuleCell: UICollectionViewCell {
     
     var thumbnailImageContainerView = {
         let view = UIView()
-        view.layer.shadowOffset = CGSize(width: 4, height: 4)
-        view.layer.shadowRadius = 4
-        view.layer.shadowOpacity = 0.5
+        view.layer.shadowOffset = FrameResource.capsuleCellShadowOffset
+        view.layer.shadowRadius = FrameResource.capsuleCellShadowRadius
+        view.layer.shadowOpacity = Float(FrameResource.capsuleCellShadowOpacity)
         view.layer.cornerRadius = FrameResource.capsuleCellWidth / 2
         return view
     }()
     
     var descriptionLabel = {
-        let label = ThemeLabel(text: "xxxx년 x월 x일\nxx시 xx구에서", size: 16, color: .themeBlack)
+        let label = ThemeLabel(text: "xxxx년 x월 x일\nxx시 xx구에서", size: FrameResource.fontSize80, color: .themeBlack)
         label.numberOfLines = 2
         label.textAlignment = .center
         return label
@@ -66,7 +66,7 @@ final class CapsuleCell: UICollectionViewCell {
         }
         
         descriptionLabel.snp.makeConstraints {
-            $0.top.equalTo(thumbnailImageContainerView.snp.bottom).offset(10)
+            $0.top.equalTo(thumbnailImageContainerView.snp.bottom).offset(FrameResource.verticalPadding)
             $0.centerX.equalToSuperview()
         }
     }
@@ -109,12 +109,12 @@ final class CapsuleCell: UICollectionViewCell {
         
         lockImageView.snp.makeConstraints {
             $0.center.equalToSuperview()
-            $0.width.height.equalTo(50)
+            $0.width.height.equalTo(thumbnailImageView.snp.width).multipliedBy(0.3)
         }
     }
     
     private func applyCapsuleDate(closeDate: String) {
-        let dateLabel = ThemeLabel(text: "밀봉시간:\(closeDate)", size: 13, color: .themeGray300)
+        let dateLabel = ThemeLabel(text: "밀봉시간:\(closeDate)", size: FrameResource.fontSize80, color: .themeGray300)
         dateLabel.textAlignment = .center
         thumbnailImageView.addSubview(dateLabel)
         

@@ -18,7 +18,7 @@ final class SortPolicyHeaderView: UITableViewHeaderFooterView {
     }()
     
     let label = {
-        let label = ThemeLabel(size: 20, color: .themeGray300)
+        let label = ThemeLabel(size: FrameResource.fontSize100, color: .themeGray300)
         label.text = "정렬 기준"
         return label
     }()
