@@ -10,11 +10,10 @@ import UIKit
 class ThemeTextField: UITextField {
     convenience init(placeholder: String?) {
         self.init()
-//        self.placeholder = placeholder
         
         attributedPlaceholder = NSAttributedString(
             string: placeholder ?? "",
-            attributes: [.foregroundColor: UIColor.themeGray200]
+            attributes: [.foregroundColor: UIColor.themeGray200 as Any]
         )
         
         textColor = .themeBlack

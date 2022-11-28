@@ -69,7 +69,6 @@ final class AppCoordinator: Coordinator {
         }
                 
         if isRegistered {
-            print("isRegistered: \(isRegistered)")
             moveToTabBar()
         } else {
             // TODO: 중복 구독하면 어떡하나?

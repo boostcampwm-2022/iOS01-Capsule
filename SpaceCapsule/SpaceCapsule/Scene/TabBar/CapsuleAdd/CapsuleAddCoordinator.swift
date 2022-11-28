@@ -40,7 +40,7 @@ final class CapsuleAddCoordinator: Coordinator {
         capsuleCloseCoordinator.parent = self
         capsuleCloseCoordinator.start()
         
-        children.popLast()
+        _ = children.popLast()
         children.append(capsuleCloseCoordinator)
     }
 }

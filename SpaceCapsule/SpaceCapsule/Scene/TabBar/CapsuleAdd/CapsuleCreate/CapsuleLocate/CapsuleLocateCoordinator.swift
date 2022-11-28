@@ -37,7 +37,7 @@ final class CapsuleLocateCoordinator: Coordinator {
     }
 
     func finish() {
-        parent?.children.popLast()
+        _ = parent?.children.popLast()
         viewController?.dismiss(animated: true)
     }
 

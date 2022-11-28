@@ -179,8 +179,6 @@
 		0D90DAFD29239C9F000DCC84 /* OwnglyphHaesomChae.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = OwnglyphHaesomChae.otf; sourceTree = "<group>"; };
 		0D9D672D292486780038F529 /* ThemeLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeLabel.swift; sourceTree = "<group>"; };
 		0D9D67302924945D0038F529 /* FrameResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameResource.swift; sourceTree = "<group>"; };
-		0DA05E1A29308B2D00B08FA5 /* SpaceCapsuleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = SpaceCapsuleTests.xctest; path = "/Users/trumanfromkorea/Develop/Boostcamp/Membership/iOS01-Capsule/SpaceCapsule/build/Debug-iphoneos/SpaceCapsuleTests.xctest"; sourceTree = "<absolute>"; };
-		0DA05E1B29308B2D00B08FA5 /* SpaceCapsuleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = SpaceCapsuleUITests.xctest; path = "/Users/trumanfromkorea/Develop/Boostcamp/Membership/iOS01-Capsule/SpaceCapsule/build/Debug-iphoneos/SpaceCapsuleUITests.xctest"; sourceTree = "<absolute>"; };
 		0DA05E1C29308B8400B08FA5 /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
 		0DA6610C292778BE00CF3563 /* ThemeTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeTextField.swift; sourceTree = "<group>"; };
 		0DA9F6902928E9B900454932 /* AddImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddImageCell.swift; sourceTree = "<group>"; };
@@ -198,7 +196,6 @@
 		0DCEED322932177F006EB2B4 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		0DCEED3429324188006EB2B4 /* LocationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationError.swift; sourceTree = "<group>"; };
 		0DCEED362932538F006EB2B4 /* Array+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+.swift"; sourceTree = "<group>"; };
-		0DD83D07292F0D390020F15C /* SpaceCapsule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = SpaceCapsule.app; path = "/Users/trumanfromkorea/Develop/Boostcamp/Membership/iOS01-Capsule/SpaceCapsule/build/Debug-iphoneos/SpaceCapsule.app"; sourceTree = "<absolute>"; };
 		0DD83D0E292F1BAD0020F15C /* CustomScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScrollView.swift; sourceTree = "<group>"; };
 		0DD83D10292F2EC80020F15C /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		0DD83D12292F51960020F15C /* LoadingIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicatorView.swift; sourceTree = "<group>"; };
@@ -264,6 +261,9 @@
 		4A05D0EB2924C04200A2EF50 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4A05D1042925CF2A00A2EF50 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		4A1FEFF7292F1F1200A935BB /* CustomAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
+		4A2449C829349F77000EE58C /* SpaceCapsule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = SpaceCapsule.app; path = "/Users/jisu/Desktop/Boostcamp/Membership/Git/iOS01-Capsule/SpaceCapsule/build/Debug-iphoneos/SpaceCapsule.app"; sourceTree = "<absolute>"; };
+		4A2449C929349F77000EE58C /* SpaceCapsuleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = SpaceCapsuleTests.xctest; path = "/Users/jisu/Desktop/Boostcamp/Membership/Git/iOS01-Capsule/SpaceCapsule/build/Debug-iphoneos/SpaceCapsuleTests.xctest"; sourceTree = "<absolute>"; };
+		4A2449CA29349F77000EE58C /* SpaceCapsuleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = SpaceCapsuleUITests.xctest; path = "/Users/jisu/Desktop/Boostcamp/Membership/Git/iOS01-Capsule/SpaceCapsule/build/Debug-iphoneos/SpaceCapsuleUITests.xctest"; sourceTree = "<absolute>"; };
 		4A9E9146292A2A5A00B7CC5C /* CLLocationManager+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationManager+Rx.swift"; sourceTree = "<group>"; };
 		4A9E9148292A383900B7CC5C /* MKMapView+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKMapView+Rx.swift"; sourceTree = "<group>"; };
 		4AF16AE6292B1F8400787C5C /* CustomAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotationView.swift; sourceTree = "<group>"; };
@@ -817,7 +817,7 @@
 				0D707D5429222BEB00380B14 /* FirebaseStorage */,
 			);
 			productName = SpaceCapsule;
-			productReference = 0DD83D07292F0D390020F15C /* SpaceCapsule.app */;
+			productReference = 4A2449C829349F77000EE58C /* SpaceCapsule.app */;
 			productType = "com.apple.product-type.application";
 		};
 		0D6CA346292216A400E02393 /* SpaceCapsuleTests */ = {
@@ -835,7 +835,7 @@
 			);
 			name = SpaceCapsuleTests;
 			productName = SpaceCapsuleTests;
-			productReference = 0DA05E1A29308B2D00B08FA5 /* SpaceCapsuleTests.xctest */;
+			productReference = 4A2449C929349F77000EE58C /* SpaceCapsuleTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		0D6CA350292216A400E02393 /* SpaceCapsuleUITests */ = {
@@ -853,7 +853,7 @@
 			);
 			name = SpaceCapsuleUITests;
 			productName = SpaceCapsuleUITests;
-			productReference = 0DA05E1B29308B2D00B08FA5 /* SpaceCapsuleUITests.xctest */;
+			productReference = 4A2449CA29349F77000EE58C /* SpaceCapsuleUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */

@@ -30,7 +30,7 @@ class CapsuleCloseCoordinator: Coordinator {
     }
 
     func finish() {
-        parent?.children.popLast()
+        _ = parent?.children.popLast()
         navigationController?.dismiss(animated: true)
     }
 }

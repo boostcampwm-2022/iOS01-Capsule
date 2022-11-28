@@ -15,7 +15,7 @@ extension UILabel {
         targetStringList.forEach {
             let range = (fullText as NSString).range(of: $0)
             attributedString.addAttributes(
-                [.font: UIFont.themeFont(ofSize: size), .foregroundColor: color],
+                [.font: UIFont.themeFont(ofSize: size) as Any, .foregroundColor: color as Any],
                 range: range
             )
         }

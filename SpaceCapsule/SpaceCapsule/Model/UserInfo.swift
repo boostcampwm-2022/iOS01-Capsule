@@ -13,8 +13,8 @@ struct UserInfo: CustomCodable {
 
     var dictData: [String: Any] {
         [
-            "email": email,
-            "nickname": nickname,
+            "email": email as Any,
+            "nickname": nickname as Any,
         ]
     }
 }
