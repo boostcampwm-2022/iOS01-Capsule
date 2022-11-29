@@ -11,6 +11,7 @@ class CapsuleOpenCoordinator: Coordinator {
     var parent: Coordinator?
     var children: [Coordinator] = []
     var navigationController: CustomNavigationController?
+    var capsuleCellModel: CapsuleCellModel?
 
     init(navigationController: CustomNavigationController?) {
         self.navigationController = navigationController
@@ -19,7 +20,7 @@ class CapsuleOpenCoordinator: Coordinator {
     func start() {
         let capsuleOpenViewController = CapsuleOpenViewController()
         let capsuleOpenViewModel = CapsuleOpenViewModel()
-
+        capsuleOpenViewModel.capsuleCellModel = capsuleCellModel
         capsuleOpenViewModel.coordinator = self
         capsuleOpenViewController.viewModel = capsuleOpenViewModel
 

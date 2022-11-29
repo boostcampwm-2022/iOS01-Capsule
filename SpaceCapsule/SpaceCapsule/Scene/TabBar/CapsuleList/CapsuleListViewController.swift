@@ -53,10 +53,11 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
             .disposed(by: disposeBag)
         
         capsuleListView.collectionView.rx.itemSelected
-            .withUnretained(self)
-            .bind { _, indexPath in
-                // TODO: 캡슐 오픈 화면 연동
-            }
+            .withLatestFrom(viewModel.input.capsuleCellModels, resultSelector: { indexPath, capsuleCellModels in
+                self.viewModel?.coordinator?.showCapsuleOpen(capsuleCellModel: capsuleCellModels[indexPath.row])
+                print(capsuleCellModels[indexPath.row])
+            })
+            .bind(onNext: {})
             .disposed(by: disposeBag)
         
         capsuleListView.sortBarButtonItem.rx.tap
