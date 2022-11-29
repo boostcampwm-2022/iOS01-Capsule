@@ -55,6 +55,7 @@
 		0DD83D0F292F1BAD0020F15C /* CustomScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD83D0E292F1BAD0020F15C /* CustomScrollView.swift */; };
 		0DD83D11292F2EC80020F15C /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD83D10292F2EC80020F15C /* UIViewController+.swift */; };
 		0DD83D13292F51960020F15C /* LoadingIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD83D12292F51960020F15C /* LoadingIndicatorView.swift */; };
+		0DE28B8A2934B42C00446143 /* CustomMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE28B892934B42C00446143 /* CustomMapView.swift */; };
 		0DE786E1292BBDEC007EF260 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE786E0292BBDEC007EF260 /* DatePickerViewController.swift */; };
 		2800F97A292F1F060069EE7F /* CapsuleCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2800F979292F1F060069EE7F /* CapsuleCellModel.swift */; };
 		2803EA3A29339B2C00589399 /* SortPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2803EA3929339B2C00589399 /* SortPolicy.swift */; };
@@ -199,6 +200,10 @@
 		0DD83D0E292F1BAD0020F15C /* CustomScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScrollView.swift; sourceTree = "<group>"; };
 		0DD83D10292F2EC80020F15C /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		0DD83D12292F51960020F15C /* LoadingIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicatorView.swift; sourceTree = "<group>"; };
+		0DE28B862934A9C000446143 /* SpaceCapsule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = SpaceCapsule.app; path = "/Users/trumanfromkorea/Develop/Boostcamp/Membership/iOS01-Capsule/SpaceCapsule/build/Debug-iphoneos/SpaceCapsule.app"; sourceTree = "<absolute>"; };
+		0DE28B872934A9C000446143 /* SpaceCapsuleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = SpaceCapsuleTests.xctest; path = "/Users/trumanfromkorea/Develop/Boostcamp/Membership/iOS01-Capsule/SpaceCapsule/build/Debug-iphoneos/SpaceCapsuleTests.xctest"; sourceTree = "<absolute>"; };
+		0DE28B882934A9C000446143 /* SpaceCapsuleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = SpaceCapsuleUITests.xctest; path = "/Users/trumanfromkorea/Develop/Boostcamp/Membership/iOS01-Capsule/SpaceCapsule/build/Debug-iphoneos/SpaceCapsuleUITests.xctest"; sourceTree = "<absolute>"; };
+		0DE28B892934B42C00446143 /* CustomMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMapView.swift; sourceTree = "<group>"; };
 		0DE786E0292BBDEC007EF260 /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
 		2800F979292F1F060069EE7F /* CapsuleCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleCellModel.swift; sourceTree = "<group>"; };
 		2803EA3929339B2C00589399 /* SortPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortPolicy.swift; sourceTree = "<group>"; };
@@ -261,9 +266,6 @@
 		4A05D0EB2924C04200A2EF50 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4A05D1042925CF2A00A2EF50 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		4A1FEFF7292F1F1200A935BB /* CustomAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
-		4A2449C829349F77000EE58C /* SpaceCapsule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = SpaceCapsule.app; path = "/Users/jisu/Desktop/Boostcamp/Membership/Git/iOS01-Capsule/SpaceCapsule/build/Debug-iphoneos/SpaceCapsule.app"; sourceTree = "<absolute>"; };
-		4A2449C929349F77000EE58C /* SpaceCapsuleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = SpaceCapsuleTests.xctest; path = "/Users/jisu/Desktop/Boostcamp/Membership/Git/iOS01-Capsule/SpaceCapsule/build/Debug-iphoneos/SpaceCapsuleTests.xctest"; sourceTree = "<absolute>"; };
-		4A2449CA29349F77000EE58C /* SpaceCapsuleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = SpaceCapsuleUITests.xctest; path = "/Users/jisu/Desktop/Boostcamp/Membership/Git/iOS01-Capsule/SpaceCapsule/build/Debug-iphoneos/SpaceCapsuleUITests.xctest"; sourceTree = "<absolute>"; };
 		4A9E9146292A2A5A00B7CC5C /* CLLocationManager+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationManager+Rx.swift"; sourceTree = "<group>"; };
 		4A9E9148292A383900B7CC5C /* MKMapView+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKMapView+Rx.swift"; sourceTree = "<group>"; };
 		4AF16AE6292B1F8400787C5C /* CustomAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotationView.swift; sourceTree = "<group>"; };
@@ -323,6 +325,7 @@
 				0DD83D0E292F1BAD0020F15C /* CustomScrollView.swift */,
 				0DCB22922924CE58002CB095 /* CustomTabBarController.swift */,
 				0DD83D12292F51960020F15C /* LoadingIndicatorView.swift */,
+				0DE28B892934B42C00446143 /* CustomMapView.swift */,
 				4A1FEFF7292F1F1200A935BB /* CustomAnnotation.swift */,
 				4AF16AE6292B1F8400787C5C /* CustomAnnotationView.swift */,
 				0DCB22942924CE61002CB095 /* Theme */,
@@ -414,16 +417,16 @@
 		0D90DAF5292397BF000DCC84 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				0D90DAF6292397CF000DCC84 /* UIColor+.swift */,
-				0D90DAF829239A81000DCC84 /* UIImage+.swift */,
-				0DCEED2C29320B28006EB2B4 /* UILabel+.swift */,
-				0D46DEF92923E1180045400A /* UIFont+.swift */,
-				0DB746B3292E268A005FF249 /* Date+.swift */,
-				0DD83D10292F2EC80020F15C /* UIViewController+.swift */,
+				0DCEED362932538F006EB2B4 /* Array+.swift */,
 				4A9E9146292A2A5A00B7CC5C /* CLLocationManager+Rx.swift */,
+				0DB746B3292E268A005FF249 /* Date+.swift */,
 				4A9E9148292A383900B7CC5C /* MKMapView+Rx.swift */,
 				0DA9F6962928EB9000454932 /* UICollectionReusableView+.swift */,
-				0DCEED362932538F006EB2B4 /* Array+.swift */,
+				0D90DAF6292397CF000DCC84 /* UIColor+.swift */,
+				0D46DEF92923E1180045400A /* UIFont+.swift */,
+				0D90DAF829239A81000DCC84 /* UIImage+.swift */,
+				0DCEED2C29320B28006EB2B4 /* UILabel+.swift */,
+				0DD83D10292F2EC80020F15C /* UIViewController+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -817,7 +820,7 @@
 				0D707D5429222BEB00380B14 /* FirebaseStorage */,
 			);
 			productName = SpaceCapsule;
-			productReference = 4A2449C829349F77000EE58C /* SpaceCapsule.app */;
+			productReference = 0DE28B862934A9C000446143 /* SpaceCapsule.app */;
 			productType = "com.apple.product-type.application";
 		};
 		0D6CA346292216A400E02393 /* SpaceCapsuleTests */ = {
@@ -835,7 +838,7 @@
 			);
 			name = SpaceCapsuleTests;
 			productName = SpaceCapsuleTests;
-			productReference = 4A2449C929349F77000EE58C /* SpaceCapsuleTests.xctest */;
+			productReference = 0DE28B872934A9C000446143 /* SpaceCapsuleTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		0D6CA350292216A400E02393 /* SpaceCapsuleUITests */ = {
@@ -853,7 +856,7 @@
 			);
 			name = SpaceCapsuleUITests;
 			productName = SpaceCapsuleUITests;
-			productReference = 4A2449CA29349F77000EE58C /* SpaceCapsuleUITests.xctest */;
+			productReference = 0DE28B882934A9C000446143 /* SpaceCapsuleUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -984,6 +987,7 @@
 				288A8EF32923607D000229D2 /* CapsuleOpenViewController.swift in Sources */,
 				4A1FEFF8292F1F1200A935BB /* CustomAnnotation.swift in Sources */,
 				599C1A47292CC99A00517E93 /* UserDefaultsManager.swift in Sources */,
+				0DE28B8A2934B42C00446143 /* CustomMapView.swift in Sources */,
 				0DB746B4292E268A005FF249 /* Date+.swift in Sources */,
 				288A8EE029235E36000229D2 /* CapsuleLocateViewController.swift in Sources */,
 				28049CE529236EEC002389BD /* CapsuleAccessCoordinator.swift in Sources */,

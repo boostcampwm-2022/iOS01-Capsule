@@ -5,35 +5,38 @@
 //  Created by jisu on 2022/11/21.
 //
 
-import UIKit
 import MapKit
+import UIKit
 
 final class CustomAnnotationView: MKAnnotationView {
+    private let detailButton = UIButton(type: .detailDisclosure)
+
     override var annotation: MKAnnotation? {
         didSet {
             (annotation as? CustomAnnotation)?.annotationView = self
         }
     }
-    
+
     override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
-        centerOffset = CGPoint(x: 0, y: -frame.size.height / 2)
+
         configure()
         update(for: annotation)
     }
-    
-    private func configure() {
-        canShowCallout = true
-        
-        let detailButton = UIButton(type: .detailDisclosure)
-        rightCalloutAccessoryView = detailButton
-    }
-    
+
     @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
+    private func configure() {
+        centerOffset = CGPoint(x: 0, y: -frame.size.height / 2)
+
+        canShowCallout = true
+
+        rightCalloutAccessoryView = detailButton
+    }
+
     func update(for annotation: MKAnnotation?) {
         let pinImage: UIImage?
         let resizingSize = CGSize(width: 40, height: 35)
