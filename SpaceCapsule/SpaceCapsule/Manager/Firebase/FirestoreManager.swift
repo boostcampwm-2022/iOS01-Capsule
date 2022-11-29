@@ -13,7 +13,9 @@ class FirestoreManager {
     static let shared = FirestoreManager()
     private let database = Firestore.firestore()
     private init() { }
-    
+
+    var capsules: Observable<[Capsule]>?
+
     func fetchUserInfo(of uid: String) -> Observable<UserInfo> {
         return Observable.create { emitter in
             self.database.collection("users").document(uid).getDocument { documentSnapshot, error in
@@ -39,7 +41,7 @@ class FirestoreManager {
             return Disposables.create { }
         }
     }
-    
+
     private func dictionaryToObject<T: Decodable>(type: T.Type, dictionary: [String: Any]?) -> T? {
         guard let data = try? JSONSerialization.data(withJSONObject: dictionary as Any),
               let object = try? JSONDecoder().decode(T.self, from: data) else {
@@ -47,7 +49,7 @@ class FirestoreManager {
         }
         return object
     }
-    
+
     private func dictionaryToCapsule(dictionary: [String: Any]?) -> Capsule? {
         guard let dict = dictionary,
               let capsule = Capsule(dictionary: dict) else {
@@ -55,7 +57,7 @@ class FirestoreManager {
         }
         return capsule
     }
-   
+
     func registerUserInfo(uid: String, userInfo: UserInfo, completion: @escaping (Error?) -> Void) {
         database
             .collection("users")
@@ -92,33 +94,41 @@ class FirestoreManager {
                 }
             }
     }
+
     // TODO: FBAuthError 이름 바꾸기
     func fetchCapsuleList(of uid: String) -> Observable<[Capsule]> {
         return Observable.create { emitter in
-            self.database.collection("capsules").whereField("userId", isEqualTo: uid).getDocuments { querySnapshot, error in
-                if let error = error {
-                    print("Error Snapshot: \(error)")
-                    emitter.onError(error)
-                    return
-                } else {
-                    guard let snapshots = querySnapshot?.documents else {
-                        print("Error Snapshot: \(FBAuthError.noSnapshot)")
-                        emitter.onError(FBAuthError.noSnapshot)
+            self.database
+                .collection("capsules")
+                .whereField("userId", isEqualTo: uid)
+                .getDocuments { querySnapshot, error in
+                    if let error = error {
+                        print("Error Snapshot: \(error)")
+                        emitter.onError(error)
                         return
-                    }
-                    var capsuleList: [Capsule] = []
-                    for snapshot in snapshots {
-                        guard let capsule = self.dictionaryToCapsule(dictionary: snapshot.data()) else {
-                            print("Error Capsule: \(FBAuthError.decodeError)")
-                            emitter.onError(FBAuthError.decodeError)
+                    } else {
+                        guard let snapshots = querySnapshot?.documents else {
+                            print("Error Snapshot: \(FBAuthError.noSnapshot)")
+                            emitter.onError(FBAuthError.noSnapshot)
                             return
                         }
-                        capsuleList.append(capsule)
+
+                        var capsuleList: [Capsule] = []
+
+                        for snapshot in snapshots {
+                            print(snapshot.data())
+                            guard let capsule = self.dictionaryToCapsule(dictionary: snapshot.data()) else {
+                                print("Error Capsule: \(FBAuthError.decodeError)")
+                                emitter.onError(FBAuthError.decodeError)
+                                return
+                            }
+                            capsuleList.append(capsule)
+                        }
+
+                        emitter.onNext(capsuleList)
+                        // emitter.onCompleted() 이건 컴플리트 날릴 필요 없을 듯, 왜냐면 캡슐 목록 새로고침 기능 생길 가능성.
                     }
-                    emitter.onNext(capsuleList)
-                    // emitter.onCompleted() 이건 컴플리트 날릴 필요 없을 듯, 왜냐면 캡슐 목록 새로고침 기능 생길 가능성.
                 }
-            }
             return Disposables.create { }
         }
     }

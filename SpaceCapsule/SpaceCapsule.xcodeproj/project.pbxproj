@@ -45,6 +45,7 @@
 		0DB746AC292DE965005FF249 /* FBStorageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB746AB292DE965005FF249 /* FBStorageError.swift */; };
 		0DB746AE292DF8F6005FF249 /* Capsule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB746AD292DF8F6005FF249 /* Capsule.swift */; };
 		0DB746B4292E268A005FF249 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB746B3292E268A005FF249 /* Date+.swift */; };
+		0DB88C712935E83600107DC3 /* AppDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB88C702935E83600107DC3 /* AppDataManager.swift */; };
 		0DCB22932924CE58002CB095 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCB22922924CE58002CB095 /* CustomTabBarController.swift */; };
 		0DCEED2D29320B28006EB2B4 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCEED2C29320B28006EB2B4 /* UILabel+.swift */; };
 		0DCEED2F29320EAB006EB2B4 /* CustomCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCEED2E29320EAB006EB2B4 /* CustomCodable.swift */; };
@@ -191,6 +192,10 @@
 		0DB746AB292DE965005FF249 /* FBStorageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBStorageError.swift; sourceTree = "<group>"; };
 		0DB746AD292DF8F6005FF249 /* Capsule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Capsule.swift; sourceTree = "<group>"; };
 		0DB746B3292E268A005FF249 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
+		0DB88C6B2935E51E00107DC3 /* SpaceCapsule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = SpaceCapsule.app; path = "/Users/trumanfromkorea/Develop/Boostcamp/Membership/iOS01-Capsule/SpaceCapsule/build/Debug-iphoneos/SpaceCapsule.app"; sourceTree = "<absolute>"; };
+		0DB88C6C2935E51E00107DC3 /* SpaceCapsuleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = SpaceCapsuleTests.xctest; path = "/Users/trumanfromkorea/Develop/Boostcamp/Membership/iOS01-Capsule/SpaceCapsule/build/Debug-iphoneos/SpaceCapsuleTests.xctest"; sourceTree = "<absolute>"; };
+		0DB88C6D2935E51E00107DC3 /* SpaceCapsuleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = SpaceCapsuleUITests.xctest; path = "/Users/trumanfromkorea/Develop/Boostcamp/Membership/iOS01-Capsule/SpaceCapsule/build/Debug-iphoneos/SpaceCapsuleUITests.xctest"; sourceTree = "<absolute>"; };
+		0DB88C702935E83600107DC3 /* AppDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDataManager.swift; sourceTree = "<group>"; };
 		0DCB22922924CE58002CB095 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		0DCEED2C29320B28006EB2B4 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		0DCEED2E29320EAB006EB2B4 /* CustomCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCodable.swift; sourceTree = "<group>"; };
@@ -201,9 +206,6 @@
 		0DD83D0E292F1BAD0020F15C /* CustomScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScrollView.swift; sourceTree = "<group>"; };
 		0DD83D10292F2EC80020F15C /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		0DD83D12292F51960020F15C /* LoadingIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicatorView.swift; sourceTree = "<group>"; };
-		0DE28B862934A9C000446143 /* SpaceCapsule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = SpaceCapsule.app; path = "/Users/trumanfromkorea/Develop/Boostcamp/Membership/iOS01-Capsule/SpaceCapsule/build/Debug-iphoneos/SpaceCapsule.app"; sourceTree = "<absolute>"; };
-		0DE28B872934A9C000446143 /* SpaceCapsuleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = SpaceCapsuleTests.xctest; path = "/Users/trumanfromkorea/Develop/Boostcamp/Membership/iOS01-Capsule/SpaceCapsule/build/Debug-iphoneos/SpaceCapsuleTests.xctest"; sourceTree = "<absolute>"; };
-		0DE28B882934A9C000446143 /* SpaceCapsuleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = SpaceCapsuleUITests.xctest; path = "/Users/trumanfromkorea/Develop/Boostcamp/Membership/iOS01-Capsule/SpaceCapsule/build/Debug-iphoneos/SpaceCapsuleUITests.xctest"; sourceTree = "<absolute>"; };
 		0DE28B892934B42C00446143 /* CustomMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMapView.swift; sourceTree = "<group>"; };
 		0DE786E0292BBDEC007EF260 /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
 		2800F979292F1F060069EE7F /* CapsuleCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleCellModel.swift; sourceTree = "<group>"; };
@@ -259,9 +261,6 @@
 		288A8EFE292360BC000229D2 /* CapsuleDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleDetailCoordinator.swift; sourceTree = "<group>"; };
 		288A8F02292362CC000229D2 /* CapsuleAddCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleAddCoordinator.swift; sourceTree = "<group>"; };
 		288A8F0429236505000229D2 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
-		28A700B52934E4C30049FAF8 /* SpaceCapsule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = SpaceCapsule.app; path = "/Users/pyj/Desktop/workplace/membership/SpaceCapsule/iOS01-Capsule/SpaceCapsule/build/Debug-iphoneos/SpaceCapsule.app"; sourceTree = "<absolute>"; };
-		28A700B62934E4C30049FAF8 /* SpaceCapsuleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = SpaceCapsuleTests.xctest; path = "/Users/pyj/Desktop/workplace/membership/SpaceCapsule/iOS01-Capsule/SpaceCapsule/build/Debug-iphoneos/SpaceCapsuleTests.xctest"; sourceTree = "<absolute>"; };
-		28A700B72934E4C30049FAF8 /* SpaceCapsuleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = SpaceCapsuleUITests.xctest; path = "/Users/pyj/Desktop/workplace/membership/SpaceCapsule/iOS01-Capsule/SpaceCapsule/build/Debug-iphoneos/SpaceCapsuleUITests.xctest"; sourceTree = "<absolute>"; };
 		28A700BA29358F0F0049FAF8 /* GeoPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoPoint.swift; sourceTree = "<group>"; };
 		28C8C97B292DC35F005615BB /* SortPolicySelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortPolicySelectionViewController.swift; sourceTree = "<group>"; };
 		28C8C97D292DC371005615BB /* SortPolicySelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortPolicySelectionViewModel.swift; sourceTree = "<group>"; };
@@ -532,10 +531,10 @@
 			isa = PBXGroup;
 			children = (
 				288A8E912923244D000229D2 /* Coordinator.swift */,
+				0DCEED2E29320EAB006EB2B4 /* CustomCodable.swift */,
 				28049CEF292382BB002389BD /* View */,
 				28049CF0292382C7002389BD /* ViewController */,
 				28049CEE2923825A002389BD /* ViewModel */,
-				0DCEED2E29320EAB006EB2B4 /* CustomCodable.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -762,6 +761,7 @@
 			isa = PBXGroup;
 			children = (
 				599C1A37292CC99900517E93 /* NetworkManager.swift */,
+				0DB88C702935E83600107DC3 /* AppDataManager.swift */,
 				0DCEED322932177F006EB2B4 /* LocationManager.swift */,
 				599C1A38292CC99900517E93 /* UserDefaultsManager.swift */,
 				0D70613C292CD23A0077787E /* Firebase */,
@@ -826,7 +826,7 @@
 				0D707D5429222BEB00380B14 /* FirebaseStorage */,
 			);
 			productName = SpaceCapsule;
-			productReference = 28A700B52934E4C30049FAF8 /* SpaceCapsule.app */;
+			productReference = 0DB88C6B2935E51E00107DC3 /* SpaceCapsule.app */;
 			productType = "com.apple.product-type.application";
 		};
 		0D6CA346292216A400E02393 /* SpaceCapsuleTests */ = {
@@ -844,7 +844,7 @@
 			);
 			name = SpaceCapsuleTests;
 			productName = SpaceCapsuleTests;
-			productReference = 28A700B62934E4C30049FAF8 /* SpaceCapsuleTests.xctest */;
+			productReference = 0DB88C6C2935E51E00107DC3 /* SpaceCapsuleTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		0D6CA350292216A400E02393 /* SpaceCapsuleUITests */ = {
@@ -862,7 +862,7 @@
 			);
 			name = SpaceCapsuleUITests;
 			productName = SpaceCapsuleUITests;
-			productReference = 28A700B72934E4C30049FAF8 /* SpaceCapsuleUITests.xctest */;
+			productReference = 0DB88C6D2935E51E00107DC3 /* SpaceCapsuleUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -1067,6 +1067,7 @@
 				288A8EA729235AF1000229D2 /* NicknameViewModel.swift in Sources */,
 				288A8ECC29235BE9000229D2 /* HomeViewController.swift in Sources */,
 				0DA6610D292778BE00CF3563 /* ThemeTextField.swift in Sources */,
+				0DB88C712935E83600107DC3 /* AppDataManager.swift in Sources */,
 				288A8EB029235B46000229D2 /* TabBarCoordinator.swift in Sources */,
 				288A8EB629235B69000229D2 /* ProfileViewModel.swift in Sources */,
 				4A9E9149292A383900B7CC5C /* MKMapView+Rx.swift in Sources */,

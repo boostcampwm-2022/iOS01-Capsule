@@ -123,11 +123,11 @@ final class CapsuleMapViewController: UIViewController, BaseViewController {
         bindNotification()
         bindLocationManager()
 
-        viewModel?.input.annotations
+        viewModel?.output.annotations
             .withUnretained(self)
-            .bind { owner, coordinates in
+            .bind { owner, annotations in
                 owner.removeAllAnnotations()
-                owner.addInitialAnnotations(coordinates: coordinates)
+                owner.addInitialAnnotations(annotations: annotations)
             }
             .disposed(by: disposeBag)
 
@@ -175,8 +175,8 @@ final class CapsuleMapViewController: UIViewController, BaseViewController {
 
     // MARK: 처음 Annotation 그릴 때 사용
 
-    private func addInitialAnnotations(coordinates: [CLLocationCoordinate2D]) {
-        let annotations = coordinates.map { CustomAnnotation(coordinate: $0) }
+    private func addInitialAnnotations(annotations: [CustomAnnotation]) {
+//        let annotations = coordinates.map { CustomAnnotation(coordinate: $0) }
         updateAnnotationsToMonitor(annotations)
         capsuleMapView.addAnnotations(annotations)
     }
