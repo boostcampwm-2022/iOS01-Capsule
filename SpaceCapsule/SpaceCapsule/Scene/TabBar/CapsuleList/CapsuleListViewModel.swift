@@ -40,8 +40,8 @@ final class CapsuleListViewModel: BaseViewModel {
                     return CapsuleCellModel(uuid: capsule.uuid,
                                             thumbnailImageURL: capsule.images.first,
                                             address: capsule.simpleAddress,
-                                            closedDate: capsule.closedDate.dateString,
-                                            memoryDate: capsule.memoryDate.dateString,
+                                            closedDate: capsule.closedDate,
+                                            memoryDate: capsule.memoryDate,
                                             coordinate: CLLocationCoordinate2D(
                                                 latitude: capsule.geopoint.latitude,
                                                 longitude: capsule.geopoint.longitude
@@ -71,11 +71,11 @@ final class CapsuleListViewModel: BaseViewModel {
             }
         case .latest:
             models = capsuleCellModels.sorted {
-                $0.dateToInt() > $1.dateToInt()
+                $0.memoryDate > $1.memoryDate
             }
         case .oldest:
             models = capsuleCellModels.sorted {
-                $0.dateToInt() < $1.dateToInt()
+                $0.memoryDate < $1.memoryDate
             }
         }
         input.capsuleCellModels.onNext(models)

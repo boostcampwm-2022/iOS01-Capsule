@@ -83,7 +83,7 @@ final class CapsuleCell: UICollectionViewCell {
             $0.removeFromSuperview()
         }
         if capsuleCellModel.isOpenable == false {
-            applyUnOpenableEffect(closeDate: capsuleCellModel.closedDate)
+            applyUnOpenableEffect(closeDate: capsuleCellModel.closedDate.dateString)
         }
     }
     
