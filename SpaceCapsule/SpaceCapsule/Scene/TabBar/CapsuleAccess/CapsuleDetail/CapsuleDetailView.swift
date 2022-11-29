@@ -71,7 +71,7 @@ final class CapsuleDetailView: UIView, BaseView {
         }
         
         imageCollectionView.snp.makeConstraints {
-            $0.height.equalTo(400)
+            $0.height.equalTo(FrameResource.detailImageViewHeight + FrameResource.spacing400)
         }
         
         contentView.snp.makeConstraints {
