@@ -46,6 +46,7 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
         
         viewModel.input.sortPolicy
             .withLatestFrom(viewModel.input.capsuleCellModels, resultSelector: { sortPolicy, capsuleCellModels in
+                self.applyBarButton(sortPolicy: sortPolicy)
                 self.viewModel?.sort(capsuleCellModels: capsuleCellModels, by: sortPolicy)
             })
             .bind(onNext: {})
@@ -79,6 +80,13 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
         let sortBarButton = UIBarButtonItem(customView: capsuleListView.sortBarButtonItem)
         sortBarButton.customView?.isUserInteractionEnabled = true
         navigationItem.rightBarButtonItem = sortBarButton
+    }
+    
+    private func applyBarButton(sortPolicy: SortPolicy) {
+        if let barItem = self.navigationItem.rightBarButtonItem,
+           let button = barItem.customView as? UIButton {
+            button.setTitle(sortPolicy.description, for: .normal)
+        }
     }
 }
 

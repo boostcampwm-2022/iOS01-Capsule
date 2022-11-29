@@ -17,6 +17,7 @@ final class CapsuleListView: UIView, BaseView {
         button.setImage(.sort, for: .normal)
         button.tintColor = .themeBlack
         button.semanticContentAttribute = .forceRightToLeft
+        button.contentHorizontalAlignment = .leading
         return button
     }()
 
