@@ -116,6 +116,9 @@
 		4A05D0EC2924C04200A2EF50 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A05D0EB2924C04200A2EF50 /* GoogleService-Info.plist */; };
 		4A05D1052925CF2A00A2EF50 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A05D1042925CF2A00A2EF50 /* NetworkError.swift */; };
 		4A1FEFF8292F1F1200A935BB /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1FEFF7292F1F1200A935BB /* CustomAnnotation.swift */; };
+		4A2449CD2936043E000EE58C /* ContentImageFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2449CC2936043E000EE58C /* ContentImageFlowLayout.swift */; };
+		4A2449CF2936053C000EE58C /* ContentImageCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2449CE2936053C000EE58C /* ContentImageCollectionView.swift */; };
+		4A2449D129360669000EE58C /* ContentImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2449D029360669000EE58C /* ContentImageCell.swift */; };
 		4A9E9147292A2A5A00B7CC5C /* CLLocationManager+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E9146292A2A5A00B7CC5C /* CLLocationManager+Rx.swift */; };
 		4A9E9149292A383900B7CC5C /* MKMapView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E9148292A383900B7CC5C /* MKMapView+Rx.swift */; };
 		4AF16AE7292B1F8400787C5C /* CustomAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF16AE6292B1F8400787C5C /* CustomAnnotationView.swift */; };
@@ -264,6 +267,9 @@
 		4A2449C829349F77000EE58C /* SpaceCapsule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = SpaceCapsule.app; path = "/Users/jisu/Desktop/Boostcamp/Membership/Git/iOS01-Capsule/SpaceCapsule/build/Debug-iphoneos/SpaceCapsule.app"; sourceTree = "<absolute>"; };
 		4A2449C929349F77000EE58C /* SpaceCapsuleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = SpaceCapsuleTests.xctest; path = "/Users/jisu/Desktop/Boostcamp/Membership/Git/iOS01-Capsule/SpaceCapsule/build/Debug-iphoneos/SpaceCapsuleTests.xctest"; sourceTree = "<absolute>"; };
 		4A2449CA29349F77000EE58C /* SpaceCapsuleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = SpaceCapsuleUITests.xctest; path = "/Users/jisu/Desktop/Boostcamp/Membership/Git/iOS01-Capsule/SpaceCapsule/build/Debug-iphoneos/SpaceCapsuleUITests.xctest"; sourceTree = "<absolute>"; };
+		4A2449CC2936043E000EE58C /* ContentImageFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentImageFlowLayout.swift; sourceTree = "<group>"; };
+		4A2449CE2936053C000EE58C /* ContentImageCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentImageCollectionView.swift; sourceTree = "<group>"; };
+		4A2449D029360669000EE58C /* ContentImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentImageCell.swift; sourceTree = "<group>"; };
 		4A9E9146292A2A5A00B7CC5C /* CLLocationManager+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationManager+Rx.swift"; sourceTree = "<group>"; };
 		4A9E9148292A383900B7CC5C /* MKMapView+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKMapView+Rx.swift"; sourceTree = "<group>"; };
 		4AF16AE6292B1F8400787C5C /* CustomAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotationView.swift; sourceTree = "<group>"; };
@@ -702,6 +708,7 @@
 		288A8EEF29236061000229D2 /* CapsuleDetail */ = {
 			isa = PBXGroup;
 			children = (
+				4A2449CB2936033B000EE58C /* Componenets */,
 				288A8EF82923609C000229D2 /* CapsuleDetailView.swift */,
 				288A8EFA292360A4000229D2 /* CapsuleDetailViewController.swift */,
 				288A8EFC292360AB000229D2 /* CapsuleDetailViewModel.swift */,
@@ -730,6 +737,16 @@
 				0DB746AB292DE965005FF249 /* FBStorageError.swift */,
 			);
 			path = Error;
+			sourceTree = "<group>";
+		};
+		4A2449CB2936033B000EE58C /* Componenets */ = {
+			isa = PBXGroup;
+			children = (
+				4A2449CC2936043E000EE58C /* ContentImageFlowLayout.swift */,
+				4A2449CE2936053C000EE58C /* ContentImageCollectionView.swift */,
+				4A2449D029360669000EE58C /* ContentImageCell.swift */,
+			);
+			path = Componenets;
 			sourceTree = "<group>";
 		};
 		4A9E91402925D51B00B7CC5C /* Model */ = {
@@ -992,6 +1009,7 @@
 				599C1A4E292CC99A00517E93 /* KingReceiver+UIImageView.swift in Sources */,
 				599C1A46292CC99A00517E93 /* NetworkManager.swift in Sources */,
 				288A8EA929235AFC000229D2 /* NicknameCoordinator.swift in Sources */,
+				4A2449CF2936053C000EE58C /* ContentImageCollectionView.swift in Sources */,
 				288A8EE629235FD5000229D2 /* CapsuleCloseView.swift in Sources */,
 				0D90DAF7292397CF000DCC84 /* UIColor+.swift in Sources */,
 				599C1A4B292CC99A00517E93 /* NoneImageCache.swift in Sources */,
@@ -1028,6 +1046,7 @@
 				288A8E922923244D000229D2 /* Coordinator.swift in Sources */,
 				288A8EE829235FE2000229D2 /* CapsuleCloseViewController.swift in Sources */,
 				599C1A4F292CC99A00517E93 /* FirebaseAuthManager.swift in Sources */,
+				4A2449CD2936043E000EE58C /* ContentImageFlowLayout.swift in Sources */,
 				288A8EB429235B62000229D2 /* ProfileViewController.swift in Sources */,
 				0DCB22932924CE58002CB095 /* CustomTabBarController.swift in Sources */,
 				4A9E9147292A2A5A00B7CC5C /* CLLocationManager+Rx.swift in Sources */,
@@ -1074,6 +1093,7 @@
 				599C1A4D292CC99A00517E93 /* DiskImageCache.swift in Sources */,
 				0D90DAEF29238B77000DCC84 /* CapsuleLocateView.swift in Sources */,
 				28C8C97C292DC360005615BB /* SortPolicySelectionViewController.swift in Sources */,
+				4A2449D129360669000EE58C /* ContentImageCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -38,7 +38,7 @@ final class CapsuleDetailViewController: UIViewController, BaseViewController {
     }
     
     private func makeConstrinats() {
-        mainView.snp.makeConstraints{
+        mainView.snp.makeConstraints {
             $0.edges.equalToSuperview()
             $0.width.equalToSuperview()
         }
