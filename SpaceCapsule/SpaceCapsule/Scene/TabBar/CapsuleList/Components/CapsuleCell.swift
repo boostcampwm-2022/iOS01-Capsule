@@ -78,7 +78,7 @@ final class CapsuleCell: UICollectionViewCell {
             thumbnailImageView.image = .logoWithBG
         }
         
-        descriptionLabel.text = "\(capsuleCellModel.memoryDate)\n\(capsuleCellModel.address)에서"
+        descriptionLabel.text = "\(capsuleCellModel.memoryDate.dateString)\n\(capsuleCellModel.address)에서"
         thumbnailImageView.subviews.forEach {
             $0.removeFromSuperview()
         }
