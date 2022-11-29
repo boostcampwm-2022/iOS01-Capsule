@@ -43,6 +43,7 @@ final class CapsuleMapViewModel: BaseViewModel {
             CLLocationCoordinate2D(latitude: 37.584552861128254, longitude: 127.0153024855037),
             CLLocationCoordinate2D(latitude: 37.589582861128354, longitude: 127.09053024855055)
         ]
+        
         input.annotations.accept(coordinates)
     }
 }

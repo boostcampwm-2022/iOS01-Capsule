@@ -200,9 +200,9 @@
 		0DD83D0E292F1BAD0020F15C /* CustomScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScrollView.swift; sourceTree = "<group>"; };
 		0DD83D10292F2EC80020F15C /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		0DD83D12292F51960020F15C /* LoadingIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicatorView.swift; sourceTree = "<group>"; };
-		0DE28B862934A9C000446143 /* SpaceCapsule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceCapsule.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		0DE28B872934A9C000446143 /* SpaceCapsuleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpaceCapsuleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		0DE28B882934A9C000446143 /* SpaceCapsuleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpaceCapsuleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0DE28B862934A9C000446143 /* SpaceCapsule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = SpaceCapsule.app; path = "/Users/trumanfromkorea/Develop/Boostcamp/Membership/iOS01-Capsule/SpaceCapsule/build/Debug-iphoneos/SpaceCapsule.app"; sourceTree = "<absolute>"; };
+		0DE28B872934A9C000446143 /* SpaceCapsuleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = SpaceCapsuleTests.xctest; path = "/Users/trumanfromkorea/Develop/Boostcamp/Membership/iOS01-Capsule/SpaceCapsule/build/Debug-iphoneos/SpaceCapsuleTests.xctest"; sourceTree = "<absolute>"; };
+		0DE28B882934A9C000446143 /* SpaceCapsuleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = SpaceCapsuleUITests.xctest; path = "/Users/trumanfromkorea/Develop/Boostcamp/Membership/iOS01-Capsule/SpaceCapsule/build/Debug-iphoneos/SpaceCapsuleUITests.xctest"; sourceTree = "<absolute>"; };
 		0DE28B892934B42C00446143 /* CustomMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMapView.swift; sourceTree = "<group>"; };
 		0DE786E0292BBDEC007EF260 /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
 		2800F979292F1F060069EE7F /* CapsuleCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleCellModel.swift; sourceTree = "<group>"; };
@@ -325,10 +325,10 @@
 				0DD83D0E292F1BAD0020F15C /* CustomScrollView.swift */,
 				0DCB22922924CE58002CB095 /* CustomTabBarController.swift */,
 				0DD83D12292F51960020F15C /* LoadingIndicatorView.swift */,
+				0DE28B892934B42C00446143 /* CustomMapView.swift */,
 				4A1FEFF7292F1F1200A935BB /* CustomAnnotation.swift */,
 				4AF16AE6292B1F8400787C5C /* CustomAnnotationView.swift */,
 				0DCB22942924CE61002CB095 /* Theme */,
-				0DE28B892934B42C00446143 /* CustomMapView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -349,9 +349,6 @@
 				0D6CA333292216A300E02393 /* SpaceCapsule */,
 				0D6CA34A292216A400E02393 /* SpaceCapsuleTests */,
 				0D6CA354292216A400E02393 /* SpaceCapsuleUITests */,
-				0DE28B862934A9C000446143 /* SpaceCapsule.app */,
-				0DE28B872934A9C000446143 /* SpaceCapsuleTests.xctest */,
-				0DE28B882934A9C000446143 /* SpaceCapsuleUITests.xctest */,
 			);
 			sourceTree = "<group>";
 		};

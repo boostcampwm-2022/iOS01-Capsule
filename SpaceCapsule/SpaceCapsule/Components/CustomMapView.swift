@@ -24,7 +24,8 @@ final class CustomMapView: MKMapView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-
+        
+        configure()
         limitMapBoundary()
 
         addSubViews()
@@ -34,6 +35,12 @@ final class CustomMapView: MKMapView {
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func configure() {
+        mapType = .standard
+        showsUserLocation = true
+        setUserTrackingMode(.follow, animated: true)
     }
 
     private func addSubViews() {
