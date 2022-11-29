@@ -6,3 +6,10 @@
 //
 
 import Foundation
+import RxSwift
+
+final class CapsuleDetailViewModel: BaseViewModel {
+    var disposeBag = DisposeBag()
+    var coordinator: CapsuleDetailCoordinator?
+    
+}

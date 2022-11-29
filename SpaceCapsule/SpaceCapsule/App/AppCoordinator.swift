@@ -54,11 +54,16 @@ final class AppCoordinator: Coordinator {
             return
         }
         
-        if isSignedIn {
-            checkRegistration(uid: currentUser.uid)
-        } else {
-            moveToAuth(authFlow: .signInFlow)
-        }
+        // TODO: 기능 구현 후 삭제 필요
+        moveToDetail()
+        
+//        if isSignedIn {
+//            checkRegistration(uid: currentUser.uid)
+//        } else {
+//            moveToAuth(authFlow: .signInFlow)
+//        }
+        
+        
     }
     
     private func checkRegistration(uid: String) {
@@ -110,5 +115,15 @@ final class AppCoordinator: Coordinator {
 
         children.append(tabBarCoordinator)
         window?.rootViewController = tabBarController
+    }
+    
+    // TODO: 기능 구현 후 삭제 필요
+    func moveToDetail() {
+        let capsuleDetailViewController = CapsuleDetailViewController()
+        let capsuleDetailViewModel = CapsuleDetailViewModel()
+        
+        capsuleDetailViewController.viewModel = capsuleDetailViewModel
+        
+        window?.rootViewController = capsuleDetailViewController
     }
 }
