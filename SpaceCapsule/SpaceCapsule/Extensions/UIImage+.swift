@@ -26,6 +26,7 @@ extension UIImage {
     static let sort = UIImage(systemName: "arrow.up.arrow.down")
     static let lock = UIImage(systemName: "lock.fill")
     static let triangleDown = UIImage(systemName: "arrowtriangle.down.fill")
+    static let locationFill = UIImage(systemName: "location.fill")
 }
 
 extension UIImage {

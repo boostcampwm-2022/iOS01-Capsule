@@ -10,8 +10,11 @@ import MapKit
 
 final class CustomAnnotation: MKPointAnnotation {
     weak var annotationView: CustomAnnotationView?
+    
     var isOpenable: Bool = false {
-        didSet { annotationView?.update(for: self) }
+        didSet {
+            annotationView?.update(for: self)
+        }
     }
     
     var pinImage: UIImage? {
