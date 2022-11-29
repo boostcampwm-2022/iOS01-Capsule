@@ -72,13 +72,18 @@ final class CapsuleCell: UICollectionViewCell {
     }
 
     func configure(capsuleCellModel: CapsuleCellModel) {
-        thumbnailImageView.image = capsuleCellModel.thumbnailImage
-        descriptionLabel.text = "\(capsuleCellModel.memoryDate)\n\(capsuleCellModel.address)에서"
+        if let thumbnailURL = capsuleCellModel.thumbnailImageURL {
+            thumbnailImageView.kr.setImage(with: thumbnailURL, scale: FrameResource.openableImageScale)
+        } else {
+            thumbnailImageView.image = .logoWithBG
+        }
+        
+        descriptionLabel.text = "\(capsuleCellModel.memoryDate.dateString)\n\(capsuleCellModel.address)에서"
         thumbnailImageView.subviews.forEach {
             $0.removeFromSuperview()
         }
         if capsuleCellModel.isOpenable == false {
-            applyUnOpenableEffect(closeDate: capsuleCellModel.closedDate)
+            applyUnOpenableEffect(closeDate: capsuleCellModel.closedDate.dateString)
         }
     }
     
