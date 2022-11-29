@@ -31,7 +31,6 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
         configureCollectionView()
         bind()
         viewModel?.fetchCapsuleList()
-        viewModel?.input.sortPolicy.onNext(.nearest)
     }
     
     func bind() {

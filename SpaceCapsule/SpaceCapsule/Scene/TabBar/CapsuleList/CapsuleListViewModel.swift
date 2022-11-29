@@ -49,6 +49,7 @@ final class CapsuleListViewModel: BaseViewModel {
                     )
                 }
                 owner.input.capsuleCellModels.onNext(capsuleCellModels)
+                owner.input.sortPolicy.onNext(.nearest)
             },
             onError: { error in
                 print(error.localizedDescription)
