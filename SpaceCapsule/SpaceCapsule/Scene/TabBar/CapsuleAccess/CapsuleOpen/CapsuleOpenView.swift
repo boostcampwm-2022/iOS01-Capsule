@@ -64,6 +64,25 @@ final class CapsuleOpenView: UIView, BaseView {
     func configure() {
         backgroundColor = .themeBackground
     }
+    
+    func configure(capsuleCellModel: CapsuleCellModel) {
+        if let thumbnailURL = capsuleCellModel.thumbnailImageURL {
+            thumbnailImageView.kr.setImage(with: thumbnailURL, scale: FrameResource.openableImageScale)
+        } else {
+            thumbnailImageView.image = .logoWithBG
+        }
+        descriptionLabel.text = """
+        \(capsuleCellModel.memoryDate.dateString)
+        \(capsuleCellModel.address) 에서의
+        추억을 담은 캡슐
+        """
+        descriptionLabel.asFontColor(
+            targetStringList: [capsuleCellModel.memoryDate.dateString, capsuleCellModel.address],
+            size: FrameResource.fontSize140,
+            color: .themeGray400
+        )
+        
+    }
 
     func addSubViews() {
         [thumbnailImageContainerView, descriptionLabel, openButton].forEach {
@@ -99,11 +118,11 @@ final class CapsuleOpenView: UIView, BaseView {
     
     // TODO: Capsule 인자로 받아서 configure하기
     
-    func applyUnOpenableEffect() {
+    func applyUnOpenableEffect(capsuleCellModel: CapsuleCellModel) {
         openButton.backgroundColor = .themeGray200
         applyBlurEffect()
         applyLockImage()
-        applyCapsuleDate()
+        applyCapsuleDate(capsuleCellModel: capsuleCellModel)
     }
     
     private func applyBlurEffect() {
@@ -123,7 +142,7 @@ final class CapsuleOpenView: UIView, BaseView {
     private func applyLockImage() {
         let lockImageView = UIImageView()
         lockImageView.image = UIImage(systemName: "lock.fill")
-        lockImageView.tintColor = .themeGray300
+        lockImageView.tintColor = .themeGray200
         
         thumbnailImageView.addSubview(lockImageView)
         
@@ -133,8 +152,8 @@ final class CapsuleOpenView: UIView, BaseView {
         }
     }
     
-    private func applyCapsuleDate() {
-        let dateLabel = ThemeLabel(text: "밀봉시간:xxxx년 x월 x일", size: 18, color: .themeGray300)
+    private func applyCapsuleDate(capsuleCellModel: CapsuleCellModel) {
+        let dateLabel = ThemeLabel(text: "밀봉시간:\(capsuleCellModel.closedDate.dateString)", size: 18, color: .themeGray200)
         dateLabel.textAlignment = .center
         
         thumbnailImageView.addSubview(dateLabel)

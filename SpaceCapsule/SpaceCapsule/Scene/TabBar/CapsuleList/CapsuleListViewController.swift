@@ -55,7 +55,6 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
         capsuleListView.collectionView.rx.itemSelected
             .withLatestFrom(viewModel.input.capsuleCellModels, resultSelector: { indexPath, capsuleCellModels in
                 self.viewModel?.coordinator?.showCapsuleOpen(capsuleCellModel: capsuleCellModels[indexPath.row])
-                print(capsuleCellModels[indexPath.row])
             })
             .bind(onNext: {})
             .disposed(by: disposeBag)

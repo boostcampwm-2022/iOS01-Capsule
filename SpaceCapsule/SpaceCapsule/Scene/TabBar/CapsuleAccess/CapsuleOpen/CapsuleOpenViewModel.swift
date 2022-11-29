@@ -20,6 +20,7 @@ class CapsuleOpenViewModel: BaseViewModel {
     struct Input {
         var popViewController = PublishSubject<Void>()
         var openButtonTapped = PublishSubject<Void>()
+        var capsuleCellModel = PublishSubject<CapsuleCellModel>()
     }
     
     struct Output {

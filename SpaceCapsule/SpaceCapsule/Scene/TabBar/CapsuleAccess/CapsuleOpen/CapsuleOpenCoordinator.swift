@@ -20,7 +20,9 @@ class CapsuleOpenCoordinator: Coordinator {
     func start() {
         let capsuleOpenViewController = CapsuleOpenViewController()
         let capsuleOpenViewModel = CapsuleOpenViewModel()
-        capsuleOpenViewModel.capsuleCellModel = capsuleCellModel
+        if let capsuleCellModel = capsuleCellModel {
+            capsuleOpenViewModel.capsuleCellModel = capsuleCellModel
+        }
         capsuleOpenViewModel.coordinator = self
         capsuleOpenViewController.viewModel = capsuleOpenViewModel
 
