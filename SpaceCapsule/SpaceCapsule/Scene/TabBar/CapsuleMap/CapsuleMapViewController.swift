@@ -36,7 +36,7 @@ final class CapsuleMapViewController: UIViewController, BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         configure()
         addConstraints()
         bindNotification()

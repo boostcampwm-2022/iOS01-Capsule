@@ -25,6 +25,8 @@ final class CustomMapView: MKMapView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
+        limitMapBoundary()
+
         addSubViews()
         makeConstraints()
     }
@@ -45,5 +47,29 @@ final class CustomMapView: MKMapView {
             $0.bottom.equalToSuperview().offset(-FrameResource.bottomPadding)
             $0.width.height.equalTo(FrameResource.userTrackingButtonSize)
         }
+    }
+
+    private func limitMapBoundary() {
+        // zoom out 제한
+        cameraZoomRange = MKMapView.CameraZoomRange(
+            minCenterCoordinateDistance: 100,
+            maxCenterCoordinateDistance: 1500000
+        )
+
+        // 이동 제한
+        let topRight = CLLocationCoordinate2DMake(39.213099, 131.134438)
+        let bottomLeft = CLLocationCoordinate2DMake(32.932619, 125.355630)
+
+        let point1 = MKMapPoint(topRight)
+        let point2 = MKMapPoint(bottomLeft)
+
+        let mapRect = MKMapRect(
+            x: fmin(point1.x, point2.x),
+            y: fmin(point1.y, point2.y),
+            width: fabs(point1.x - point2.x),
+            height: fabs(point1.y - point2.y)
+        )
+
+        setCameraBoundary(MKMapView.CameraBoundary(mapRect: mapRect), animated: true)
     }
 }
