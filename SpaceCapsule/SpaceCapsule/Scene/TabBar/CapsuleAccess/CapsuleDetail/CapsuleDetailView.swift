@@ -12,8 +12,15 @@ final class CapsuleDetailView: UIView, BaseView {
     private let mainStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = FrameResource.spacing400
+        stackView.spacing = FrameResource.spacing80
         return stackView
+    }()
+    
+    private let closingDateView: UILabel = {
+        let label = UILabel()
+        label.textColor = .themeGray300
+        label.font = .themeFont(ofSize: 16)
+        return label
     }()
     
     private let contentView: UIView = {
@@ -52,10 +59,12 @@ final class CapsuleDetailView: UIView, BaseView {
     }
     
     func configure() {
+        closingDateView.text = "밀봉시간: 2010년 7월 1일"
     }
     
     func addSubViews() {
         [imageCollectionView,
+         closingDateView,
          contentView,
          mapView
         ].forEach {
@@ -71,7 +80,7 @@ final class CapsuleDetailView: UIView, BaseView {
         }
         
         imageCollectionView.snp.makeConstraints {
-            $0.height.equalTo(FrameResource.detailImageViewHeight + FrameResource.spacing400)
+            $0.height.equalTo(FrameResource.detailImageViewHeight)
         }
         
         contentView.snp.makeConstraints {

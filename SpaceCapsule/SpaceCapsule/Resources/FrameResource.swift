@@ -34,6 +34,7 @@ enum FrameResource {
     
     static let detailImageViewHeight: CGFloat = 400
     static let detailImageViewWidth: CGFloat = 300
+    static let detailImageFooterHeight: CGFloat = 20
 
     static let fontSize80: CGFloat = 16.0
     static let fontSize90: CGFloat = 18.0

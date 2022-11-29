@@ -15,15 +15,16 @@ final class ContentImageFlowLayout: UICollectionViewFlowLayout {
         self.itemSize = CGSize(width: FrameResource.detailImageViewWidth,
                                height: FrameResource.detailImageViewHeight)
         
-        self.minimumInteritemSpacing = FrameResource.spacing400
         self.minimumLineSpacing = FrameResource.spacing200 // cell간의 간격
         
         self.sectionInset = UIEdgeInsets(top: 0.0,
                                          left: 0.0,
-                                         bottom: self.minimumInteritemSpacing,
+                                         bottom: 0.0,
                                          right: 0.0)
         
         self.sectionInsetReference = .fromSafeArea
         self.scrollDirection = .horizontal
     }
+
+
 }
