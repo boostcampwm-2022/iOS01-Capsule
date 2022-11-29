@@ -132,4 +132,33 @@ class FirestoreManager {
             return Disposables.create { }
         }
     }
+
+    func deleteUserCapsules() {
+        guard let uid = FirebaseAuthManager.shared.currentUser?.uid else {
+            return
+        }
+
+        database
+            .collection("users")
+            .document(uid)
+            .updateData(["capsules": []])
+
+        database
+            .collection("capsules")
+            .whereField("userId", isEqualTo: uid)
+            .getDocuments { snapshot, _ in
+                snapshot?.documents.forEach {
+                    self.database
+                        .collection("capsules")
+                        .document($0.documentID)
+                        .delete { error in
+                            guard let error else {
+                                print("error")
+                                return
+                            }
+                            print("delete!")
+                        }
+                }
+            }
+    }
 }
