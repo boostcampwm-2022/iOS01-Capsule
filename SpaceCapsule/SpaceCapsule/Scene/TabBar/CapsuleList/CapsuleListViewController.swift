@@ -30,7 +30,7 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
         addSortBarButton()
         configureCollectionView()
         bind()
-        viewModel?.fetchCapsules()
+        viewModel?.fetchCapsuleList()
         viewModel?.input.sortPolicy.onNext(.nearest)
     }
     
