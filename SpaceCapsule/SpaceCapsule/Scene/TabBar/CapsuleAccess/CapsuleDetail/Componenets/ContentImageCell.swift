@@ -9,19 +9,19 @@ import UIKit
 import SnapKit
 
 final class ContentImageCell: UICollectionViewCell {
-    let imageView: UIImageView = {
+    private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
 
         return imageView
     }()
     
-    let gradientView: UIView = {
+    private let gradientView: UIView = {
         let view = UIView()
         return view
     }()
     
-    let gradient: CAGradientLayer = {
+    private let gradient: CAGradientLayer = {
        let gradient = CAGradientLayer()
         gradient.colors = [UIColor.clear.cgColor, UIColor.clear.cgColor, UIColor.black.cgColor]
         gradient.locations = [0.0, 0.8, 1.0]
