@@ -72,7 +72,12 @@ final class CapsuleCell: UICollectionViewCell {
     }
 
     func configure(capsuleCellModel: CapsuleCellModel) {
-        thumbnailImageView.image = capsuleCellModel.thumbnailImage
+        if let thumbnailURL = capsuleCellModel.thumbnailImageURL {
+            thumbnailImageView.kr.setImage(with: thumbnailURL, scale: FrameResource.openableImageScale)
+        } else {
+            thumbnailImageView.image = .logoWithBG
+        }
+        
         descriptionLabel.text = "\(capsuleCellModel.memoryDate)\n\(capsuleCellModel.address)에서"
         thumbnailImageView.subviews.forEach {
             $0.removeFromSuperview()

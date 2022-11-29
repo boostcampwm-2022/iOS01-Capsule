@@ -46,7 +46,8 @@ enum FrameResource {
     static let shadowOffset: CGSize = .init(width: 4, height: 4)
     static let shadowRadius: CGFloat = 4
     static let shadowOpacity: Float = 0.25
-
+    
+    static let openableImageScale: CGFloat = 1.0
     static let closedImageScale: CGFloat = 0.5
     static let closedIconSize: CGFloat = 50.0
     static let closedDateOffset: CGFloat = 10.0

@@ -9,13 +9,17 @@ import UIKit
 import CoreLocation
 
 struct CapsuleCellModel: Hashable, Equatable {
-    let uuid: UUID
-    let thumbnailImage: UIImage?
+    let uuid: String
+    let thumbnailImageURL: String?
     let address: String
     let closedDate: String
     let memoryDate: String
-    let isOpenable: Bool
     let coordinate: CLLocationCoordinate2D
+    
+    var isOpenable: Bool = {
+        var isOpenable = true
+        return isOpenable
+    }()
     
     static func == (lhs: Self, rhs: Self) -> Bool {
         return lhs.uuid == rhs.uuid
