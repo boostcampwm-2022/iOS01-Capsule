@@ -28,11 +28,8 @@ final class CapsuleDetailView: UIView, BaseView {
         return mapView
     }()
     
-    private let imageCollectionView: ContentImageCollectionView = {
-        let customLayout = ContentImageFlowLayout()
-        customLayout.scrollDirection = .horizontal
-        
-        let collectionView = ContentImageCollectionView(frame: .zero, collectionViewLayout: customLayout)
+    private let imageCollectionView: ContentImageCollectionView = {        
+        let collectionView = ContentImageCollectionView(frame: .zero)
         collectionView.alwaysBounceHorizontal = true
         collectionView.backgroundColor = .brown
         return collectionView
@@ -40,6 +37,9 @@ final class CapsuleDetailView: UIView, BaseView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        imageCollectionView.delegate = self
+        imageCollectionView.dataSource = self
 
         configure()
         addSubViews()
@@ -81,5 +81,15 @@ final class CapsuleDetailView: UIView, BaseView {
         mapView.snp.makeConstraints {
             $0.height.equalTo(600)
         }
+    }
+}
+
+extension CapsuleDetailView: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        5
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        return collectionView.dequeueReusableCell(withReuseIdentifier: ContentImageCell.identifier, for: indexPath)
     }
 }

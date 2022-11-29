@@ -21,5 +21,6 @@ final class ContentImageFlowLayout: UICollectionViewFlowLayout {
                                          right: 0.0)
         
         self.sectionInsetReference = .fromSafeArea
+        self.scrollDirection = .horizontal
     }
 }

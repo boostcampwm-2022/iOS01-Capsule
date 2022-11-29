@@ -62,8 +62,7 @@ final class AppCoordinator: Coordinator {
 //        } else {
 //            moveToAuth(authFlow: .signInFlow)
 //        }
-        
-        
+ 
     }
     
     private func checkRegistration(uid: String) {

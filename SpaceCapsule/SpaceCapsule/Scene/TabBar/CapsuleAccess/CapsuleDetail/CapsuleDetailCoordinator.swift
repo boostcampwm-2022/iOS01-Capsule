@@ -27,4 +27,3 @@ final class CapsuleDetailCoordinator: Coordinator {
         capsuleDetailViewController.viewModel = capsuleDetailViewModel
     }
 }
-
