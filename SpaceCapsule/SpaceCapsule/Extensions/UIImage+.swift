@@ -11,6 +11,9 @@ extension UIImage {
     static let logo = UIImage(named: "logo")
     static let logoWithBG = UIImage(named: "logoWithBG")
     static let logoWithText = UIImage(named: "logoWithText")
+    
+    static let openableCapsule = UIImage(named: "openableCapsule")
+    static let unopenableCapsule = UIImage(named: "unopenableCapsule")
 
     static let homeFill = UIImage(systemName: "house.fill")
     static let mapFill = UIImage(systemName: "map.fill")

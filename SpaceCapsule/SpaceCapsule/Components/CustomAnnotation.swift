@@ -20,16 +20,8 @@ final class CustomAnnotation: MKPointAnnotation {
     }
 
     var pinImage: UIImage? {
-        return isOpenable ? UIImage(named: "logo") : UIImage(named: "logoGray")
+        return isOpenable ? .openableCapsule : .unopenableCapsule
     }
-
-//    required init(uuid: String, coordinate: CLLocationCoordinate2D) {
-//        self.uuid = uuid
-//
-//        super.init()
-//
-//        self.coordinate = coordinate
-//    }
 
     required init(uuid: String, latitude: Double, longitude: Double) {
         self.uuid = uuid

@@ -38,14 +38,6 @@ final class CustomAnnotationView: MKAnnotationView {
     }
 
     func update(for annotation: MKAnnotation?) {
-        let pinImage: UIImage?
-        let resizingSize = CGSize(width: 40, height: 35)
-
-        UIGraphicsBeginImageContext(resizingSize)
-        pinImage = (annotation as? CustomAnnotation)?.pinImage
-        pinImage?.draw(in: CGRect(origin: .zero, size: resizingSize))
-
-        let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
-        image = resizedImage
+        image = (annotation as? CustomAnnotation)?.pinImage?.resize(40)
     }
 }
