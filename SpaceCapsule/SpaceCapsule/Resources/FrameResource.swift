@@ -22,6 +22,7 @@ enum FrameResource {
     static let textFieldHeight: CGFloat = 40.0
     static let textViewHeight: CGFloat = 200.0
 
+    static let spacing50: CGFloat = 5.0
     static let spacing80: CGFloat = 8.0
     static let spacing200: CGFloat = 20.0
     static let spacing400: CGFloat = 40.0

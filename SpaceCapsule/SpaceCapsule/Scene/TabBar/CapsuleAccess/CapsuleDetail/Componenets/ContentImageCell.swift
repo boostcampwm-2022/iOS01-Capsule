@@ -11,7 +11,7 @@ import SnapKit
 final class ContentImageCell: UICollectionViewCell {
     private let imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         imageView.backgroundColor = .blue
         imageView.image = UIImage.logoWithBG
         return imageView
@@ -102,8 +102,8 @@ final class ContentImageCell: UICollectionViewCell {
         gradient.frame = bounds
         
         capsuleInfoStackView.snp.makeConstraints {
-            $0.left.equalToSuperview().inset(20)
-            $0.bottom.equalToSuperview().inset(20)
+            $0.left.equalToSuperview().inset(15)
+            $0.bottom.equalToSuperview().inset(15)
         }
     }
     
