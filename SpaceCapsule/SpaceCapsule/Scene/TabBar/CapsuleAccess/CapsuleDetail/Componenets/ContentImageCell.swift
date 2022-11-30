@@ -65,6 +65,10 @@ final class ContentImageCell: UICollectionViewCell {
     }
     
     private func configure() {
+        layer.shadowOffset = FrameResource.capsuleCellShadowOffset
+        layer.shadowRadius = FrameResource.capsuleCellShadowRadius
+        layer.shadowOpacity = Float(FrameResource.capsuleCellShadowOpacity)
+        
         layer.cornerRadius = FrameResource.commonCornerRadius
         gradient.cornerRadius = FrameResource.commonCornerRadius
         

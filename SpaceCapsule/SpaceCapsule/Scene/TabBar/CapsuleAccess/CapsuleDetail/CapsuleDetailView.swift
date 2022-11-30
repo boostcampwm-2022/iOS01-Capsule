@@ -38,7 +38,6 @@ final class CapsuleDetailView: UIView, BaseView {
     private let imageCollectionView: ContentImageCollectionView = {        
         let collectionView = ContentImageCollectionView(frame: .zero)
         collectionView.alwaysBounceHorizontal = true
-        collectionView.backgroundColor = .brown
         return collectionView
     }()
     
@@ -80,7 +79,7 @@ final class CapsuleDetailView: UIView, BaseView {
         }
         
         imageCollectionView.snp.makeConstraints {
-            $0.height.equalTo(FrameResource.detailImageViewHeight)
+            $0.height.equalTo(FrameResource.detailImageCollectionViewHeight)
         }
         
         contentView.snp.makeConstraints {

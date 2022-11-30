@@ -19,12 +19,10 @@ final class ContentImageFlowLayout: UICollectionViewFlowLayout {
         
         self.sectionInset = UIEdgeInsets(top: 0.0,
                                          left: 0.0,
-                                         bottom: 0.0,
+                                         bottom: 10.0,
                                          right: 0.0)
         
         self.sectionInsetReference = .fromSafeArea
         self.scrollDirection = .horizontal
     }
-
-
 }

@@ -24,11 +24,11 @@ final class CapsuleDetailViewController: UIViewController, BaseViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         scrollView.frame = CGRect(origin: .zero, size: view.frame.size)
-        scrollView.backgroundColor = .red
+        scrollView.backgroundColor = .themeBackground
         
         view.addSubview(scrollView)
         scrollView.addSubview(mainView)
-        mainView.backgroundColor = .yellow
+        mainView.backgroundColor = .themeBackground
         
         makeConstrinats()
     }
