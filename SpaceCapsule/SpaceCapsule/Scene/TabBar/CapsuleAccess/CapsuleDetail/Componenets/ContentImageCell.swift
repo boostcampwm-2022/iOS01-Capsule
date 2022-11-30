@@ -28,6 +28,27 @@ final class ContentImageCell: UICollectionViewCell {
         return gradient
     }()
     
+    private let capsuleInfoStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        return stackView
+    }()
+    
+    private let capsuleDate: UILabel = {
+       let label = UILabel()
+        label.textColor = .white
+        label.font = .themeFont(ofSize: 20)
+        return label
+    }()
+    
+    private let capsuleLocation: UILabel = {
+       let label = UILabel()
+        label.textColor = .white
+        label.font = .themeFont(ofSize: 30)
+        return label
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -46,11 +67,19 @@ final class ContentImageCell: UICollectionViewCell {
     private func configure() {
         layer.cornerRadius = FrameResource.commonCornerRadius
         gradient.cornerRadius = FrameResource.commonCornerRadius
+        
+        // TODO: 구현 후 삭제 필요
+        capsuleDate.text = "2020년 6월 5일"
+        capsuleLocation.text = "서울시 광진구"
     }
 
     private func addSubViews() {
+        capsuleInfoStackView.addArrangedSubview(capsuleDate)
+        capsuleInfoStackView.addArrangedSubview(capsuleLocation)
+        
         addSubview(imageView)
         addSubview(gradientView)
+        addSubview(capsuleInfoStackView)
     }
     
     private func makeConstraints() {
@@ -63,6 +92,11 @@ final class ContentImageCell: UICollectionViewCell {
         }
         
         gradient.frame = bounds
+        
+        capsuleInfoStackView.snp.makeConstraints {
+            $0.left.equalToSuperview().inset(20)
+            $0.bottom.equalToSuperview().inset(20)
+        }
     }
     
     private func addGradientLayer() {
