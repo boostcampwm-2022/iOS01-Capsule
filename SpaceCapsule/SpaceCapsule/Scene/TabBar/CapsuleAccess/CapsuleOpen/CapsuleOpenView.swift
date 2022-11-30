@@ -21,15 +21,15 @@ final class CapsuleOpenView: UIView, BaseView {
     
     var thumbnailImageContainerView = {
         let view = UIView()
-        view.layer.shadowOffset = CGSize(width: 4, height: 4)
-        view.layer.shadowRadius = 4
-        view.layer.shadowOpacity = 0.5
+        view.layer.shadowOffset = FrameResource.shadowOffset
+        view.layer.shadowRadius = FrameResource.shadowRadius
+        view.layer.shadowOpacity = FrameResource.shadowOpacity
         view.layer.cornerRadius = FrameResource.capsuleThumbnailCornerRadius
         return view
     }()
     
     var descriptionLabel = {
-        let label = ThemeLabel(text: "xxxx년 x월 x일\nxx시 xx구 에서의\n추억을 담은 캡슐", size: 28, color: .themeGray300)
+        let label = ThemeLabel(text: "xxxx년 x월 x일\nxx시 xx구 에서의\n추억을 담은 캡슐", size: FrameResource.fontSize140, color: .themeGray300)
         label.numberOfLines = 3
         label.textAlignment = .center
         return label
@@ -37,7 +37,7 @@ final class CapsuleOpenView: UIView, BaseView {
     
     var openButton = {
         let button = UIButton()
-        button.titleLabel?.font = .themeFont(ofSize: 20)
+        button.titleLabel?.font = .themeFont(ofSize: FrameResource.fontSize100)
         button.setTitle("열기", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .themeColor200
@@ -148,12 +148,12 @@ final class CapsuleOpenView: UIView, BaseView {
         
         lockImageView.snp.makeConstraints {
             $0.center.equalToSuperview()
-            $0.width.height.equalTo(50)
+            $0.width.height.equalTo(thumbnailImageView.snp.width).multipliedBy(0.3)
         }
     }
     
     private func applyCapsuleDate(capsuleCellModel: CapsuleCellModel) {
-        let dateLabel = ThemeLabel(text: "밀봉시간:\(capsuleCellModel.closedDate.dateString)", size: 18, color: .themeGray200)
+        let dateLabel = ThemeLabel(text: "밀봉시간:\(capsuleCellModel.closedDate.dateString)", size: FrameResource.fontSize90, color: .themeGray200)
         dateLabel.textAlignment = .center
         
         thumbnailImageView.addSubview(dateLabel)
