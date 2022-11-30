@@ -23,9 +23,13 @@ final class CapsuleDetailView: UIView, BaseView {
         return label
     }()
     
-    private let contentView: UIView = {
-       let view = UIView()
+    private let contentView: UITextView = {
+       let view = UITextView()
+        view.isUserInteractionEnabled = false
+        view.textColor = .themeGray300
+        view.font = .themeFont(ofSize: 24)
         view.backgroundColor = .blue
+        view.isScrollEnabled = false
         return view
     }()
     
@@ -58,7 +62,9 @@ final class CapsuleDetailView: UIView, BaseView {
     }
     
     func configure() {
+        // TODO: 구현 후 삭제필요
         closingDateView.text = "밀봉시간: 2010년 7월 1일"
+        contentView.text = "날씨가 너무 좋았던 날\n 영준이를 오랜만에 봐서 좋았다\n 지수랑 민중이랑 영준이랑 김치 떡볶이 먹고 인생네컷도 찍었다.\n 지수는 소주를 3병이나 먹는게 진짜 신기하다"
     }
     
     func addSubViews() {
@@ -80,10 +86,6 @@ final class CapsuleDetailView: UIView, BaseView {
         
         imageCollectionView.snp.makeConstraints {
             $0.height.equalTo(FrameResource.detailImageCollectionViewHeight)
-        }
-        
-        contentView.snp.makeConstraints {
-            $0.height.equalTo(500)
         }
         
         mapView.snp.makeConstraints {
