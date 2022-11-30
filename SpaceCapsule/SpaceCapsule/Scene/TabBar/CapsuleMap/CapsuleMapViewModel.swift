@@ -32,13 +32,11 @@ final class CapsuleMapViewModel: BaseViewModel {
     }
 
     func bind() {
-        print("capsule map viewmodel bind")
         AppDataManager.shared.capsules
             .withUnretained(self)
             .subscribe(onNext: { owner, capsules in
 
                 let annotations = capsules.map {
-                    print($0.geopoint)
                     return CustomAnnotation(
                         uuid: $0.uuid,
                         latitude: $0.geopoint.latitude,

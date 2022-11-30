@@ -29,12 +29,9 @@ final class AppDataManager {
             return
         }
         
-        print(uid)
-
         firestore.fetchCapsuleList(of: uid)
             .withUnretained(self)
             .subscribe(onNext: { owner, capsules in
-                print("success")
                 owner.capsules.accept(capsules)
             })
             .disposed(by: disposeBag)

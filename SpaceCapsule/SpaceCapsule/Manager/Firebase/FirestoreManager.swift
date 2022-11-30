@@ -75,13 +75,7 @@ class FirestoreManager {
         database
             .collection("users")
             .document(uid)
-            .updateData(["capsules": FieldValue.arrayUnion([capsule.uuid])]) { _ in
-//                if let error = error {
-//                    completion(error)
-//                } else {
-//                    completion(nil)
-//                }
-            }
+            .updateData(["capsules": FieldValue.arrayUnion([capsule.uuid])])
 
         database
             .collection("capsules")
@@ -151,13 +145,7 @@ class FirestoreManager {
                     self.database
                         .collection("capsules")
                         .document($0.documentID)
-                        .delete { error in
-                            guard let error else {
-                                print("error")
-                                return
-                            }
-                            print("delete!")
-                        }
+                        .delete()
                 }
             }
     }
