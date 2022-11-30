@@ -12,7 +12,7 @@ final class ContentImageCell: UICollectionViewCell {
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-
+        imageView.backgroundColor = .blue
         return imageView
     }()
     
@@ -51,8 +51,7 @@ final class ContentImageCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        backgroundColor = .blue
+
         configure()
         addSubViews()
         addGradientLayer()
@@ -65,11 +64,15 @@ final class ContentImageCell: UICollectionViewCell {
     }
     
     private func configure() {
+        contentView.layer.cornerRadius = FrameResource.commonCornerRadius
+        contentView.layer.masksToBounds = true
+        
+        layer.masksToBounds = false
+        layer.shadowOpacity = 0.5
         layer.shadowOffset = FrameResource.capsuleCellShadowOffset
         layer.shadowRadius = FrameResource.capsuleCellShadowRadius
-        layer.shadowOpacity = Float(FrameResource.capsuleCellShadowOpacity)
+        layer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
         
-        layer.cornerRadius = FrameResource.commonCornerRadius
         gradient.cornerRadius = FrameResource.commonCornerRadius
         
         // TODO: 구현 후 삭제 필요
@@ -81,9 +84,9 @@ final class ContentImageCell: UICollectionViewCell {
         capsuleInfoStackView.addArrangedSubview(capsuleDate)
         capsuleInfoStackView.addArrangedSubview(capsuleLocation)
         
-        addSubview(imageView)
-        addSubview(gradientView)
-        addSubview(capsuleInfoStackView)
+        contentView.addSubview(imageView)
+        contentView.addSubview(gradientView)
+        contentView.addSubview(capsuleInfoStackView)
     }
     
     private func makeConstraints() {

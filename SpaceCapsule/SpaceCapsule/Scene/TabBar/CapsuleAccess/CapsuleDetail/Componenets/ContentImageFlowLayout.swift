@@ -17,6 +17,7 @@ final class ContentImageFlowLayout: UICollectionViewFlowLayout {
         
         self.minimumLineSpacing = FrameResource.spacing200 // cell간의 간격
         
+        
         self.sectionInset = UIEdgeInsets(top: 0.0,
                                          left: 0.0,
                                          bottom: 10.0,
