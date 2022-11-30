@@ -12,7 +12,6 @@ final class ContentImageCell: UICollectionViewCell {
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
-        imageView.backgroundColor = .blue
         imageView.image = UIImage.logoWithBG
         return imageView
     }()
