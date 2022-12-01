@@ -18,7 +18,7 @@ final class CapsuleListViewModel: BaseViewModel {
 
     struct Input {
         var capsules: BehaviorRelay<[Capsule]> = AppDataManager.shared.capsules
-        var capsuleCellModels = BehaviorRelay<[CapsuleCellModel]>(value: [])
+        var capsuleCellModels = BehaviorRelay<[ListCapsuleCellModel]>(value: [])
         var sortPolicy = BehaviorRelay<SortPolicy>(value: .nearest)
         var refreshLoading = PublishRelay<Bool>()
     }

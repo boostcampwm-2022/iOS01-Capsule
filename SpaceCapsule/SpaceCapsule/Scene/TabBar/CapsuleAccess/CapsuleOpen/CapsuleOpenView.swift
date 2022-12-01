@@ -65,7 +65,7 @@ final class CapsuleOpenView: UIView, BaseView {
         backgroundColor = .themeBackground
     }
     
-    func configure(capsuleCellModel: CapsuleCellModel) {
+    func configure(capsuleCellModel: ListCapsuleCellModel) {
         if let thumbnailURL = capsuleCellModel.thumbnailImageURL {
             thumbnailImageView.kr.setImage(with: thumbnailURL, scale: FrameResource.openableImageScale)
         } else {
@@ -116,7 +116,7 @@ final class CapsuleOpenView: UIView, BaseView {
         }
     }
     
-    func applyUnOpenableEffect(capsuleCellModel: CapsuleCellModel) {
+    func applyUnOpenableEffect(capsuleCellModel: ListCapsuleCellModel) {
         openButton.backgroundColor = .themeGray200
         applyBlurEffect()
         applyLockImage()
@@ -150,7 +150,7 @@ final class CapsuleOpenView: UIView, BaseView {
         }
     }
     
-    private func applyCapsuleDate(capsuleCellModel: CapsuleCellModel) {
+    private func applyCapsuleDate(capsuleCellModel: ListCapsuleCellModel) {
         let dateLabel = ThemeLabel(text: "밀봉시간:\(capsuleCellModel.closedDate.dateString)",
                                    size: FrameResource.fontSize90, color: .themeGray200)
         dateLabel.textAlignment = .center

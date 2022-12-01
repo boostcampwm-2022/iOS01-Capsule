@@ -11,7 +11,7 @@ class CapsuleOpenCoordinator: Coordinator {
     var parent: Coordinator?
     var children: [Coordinator] = []
     var navigationController: CustomNavigationController?
-    var capsuleCellModel: CapsuleCellModel?
+    var capsuleCellModel: ListCapsuleCellModel?
 
     init(navigationController: CustomNavigationController?) {
         self.navigationController = navigationController

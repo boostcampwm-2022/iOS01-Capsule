@@ -35,7 +35,7 @@ final class CapsuleListCoordinator: Coordinator {
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.themeFont(ofSize: FrameResource.fontSize120) as Any]
     }
     
-    func showCapsuleOpen(capsuleCellModel: CapsuleCellModel) {
+    func showCapsuleOpen(capsuleCellModel: ListCapsuleCellModel) {
         let capsuleOpenCoordinator = CapsuleOpenCoordinator(navigationController: navigationController)
         capsuleOpenCoordinator.capsuleCellModel = capsuleCellModel
         capsuleOpenCoordinator.parent = self
