@@ -32,14 +32,6 @@ enum FrameResource {
 
     static let addCapsuleButtonSize: CGFloat = 50.0
     static let addImageViewSize: CGFloat = 250.0
-    
-    static let detailImageViewHeight: CGFloat = 400
-    static let detailImageViewWidth: CGFloat = 300
-    
-    static let detailImageCollectionViewHeight: CGFloat = detailImageViewHeight + 15
-    
-    static let detailImageCellShadowOffset: CGSize = CGSize(width: 2, height: 2)
-    static let detailImageCellShadowRadius: CGFloat = 6.0
 
     static let fontSize80: CGFloat = 16.0
     static let fontSize90: CGFloat = 18.0
@@ -74,4 +66,16 @@ enum FrameResource {
     
     static let sortPolicySelectionSheetHeight: CGFloat = 250.0
     static let sortPolicySelectionCellHeight: CGFloat = 40.0
+    
+    static let detailImageViewHeight: CGFloat = 400
+    static let detailImageViewWidth: CGFloat = 300
+    
+    static let detailImageCollectionViewHeight: CGFloat = detailImageViewHeight + 15
+    
+    static let detailImageCellShadowOffset: CGSize = CGSize(width: 2, height: 2)
+    static let detailImageCellShadowRadius: CGFloat = 6.0
+    
+    static let detailContentHInset: CGFloat = 30.0
+    
+    static let detailMapHeight: CGFloat = 200.0
 }

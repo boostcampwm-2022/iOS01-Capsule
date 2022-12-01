@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class ContentImageCell: UICollectionViewCell {
+final class DetailImageCell: UICollectionViewCell {
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -28,10 +28,11 @@ final class ContentImageCell: UICollectionViewCell {
         return gradient
     }()
     
+    // MARK: 이미지 위에 띄울 정보
     private let capsuleInfoStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 20
+        stackView.spacing = 10
         return stackView
     }()
     
@@ -67,18 +68,21 @@ final class ContentImageCell: UICollectionViewCell {
         contentView.layer.cornerRadius = FrameResource.commonCornerRadius
         contentView.layer.masksToBounds = true
         
+        gradient.cornerRadius = FrameResource.commonCornerRadius
+        
+        configureShadow()
+        // TODO: 구현 후 삭제 필요
+        capsuleDate.text = "2020년 6월 5일"
+        capsuleLocation.text = "서울시 광진구"
+    }
+    
+    private func configureShadow() {
         let rect = CGRect(x: 7, y: 7, width: bounds.width,
                           height: bounds.height)
         layer.masksToBounds = false
         layer.shadowOpacity = 0.35
         layer.shadowRadius = 3
-        layer.shadowPath = UIBezierPath(roundedRect: rect, cornerRadius: 10).cgPath
-        
-        gradient.cornerRadius = FrameResource.commonCornerRadius
-        
-        // TODO: 구현 후 삭제 필요
-        capsuleDate.text = "2020년 6월 5일"
-        capsuleLocation.text = "서울시 광진구"
+        layer.shadowPath = UIBezierPath(roundedRect: rect, cornerRadius: FrameResource.commonCornerRadius).cgPath
     }
 
     private func addSubViews() {

@@ -17,11 +17,7 @@ final class CapsuleDetailView: UIView, BaseView {
         return stackView
     }()
     
-    private let imageCollectionView: ContentImageCollectionView = {
-        let collectionView = ContentImageCollectionView(frame: .zero)
-        collectionView.alwaysBounceHorizontal = true
-        return collectionView
-    }()
+    private let imageCollectionView = DetailImageCollectionView(frame: .zero)
     
     private let contentStackView: UIStackView = {
         let stackView = UIStackView()
@@ -30,14 +26,14 @@ final class CapsuleDetailView: UIView, BaseView {
         return stackView
     }()
     
-    private let closingDateView: UILabel = {
+    private let closedDateLabel: UILabel = {
         let label = UILabel()
         label.textColor = .themeGray300
         label.font = .themeFont(ofSize: 16)
         return label
     }()
     
-    private let contentView: UITextView = {
+    private let descriptionView: UITextView = {
        let view = UITextView()
         view.isUserInteractionEnabled = false
         view.textColor = .themeGray300
@@ -73,8 +69,8 @@ final class CapsuleDetailView: UIView, BaseView {
     
     func configure() {
         // TODO: 구현 후 삭제필요
-        closingDateView.text = "밀봉시간: 2010년 7월 1일"
-        contentView.text = "날씨가 너무 좋았던 날\n 영준이를 오랜만에 봐서 좋았다\n 지수랑 민중이랑 영준이랑 김치 떡볶이 먹고 인생네컷도 찍었다.\n 지수는 소주를 3병이나 먹는게 진짜 신기하다"
+        closedDateLabel.text = "밀봉시간: 2010년 7월 1일"
+        descriptionView.text = "날씨가 너무 좋았던 날\n 영준이를 오랜만에 봐서 좋았다\n 지수랑 민중이랑 영준이랑 김치 떡볶이 먹고 인생네컷도 찍었다.\n 지수는 소주를 3병이나 먹는게 진짜 신기하다"
     }
     
     override func layoutSubviews() {
@@ -84,8 +80,8 @@ final class CapsuleDetailView: UIView, BaseView {
     }
     
     func addSubViews() {
-        [closingDateView,
-         contentView,
+        [closedDateLabel,
+         descriptionView,
          mapView].forEach {
             contentStackView.addArrangedSubview($0)
         }
@@ -110,21 +106,23 @@ final class CapsuleDetailView: UIView, BaseView {
         }
         
         contentStackView.snp.makeConstraints {
-            $0.width.equalToSuperview().inset(30)
+            $0.width.equalToSuperview().inset(FrameResource.detailContentHInset)
         }
         
         mapView.snp.makeConstraints {
-            $0.height.equalTo(200)
+            $0.height.equalTo(FrameResource.detailMapHeight)
         }
     }
     
     private func addMapSnapshot() {
+        // TODO: 선택한 캡슐 위치 좌표 입력으로 변경
         let center = CLLocationCoordinate2D(latitude: 37.583577, longitude: 127.019607)
         let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+        
         let options: MKMapSnapshotter.Options = .init()
         options.region = MKCoordinateRegion(center: center, span: span)
-        options.size = CGSize(width: frame.size.width - 60,
-                              height: 200)
+        options.size = CGSize(width: frame.size.width - (FrameResource.detailContentHInset * 2),
+                              height: FrameResource.detailMapHeight)
         
         let snapshotShooter = MKMapSnapshotter(options: options)
         
@@ -152,6 +150,6 @@ extension CapsuleDetailView: UICollectionViewDelegate, UICollectionViewDataSourc
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return collectionView.dequeueReusableCell(withReuseIdentifier: ContentImageCell.identifier, for: indexPath)
+        return collectionView.dequeueReusableCell(withReuseIdentifier: DetailImageCell.identifier, for: indexPath)
     }
 }

@@ -8,11 +8,11 @@
 import UIKit
 import SnapKit
 
-final class ContentImageCollectionView: UICollectionView {
+final class DetailImageCollectionView: UICollectionView {
     required init(frame: CGRect) {
-        let customLayout = ContentImageFlowLayout()
+        let customLayout = DetailImageFlowLayout()
         super.init(frame: frame, collectionViewLayout: customLayout)
-        register(ContentImageCell.self, forCellWithReuseIdentifier: ContentImageCell.identifier)
+        register(DetailImageCell.self, forCellWithReuseIdentifier: DetailImageCell.identifier)
         
         configure()
     }
@@ -23,6 +23,7 @@ final class ContentImageCollectionView: UICollectionView {
     }
     
     private func configure() {
+        alwaysBounceHorizontal = true
         backgroundColor = .clear
         showsHorizontalScrollIndicator = false
     }
