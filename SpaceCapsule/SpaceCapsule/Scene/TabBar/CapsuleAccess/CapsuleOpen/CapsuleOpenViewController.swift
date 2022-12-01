@@ -21,7 +21,7 @@ final class CapsuleOpenViewController: UIViewController, BaseViewController {
         if let capsuleCellModel = viewModel?.capsuleCellModel {
             viewModel?.input.capsuleCellModel.onNext(capsuleCellModel)
         }
-        viewModel?.output.isOpenable.onNext(false)
+        viewModel?.output.isOpenable.onNext(true)
     }
     
     override func viewDidAppear(_ animated: Bool) {
