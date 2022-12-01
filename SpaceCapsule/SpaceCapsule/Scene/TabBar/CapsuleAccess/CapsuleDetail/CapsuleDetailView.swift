@@ -43,7 +43,7 @@ final class CapsuleDetailView: UIView, BaseView {
         return view
     }()
     
-    private let mapView: UIImageView = {
+    let mapView: UIImageView = {
         let mapView = UIImageView()
         mapView.contentMode = .scaleAspectFit
         mapView.layer.borderWidth = 0.5
@@ -72,7 +72,7 @@ final class CapsuleDetailView: UIView, BaseView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        addMapSnapshot()
+        //addMapSnapshot()
     }
     
     func addSubViews() {
@@ -107,35 +107,6 @@ final class CapsuleDetailView: UIView, BaseView {
         
         mapView.snp.makeConstraints {
             $0.height.equalTo(FrameResource.detailMapHeight)
-        }
-    }
-    
-    private func addMapSnapshot() {
-        // TODO: 선택한 캡슐 위치 좌표 입력으로 변경
-        let center = CLLocationCoordinate2D(latitude: 37.583577, longitude: 127.019607)
-        let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
-        
-        let options: MKMapSnapshotter.Options = .init()
-        options.region = MKCoordinateRegion(center: center, span: span)
-        options.size = CGSize(width: frame.size.width - (FrameResource.detailContentHInset * 2),
-                              height: FrameResource.detailMapHeight)
-        
-        let snapshotShooter = MKMapSnapshotter(options: options)
-        
-        snapshotShooter.start { snapshot, error in
-            guard let snapshot = snapshot else {
-                print("no snapshot passed")
-                return
-            }
-            
-            if error != nil {
-                print("error")
-                return
-            }
-            
-            DispatchQueue.main.async {
-                self.mapView.image = snapshot.image
-            }
         }
     }
 }

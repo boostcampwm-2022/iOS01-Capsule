@@ -34,6 +34,7 @@ final class DetailImageCollectionView: UICollectionView {
     
     enum Cell: Hashable {
         case image(data: Data)
+        // TODO: 더미데이터 삭제 필요
         case sampleImage1
         case sampleImage2
         case sampleImage3
@@ -72,15 +73,7 @@ final class DetailImageCollectionView: UICollectionView {
     func applySnapshot(items: [DetailImageCollectionView.Cell]) {
         var snapshot = NSDiffableDataSourceSnapshot<Int, DetailImageCollectionView.Cell>()
         snapshot.appendSections([0])
-        
-        // TODO: 나중에 삭제
-        if let cell = DetailImageCell() as? DetailImageCollectionView.Cell {
-            snapshot.appendItems(items + [cell], toSection: 0)
-        } else {
-            snapshot.appendItems(items, toSection: 0)
-        }
-        
-        // snapshot.appendItems(items, toSection: 0)
+        snapshot.appendItems(items, toSection: 0)
         imageDataSource?.apply(snapshot)
     }
 }

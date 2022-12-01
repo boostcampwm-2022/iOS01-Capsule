@@ -12,7 +12,6 @@ final class DetailImageCell: UICollectionViewCell {
     let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
-        imageView.image = UIImage.logoWithBG
         return imageView
     }()
     
