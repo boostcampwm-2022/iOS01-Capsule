@@ -49,7 +49,7 @@ final class CapsuleOpenViewController: UIViewController, BaseViewController {
             .withUnretained(self)
             .bind { owner, capsuleCellModel in
                 owner.capsuleOpenView.configure(capsuleCellModel: capsuleCellModel)
-            }
+            }.disposed(by: disposeBag)
         
         viewModel.input.openButtonTapped
             .withLatestFrom(viewModel.output.isOpenable)
