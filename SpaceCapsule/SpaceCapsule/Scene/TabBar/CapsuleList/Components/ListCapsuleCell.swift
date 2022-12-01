@@ -55,14 +55,8 @@ final class ListCapsuleCell: UICollectionViewCell {
     func configure(capsuleCellModel: ListCapsuleCellModel) {
         if let thumbnailURL = capsuleCellModel.thumbnailImageURL {
             thumbnailImageView.imageView.kr.setImage(with: thumbnailURL, scale: FrameResource.openableImageScale)
-        } else {
-            thumbnailImageView.imageView.image = .logoWithBG
         }
-        
         descriptionLabel.text = "\(capsuleCellModel.memoryDate.dateString)\n\(capsuleCellModel.address)에서"
-        thumbnailImageView.imageView.subviews.forEach {
-            $0.removeFromSuperview()
-        }
         if capsuleCellModel.isOpenable == false {
             applyUnOpenableEffect(closeDate: capsuleCellModel.closedDate.dateString)
         }
@@ -89,7 +83,7 @@ final class ListCapsuleCell: UICollectionViewCell {
     
     private func applyLockImage() {
         let lockImageView = UIImageView()
-        lockImageView.image = UIImage(systemName: "lock.fill")
+        lockImageView.image = .lock
         lockImageView.tintColor = .themeGray300
         thumbnailImageView.imageView.addSubview(lockImageView)
         

@@ -19,19 +19,15 @@ final class CapsuleListViewModel: BaseViewModel {
     struct Input {
         var capsuleCellModels = PublishSubject<[ListCapsuleCellModel]>()
         var sortPolicy = PublishSubject<SortPolicy>()
+        var refreshLoading = PublishRelay<Bool>()
     }
 
-    init() {
-        bind()
-    }
-
-    private func bind() {}
+    init() {}
     
     func fetchCapsuleList() {
         guard let currentUser = FirebaseAuthManager.shared.currentUser else {
             return
         }
-      
         FirestoreManager.shared.fetchCapsuleList(of: currentUser.uid)
             .withUnretained(self)
             .subscribe(

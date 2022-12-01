@@ -12,6 +12,12 @@ final class ProfileViewController: UIViewController, BaseViewController {
     var disposeBag = DisposeBag()
     var viewModel: ProfileViewModel?
 
+    let mainView = ProfileView()
+
+    override func loadView() {
+        view = mainView
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -20,5 +26,12 @@ final class ProfileViewController: UIViewController, BaseViewController {
         bind()
     }
 
-    func bind() {}
+    func bind() {
+        // 임시요
+        mainView.deleteButton.rx.tap
+            .subscribe { _ in
+                self.viewModel?.input.tapDelete.onNext(())
+            }
+            .disposed(by: disposeBag)
+    }
 }

@@ -11,35 +11,36 @@ import RxSwift
 
 class FirestoreManager {
     static let shared = FirestoreManager()
-    private let database = Firestore.firestore()
     private init() { }
-    
+
+    private let database = Firestore.firestore()
+
     func fetchUserInfo(of uid: String) -> Observable<UserInfo> {
         return Observable.create { emitter in
-            self.database.collection("users").document(uid).getDocument { documentSnapshot, error in
-                if let error = error {
-                    print("Error getting document: \(error)")
-                    emitter.onError(error)
-                    return
-                } else {
-                    guard let snapshot = documentSnapshot?.data() else {
-                        print("Error Snapshot: \(FBAuthError.noSnapshot)")
-                        emitter.onError(FBAuthError.noSnapshot)
+            self.database
+                .collection("users")
+                .document(uid)
+                .getDocument { documentSnapshot, error in
+                    if let error = error {
+                        emitter.onError(error)
                         return
+                    } else {
+                        guard let snapshot = documentSnapshot?.data() else {
+                            emitter.onError(FBAuthError.noSnapshot)
+                            return
+                        }
+                        guard let userInfo = self.dictionaryToObject(type: UserInfo.self, dictionary: snapshot) else {
+                            emitter.onError(FBAuthError.decodeError)
+                            return
+                        }
+                        emitter.onNext(userInfo)
+                        emitter.onCompleted()
                     }
-                    guard let userInfo = self.dictionaryToObject(type: UserInfo.self, dictionary: snapshot) else {
-                        print("Error UserInfo: \(FBAuthError.decodeError)")
-                        emitter.onError(FBAuthError.decodeError)
-                        return
-                    }
-                    emitter.onNext(userInfo)
-                    emitter.onCompleted()
                 }
-            }
             return Disposables.create { }
         }
     }
-    
+
     private func dictionaryToObject<T: Decodable>(type: T.Type, dictionary: [String: Any]?) -> T? {
         guard let data = try? JSONSerialization.data(withJSONObject: dictionary as Any),
               let object = try? JSONDecoder().decode(T.self, from: data) else {
@@ -47,7 +48,7 @@ class FirestoreManager {
         }
         return object
     }
-    
+
     private func dictionaryToCapsule(dictionary: [String: Any]?) -> Capsule? {
         guard let dict = dictionary,
               let capsule = Capsule(dictionary: dict) else {
@@ -55,7 +56,7 @@ class FirestoreManager {
         }
         return capsule
     }
-   
+
     func registerUserInfo(uid: String, userInfo: UserInfo, completion: @escaping (Error?) -> Void) {
         database
             .collection("users")
@@ -73,13 +74,7 @@ class FirestoreManager {
         database
             .collection("users")
             .document(uid)
-            .updateData(["capsules": FieldValue.arrayUnion([capsule.uuid])]) { _ in
-//                if let error = error {
-//                    completion(error)
-//                } else {
-//                    completion(nil)
-//                }
-            }
+            .updateData(["capsules": FieldValue.arrayUnion([capsule.uuid])])
 
         database
             .collection("capsules")
@@ -92,34 +87,88 @@ class FirestoreManager {
                 }
             }
     }
+
     // TODO: FBAuthError 이름 바꾸기
     func fetchCapsuleList(of uid: String) -> Observable<[Capsule]> {
         return Observable.create { emitter in
-            self.database.collection("capsules").whereField("userId", isEqualTo: uid).getDocuments { querySnapshot, error in
-                if let error = error {
-                    print("Error Snapshot: \(error)")
-                    emitter.onError(error)
-                    return
-                } else {
-                    guard let snapshots = querySnapshot?.documents else {
-                        print("Error Snapshot: \(FBAuthError.noSnapshot)")
-                        emitter.onError(FBAuthError.noSnapshot)
+            self.database
+                .collection("capsules")
+                .whereField("userId", isEqualTo: uid)
+                .getDocuments { querySnapshot, error in
+                    if let error = error {
+                        emitter.onError(error)
                         return
-                    }
-                    var capsuleList: [Capsule] = []
-                    for snapshot in snapshots {
-                        guard let capsule = self.dictionaryToCapsule(dictionary: snapshot.data()) else {
-                            print("Error Capsule: \(FBAuthError.decodeError)")
-                            emitter.onError(FBAuthError.decodeError)
+                    } else {
+                        guard let snapshots = querySnapshot?.documents else {
+                            emitter.onError(FBAuthError.noSnapshot)
                             return
                         }
-                        capsuleList.append(capsule)
+
+                        var capsuleList: [Capsule] = []
+
+                        for snapshot in snapshots {
+                            guard let capsule = self.dictionaryToCapsule(dictionary: snapshot.data()) else {
+                                emitter.onError(FBAuthError.decodeError)
+                                return
+                            }
+                            capsuleList.append(capsule)
+                        }
+
+                        emitter.onNext(capsuleList)
+                        // emitter.onCompleted() 이건 컴플리트 날릴 필요 없을 듯, 왜냐면 캡슐 목록 새로고침 기능 생길 가능성.
                     }
-                    emitter.onNext(capsuleList)
-                    // emitter.onCompleted() 이건 컴플리트 날릴 필요 없을 듯, 왜냐면 캡슐 목록 새로고침 기능 생길 가능성.
                 }
-            }
             return Disposables.create { }
         }
+    }
+
+    func fetchCapsules(completion: @escaping ([Capsule]?) -> Void) {
+        guard let uid = FirebaseAuthManager.shared.currentUser?.uid else {
+            return
+        }
+
+        database
+            .collection("capsules")
+            .whereField("userId", isEqualTo: uid)
+            .getDocuments { query, error in
+                guard error == nil else {
+                    completion(nil)
+                    return
+                }
+
+                guard let documents = query?.documents else {
+                    completion(nil)
+                    return
+                }
+
+                let capsules = documents.compactMap {
+                    self.dictionaryToCapsule(dictionary: $0.data())
+                }
+
+                completion(capsules)
+            }
+    }
+
+    func deleteUserCapsules() {
+        guard let uid = FirebaseAuthManager.shared.currentUser?.uid else {
+            return
+        }
+
+        database
+            .collection("users")
+            .document(uid)
+            .updateData(["capsules": []])
+
+        database
+            .collection("capsules")
+            .whereField("userId", isEqualTo: uid)
+            .getDocuments { snapshot, _ in
+                snapshot?.documents.forEach {
+                    self.database
+                        .collection("capsules")
+                        .document($0.documentID)
+                        .delete()
+                }
+            }
     }
 }

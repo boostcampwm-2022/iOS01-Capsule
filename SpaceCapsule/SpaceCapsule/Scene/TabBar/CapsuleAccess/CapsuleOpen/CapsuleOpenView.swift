@@ -21,15 +21,15 @@ final class CapsuleOpenView: UIView, BaseView {
     
     var thumbnailImageContainerView = {
         let view = UIView()
-        view.layer.shadowOffset = CGSize(width: 4, height: 4)
-        view.layer.shadowRadius = 4
-        view.layer.shadowOpacity = 0.5
+        view.layer.shadowOffset = FrameResource.shadowOffset
+        view.layer.shadowRadius = FrameResource.shadowRadius
+        view.layer.shadowOpacity = FrameResource.shadowOpacity
         view.layer.cornerRadius = FrameResource.capsuleThumbnailCornerRadius
         return view
     }()
     
     var descriptionLabel = {
-        let label = ThemeLabel(text: "xxxx년 x월 x일\nxx시 xx구 에서의\n추억을 담은 캡슐", size: 28, color: .themeGray300)
+        let label = ThemeLabel(text: "xxxx년 x월 x일\nxx시 xx구 에서의\n추억을 담은 캡슐", size: FrameResource.fontSize140, color: .themeGray300)
         label.numberOfLines = 3
         label.textAlignment = .center
         return label
@@ -37,7 +37,7 @@ final class CapsuleOpenView: UIView, BaseView {
     
     var openButton = {
         let button = UIButton()
-        button.titleLabel?.font = .themeFont(ofSize: 20)
+        button.titleLabel?.font = .themeFont(ofSize: FrameResource.fontSize100)
         button.setTitle("열기", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .themeColor200
@@ -63,6 +63,25 @@ final class CapsuleOpenView: UIView, BaseView {
 
     func configure() {
         backgroundColor = .themeBackground
+    }
+    
+    func configure(capsuleCellModel: CapsuleCellModel) {
+        if let thumbnailURL = capsuleCellModel.thumbnailImageURL {
+            thumbnailImageView.kr.setImage(with: thumbnailURL, scale: FrameResource.openableImageScale)
+        } else {
+            thumbnailImageView.image = .logoWithBG
+        }
+        descriptionLabel.text = """
+        \(capsuleCellModel.memoryDate.dateString)
+        \(capsuleCellModel.address) 에서의
+        추억을 담은 캡슐
+        """
+        descriptionLabel.asFontColor(
+            targetStringList: [capsuleCellModel.memoryDate.dateString, capsuleCellModel.address],
+            size: FrameResource.fontSize140,
+            color: .themeGray400
+        )
+        
     }
 
     func addSubViews() {
@@ -99,11 +118,11 @@ final class CapsuleOpenView: UIView, BaseView {
     
     // TODO: Capsule 인자로 받아서 configure하기
     
-    func applyUnOpenableEffect() {
+    func applyUnOpenableEffect(capsuleCellModel: CapsuleCellModel) {
         openButton.backgroundColor = .themeGray200
         applyBlurEffect()
         applyLockImage()
-        applyCapsuleDate()
+        applyCapsuleDate(capsuleCellModel: capsuleCellModel)
     }
     
     private func applyBlurEffect() {
@@ -122,19 +141,20 @@ final class CapsuleOpenView: UIView, BaseView {
     
     private func applyLockImage() {
         let lockImageView = UIImageView()
-        lockImageView.image = UIImage(systemName: "lock.fill")
-        lockImageView.tintColor = .themeGray300
+        lockImageView.image = .lock
+        lockImageView.tintColor = .themeGray200
         
         thumbnailImageView.addSubview(lockImageView)
         
         lockImageView.snp.makeConstraints {
             $0.center.equalToSuperview()
-            $0.width.height.equalTo(50)
+            $0.width.height.equalTo(thumbnailImageView.snp.width).multipliedBy(0.3)
         }
     }
     
-    private func applyCapsuleDate() {
-        let dateLabel = ThemeLabel(text: "밀봉시간:xxxx년 x월 x일", size: 18, color: .themeGray300)
+    private func applyCapsuleDate(capsuleCellModel: CapsuleCellModel) {
+        let dateLabel = ThemeLabel(text: "밀봉시간:\(capsuleCellModel.closedDate.dateString)",
+                                   size: FrameResource.fontSize90, color: .themeGray200)
         dateLabel.textAlignment = .center
         
         thumbnailImageView.addSubview(dateLabel)
@@ -158,18 +178,19 @@ final class CapsuleOpenView: UIView, BaseView {
     
     func shakeAnimate() {
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
-        let animation = CABasicAnimation(keyPath: "position")
+        let keyPath = "shake"
+        let animation = CABasicAnimation(keyPath: keyPath)
         animation.duration = 0.05
         animation.repeatCount = 5
         animation.autoreverses = true
         animation.fromValue = CGPoint(
-            x: thumbnailImageContainerView.center.x - 4.0,
+            x: thumbnailImageContainerView.center.x - FrameResource.capsuleShakeWidth,
             y: thumbnailImageContainerView.center.y
         )
         animation.toValue = CGPoint(
-            x: thumbnailImageContainerView.center.x + 4.0,
+            x: thumbnailImageContainerView.center.x + FrameResource.capsuleShakeWidth,
             y: thumbnailImageContainerView.center.y
         )
-        thumbnailImageContainerView.layer.add(animation, forKey: "position")
+        thumbnailImageContainerView.layer.add(animation, forKey: keyPath)
     }
 }
