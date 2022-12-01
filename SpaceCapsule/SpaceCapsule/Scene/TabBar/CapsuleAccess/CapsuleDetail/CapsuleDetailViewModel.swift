@@ -48,8 +48,24 @@ final class CapsuleDetailViewModel: BaseViewModel {
             if error != nil {
                 return
             }
+            UIGraphicsBeginImageContextWithOptions(snapshot.image.size, true, snapshot.image.scale)
+            snapshot.image.draw(at: .zero)
             
-            self?.output.mapSnapshot.accept([snapshot.image])
+            let point = snapshot.point(for: center)
+            let annotation = CustomAnnotation(coordinate: center)
+            
+            let annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "capsuleLocation")
+            
+            annotationView.contentMode = .scaleAspectFit
+            annotationView.bounds = CGRect(x: 0, y: 0, width: 40, height: 40)
+            
+            annotationView.drawHierarchy(in: CGRect(x: point.x, y: point.y, width: annotationView.bounds.width, height: annotationView.bounds.height), afterScreenUpdates: true)
+            
+            let drawImage = UIGraphicsGetImageFromCurrentImageContext()
+            
+            if let drawImage = drawImage {
+                self?.output.mapSnapshot.accept([drawImage])
+            }
         }
         
     }
