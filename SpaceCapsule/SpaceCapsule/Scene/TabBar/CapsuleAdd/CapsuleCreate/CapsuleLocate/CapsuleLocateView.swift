@@ -32,10 +32,7 @@ final class CapsuleLocateView: UIView, BaseView {
 
     let titleLabel = ThemeLabel(text: "캡슐 위치 선택", size: FrameResource.fontSize120, color: .themeBlack)
 
-    let locateMap: MKMapView = {
-        let mapView = MKMapView()
-        return mapView
-    }()
+    let locateMap = CustomMapView()
 
     let cursor: UIImageView = {
         let cursor = UIImageView(image: UIImage(systemName: "plus"))

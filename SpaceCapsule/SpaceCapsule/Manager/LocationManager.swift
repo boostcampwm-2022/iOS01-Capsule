@@ -9,19 +9,28 @@ import CoreLocation
 import Foundation
 import RxSwift
 
-struct Address {
-    let full: String
-    let simple: String
-}
-
 final class LocationManager {
     static let shared = LocationManager()
 
     private init() {}
 
+    let core: CLLocationManager = {
+        let manager = CLLocationManager()
+        manager.desiredAccuracy = kCLLocationAccuracyBest
+        manager.distanceFilter = 5
+        manager.requestWhenInUseAuthorization()
+
+        return manager
+    }()
+
+    var coordinate: CLLocationCoordinate2D? {
+        core.location?.coordinate
+    }
+
     private let geocoder = CLGeocoder()
     private let locale = Locale(identifier: "ko_KR")
 
+    // 좌표 -> 주소
     func reverseGeocode(with point: GeoPoint) -> Observable<Address> {
         let location = CLLocation(latitude: point.latitude, longitude: point.longitude)
 
@@ -55,5 +64,26 @@ final class LocationManager {
 
             return Disposables.create {}
         }
+    }
+
+    // 위치 권한 상태 확인
+    @discardableResult
+    func checkAuthorization(status: CLAuthorizationStatus) -> Bool {
+        switch status {
+        case .authorizedAlways, .authorizedWhenInUse:
+            core.startUpdatingLocation()
+            return true
+
+        case .restricted, .notDetermined:
+            core.requestWhenInUseAuthorization()
+
+        case .denied:
+            core.requestWhenInUseAuthorization()
+
+        @unknown default:
+            return false
+        }
+
+        return false
     }
 }

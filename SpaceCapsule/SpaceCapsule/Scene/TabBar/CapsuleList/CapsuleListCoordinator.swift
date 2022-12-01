@@ -7,6 +7,7 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 
 final class CapsuleListCoordinator: Coordinator {
     var parent: Coordinator?
@@ -14,7 +15,7 @@ final class CapsuleListCoordinator: Coordinator {
     var navigationController: CustomNavigationController?
 
     var disposeBag = DisposeBag()
-    var sortPolicyObserver = PublishSubject<SortPolicy>()
+    var sortPolicyObserver = BehaviorRelay<SortPolicy>(value: .nearest)
     
     init() {
         navigationController = .init()
@@ -27,16 +28,16 @@ final class CapsuleListCoordinator: Coordinator {
         capsuleListViewModel.coordinator = self
         capsuleListViewController.viewModel = capsuleListViewModel
         capsuleListViewModel.input.sortPolicy = sortPolicyObserver
-        capsuleListViewController.viewModel?.input.sortPolicy.onNext(.nearest)
+        capsuleListViewController.viewModel?.input.sortPolicy = sortPolicyObserver
         
         navigationController?.setViewControllers([capsuleListViewController], animated: true)
         navigationController?.navigationBar.topItem?.title = "목록"
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.themeFont(ofSize: FrameResource.fontSize120) as Any]
     }
     
-    func showCapsuleOpen() {
+    func showCapsuleOpen(capsuleCellModel: CapsuleCellModel) {
         let capsuleOpenCoordinator = CapsuleOpenCoordinator(navigationController: navigationController)
-        
+        capsuleOpenCoordinator.capsuleCellModel = capsuleCellModel
         capsuleOpenCoordinator.parent = self
         capsuleOpenCoordinator.start()
         

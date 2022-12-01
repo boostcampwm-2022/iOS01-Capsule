@@ -36,7 +36,7 @@ extension KingReceiverWrapper where Base: UIImageView {
                     base.image = placeholder
                     return
                 }
-                
+
                 if resizing {
                     base.image = UIImage.resize(data: data, to: base.frame.size, scale: scale)
                 } else {

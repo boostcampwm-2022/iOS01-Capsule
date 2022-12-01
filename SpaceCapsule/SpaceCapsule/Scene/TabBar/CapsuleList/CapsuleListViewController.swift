@@ -13,9 +13,10 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
     var disposeBag = DisposeBag()
     var viewModel: CapsuleListViewModel?
     let capsuleListView = CapsuleListView()
+    let refreshControl = UIRefreshControl()
     
-    private var dataSource: UICollectionViewDiffableDataSource<Int, CapsuleCellModel>?
-    private var snapshot = NSDiffableDataSourceSnapshot<Int, CapsuleCellModel>()
+    private var dataSource: UICollectionViewDiffableDataSource<Int, ListCapsuleCellModel>?
+    private var snapshot = NSDiffableDataSourceSnapshot<Int, ListCapsuleCellModel>()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -30,46 +31,72 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
         addSortBarButton()
         configureCollectionView()
         bind()
-        viewModel?.fetchCapsules()
-        viewModel?.input.sortPolicy.onNext(.nearest)
+        bindViewModel()
+        viewModel?.fetchCapsuleList()
     }
     
     func bind() {
         guard let viewModel else {
             return
         }
-        viewModel.input.capsuleCellModels
-            .withUnretained(self)
-            .bind { weakSelf, capsuleCellModels in
-                weakSelf.applySnapshot(capsuleCellModels: capsuleCellModels)
-            }
-            .disposed(by: disposeBag)
-        
-        viewModel.input.sortPolicy
-            .withLatestFrom(viewModel.input.capsuleCellModels, resultSelector: { sortPolicy, capsuleCellModels in
-                self.viewModel?.sort(capsuleCellModels: capsuleCellModels, by: sortPolicy)
+        capsuleListView.collectionView.rx.itemSelected
+            .withLatestFrom(viewModel.input.capsuleCellModels, resultSelector: { indexPath, capsuleCellModels in
+                viewModel.coordinator?.showCapsuleOpen(capsuleCellModel: capsuleCellModels[indexPath.row])
             })
             .bind(onNext: {})
-            .disposed(by: disposeBag)
-        
-        capsuleListView.collectionView.rx.itemSelected
-            .withUnretained(self)
-            .bind { _, indexPath in
-                // TODO: 캡슐 오픈 화면 연동
-            }
             .disposed(by: disposeBag)
         
         capsuleListView.sortBarButtonItem.rx.tap
             .withLatestFrom(viewModel.input.sortPolicy)
             .withUnretained(self)
-            .bind { weakSelf, sortPolicy in
-                weakSelf.viewModel?.coordinator?.showSortPolicySelection(sortPolicy: sortPolicy)
+            .bind { owner, sortPolicy in
+                owner.viewModel?.coordinator?.showSortPolicySelection(sortPolicy: sortPolicy)
             }
             .disposed(by: disposeBag)
         
+        refreshControl.rx.controlEvent(.valueChanged)
+            .withUnretained(self)
+            .bind(onNext: { owner, _ in
+                owner.viewModel?.fetchCapsuleList()
+            })
+            .disposed(by: disposeBag)
     }
     
-    private func applySnapshot(capsuleCellModels: [CapsuleCellModel]) {
+    private func bindViewModel() {
+        guard let viewModel else {
+            return
+        }
+        viewModel.input.capsuleCellModels
+            .withUnretained(self)
+            .bind { owner, capsuleCellModels in
+                owner.applySnapshot(capsuleCellModels: capsuleCellModels)
+                owner.viewModel?.input.refreshLoading.accept(false)
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.input.sortPolicy
+            .withUnretained(self)
+            .bind { owner, sortPolicy in
+                owner.applyBarButton(sortPolicy: sortPolicy)
+                if let capsuleCellModels = owner.viewModel?.input.capsuleCellModels.value {
+                    owner.viewModel?.sort(capsuleCellModels: capsuleCellModels, by: sortPolicy)
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.input.refreshLoading
+            .withUnretained(self)
+            .bind { owner, isRefreshLoading in
+                if isRefreshLoading {
+                    owner.refreshControl.rx.isRefreshing.onNext(isRefreshLoading)
+                } else {
+                    owner.refreshControl.endRefreshing()
+                }
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    private func applySnapshot(capsuleCellModels: [ListCapsuleCellModel]) {
         snapshot.deleteAllItems()
         snapshot.appendSections([0])
         snapshot.appendItems(capsuleCellModels, toSection: 0)
@@ -81,21 +108,28 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
         sortBarButton.customView?.isUserInteractionEnabled = true
         navigationItem.rightBarButtonItem = sortBarButton
     }
+    
+    private func applyBarButton(sortPolicy: SortPolicy) {
+        if let barItem = self.navigationItem.rightBarButtonItem,
+           let button = barItem.customView as? UIButton {
+            button.setTitle(sortPolicy.description, for: .normal)
+        }
+    }
 }
 
 extension CapsuleListViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     private func configureCollectionView() {
-        dataSource = UICollectionViewDiffableDataSource<Int, CapsuleCellModel>(collectionView: capsuleListView.collectionView, cellProvider: { collectionView, indexPath, capsuleCellModel in
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CapsuleCell.cellIdentifier, for: indexPath) as? CapsuleCell
+        dataSource = UICollectionViewDiffableDataSource<Int, ListCapsuleCellModel>(collectionView: capsuleListView.collectionView, cellProvider: { collectionView, indexPath, capsuleCellModel in
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ListCapsuleCell.cellIdentifier, for: indexPath) as? ListCapsuleCell
             cell?.configure(capsuleCellModel: capsuleCellModel)
             return cell
         })
         capsuleListView.collectionView.delegate = self
-        capsuleListView.collectionView.dataSource = dataSource
+        capsuleListView.collectionView.refreshControl = refreshControl
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewlayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: FrameResource.capsuleCellWidth, height: FrameResource.capsuleCellHeight + FrameResource.bottomPadding)
+        return CGSize(width: FrameResource.listCapsuleCellWidth, height: FrameResource.listCapsuleCellHeight + FrameResource.bottomPadding)
     }
     
 }

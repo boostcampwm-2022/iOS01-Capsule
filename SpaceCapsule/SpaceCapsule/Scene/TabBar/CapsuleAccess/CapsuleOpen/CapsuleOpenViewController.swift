@@ -18,7 +18,10 @@ final class CapsuleOpenViewController: UIViewController, BaseViewController {
         super.viewDidLoad()
         view = capsuleOpenView
         bind()
-        viewModel?.output.isOpenable.onNext(true)
+        if let capsuleCellModel = viewModel?.capsuleCellModel {
+            viewModel?.input.capsuleCellModel.onNext(capsuleCellModel)
+        }
+        viewModel?.output.isOpenable.onNext(false)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -42,35 +45,39 @@ final class CapsuleOpenViewController: UIViewController, BaseViewController {
             }
             .disposed(by: disposeBag)
         
+        viewModel.input.capsuleCellModel
+            .withUnretained(self)
+            .bind { owner, capsuleCellModel in
+                owner.capsuleOpenView.configure(capsuleCellModel: capsuleCellModel)
+            }.disposed(by: disposeBag)
+        
         viewModel.input.openButtonTapped
             .withLatestFrom(viewModel.output.isOpenable)
             .withUnretained(self)
-            .bind { weakSelf, isOpenable in
+            .bind { owner, isOpenable in
                 if isOpenable {
-                    // 애니메이션 적용과
-                    // 진동
-                    weakSelf.capsuleOpenView.shakeAnimate()
-                    weakSelf.moveToCapsuleDetail()
+                    owner.capsuleOpenView.shakeAnimate()
+                    owner.moveToCapsuleDetail()
                 } else {
-                    weakSelf.showAlert()
+                    owner.showAlert()
                 }
             }
             .disposed(by: disposeBag)
         
         viewModel.output.isOpenable
             .subscribe(on: MainScheduler.instance)
-            .withUnretained(self)
-            .subscribe(onNext: { weakSelf, isOpenable in
+            .withLatestFrom(viewModel.input.capsuleCellModel, resultSelector: { isOpenable, capsuleCellModel in
                 if isOpenable == false {
-                    weakSelf.capsuleOpenView.applyUnOpenableEffect()
+                    self.capsuleOpenView.applyUnOpenableEffect(capsuleCellModel: capsuleCellModel)
                 }
             })
+            .bind(onNext: {})
             .disposed(by: disposeBag)
     
     }
     
     private func moveToCapsuleDetail() {
-        print("move to CapsuleDetail 화면")
+        // TODO: 상세화면 이동
         // viewModel?.coordinator?.moveToCapsuleDetail()
     }
     
