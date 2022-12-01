@@ -34,15 +34,15 @@ final class CapsuleListViewModel: BaseViewModel {
             .subscribe(
             onNext: { owner, capsuleList in
                 let capsuleCellModels = capsuleList.map { capsule in
-                    return CapsuleCellModel(uuid: capsule.uuid,
-                                            thumbnailImageURL: capsule.images.first,
-                                            address: capsule.simpleAddress,
-                                            closedDate: capsule.closedDate,
-                                            memoryDate: capsule.memoryDate,
-                                            coordinate: CLLocationCoordinate2D(
-                                                latitude: capsule.geopoint.latitude,
-                                                longitude: capsule.geopoint.longitude
-                                            )
+                    return ListCapsuleCellModel(uuid: capsule.uuid,
+                                                thumbnailImageURL: capsule.images.first,
+                                                address: capsule.simpleAddress,
+                                                closedDate: capsule.closedDate,
+                                                memoryDate: capsule.memoryDate,
+                                                coordinate: CLLocationCoordinate2D(
+                                                    latitude: capsule.geopoint.latitude,
+                                                    longitude: capsule.geopoint.longitude
+                                                )
                     )
                 }
                 owner.sort(capsuleCellModels: capsuleCellModels, by: owner.input.sortPolicy.value)
@@ -55,7 +55,7 @@ final class CapsuleListViewModel: BaseViewModel {
         
     }
     
-    func sort(capsuleCellModels: [CapsuleCellModel], by sortPolicy: SortPolicy) {
+    func sort(capsuleCellModels: [ListCapsuleCellModel], by sortPolicy: SortPolicy) {
         var models = capsuleCellModels
         switch sortPolicy {
         case .nearest:

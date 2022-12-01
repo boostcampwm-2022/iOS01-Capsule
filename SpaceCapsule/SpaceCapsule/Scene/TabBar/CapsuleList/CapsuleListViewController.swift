@@ -15,8 +15,8 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
     let capsuleListView = CapsuleListView()
     let refreshControl = UIRefreshControl()
     
-    private var dataSource: UICollectionViewDiffableDataSource<Int, CapsuleCellModel>?
-    private var snapshot = NSDiffableDataSourceSnapshot<Int, CapsuleCellModel>()
+    private var dataSource: UICollectionViewDiffableDataSource<Int, ListCapsuleCellModel>?
+    private var snapshot = NSDiffableDataSourceSnapshot<Int, ListCapsuleCellModel>()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -96,7 +96,7 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
             .disposed(by: disposeBag)
     }
     
-    private func applySnapshot(capsuleCellModels: [CapsuleCellModel]) {
+    private func applySnapshot(capsuleCellModels: [ListCapsuleCellModel]) {
         snapshot.deleteAllItems()
         snapshot.appendSections([0])
         snapshot.appendItems(capsuleCellModels, toSection: 0)
@@ -119,8 +119,8 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
 
 extension CapsuleListViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     private func configureCollectionView() {
-        dataSource = UICollectionViewDiffableDataSource<Int, CapsuleCellModel>(collectionView: capsuleListView.collectionView, cellProvider: { collectionView, indexPath, capsuleCellModel in
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CapsuleCell.cellIdentifier, for: indexPath) as? CapsuleCell
+        dataSource = UICollectionViewDiffableDataSource<Int, ListCapsuleCellModel>(collectionView: capsuleListView.collectionView, cellProvider: { collectionView, indexPath, capsuleCellModel in
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ListCapsuleCell.cellIdentifier, for: indexPath) as? ListCapsuleCell
             cell?.configure(capsuleCellModel: capsuleCellModel)
             return cell
         })
@@ -129,7 +129,7 @@ extension CapsuleListViewController: UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewlayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: FrameResource.capsuleCellWidth, height: FrameResource.capsuleCellHeight + FrameResource.bottomPadding)
+        return CGSize(width: FrameResource.listCapsuleCellWidth, height: FrameResource.listCapsuleCellHeight + FrameResource.bottomPadding)
     }
     
 }
