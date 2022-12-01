@@ -9,15 +9,6 @@ import UIKit
 
 // 키보드 높이에 맞게 scroll 가능한
 final class CustomScrollView: UIScrollView {
-//    override init(frame: CGRect) {
-//        super.init(frame: frame)
-//
-//    }
-//
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
-
     func addKeyboardNotification() {
         NotificationCenter.default.addObserver(
             self,

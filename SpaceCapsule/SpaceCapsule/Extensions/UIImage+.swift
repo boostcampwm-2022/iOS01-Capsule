@@ -30,6 +30,7 @@ extension UIImage {
     static let lock = UIImage(systemName: "lock.fill")
     static let triangleDown = UIImage(systemName: "arrowtriangle.down.fill")
     static let locationFill = UIImage(systemName: "location.fill")
+    static let refresh = UIImage(systemName: "arrow.clockwise")
 }
 
 extension UIImage {

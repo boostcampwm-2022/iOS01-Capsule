@@ -9,9 +9,7 @@ import MapKit
 import SnapKit
 import UIKit
 
-final class CustomMapView: MKMapView {
-    let image = UIImageView(image: .locationFill)
-
+class CustomMapView: MKMapView {
     lazy var currentLocationButton: MKUserTrackingButton = {
         let button = MKUserTrackingButton(mapView: self)
         button.backgroundColor = .white
@@ -24,10 +22,9 @@ final class CustomMapView: MKMapView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
         configure()
         limitMapBoundary()
-
         addSubViews()
         makeConstraints()
     }
@@ -36,7 +33,7 @@ final class CustomMapView: MKMapView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     private func configure() {
         mapType = .standard
         showsUserLocation = true
@@ -44,13 +41,12 @@ final class CustomMapView: MKMapView {
     }
 
     private func addSubViews() {
-        image.tintColor = .red
         addSubview(currentLocationButton)
     }
 
     private func makeConstraints() {
         currentLocationButton.snp.makeConstraints {
-            $0.trailing.equalToSuperview().offset(-FrameResource.horizontalPadding)
+            $0.leading.equalToSuperview().offset(FrameResource.horizontalPadding)
             $0.bottom.equalToSuperview().offset(-FrameResource.bottomPadding)
             $0.width.height.equalTo(FrameResource.userTrackingButtonSize)
         }

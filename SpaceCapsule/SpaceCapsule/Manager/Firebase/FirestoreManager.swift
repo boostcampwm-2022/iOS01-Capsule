@@ -110,7 +110,6 @@ class FirestoreManager {
                         var capsuleList: [Capsule] = []
 
                         for snapshot in snapshots {
-                            print(snapshot.data())
                             guard let capsule = self.dictionaryToCapsule(dictionary: snapshot.data()) else {
                                 print("Error Capsule: \(FBAuthError.decodeError)")
                                 emitter.onError(FBAuthError.decodeError)
@@ -125,6 +124,33 @@ class FirestoreManager {
                 }
             return Disposables.create { }
         }
+    }
+
+    func fetchCapsules(completion: @escaping ([Capsule]?) -> Void) {
+        guard let uid = FirebaseAuthManager.shared.currentUser?.uid else {
+            return
+        }
+
+        database
+            .collection("capsules")
+            .whereField("userId", isEqualTo: uid)
+            .getDocuments { query, error in
+                guard error == nil else {
+                    completion(nil)
+                    return
+                }
+
+                guard let documents = query?.documents else {
+                    completion(nil)
+                    return
+                }
+
+                let capsules = documents.compactMap {
+                    self.dictionaryToCapsule(dictionary: $0.data())
+                }
+                
+                completion(capsules)
+            }
     }
 
     func deleteUserCapsules() {

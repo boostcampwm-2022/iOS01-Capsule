@@ -9,10 +9,6 @@ import CoreLocation
 import Foundation
 import RxSwift
 
-struct Address {
-    let full: String
-    let simple: String
-}
 
 final class LocationManager {
     static let shared = LocationManager()
@@ -68,6 +64,7 @@ final class LocationManager {
     }
 
     // 위치 권한 상태 확인
+    @discardableResult
     func checkAuthorization(status: CLAuthorizationStatus) -> Bool {
         switch status {
         case .authorizedAlways, .authorizedWhenInUse:
