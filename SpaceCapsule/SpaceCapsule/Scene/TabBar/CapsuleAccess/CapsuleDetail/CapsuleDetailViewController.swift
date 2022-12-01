@@ -19,6 +19,11 @@ final class CapsuleDetailViewController: UIViewController, BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        mainView.imageCollectionView.applyDataSource()
+        viewModel?.addImage()
+    
+        bind()
     }
     
     override func viewDidLayoutSubviews() {
@@ -34,7 +39,13 @@ final class CapsuleDetailViewController: UIViewController, BaseViewController {
     }
     
     func bind() {
-        
+        viewModel?.input.imageData
+            .withUnretained(self)
+            .subscribe(onNext: { owner, items in
+                owner.mainView.imageCollectionView
+                    .applySnapshot(items: items)
+            })
+            .disposed(by: disposeBag)
     }
     
     private func makeConstrinats() {

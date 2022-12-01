@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 final class DetailImageCell: UICollectionViewCell {
-    private let imageView: UIImageView = {
+    let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.image = UIImage.logoWithBG

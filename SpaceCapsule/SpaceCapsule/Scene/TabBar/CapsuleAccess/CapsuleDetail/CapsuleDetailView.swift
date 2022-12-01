@@ -17,7 +17,7 @@ final class CapsuleDetailView: UIView, BaseView {
         return stackView
     }()
     
-    private let imageCollectionView = DetailImageCollectionView(frame: .zero)
+    let imageCollectionView = DetailImageCollectionView(frame: .zero)
     
     private let contentStackView: UIStackView = {
         let stackView = UIStackView()
@@ -55,7 +55,6 @@ final class CapsuleDetailView: UIView, BaseView {
         super.init(frame: frame)
         
         imageCollectionView.delegate = self
-        imageCollectionView.dataSource = self
 
         configure()
         addSubViews()
@@ -133,7 +132,7 @@ final class CapsuleDetailView: UIView, BaseView {
             }
             
             if error != nil {
-                print(error)
+                print("error")
                 return
             }
             
@@ -144,12 +143,8 @@ final class CapsuleDetailView: UIView, BaseView {
     }
 }
 
-extension CapsuleDetailView: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        5
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+extension CapsuleDetailView: UICollectionViewDelegate {
+    private func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         return collectionView.dequeueReusableCell(withReuseIdentifier: DetailImageCell.identifier, for: indexPath)
     }
 }
