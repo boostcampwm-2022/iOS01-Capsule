@@ -23,7 +23,7 @@ final class CapsuleListView: UIView, BaseView {
 
     let collectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
-        collectionView.register(CapsuleCell.self, forCellWithReuseIdentifier: CapsuleCell.cellIdentifier)
+        collectionView.register(ListCapsuleCell.self, forCellWithReuseIdentifier: ListCapsuleCell.cellIdentifier)
         collectionView.showsVerticalScrollIndicator = false
         return collectionView
     }()
@@ -52,9 +52,9 @@ final class CapsuleListView: UIView, BaseView {
         collectionViewFlowLayout.minimumLineSpacing = FrameResource.verticalPadding
         collectionViewFlowLayout.sectionInset = UIEdgeInsets(
             top: FrameResource.verticalPadding,
-            left: FrameResource.capsuleHorizontalInset,
+            left: FrameResource.listCapsuleHorizontalInset,
             bottom: 0,
-            right: FrameResource.capsuleHorizontalInset)
+            right: FrameResource.listCapsuleHorizontalInset)
         collectionView.collectionViewLayout = collectionViewFlowLayout
     }
     

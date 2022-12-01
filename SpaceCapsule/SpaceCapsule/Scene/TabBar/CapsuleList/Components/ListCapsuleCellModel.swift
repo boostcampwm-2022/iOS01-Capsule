@@ -8,7 +8,7 @@
 import UIKit
 import CoreLocation
 
-struct CapsuleCellModel: Hashable, Equatable {
+struct ListCapsuleCellModel: Hashable, Equatable {
     let uuid: String
     let thumbnailImageURL: String?
     let address: String

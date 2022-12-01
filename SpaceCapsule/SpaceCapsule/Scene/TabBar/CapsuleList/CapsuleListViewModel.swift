@@ -17,7 +17,7 @@ final class CapsuleListViewModel: BaseViewModel {
     var input = Input()
 
     struct Input {
-        var capsuleCellModels = PublishSubject<[CapsuleCellModel]>()
+        var capsuleCellModels = PublishSubject<[ListCapsuleCellModel]>()
         var sortPolicy = PublishSubject<SortPolicy>()
     }
 
@@ -37,15 +37,15 @@ final class CapsuleListViewModel: BaseViewModel {
             .subscribe(
             onNext: { owner, capsuleList in
                 let capsuleCellModels = capsuleList.map { capsule in
-                    return CapsuleCellModel(uuid: capsule.uuid,
-                                            thumbnailImageURL: capsule.images.first,
-                                            address: capsule.simpleAddress,
-                                            closedDate: capsule.closedDate,
-                                            memoryDate: capsule.memoryDate,
-                                            coordinate: CLLocationCoordinate2D(
-                                                latitude: capsule.geopoint.latitude,
-                                                longitude: capsule.geopoint.longitude
-                                            )
+                    return ListCapsuleCellModel(uuid: capsule.uuid,
+                                                thumbnailImageURL: capsule.images.first,
+                                                address: capsule.simpleAddress,
+                                                closedDate: capsule.closedDate,
+                                                memoryDate: capsule.memoryDate,
+                                                coordinate: CLLocationCoordinate2D(
+                                                    latitude: capsule.geopoint.latitude,
+                                                    longitude: capsule.geopoint.longitude
+                                                )
                     )
                 }
                 owner.input.capsuleCellModels.onNext(capsuleCellModels)
@@ -59,7 +59,7 @@ final class CapsuleListViewModel: BaseViewModel {
         
     }
     
-    func sort(capsuleCellModels: [CapsuleCellModel], by sortPolicy: SortPolicy) {
+    func sort(capsuleCellModels: [ListCapsuleCellModel], by sortPolicy: SortPolicy) {
         var models = capsuleCellModels
         switch sortPolicy {
         case .nearest:
