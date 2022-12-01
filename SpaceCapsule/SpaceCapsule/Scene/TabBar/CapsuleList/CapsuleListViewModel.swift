@@ -17,18 +17,19 @@ final class CapsuleListViewModel: BaseViewModel {
     var input = Input()
 
     struct Input {
+        var capsules: BehaviorRelay<[Capsule]> = AppDataManager.shared.capsules
         var capsuleCellModels = PublishSubject<[CapsuleCellModel]>()
-        var sortPolicy = PublishSubject<SortPolicy>()
+        var sortPolicy = BehaviorRelay<SortPolicy>(value: .nearest)
         var refreshLoading = PublishRelay<Bool>()
     }
 
-    init() {}
+    init() {
+        bind()
+    }
+    private func bind() {}
     
     func fetchCapsuleList() {
-        guard let currentUser = FirebaseAuthManager.shared.currentUser else {
-            return
-        }
-        FirestoreManager.shared.fetchCapsuleList(of: currentUser.uid)
+        input.capsules
             .withUnretained(self)
             .subscribe(
             onNext: { owner, capsuleList in
@@ -44,8 +45,7 @@ final class CapsuleListViewModel: BaseViewModel {
                                             )
                     )
                 }
-                owner.input.capsuleCellModels.onNext(capsuleCellModels)
-                owner.input.sortPolicy.onNext(.nearest)
+                owner.sort(capsuleCellModels: capsuleCellModels, by: owner.input.sortPolicy.value)
             },
             onError: { error in
                 print(error.localizedDescription)

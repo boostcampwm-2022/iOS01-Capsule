@@ -58,7 +58,6 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
             .withUnretained(self)
             .bind(onNext: { owner, _ in
                 owner.viewModel?.fetchCapsuleList()
-                owner.viewModel?.input.refreshLoading.accept(true)
             })
             .disposed(by: disposeBag)
     }
@@ -86,7 +85,11 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
         viewModel.input.refreshLoading
             .withUnretained(self)
             .bind { owner, isRefreshLoading in
-                owner.refreshControl.rx.isRefreshing.onNext(isRefreshLoading)
+                if isRefreshLoading {
+                    owner.refreshControl.rx.isRefreshing.onNext(isRefreshLoading)
+                } else {
+                    owner.refreshControl.endRefreshing()
+                }
             }
             .disposed(by: disposeBag)
     }
