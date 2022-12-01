@@ -36,6 +36,14 @@ class CapsuleOpenCoordinator: Coordinator {
         }
     }
     
+    func moveToCapsuleDetail() {
+        guard let parent = parent as? CapsuleAccessCoordinator else {
+            return
+        }
+        
+        parent.moveToCapsuleDetail()
+    }
+    
 //    func moveToCapsuleDetail() {
 //        let capsuleDetailCoordinator = CapsuleDetailCoordinator()
 //        capsuleDetailCoordinator.parent = self

@@ -33,8 +33,16 @@ class CapsuleOpenViewModel: BaseViewModel {
 
     private func bind() {
         input.popViewController.asObservable()
-            .subscribe(onNext: { [weak self] in
-                self?.coordinator?.finish()
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.coordinator?.finish()
+            })
+            .disposed(by: disposeBag)
+        
+        input.openButtonTapped
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.coordinator?.moveToCapsuleDetail()
             })
             .disposed(by: disposeBag)
     }

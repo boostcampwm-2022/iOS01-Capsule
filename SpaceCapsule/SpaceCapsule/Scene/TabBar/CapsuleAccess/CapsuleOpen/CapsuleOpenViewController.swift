@@ -39,6 +39,7 @@ final class CapsuleOpenViewController: UIViewController, BaseViewController {
             // TODO: 예외처리
             return
         }
+        
         capsuleOpenView.openButton.rx.tap
             .bind {
                 viewModel.input.openButtonTapped.onNext(())

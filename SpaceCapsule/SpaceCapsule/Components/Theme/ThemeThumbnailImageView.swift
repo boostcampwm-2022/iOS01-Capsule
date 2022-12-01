@@ -16,7 +16,8 @@ final class ThemeThumbnailImageView: UIView {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = width / 2
         imageView.clipsToBounds = true
-        imageView.image = UIImage.logoWithBG
+        imageView.contentMode = .scaleAspectFill
+
         return imageView
     }()
     
@@ -37,7 +38,7 @@ final class ThemeThumbnailImageView: UIView {
     // MARK: - Methods
     
     func configure() {
-        backgroundColor = .none
+        backgroundColor = .themeGray100
         layer.shadowOffset = FrameResource.capsuleCellShadowOffset
         layer.shadowRadius = FrameResource.capsuleCellShadowRadius
         layer.shadowOpacity = Float(FrameResource.capsuleCellShadowOpacity)

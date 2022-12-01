@@ -13,17 +13,23 @@ final class CapsuleDetailCoordinator: Coordinator {
     var children: [Coordinator] = []
     var navigationController: CustomNavigationController?
     
-    var disposeBag = DisposeBag()
-    
+    var capsuleUUID: String?
+
+    init(navigationController: CustomNavigationController?) {
+        self.navigationController = navigationController
+    }
+
     func start() {
         moveToCapsuleDetail()
     }
-    
+
     func moveToCapsuleDetail() {
         let capsuleDetailViewController = CapsuleDetailViewController()
         let capsuleDetailViewModel = CapsuleDetailViewModel()
-        
+
         capsuleDetailViewModel.coordinator = self
         capsuleDetailViewController.viewModel = capsuleDetailViewModel
+        
+        navigationController?.pushViewController(capsuleDetailViewController, animated: true)
     }
 }
