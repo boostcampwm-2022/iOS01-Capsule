@@ -25,24 +25,15 @@ final class AppDataManager {
     let capsules = BehaviorRelay<[Capsule]>(value: [])
 
     func fetchCapsules() {
-//        guard let uid = auth.currentUser?.uid else {
-//            return
-//        }
-
-//        firestore.fetchCapsuleList(of: uid)
-//            .withUnretained(self)
-//            .subscribe(onNext: { owner, capsules in
-//                print("capsule Fetched !!!!!!")
-//                owner.capsules.accept(capsules)
-//            })
-//            .disposed(by: disposeBag)
-
         firestore.fetchCapsules { data in
             guard let data else {
                 return
             }
-            print("hello")
             self.capsules.accept(data)
         }
+    }
+
+    func capsule(uuid: String) -> Capsule? {
+        return capsules.value.first(where: { $0.uuid == uuid })
     }
 }

@@ -11,33 +11,32 @@ import RxSwift
 
 class FirestoreManager {
     static let shared = FirestoreManager()
-    private let database = Firestore.firestore()
     private init() { }
 
-    var capsules: Observable<[Capsule]>?
+    private let database = Firestore.firestore()
 
     func fetchUserInfo(of uid: String) -> Observable<UserInfo> {
         return Observable.create { emitter in
-            self.database.collection("users").document(uid).getDocument { documentSnapshot, error in
-                if let error = error {
-                    print("Error getting document: \(error)")
-                    emitter.onError(error)
-                    return
-                } else {
-                    guard let snapshot = documentSnapshot?.data() else {
-                        print("Error Snapshot: \(FBAuthError.noSnapshot)")
-                        emitter.onError(FBAuthError.noSnapshot)
+            self.database
+                .collection("users")
+                .document(uid)
+                .getDocument { documentSnapshot, error in
+                    if let error = error {
+                        emitter.onError(error)
                         return
+                    } else {
+                        guard let snapshot = documentSnapshot?.data() else {
+                            emitter.onError(FBAuthError.noSnapshot)
+                            return
+                        }
+                        guard let userInfo = self.dictionaryToObject(type: UserInfo.self, dictionary: snapshot) else {
+                            emitter.onError(FBAuthError.decodeError)
+                            return
+                        }
+                        emitter.onNext(userInfo)
+                        emitter.onCompleted()
                     }
-                    guard let userInfo = self.dictionaryToObject(type: UserInfo.self, dictionary: snapshot) else {
-                        print("Error UserInfo: \(FBAuthError.decodeError)")
-                        emitter.onError(FBAuthError.decodeError)
-                        return
-                    }
-                    emitter.onNext(userInfo)
-                    emitter.onCompleted()
                 }
-            }
             return Disposables.create { }
         }
     }
@@ -97,12 +96,10 @@ class FirestoreManager {
                 .whereField("userId", isEqualTo: uid)
                 .getDocuments { querySnapshot, error in
                     if let error = error {
-                        print("Error Snapshot: \(error)")
                         emitter.onError(error)
                         return
                     } else {
                         guard let snapshots = querySnapshot?.documents else {
-                            print("Error Snapshot: \(FBAuthError.noSnapshot)")
                             emitter.onError(FBAuthError.noSnapshot)
                             return
                         }
@@ -111,7 +108,6 @@ class FirestoreManager {
 
                         for snapshot in snapshots {
                             guard let capsule = self.dictionaryToCapsule(dictionary: snapshot.data()) else {
-                                print("Error Capsule: \(FBAuthError.decodeError)")
                                 emitter.onError(FBAuthError.decodeError)
                                 return
                             }
@@ -148,7 +144,7 @@ class FirestoreManager {
                 let capsules = documents.compactMap {
                     self.dictionaryToCapsule(dictionary: $0.data())
                 }
-                
+
                 completion(capsules)
             }
     }

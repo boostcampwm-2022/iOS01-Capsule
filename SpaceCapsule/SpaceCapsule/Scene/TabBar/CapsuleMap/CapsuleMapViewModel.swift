@@ -38,8 +38,7 @@ final class CapsuleMapViewModel: BaseViewModel {
             .disposed(by: disposeBag)
 
         input.tapRefresh
-            .withUnretained(self)
-            .subscribe(onNext: { _, _ in
+            .subscribe(onNext: { _ in
                 AppDataManager.shared.fetchCapsules()
             })
             .disposed(by: disposeBag)

@@ -9,7 +9,6 @@ import CoreLocation
 import Foundation
 import RxSwift
 
-
 final class LocationManager {
     static let shared = LocationManager()
 
@@ -23,6 +22,10 @@ final class LocationManager {
 
         return manager
     }()
+
+    var coordinate: CLLocationCoordinate2D? {
+        core.location?.coordinate
+    }
 
     private let geocoder = CLGeocoder()
     private let locale = Locale(identifier: "ko_KR")
