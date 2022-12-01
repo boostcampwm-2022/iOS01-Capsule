@@ -53,9 +53,6 @@ final class CapsuleDetailView: UIView, BaseView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        imageCollectionView.delegate = self
-
         configure()
         addSubViews()
         makeConstraints()
@@ -140,11 +137,5 @@ final class CapsuleDetailView: UIView, BaseView {
                 self.mapView.image = snapshot.image
             }
         }
-    }
-}
-
-extension CapsuleDetailView: UICollectionViewDelegate {
-    private func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return collectionView.dequeueReusableCell(withReuseIdentifier: DetailImageCell.identifier, for: indexPath)
     }
 }
