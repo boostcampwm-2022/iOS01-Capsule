@@ -98,7 +98,6 @@ extension CapsuleListViewController: UICollectionViewDelegate, UICollectionViewD
             return cell
         })
         capsuleListView.collectionView.delegate = self
-        capsuleListView.collectionView.dataSource = dataSource
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewlayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
