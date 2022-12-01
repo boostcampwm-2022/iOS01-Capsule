@@ -43,17 +43,4 @@ class CapsuleOpenCoordinator: Coordinator {
         
         parent.moveToCapsuleDetail()
     }
-    
-//    func moveToCapsuleDetail() {
-//        let capsuleDetailCoordinator = CapsuleDetailCoordinator()
-//        capsuleDetailCoordinator.parent = self
-//        capsuleDetailCoordinator.start()
-//
-//        children.append(capsuleDetailCoordinator)
-//
-//        if let controller = capsuleDetailCoordinator.navigationController {
-//            controller.modalPresentationStyle = .fullScreen
-//            tabBarController.present(controller, animated: true)
-//        }
-//    }
 }

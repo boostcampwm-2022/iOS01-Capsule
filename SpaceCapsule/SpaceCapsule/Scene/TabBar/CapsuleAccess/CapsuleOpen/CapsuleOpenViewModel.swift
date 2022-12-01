@@ -9,7 +9,7 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-class CapsuleOpenViewModel: BaseViewModel {
+final class CapsuleOpenViewModel: BaseViewModel {
     var disposeBag = DisposeBag()
     var coordinator: CapsuleOpenCoordinator?
     var capsuleCellModel: ListCapsuleCellModel?

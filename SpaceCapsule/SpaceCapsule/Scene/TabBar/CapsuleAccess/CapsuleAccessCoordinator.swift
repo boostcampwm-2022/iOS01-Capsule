@@ -24,6 +24,7 @@ final class CapsuleAccessCoordinator: Coordinator {
 
     func moveToCapsuleOpen() {
         let capsuleOpenCoordinator = CapsuleOpenCoordinator(navigationController: navigationController)
+        capsuleOpenCoordinator.capsuleCellModel = capsuleCellModel
         capsuleOpenCoordinator.parent = self
         capsuleOpenCoordinator.start()
         
