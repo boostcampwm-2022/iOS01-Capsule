@@ -22,6 +22,7 @@ enum FrameResource {
     static let textFieldHeight: CGFloat = 40.0
     static let textViewHeight: CGFloat = 200.0
 
+    static let spacing50: CGFloat = 5.0
     static let spacing80: CGFloat = 8.0
     static let spacing200: CGFloat = 20.0
     static let spacing400: CGFloat = 40.0
@@ -71,5 +72,16 @@ enum FrameResource {
     static let sortPolicySelectionSheetHeight: CGFloat = 250.0
     static let sortPolicySelectionCellHeight: CGFloat = 40.0
     
+    static let detailImageViewHeight: CGFloat = 400
+    static let detailImageViewWidth: CGFloat = 300
+    
+    static let detailImageCollectionViewHeight: CGFloat = detailImageViewHeight + 15
+    
+    static let detailImageCellShadowOffset: CGSize = CGSize(width: 2, height: 2)
+    static let detailImageCellShadowRadius: CGFloat = 6.0
+    
+    static let detailContentHInset: CGFloat = 30.0
+    
+    static let detailMapHeight: CGFloat = 200.0
     static let userTrackingButtonSize: CGFloat = 50.0
 }
