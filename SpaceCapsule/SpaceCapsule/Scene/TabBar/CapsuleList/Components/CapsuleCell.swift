@@ -15,7 +15,7 @@ final class CapsuleCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = FrameResource.capsuleCellWidth / 2
         imageView.clipsToBounds = true
-        imageView.image = UIImage.logoWithBG
+        imageView.backgroundColor = .white
         return imageView
     }()
     
@@ -74,14 +74,8 @@ final class CapsuleCell: UICollectionViewCell {
     func configure(capsuleCellModel: CapsuleCellModel) {
         if let thumbnailURL = capsuleCellModel.thumbnailImageURL {
             thumbnailImageView.kr.setImage(with: thumbnailURL, scale: FrameResource.openableImageScale)
-        } else {
-            thumbnailImageView.image = .logoWithBG
         }
-        
         descriptionLabel.text = "\(capsuleCellModel.memoryDate.dateString)\n\(capsuleCellModel.address)에서"
-        thumbnailImageView.subviews.forEach {
-            $0.removeFromSuperview()
-        }
         if capsuleCellModel.isOpenable == false {
             applyUnOpenableEffect(closeDate: capsuleCellModel.closedDate.dateString)
         }
@@ -108,7 +102,7 @@ final class CapsuleCell: UICollectionViewCell {
     
     private func applyLockImage() {
         let lockImageView = UIImageView()
-        lockImageView.image = UIImage(systemName: "lock.fill")
+        lockImageView.image = .lock
         lockImageView.tintColor = .themeGray300
         thumbnailImageView.addSubview(lockImageView)
         

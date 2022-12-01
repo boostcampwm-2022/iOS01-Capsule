@@ -12,6 +12,7 @@ import RxSwift
 class CapsuleOpenViewModel: BaseViewModel {
     var disposeBag = DisposeBag()
     var coordinator: CapsuleOpenCoordinator?
+    var capsuleCellModel: CapsuleCellModel?
 
     var input = Input()
     var output = Output()
@@ -19,6 +20,7 @@ class CapsuleOpenViewModel: BaseViewModel {
     struct Input {
         var popViewController = PublishSubject<Void>()
         var openButtonTapped = PublishSubject<Void>()
+        var capsuleCellModel = PublishSubject<CapsuleCellModel>()
     }
     
     struct Output {
