@@ -105,7 +105,7 @@ final class CapsuleCell: UICollectionViewCell {
     
     private func applyLockImage() {
         let lockImageView = UIImageView()
-        lockImageView.image = UIImage(systemName: "lock.fill")
+        lockImageView.image = .lock
         lockImageView.tintColor = .themeGray300
         thumbnailImageView.addSubview(lockImageView)
         
