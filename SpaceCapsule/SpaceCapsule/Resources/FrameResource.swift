@@ -47,7 +47,7 @@ enum FrameResource {
     static let shadowRadius: CGFloat = 4
     static let shadowOpacity: Float = 0.25
     
-    static let openableImageScale: CGFloat = 1.0
+    static let openableImageScale: CGFloat = 2.0
     static let closedImageScale: CGFloat = 0.5
     static let closedIconSize: CGFloat = 50.0
     static let closedDateOffset: CGFloat = 10.0
@@ -63,6 +63,7 @@ enum FrameResource {
     static let capsuleCellShadowOffset: CGSize = CGSize(width: 4, height: 4)
     static let capsuleCellShadowRadius: CGFloat = 4.0
     static let capsuleCellShadowOpacity: CGFloat = 0.3
+    static let capsuleShakeWidth: CGFloat = 4.0
     
     static let sortPolicySelectionSheetHeight: CGFloat = 250.0
     static let sortPolicySelectionCellHeight: CGFloat = 40.0
