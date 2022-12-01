@@ -107,20 +107,7 @@ extension CapsuleLocateViewController: CLLocationManagerDelegate {
     }
 
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        switch status {
-        case .authorizedAlways, .authorizedWhenInUse:
-            print("GPS 권한 설정됨")
-            locationManager.startUpdatingLocation()
-            goToCurrentLocation()
-        case .restricted, .notDetermined:
-            print("GPS 권한 설정되지 않음")
-            locationManager.requestWhenInUseAuthorization()
-        case .denied:
-            print("GPS 권한 요청 거부됨")
-            locationManager.requestWhenInUseAuthorization()
-        default:
-            print("GPS: Default")
-        }
+        LocationManager.shared.checkAuthorization(status: status)
     }
 }
 

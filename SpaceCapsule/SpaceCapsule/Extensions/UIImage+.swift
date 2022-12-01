@@ -11,6 +11,9 @@ extension UIImage {
     static let logo = UIImage(named: "logo")
     static let logoWithBG = UIImage(named: "logoWithBG")
     static let logoWithText = UIImage(named: "logoWithText")
+    
+    static let openableCapsule = UIImage(named: "openableCapsule")
+    static let unopenableCapsule = UIImage(named: "unopenableCapsule")
 
     static let homeFill = UIImage(systemName: "house.fill")
     static let mapFill = UIImage(systemName: "map.fill")
@@ -27,6 +30,7 @@ extension UIImage {
     static let lock = UIImage(systemName: "lock.fill")
     static let triangleDown = UIImage(systemName: "arrowtriangle.down.fill")
     static let locationFill = UIImage(systemName: "location.fill")
+    static let refresh = UIImage(systemName: "arrow.clockwise")
 }
 
 extension UIImage {

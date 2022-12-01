@@ -5,8 +5,8 @@
 //  Created by 장재훈 on 2022/11/23.
 //
 
-import Foundation
 import FirebaseFirestore
+import Foundation
 
 protocol DocumentSerializable {
     init?(dictionary: [String: Any])
@@ -65,12 +65,19 @@ extension Capsule: DocumentSerializable {
             print("nsdict decode error")
             return nil
         }
-        
-        self.init(uuid: uuid, userId: userId, images: images, title: title,
-                  description: description, address: address, simpleAddress: simpleAddress,
-                  geopoint: GeoPoint(latitude: latitude, longitude: longitude), memoryDate: memoryDate.dateValue(),
-                  closedDate: closedDate.dateValue(), openCount: openCount
+
+        self.init(
+            uuid: uuid,
+            userId: userId,
+            images: images,
+            title: title,
+            description: description,
+            address: address,
+            simpleAddress: simpleAddress,
+            geopoint: GeoPoint(latitude: latitude, longitude: longitude),
+            memoryDate: memoryDate.dateValue(),
+            closedDate: closedDate.dateValue(),
+            openCount: openCount
         )
     }
-
 }
