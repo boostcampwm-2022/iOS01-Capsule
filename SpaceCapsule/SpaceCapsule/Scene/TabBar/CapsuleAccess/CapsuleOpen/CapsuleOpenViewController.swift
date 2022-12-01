@@ -54,14 +54,12 @@ final class CapsuleOpenViewController: UIViewController, BaseViewController {
         viewModel.input.openButtonTapped
             .withLatestFrom(viewModel.output.isOpenable)
             .withUnretained(self)
-            .bind { weakSelf, isOpenable in
+            .bind { owner, isOpenable in
                 if isOpenable {
-                    // 애니메이션 적용과
-                    // 진동
-                    weakSelf.capsuleOpenView.shakeAnimate()
-                    weakSelf.moveToCapsuleDetail()
+                    owner.capsuleOpenView.shakeAnimate()
+                    owner.moveToCapsuleDetail()
                 } else {
-                    weakSelf.showAlert()
+                    owner.showAlert()
                 }
             }
             .disposed(by: disposeBag)
@@ -79,7 +77,7 @@ final class CapsuleOpenViewController: UIViewController, BaseViewController {
     }
     
     private func moveToCapsuleDetail() {
-        print("move to CapsuleDetail 화면")
+        // TODO: 상세화면 이동
         // viewModel?.coordinator?.moveToCapsuleDetail()
     }
     

@@ -116,8 +116,6 @@ final class CapsuleOpenView: UIView, BaseView {
         }
     }
     
-    // TODO: Capsule 인자로 받아서 configure하기
-    
     func applyUnOpenableEffect(capsuleCellModel: CapsuleCellModel) {
         openButton.backgroundColor = .themeGray200
         applyBlurEffect()
@@ -166,12 +164,15 @@ final class CapsuleOpenView: UIView, BaseView {
     }
     
     func animate() {
-        UIView.animate(withDuration: 1.0, animations: {
+        UIView.animate(withDuration: AnimationResource.capsuleMoveDuration, animations: {
             self.layoutIfNeeded()
-            self.thumbnailImageContainerView.center.y = (self.frame.height * (2 / 5))
+            self.thumbnailImageContainerView.center.y = (self.frame.height * AnimationResource.destinationHeightRatio)
         }, completion: { _ in
-            UIView.animate(withDuration: 1, delay: 0, options: [.repeat, .autoreverse]) {
-                self.thumbnailImageContainerView.transform = .init(translationX: 0, y: 20)
+            UIView.animate(withDuration: AnimationResource.capsuleMoveDuration,
+                           delay: 0,
+                           options: [.repeat, .autoreverse]
+            ) {
+                self.thumbnailImageContainerView.transform = .init(translationX: 0, y: AnimationResource.capsuleMoveHeight)
             }
         })
     }
@@ -180,15 +181,15 @@ final class CapsuleOpenView: UIView, BaseView {
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
         let keyPath = "shake"
         let animation = CABasicAnimation(keyPath: keyPath)
-        animation.duration = 0.05
-        animation.repeatCount = 5
+        animation.duration = AnimationResource.capsuleShakeDuration
+        animation.repeatCount = AnimationResource.capsuleShakeRepeat
         animation.autoreverses = true
         animation.fromValue = CGPoint(
-            x: thumbnailImageContainerView.center.x - FrameResource.capsuleShakeWidth,
+            x: thumbnailImageContainerView.center.x - AnimationResource.capsuleShakeWidth,
             y: thumbnailImageContainerView.center.y
         )
         animation.toValue = CGPoint(
-            x: thumbnailImageContainerView.center.x + FrameResource.capsuleShakeWidth,
+            x: thumbnailImageContainerView.center.x + AnimationResource.capsuleShakeWidth,
             y: thumbnailImageContainerView.center.y
         )
         thumbnailImageContainerView.layer.add(animation, forKey: keyPath)

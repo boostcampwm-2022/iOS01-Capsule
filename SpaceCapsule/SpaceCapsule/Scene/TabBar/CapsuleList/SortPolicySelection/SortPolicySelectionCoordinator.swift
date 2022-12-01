@@ -41,7 +41,7 @@ final class SortPolicySelectionCoordinator: Coordinator {
             return
         }
         
-        parent.sortPolicyObserver.onNext(sortPolicy)
+        parent.sortPolicyObserver.accept(sortPolicy)
         _ = parent.children.popLast()
     }
 

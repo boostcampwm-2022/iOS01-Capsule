@@ -114,6 +114,7 @@
 		288A8F03292362CC000229D2 /* CapsuleAddCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288A8F02292362CC000229D2 /* CapsuleAddCoordinator.swift */; };
 		288A8F0529236505000229D2 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288A8F0429236505000229D2 /* AppCoordinator.swift */; };
 		28A700BB29358F0F0049FAF8 /* GeoPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A700BA29358F0F0049FAF8 /* GeoPoint.swift */; };
+		28A700D52938AE100049FAF8 /* AnimationResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A700D42938AE100049FAF8 /* AnimationResource.swift */; };
 		28C8C97C292DC360005615BB /* SortPolicySelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C8C97B292DC35F005615BB /* SortPolicySelectionViewController.swift */; };
 		28C8C97E292DC371005615BB /* SortPolicySelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C8C97D292DC371005615BB /* SortPolicySelectionViewModel.swift */; };
 		28C8C980292DC382005615BB /* SortPolicySelectionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C8C97F292DC382005615BB /* SortPolicySelectionCoordinator.swift */; };
@@ -187,9 +188,6 @@
 		0D90DAF6292397CF000DCC84 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		0D90DAF829239A81000DCC84 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		0D90DAFD29239C9F000DCC84 /* OwnglyphHaesomChae.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = OwnglyphHaesomChae.otf; sourceTree = "<group>"; };
-		0D9A8349293786E300D00303 /* SpaceCapsule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceCapsule.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		0D9A834A293786E300D00303 /* SpaceCapsuleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpaceCapsuleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		0D9A834B293786E300D00303 /* SpaceCapsuleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpaceCapsuleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D9A834D293788C100D00303 /* CustomRefreshableMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRefreshableMapView.swift; sourceTree = "<group>"; };
 		0D9D672D292486780038F529 /* ThemeLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeLabel.swift; sourceTree = "<group>"; };
 		0D9D67302924945D0038F529 /* FrameResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameResource.swift; sourceTree = "<group>"; };
@@ -271,9 +269,10 @@
 		288A8F02292362CC000229D2 /* CapsuleAddCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleAddCoordinator.swift; sourceTree = "<group>"; };
 		288A8F0429236505000229D2 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		28A700BA29358F0F0049FAF8 /* GeoPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoPoint.swift; sourceTree = "<group>"; };
-		28A700BC2935E5120049FAF8 /* SpaceCapsule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = SpaceCapsule.app; path = "/Users/pyj/Desktop/workplace/membership/SpaceCapsule/iOS01-Capsule/SpaceCapsule/build/Debug-iphoneos/SpaceCapsule.app"; sourceTree = "<absolute>"; };
-		28A700BD2935E5120049FAF8 /* SpaceCapsuleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = SpaceCapsuleTests.xctest; path = "/Users/pyj/Desktop/workplace/membership/SpaceCapsule/iOS01-Capsule/SpaceCapsule/build/Debug-iphoneos/SpaceCapsuleTests.xctest"; sourceTree = "<absolute>"; };
-		28A700BE2935E5120049FAF8 /* SpaceCapsuleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = SpaceCapsuleUITests.xctest; path = "/Users/pyj/Desktop/workplace/membership/SpaceCapsule/iOS01-Capsule/SpaceCapsule/build/Debug-iphoneos/SpaceCapsuleUITests.xctest"; sourceTree = "<absolute>"; };
+		28A700D129389AFF0049FAF8 /* SpaceCapsule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = SpaceCapsule.app; path = "/Users/pyj/Desktop/workplace/membership/SpaceCapsule/iOS01-Capsule/SpaceCapsule/build/Debug-iphoneos/SpaceCapsule.app"; sourceTree = "<absolute>"; };
+		28A700D229389AFF0049FAF8 /* SpaceCapsuleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = SpaceCapsuleTests.xctest; path = "/Users/pyj/Desktop/workplace/membership/SpaceCapsule/iOS01-Capsule/SpaceCapsule/build/Debug-iphoneos/SpaceCapsuleTests.xctest"; sourceTree = "<absolute>"; };
+		28A700D329389AFF0049FAF8 /* SpaceCapsuleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = SpaceCapsuleUITests.xctest; path = "/Users/pyj/Desktop/workplace/membership/SpaceCapsule/iOS01-Capsule/SpaceCapsule/build/Debug-iphoneos/SpaceCapsuleUITests.xctest"; sourceTree = "<absolute>"; };
+		28A700D42938AE100049FAF8 /* AnimationResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationResource.swift; sourceTree = "<group>"; };
 		28C8C97B292DC35F005615BB /* SortPolicySelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortPolicySelectionViewController.swift; sourceTree = "<group>"; };
 		28C8C97D292DC371005615BB /* SortPolicySelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortPolicySelectionViewModel.swift; sourceTree = "<group>"; };
 		28C8C97F292DC382005615BB /* SortPolicySelectionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortPolicySelectionCoordinator.swift; sourceTree = "<group>"; };
@@ -369,9 +368,6 @@
 				0D6CA333292216A300E02393 /* SpaceCapsule */,
 				0D6CA34A292216A400E02393 /* SpaceCapsuleTests */,
 				0D6CA354292216A400E02393 /* SpaceCapsuleUITests */,
-				0D9A8349293786E300D00303 /* SpaceCapsule.app */,
-				0D9A834A293786E300D00303 /* SpaceCapsuleTests.xctest */,
-				0D9A834B293786E300D00303 /* SpaceCapsuleUITests.xctest */,
 			);
 			sourceTree = "<group>";
 		};
@@ -477,6 +473,7 @@
 			isa = PBXGroup;
 			children = (
 				0D9D67302924945D0038F529 /* FrameResource.swift */,
+				28A700D42938AE100049FAF8 /* AnimationResource.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -869,9 +866,7 @@
 				0D707D5429222BEB00380B14 /* FirebaseStorage */,
 			);
 			productName = SpaceCapsule;
-
-			productReference = 28A700BC2935E5120049FAF8 /* SpaceCapsule.app */;
-      
+			productReference = 28A700D129389AFF0049FAF8 /* SpaceCapsule.app */;
 			productType = "com.apple.product-type.application";
 		};
 		0D6CA346292216A400E02393 /* SpaceCapsuleTests */ = {
@@ -889,9 +884,7 @@
 			);
 			name = SpaceCapsuleTests;
 			productName = SpaceCapsuleTests;
-
-			productReference = 28A700BD2935E5120049FAF8 /* SpaceCapsuleTests.xctest */;
-
+			productReference = 28A700D229389AFF0049FAF8 /* SpaceCapsuleTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		0D6CA350292216A400E02393 /* SpaceCapsuleUITests */ = {
@@ -909,9 +902,7 @@
 			);
 			name = SpaceCapsuleUITests;
 			productName = SpaceCapsuleUITests;
-
-			productReference = 28A700BE2935E5120049FAF8 /* SpaceCapsuleUITests.xctest */;
-
+			productReference = 28A700D329389AFF0049FAF8 /* SpaceCapsuleUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -1101,6 +1092,7 @@
 				599C1A50292CC99A00517E93 /* FirestoreManager.swift in Sources */,
 				288A8EFD292360AB000229D2 /* CapsuleDetailViewModel.swift in Sources */,
 				0D9A834E293788C100D00303 /* CustomRefreshableMapView.swift in Sources */,
+				28A700D52938AE100049FAF8 /* AnimationResource.swift in Sources */,
 				288A8EE229235E3F000229D2 /* CapsuleLocateViewModel.swift in Sources */,
 				59D8CFBC29360A8900FD9CF6 /* ThemeThumbnailImageView.swift in Sources */,
 				0D4C11372927489D00B1C2B6 /* UIViewPreview.swift in Sources */,

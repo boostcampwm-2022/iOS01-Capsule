@@ -41,7 +41,7 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
         }
         capsuleListView.collectionView.rx.itemSelected
             .withLatestFrom(viewModel.input.capsuleCellModels, resultSelector: { indexPath, capsuleCellModels in
-                self.viewModel?.coordinator?.showCapsuleOpen(capsuleCellModel: capsuleCellModels[indexPath.row])
+                viewModel.coordinator?.showCapsuleOpen(capsuleCellModel: capsuleCellModels[indexPath.row])
             })
             .bind(onNext: {})
             .disposed(by: disposeBag)
@@ -58,7 +58,6 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
             .withUnretained(self)
             .bind(onNext: { owner, _ in
                 owner.viewModel?.fetchCapsuleList()
-                owner.viewModel?.input.refreshLoading.accept(true)
             })
             .disposed(by: disposeBag)
     }
@@ -76,17 +75,23 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
             .disposed(by: disposeBag)
         
         viewModel.input.sortPolicy
-            .withLatestFrom(viewModel.input.capsuleCellModels, resultSelector: { sortPolicy, capsuleCellModels in
-                self.applyBarButton(sortPolicy: sortPolicy)
-                self.viewModel?.sort(capsuleCellModels: capsuleCellModels, by: sortPolicy)
-            })
-            .bind(onNext: {})
+            .withUnretained(self)
+            .bind { owner, sortPolicy in
+                owner.applyBarButton(sortPolicy: sortPolicy)
+                if let capsuleCellModels = owner.viewModel?.input.capsuleCellModels.value {
+                    owner.viewModel?.sort(capsuleCellModels: capsuleCellModels, by: sortPolicy)
+                }
+            }
             .disposed(by: disposeBag)
         
         viewModel.input.refreshLoading
             .withUnretained(self)
             .bind { owner, isRefreshLoading in
-                owner.refreshControl.rx.isRefreshing.onNext(isRefreshLoading)
+                if isRefreshLoading {
+                    owner.refreshControl.rx.isRefreshing.onNext(isRefreshLoading)
+                } else {
+                    owner.refreshControl.endRefreshing()
+                }
             }
             .disposed(by: disposeBag)
     }
