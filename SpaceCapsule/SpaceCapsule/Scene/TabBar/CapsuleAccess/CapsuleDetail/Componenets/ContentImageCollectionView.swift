@@ -12,15 +12,18 @@ final class ContentImageCollectionView: UICollectionView {
     required init(frame: CGRect) {
         let customLayout = ContentImageFlowLayout()
         super.init(frame: frame, collectionViewLayout: customLayout)
-
-        backgroundColor = .clear
-
         register(ContentImageCell.self, forCellWithReuseIdentifier: ContentImageCell.identifier)
         
+        configure()
     }
 
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func configure() {
+        backgroundColor = .clear
+        showsHorizontalScrollIndicator = false
     }
 }

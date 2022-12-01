@@ -26,7 +26,7 @@ final class CapsuleDetailView: UIView, BaseView {
     private let contentStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = FrameResource.spacing200
+        stackView.spacing = FrameResource.spacing400
         return stackView
     }()
     
@@ -114,7 +114,7 @@ final class CapsuleDetailView: UIView, BaseView {
         }
         
         mapView.snp.makeConstraints {
-            $0.height.equalTo(300)
+            $0.height.equalTo(200)
         }
     }
     
@@ -123,8 +123,8 @@ final class CapsuleDetailView: UIView, BaseView {
         let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
         let options: MKMapSnapshotter.Options = .init()
         options.region = MKCoordinateRegion(center: center, span: span)
-        options.size = CGSize(width: frame.size.width,
-                              height: 300)
+        options.size = CGSize(width: frame.size.width - 60,
+                              height: 200)
         
         let snapshotShooter = MKMapSnapshotter(options: options)
         
