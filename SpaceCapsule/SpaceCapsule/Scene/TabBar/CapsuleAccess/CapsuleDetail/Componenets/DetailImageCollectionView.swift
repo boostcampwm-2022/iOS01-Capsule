@@ -64,7 +64,7 @@ final class DetailImageCollectionView: UICollectionView {
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DetailImageCell.identifier, for: indexPath) as? DetailImageCell else {
                     return UICollectionViewCell()
                 }
-                cell.imageView.image = UIImage.logoWithText
+                cell.imageView.image = UIImage.logoWithBG
                 return cell
             }
         })

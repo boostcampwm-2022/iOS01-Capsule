@@ -59,7 +59,7 @@ final class CapsuleDetailViewModel: BaseViewModel {
             annotationView.contentMode = .scaleAspectFit
             annotationView.bounds = CGRect(x: 0, y: 0, width: 40, height: 40)
             
-            annotationView.drawHierarchy(in: CGRect(x: point.x, y: point.y, width: annotationView.bounds.width, height: annotationView.bounds.height), afterScreenUpdates: true)
+            annotationView.drawHierarchy(in: CGRect(x: point.x - annotationView.bounds.width, y: point.y - annotationView.bounds.height, width: annotationView.bounds.width, height: annotationView.bounds.height), afterScreenUpdates: true)
             
             let drawImage = UIGraphicsGetImageFromCurrentImageContext()
             
