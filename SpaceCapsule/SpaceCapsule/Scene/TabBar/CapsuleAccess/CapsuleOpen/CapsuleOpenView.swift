@@ -141,7 +141,7 @@ final class CapsuleOpenView: UIView, BaseView {
     
     private func applyLockImage() {
         let lockImageView = UIImageView()
-        lockImageView.image = UIImage(systemName: "lock.fill")
+        lockImageView.image = .lock
         lockImageView.tintColor = .themeGray200
         
         thumbnailImageView.addSubview(lockImageView)
@@ -153,7 +153,8 @@ final class CapsuleOpenView: UIView, BaseView {
     }
     
     private func applyCapsuleDate(capsuleCellModel: CapsuleCellModel) {
-        let dateLabel = ThemeLabel(text: "밀봉시간:\(capsuleCellModel.closedDate.dateString)", size: FrameResource.fontSize90, color: .themeGray200)
+        let dateLabel = ThemeLabel(text: "밀봉시간:\(capsuleCellModel.closedDate.dateString)",
+                                   size: FrameResource.fontSize90, color: .themeGray200)
         dateLabel.textAlignment = .center
         
         thumbnailImageView.addSubview(dateLabel)
@@ -177,18 +178,19 @@ final class CapsuleOpenView: UIView, BaseView {
     
     func shakeAnimate() {
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
-        let animation = CABasicAnimation(keyPath: "position")
+        let keyPath = "shake"
+        let animation = CABasicAnimation(keyPath: keyPath)
         animation.duration = 0.05
         animation.repeatCount = 5
         animation.autoreverses = true
         animation.fromValue = CGPoint(
-            x: thumbnailImageContainerView.center.x - 4.0,
+            x: thumbnailImageContainerView.center.x - FrameResource.capsuleShakeWidth,
             y: thumbnailImageContainerView.center.y
         )
         animation.toValue = CGPoint(
-            x: thumbnailImageContainerView.center.x + 4.0,
+            x: thumbnailImageContainerView.center.x + FrameResource.capsuleShakeWidth,
             y: thumbnailImageContainerView.center.y
         )
-        thumbnailImageContainerView.layer.add(animation, forKey: "position")
+        thumbnailImageContainerView.layer.add(animation, forKey: keyPath)
     }
 }
