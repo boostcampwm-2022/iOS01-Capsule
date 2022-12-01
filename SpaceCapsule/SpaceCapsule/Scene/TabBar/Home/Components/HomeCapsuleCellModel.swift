@@ -1,14 +1,14 @@
 //
-//  CapsuleCellModel.swift
+//  HomeCapsuleCellModel.swift
 //  SpaceCapsule
 //
-//  Created by young june Park on 2022/11/24.
+//  Created by 김민중 on 2022/11/29.
 //
 
 import UIKit
 import CoreLocation
 
-struct CapsuleCellModel: Hashable, Equatable {
+struct HomeCapsuleCellModel: Hashable, Equatable {
     let uuid: String
     let thumbnailImageURL: String?
     let address: String

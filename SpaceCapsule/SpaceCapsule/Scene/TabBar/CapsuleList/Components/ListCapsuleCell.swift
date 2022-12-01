@@ -8,25 +8,10 @@
 import UIKit
 import SnapKit
 
-final class CapsuleCell: UICollectionViewCell {
-    static let cellIdentifier = "CapsuleCell"
+final class ListCapsuleCell: UICollectionViewCell {
+    static let cellIdentifier = "ListCapsuleCell"
     
-    var thumbnailImageView = {
-        let imageView = UIImageView()
-        imageView.layer.cornerRadius = FrameResource.capsuleCellWidth / 2
-        imageView.clipsToBounds = true
-        imageView.backgroundColor = .white
-        return imageView
-    }()
-    
-    var thumbnailImageContainerView = {
-        let view = UIView()
-        view.layer.shadowOffset = FrameResource.capsuleCellShadowOffset
-        view.layer.shadowRadius = FrameResource.capsuleCellShadowRadius
-        view.layer.shadowOpacity = Float(FrameResource.capsuleCellShadowOpacity)
-        view.layer.cornerRadius = FrameResource.capsuleCellWidth / 2
-        return view
-    }()
+    var thumbnailImageView = ThemeThumbnailImageView(frame: .zero, width: FrameResource.listCapsuleCellWidth)
     
     var descriptionLabel = {
         let label = ThemeLabel(text: "xxxx년 x월 x일\nxx시 xx구에서", size: FrameResource.fontSize80, color: .themeBlack)
@@ -47,33 +32,29 @@ final class CapsuleCell: UICollectionViewCell {
     }
     
     func addSubviews() {
-        thumbnailImageContainerView.addSubview(thumbnailImageView)
-        [thumbnailImageContainerView, descriptionLabel].forEach {
+        [thumbnailImageView, descriptionLabel].forEach {
             self.contentView.addSubview($0)
         }
     }
     
     func makeConstraints() {
-        thumbnailImageContainerView.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.centerY.equalToSuperview().multipliedBy(0.8)
-            $0.width.equalTo(FrameResource.capsuleCellWidth)
-            $0.height.equalTo(FrameResource.capsuleCellHeight)
-        }
         
         thumbnailImageView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.centerX.equalToSuperview()
+            $0.centerY.equalToSuperview().multipliedBy(0.8)
+            $0.width.equalTo(FrameResource.listCapsuleCellWidth)
+            $0.height.equalTo(FrameResource.listCapsuleCellHeight)
         }
         
         descriptionLabel.snp.makeConstraints {
-            $0.top.equalTo(thumbnailImageContainerView.snp.bottom).offset(FrameResource.verticalPadding)
+            $0.top.equalTo(thumbnailImageView.snp.bottom).offset(FrameResource.verticalPadding)
             $0.centerX.equalToSuperview()
         }
     }
 
-    func configure(capsuleCellModel: CapsuleCellModel) {
+    func configure(capsuleCellModel: ListCapsuleCellModel) {
         if let thumbnailURL = capsuleCellModel.thumbnailImageURL {
-            thumbnailImageView.kr.setImage(with: thumbnailURL, scale: FrameResource.openableImageScale)
+            thumbnailImageView.imageView.kr.setImage(with: thumbnailURL, scale: FrameResource.openableImageScale)
         }
         descriptionLabel.text = "\(capsuleCellModel.memoryDate.dateString)\n\(capsuleCellModel.address)에서"
         if capsuleCellModel.isOpenable == false {
@@ -90,9 +71,9 @@ final class CapsuleCell: UICollectionViewCell {
     private func applyBlurEffect() {
         let blurEffect = UIBlurEffect(style: .light)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.layer.cornerRadius = FrameResource.capsuleCellWidth / 2
+        blurEffectView.layer.cornerRadius = FrameResource.listCapsuleCellWidth / 2
         blurEffectView.clipsToBounds = true
-        thumbnailImageView.addSubview(blurEffectView)
+        thumbnailImageView.imageView.addSubview(blurEffectView)
         
         blurEffectView.snp.makeConstraints {
             $0.center.equalToSuperview()
@@ -104,18 +85,18 @@ final class CapsuleCell: UICollectionViewCell {
         let lockImageView = UIImageView()
         lockImageView.image = .lock
         lockImageView.tintColor = .themeGray300
-        thumbnailImageView.addSubview(lockImageView)
+        thumbnailImageView.imageView.addSubview(lockImageView)
         
         lockImageView.snp.makeConstraints {
             $0.center.equalToSuperview()
-            $0.width.height.equalTo(thumbnailImageView.snp.width).multipliedBy(0.3)
+            $0.width.height.equalTo(thumbnailImageView.imageView.snp.width).multipliedBy(0.3)
         }
     }
     
     private func applyCapsuleDate(closeDate: String) {
         let dateLabel = ThemeLabel(text: "밀봉시간:\(closeDate)", size: FrameResource.fontSize80, color: .themeGray300)
         dateLabel.textAlignment = .center
-        thumbnailImageView.addSubview(dateLabel)
+        thumbnailImageView.imageView.addSubview(dateLabel)
         
         dateLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
