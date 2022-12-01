@@ -31,7 +31,7 @@ final class ContentImageCell: UICollectionViewCell {
     private let capsuleInfoStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 10
+        stackView.spacing = 20
         return stackView
     }()
     
@@ -67,11 +67,12 @@ final class ContentImageCell: UICollectionViewCell {
         contentView.layer.cornerRadius = FrameResource.commonCornerRadius
         contentView.layer.masksToBounds = true
         
+        let rect = CGRect(x: 7, y: 7, width: bounds.width,
+                          height: bounds.height)
         layer.masksToBounds = false
-        layer.shadowOpacity = 0.5
-        layer.shadowOffset = FrameResource.capsuleCellShadowOffset
-        layer.shadowRadius = FrameResource.capsuleCellShadowRadius
-        layer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
+        layer.shadowOpacity = 0.35
+        layer.shadowRadius = 3
+        layer.shadowPath = UIBezierPath(roundedRect: rect, cornerRadius: 10).cgPath
         
         gradient.cornerRadius = FrameResource.commonCornerRadius
         
@@ -108,7 +109,7 @@ final class ContentImageCell: UICollectionViewCell {
     
     private func addGradientLayer() {
         gradientView.layer.insertSublayer(gradient, at: 0)
-        
+
         imageView.addSubview(gradientView)
         imageView.bringSubviewToFront(gradientView)
     }

@@ -12,7 +12,21 @@ final class CapsuleDetailView: UIView, BaseView {
     private let mainStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = FrameResource.spacing50
+        stackView.spacing = 0
+        stackView.alignment = .center
+        return stackView
+    }()
+    
+    private let imageCollectionView: ContentImageCollectionView = {
+        let collectionView = ContentImageCollectionView(frame: .zero)
+        collectionView.alwaysBounceHorizontal = true
+        return collectionView
+    }()
+    
+    private let contentStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = FrameResource.spacing200
         return stackView
     }()
     
@@ -28,21 +42,17 @@ final class CapsuleDetailView: UIView, BaseView {
         view.isUserInteractionEnabled = false
         view.textColor = .themeGray300
         view.font = .themeFont(ofSize: 24)
-        view.backgroundColor = .blue
         view.isScrollEnabled = false
+        view.backgroundColor = .clear
         return view
     }()
     
-    private let mapView: UIView = {
-        let mapView = UIView()
-        mapView.backgroundColor = .gray
+    private let mapView: UIImageView = {
+        let mapView = UIImageView()
+        mapView.contentMode = .scaleAspectFit
+        mapView.layer.borderWidth = 0.5
+        mapView.layer.borderColor = UIColor.themeGray300?.cgColor
         return mapView
-    }()
-    
-    private let imageCollectionView: ContentImageCollectionView = {        
-        let collectionView = ContentImageCollectionView(frame: .zero)
-        collectionView.alwaysBounceHorizontal = true
-        return collectionView
     }()
     
     override init(frame: CGRect) {
@@ -67,11 +77,21 @@ final class CapsuleDetailView: UIView, BaseView {
         contentView.text = "날씨가 너무 좋았던 날\n 영준이를 오랜만에 봐서 좋았다\n 지수랑 민중이랑 영준이랑 김치 떡볶이 먹고 인생네컷도 찍었다.\n 지수는 소주를 3병이나 먹는게 진짜 신기하다"
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        addMapSnapshot()
+    }
+    
     func addSubViews() {
-        [imageCollectionView,
-         closingDateView,
+        [closingDateView,
          contentView,
-         mapView
+         mapView].forEach {
+            contentStackView.addArrangedSubview($0)
+        }
+        
+        [imageCollectionView,
+         contentStackView
         ].forEach {
             mainStackView.addArrangedSubview($0)
         }
@@ -85,11 +105,43 @@ final class CapsuleDetailView: UIView, BaseView {
         }
         
         imageCollectionView.snp.makeConstraints {
+            $0.width.equalToSuperview()
             $0.height.equalTo(FrameResource.detailImageCollectionViewHeight)
         }
         
+        contentStackView.snp.makeConstraints {
+            $0.width.equalToSuperview().inset(30)
+        }
+        
         mapView.snp.makeConstraints {
-            $0.height.equalTo(600)
+            $0.height.equalTo(300)
+        }
+    }
+    
+    private func addMapSnapshot() {
+        let center = CLLocationCoordinate2D(latitude: 37.583577, longitude: 127.019607)
+        let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+        let options: MKMapSnapshotter.Options = .init()
+        options.region = MKCoordinateRegion(center: center, span: span)
+        options.size = CGSize(width: frame.size.width,
+                              height: 300)
+        
+        let snapshotShooter = MKMapSnapshotter(options: options)
+        
+        snapshotShooter.start { snapshot, error in
+            guard let snapshot = snapshot else {
+                print("no snapshot passed")
+                return
+            }
+            
+            if error != nil {
+                print(error)
+                return
+            }
+            
+            DispatchQueue.main.async {
+                self.mapView.image = snapshot.image
+            }
         }
     }
 }

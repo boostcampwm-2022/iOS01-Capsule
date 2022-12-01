@@ -36,7 +36,10 @@ enum FrameResource {
     static let detailImageViewHeight: CGFloat = 400
     static let detailImageViewWidth: CGFloat = 300
     
-    static let detailImageCollectionViewHeight: CGFloat = detailImageViewHeight + 10
+    static let detailImageCollectionViewHeight: CGFloat = detailImageViewHeight + 15
+    
+    static let detailImageCellShadowOffset: CGSize = CGSize(width: 2, height: 2)
+    static let detailImageCellShadowRadius: CGFloat = 6.0
 
     static let fontSize80: CGFloat = 16.0
     static let fontSize90: CGFloat = 18.0
