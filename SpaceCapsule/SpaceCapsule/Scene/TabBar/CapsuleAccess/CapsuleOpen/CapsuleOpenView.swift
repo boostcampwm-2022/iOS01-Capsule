@@ -81,6 +81,9 @@ final class CapsuleOpenView: UIView, BaseView {
             size: FrameResource.fontSize140,
             color: .themeGray400
         )
+        if capsuleCellModel.isOpenable() == false {
+            applyUnOpenableEffect(capsuleCellModel: capsuleCellModel)
+        }
         
     }
 
