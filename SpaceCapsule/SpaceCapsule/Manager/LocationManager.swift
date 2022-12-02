@@ -86,4 +86,10 @@ final class LocationManager {
 
         return false
     }
+    
+    func location(_ coordinate: CLLocationCoordinate2D) -> CLLocation {
+        return CLLocation(latitude: coordinate.latitude,
+                          longitude: coordinate.longitude)
+    }
+    
 }

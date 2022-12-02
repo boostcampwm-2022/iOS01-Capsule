@@ -132,7 +132,6 @@
 		599C19D2292B82D000517E93 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C19D1292B82D000517E93 /* LoadingViewController.swift */; };
 		599C19D4292B838D00517E93 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C19D3292B838D00517E93 /* LoadingView.swift */; };
 		599C1A2C292C9F5B00517E93 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 599C1A2B292C9F5B00517E93 /* .swiftlint.yml */; };
-		599C1A34292CC95000517E93 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C1A33292CC94F00517E93 /* Key.swift */; };
 		599C1A47292CC99A00517E93 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C1A38292CC99900517E93 /* UserDefaultsManager.swift */; };
 		599C1A48292CC99A00517E93 /* KingReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C1A3A292CC99900517E93 /* KingReceiver.swift */; };
 		599C1A49292CC99A00517E93 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C1A3C292CC99900517E93 /* ImageCache.swift */; };
@@ -168,9 +167,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0D0130EE2938CBB600241587 /* SpaceCapsule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = SpaceCapsule.app; path = "/Users/trumanfromkorea/Develop/Boostcamp/Membership/iOS01-Capsule/SpaceCapsule/build/Debug-iphoneos/SpaceCapsule.app"; sourceTree = "<absolute>"; };
-		0D0130EF2938CBB600241587 /* SpaceCapsuleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = SpaceCapsuleTests.xctest; path = "/Users/trumanfromkorea/Develop/Boostcamp/Membership/iOS01-Capsule/SpaceCapsule/build/Debug-iphoneos/SpaceCapsuleTests.xctest"; sourceTree = "<absolute>"; };
-		0D0130F02938CBB600241587 /* SpaceCapsuleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = SpaceCapsuleUITests.xctest; path = "/Users/trumanfromkorea/Develop/Boostcamp/Membership/iOS01-Capsule/SpaceCapsule/build/Debug-iphoneos/SpaceCapsuleUITests.xctest"; sourceTree = "<absolute>"; };
 		0D1331C6293842D300B2CD28 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		0D2B7AB92934594400CE34E3 /* running.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = running.gpx; sourceTree = "<group>"; };
 		0D46DEF92923E1180045400A /* UIFont+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
@@ -229,6 +225,9 @@
 		28049CEA29237E96002389BD /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		28049CEC29238216002389BD /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
 		2807BC0A292C658000288A5D /* ListCapsuleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCapsuleCell.swift; sourceTree = "<group>"; };
+		282455542939855800DE03A1 /* SpaceCapsule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = SpaceCapsule.app; path = "/Users/pyj/Desktop/workplace/membership/SpaceCapsule/iOS01-Capsule/SpaceCapsule/build/Debug-iphoneos/SpaceCapsule.app"; sourceTree = "<absolute>"; };
+		282455552939855800DE03A1 /* SpaceCapsuleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = SpaceCapsuleTests.xctest; path = "/Users/pyj/Desktop/workplace/membership/SpaceCapsule/iOS01-Capsule/SpaceCapsule/build/Debug-iphoneos/SpaceCapsuleTests.xctest"; sourceTree = "<absolute>"; };
+		282455562939855800DE03A1 /* SpaceCapsuleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = SpaceCapsuleUITests.xctest; path = "/Users/pyj/Desktop/workplace/membership/SpaceCapsule/iOS01-Capsule/SpaceCapsule/build/Debug-iphoneos/SpaceCapsuleUITests.xctest"; sourceTree = "<absolute>"; };
 		288A8E912923244D000229D2 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		288A8E96292359CF000229D2 /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 		288A8E9A29235A6E000229D2 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
@@ -293,7 +292,6 @@
 		599C19D1292B82D000517E93 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Loading\U0010ViewController.swift"; sourceTree = "<group>"; };
 		599C19D3292B838D00517E93 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		599C1A2B292C9F5B00517E93 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
-		599C1A33292CC94F00517E93 /* Key.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
 		599C1A38292CC99900517E93 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		599C1A3A292CC99900517E93 /* KingReceiver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KingReceiver.swift; sourceTree = "<group>"; };
 		599C1A3C292CC99900517E93 /* ImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
@@ -392,7 +390,6 @@
 				599C1A35292CC99900517E93 /* Manager */,
 				4A9E91402925D51B00B7CC5C /* Model */,
 				0D4C11352927489200B1C2B6 /* Preview */,
-				599C1A32292CC92300517E93 /* Private */,
 				0D9D672F292493F00038F529 /* Resources */,
 				288A8E9429235989000229D2 /* Scene */,
 			);
@@ -795,14 +792,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		599C1A32292CC92300517E93 /* Private */ = {
-			isa = PBXGroup;
-			children = (
-				599C1A33292CC94F00517E93 /* Key.swift */,
-			);
-			path = Private;
-			sourceTree = "<group>";
-		};
 		599C1A35292CC99900517E93 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
@@ -880,7 +869,7 @@
 				0D707D5429222BEB00380B14 /* FirebaseStorage */,
 			);
 			productName = SpaceCapsule;
-			productReference = 0D0130EE2938CBB600241587 /* SpaceCapsule.app */;
+			productReference = 282455542939855800DE03A1 /* SpaceCapsule.app */;
 			productType = "com.apple.product-type.application";
 		};
 		0D6CA346292216A400E02393 /* SpaceCapsuleTests */ = {
@@ -898,7 +887,7 @@
 			);
 			name = SpaceCapsuleTests;
 			productName = SpaceCapsuleTests;
-			productReference = 0D0130EF2938CBB600241587 /* SpaceCapsuleTests.xctest */;
+			productReference = 282455552939855800DE03A1 /* SpaceCapsuleTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		0D6CA350292216A400E02393 /* SpaceCapsuleUITests */ = {
@@ -916,7 +905,7 @@
 			);
 			name = SpaceCapsuleUITests;
 			productName = SpaceCapsuleUITests;
-			productReference = 0D0130F02938CBB600241587 /* SpaceCapsuleUITests.xctest */;
+			productReference = 282455562939855800DE03A1 /* SpaceCapsuleUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -1087,7 +1076,6 @@
 				288A8EC429235BB7000229D2 /* CapsuleMapViewController.swift in Sources */,
 				0DB746AA292DE94B005FF249 /* FBAuthError.swift in Sources */,
 				2803EA3A29339B2C00589399 /* SortPolicy.swift in Sources */,
-				599C1A34292CC95000517E93 /* Key.swift in Sources */,
 				0DB746AE292DF8F6005FF249 /* Capsule.swift in Sources */,
 				288A8EC829235BCE000229D2 /* CapsuleMapCoordinator.swift in Sources */,
 				599C19D2292B82D000517E93 /* LoadingViewController.swift in Sources */,

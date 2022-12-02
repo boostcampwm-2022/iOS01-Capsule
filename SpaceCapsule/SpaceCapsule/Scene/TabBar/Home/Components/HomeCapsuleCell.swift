@@ -57,10 +57,6 @@ final class HomeCapsuleCell: UICollectionViewCell {
         }
 
         descriptionLabel.text = "\(capsuleCellModel.memoryDate.dateString)\n\(capsuleCellModel.address)에서"
-//        thumbnailImageView.imageView.subviews.forEach {
-//            $0.removeFromSuperview()
-//        }
-        if capsuleCellModel.isOpenable == false {
             applyUnOpenableEffect(closeDate: capsuleCellModel.closedDate.dateString)
         }
     }

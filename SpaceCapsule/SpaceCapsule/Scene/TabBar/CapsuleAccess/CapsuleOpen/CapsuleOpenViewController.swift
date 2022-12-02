@@ -22,8 +22,6 @@ final class CapsuleOpenViewController: UIViewController, BaseViewController {
         if let capsuleCellModel = viewModel?.capsuleCellModel {
             viewModel?.input.capsuleCellModel.onNext(capsuleCellModel)
         }
-        
-        viewModel?.output.isOpenable.onNext(true)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -52,6 +50,7 @@ final class CapsuleOpenViewController: UIViewController, BaseViewController {
             .withUnretained(self)
             .bind { owner, capsuleCellModel in
                 owner.capsuleOpenView.configure(capsuleCellModel: capsuleCellModel)
+                owner.viewModel?.output.isOpenable.onNext(capsuleCellModel.isOpenable())
             }.disposed(by: disposeBag)
 
         viewModel.input.openButtonTapped

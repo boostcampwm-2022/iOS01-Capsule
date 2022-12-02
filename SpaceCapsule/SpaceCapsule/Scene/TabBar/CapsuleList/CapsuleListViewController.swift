@@ -36,7 +36,6 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
         configureCollectionView()
         bind()
         bindViewModel()
-        viewModel?.fetchCapsuleList()
     }
 
     func bind() {
@@ -61,7 +60,7 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
         refreshControl.rx.controlEvent(.valueChanged)
             .withUnretained(self)
             .bind(onNext: { owner, _ in
-                owner.viewModel?.fetchCapsuleList()
+                owner.viewModel?.refreshCapsule()
             })
             .disposed(by: disposeBag)
     }

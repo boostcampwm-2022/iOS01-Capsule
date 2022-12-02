@@ -22,7 +22,7 @@ final class CapsuleOpenViewModel: BaseViewModel {
         var openButtonTapped = PublishSubject<Void>()
         var capsuleCellModel = PublishSubject<ListCapsuleCellModel>()
     }
-    
+
     struct Output {
         var isOpenable = PublishSubject<Bool>()
     }

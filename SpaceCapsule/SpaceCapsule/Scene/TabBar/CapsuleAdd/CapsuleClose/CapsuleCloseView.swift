@@ -21,7 +21,7 @@ final class CapsuleCloseView: UIView, BaseView {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = FrameResource.capsuleThumbnailWidth / 2
         imageView.clipsToBounds = true
-
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
 
@@ -35,11 +35,11 @@ final class CapsuleCloseView: UIView, BaseView {
     }()
 
     private let blurEffectView: UIVisualEffectView = {
-        let blurEffect = UIBlurEffect(style: .regular)
+        let blurEffect = UIBlurEffect(style: .dark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.layer.cornerRadius = FrameResource.capsuleThumbnailWidth / 2
         blurEffectView.clipsToBounds = true
-
+        blurEffectView.alpha = FrameResource.blurEffectAlpha
         return blurEffectView
     }()
 
