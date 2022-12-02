@@ -13,7 +13,6 @@ import RxSwift
 final class CapsuleListViewModel: BaseViewModel {
     var disposeBag = DisposeBag()
     var coordinator: CapsuleListCoordinator?
-    private let currentLocation = CLLocationCoordinate2D(latitude: 37.582867, longitude: 126.027869)
     var input = Input()
 
     struct Input {

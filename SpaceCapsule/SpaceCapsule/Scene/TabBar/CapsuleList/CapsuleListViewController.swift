@@ -24,7 +24,7 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
             parent.tabBarWillHide(false)
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view = capsuleListView
