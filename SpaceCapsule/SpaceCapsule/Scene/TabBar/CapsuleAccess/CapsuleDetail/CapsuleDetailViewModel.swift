@@ -42,16 +42,18 @@ final class CapsuleDetailViewModel: BaseViewModel {
                                                                                       date: capsule.memoryDate.dateString))
         let otherCells = capsule.images[1..<capsule.images.count].map { DetailImageCell.Cell(imageURL: $0, capsuleInfo: nil) }
         output.imageCell.accept([firstCell] + otherCells)
+        
+        fetchCapsuleMap(at: capsule.geopoint)
     }
 
-    func fetchCapsuleMap(at coordinate: GeoPoint, width: CGFloat) {
+    func fetchCapsuleMap(at coordinate: GeoPoint) {
         let center = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
         let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
 
         let options: MKMapSnapshotter.Options = .init()
         options.region = MKCoordinateRegion(center: center, span: span)
-        options.size = CGSize(width: width - (FrameResource.detailContentHInset * 2),
-                              height: FrameResource.detailMapHeight)
+        //options.size = CGSize(width: width - (FrameResource.detailContentHInset * 2),
+        //                      height: FrameResource.detailMapHeight)
 
         let snapshotShooter = MKMapSnapshotter(options: options)
 

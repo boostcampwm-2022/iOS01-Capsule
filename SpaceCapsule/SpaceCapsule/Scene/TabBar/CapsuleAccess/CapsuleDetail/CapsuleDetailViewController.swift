@@ -23,10 +23,6 @@ final class CapsuleDetailViewController: UIViewController, BaseViewController {
         applyDataSource()
         
         bind()
-
-        // TODO: 구현 후에 지우기
-        let center = GeoPoint(latitude: 37.583577, longitude: 127.019607)
-        viewModel?.fetchCapsuleMap(at: center, width: view.frame.width)
     }
 
     override func viewDidLayoutSubviews() {
