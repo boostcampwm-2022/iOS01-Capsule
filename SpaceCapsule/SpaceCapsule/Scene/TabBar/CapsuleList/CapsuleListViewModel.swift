@@ -28,7 +28,9 @@ final class CapsuleListViewModel: BaseViewModel {
         fetchCapsuleList()
     }
     private func bind() {}
-    
+    func refreshCapsule() {
+        AppDataManager.shared.fetchCapsules()
+    }
     func fetchCapsuleList() {
         input.capsules
             .withUnretained(self)
