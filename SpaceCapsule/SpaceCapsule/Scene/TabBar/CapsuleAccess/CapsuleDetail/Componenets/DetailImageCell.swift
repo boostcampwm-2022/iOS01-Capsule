@@ -9,6 +9,16 @@ import UIKit
 import SnapKit
 
 final class DetailImageCell: UICollectionViewCell {
+    struct Cell: Hashable {
+        var imageURL: String
+        var capsuleInfo: CapsuleInfo?
+    }
+    
+    struct CapsuleInfo: Hashable {
+        var address: String
+        var date: String
+    }
+    
     let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -70,9 +80,6 @@ final class DetailImageCell: UICollectionViewCell {
         gradient.cornerRadius = FrameResource.commonCornerRadius
         
         configureShadow()
-        // TODO: 구현 후 삭제 필요
-        capsuleDate.text = "2020년 6월 5일"
-        capsuleLocation.text = "서울시 광진구"
     }
     
     private func configureShadow() {
@@ -85,12 +92,8 @@ final class DetailImageCell: UICollectionViewCell {
     }
 
     private func addSubViews() {
-        capsuleInfoStackView.addArrangedSubview(capsuleDate)
-        capsuleInfoStackView.addArrangedSubview(capsuleLocation)
-        
         contentView.addSubview(imageView)
         contentView.addSubview(gradientView)
-        contentView.addSubview(capsuleInfoStackView)
     }
     
     private func makeConstraints() {
@@ -103,11 +106,6 @@ final class DetailImageCell: UICollectionViewCell {
         }
         
         gradient.frame = bounds
-        
-        capsuleInfoStackView.snp.makeConstraints {
-            $0.left.equalToSuperview().inset(15)
-            $0.bottom.equalToSuperview().inset(15)
-        }
     }
     
     private func addGradientLayer() {
@@ -115,5 +113,19 @@ final class DetailImageCell: UICollectionViewCell {
 
         imageView.addSubview(gradientView)
         imageView.bringSubviewToFront(gradientView)
+    }
+    
+    func addCapsuleInfo(_ capsuleInfo: CapsuleInfo) {
+        capsuleDate.text = capsuleInfo.date
+        capsuleLocation.text = capsuleInfo.address
+        
+        capsuleInfoStackView.addArrangedSubview(capsuleDate)
+        capsuleInfoStackView.addArrangedSubview(capsuleLocation)
+        contentView.addSubview(capsuleInfoStackView)
+        
+        capsuleInfoStackView.snp.makeConstraints {
+            $0.left.equalToSuperview().inset(15)
+            $0.bottom.equalToSuperview().inset(15)
+        }
     }
 }

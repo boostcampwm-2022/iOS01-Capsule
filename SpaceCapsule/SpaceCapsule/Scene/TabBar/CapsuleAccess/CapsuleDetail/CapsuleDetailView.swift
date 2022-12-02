@@ -63,16 +63,10 @@ final class CapsuleDetailView: UIView, BaseView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure() {
-        // TODO: 구현 후 삭제필요
-        closedDateLabel.text = "밀봉시간: 2010년 7월 1일"
-        descriptionView.text = "날씨가 너무 좋았던 날\n 영준이를 오랜만에 봐서 좋았다\n 지수랑 민중이랑 영준이랑 김치 떡볶이 먹고 인생네컷도 찍었다.\n 지수는 소주를 3병이나 먹는게 진짜 신기하다"
-    }
+    func configure() {}
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        //addMapSnapshot()
     }
     
     func addSubViews() {
@@ -108,5 +102,10 @@ final class CapsuleDetailView: UIView, BaseView {
         mapView.snp.makeConstraints {
             $0.height.equalTo(FrameResource.detailMapHeight)
         }
+    }
+    
+    func updateCapsuleData(capsule: Capsule) {
+        closedDateLabel.text = capsule.closedDate.dateString
+        descriptionView.text = capsule.description
     }
 }
