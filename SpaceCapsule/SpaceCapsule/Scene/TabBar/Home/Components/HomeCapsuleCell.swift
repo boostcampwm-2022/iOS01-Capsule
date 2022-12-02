@@ -57,6 +57,8 @@ final class HomeCapsuleCell: UICollectionViewCell {
         }
 
         descriptionLabel.text = "\(capsuleCellModel.memoryDate.dateString)\n\(capsuleCellModel.address)에서"
+        
+        if !capsuleCellModel.isOpenable() {
             applyUnOpenableEffect(closeDate: capsuleCellModel.closedDate.dateString)
         }
     }

@@ -35,13 +35,13 @@ final class CapsuleListCoordinator: Coordinator {
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.themeFont(ofSize: FrameResource.fontSize120) as Any]
     }
 
-    func showCapsuleOpen(capsuleCellModel: ListCapsuleCellModel) {
-        let capsuleOpenCoordinator = CapsuleOpenCoordinator(navigationController: navigationController)
-        capsuleOpenCoordinator.capsuleCellModel = capsuleCellModel
-        capsuleOpenCoordinator.parent = self
-        capsuleOpenCoordinator.start()
+    func moveToCapsuleAccess(capsuleCellModel: ListCapsuleCellModel) {
+        let capsuleAccessCoordinator = CapsuleAccessCoordinator(navigationController: navigationController)
+        capsuleAccessCoordinator.capsuleCellModel = capsuleCellModel
+        capsuleAccessCoordinator.parent = self
+        capsuleAccessCoordinator.start()
 
-        children.append(capsuleOpenCoordinator)
+        children.append(capsuleAccessCoordinator)
 
         if let parent = parent as? TabBarCoordinator {
             parent.tabBarWillHide(true)
