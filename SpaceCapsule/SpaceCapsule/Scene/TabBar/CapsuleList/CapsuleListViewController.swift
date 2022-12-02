@@ -32,7 +32,6 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
         configureCollectionView()
         bind()
         bindViewModel()
-        viewModel?.fetchCapsuleList()
     }
     
     func bind() {

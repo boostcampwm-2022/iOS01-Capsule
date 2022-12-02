@@ -25,6 +25,7 @@ final class CapsuleListViewModel: BaseViewModel {
 
     init() {
         bind()
+        fetchCapsuleList()
     }
     private func bind() {}
     
