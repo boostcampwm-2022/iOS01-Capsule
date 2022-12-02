@@ -17,7 +17,16 @@ final class CapsuleDetailView: UIView, BaseView {
         return stackView
     }()
     
-    let imageCollectionView = DetailImageCollectionView(frame: .zero)
+    let imageCollectionView = {
+        let customLayout = DetailImageFlowLayout()
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: customLayout)
+        collectionView.register(DetailImageCell.self, forCellWithReuseIdentifier: DetailImageCell.identifier)
+        
+        collectionView.alwaysBounceHorizontal = true
+        collectionView.backgroundColor = .clear
+        collectionView.showsHorizontalScrollIndicator = false
+        return collectionView
+    }()
     
     private let contentStackView: UIStackView = {
         let stackView = UIStackView()
