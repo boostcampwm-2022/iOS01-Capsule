@@ -127,11 +127,11 @@ final class CapsuleOpenView: UIView, BaseView {
     }
     
     private func applyBlurEffect() {
-        let blurEffect = UIBlurEffect(style: .light)
+        let blurEffect = UIBlurEffect(style: .dark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.layer.cornerRadius = FrameResource.capsuleThumbnailCornerRadius
         blurEffectView.clipsToBounds = true
-    
+        blurEffectView.alpha = FrameResource.blurEffectAlpha
         thumbnailImageView.addSubview(blurEffectView)
         
         blurEffectView.snp.makeConstraints {

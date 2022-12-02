@@ -69,10 +69,11 @@ final class ListCapsuleCell: UICollectionViewCell {
     }
     
     private func applyBlurEffect() {
-        let blurEffect = UIBlurEffect(style: .light)
+        let blurEffect = UIBlurEffect(style: .dark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.layer.cornerRadius = FrameResource.listCapsuleCellWidth / 2
         blurEffectView.clipsToBounds = true
+        blurEffectView.alpha = FrameResource.blurEffectAlpha
         thumbnailImageView.imageView.addSubview(blurEffectView)
         
         blurEffectView.snp.makeConstraints {
@@ -84,7 +85,7 @@ final class ListCapsuleCell: UICollectionViewCell {
     private func applyLockImage() {
         let lockImageView = UIImageView()
         lockImageView.image = .lock
-        lockImageView.tintColor = .themeGray300
+        lockImageView.tintColor = .themeGray200
         thumbnailImageView.imageView.addSubview(lockImageView)
         
         lockImageView.snp.makeConstraints {
@@ -94,7 +95,7 @@ final class ListCapsuleCell: UICollectionViewCell {
     }
     
     private func applyCapsuleDate(closeDate: String) {
-        let dateLabel = ThemeLabel(text: "밀봉시간:\(closeDate)", size: FrameResource.fontSize80, color: .themeGray300)
+        let dateLabel = ThemeLabel(text: "밀봉시간:\(closeDate)", size: FrameResource.fontSize80, color: .themeGray200)
         dateLabel.textAlignment = .center
         thumbnailImageView.imageView.addSubview(dateLabel)
         
