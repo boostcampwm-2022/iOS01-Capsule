@@ -33,6 +33,13 @@ final class CapsuleDetailViewController: UIViewController, BaseViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(mainView)
         mainView.backgroundColor = .themeBackground
+        
+        if let detailLayout = mainView.imageCollectionView.collectionViewLayout as? DetailImageFlowLayout {
+            detailLayout.sectionInset = UIEdgeInsets(top: 0.0,
+                                                     left: (view.frame.width - FrameResource.detailImageViewWidth) / 2,
+                                                     bottom: 0.0,
+                                                     right: (view.frame.width - FrameResource.detailImageViewWidth) / 2)
+        }
 
         makeConstrinats()
     }
