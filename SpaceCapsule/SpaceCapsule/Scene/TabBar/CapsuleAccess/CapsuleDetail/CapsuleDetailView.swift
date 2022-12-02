@@ -12,7 +12,7 @@ final class CapsuleDetailView: UIView, BaseView {
     private let mainStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 0
+        stackView.spacing = FrameResource.spacing400
         stackView.alignment = .center
         return stackView
     }()
@@ -31,7 +31,7 @@ final class CapsuleDetailView: UIView, BaseView {
     private let contentStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = FrameResource.spacing400
+        stackView.spacing = FrameResource.spacing200
         return stackView
     }()
     
@@ -114,7 +114,7 @@ final class CapsuleDetailView: UIView, BaseView {
     }
     
     func updateCapsuleData(capsule: Capsule) {
-        closedDateLabel.text = capsule.closedDate.dateString
+        closedDateLabel.text = "밀봉시간: \(capsule.closedDate.dateString)"
         descriptionView.text = capsule.description
     }
 }
