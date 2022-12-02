@@ -57,7 +57,7 @@ final class ListCapsuleCell: UICollectionViewCell {
             thumbnailImageView.imageView.kr.setImage(with: thumbnailURL, scale: FrameResource.openableImageScale)
         }
         descriptionLabel.text = "\(capsuleCellModel.memoryDate.dateString)\n\(capsuleCellModel.address)에서"
-        if capsuleCellModel.isOpenable == false {
+        if capsuleCellModel.isOpenable() == false {
             applyUnOpenableEffect(closeDate: capsuleCellModel.closedDate.dateString)
         }
     }

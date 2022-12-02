@@ -61,11 +61,11 @@ final class CapsuleListViewModel: BaseViewModel {
         switch sortPolicy {
         case .nearest:
             models = capsuleCellModels.sorted {
-                $0.distance(from: currentLocation) < $1.distance(from: currentLocation)
+                $0.distance() < $1.distance()
             }
         case .furthest:
             models = capsuleCellModels.sorted {
-                $0.distance(from: currentLocation) > $1.distance(from: currentLocation)
+                $0.distance() > $1.distance()
             }
         case .latest:
             models = capsuleCellModels.sorted {
