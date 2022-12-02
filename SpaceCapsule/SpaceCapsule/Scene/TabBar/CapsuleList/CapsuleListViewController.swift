@@ -25,9 +25,13 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
         }
     }
 
+    override func loadView() {
+        view = capsuleListView
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        view = capsuleListView
+
         addSortBarButton()
         configureCollectionView()
         bind()
@@ -40,7 +44,7 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
         }
         capsuleListView.collectionView.rx.itemSelected
             .withLatestFrom(viewModel.input.capsuleCellModels, resultSelector: { indexPath, capsuleCellModels in
-                viewModel.coordinator?.showCapsuleOpen(capsuleCellModel: capsuleCellModels[indexPath.row])
+                viewModel.coordinator?.moveToCapsuleAccess(capsuleCellModel: capsuleCellModels[indexPath.row])
             })
             .bind(onNext: {})
             .disposed(by: disposeBag)

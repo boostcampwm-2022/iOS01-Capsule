@@ -38,7 +38,7 @@ final class ThemeThumbnailImageView: UIView {
     // MARK: - Methods
     
     func configure() {
-        backgroundColor = .none
+        backgroundColor = .themeGray100
         layer.shadowOffset = FrameResource.capsuleCellShadowOffset
         layer.shadowRadius = FrameResource.capsuleCellShadowRadius
         layer.shadowOpacity = Float(FrameResource.capsuleCellShadowOpacity)

@@ -35,17 +35,12 @@ class CapsuleOpenCoordinator: Coordinator {
             parent.tabBarWillHide(false)
         }
     }
-
-//    func moveToCapsuleDetail() {
-//        let capsuleDetailCoordinator = CapsuleDetailCoordinator()
-//        capsuleDetailCoordinator.parent = self
-//        capsuleDetailCoordinator.start()
-//
-//        children.append(capsuleDetailCoordinator)
-//
-//        if let controller = capsuleDetailCoordinator.navigationController {
-//            controller.modalPresentationStyle = .fullScreen
-//            tabBarController.present(controller, animated: true)
-//        }
-//    }
+    
+    func moveToCapsuleDetail() {
+        guard let parent = parent as? CapsuleAccessCoordinator else {
+            return
+        }
+        
+        parent.moveToCapsuleDetail()
+    }
 }

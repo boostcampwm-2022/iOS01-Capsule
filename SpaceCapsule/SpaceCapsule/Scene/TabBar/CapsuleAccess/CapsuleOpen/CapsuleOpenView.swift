@@ -14,8 +14,8 @@ final class CapsuleOpenView: UIView, BaseView {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = FrameResource.capsuleThumbnailWidth / 2
         imageView.clipsToBounds = true
-        imageView.image = UIImage.logoWithBG
         imageView.contentMode = .scaleAspectFill
+        
         return imageView
     }()
 
@@ -25,6 +25,7 @@ final class CapsuleOpenView: UIView, BaseView {
         view.layer.shadowRadius = FrameResource.shadowRadius
         view.layer.shadowOpacity = FrameResource.shadowOpacity
         view.layer.cornerRadius = FrameResource.capsuleThumbnailCornerRadius
+        
         return view
     }()
 
@@ -42,6 +43,7 @@ final class CapsuleOpenView: UIView, BaseView {
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .themeColor200
         button.layer.cornerRadius = FrameResource.commonCornerRadius
+        
         return button
     }()
 
@@ -68,9 +70,8 @@ final class CapsuleOpenView: UIView, BaseView {
     func configure(capsuleCellModel: ListCapsuleCellModel) {
         if let thumbnailURL = capsuleCellModel.thumbnailImageURL {
             thumbnailImageView.kr.setImage(with: thumbnailURL, scale: FrameResource.openableImageScale)
-        } else {
-            thumbnailImageView.image = .logoWithBG
         }
+        
         descriptionLabel.text = """
         \(capsuleCellModel.memoryDate.dateString)
         \(capsuleCellModel.address) 에서의

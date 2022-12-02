@@ -46,6 +46,17 @@ final class CapsuleListCoordinator: Coordinator {
         if let parent = parent as? TabBarCoordinator {
             parent.tabBarWillHide(true)
         }
+
+//        let capsuleOpenCoordinator = CapsuleOpenCoordinator(navigationController: navigationController)
+//        capsuleOpenCoordinator.capsuleCellModel = capsuleCellModel
+//        capsuleOpenCoordinator.parent = self
+//        capsuleOpenCoordinator.start()
+//
+//        children.append(capsuleOpenCoordinator)
+//
+//        if let parent = parent as? TabBarCoordinator {
+//            parent.tabBarWillHide(true)
+//        }
     }
 
     func showSortPolicySelection(sortPolicy: SortPolicy) {

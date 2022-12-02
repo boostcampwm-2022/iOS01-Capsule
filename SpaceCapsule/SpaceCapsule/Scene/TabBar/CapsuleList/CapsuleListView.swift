@@ -54,7 +54,8 @@ final class CapsuleListView: UIView, BaseView {
             top: FrameResource.verticalPadding,
             left: FrameResource.listCapsuleHorizontalInset,
             bottom: 0,
-            right: FrameResource.listCapsuleHorizontalInset)
+            right: FrameResource.listCapsuleHorizontalInset
+        )
         collectionView.collectionViewLayout = collectionViewFlowLayout
     }
 

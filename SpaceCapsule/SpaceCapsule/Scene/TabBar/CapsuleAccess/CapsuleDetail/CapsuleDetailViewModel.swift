@@ -21,12 +21,17 @@ final class CapsuleDetailViewModel: BaseViewModel {
     }
 
     struct Output {
-        var imageData = BehaviorRelay<[DetailImageCollectionView.Cell]>(value: [])
+        var imageURLs = BehaviorRelay<[String]>(value: [])
         var mapSnapshot = BehaviorRelay<[UIImage]>(value: [])
     }
 
-    func addImage() {
-        output.imageData.accept([.sampleImage1, .sampleImage2, .sampleImage3, .sampleImage4, .sampleImage5])
+    func getCapsule(with uuid: String?) {
+        guard let uuid,
+              let capsule = AppDataManager.shared.capsule(uuid: uuid) else {
+            return
+        }
+
+        output.imageURLs.accept(capsule.images)
     }
 
     func fetchCapsuleMap(at coordinate: GeoPoint, width: CGFloat) {

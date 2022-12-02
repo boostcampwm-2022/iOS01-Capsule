@@ -18,6 +18,7 @@ final class CapsuleOpenViewController: UIViewController, BaseViewController {
         super.viewDidLoad()
         view = capsuleOpenView
         bind()
+        
         if let capsuleCellModel = viewModel?.capsuleCellModel {
             viewModel?.input.capsuleCellModel.onNext(capsuleCellModel)
         }
@@ -38,6 +39,7 @@ final class CapsuleOpenViewController: UIViewController, BaseViewController {
             // TODO: 예외처리
             return
         }
+
         capsuleOpenView.openButton.rx.tap
             .bind {
                 viewModel.input.openButtonTapped.onNext(())
