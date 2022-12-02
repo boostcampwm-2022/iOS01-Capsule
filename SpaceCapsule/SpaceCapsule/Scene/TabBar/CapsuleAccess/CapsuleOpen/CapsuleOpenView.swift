@@ -12,7 +12,7 @@ import UIKit
 final class CapsuleOpenView: UIView, BaseView {
     var thumbnailImageView = {
         let imageView = UIImageView()
-        imageView.layer.cornerRadius = FrameResource.capsuleThumbnailCornerRadius
+        imageView.layer.cornerRadius = FrameResource.capsuleThumbnailWidth / 2
         imageView.clipsToBounds = true
         imageView.image = UIImage.logoWithBG
         imageView.contentMode = .scaleAspectFill
