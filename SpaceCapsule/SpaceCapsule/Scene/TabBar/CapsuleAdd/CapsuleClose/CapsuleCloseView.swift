@@ -21,7 +21,7 @@ final class CapsuleCloseView: UIView, BaseView {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = FrameResource.capsuleThumbnailWidth / 2
         imageView.clipsToBounds = true
-
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
 
