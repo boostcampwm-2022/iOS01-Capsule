@@ -26,37 +26,38 @@ final class CapsuleListViewModel: BaseViewModel {
         bind()
         fetchCapsuleList()
     }
+
     private func bind() {}
     func refreshCapsule() {
         AppDataManager.shared.fetchCapsules()
     }
+
     func fetchCapsuleList() {
         input.capsules
             .withUnretained(self)
             .subscribe(
-            onNext: { owner, capsuleList in
-                let capsuleCellModels = capsuleList.map { capsule in
-                    return ListCapsuleCellModel(uuid: capsule.uuid,
-                                                thumbnailImageURL: capsule.images.first,
-                                                address: capsule.simpleAddress,
-                                                closedDate: capsule.closedDate,
-                                                memoryDate: capsule.memoryDate,
-                                                coordinate: CLLocationCoordinate2D(
-                                                    latitude: capsule.geopoint.latitude,
-                                                    longitude: capsule.geopoint.longitude
-                                                )
-                    )
+                onNext: { owner, capsuleList in
+                    let capsuleCellModels = capsuleList.map { capsule in
+                        ListCapsuleCellModel(uuid: capsule.uuid,
+                                             thumbnailImageURL: capsule.images.first,
+                                             address: capsule.simpleAddress,
+                                             closedDate: capsule.closedDate,
+                                             memoryDate: capsule.memoryDate,
+                                             coordinate: CLLocationCoordinate2D(
+                                                 latitude: capsule.geopoint.latitude,
+                                                 longitude: capsule.geopoint.longitude
+                                             )
+                        )
+                    }
+                    owner.sort(capsuleCellModels: capsuleCellModels, by: owner.input.sortPolicy.value)
+                },
+                onError: { error in
+                    print(error.localizedDescription)
                 }
-                owner.sort(capsuleCellModels: capsuleCellModels, by: owner.input.sortPolicy.value)
-            },
-            onError: { error in
-                print(error.localizedDescription)
-            }
-        )
-        .disposed(by: disposeBag)
-        
+            )
+            .disposed(by: disposeBag)
     }
-    
+
     func sort(capsuleCellModels: [ListCapsuleCellModel], by sortPolicy: SortPolicy) {
         var models = capsuleCellModels
         switch sortPolicy {

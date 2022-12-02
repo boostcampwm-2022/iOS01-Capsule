@@ -5,8 +5,8 @@
 //  Created by young june Park on 2022/11/15.
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
 final class CapsuleListView: UIView, BaseView {
     let sortBarButtonItem = {
@@ -27,7 +27,7 @@ final class CapsuleListView: UIView, BaseView {
         collectionView.showsVerticalScrollIndicator = false
         return collectionView
     }()
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -39,13 +39,13 @@ final class CapsuleListView: UIView, BaseView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     func configure() {
         backgroundColor = .themeBackground
         collectionView.backgroundColor = .themeBackground
         configureFlowLayout()
     }
-    
+
     func configureFlowLayout() {
         let collectionViewFlowLayout = UICollectionViewFlowLayout()
         collectionViewFlowLayout.scrollDirection = .vertical
@@ -57,13 +57,13 @@ final class CapsuleListView: UIView, BaseView {
             right: FrameResource.listCapsuleHorizontalInset)
         collectionView.collectionViewLayout = collectionViewFlowLayout
     }
-    
+
     func addSubViews() {
         [collectionView].forEach {
             addSubview($0)
         }
     }
-    
+
     func makeConstraints() {
         collectionView.snp.makeConstraints {
             $0.top.bottom.equalToSuperview()
@@ -71,5 +71,4 @@ final class CapsuleListView: UIView, BaseView {
             $0.trailing.equalToSuperview().offset(-FrameResource.horizontalPadding)
         }
     }
-    
 }

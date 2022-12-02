@@ -13,7 +13,7 @@ final class CapsuleOpenViewController: UIViewController, BaseViewController {
     var disposeBag = DisposeBag()
     var viewModel: CapsuleOpenViewModel?
     let capsuleOpenView = CapsuleOpenView()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view = capsuleOpenView
@@ -22,7 +22,7 @@ final class CapsuleOpenViewController: UIViewController, BaseViewController {
             viewModel?.input.capsuleCellModel.onNext(capsuleCellModel)
         }
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         capsuleOpenView.animate()
@@ -34,7 +34,7 @@ final class CapsuleOpenViewController: UIViewController, BaseViewController {
     }
 
     func bind() {
-        guard let viewModel = self.viewModel else {
+        guard let viewModel = viewModel else {
             // TODO: 예외처리
             return
         }
@@ -43,14 +43,14 @@ final class CapsuleOpenViewController: UIViewController, BaseViewController {
                 viewModel.input.openButtonTapped.onNext(())
             }
             .disposed(by: disposeBag)
-        
+
         viewModel.input.capsuleCellModel
             .withUnretained(self)
             .bind { owner, capsuleCellModel in
                 owner.capsuleOpenView.configure(capsuleCellModel: capsuleCellModel)
                 owner.viewModel?.output.isOpenable.onNext(capsuleCellModel.isOpenable())
             }.disposed(by: disposeBag)
-        
+
         viewModel.input.openButtonTapped
             .withLatestFrom(viewModel.output.isOpenable)
             .withUnretained(self)
@@ -63,7 +63,7 @@ final class CapsuleOpenViewController: UIViewController, BaseViewController {
                 }
             }
             .disposed(by: disposeBag)
-        
+
         viewModel.output.isOpenable
             .subscribe(on: MainScheduler.instance)
             .withLatestFrom(viewModel.input.capsuleCellModel, resultSelector: { isOpenable, capsuleCellModel in
@@ -73,14 +73,13 @@ final class CapsuleOpenViewController: UIViewController, BaseViewController {
             })
             .bind(onNext: {})
             .disposed(by: disposeBag)
-    
     }
-    
+
     private func moveToCapsuleDetail() {
         // TODO: 상세화면 이동
         // viewModel?.coordinator?.moveToCapsuleDetail()
     }
-    
+
     private func showAlert() {
         let alertController = UIAlertController(title: "캡슐 알림", message: "열 수 없는 캡슐입니다", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -89,5 +88,4 @@ final class CapsuleOpenViewController: UIViewController, BaseViewController {
         alertController.addAction(acceptAction)
         present(alertController, animated: true, completion: nil)
     }
-    
 }

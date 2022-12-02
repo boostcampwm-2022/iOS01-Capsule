@@ -35,7 +35,7 @@ class CapsuleOpenCoordinator: Coordinator {
             parent.tabBarWillHide(false)
         }
     }
-    
+
 //    func moveToCapsuleDetail() {
 //        let capsuleDetailCoordinator = CapsuleDetailCoordinator()
 //        capsuleDetailCoordinator.parent = self
