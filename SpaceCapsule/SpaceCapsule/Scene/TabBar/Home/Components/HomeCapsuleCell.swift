@@ -63,7 +63,7 @@ final class HomeCapsuleCell: UICollectionViewCell {
         thumbnailImageView.imageView.subviews.forEach {
             $0.removeFromSuperview()
         }
-        if capsuleCellModel.isOpenable == false {
+        if capsuleCellModel.isOpenable() == false {
             applyUnOpenableEffect(closeDate: capsuleCellModel.closedDate.dateString)
         }
     }
