@@ -19,7 +19,7 @@ final class ListCapsuleCell: UICollectionViewCell, UnOpenable {
         label.textAlignment = .center
         return label
     }()
-    
+
     lazy var blurEffectView = {
         let blurEffect = UIBlurEffect(style: .dark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
@@ -28,20 +28,20 @@ final class ListCapsuleCell: UICollectionViewCell, UnOpenable {
         blurEffectView.alpha = FrameResource.blurEffectAlpha
         return blurEffectView
     }()
-    
+
     lazy var lockImageView = {
         let lockImageView = UIImageView()
         lockImageView.image = .lock
         lockImageView.tintColor = .themeGray200
         return lockImageView
     }()
-    
+
     lazy var dateLabel = {
         let dateLabel = ThemeLabel(text: "밀봉시간:xxxx년 xx월 xx일", size: FrameResource.fontSize80, color: .themeGray200)
         dateLabel.textAlignment = .center
         return dateLabel
     }()
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubviews()
@@ -52,7 +52,14 @@ final class ListCapsuleCell: UICollectionViewCell, UnOpenable {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        thumbnailImageView.imageView.subviews.forEach {
+            $0.removeFromSuperview()
+        }
+    }
+
     func addSubviews() {
         [thumbnailImageView, descriptionLabel].forEach { [weak self] in
             self?.contentView.addSubview($0)
@@ -83,9 +90,8 @@ final class ListCapsuleCell: UICollectionViewCell, UnOpenable {
             applyUnOpenableEffect()
         }
     }
-    
+
 //    func applyUnOpenableEffect() {
-//        
+//
 //    }
-    
 }
