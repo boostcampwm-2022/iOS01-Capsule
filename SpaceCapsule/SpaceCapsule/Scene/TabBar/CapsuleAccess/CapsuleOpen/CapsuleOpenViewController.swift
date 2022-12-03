@@ -70,7 +70,7 @@ final class CapsuleOpenViewController: UIViewController, BaseViewController {
             .subscribe(on: MainScheduler.instance)
             .withLatestFrom(viewModel.input.capsuleCellModel, resultSelector: { isOpenable, capsuleCellModel in
                 if isOpenable == false {
-                    self.capsuleOpenView.applyUnOpenableEffect(capsuleCellModel: capsuleCellModel)
+                    self.capsuleOpenView.applyUnOpenableEffect()
                 }
             })
             .bind(onNext: {})

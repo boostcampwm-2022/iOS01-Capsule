@@ -8,7 +8,7 @@
 import SnapKit
 import UIKit
 
-protocol UnOpenable: UICollectionViewCell {
+protocol UnOpenable: UIView {
     var thumbnailImageView: ThemeThumbnailImageView { get }
     var blurEffectView: UIVisualEffectView { get }
     var lockImageView: UIImageView { get }
