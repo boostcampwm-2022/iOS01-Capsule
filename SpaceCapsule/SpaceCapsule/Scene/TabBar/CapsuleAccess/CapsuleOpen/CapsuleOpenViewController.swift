@@ -34,18 +34,12 @@ final class CapsuleOpenViewController: UIViewController, BaseViewController {
     }
 
     func bind() {
-        guard let viewModel = viewModel else {
-            // TODO: 예외처리
-            return
-        }
-
         capsuleOpenView.openButton.rx.tap
             .withUnretained(self)
             .bind { owner, _ in
                 owner.handleOpenButtonTap()
             }
             .disposed(by: disposeBag)
-       
     }
 
     private func showAlert() {

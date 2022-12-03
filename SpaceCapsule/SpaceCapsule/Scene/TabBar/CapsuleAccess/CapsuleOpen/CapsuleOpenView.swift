@@ -111,7 +111,6 @@ final class CapsuleOpenView: UIView, BaseView, UnOpenable {
         descriptionLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(self.snp.centerY).multipliedBy(0.8).offset(FrameResource.openCapsuleVerticalPadding + FrameResource.capsuleThumbnailHeight / 2)
-            //$0.bottom.equalTo(openButton.snp.top).offset(-FrameResource.bottomPadding)
         }
 
         openButton.snp.makeConstraints {

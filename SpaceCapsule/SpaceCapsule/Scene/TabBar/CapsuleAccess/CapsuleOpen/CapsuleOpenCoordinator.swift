@@ -35,12 +35,12 @@ class CapsuleOpenCoordinator: Coordinator {
             parent.tabBarWillHide(false)
         }
     }
-    
+
     func moveToCapsuleDetail() {
         guard let parent = parent as? CapsuleAccessCoordinator else {
             return
         }
-        
+
         parent.moveToCapsuleDetail()
     }
 }

@@ -13,7 +13,7 @@ final class CapsuleOpenViewModel: BaseViewModel {
     var disposeBag = DisposeBag()
     var coordinator: CapsuleOpenCoordinator?
     var capsuleCellItem: ListCapsuleCellItem?
-  
+
     var input = Input()
 
     struct Input {
