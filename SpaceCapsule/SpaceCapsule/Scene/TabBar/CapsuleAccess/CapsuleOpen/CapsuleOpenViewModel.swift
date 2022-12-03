@@ -12,7 +12,7 @@ import RxSwift
 final class CapsuleOpenViewModel: BaseViewModel {
     var disposeBag = DisposeBag()
     var coordinator: CapsuleOpenCoordinator?
-    var capsuleCellModel: ListCapsuleCellModel?
+    var capsuleCellItem: ListCapsuleCellItem?
   
     var input = Input()
 

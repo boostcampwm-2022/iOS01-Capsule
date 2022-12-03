@@ -8,7 +8,7 @@
 import CoreLocation
 import UIKit
 
-struct ListCapsuleCellModel: Hashable, Equatable {
+struct ListCapsuleCellItem: Hashable, Equatable {
     let uuid: String
     let thumbnailImageURL: String?
     let address: String
@@ -17,8 +17,7 @@ struct ListCapsuleCellModel: Hashable, Equatable {
     let coordinate: CLLocationCoordinate2D
 
     func isOpenable() -> Bool {
-        let distance = distance()
-        return (distance <= 100.0) ? true : false
+        return (distance() <= 100.0) ? true : false
     }
 
     static func == (lhs: Self, rhs: Self) -> Bool {

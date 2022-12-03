@@ -80,13 +80,13 @@ final class ListCapsuleCell: UICollectionViewCell, UnOpenable {
         }
     }
 
-    func configure(capsuleCellModel: ListCapsuleCellModel) {
-        if let thumbnailURL = capsuleCellModel.thumbnailImageURL {
+    func configure(capsuleCellItem: ListCapsuleCellItem) {
+        if let thumbnailURL = capsuleCellItem.thumbnailImageURL {
             thumbnailImageView.imageView.kr.setImage(with: thumbnailURL, scale: FrameResource.openableImageScale)
         }
-        descriptionLabel.text = "\(capsuleCellModel.memoryDate.dateString)\n\(capsuleCellModel.address)에서"
-        dateLabel.text = "밀봉시간:\(capsuleCellModel.closedDate.dateString)"
-        if !capsuleCellModel.isOpenable() {
+        descriptionLabel.text = "\(capsuleCellItem.memoryDate.dateString)\n\(capsuleCellItem.address)에서"
+        dateLabel.text = "밀봉시간:\(capsuleCellItem.closedDate.dateString)"
+        if !capsuleCellItem.isOpenable() {
             applyUnOpenableEffect()
         }
     }

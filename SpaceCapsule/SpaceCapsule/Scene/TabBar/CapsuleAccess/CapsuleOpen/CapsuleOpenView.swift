@@ -72,23 +72,23 @@ final class CapsuleOpenView: UIView, BaseView, UnOpenable {
         backgroundColor = .themeBackground
     }
 
-    func configure(capsuleCellModel: ListCapsuleCellModel) {
-        if let thumbnailURL = capsuleCellModel.thumbnailImageURL {
+    func configure(capsuleCellItem: ListCapsuleCellItem) {
+        if let thumbnailURL = capsuleCellItem.thumbnailImageURL {
             thumbnailImageView.imageView.kr.setImage(with: thumbnailURL, scale: FrameResource.openableImageScale)
         }
 
         descriptionLabel.text = """
-        \(capsuleCellModel.memoryDate.dateString)
-        \(capsuleCellModel.address) 에서의
+        \(capsuleCellItem.memoryDate.dateString)
+        \(capsuleCellItem.address) 에서의
         추억을 담은 캡슐
         """
         descriptionLabel.asFontColor(
-            targetStringList: [capsuleCellModel.memoryDate.dateString, capsuleCellModel.address],
+            targetStringList: [capsuleCellItem.memoryDate.dateString, capsuleCellItem.address],
             size: FrameResource.fontSize140,
             color: .themeGray400
         )
-        dateLabel.text = capsuleCellModel.closedDate.dateTimeString
-        if !capsuleCellModel.isOpenable() {
+        dateLabel.text = capsuleCellItem.closedDate.dateTimeString
+        if !capsuleCellItem.isOpenable() {
             openButton.backgroundColor = .themeGray200
             applyUnOpenableEffect()
         }

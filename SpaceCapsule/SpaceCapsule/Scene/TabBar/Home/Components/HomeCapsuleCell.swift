@@ -51,7 +51,7 @@ final class HomeCapsuleCell: UICollectionViewCell {
         }
     }
 
-    func configure(capsuleCellModel: ListCapsuleCellModel) {
+    func configure(capsuleCellModel: ListCapsuleCellItem) {
         if let thumbnailURL = capsuleCellModel.thumbnailImageURL {
             thumbnailImageView.imageView.kr.setImage(with: thumbnailURL, scale: FrameResource.openableImageScale)
         }

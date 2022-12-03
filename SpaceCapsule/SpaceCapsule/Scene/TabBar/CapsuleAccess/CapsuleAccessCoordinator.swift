@@ -12,7 +12,7 @@ final class CapsuleAccessCoordinator: Coordinator {
     var children: [Coordinator] = []
     var navigationController: CustomNavigationController?
     
-    var capsuleCellModel: ListCapsuleCellModel?
+    var capsuleCellItem: ListCapsuleCellItem?
 
     init(navigationController: CustomNavigationController?) {
         self.navigationController = navigationController
@@ -24,7 +24,7 @@ final class CapsuleAccessCoordinator: Coordinator {
 
     func moveToCapsuleOpen() {
         let capsuleOpenCoordinator = CapsuleOpenCoordinator(navigationController: navigationController)
-        capsuleOpenCoordinator.capsuleCellModel = capsuleCellModel
+        capsuleOpenCoordinator.capsuleCellItem = capsuleCellItem
         capsuleOpenCoordinator.parent = self
         capsuleOpenCoordinator.start()
         
@@ -34,7 +34,7 @@ final class CapsuleAccessCoordinator: Coordinator {
     func moveToCapsuleDetail() {
         let capsuleDetailCoordinator = CapsuleDetailCoordinator(navigationController: navigationController)
         capsuleDetailCoordinator.parent = self
-        capsuleDetailCoordinator.capsuleUUID = capsuleCellModel?.uuid
+        capsuleDetailCoordinator.capsuleUUID = capsuleCellItem?.uuid
         capsuleDetailCoordinator.start()
 
         children.append(capsuleDetailCoordinator)
