@@ -25,5 +25,7 @@ final class ProfileCoordinator: Coordinator {
         profileViewController.viewModel = profileViewModel
 
         navigationController?.setViewControllers([profileViewController], animated: true)
+        navigationController?.navigationBar.topItem?.title = "프로필"
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.themeFont(ofSize: FrameResource.fontSize120) as Any]
     }
 }
