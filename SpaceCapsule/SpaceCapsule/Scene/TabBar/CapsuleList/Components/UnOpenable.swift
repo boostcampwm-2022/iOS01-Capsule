@@ -29,12 +29,12 @@ extension UnOpenable {
         
         lockImageView.snp.makeConstraints {
             $0.center.equalToSuperview()
-            $0.width.height.equalToSuperview().multipliedBy(0.3)
+            $0.width.height.equalTo(thumbnailImageView.snp.width).multipliedBy(0.3)
         }
         
         dateLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.centerY.equalToSuperview().multipliedBy(1.4)
+            $0.top.equalTo(lockImageView.snp.bottom).offset(FrameResource.verticalPadding)
         }
     }
 }
