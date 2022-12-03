@@ -5,8 +5,8 @@
 //  Created by young june Park on 2022/11/15.
 //
 
-import RxSwift
 import RxCocoa
+import RxSwift
 import UIKit
 
 final class ProfileViewController: UIViewController, BaseViewController {
@@ -20,28 +20,29 @@ final class ProfileViewController: UIViewController, BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         bind()
     }
 
     func bind() {
-//        guard let viewModel else {
-//            return
-//        }
+        guard let viewModel else {
+            return
+        }
         profileView.settingButton.rx.tap
             .bind {
-            print("setting")
-        }
-        .disposed(by: disposeBag)
+                viewModel.input.tapSetting.onNext(())
+            }
+            .disposed(by: disposeBag)
+
         profileView.logOutButton.rx.tap
             .bind {
-            print("log2")
-        }
-        .disposed(by: disposeBag)
+                viewModel.input.tapLogOut.onNext(())
+            }
+            .disposed(by: disposeBag)
+
         profileView.signOutButton.rx.tap
             .bind {
-            print("signout")
-        }
-        .disposed(by: disposeBag)
+                viewModel.input.tapSignOut.onNext(())
+            }
+            .disposed(by: disposeBag)
     }
 }
