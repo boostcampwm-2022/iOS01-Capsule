@@ -87,7 +87,7 @@ final class CapsuleOpenView: UIView, BaseView, UnOpenable {
             size: FrameResource.fontSize140,
             color: .themeGray400
         )
-        
+        dateLabel.text = capsuleCellModel.closedDate.dateTimeString
         if !capsuleCellModel.isOpenable() {
             openButton.backgroundColor = .themeGray200
             applyUnOpenableEffect()
@@ -110,13 +110,13 @@ final class CapsuleOpenView: UIView, BaseView, UnOpenable {
 
         descriptionLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.bottom.equalTo(openButton.snp.top).offset(-FrameResource.buttonHeight)
+            $0.bottom.equalTo(openButton.snp.top).offset(-FrameResource.verticalPadding)
         }
 
         openButton.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(FrameResource.horizontalPadding)
             $0.trailing.equalToSuperview().offset(-FrameResource.horizontalPadding)
-            $0.bottom.equalToSuperview().offset(-FrameResource.buttonHeight)
+            $0.bottom.equalTo(safeAreaLayoutGuide.snp.bottom)
             $0.height.equalTo(FrameResource.buttonHeight)
         }
     }
