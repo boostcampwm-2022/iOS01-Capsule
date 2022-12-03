@@ -13,7 +13,7 @@ final class CapsuleOpenView: UIView, BaseView, UnOpenable {
     lazy var thumbnailImageView = ThemeThumbnailImageView(frame: .zero, width: FrameResource.capsuleThumbnailWidth)
 
     lazy var descriptionLabel = {
-        let label = ThemeLabel(text: "xxxx년 x월 x일\nxx시 xx구 에서의\n추억을 담은 캡슐", size: FrameResource.fontSize140, color: .themeGray300)
+        let label = ThemeLabel(text: nil, size: FrameResource.fontSize140, color: .themeGray300)
         label.numberOfLines = 3
         label.textAlignment = .center
         return label
@@ -36,7 +36,7 @@ final class CapsuleOpenView: UIView, BaseView, UnOpenable {
     }()
 
     lazy var dateLabel = {
-        let dateLabel = ThemeLabel(text: "밀봉시간:xxxx년 xx월 xx일", size: FrameResource.fontSize80, color: .themeGray200)
+        let dateLabel = ThemeLabel(text: nil, size: FrameResource.fontSize80, color: .themeGray200)
         dateLabel.textAlignment = .center
         return dateLabel
     }()
