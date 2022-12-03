@@ -8,16 +8,38 @@
 import SnapKit
 import UIKit
 
-final class ListCapsuleCell: UICollectionViewCell {
+final class ListCapsuleCell: UICollectionViewCell, UnOpenable {
     static let cellIdentifier = "ListCapsuleCell"
 
-    var thumbnailImageView = ThemeThumbnailImageView(frame: .zero, width: FrameResource.listCapsuleCellWidth)
+    lazy var thumbnailImageView = ThemeThumbnailImageView(frame: .zero, width: FrameResource.listCapsuleCellWidth)
 
-    var descriptionLabel = {
-        let label = ThemeLabel(text: "xxxx년 x월 x일\nxx시 xx구에서", size: FrameResource.fontSize80, color: .themeBlack)
+    lazy var descriptionLabel = {
+        let label = ThemeLabel(text: nil, size: FrameResource.fontSize80, color: .themeBlack)
         label.numberOfLines = 2
         label.textAlignment = .center
         return label
+    }()
+
+    lazy var blurEffectView = {
+        let blurEffect = UIBlurEffect(style: .dark)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.layer.cornerRadius = FrameResource.listCapsuleCellWidth / 2
+        blurEffectView.clipsToBounds = true
+        blurEffectView.alpha = FrameResource.blurEffectAlpha
+        return blurEffectView
+    }()
+
+    lazy var lockImageView = {
+        let lockImageView = UIImageView()
+        lockImageView.image = .lock
+        lockImageView.tintColor = .themeGray200
+        return lockImageView
+    }()
+
+    lazy var dateLabel = {
+        let dateLabel = ThemeLabel(text: nil, size: FrameResource.fontSize80, color: .themeGray200)
+        dateLabel.textAlignment = .center
+        return dateLabel
     }()
 
     override init(frame: CGRect) {
@@ -31,9 +53,16 @@ final class ListCapsuleCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        thumbnailImageView.imageView.subviews.forEach {
+            $0.removeFromSuperview()
+        }
+    }
+
     func addSubviews() {
-        [thumbnailImageView, descriptionLabel].forEach {
-            self.contentView.addSubview($0)
+        [thumbnailImageView, descriptionLabel].forEach { [weak self] in
+            self?.contentView.addSubview($0)
         }
     }
 
@@ -51,56 +80,14 @@ final class ListCapsuleCell: UICollectionViewCell {
         }
     }
 
-    func configure(capsuleCellModel: ListCapsuleCellModel) {
-        if let thumbnailURL = capsuleCellModel.thumbnailImageURL {
+    func configure(capsuleCellItem: ListCapsuleCellItem) {
+        if let thumbnailURL = capsuleCellItem.thumbnailImageURL {
             thumbnailImageView.imageView.kr.setImage(with: thumbnailURL, scale: FrameResource.openableImageScale)
         }
-        descriptionLabel.text = "\(capsuleCellModel.memoryDate.dateString)\n\(capsuleCellModel.address)에서"
-        if capsuleCellModel.isOpenable() == false {
-            applyUnOpenableEffect(closeDate: capsuleCellModel.closedDate.dateString)
-        }
-    }
-
-    func applyUnOpenableEffect(closeDate: String) {
-        applyBlurEffect()
-        applyLockImage()
-        applyCapsuleDate(closeDate: closeDate)
-    }
-
-    private func applyBlurEffect() {
-        let blurEffect = UIBlurEffect(style: .dark)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.layer.cornerRadius = FrameResource.listCapsuleCellWidth / 2
-        blurEffectView.clipsToBounds = true
-        blurEffectView.alpha = FrameResource.blurEffectAlpha
-        thumbnailImageView.imageView.addSubview(blurEffectView)
-
-        blurEffectView.snp.makeConstraints {
-            $0.center.equalToSuperview()
-            $0.width.height.equalToSuperview()
-        }
-    }
-
-    private func applyLockImage() {
-        let lockImageView = UIImageView()
-        lockImageView.image = .lock
-        lockImageView.tintColor = .themeGray200
-        thumbnailImageView.imageView.addSubview(lockImageView)
-
-        lockImageView.snp.makeConstraints {
-            $0.center.equalToSuperview()
-            $0.width.height.equalTo(thumbnailImageView.imageView.snp.width).multipliedBy(0.3)
-        }
-    }
-
-    private func applyCapsuleDate(closeDate: String) {
-        let dateLabel = ThemeLabel(text: "밀봉시간:\(closeDate)", size: FrameResource.fontSize80, color: .themeGray200)
-        dateLabel.textAlignment = .center
-        thumbnailImageView.imageView.addSubview(dateLabel)
-
-        dateLabel.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.centerY.equalToSuperview().multipliedBy(1.4)
+        descriptionLabel.text = "\(capsuleCellItem.memoryDate.dateString)\n\(capsuleCellItem.address)에서"
+        dateLabel.text = "밀봉시간:\(capsuleCellItem.closedDate.dateString)"
+        if !capsuleCellItem.isOpenable() {
+            applyUnOpenableEffect()
         }
     }
 }

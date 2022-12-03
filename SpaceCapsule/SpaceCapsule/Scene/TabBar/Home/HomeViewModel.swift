@@ -18,7 +18,7 @@ final class HomeViewModel: BaseViewModel {
     var output = Output()
     
     struct Input: ViewModelInput {
-        var capsuleCellModels = PublishSubject<[ListCapsuleCellModel]>()
+        var capsuleCellModels = PublishSubject<[ListCapsuleCellItem]>()
     }
     
     struct Output: ViewModelOutput {
@@ -38,7 +38,7 @@ final class HomeViewModel: BaseViewModel {
             .subscribe(
             onNext: { owner, capsuleList in
                 let capsuleCellModels = capsuleList.map { capsule in
-                    return ListCapsuleCellModel(uuid: capsule.uuid,
+                    return ListCapsuleCellItem(uuid: capsule.uuid,
                                                 thumbnailImageURL: capsule.images.first,
                                                 address: capsule.simpleAddress,
                                                 closedDate: capsule.closedDate,

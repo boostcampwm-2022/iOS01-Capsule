@@ -64,6 +64,7 @@ enum FrameResource {
     static let listCapsuleCellWidth: CGFloat = 135.0
     static let listCapsuleCellHeight: CGFloat = 210.0
     static let listCapsuleHorizontalInset: CGFloat = 10.0
+    static let openCapsuleVerticalPadding: CGFloat = 30.0
     
     static let capsuleCellShadowOffset: CGSize = CGSize(width: 4, height: 4)
     static let capsuleCellShadowRadius: CGFloat = 4.0

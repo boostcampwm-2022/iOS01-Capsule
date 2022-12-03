@@ -12,19 +12,12 @@ import RxSwift
 final class CapsuleOpenViewModel: BaseViewModel {
     var disposeBag = DisposeBag()
     var coordinator: CapsuleOpenCoordinator?
-    var capsuleCellModel: ListCapsuleCellModel?
+    var capsuleCellItem: ListCapsuleCellItem?
 
     var input = Input()
-    var output = Output()
 
     struct Input {
         var popViewController = PublishSubject<Void>()
-        var openButtonTapped = PublishSubject<Void>()
-        var capsuleCellModel = PublishSubject<ListCapsuleCellModel>()
-    }
-
-    struct Output {
-        var isOpenable = PublishSubject<Bool>()
     }
 
     init() {
@@ -36,13 +29,6 @@ final class CapsuleOpenViewModel: BaseViewModel {
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 owner.coordinator?.finish()
-            })
-            .disposed(by: disposeBag)
-        
-        input.openButtonTapped
-            .withUnretained(self)
-            .subscribe(onNext: { owner, _ in
-                owner.coordinator?.moveToCapsuleDetail()
             })
             .disposed(by: disposeBag)
     }

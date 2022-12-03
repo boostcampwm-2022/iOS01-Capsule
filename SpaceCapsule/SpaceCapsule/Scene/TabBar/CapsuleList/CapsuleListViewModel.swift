@@ -17,7 +17,7 @@ final class CapsuleListViewModel: BaseViewModel {
 
     struct Input {
         var capsules: BehaviorRelay<[Capsule]> = AppDataManager.shared.capsules
-        var capsuleCellModels = BehaviorRelay<[ListCapsuleCellModel]>(value: [])
+        var capsuleCellItems = BehaviorRelay<[ListCapsuleCellItem]>(value: [])
         var sortPolicy = BehaviorRelay<SortPolicy>(value: .nearest)
         var refreshLoading = PublishRelay<Bool>()
     }
@@ -37,19 +37,19 @@ final class CapsuleListViewModel: BaseViewModel {
             .withUnretained(self)
             .subscribe(
                 onNext: { owner, capsuleList in
-                    let capsuleCellModels = capsuleList.map { capsule in
-                        ListCapsuleCellModel(uuid: capsule.uuid,
-                                             thumbnailImageURL: capsule.images.first,
-                                             address: capsule.simpleAddress,
-                                             closedDate: capsule.closedDate,
-                                             memoryDate: capsule.memoryDate,
-                                             coordinate: CLLocationCoordinate2D(
-                                                 latitude: capsule.geopoint.latitude,
-                                                 longitude: capsule.geopoint.longitude
-                                             )
+                    let capsuleCellItems = capsuleList.map { capsule in
+                        ListCapsuleCellItem(uuid: capsule.uuid,
+                                            thumbnailImageURL: capsule.images.first,
+                                            address: capsule.simpleAddress,
+                                            closedDate: capsule.closedDate,
+                                            memoryDate: capsule.memoryDate,
+                                            coordinate: CLLocationCoordinate2D(
+                                                latitude: capsule.geopoint.latitude,
+                                                longitude: capsule.geopoint.longitude
+                                            )
                         )
                     }
-                    owner.sort(capsuleCellModels: capsuleCellModels, by: owner.input.sortPolicy.value)
+                    owner.sort(capsuleCellItems: capsuleCellItems, by: owner.input.sortPolicy.value)
                 },
                 onError: { error in
                     print(error.localizedDescription)
@@ -58,26 +58,26 @@ final class CapsuleListViewModel: BaseViewModel {
             .disposed(by: disposeBag)
     }
 
-    func sort(capsuleCellModels: [ListCapsuleCellModel], by sortPolicy: SortPolicy) {
-        var models = capsuleCellModels
+    func sort(capsuleCellItems: [ListCapsuleCellItem], by sortPolicy: SortPolicy) {
+        var items = capsuleCellItems
         switch sortPolicy {
         case .nearest:
-            models = capsuleCellModels.sorted {
+            items = capsuleCellItems.sorted {
                 $0.distance() < $1.distance()
             }
         case .furthest:
-            models = capsuleCellModels.sorted {
+            items = capsuleCellItems.sorted {
                 $0.distance() > $1.distance()
             }
         case .latest:
-            models = capsuleCellModels.sorted {
+            items = capsuleCellItems.sorted {
                 $0.memoryDate > $1.memoryDate
             }
         case .oldest:
-            models = capsuleCellModels.sorted {
+            items = capsuleCellItems.sorted {
                 $0.memoryDate < $1.memoryDate
             }
         }
-        input.capsuleCellModels.accept(models)
+        input.capsuleCellItems.accept(items)
     }
 }
