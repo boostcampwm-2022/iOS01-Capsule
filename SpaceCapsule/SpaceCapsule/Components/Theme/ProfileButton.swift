@@ -5,10 +5,12 @@
 //  Created by young june Park on 2022/12/03.
 //
 
+import RxCocoa
+import RxSwift
 import SnapKit
 import UIKit
 
-class ProfileButton: UIView {
+class ProfileButton: UIControl {
     private let label = ThemeLabel(size: FrameResource.fontSize100, color: .themeGray400)
     private let icon: UIImageView = {
         let imageView = UIImageView()
@@ -18,22 +20,15 @@ class ProfileButton: UIView {
         return imageView
     }()
 
-    var eventHandler: (() -> Void)?
-
     convenience init(text: String) {
         self.init()
-        
+        isUserInteractionEnabled = true
         label.text = text
         backgroundColor = .themeBackground
-        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapGestureEvent(_:))))
         addSubViews()
         makeConstraints()
     }
 
-    @objc private func tapGestureEvent(_ sender: UITapGestureRecognizer) {
-        eventHandler?()
-    }
-    
     func setText(_ text: String) {
         label.text = text
     }
@@ -59,5 +54,11 @@ class ProfileButton: UIView {
             $0.trailing.equalToSuperview().offset(-10)
             $0.leading.greaterThanOrEqualTo(label).offset(10)
         }
+    }
+}
+
+extension Reactive where Base: ProfileButton {
+    var tap: ControlEvent<Void> {
+        return controlEvent(.touchUpInside)
     }
 }

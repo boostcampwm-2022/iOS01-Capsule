@@ -6,15 +6,16 @@
 //
 
 import RxSwift
+import RxCocoa
 import UIKit
 
 final class ProfileViewController: UIViewController, BaseViewController {
     var disposeBag = DisposeBag()
     var viewModel: ProfileViewModel?
-    let mainView = ProfileView()
+    let profileView = ProfileView()
 
     override func loadView() {
-        view = mainView
+        view = profileView
     }
 
     override func viewDidLoad() {
@@ -24,6 +25,23 @@ final class ProfileViewController: UIViewController, BaseViewController {
     }
 
     func bind() {
-        // 임시요
+//        guard let viewModel else {
+//            return
+//        }
+        profileView.settingButton.rx.tap
+            .bind {
+            print("setting")
+        }
+        .disposed(by: disposeBag)
+        profileView.logOutButton.rx.tap
+            .bind {
+            print("log2")
+        }
+        .disposed(by: disposeBag)
+        profileView.signOutButton.rx.tap
+            .bind {
+            print("signout")
+        }
+        .disposed(by: disposeBag)
     }
 }
