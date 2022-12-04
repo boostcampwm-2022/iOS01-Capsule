@@ -72,7 +72,9 @@ final class ProfileView: UIView, BaseView {
 
     func configure() {
         profileImageView.image = .logo
-        nicknameLabel.text = "solbat"
+        if let nickname = UserDefaultsManager<UserInfo>.loadData(key: .userInfo)?.nickname {
+            nicknameLabel.text = nickname
+        }
     }
 
     func addSubViews() {
