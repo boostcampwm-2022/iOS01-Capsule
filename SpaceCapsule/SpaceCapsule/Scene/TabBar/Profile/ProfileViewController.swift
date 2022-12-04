@@ -45,6 +45,13 @@ final class ProfileViewController: UIViewController, BaseViewController {
             }
             .disposed(by: disposeBag)
 
+        viewModel.input.tapSetting
+            .withUnretained(self)
+            .bind { owner, _ in
+                owner.locationInfoSetting()
+            }
+            .disposed(by: disposeBag)
+
         viewModel.input.tapSignOut
             .withUnretained(self)
             .bind { owner, _ in
@@ -76,6 +83,39 @@ final class ProfileViewController: UIViewController, BaseViewController {
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let acceptAction = UIAlertAction(title: "OK", style: .destructive, handler: { [weak self] _ in
             self?.viewModel?.withdrawal()
+        })
+        alertController.addAction(cancelAction)
+        alertController.addAction(acceptAction)
+        present(alertController, animated: true, completion: nil)
+    }
+
+    func locationInfoSetting() {
+        switch AppDataManager.shared.location.core.authorizationStatus {
+        case .denied:
+            showRequestAuthorization()
+        case .notDetermined, .restricted:
+            AppDataManager.shared.location.core.requestWhenInUseAuthorization()
+        default:
+            showAlreadyAllowed()
+            return
+        }
+    }
+
+    private func showAlreadyAllowed() {
+        let alertController = UIAlertController(title: "위치 권한", message: "이미 동의하셨습니다.", preferredStyle: .alert)
+        let acceptAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+        alertController.addAction(acceptAction)
+        present(alertController, animated: true, completion: nil)
+    }
+
+    private func showRequestAuthorization() {
+        guard let url = URL(string: UIApplication.openSettingsURLString) else {
+            return
+        }
+        let alertController = UIAlertController(title: "위치 권한", message: "앱 설정에서 위치권한을 허용해주세요.", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let acceptAction = UIAlertAction(title: "OK", style: .default, handler: { _ in
+            UIApplication.shared.open(url)
         })
         alertController.addAction(cancelAction)
         alertController.addAction(acceptAction)

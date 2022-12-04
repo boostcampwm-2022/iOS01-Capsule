@@ -24,13 +24,7 @@ final class ProfileViewModel: BaseViewModel {
         bind()
     }
 
-    func bind() {
-        input.tapSetting
-            .bind {
-                print(1)
-            }
-            .disposed(by: disposeBag)
-    }
+    func bind() {}
 
     func signOut() {
         AppDataManager.shared.auth.signOut { error in
