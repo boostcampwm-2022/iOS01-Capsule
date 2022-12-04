@@ -14,3 +14,13 @@ protocol Coordinator: AnyObject {
 
     func start()
 }
+
+extension Coordinator {
+    func pop() -> Coordinator? {
+        let parentCoordinator = parent
+        children.removeAll()
+        navigationController?.setViewControllers([], animated: false)
+        parent = nil
+        return parentCoordinator
+    }
+}
