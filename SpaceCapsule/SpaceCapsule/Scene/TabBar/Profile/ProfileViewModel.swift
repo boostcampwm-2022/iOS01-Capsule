@@ -44,7 +44,15 @@ final class ProfileViewModel: BaseViewModel {
         coordinator?.moveToAuth()
     }
 
-//    func withdrawal() {
-//
-//    }
+    func withdrawal() {
+        AppDataManager.shared.auth.withdrawal { error in
+            if let error = error {
+                print(error.localizedDescription)
+                UserDefaultsManager.saveData(data: true, key: .isRegistered)
+                return
+            }
+        }
+        UserDefaultsManager.saveData(data: false, key: .isRegistered)
+        signOut()
+    }
 }
