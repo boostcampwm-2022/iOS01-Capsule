@@ -25,4 +25,13 @@ class FirebaseAuthManager {
     func signIn(with: AuthCredential, completion: @escaping ((AuthDataResult?, Error?) -> Void?)) {
         auth.signIn(with: with)
     }
+    
+    func signOut(completion: @escaping ((Error?) -> Void?)) {
+        do {
+            try auth.signOut()
+        } catch let signOutError as NSError {
+            completion(signOutError)
+        }
+    }
+    
 }
