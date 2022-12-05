@@ -13,27 +13,32 @@ import RxSwift
 final class CapsuleListViewModel: BaseViewModel {
     var disposeBag = DisposeBag()
     var coordinator: CapsuleListCoordinator?
-    private let currentLocation = CLLocationCoordinate2D(latitude: 37.582867, longitude: 126.027869)
     var input = Input()
 
     struct Input {
-        var capsuleCellModels = PublishSubject<[CapsuleCellModel]>()
-        var sortPolicy = PublishSubject<SortPolicy>()
+        var capsules: BehaviorRelay<[Capsule]> = AppDataManager.shared.capsules
+        var capsuleCellItems = BehaviorRelay<[ListCapsuleCellItem]>(value: [])
+        var sortPolicy = BehaviorRelay<SortPolicy>(value: .nearest)
         var refreshLoading = PublishRelay<Bool>()
     }
 
-    init() {}
-    
+    init() {
+        bind()
+        fetchCapsuleList()
+    }
+
+    private func bind() {}
+    func refreshCapsule() {
+        AppDataManager.shared.fetchCapsules()
+    }
+
     func fetchCapsuleList() {
-        guard let currentUser = FirebaseAuthManager.shared.currentUser else {
-            return
-        }
-        FirestoreManager.shared.fetchCapsuleList(of: currentUser.uid)
+        input.capsules
             .withUnretained(self)
             .subscribe(
-            onNext: { owner, capsuleList in
-                let capsuleCellModels = capsuleList.map { capsule in
-                    return CapsuleCellModel(uuid: capsule.uuid,
+                onNext: { owner, capsuleList in
+                    let capsuleCellItems = capsuleList.map { capsule in
+                        ListCapsuleCellItem(uuid: capsule.uuid,
                                             thumbnailImageURL: capsule.images.first,
                                             address: capsule.simpleAddress,
                                             closedDate: capsule.closedDate,
@@ -42,39 +47,37 @@ final class CapsuleListViewModel: BaseViewModel {
                                                 latitude: capsule.geopoint.latitude,
                                                 longitude: capsule.geopoint.longitude
                                             )
-                    )
+                        )
+                    }
+                    owner.sort(capsuleCellItems: capsuleCellItems, by: owner.input.sortPolicy.value)
+                },
+                onError: { error in
+                    print(error.localizedDescription)
                 }
-                owner.input.capsuleCellModels.onNext(capsuleCellModels)
-                owner.input.sortPolicy.onNext(.nearest)
-            },
-            onError: { error in
-                print(error.localizedDescription)
-            }
-        )
-        .disposed(by: disposeBag)
-        
+            )
+            .disposed(by: disposeBag)
     }
-    
-    func sort(capsuleCellModels: [CapsuleCellModel], by sortPolicy: SortPolicy) {
-        var models = capsuleCellModels
+
+    func sort(capsuleCellItems: [ListCapsuleCellItem], by sortPolicy: SortPolicy) {
+        var items = capsuleCellItems
         switch sortPolicy {
         case .nearest:
-            models = capsuleCellModels.sorted {
-                $0.distance(from: currentLocation) < $1.distance(from: currentLocation)
+            items = capsuleCellItems.sorted {
+                $0.distance() < $1.distance()
             }
         case .furthest:
-            models = capsuleCellModels.sorted {
-                $0.distance(from: currentLocation) > $1.distance(from: currentLocation)
+            items = capsuleCellItems.sorted {
+                $0.distance() > $1.distance()
             }
         case .latest:
-            models = capsuleCellModels.sorted {
+            items = capsuleCellItems.sorted {
                 $0.memoryDate > $1.memoryDate
             }
         case .oldest:
-            models = capsuleCellModels.sorted {
+            items = capsuleCellItems.sorted {
                 $0.memoryDate < $1.memoryDate
             }
         }
-        input.capsuleCellModels.onNext(models)
+        input.capsuleCellItems.accept(items)
     }
 }

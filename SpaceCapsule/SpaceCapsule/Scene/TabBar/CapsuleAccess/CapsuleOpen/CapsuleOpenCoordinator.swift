@@ -11,7 +11,7 @@ class CapsuleOpenCoordinator: Coordinator {
     var parent: Coordinator?
     var children: [Coordinator] = []
     var navigationController: CustomNavigationController?
-    var capsuleCellModel: CapsuleCellModel?
+    var capsuleCellItem: ListCapsuleCellItem?
 
     init(navigationController: CustomNavigationController?) {
         self.navigationController = navigationController
@@ -20,12 +20,12 @@ class CapsuleOpenCoordinator: Coordinator {
     func start() {
         let capsuleOpenViewController = CapsuleOpenViewController()
         let capsuleOpenViewModel = CapsuleOpenViewModel()
-        if let capsuleCellModel = capsuleCellModel {
-            capsuleOpenViewModel.capsuleCellModel = capsuleCellModel
+        if let capsuleCellItem = capsuleCellItem {
+            capsuleOpenViewModel.capsuleCellItem = capsuleCellItem
         }
         capsuleOpenViewModel.coordinator = self
         capsuleOpenViewController.viewModel = capsuleOpenViewModel
-
+        
         navigationController?.pushViewController(capsuleOpenViewController, animated: true)
     }
 
@@ -35,17 +35,12 @@ class CapsuleOpenCoordinator: Coordinator {
             parent.tabBarWillHide(false)
         }
     }
-    
-//    func moveToCapsuleDetail() {
-//        let capsuleDetailCoordinator = CapsuleDetailCoordinator()
-//        capsuleDetailCoordinator.parent = self
-//        capsuleDetailCoordinator.start()
-//
-//        children.append(capsuleDetailCoordinator)
-//
-//        if let controller = capsuleDetailCoordinator.navigationController {
-//            controller.modalPresentationStyle = .fullScreen
-//            tabBarController.present(controller, animated: true)
-//        }
-//    }
+
+    func moveToCapsuleDetail() {
+        guard let parent = parent as? CapsuleAccessCoordinator else {
+            return
+        }
+ 
+        parent.moveToCapsuleDetail()
+    }
 }

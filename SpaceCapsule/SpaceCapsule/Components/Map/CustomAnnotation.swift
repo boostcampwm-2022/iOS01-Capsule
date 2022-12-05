@@ -9,7 +9,7 @@ import MapKit
 import UIKit
 
 final class CustomAnnotation: MKPointAnnotation {
-    let uuid: String
+    let uuid: String?
 
     weak var annotationView: CustomAnnotationView?
 
@@ -23,7 +23,7 @@ final class CustomAnnotation: MKPointAnnotation {
         return isOpenable ? .openableCapsule : .unopenableCapsule
     }
 
-    required init(uuid: String, latitude: Double, longitude: Double) {
+    required init(uuid: String?, latitude: Double, longitude: Double) {
         self.uuid = uuid
 
         super.init()

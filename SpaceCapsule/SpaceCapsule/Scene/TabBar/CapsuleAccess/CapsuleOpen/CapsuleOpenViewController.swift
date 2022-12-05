@@ -13,17 +13,16 @@ final class CapsuleOpenViewController: UIViewController, BaseViewController {
     var disposeBag = DisposeBag()
     var viewModel: CapsuleOpenViewModel?
     let capsuleOpenView = CapsuleOpenView()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view = capsuleOpenView
-        bind()
-        if let capsuleCellModel = viewModel?.capsuleCellModel {
-            viewModel?.input.capsuleCellModel.onNext(capsuleCellModel)
+        if let capsuleCellItem = viewModel?.capsuleCellItem {
+            capsuleOpenView.configure(capsuleCellItem: capsuleCellItem)
         }
-        viewModel?.output.isOpenable.onNext(false)
+        bind()
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         capsuleOpenView.animate()
@@ -35,54 +34,14 @@ final class CapsuleOpenViewController: UIViewController, BaseViewController {
     }
 
     func bind() {
-        guard let viewModel = self.viewModel else {
-            // TODO: 예외처리
-            return
-        }
         capsuleOpenView.openButton.rx.tap
-            .bind {
-                viewModel.input.openButtonTapped.onNext(())
+            .withUnretained(self)
+            .bind { owner, _ in
+                owner.handleOpenButtonTap()
             }
             .disposed(by: disposeBag)
-        
-        viewModel.input.capsuleCellModel
-            .withUnretained(self)
-            .bind { owner, capsuleCellModel in
-                owner.capsuleOpenView.configure(capsuleCellModel: capsuleCellModel)
-            }.disposed(by: disposeBag)
-        
-        viewModel.input.openButtonTapped
-            .withLatestFrom(viewModel.output.isOpenable)
-            .withUnretained(self)
-            .bind { weakSelf, isOpenable in
-                if isOpenable {
-                    // 애니메이션 적용과
-                    // 진동
-                    weakSelf.capsuleOpenView.shakeAnimate()
-                    weakSelf.moveToCapsuleDetail()
-                } else {
-                    weakSelf.showAlert()
-                }
-            }
-            .disposed(by: disposeBag)
-        
-        viewModel.output.isOpenable
-            .subscribe(on: MainScheduler.instance)
-            .withLatestFrom(viewModel.input.capsuleCellModel, resultSelector: { isOpenable, capsuleCellModel in
-                if isOpenable == false {
-                    self.capsuleOpenView.applyUnOpenableEffect(capsuleCellModel: capsuleCellModel)
-                }
-            })
-            .bind(onNext: {})
-            .disposed(by: disposeBag)
-    
     }
-    
-    private func moveToCapsuleDetail() {
-        print("move to CapsuleDetail 화면")
-        // viewModel?.coordinator?.moveToCapsuleDetail()
-    }
-    
+
     private func showAlert() {
         let alertController = UIAlertController(title: "캡슐 알림", message: "열 수 없는 캡슐입니다", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -91,5 +50,16 @@ final class CapsuleOpenViewController: UIViewController, BaseViewController {
         alertController.addAction(acceptAction)
         present(alertController, animated: true, completion: nil)
     }
-    
+
+    func handleOpenButtonTap() {
+        guard let capsuleCellItem = viewModel?.capsuleCellItem else {
+            return
+        }
+        if capsuleCellItem.isOpenable() {
+            capsuleOpenView.shakeAnimate()
+            viewModel?.coordinator?.moveToCapsuleDetail()
+        } else {
+            showAlert()
+        }
+    }
 }

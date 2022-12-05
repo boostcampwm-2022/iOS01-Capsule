@@ -10,47 +10,43 @@ import SnapKit
 import UIKit
 
 final class DatePickerViewController: UIViewController {
-    var datePicker: UIDatePicker = UIDatePicker()
+    var disposeBag = DisposeBag()
     var viewModel: DatePickerViewModel?
+
+    private let mainView = DatePickerView()
+
+    override func loadView() {
+        view = mainView
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.backgroundColor = .white
-
-        addSubViews()
-        makeConstraints()
+        bind()
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        viewModel?.input.viewWillDisappear.onNext(())
-        datePicker.removeTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
-    }
 
     func configure(date: Date?) {
-        datePicker.date = date ?? Date()
-        datePicker.preferredDatePickerStyle = .inline
-        datePicker.datePickerMode = .date
-        datePicker.locale = Locale(identifier: "ko-KR")
-        datePicker.timeZone = .autoupdatingCurrent
-        datePicker.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
+        view.backgroundColor = .white
+        mainView.configure(date: date)
     }
 
-    func addSubViews() {
-        view.addSubview(datePicker)
-    }
-
-    func makeConstraints() {
-        datePicker.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(FrameResource.spacing200)
-            $0.leading.equalToSuperview().offset(FrameResource.horizontalPadding)
-            $0.trailing.equalToSuperview().offset(-FrameResource.horizontalPadding)
-            $0.bottom.equalToSuperview()
-        }
-    }
-
-    @objc private func dateChanged(_ sender: UIDatePicker) {
-        viewModel?.input.date.onNext(sender.date)
+    private func bind() {
+        mainView.datePicker.rx.date
+            .subscribe(onNext: { [weak self] date in
+                self?.viewModel?.input.date.onNext(date)
+            })
+            .disposed(by: disposeBag)
+        
+        mainView.cancelButton.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                self?.viewModel?.input.tapCancel.onNext(())
+            })
+            .disposed(by: disposeBag)
+        
+        mainView.doneButton.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                self?.viewModel?.input.tapDone.onNext(())
+            })
+            .disposed(by: disposeBag)
     }
 }

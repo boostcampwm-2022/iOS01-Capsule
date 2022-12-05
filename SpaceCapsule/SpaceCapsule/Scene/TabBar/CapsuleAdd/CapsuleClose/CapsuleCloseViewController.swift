@@ -31,16 +31,17 @@ final class CapsuleCloseViewController: UIViewController, BaseViewController {
 
     func bind() {
         mainView.closeButton.rx.tap
-            .subscribe(onNext: { [weak self] in
-                self?.viewModel?.input.tapClose.onNext(())
+            .withUnretained(self)
+            .bind(onNext: { owner, _ in
+                owner.viewModel?.input.tapClose.onNext(())
             })
             .disposed(by: disposeBag)
 
         viewModel?.output.capsule
             .compactMap { $0 }
             .withUnretained(self)
-            .subscribe(onNext: { weakSelf, capsule in
-                weakSelf.mainView.configure(item:
+            .subscribe(onNext: { owner, capsule in
+                owner.mainView.configure(item:
                     CapsuleCloseView.Item(
                         closedDateString: capsule.closedDate.dateTimeString,
                         memoryDateString: capsule.memoryDate.dateString,

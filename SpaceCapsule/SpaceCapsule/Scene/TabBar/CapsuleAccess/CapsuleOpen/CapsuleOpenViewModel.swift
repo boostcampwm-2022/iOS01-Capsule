@@ -9,22 +9,15 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-class CapsuleOpenViewModel: BaseViewModel {
+final class CapsuleOpenViewModel: BaseViewModel {
     var disposeBag = DisposeBag()
     var coordinator: CapsuleOpenCoordinator?
-    var capsuleCellModel: CapsuleCellModel?
+    var capsuleCellItem: ListCapsuleCellItem?
 
     var input = Input()
-    var output = Output()
 
     struct Input {
         var popViewController = PublishSubject<Void>()
-        var openButtonTapped = PublishSubject<Void>()
-        var capsuleCellModel = PublishSubject<CapsuleCellModel>()
-    }
-    
-    struct Output {
-        var isOpenable = PublishSubject<Bool>()
     }
 
     init() {
@@ -33,8 +26,9 @@ class CapsuleOpenViewModel: BaseViewModel {
 
     private func bind() {
         input.popViewController.asObservable()
-            .subscribe(onNext: { [weak self] in
-                self?.coordinator?.finish()
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.coordinator?.finish()
             })
             .disposed(by: disposeBag)
     }

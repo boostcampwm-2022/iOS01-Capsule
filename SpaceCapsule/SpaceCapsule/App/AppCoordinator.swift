@@ -5,8 +5,8 @@
 //  Created by young june Park on 2022/11/15.
 //
 
-import UIKit
 import RxSwift
+import UIKit
 
 enum AuthFlow {
     case signInFlow
@@ -16,7 +16,7 @@ enum AuthFlow {
 enum FirebaseAuthError: LocalizedError {
     case noSnapshot
     case decodeError
-    
+
     var errorDescription: String {
         switch self {
         case .noSnapshot:
@@ -31,43 +31,45 @@ final class AppCoordinator: Coordinator {
     var parent: Coordinator?
     var children: [Coordinator] = []
     var navigationController: CustomNavigationController?
-    
+
     var window: UIWindow?
-    
+
     let disposeBag = DisposeBag()
-    
+
     // MARK: AppCoordinator가 Window를 관리
+
     init(window: UIWindow?) {
         self.window = window
     }
-    
+
     func start() {
         // MARK: 앱 실행 시 로딩 화면
+
         let loadingViewController = LoadingViewController()
         window?.rootViewController = loadingViewController
         window?.makeKeyAndVisible()
-        
+
         // MARK: Firebase signin/signout 과 Apple 로그인/로그아웃 상태
+
         guard let currentUser = FirebaseAuthManager.shared.currentUser,
               let isSignedIn = UserDefaultsManager<Bool>.loadData(key: .isSignedIn) else {
             moveToAuth(authFlow: .signInFlow)
             return
         }
-        
+
         if isSignedIn {
             checkRegistration(uid: currentUser.uid)
         } else {
             moveToAuth(authFlow: .signInFlow)
         }
     }
-    
+
     private func checkRegistration(uid: String) {
-        
         guard let isRegistered = UserDefaultsManager<Bool>.loadData(key: .isRegistered) else {
             moveToAuth(authFlow: .nicknameFlow)
             return
         }
-                
+
         if isRegistered {
             moveToTabBar()
         } else {
@@ -85,10 +87,10 @@ final class AppCoordinator: Coordinator {
                         self?.moveToAuth(authFlow: .nicknameFlow)
                     }
                 )
-                .disposed(by: self.disposeBag)
+                .disposed(by: disposeBag)
         }
     }
-    
+
     func moveToAuth(authFlow: AuthFlow) {
         let navigationController = CustomNavigationController()
         let authCoordinator = AuthCoordinator(navigationController: navigationController)

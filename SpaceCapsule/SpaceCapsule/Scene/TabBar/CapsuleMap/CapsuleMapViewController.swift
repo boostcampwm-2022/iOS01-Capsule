@@ -12,7 +12,7 @@ import UIKit
 
 final class CapsuleMapViewController: UIViewController, BaseViewController {
     struct Settings {
-        static let openableRange: Double = 100
+        static let openableRange: Double = LocationManager.openableRange
         static let monitoringRange: Double = 1000
         static let monitoringUpdateRange: Double = 850
         static let locationUpdateRange: Double = 5
@@ -151,7 +151,7 @@ final class CapsuleMapViewController: UIViewController, BaseViewController {
             return
         }
 
-        let span = MKCoordinateSpan(latitudeDelta: 0.04, longitudeDelta: 0.04)
+        let span = MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
         let region = MKCoordinateRegion(center: currentLocation, span: span)
         mapView.setRegion(region, animated: true)
 
@@ -247,13 +247,13 @@ final class CapsuleMapViewController: UIViewController, BaseViewController {
 // TODO: Overlay 필요없을 때 삭제
 extension CapsuleMapViewController: MKMapViewDelegate {
     private func addCircleLocation(at center: CLLocationCoordinate2D) {
-        if let previousOverlay = smallOverlay {
-            mapView.removeOverlay(previousOverlay)
-        }
+//        if let previousOverlay = smallOverlay {
+//            mapView.removeOverlay(previousOverlay)
+//        }
 
-        let circle = MKCircle(center: center, radius: Settings.openableRange)
-        mapView.addOverlay(circle)
-        smallOverlay = circle
+//        let circle = MKCircle(center: center, radius: Settings.openableRange)
+//        mapView.addOverlay(circle)
+//        smallOverlay = circle
     }
 
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
