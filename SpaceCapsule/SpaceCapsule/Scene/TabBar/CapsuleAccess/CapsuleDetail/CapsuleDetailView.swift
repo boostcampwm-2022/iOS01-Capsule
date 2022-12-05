@@ -14,17 +14,18 @@ final class CapsuleDetailView: UIView, BaseView {
         stackView.axis = .vertical
         stackView.spacing = FrameResource.spacing400
         stackView.alignment = .center
+        
         return stackView
     }()
     
-    let imageCollectionView = {
-        let customLayout = DetailImageFlowLayout()
+    lazy var imageCollectionView = {
+        let customLayout = createLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: customLayout)
         collectionView.register(DetailImageCell.self, forCellWithReuseIdentifier: DetailImageCell.identifier)
-        
         collectionView.alwaysBounceHorizontal = true
         collectionView.backgroundColor = .clear
         collectionView.showsHorizontalScrollIndicator = false
+        
         return collectionView
     }()
     
@@ -32,6 +33,7 @@ final class CapsuleDetailView: UIView, BaseView {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = FrameResource.spacing200
+        
         return stackView
     }()
     
@@ -39,16 +41,18 @@ final class CapsuleDetailView: UIView, BaseView {
         let label = UILabel()
         label.textColor = .themeGray300
         label.font = .themeFont(ofSize: 16)
+        
         return label
     }()
     
     private let descriptionView: UITextView = {
-       let view = UITextView()
+        let view = UITextView()
         view.isUserInteractionEnabled = false
         view.textColor = .themeGray400
         view.font = .themeFont(ofSize: 24)
         view.isScrollEnabled = false
         view.backgroundColor = .clear
+        
         return view
     }()
     
@@ -57,6 +61,7 @@ final class CapsuleDetailView: UIView, BaseView {
         mapView.contentMode = .scaleAspectFit
         mapView.layer.borderWidth = 0.5
         mapView.layer.borderColor = UIColor.themeGray300?.cgColor
+        
         return mapView
     }()
     
@@ -66,7 +71,7 @@ final class CapsuleDetailView: UIView, BaseView {
         addSubViews()
         makeConstraints()
     }
-
+    
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -116,5 +121,22 @@ final class CapsuleDetailView: UIView, BaseView {
     func updateCapsuleData(capsule: Capsule) {
         closedDateLabel.text = "밀봉시간: \(capsule.closedDate.dateString)"
         descriptionView.text = capsule.description
+    }
+    
+    private func createLayout() -> UICollectionViewLayout {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                              heightDimension: .fractionalHeight(1))
+        
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(FrameResource.detailImageViewWidth), heightDimension: .absolute(FrameResource.detailImageViewHeight))
+        
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .groupPagingCentered
+        section.interGroupSpacing = FrameResource.spacing200
+        
+        return UICollectionViewCompositionalLayout(section: section)
     }
 }

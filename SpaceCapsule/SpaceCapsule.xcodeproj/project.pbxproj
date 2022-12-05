@@ -127,7 +127,6 @@
 		4A05D0EC2924C04200A2EF50 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A05D0EB2924C04200A2EF50 /* GoogleService-Info.plist */; };
 		4A05D1052925CF2A00A2EF50 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A05D1042925CF2A00A2EF50 /* NetworkError.swift */; };
 		4A1FEFF8292F1F1200A935BB /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1FEFF7292F1F1200A935BB /* CustomAnnotation.swift */; };
-		4A2449CD2936043E000EE58C /* DetailImageFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2449CC2936043E000EE58C /* DetailImageFlowLayout.swift */; };
 		4A2449D129360669000EE58C /* DetailImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2449D029360669000EE58C /* DetailImageCell.swift */; };
 		4A9E9147292A2A5A00B7CC5C /* CLLocationManager+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E9146292A2A5A00B7CC5C /* CLLocationManager+Rx.swift */; };
 		4A9E9149292A383900B7CC5C /* MKMapView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E9148292A383900B7CC5C /* MKMapView+Rx.swift */; };
@@ -233,9 +232,6 @@
 		28049CEA29237E96002389BD /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		28049CEC29238216002389BD /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
 		2807BC0A292C658000288A5D /* ListCapsuleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCapsuleCell.swift; sourceTree = "<group>"; };
-		2824555E293B105800DE03A1 /* SpaceCapsule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceCapsule.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		2824555F293B105800DE03A1 /* SpaceCapsuleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpaceCapsuleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		28245560293B105800DE03A1 /* SpaceCapsuleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpaceCapsuleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		28245561293B17B100DE03A1 /* UnOpenable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnOpenable.swift; sourceTree = "<group>"; };
 		2885A9FF293B6466003E5311 /* ProfileButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileButton.swift; sourceTree = "<group>"; };
 		288A8E912923244D000229D2 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
@@ -293,11 +289,7 @@
 		4A05D0EB2924C04200A2EF50 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4A05D1042925CF2A00A2EF50 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		4A1FEFF7292F1F1200A935BB /* CustomAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
-		4A2449CC2936043E000EE58C /* DetailImageFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImageFlowLayout.swift; sourceTree = "<group>"; };
 		4A2449D029360669000EE58C /* DetailImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImageCell.swift; sourceTree = "<group>"; };
-		4A2449ED2939C63E000EE58C /* SpaceCapsule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceCapsule.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		4A2449EE2939C63E000EE58C /* SpaceCapsuleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpaceCapsuleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		4A2449EF2939C63E000EE58C /* SpaceCapsuleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpaceCapsuleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A9E9146292A2A5A00B7CC5C /* CLLocationManager+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationManager+Rx.swift"; sourceTree = "<group>"; };
 		4A9E9148292A383900B7CC5C /* MKMapView+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKMapView+Rx.swift"; sourceTree = "<group>"; };
 		4AF16AE6292B1F8400787C5C /* CustomAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotationView.swift; sourceTree = "<group>"; };
@@ -793,7 +785,6 @@
 		4A2449CB2936033B000EE58C /* Componenets */ = {
 			isa = PBXGroup;
 			children = (
-				4A2449CC2936043E000EE58C /* DetailImageFlowLayout.swift */,
 				4A2449D029360669000EE58C /* DetailImageCell.swift */,
 			);
 			path = Componenets;
@@ -1102,7 +1093,6 @@
 				288A8E922923244D000229D2 /* Coordinator.swift in Sources */,
 				288A8EE829235FE2000229D2 /* CapsuleCloseViewController.swift in Sources */,
 				599C1A4F292CC99A00517E93 /* FirebaseAuthManager.swift in Sources */,
-				4A2449CD2936043E000EE58C /* DetailImageFlowLayout.swift in Sources */,
 				288A8EB429235B62000229D2 /* ProfileViewController.swift in Sources */,
 				0DCB22932924CE58002CB095 /* CustomTabBarController.swift in Sources */,
 				4A9E9147292A2A5A00B7CC5C /* CLLocationManager+Rx.swift in Sources */,
