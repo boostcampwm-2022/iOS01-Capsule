@@ -7,6 +7,7 @@
 
 import RxSwift
 import SnapKit
+import MapKit
 import UIKit
 
 final class CapsuleDetailViewController: UIViewController, BaseViewController {
@@ -21,12 +22,13 @@ final class CapsuleDetailViewController: UIViewController, BaseViewController {
         super.viewDidLoad()
         
         applyDataSource()
-        
         bind()
+        viewModel?.input.frameWidth.onNext(view.frame.width)
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
         scrollView.frame = CGRect(origin: .zero, size: view.frame.size)
         scrollView.backgroundColor = .themeBackground
 
@@ -57,6 +59,7 @@ final class CapsuleDetailViewController: UIViewController, BaseViewController {
             .subscribe(onNext: { owner, data in
                 if let capsule = data.first {
                     owner.mainView.updateCapsuleData(capsule: capsule)
+                    owner.setUpNavigationTitle(capsule.title)
                 }
             })
             .disposed(by: disposeBag)
@@ -98,5 +101,9 @@ final class CapsuleDetailViewController: UIViewController, BaseViewController {
         snapshot.appendSections([0])
         snapshot.appendItems(cells, toSection: 0)
         imageDataSource?.apply(snapshot)
+    }
+    
+    private func setUpNavigationTitle(_ title: String) {
+        navigationItem.title = title
     }
 }

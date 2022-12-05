@@ -25,7 +25,7 @@ class CapsuleOpenCoordinator: Coordinator {
         }
         capsuleOpenViewModel.coordinator = self
         capsuleOpenViewController.viewModel = capsuleOpenViewModel
-
+        
         navigationController?.pushViewController(capsuleOpenViewController, animated: true)
     }
 
@@ -40,7 +40,7 @@ class CapsuleOpenCoordinator: Coordinator {
         guard let parent = parent as? CapsuleAccessCoordinator else {
             return
         }
-
+ 
         parent.moveToCapsuleDetail()
     }
 }
