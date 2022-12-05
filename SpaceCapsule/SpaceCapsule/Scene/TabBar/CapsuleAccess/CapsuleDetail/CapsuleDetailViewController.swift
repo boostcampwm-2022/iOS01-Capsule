@@ -59,6 +59,7 @@ final class CapsuleDetailViewController: UIViewController, BaseViewController {
             .subscribe(onNext: { owner, data in
                 if let capsule = data.first {
                     owner.mainView.updateCapsuleData(capsule: capsule)
+                    owner.setUpNavigationTitle(capsule.title)
                 }
             })
             .disposed(by: disposeBag)
@@ -100,5 +101,9 @@ final class CapsuleDetailViewController: UIViewController, BaseViewController {
         snapshot.appendSections([0])
         snapshot.appendItems(cells, toSection: 0)
         imageDataSource?.apply(snapshot)
+    }
+    
+    private func setUpNavigationTitle(_ title: String) {
+        navigationItem.title = title
     }
 }

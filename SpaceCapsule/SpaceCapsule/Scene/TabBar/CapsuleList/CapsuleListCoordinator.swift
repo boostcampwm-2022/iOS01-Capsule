@@ -22,15 +22,22 @@ final class CapsuleListCoordinator: Coordinator {
     }
 
     func start() {
+        moveToCapsuleList()
+    }
+    
+    func moveToCapsuleList() {
         let capsuleListViewController = CapsuleListViewController()
         let capsuleListViewModel = CapsuleListViewModel()
-
         capsuleListViewModel.coordinator = self
         capsuleListViewController.viewModel = capsuleListViewModel
         capsuleListViewModel.input.sortPolicy = sortPolicyObserver
         capsuleListViewController.viewModel?.input.sortPolicy = sortPolicyObserver
-
         navigationController?.setViewControllers([capsuleListViewController], animated: true)
+        
+        setUpNavigationItem()
+    }
+    
+    private func setUpNavigationItem() {
         navigationController?.navigationBar.topItem?.title = "목록"
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.themeFont(ofSize: FrameResource.fontSize120) as Any]
     }

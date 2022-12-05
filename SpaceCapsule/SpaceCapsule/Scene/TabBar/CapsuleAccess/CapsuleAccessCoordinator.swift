@@ -35,6 +35,7 @@ final class CapsuleAccessCoordinator: Coordinator {
         let capsuleDetailCoordinator = CapsuleDetailCoordinator(navigationController: navigationController)
         capsuleDetailCoordinator.parent = self
         capsuleDetailCoordinator.capsuleUUID = capsuleCellItem?.uuid
+        
         capsuleDetailCoordinator.start()
 
         children.append(capsuleDetailCoordinator)
