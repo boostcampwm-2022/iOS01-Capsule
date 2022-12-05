@@ -14,25 +14,30 @@ final class CapsuleDetailCoordinator: Coordinator {
     var navigationController: CustomNavigationController?
     
     var capsuleUUID: String?
-
+    
     init(navigationController: CustomNavigationController?) {
         self.navigationController = navigationController
     }
-
+    
     func start() {
         moveToCapsuleDetail()
     }
-
+    
     func moveToCapsuleDetail() {
         let capsuleDetailViewController = CapsuleDetailViewController()
         let capsuleDetailViewModel = CapsuleDetailViewModel()
-
+        
         capsuleDetailViewModel.coordinator = self
         capsuleDetailViewController.viewModel = capsuleDetailViewModel
         
         capsuleDetailViewModel.fetchCapsule(with: capsuleUUID)
         
         navigationController?.pushViewController(capsuleDetailViewController, animated: true)
+        
+        // MARK: 목록으로 이동
+        if let rootVC = navigationController?.viewControllers.first {
+            navigationController?.viewControllers = [rootVC, capsuleDetailViewController]
+        }
         
         setupNavigationItem()
     }
