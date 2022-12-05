@@ -45,7 +45,7 @@ final class CapsuleDetailView: UIView, BaseView {
     private let descriptionView: UITextView = {
        let view = UITextView()
         view.isUserInteractionEnabled = false
-        view.textColor = .themeGray300
+        view.textColor = .themeGray400
         view.font = .themeFont(ofSize: 24)
         view.isScrollEnabled = false
         view.backgroundColor = .clear
