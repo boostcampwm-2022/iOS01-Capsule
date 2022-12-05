@@ -62,6 +62,7 @@ final class CapsuleDetailViewModel: BaseViewModel {
         guard let firstImageURL = capsule.images.first else {
             return
         }
+
         let firstCell = DetailImageCell.Cell(imageURL: firstImageURL,
                                              capsuleInfo: DetailImageCell.CapsuleInfo(address: capsule.simpleAddress,
                                                                                       date: capsule.memoryDate.dateString))
@@ -86,31 +87,27 @@ final class CapsuleDetailViewModel: BaseViewModel {
             if error != nil {
                 return
             }
-            
-            UIGraphicsBeginImageContextWithOptions(snapshot.image.size, true, snapshot.image.scale)
-            snapshot.image.draw(at: .zero)
-
-            let point = snapshot.point(for: center)
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = center
-
-            let annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "")
-
-            annotationView.contentMode = .scaleAspectFit
-            annotationView.bounds = CGRect(x: 0, y: 0, width: 40, height: 40)
-            
-            let rect = CGRect(x: point.x - (annotationView.bounds.width / 2),
-                              y: point.y - (annotationView.bounds.height),
-                              width: annotationView.bounds.width,
-                              height: annotationView.bounds.height)
-
-            annotationView.drawHierarchy(in: rect, afterScreenUpdates: true)
-
-            let drawImage = UIGraphicsGetImageFromCurrentImageContext()
-
-            if let drawImage = drawImage {
+ 
+            if let drawImage = self?.drawAnnotation(with: center, on: snapshot) {
                 self?.output.mapSnapshot.accept([drawImage])
             }
         }
+    }
+    
+    private func drawAnnotation(with center: CLLocationCoordinate2D, on snapshot: MKMapSnapshotter.Snapshot) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(snapshot.image.size, true, snapshot.image.scale)
+        snapshot.image.draw(at: .zero)
+
+        let point = snapshot.point(for: center)
+        let annotation = CustomAnnotation(uuid: nil, latitude: center.latitude, longitude: center.longitude)
+        annotation.isOpenable = true
+        let annotationView = CustomAnnotationView(annotation: annotation, reuseIdentifier: "annotationView")
+        let rect = CGRect(x: point.x - (annotationView.bounds.width / 2),
+                          y: point.y - (annotationView.bounds.height),
+                          width: annotationView.bounds.width,
+                          height: annotationView.bounds.height)
+
+        annotationView.drawHierarchy(in: rect, afterScreenUpdates: true)
+        return UIGraphicsGetImageFromCurrentImageContext()
     }
 }
