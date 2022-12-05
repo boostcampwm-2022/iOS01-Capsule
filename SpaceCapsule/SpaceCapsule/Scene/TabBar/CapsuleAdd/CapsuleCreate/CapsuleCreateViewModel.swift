@@ -186,4 +186,19 @@ final class CapsuleCreateViewModel: BaseViewModel {
             input.imageData.accept(imageValues)
         }
     }
+
+    func fetchAddress() {
+        guard let coordinate = LocationManager.shared.coordinate else {
+            return
+        }
+
+        let point = GeoPoint(latitude: coordinate.latitude, longitude: coordinate.longitude)
+
+        LocationManager.shared.coordToAddress(point: point) { [weak self] address in
+            guard let address else {
+                return
+            }
+            self?.output.address.onNext(address)
+        }
+    }
 }

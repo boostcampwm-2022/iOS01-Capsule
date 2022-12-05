@@ -63,7 +63,7 @@ final class CapsuleLocateViewModel: BaseViewModel {
 
     func fetchLocation(latitude: Double, longitude: Double) {
         LocationManager.shared
-            .reverseGeocode(with: GeoPoint(latitude: latitude, longitude: longitude))
+            .observableAddress(with: GeoPoint(latitude: latitude, longitude: longitude))
             .subscribe(
                 onNext: { [weak self] address in
                     self?.output.doneButtonState.accept(true)
