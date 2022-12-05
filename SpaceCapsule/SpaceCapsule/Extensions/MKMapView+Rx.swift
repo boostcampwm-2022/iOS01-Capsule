@@ -44,15 +44,28 @@ extension Reactive where Base: MKMapView {
             }
     }
 
-    var regionDidChangeAnimated: Observable<(MKMapView, Bool)> {
+    var regionDidChangeAnimated: Observable<(MKMapView)> {
         return delegate
             .methodInvoked(#selector(MKMapViewDelegate.mapView(_:regionDidChangeAnimated:)))
             .map { param in
-                if let mapView = param[safe: 0] as? MKMapView,
-                   let regionDidChangeAnimated = param[safe: 1] as? Bool {
-                    return (mapView, regionDidChangeAnimated)
+                if let mapView = param[safe: 0] as? MKMapView {
+                    return (mapView)
                 }
-                return (MKMapView(), false)
+                return (MKMapView())
             }
     }
+
+//    var didSelect: Observable<(MKMapView, CustomAnnotation)> {
+//        return delegate
+//            .methodInvoked(#selector(MKMapViewDelegate.mapView(_:didSelect:)))
+//            .map { param in
+//                if let mapView = param[safe: 0] as? MKMapView,
+//                   let annotationView = param[safe: 1] as? CustomAnnotationView,
+//                   let annotation = annotationView.annotation as? CustomAnnotation {
+//                    return (mapView, annotation)
+//                }
+//
+//                return (MKMapView(), CustomAnnotation(uuid: "", latitude: 0.0, longitude: 0.0))
+//            }
+//    }
 }

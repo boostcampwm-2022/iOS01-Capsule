@@ -38,4 +38,10 @@ final class CapsuleAccessCoordinator: Coordinator {
         
         children.append(capsuleDetailCoordinator)
     }
+    
+    func finish() {
+        if let parent = parent?.parent as? TabBarCoordinator {
+            parent.tabBarWillHide(false)
+        }
+    }
 }

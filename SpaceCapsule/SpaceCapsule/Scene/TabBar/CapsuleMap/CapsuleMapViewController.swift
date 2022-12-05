@@ -52,6 +52,7 @@ final class CapsuleMapViewController: UIViewController, BaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         locationManager.stopUpdatingLocation()
+        mapView.selectedAnnotations.removeAll()
     }
 
     private func configure() {
@@ -275,5 +276,15 @@ extension CapsuleMapViewController: MKMapViewDelegate {
         default:
             return nil
         }
+    }
+
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        guard let annotationView = view as? CustomAnnotationView,
+              let annotation = annotationView.annotation as? CustomAnnotation,
+              let uuid = annotation.uuid else {
+            return
+        }
+
+        viewModel?.input.tapCapsule.onNext(uuid)
     }
 }
