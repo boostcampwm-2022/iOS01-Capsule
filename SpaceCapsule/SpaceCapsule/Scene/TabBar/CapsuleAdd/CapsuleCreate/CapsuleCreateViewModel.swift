@@ -175,10 +175,15 @@ final class CapsuleCreateViewModel: BaseViewModel {
     }
 
     func addImage(data: Data) {
-        let imageValues = input.imageData.value
+        var imageValues = input.imageData.value
+
+        if imageValues.count > 10 {
+            return
+        }
 
         if !imageValues.compactMap({ $0.data }).contains(data) {
-            input.imageData.accept([.image(data: data)] + imageValues)
+            imageValues.insert(contentsOf: [.image(data: data)], at: imageValues.count - 1)
+            input.imageData.accept(imageValues)
         }
     }
 }
