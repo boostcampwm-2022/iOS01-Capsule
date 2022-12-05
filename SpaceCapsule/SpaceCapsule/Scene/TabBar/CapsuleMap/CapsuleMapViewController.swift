@@ -12,7 +12,7 @@ import UIKit
 
 final class CapsuleMapViewController: UIViewController, BaseViewController {
     struct Settings {
-        static let openableRange: Double = 100
+        static let openableRange: Double = LocationManager.openableRange
         static let monitoringRange: Double = 1000
         static let monitoringUpdateRange: Double = 850
         static let locationUpdateRange: Double = 5

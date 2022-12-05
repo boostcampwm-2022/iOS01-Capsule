@@ -16,8 +16,8 @@ final class ThemeThumbnailImageView: UIView {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = width / 2
         imageView.clipsToBounds = true
+        imageView.backgroundColor = .white
         imageView.contentMode = .scaleAspectFill
-
         return imageView
     }()
     

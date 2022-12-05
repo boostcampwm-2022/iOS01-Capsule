@@ -11,7 +11,8 @@ import RxSwift
 
 final class LocationManager {
     static let shared = LocationManager()
-
+    static let openableRange = 10000.0
+    
     private init() {}
 
     let core: CLLocationManager = {
@@ -81,5 +82,23 @@ final class LocationManager {
         }
 
         return false
+    }
+
+    func location(_ coordinate: CLLocationCoordinate2D) -> CLLocation {
+        return CLLocation(latitude: coordinate.latitude,
+                          longitude: coordinate.longitude)
+    }
+
+    func distance(capsuleCoordinate: CLLocationCoordinate2D) -> Double {
+        guard let currentCoordinate = coordinate else {
+            return 0.0
+        }
+        let currentLocation = location(currentCoordinate)
+        let capsuleLocation = location(capsuleCoordinate)
+        return currentLocation.distance(from: capsuleLocation)
+    }
+
+    func isOpenable(capsuleCoordinate: CLLocationCoordinate2D) -> Bool {
+        return distance(capsuleCoordinate: capsuleCoordinate) <= LocationManager.openableRange ? true : false
     }
 }

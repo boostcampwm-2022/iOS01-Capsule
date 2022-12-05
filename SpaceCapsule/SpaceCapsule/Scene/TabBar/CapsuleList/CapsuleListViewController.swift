@@ -15,8 +15,8 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
     let capsuleListView = CapsuleListView()
     let refreshControl = UIRefreshControl()
 
-    private var dataSource: UICollectionViewDiffableDataSource<Int, ListCapsuleCellModel>?
-    private var snapshot = NSDiffableDataSourceSnapshot<Int, ListCapsuleCellModel>()
+    private var dataSource: UICollectionViewDiffableDataSource<Int, ListCapsuleCellItem>?
+    private var snapshot = NSDiffableDataSourceSnapshot<Int, ListCapsuleCellItem>()
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -36,7 +36,6 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
         configureCollectionView()
         bind()
         bindViewModel()
-        viewModel?.fetchCapsuleList()
     }
 
     func bind() {
@@ -44,8 +43,8 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
             return
         }
         capsuleListView.collectionView.rx.itemSelected
-            .withLatestFrom(viewModel.input.capsuleCellModels, resultSelector: { indexPath, capsuleCellModels in
-                viewModel.coordinator?.moveToCapsuleAccess(capsuleCellModel: capsuleCellModels[indexPath.row])
+            .withLatestFrom(viewModel.input.capsuleCellItems, resultSelector: { indexPath, capsuleCellItems in
+                viewModel.coordinator?.moveToCapsuleAccess(capsuleCellItem: capsuleCellItems[indexPath.row])
             })
             .bind(onNext: {})
             .disposed(by: disposeBag)
@@ -61,7 +60,7 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
         refreshControl.rx.controlEvent(.valueChanged)
             .withUnretained(self)
             .bind(onNext: { owner, _ in
-                owner.viewModel?.fetchCapsuleList()
+                owner.viewModel?.refreshCapsule()
             })
             .disposed(by: disposeBag)
     }
@@ -70,10 +69,10 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
         guard let viewModel else {
             return
         }
-        viewModel.input.capsuleCellModels
+        viewModel.input.capsuleCellItems
             .withUnretained(self)
-            .bind { owner, capsuleCellModels in
-                owner.applySnapshot(capsuleCellModels: capsuleCellModels)
+            .bind { owner, capsuleCellItems in
+                owner.applySnapshot(capsuleCellModels: capsuleCellItems)
                 owner.viewModel?.input.refreshLoading.accept(false)
             }
             .disposed(by: disposeBag)
@@ -82,8 +81,8 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
             .withUnretained(self)
             .bind { owner, sortPolicy in
                 owner.applyBarButton(sortPolicy: sortPolicy)
-                if let capsuleCellModels = owner.viewModel?.input.capsuleCellModels.value {
-                    owner.viewModel?.sort(capsuleCellModels: capsuleCellModels, by: sortPolicy)
+                if let capsuleCellItems = owner.viewModel?.input.capsuleCellItems.value {
+                    owner.viewModel?.sort(capsuleCellItems: capsuleCellItems, by: sortPolicy)
                 }
             }
             .disposed(by: disposeBag)
@@ -100,7 +99,7 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
             .disposed(by: disposeBag)
     }
 
-    private func applySnapshot(capsuleCellModels: [ListCapsuleCellModel]) {
+    private func applySnapshot(capsuleCellModels: [ListCapsuleCellItem]) {
         snapshot.deleteAllItems()
         snapshot.appendSections([0])
         snapshot.appendItems(capsuleCellModels, toSection: 0)
@@ -123,9 +122,9 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
 
 extension CapsuleListViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     private func configureCollectionView() {
-        dataSource = UICollectionViewDiffableDataSource<Int, ListCapsuleCellModel>(collectionView: capsuleListView.collectionView, cellProvider: { collectionView, indexPath, capsuleCellModel in
+        dataSource = UICollectionViewDiffableDataSource<Int, ListCapsuleCellItem>(collectionView: capsuleListView.collectionView, cellProvider: { collectionView, indexPath, capsuleCellItem in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ListCapsuleCell.cellIdentifier, for: indexPath) as? ListCapsuleCell
-            cell?.configure(capsuleCellModel: capsuleCellModel)
+            cell?.configure(capsuleCellItem: capsuleCellItem)
             return cell
         })
         capsuleListView.collectionView.delegate = self
