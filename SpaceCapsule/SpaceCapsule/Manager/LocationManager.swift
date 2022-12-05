@@ -31,24 +31,7 @@ final class LocationManager {
     private let locale = Locale(identifier: "ko_KR")
 
     // 좌표 -> 주소
-    func observableAddress(with point: GeoPoint) -> Observable<Address> {
-        let location = CLLocation(latitude: point.latitude, longitude: point.longitude)
-
-        return Observable.create { emitter in
-            self.coordToAddress(point: point) { address in
-                guard let address else {
-                    emitter.onError(LocationError.invalidGeopoint)
-                    return
-                }
-
-                emitter.onNext(address)
-            }
-
-            return Disposables.create {}
-        }
-    }
-
-    func coordToAddress(point: GeoPoint, completion: @escaping (Address?) -> Void) {
+    func reverseGeocode(point: GeoPoint, completion: @escaping (Address?) -> Void) {
         let location = CLLocation(latitude: point.latitude, longitude: point.longitude)
 
         geocoder.reverseGeocodeLocation(location, preferredLocale: locale) { placemarks, error in

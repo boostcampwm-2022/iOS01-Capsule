@@ -38,19 +38,19 @@ final class CapsuleLocateViewController: UIViewController, BaseViewController {
         // Drag
         viewModel?.input.isDragging
             .withUnretained(self)
-            .bind { weakSelf, isDragging in
+            .bind { owner, isDragging in
                 if isDragging {
-                    weakSelf.mainView.cursor.backgroundColor = .lightGray
+                    owner.mainView.cursor.image = .locateDisabled
                 } else {
-                    weakSelf.mainView.cursor.backgroundColor = .green
+                    owner.mainView.cursor.image = .locate
                 }
             }.disposed(by: disposeBag)
 
         viewModel?.output.doneButtonState
             .withUnretained(self)
-            .subscribe(onNext: { weakSelf, state in
-                weakSelf.mainView.doneButton.isEnabled = state
-                weakSelf.mainView.doneButton.backgroundColor = state ? .themeColor200 : .themeGray200
+            .subscribe(onNext: { owner, state in
+                owner.mainView.doneButton.isEnabled = state
+                owner.mainView.doneButton.backgroundColor = state ? .themeColor200 : .themeGray200
             })
             .disposed(by: disposeBag)
 
@@ -121,6 +121,8 @@ extension CapsuleLocateViewController: MKMapViewDelegate {
 
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated: Bool) {
         let coordinate = mapView.region.center
+        
+        print(coordinate)
 
         viewModel?.output.geopoint.onNext(
             GeoPoint(latitude: coordinate.latitude, longitude: coordinate.longitude)

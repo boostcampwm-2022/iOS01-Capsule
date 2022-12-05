@@ -194,7 +194,7 @@ final class CapsuleCreateViewModel: BaseViewModel {
 
         let point = GeoPoint(latitude: coordinate.latitude, longitude: coordinate.longitude)
 
-        LocationManager.shared.coordToAddress(point: point) { [weak self] address in
+        LocationManager.shared.reverseGeocode(point: point) { [weak self] address in
             guard let address else {
                 return
             }
