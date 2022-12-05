@@ -11,7 +11,7 @@ import RxSwift
 
 final class LocationManager {
     static let shared = LocationManager()
-    static let openableRange = 100.0
+    static let openableRange = 10000.0
     
     private init() {}
 

@@ -48,7 +48,7 @@ final class CapsuleDetailViewModel: BaseViewModel {
 
     func fetchCapsuleMap(at coordinate: GeoPoint) {
         let center = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
-        let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+        let span = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
 
         let options: MKMapSnapshotter.Options = .init()
         options.region = MKCoordinateRegion(center: center, span: span)
@@ -77,8 +77,8 @@ final class CapsuleDetailViewModel: BaseViewModel {
             annotationView.contentMode = .scaleAspectFit
             annotationView.bounds = CGRect(x: 0, y: 0, width: 40, height: 40)
             
-            let rect = CGRect(x: point.x - annotationView.bounds.width,
-                              y: point.y - annotationView.bounds.height,
+            let rect = CGRect(x: point.x - (annotationView.bounds.width / 2),
+                              y: point.y - (annotationView.bounds.height),
                               width: annotationView.bounds.width,
                               height: annotationView.bounds.height)
 
