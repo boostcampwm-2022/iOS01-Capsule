@@ -42,9 +42,7 @@ final class CapsuleDetailCoordinator: Coordinator {
         setupNavigationItem()
     }
     
-    private func setupNavigationItem() {
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.themeFont(ofSize: FrameResource.fontSize100) as Any]
-        
+    private func setupNavigationItem() {        
         let backButton = UIBarButtonItem()
         backButton.title = "목록"
         navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
