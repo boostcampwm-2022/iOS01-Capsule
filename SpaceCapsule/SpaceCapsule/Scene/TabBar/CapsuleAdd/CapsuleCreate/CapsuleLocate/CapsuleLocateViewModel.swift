@@ -59,6 +59,8 @@ final class CapsuleLocateViewModel: BaseViewModel {
                 onNext: { [weak self] in
                     LocationManager.shared.reverseGeocode(point: $0) { address in
                         guard let address else {
+                            self?.output.doneButtonState.accept(false)
+                            self?.output.fullAddress.accept(LocationError.invalidGeopoint.localizedDescription)
                             return
                         }
 

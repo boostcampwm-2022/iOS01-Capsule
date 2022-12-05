@@ -15,7 +15,7 @@ final class CapsuleLocateViewController: UIViewController, BaseViewController {
     var viewModel: CapsuleLocateViewModel?
 
     let mainView = CapsuleLocateView()
-    let locationManager = CLLocationManager()
+    let locationManager = LocationManager.shared.core
 
     override func loadView() {
         view = mainView
@@ -74,18 +74,27 @@ final class CapsuleLocateViewController: UIViewController, BaseViewController {
                 self?.viewModel?.input.done.onNext(())
             })
             .disposed(by: disposeBag)
+
+        mainView.locateMap.rx.regionDidChangeAnimated
+            .subscribe(onNext: { [weak self] mapView, _ in
+                let coordinate = mapView.centerCoordinate
+                
+                self?.viewModel?.output.geopoint.onNext(
+                    GeoPoint(latitude: coordinate.latitude, longitude: coordinate.longitude)
+                )
+            })
+            .disposed(by: disposeBag)
     }
 
     private func configure() {
         view.backgroundColor = .white
 
         configureLocationManager()
-        configureMap()
         configureGesture()
     }
 
     private func goToCurrentLocation() {
-        guard let center = locationManager.location?.coordinate else {
+        guard let center = LocationManager.shared.coordinate else {
             return
         }
 
@@ -101,32 +110,10 @@ final class CapsuleLocateViewController: UIViewController, BaseViewController {
 extension CapsuleLocateViewController: CLLocationManagerDelegate {
     private func configureLocationManager() {
         locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
     }
 
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         LocationManager.shared.checkAuthorization(status: status)
-    }
-}
-
-// MARK: - MKMapView
-
-extension CapsuleLocateViewController: MKMapViewDelegate {
-    private func configureMap() {
-        mainView.locateMap.delegate = self
-        mainView.locateMap.mapType = MKMapType.standard
-    }
-
-    func mapView(_ mapView: MKMapView, regionDidChangeAnimated: Bool) {
-        let coordinate = mapView.region.center
-        
-        print(coordinate)
-
-        viewModel?.output.geopoint.onNext(
-            GeoPoint(latitude: coordinate.latitude, longitude: coordinate.longitude)
-        )
     }
 }
 
