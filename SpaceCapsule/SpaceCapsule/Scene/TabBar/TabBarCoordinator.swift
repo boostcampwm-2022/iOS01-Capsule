@@ -16,6 +16,10 @@ final class TabBarCoordinator: Coordinator {
     init(tabBarController: CustomTabBarController) {
         self.tabBarController = tabBarController
     }
+    
+    deinit {
+        print("TabBarCoordinator deinit")
+    }
 
     func start() {
         firstTabBarItem()

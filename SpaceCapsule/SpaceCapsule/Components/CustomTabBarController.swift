@@ -12,7 +12,7 @@ import UIKit
 
 @objc class CustomTabBarController: UITabBarController {
     let disposeBag = DisposeBag()
-    var coordinator: TabBarCoordinator?
+    weak var coordinator: TabBarCoordinator?
 
     lazy var centerButton: UIButton = {
         let button = UIButton()
