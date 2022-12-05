@@ -64,7 +64,6 @@ final class DetailImageCell: UICollectionViewCell {
 
         configure()
         addSubViews()
-        addGradientLayer()
         makeConstraints()
     }
 
@@ -100,12 +99,6 @@ final class DetailImageCell: UICollectionViewCell {
         imageView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-        
-        gradientView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
-        
-        gradient.frame = bounds
     }
     
     private func addGradientLayer() {
@@ -113,9 +106,16 @@ final class DetailImageCell: UICollectionViewCell {
 
         imageView.addSubview(gradientView)
         imageView.bringSubviewToFront(gradientView)
+        
+        gradientView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        gradient.frame = bounds
     }
     
     func addCapsuleInfo(_ capsuleInfo: CapsuleInfo) {
+        addGradientLayer()
+        
         capsuleDate.text = capsuleInfo.date
         capsuleLocation.text = capsuleInfo.address
         
