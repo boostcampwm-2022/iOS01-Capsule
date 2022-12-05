@@ -16,4 +16,5 @@ enum AnimationResource {
     static let capsuleMoveDuration: CFTimeInterval = 1.0
     static let capsuleMoveDelay: CFTimeInterval = 0.0
     static let destinationHeightRatio: CGFloat = (2 / 5)
+    static let fromOriginY: CGFloat = 3.0
 }

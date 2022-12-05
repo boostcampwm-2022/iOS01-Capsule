@@ -51,16 +51,14 @@ final class HomeCapsuleCell: UICollectionViewCell {
         }
     }
 
-    func configure(capsuleCellModel: ListCapsuleCellModel) {
+    func configure(capsuleCellModel: ListCapsuleCellItem) {
         if let thumbnailURL = capsuleCellModel.thumbnailImageURL {
             thumbnailImageView.imageView.kr.setImage(with: thumbnailURL, scale: FrameResource.openableImageScale)
         }
 
         descriptionLabel.text = "\(capsuleCellModel.memoryDate.dateString)\n\(capsuleCellModel.address)에서"
-//        thumbnailImageView.imageView.subviews.forEach {
-//            $0.removeFromSuperview()
-//        }
-        if capsuleCellModel.isOpenable == false {
+        
+        if !capsuleCellModel.isOpenable() {
             applyUnOpenableEffect(closeDate: capsuleCellModel.closedDate.dateString)
         }
     }
