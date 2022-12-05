@@ -167,8 +167,6 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
                 weakSelf.navigationItem.rightBarButtonItem?.isEnabled = state
             })
             .disposed(by: disposeBag)
-        
-        viewModel?.fetchAddress()
     }
 
     private func addSubViews() {

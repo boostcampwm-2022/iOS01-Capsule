@@ -55,20 +55,21 @@ final class CapsuleLocateViewModel: BaseViewModel {
             .disposed(by: disposeBag)
 
         output.geopoint
-            .subscribe(
-                onNext: { [weak self] in
-                    LocationManager.shared.reverseGeocode(point: $0) { address in
-                        guard let address else {
-                            self?.output.doneButtonState.accept(false)
-                            self?.output.fullAddress.accept(LocationError.invalidGeopoint.localizedDescription)
-                            return
-                        }
+            .subscribe(onNext: { [weak self] in
+                self?.fetchLocation(latitude: $0.latitude, longitude: $0.longitude)
+            })
+            .disposed(by: disposeBag)
+    }
 
-                        self?.output.doneButtonState.accept(true)
-                        self?.output.address.onNext(address)
-                        self?.output.fullAddress.accept(address.full)
-                        self?.output.simpleAddress.onNext(address.simple)
-                    }
+    func fetchLocation(latitude: Double, longitude: Double) {
+        LocationManager.shared
+            .reverseGeocode(with: GeoPoint(latitude: latitude, longitude: longitude))
+            .subscribe(
+                onNext: { [weak self] address in
+                    self?.output.doneButtonState.accept(true)
+                    self?.output.address.onNext(Address(full: address.full, simple: address.simple))
+                    self?.output.fullAddress.accept(address.full)
+                    self?.output.simpleAddress.onNext(address.simple)
                 },
                 onError: { [weak self] error in
                     self?.output.doneButtonState.accept(false)

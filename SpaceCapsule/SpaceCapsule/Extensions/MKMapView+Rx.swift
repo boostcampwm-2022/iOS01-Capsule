@@ -7,21 +7,21 @@
 
 import Foundation
 
-import MapKit
-import RxCocoa
 import RxSwift
+import RxCocoa
+import MapKit
 
 final class RxMKMapViewDelegateProxy: DelegateProxy<MKMapView, MKMapViewDelegate>, MKMapViewDelegate, DelegateProxyType {
     static func registerKnownImplementations() {
-        register { mapView -> RxMKMapViewDelegateProxy in
+        self.register { mapView -> RxMKMapViewDelegateProxy in
             RxMKMapViewDelegateProxy(parentObject: mapView, delegateProxy: self)
         }
     }
-
+    
     static func currentDelegate(for object: MKMapView) -> MKMapViewDelegate? {
         return object.delegate
     }
-
+    
     static func setCurrentDelegate(_ delegate: MKMapViewDelegate?, to object: MKMapView) {
         object.delegate = delegate
     }
@@ -29,9 +29,9 @@ final class RxMKMapViewDelegateProxy: DelegateProxy<MKMapView, MKMapViewDelegate
 
 extension Reactive where Base: MKMapView {
     var delegate: DelegateProxy<MKMapView, MKMapViewDelegate> {
-        return RxMKMapViewDelegateProxy.proxy(for: base)
+        return RxMKMapViewDelegateProxy.proxy(for: self.base)
     }
-
+    
     var calloutAccessoryControlTapped: Observable<(MKMapView, MKAnnotationView, UIButton)> {
         return delegate.methodInvoked(#selector(MKMapViewDelegate.mapView(_:annotationView:calloutAccessoryControlTapped:)))
             .map { param in
@@ -44,15 +44,4 @@ extension Reactive where Base: MKMapView {
             }
     }
 
-    var regionDidChangeAnimated: Observable<(MKMapView, Bool)> {
-        return delegate
-            .methodInvoked(#selector(MKMapViewDelegate.mapView(_:regionDidChangeAnimated:)))
-            .map { param in
-                if let mapView = param[safe: 0] as? MKMapView,
-                   let regionDidChangeAnimated = param[safe: 1] as? Bool {
-                    return (mapView, regionDidChangeAnimated)
-                }
-                return (MKMapView(), false)
-            }
-    }
 }

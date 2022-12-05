@@ -16,8 +16,7 @@ final class DatePickerViewModel: BaseViewModel {
     var input = Input()
 
     struct Input {
-        var tapDone = PublishSubject<Void>()
-        var tapCancel = PublishSubject<Void>()
+        var viewWillDisappear = PublishSubject<Void>()
         var date = PublishSubject<Date>()
     }
 
@@ -26,15 +25,10 @@ final class DatePickerViewModel: BaseViewModel {
     }
 
     func bind() {
-        input.tapDone
+        input.viewWillDisappear
             .withLatestFrom(input.date)
             .subscribe(onNext: { [weak self] in
                 self?.coordinator?.done(date: $0)
-            })
-
-        input.tapCancel
-            .subscribe(onNext: { [weak self] in
-                self?.coordinator?.done(date: nil)
             })
             .disposed(by: disposeBag)
     }
