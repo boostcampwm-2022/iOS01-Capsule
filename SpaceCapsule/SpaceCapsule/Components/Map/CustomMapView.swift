@@ -73,6 +73,6 @@ class CustomMapView: MKMapView {
             height: fabs(point1.y - point2.y)
         )
 
-        setCameraBoundary(CameraBoundary(mapRect: mapRect), animated: false)
+        setCameraBoundary(MKMapView.CameraBoundary(mapRect: mapRect), animated: true)
     }
 }

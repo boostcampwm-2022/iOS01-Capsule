@@ -175,30 +175,10 @@ final class CapsuleCreateViewModel: BaseViewModel {
     }
 
     func addImage(data: Data) {
-        var imageValues = input.imageData.value
-
-        if imageValues.count > 10 {
-            return
-        }
+        let imageValues = input.imageData.value
 
         if !imageValues.compactMap({ $0.data }).contains(data) {
-            imageValues.insert(contentsOf: [.image(data: data)], at: imageValues.count - 1)
-            input.imageData.accept(imageValues)
-        }
-    }
-
-    func fetchAddress() {
-        guard let coordinate = LocationManager.shared.coordinate else {
-            return
-        }
-
-        let point = GeoPoint(latitude: coordinate.latitude, longitude: coordinate.longitude)
-
-        LocationManager.shared.reverseGeocode(point: point) { [weak self] address in
-            guard let address else {
-                return
-            }
-            self?.output.address.onNext(address)
+            input.imageData.accept([.image(data: data)] + imageValues)
         }
     }
 }

@@ -5,7 +5,7 @@
 //  Created by young june Park on 2022/11/23.
 //
 
-import Foundation
+import UIKit
 
 final class SortPolicySelectionCoordinator: Coordinator {
     var parent: Coordinator?

@@ -47,15 +47,6 @@ final class CustomScrollView: UIScrollView {
         let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
         contentInset = contentInsets
         scrollIndicatorInsets = contentInsets
-
-        if let textField = currentFirstResponder() as? UITextField {
-            scrollRectToVisible(textField.frame, animated: true)
-        }
-
-        if let textView = currentFirstResponder() as? UITextView {
-            let offset = CGPoint(x: 0, y: textView.frame.origin.y)
-            setContentOffset(offset, animated: true)
-        }
     }
 
     @objc private func keyboardWillHide(notification: NSNotification) {

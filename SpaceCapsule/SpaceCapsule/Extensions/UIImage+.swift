@@ -11,11 +11,9 @@ extension UIImage {
     static let logo = UIImage(named: "logo")
     static let logoWithBG = UIImage(named: "logoWithBG")
     static let logoWithText = UIImage(named: "logoWithText")
-
+    
     static let openableCapsule = UIImage(named: "openableCapsule")
     static let unopenableCapsule = UIImage(named: "unopenableCapsule")
-    static let locate = UIImage(named: "locate")
-    static let locateDisabled = UIImage(named: "locateDisabled")
 
     static let homeFill = UIImage(systemName: "house.fill")
     static let mapFill = UIImage(systemName: "map.fill")
@@ -48,25 +46,25 @@ extension UIImage {
 
         return renderImage
     }
-
+    
     static func resize(data: Data, to targetSize: CGSize, scale: CGFloat) -> UIImage? {
-        let imageSourceOptions = [kCGImageSourceShouldCache: false] as CFDictionary
-        guard let imageSource = CGImageSourceCreateWithData(data as CFData, imageSourceOptions) else {
-            return nil
-        }
+       let imageSourceOptions = [kCGImageSourceShouldCache: false] as CFDictionary
+       guard let imageSource = CGImageSourceCreateWithData(data as CFData, imageSourceOptions) else {
+           return nil
+       }
 
-        let maxDimension = max(targetSize.width, targetSize.height) * scale
-        let resizingOptions = [
-            kCGImageSourceCreateThumbnailFromImageAlways: true,
-            kCGImageSourceShouldCacheImmediately: true,
-            kCGImageSourceCreateThumbnailWithTransform: true,
-            kCGImageSourceThumbnailMaxPixelSize: maxDimension,
-        ] as CFDictionary
+       let maxDimension = max(targetSize.width, targetSize.height) * scale
+       let resizingOptions = [
+           kCGImageSourceCreateThumbnailFromImageAlways: true,
+           kCGImageSourceShouldCacheImmediately: true,
+           kCGImageSourceCreateThumbnailWithTransform: true,
+           kCGImageSourceThumbnailMaxPixelSize: maxDimension,
+       ] as CFDictionary
 
-        guard let resizedImage = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, resizingOptions) else {
-            return nil
-        }
+       guard let resizedImage = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, resizingOptions) else {
+           return nil
+       }
 
-        return UIImage(cgImage: resizedImage)
-    }
+       return UIImage(cgImage: resizedImage)
+   }
 }
