@@ -16,7 +16,7 @@ protocol Coordinator: AnyObject {
 }
 
 extension Coordinator {
-    func pop() -> Coordinator? {
+    func popParentCoordinator() -> Coordinator? {
         let parentCoordinator = parent
         children.removeAll()
         navigationController?.setViewControllers([], animated: false)

@@ -48,7 +48,7 @@ final class ProfileViewController: UIViewController, BaseViewController {
         viewModel.input.tapSetting
             .withUnretained(self)
             .bind { owner, _ in
-                owner.locationInfoSetting()
+                owner.checkLocationAuthorization()
             }
             .disposed(by: disposeBag)
 
@@ -82,14 +82,14 @@ final class ProfileViewController: UIViewController, BaseViewController {
         let alertController = UIAlertController(title: "회원 탈퇴", message: "탈퇴 하시겠습니까?", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let acceptAction = UIAlertAction(title: "OK", style: .destructive, handler: { [weak self] _ in
-            self?.viewModel?.withdrawal()
+            self?.viewModel?.deleteAccount()
         })
         alertController.addAction(cancelAction)
         alertController.addAction(acceptAction)
         present(alertController, animated: true, completion: nil)
     }
 
-    func locationInfoSetting() {
+    func checkLocationAuthorization() {
         switch AppDataManager.shared.location.core.authorizationStatus {
         case .denied:
             showRequestAuthorization()

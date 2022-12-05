@@ -35,12 +35,12 @@ final class ProfileCoordinator: Coordinator {
 
     func moveToAuth() {
         // pop to tabbar coordinator
-        guard let tabCoordinator = pop() as? TabBarCoordinator else {
+        guard let tabCoordinator = popParentCoordinator() as? TabBarCoordinator else {
             print("to tabCoordinator error")
             return
         }
         // pop to app coordinator
-        guard let appCoordinator = tabCoordinator.pop() as? AppCoordinator else {
+        guard let appCoordinator = tabCoordinator.popParentCoordinator() as? AppCoordinator else {
             print("to appCoordinator error")
             return
         }

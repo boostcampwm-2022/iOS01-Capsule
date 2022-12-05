@@ -34,7 +34,7 @@ class FirebaseAuthManager {
         }
     }
 
-    func withdrawal(completion: @escaping ((Error?) -> Void?)) {
+    func deleteAccount(completion: @escaping ((Error?) -> Void)) {
         guard let uid = FirebaseAuthManager.shared.currentUser?.uid else {
             return
         }
@@ -45,6 +45,10 @@ class FirebaseAuthManager {
                 return
             }
         }
-        auth.currentUser?.delete()
+        auth.currentUser?.delete { error in
+            if let error = error {
+                completion(error)
+            }
+        }
     }
 }

@@ -70,7 +70,7 @@ class FirestoreManager {
             }
     }
 
-    func deleteUserInfo(uid: String, completion: @escaping (Error?) -> Void) {
+    func deleteUserInfo(uid: String, completion: @escaping ((Error?) -> Void)) {
         database
             .collection("users")
             .document(uid)

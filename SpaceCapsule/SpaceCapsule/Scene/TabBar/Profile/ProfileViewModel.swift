@@ -38,8 +38,8 @@ final class ProfileViewModel: BaseViewModel {
         coordinator?.moveToAuth()
     }
 
-    func withdrawal() {
-        AppDataManager.shared.auth.withdrawal { error in
+    func deleteAccount() {
+        AppDataManager.shared.auth.deleteAccount { error in
             if let error = error {
                 print(error.localizedDescription)
                 UserDefaultsManager.saveData(data: true, key: .isRegistered)
