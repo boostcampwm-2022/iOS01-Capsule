@@ -15,7 +15,6 @@ final class DetailImageFlowLayout: UICollectionViewFlowLayout {
                                height: FrameResource.detailImageViewHeight)
         
         self.minimumLineSpacing = FrameResource.spacing200
-        //self.sectionInset = 
         
         self.sectionInsetReference = .fromSafeArea
         self.scrollDirection = .horizontal

@@ -52,7 +52,7 @@ final class CapsuleDetailViewModel: BaseViewModel {
 
         let options: MKMapSnapshotter.Options = .init()
         options.region = MKCoordinateRegion(center: center, span: span)
-        //options.size = CGSize(width: width - (FrameResource.detailContentHInset * 2),
+        // options.size = CGSize(width: width - (FrameResource.detailContentHInset * 2),
         //                      height: FrameResource.detailMapHeight)
 
         let snapshotShooter = MKMapSnapshotter(options: options)
