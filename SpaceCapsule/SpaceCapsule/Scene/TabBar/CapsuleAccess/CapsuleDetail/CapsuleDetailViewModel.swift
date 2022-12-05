@@ -16,24 +16,49 @@ final class CapsuleDetailViewModel: BaseViewModel {
 
     var input = Input()
     var output = Output()
-
+    
+    lazy var mapSnapshotInfo = Observable.zip(input.frameWidth, output.mapCoordinate)
+        
     struct Input {
+        var frameWidth = PublishSubject<CGFloat>()
     }
 
     struct Output {
         var imageCell = BehaviorRelay<[DetailImageCell.Cell]>(value: [])
         var capsuleData = BehaviorRelay<[Capsule]>(value: [])
+        var mapCoordinate = PublishSubject<CLLocationCoordinate2D>()
         var mapSnapshot = BehaviorRelay<[UIImage]>(value: [])
     }
+    
+    init() {
+        bind()
+    }
+    
+    private func bind() {
+        mapSnapshotInfo
+            .withUnretained(self)
+            .subscribe(onNext: { owner, snapshotInfo in
+                let (width, coordinate) = (snapshotInfo.0, snapshotInfo.1)
+                owner.drawMapSnapshot(width: width, at: coordinate)
+            })
+            .disposed(by: disposeBag)
+    }
 
-    func getCapsule(with uuid: String?) {
+    func fetchCapsule(with uuid: String?) {
+        
         guard let uuid,
               let capsule = AppDataManager.shared.capsule(uuid: uuid) else {
             return
         }
         
+        // MARK: 캡슐 정보 업데이트
         output.capsuleData.accept([capsule])
         
+        // MARK: 캡슐 지도 업데이트
+        output.mapCoordinate.onNext(CLLocationCoordinate2D(latitude: capsule.geopoint.latitude,
+                                                           longitude: capsule.geopoint.longitude))
+        
+        // MARK: 캡슐 이미지 업데이트
         guard let firstImageURL = capsule.images.first else {
             return
         }
@@ -42,21 +67,17 @@ final class CapsuleDetailViewModel: BaseViewModel {
                                                                                       date: capsule.memoryDate.dateString))
         let otherCells = capsule.images[1..<capsule.images.count].map { DetailImageCell.Cell(imageURL: $0, capsuleInfo: nil) }
         output.imageCell.accept([firstCell] + otherCells)
-        
-        fetchCapsuleMap(at: capsule.geopoint)
     }
-
-    func fetchCapsuleMap(at coordinate: GeoPoint) {
-        let center = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
+    
+    private func drawMapSnapshot(width: CGFloat, at center: CLLocationCoordinate2D) {
         let span = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
 
         let options: MKMapSnapshotter.Options = .init()
         options.region = MKCoordinateRegion(center: center, span: span)
-        // options.size = CGSize(width: width - (FrameResource.detailContentHInset * 2),
-        //                      height: FrameResource.detailMapHeight)
+        options.size = CGSize(width: width - (FrameResource.detailContentHInset * 2),
+                              height: FrameResource.detailMapHeight)
 
         let snapshotShooter = MKMapSnapshotter(options: options)
-
         snapshotShooter.start { [weak self] snapshot, error in
             guard let snapshot = snapshot else {
                 return
@@ -65,6 +86,7 @@ final class CapsuleDetailViewModel: BaseViewModel {
             if error != nil {
                 return
             }
+            
             UIGraphicsBeginImageContextWithOptions(snapshot.image.size, true, snapshot.image.scale)
             snapshot.image.draw(at: .zero)
 

@@ -7,6 +7,7 @@
 
 import RxSwift
 import SnapKit
+import MapKit
 import UIKit
 
 final class CapsuleDetailViewController: UIViewController, BaseViewController {
@@ -21,12 +22,13 @@ final class CapsuleDetailViewController: UIViewController, BaseViewController {
         super.viewDidLoad()
         
         applyDataSource()
-        
         bind()
+        viewModel?.input.frameWidth.onNext(view.frame.width)
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
         scrollView.frame = CGRect(origin: .zero, size: view.frame.size)
         scrollView.backgroundColor = .themeBackground
 

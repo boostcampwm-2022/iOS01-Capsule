@@ -30,7 +30,7 @@ final class CapsuleDetailCoordinator: Coordinator {
         capsuleDetailViewModel.coordinator = self
         capsuleDetailViewController.viewModel = capsuleDetailViewModel
         
-        capsuleDetailViewModel.getCapsule(with: capsuleUUID)
+        capsuleDetailViewModel.fetchCapsule(with: capsuleUUID)
         
         navigationController?.pushViewController(capsuleDetailViewController, animated: true)
     }
