@@ -35,9 +35,9 @@ final class CapsuleLocateView: UIView, BaseView {
     let locateMap = CustomMapView()
 
     let cursor: UIImageView = {
-        let cursor = UIImageView(image: UIImage(systemName: "plus"))
+        let cursor = UIImageView(image: .locate)
         cursor.isUserInteractionEnabled = true
-        cursor.tintColor = .red
+
         return cursor
     }()
 
@@ -104,7 +104,7 @@ final class CapsuleLocateView: UIView, BaseView {
     func makeConstraints() {
         cursor.snp.makeConstraints {
             $0.center.equalToSuperview()
-            $0.height.width.equalTo(20) // 바뀔것 같아서 수정안함!
+            $0.height.width.equalTo(30) // 바뀔것 같아서 수정안함!
         }
 
         cancelButton.snp.makeConstraints {

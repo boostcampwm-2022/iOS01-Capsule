@@ -60,6 +60,8 @@
 		0DD83D11292F2EC80020F15C /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD83D10292F2EC80020F15C /* UIViewController+.swift */; };
 		0DD83D13292F51960020F15C /* LoadingIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD83D12292F51960020F15C /* LoadingIndicatorView.swift */; };
 		0DE28B8A2934B42C00446143 /* CustomMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE28B892934B42C00446143 /* CustomMapView.swift */; };
+		0DE43D24293DA8A5001F6C4F /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE43D23293DA8A5001F6C4F /* UIView+.swift */; };
+		0DE43D26293DAC06001F6C4F /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE43D25293DAC06001F6C4F /* DatePickerView.swift */; };
 		0DE786E1292BBDEC007EF260 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE786E0292BBDEC007EF260 /* DatePickerViewController.swift */; };
 		2800F97A292F1F060069EE7F /* ListCapsuleCellItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2800F979292F1F060069EE7F /* ListCapsuleCellItem.swift */; };
 		2803EA3A29339B2C00589399 /* SortPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2803EA3929339B2C00589399 /* SortPolicy.swift */; };
@@ -196,6 +198,9 @@
 		0D9D67302924945D0038F529 /* FrameResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameResource.swift; sourceTree = "<group>"; };
 		0DA05E1C29308B8400B08FA5 /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
 		0DA6610C292778BE00CF3563 /* ThemeTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeTextField.swift; sourceTree = "<group>"; };
+		0DA72BDF2939F7D700DF6E69 /* SpaceCapsule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceCapsule.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0DA72BE02939F7D700DF6E69 /* SpaceCapsuleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpaceCapsuleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0DA72BE12939F7D700DF6E69 /* SpaceCapsuleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpaceCapsuleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DA9F6902928E9B900454932 /* AddImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddImageCell.swift; sourceTree = "<group>"; };
 		0DA9F6922928E9CB00454932 /* AddImageCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddImageCollectionView.swift; sourceTree = "<group>"; };
 		0DA9F6942928EA4900454932 /* AddImageButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddImageButtonCell.swift; sourceTree = "<group>"; };
@@ -217,6 +222,8 @@
 		0DD83D10292F2EC80020F15C /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		0DD83D12292F51960020F15C /* LoadingIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicatorView.swift; sourceTree = "<group>"; };
 		0DE28B892934B42C00446143 /* CustomMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMapView.swift; sourceTree = "<group>"; };
+		0DE43D23293DA8A5001F6C4F /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
+		0DE43D25293DAC06001F6C4F /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
 		0DE786E0292BBDEC007EF260 /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
 		2800F979292F1F060069EE7F /* ListCapsuleCellItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCapsuleCellItem.swift; sourceTree = "<group>"; };
 		2803EA3929339B2C00589399 /* SortPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortPolicy.swift; sourceTree = "<group>"; };
@@ -374,9 +381,6 @@
 				0D6CA333292216A300E02393 /* SpaceCapsule */,
 				0D6CA34A292216A400E02393 /* SpaceCapsuleTests */,
 				0D6CA354292216A400E02393 /* SpaceCapsuleUITests */,
-				2824555E293B105800DE03A1 /* SpaceCapsule.app */,
-				2824555F293B105800DE03A1 /* SpaceCapsuleTests.xctest */,
-				28245560293B105800DE03A1 /* SpaceCapsuleUITests.xctest */,
 			);
 			sourceTree = "<group>";
 		};
@@ -427,6 +431,7 @@
 				0DE786E0292BBDEC007EF260 /* DatePickerViewController.swift */,
 				0D706136292C630D0077787E /* DatePickerViewModel.swift */,
 				0D706138292C63140077787E /* DatePickerCoordinator.swift */,
+				0DE43D25293DAC06001F6C4F /* DatePickerView.swift */,
 			);
 			path = DatePicker;
 			sourceTree = "<group>";
@@ -445,6 +450,7 @@
 			isa = PBXGroup;
 			children = (
 				0DCEED362932538F006EB2B4 /* Array+.swift */,
+				0DE43D23293DA8A5001F6C4F /* UIView+.swift */,
 				4A9E9146292A2A5A00B7CC5C /* CLLocationManager+Rx.swift */,
 				0DB746B3292E268A005FF249 /* Date+.swift */,
 				4A9E9148292A383900B7CC5C /* MKMapView+Rx.swift */,
@@ -878,44 +884,7 @@
 				0D707D5429222BEB00380B14 /* FirebaseStorage */,
 			);
 			productName = SpaceCapsule;
-			productReference = 2824555E293B105800DE03A1 /* SpaceCapsule.app */;
 			productType = "com.apple.product-type.application";
-		};
-		0D6CA346292216A400E02393 /* SpaceCapsuleTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 0D6CA35E292216A400E02393 /* Build configuration list for PBXNativeTarget "SpaceCapsuleTests" */;
-			buildPhases = (
-				0D6CA343292216A400E02393 /* Sources */,
-				0D6CA344292216A400E02393 /* Frameworks */,
-				0D6CA345292216A400E02393 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				0D6CA349292216A400E02393 /* PBXTargetDependency */,
-			);
-			name = SpaceCapsuleTests;
-			productName = SpaceCapsuleTests;
-			productReference = 2824555F293B105800DE03A1 /* SpaceCapsuleTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		0D6CA350292216A400E02393 /* SpaceCapsuleUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 0D6CA361292216A400E02393 /* Build configuration list for PBXNativeTarget "SpaceCapsuleUITests" */;
-			buildPhases = (
-				0D6CA34D292216A400E02393 /* Sources */,
-				0D6CA34E292216A400E02393 /* Frameworks */,
-				0D6CA34F292216A400E02393 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				0D6CA353292216A400E02393 /* PBXTargetDependency */,
-			);
-			name = SpaceCapsuleUITests;
-			productName = SpaceCapsuleUITests;
-			productReference = 28245560293B105800DE03A1 /* SpaceCapsuleUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
@@ -1039,6 +1008,7 @@
 				0DCEED332932177F006EB2B4 /* LocationManager.swift in Sources */,
 				0D70613E292CD24D0077787E /* FirebaseStorageManager.swift in Sources */,
 				288A8EBA29235B86000229D2 /* CapsuleListView.swift in Sources */,
+				0DE43D26293DAC06001F6C4F /* DatePickerView.swift in Sources */,
 				288A8ED729235C77000229D2 /* CapsuleCreateViewModel.swift in Sources */,
 				0D9D672E292486780038F529 /* ThemeLabel.swift in Sources */,
 				28C8C984292DF4EA005615BB /* SortPolicyHeaderView.swift in Sources */,
@@ -1096,6 +1066,7 @@
 				288A8EB429235B62000229D2 /* ProfileViewController.swift in Sources */,
 				0DCB22932924CE58002CB095 /* CustomTabBarController.swift in Sources */,
 				4A9E9147292A2A5A00B7CC5C /* CLLocationManager+Rx.swift in Sources */,
+				0DE43D24293DA8A5001F6C4F /* UIView+.swift in Sources */,
 				288A8EA129235AA1000229D2 /* SignInCoordinator.swift in Sources */,
 				0DA9F6932928E9CB00454932 /* AddImageCollectionView.swift in Sources */,
 				288A8ED929235C83000229D2 /* CapsuleCreateCoordinator.swift in Sources */,
@@ -1316,19 +1287,21 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SpaceCapsule/SpaceCapsule.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 4G6ZD4247R;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SpaceCapsule/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "공간캡슐";
-				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "This application requires location services to work";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "This app would like to use your location";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "This application requires location services to work";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Location is required to find out where you are";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app would like to use your location";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "갤러리 접근 권한";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1353,19 +1326,21 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SpaceCapsule/SpaceCapsule.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 4G6ZD4247R;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SpaceCapsule/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "공간캡슐";
-				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "This application requires location services to work";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "This app would like to use your location";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "This application requires location services to work";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Location is required to find out where you are";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app would like to use your location";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "갤러리 접근 권한";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

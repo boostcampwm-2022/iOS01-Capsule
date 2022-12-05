@@ -15,7 +15,7 @@ final class CapsuleLocateViewController: UIViewController, BaseViewController {
     var viewModel: CapsuleLocateViewModel?
 
     let mainView = CapsuleLocateView()
-    let locationManager = CLLocationManager()
+    let locationManager = LocationManager.shared.core
 
     override func loadView() {
         view = mainView
@@ -38,19 +38,19 @@ final class CapsuleLocateViewController: UIViewController, BaseViewController {
         // Drag
         viewModel?.input.isDragging
             .withUnretained(self)
-            .bind { weakSelf, isDragging in
+            .bind { owner, isDragging in
                 if isDragging {
-                    weakSelf.mainView.cursor.backgroundColor = .lightGray
+                    owner.mainView.cursor.image = .locateDisabled
                 } else {
-                    weakSelf.mainView.cursor.backgroundColor = .green
+                    owner.mainView.cursor.image = .locate
                 }
             }.disposed(by: disposeBag)
 
         viewModel?.output.doneButtonState
             .withUnretained(self)
-            .subscribe(onNext: { weakSelf, state in
-                weakSelf.mainView.doneButton.isEnabled = state
-                weakSelf.mainView.doneButton.backgroundColor = state ? .themeColor200 : .themeGray200
+            .subscribe(onNext: { owner, state in
+                owner.mainView.doneButton.isEnabled = state
+                owner.mainView.doneButton.backgroundColor = state ? .themeColor200 : .themeGray200
             })
             .disposed(by: disposeBag)
 
@@ -74,18 +74,27 @@ final class CapsuleLocateViewController: UIViewController, BaseViewController {
                 self?.viewModel?.input.done.onNext(())
             })
             .disposed(by: disposeBag)
+
+        mainView.locateMap.rx.regionDidChangeAnimated
+            .subscribe(onNext: { [weak self] mapView, _ in
+                let coordinate = mapView.centerCoordinate
+                
+                self?.viewModel?.output.geopoint.onNext(
+                    GeoPoint(latitude: coordinate.latitude, longitude: coordinate.longitude)
+                )
+            })
+            .disposed(by: disposeBag)
     }
 
     private func configure() {
         view.backgroundColor = .white
 
         configureLocationManager()
-        configureMap()
         configureGesture()
     }
 
     private func goToCurrentLocation() {
-        guard let center = locationManager.location?.coordinate else {
+        guard let center = LocationManager.shared.coordinate else {
             return
         }
 
@@ -101,30 +110,10 @@ final class CapsuleLocateViewController: UIViewController, BaseViewController {
 extension CapsuleLocateViewController: CLLocationManagerDelegate {
     private func configureLocationManager() {
         locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
     }
 
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         LocationManager.shared.checkAuthorization(status: status)
-    }
-}
-
-// MARK: - MKMapView
-
-extension CapsuleLocateViewController: MKMapViewDelegate {
-    private func configureMap() {
-        mainView.locateMap.delegate = self
-        mainView.locateMap.mapType = MKMapType.standard
-    }
-
-    func mapView(_ mapView: MKMapView, regionDidChangeAnimated: Bool) {
-        let coordinate = mapView.region.center
-
-        viewModel?.output.geopoint.onNext(
-            GeoPoint(latitude: coordinate.latitude, longitude: coordinate.longitude)
-        )
     }
 }
 
