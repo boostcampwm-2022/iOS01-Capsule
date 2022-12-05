@@ -12,20 +12,17 @@ import UIKit
 final class CapsuleDetailViewController: UIViewController, BaseViewController {
     var disposeBag = DisposeBag()
     var viewModel: CapsuleDetailViewModel?
+    private var imageDataSource: UICollectionViewDiffableDataSource<Int, DetailImageCell.Cell>?
 
     private let scrollView = CustomScrollView()
     private let mainView = CapsuleDetailView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        mainView.imageCollectionView.applyDataSource()
-
+        
+        applyDataSource()
+        
         bind()
-
-        // TODO: 구현 후에 지우기
-        let center = GeoPoint(latitude: 37.583577, longitude: 127.019607)
-        viewModel?.fetchCapsuleMap(at: center, width: view.frame.width)
     }
 
     override func viewDidLayoutSubviews() {
@@ -36,15 +33,31 @@ final class CapsuleDetailViewController: UIViewController, BaseViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(mainView)
         mainView.backgroundColor = .themeBackground
+        
+        if let detailLayout = mainView.imageCollectionView.collectionViewLayout as? DetailImageFlowLayout {
+            detailLayout.sectionInset = UIEdgeInsets(top: 0.0,
+                                                     left: (view.frame.width - FrameResource.detailImageViewWidth) / 2,
+                                                     bottom: 0.0,
+                                                     right: (view.frame.width - FrameResource.detailImageViewWidth) / 2)
+        }
 
         makeConstrinats()
     }
 
     func bind() {
-        viewModel?.output.imageURLs
+        viewModel?.output.imageCell
             .withUnretained(self)
-            .subscribe(onNext: { owner, urls in
-                owner.mainView.imageCollectionView.applySnapshot(items: urls)
+            .subscribe(onNext: { owner, cells in
+                owner.applySnapshot(cells: cells)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel?.output.capsuleData
+            .withUnretained(self)
+            .subscribe(onNext: { owner, data in
+                if let capsule = data.first {
+                    owner.mainView.updateCapsuleData(capsule: capsule)
+                }
             })
             .disposed(by: disposeBag)
 
@@ -61,5 +74,29 @@ final class CapsuleDetailViewController: UIViewController, BaseViewController {
             $0.edges.equalToSuperview()
             $0.width.equalToSuperview()
         }
+    }
+    
+    func applyDataSource() {
+        self.imageDataSource = UICollectionViewDiffableDataSource<Int, DetailImageCell.Cell>(collectionView: self.mainView.imageCollectionView, cellProvider: { collectionView, indexPath, item in
+            
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DetailImageCell.identifier, for: indexPath) as? DetailImageCell else {
+                return UICollectionViewCell()
+            }
+            
+            cell.imageView.kr.setImage(with: item.imageURL, scale: 1.0)
+            
+            if let info = item.capsuleInfo {
+                cell.addCapsuleInfo(info)
+            }
+            
+            return cell
+        })
+    }
+    
+    func applySnapshot(cells: [DetailImageCell.Cell]) {
+        var snapshot = NSDiffableDataSourceSnapshot<Int, DetailImageCell.Cell>()
+        snapshot.appendSections([0])
+        snapshot.appendItems(cells, toSection: 0)
+        imageDataSource?.apply(snapshot)
     }
 }

@@ -21,7 +21,8 @@ final class CapsuleDetailViewModel: BaseViewModel {
     }
 
     struct Output {
-        var imageURLs = BehaviorRelay<[String]>(value: [])
+        var imageCell = BehaviorRelay<[DetailImageCell.Cell]>(value: [])
+        var capsuleData = BehaviorRelay<[Capsule]>(value: [])
         var mapSnapshot = BehaviorRelay<[UIImage]>(value: [])
     }
 
@@ -30,18 +31,29 @@ final class CapsuleDetailViewModel: BaseViewModel {
               let capsule = AppDataManager.shared.capsule(uuid: uuid) else {
             return
         }
-
-        output.imageURLs.accept(capsule.images)
+        
+        output.capsuleData.accept([capsule])
+        
+        guard let firstImageURL = capsule.images.first else {
+            return
+        }
+        let firstCell = DetailImageCell.Cell(imageURL: firstImageURL,
+                                             capsuleInfo: DetailImageCell.CapsuleInfo(address: capsule.simpleAddress,
+                                                                                      date: capsule.memoryDate.dateString))
+        let otherCells = capsule.images[1..<capsule.images.count].map { DetailImageCell.Cell(imageURL: $0, capsuleInfo: nil) }
+        output.imageCell.accept([firstCell] + otherCells)
+        
+        fetchCapsuleMap(at: capsule.geopoint)
     }
 
-    func fetchCapsuleMap(at coordinate: GeoPoint, width: CGFloat) {
+    func fetchCapsuleMap(at coordinate: GeoPoint) {
         let center = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
         let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
 
         let options: MKMapSnapshotter.Options = .init()
         options.region = MKCoordinateRegion(center: center, span: span)
-        options.size = CGSize(width: width - (FrameResource.detailContentHInset * 2),
-                              height: FrameResource.detailMapHeight)
+        // options.size = CGSize(width: width - (FrameResource.detailContentHInset * 2),
+        //                      height: FrameResource.detailMapHeight)
 
         let snapshotShooter = MKMapSnapshotter(options: options)
 
@@ -57,16 +69,20 @@ final class CapsuleDetailViewModel: BaseViewModel {
             snapshot.image.draw(at: .zero)
 
             let point = snapshot.point(for: center)
-//            let annotation = CustomAnnotation(coordinate: center)
             let annotation = MKPointAnnotation()
             annotation.coordinate = center
 
-            let annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "capsuleLocation")
+            let annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "")
 
             annotationView.contentMode = .scaleAspectFit
             annotationView.bounds = CGRect(x: 0, y: 0, width: 40, height: 40)
+            
+            let rect = CGRect(x: point.x - annotationView.bounds.width,
+                              y: point.y - annotationView.bounds.height,
+                              width: annotationView.bounds.width,
+                              height: annotationView.bounds.height)
 
-            annotationView.drawHierarchy(in: CGRect(x: point.x - annotationView.bounds.width, y: point.y - annotationView.bounds.height, width: annotationView.bounds.width, height: annotationView.bounds.height), afterScreenUpdates: true)
+            annotationView.drawHierarchy(in: rect, afterScreenUpdates: true)
 
             let drawImage = UIGraphicsGetImageFromCurrentImageContext()
 

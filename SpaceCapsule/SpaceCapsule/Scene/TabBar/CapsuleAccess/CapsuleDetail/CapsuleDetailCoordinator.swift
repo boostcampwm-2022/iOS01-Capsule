@@ -28,9 +28,9 @@ final class CapsuleDetailCoordinator: Coordinator {
         let capsuleDetailViewModel = CapsuleDetailViewModel()
 
         capsuleDetailViewModel.coordinator = self
-        capsuleDetailViewModel.getCapsule(with: capsuleUUID)
         capsuleDetailViewController.viewModel = capsuleDetailViewModel
         
+        capsuleDetailViewModel.getCapsule(with: capsuleUUID)
         
         navigationController?.pushViewController(capsuleDetailViewController, animated: true)
     }
