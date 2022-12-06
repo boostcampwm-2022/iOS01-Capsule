@@ -19,18 +19,18 @@ final class CapsuleDetailViewModel: BaseViewModel {
     
     lazy var mapSnapshotInfo = Observable.zip(input.frameWidth, output.mapCoordinate)
     
-    lazy var deleteCapsule = Observable.combineLatest(output.capsuleData, input.deleteCapsule)
+    lazy var deleteCapsule = Observable.combineLatest(output.capsuleData, input.deleteCapsuleTapped)
         
     struct Input {
-        var frameWidth = PublishSubject<CGFloat>()
-        var deleteCapsule = PublishSubject<Void>()
+        let frameWidth = PublishSubject<CGFloat>()
+        let deleteCapsuleTapped = PublishSubject<Void>()
     }
 
     struct Output {
-        var imageCell = BehaviorRelay<[DetailImageCell.Cell]>(value: [])
-        var capsuleData = BehaviorRelay<[Capsule]>(value: [])
-        var mapCoordinate = PublishSubject<CLLocationCoordinate2D>()
-        var mapSnapshot = BehaviorRelay<[UIImage]>(value: [])
+        let imageCell = BehaviorRelay<[DetailImageCell.Cell]>(value: [])
+        let capsuleData = PublishSubject<Capsule>()
+        let mapCoordinate = PublishSubject<CLLocationCoordinate2D>()
+        let mapSnapshot = PublishSubject<UIImage>()
     }
     
     init() {
@@ -46,23 +46,15 @@ final class CapsuleDetailViewModel: BaseViewModel {
             })
             .disposed(by: disposeBag)
         
-        input.deleteCapsule
-            .subscribe(onNext: {
-                print("캡슐 삭제")
-            })
-            .disposed(by: disposeBag)
-        
         deleteCapsule
             .subscribe(onNext: { capsuleData, _ in
-                let uuid = capsuleData.first!.uuid
-                FirestoreManager.shared.deleteCapsule(uuid)
+                FirestoreManager.shared.deleteCapsule(capsuleData.uuid)
             })
             .disposed(by: disposeBag)
     }
 
-    func fetchCapsule(with uuid: String?) {
-        
-        guard let uuid,
+    func fetchCapsule() {
+        guard let uuid = coordinator?.capsuleUUID,
               let capsule = AppDataManager.shared.capsule(uuid: uuid) else {
             return
         }
@@ -71,7 +63,7 @@ final class CapsuleDetailViewModel: BaseViewModel {
         FirestoreManager.shared.incrementOpenCount(uuid: uuid)
         
         // MARK: 캡슐 정보 업데이트
-        output.capsuleData.accept([capsule])
+        output.capsuleData.onNext(capsule)
         
         // MARK: 캡슐 지도 업데이트
         output.mapCoordinate.onNext(CLLocationCoordinate2D(latitude: capsule.geopoint.latitude,
@@ -108,7 +100,7 @@ final class CapsuleDetailViewModel: BaseViewModel {
             }
  
             if let drawImage = self?.drawAnnotation(with: center, on: snapshot) {
-                self?.output.mapSnapshot.accept([drawImage])
+                self?.output.mapSnapshot.onNext(drawImage)
             }
         }
     }

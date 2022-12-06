@@ -23,7 +23,7 @@ final class CapsuleDetailViewController: UIViewController, BaseViewController {
         addSettingButton()
         applyDataSource()
         bind()
-        viewModel?.input.frameWidth.onNext(view.frame.width)
+        viewModel?.fetchCapsule()
     }
 
     override func viewDidLayoutSubviews() {
@@ -40,6 +40,8 @@ final class CapsuleDetailViewController: UIViewController, BaseViewController {
     }
 
     func bind() {
+        viewModel?.input.frameWidth.onNext(view.frame.width)
+        
         viewModel?.output.imageCell
             .withUnretained(self)
             .subscribe(onNext: { owner, cells in
@@ -49,21 +51,18 @@ final class CapsuleDetailViewController: UIViewController, BaseViewController {
         
         viewModel?.output.capsuleData
             .withUnretained(self)
-            .subscribe(onNext: { owner, data in
-                if let capsule = data.first {
-                    owner.mainView.updateCapsuleData(capsule: capsule)
-                    owner.setUpNavigationTitle(capsule.title)
-                }
+            .subscribe(onNext: { owner, capsule in
+                owner.mainView.updateCapsuleData(capsule: capsule)
+                owner.setUpNavigationTitle(capsule.title)
             })
             .disposed(by: disposeBag)
 
         viewModel?.output.mapSnapshot
             .withUnretained(self)
             .subscribe(onNext: { owner, mapImage in
-                owner.mainView.mapView.image = mapImage.first
+                owner.mainView.mapView.image = mapImage
             })
             .disposed(by: disposeBag)
-        
     }
     
     private func addSettingButton() {
@@ -75,7 +74,7 @@ final class CapsuleDetailViewController: UIViewController, BaseViewController {
     
     private func getSettingsMenu() -> UIMenu {
         let deleteAction = UIAction(title: "캐슐 삭제") { [weak self] _ in
-            self?.viewModel?.input.deleteCapsule.onNext(())
+            self?.viewModel?.input.deleteCapsuleTapped.onNext(())
         }
         
         let menu = UIMenu(options: .displayInline, children: [deleteAction])
