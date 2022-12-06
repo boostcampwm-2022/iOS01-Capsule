@@ -31,8 +31,9 @@ class CapsuleOpenCoordinator: Coordinator {
 
     func finish() {
         _ = parent?.children.popLast()
-        if let parent = parent as? TabBarCoordinator {
-            parent.tabBarWillHide(false)
+
+        if let parent = parent as? CapsuleAccessCoordinator {
+            parent.finish()
         }
     }
 

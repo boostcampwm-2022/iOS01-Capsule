@@ -20,9 +20,10 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if let parent = viewModel?.coordinator?.parent as? TabBarCoordinator {
-            parent.tabBarWillHide(false)
-        }
+        
+//        if let parent = viewModel?.coordinator?.parent as? TabBarCoordinator {
+//            parent.tabBarWillHide(false)
+//        }
     }
 
     override func loadView() {
