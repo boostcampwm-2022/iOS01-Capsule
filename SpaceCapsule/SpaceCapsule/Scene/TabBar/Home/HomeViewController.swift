@@ -15,6 +15,10 @@ final class HomeViewController: UIViewController, BaseViewController {
     var viewModel: HomeViewModel?
     var disposeBag = DisposeBag()
     
+    var centerIndex: CGFloat {
+        return homeView.capsuleCollectionView.contentOffset.x / (FrameResource.homeCapsuleCellWidth * 0.75 + 10)
+    }
+    
     // MARK: - Lifecycles
     override func loadView() {
         view = homeView
@@ -43,17 +47,17 @@ final class HomeViewController: UIViewController, BaseViewController {
             .disposed(by: disposeBag)
         
         homeView.capsuleCollectionView.rx.itemHighlighted.subscribe(onNext: { [weak self] indexPath in
-            if let cell = self?.homeView.capsuleCollectionView.cellForItem(at: indexPath) as? HomeCapsuleCell {
-                if cell.alpha == 1.0 {
+            if CGFloat(indexPath.item) == self?.centerIndex {
+                if let cell = self?.homeView.capsuleCollectionView.cellForItem(at: indexPath) as? HomeCapsuleCell {
                     let pressedDownTransform = CGAffineTransform(scaleX: 0.96, y: 0.96)
-                    UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 10, options: [.curveEaseInOut], animations: { cell.transform = pressedDownTransform })
+                    UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 10, options: [.curveEaseInOut], animations: { cell.transform = pressedDownTransform })
                 }
             }
         }).disposed(by: disposeBag)
         
         homeView.capsuleCollectionView.rx.itemUnhighlighted.subscribe(onNext: { [weak self] indexPath in
-            if let cell = self?.homeView.capsuleCollectionView.cellForItem(at: indexPath) as? HomeCapsuleCell {
-                if cell.alpha == 1.0 {
+            if CGFloat(indexPath.item) == self?.centerIndex {
+                if let cell = self?.homeView.capsuleCollectionView.cellForItem(at: indexPath) as? HomeCapsuleCell {
                     let originalTransform = CGAffineTransform(scaleX: 1, y: 1)
                     UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 10, options: [.curveEaseInOut], animations: { cell.transform = originalTransform })
                 }
@@ -61,10 +65,8 @@ final class HomeViewController: UIViewController, BaseViewController {
         }).disposed(by: disposeBag)
         
         homeView.capsuleCollectionView.rx.itemSelected.subscribe(onNext: { [weak self] indexPath in
-            if let cell = self?.homeView.capsuleCollectionView.cellForItem(at: indexPath) as? HomeCapsuleCell {
-                if cell.alpha != 1.0 {
-                    self?.homeView.capsuleCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-                }
+            if CGFloat(indexPath.item) != self?.centerIndex {
+                self?.homeView.capsuleCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
             }
         }).disposed(by: disposeBag)
     }
