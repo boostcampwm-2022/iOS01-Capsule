@@ -15,6 +15,7 @@ final class ProfileViewModel: BaseViewModel {
     var input = Input()
 
     struct Input {
+        var tapSetupNotification = PublishSubject<Void>()
         var tapSetting = PublishSubject<Void>()
         var tapSignOut = PublishSubject<Void>()
         var tapWithdrawal = PublishSubject<Void>()

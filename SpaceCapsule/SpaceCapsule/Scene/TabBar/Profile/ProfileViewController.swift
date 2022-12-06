@@ -21,12 +21,18 @@ final class ProfileViewController: UIViewController, BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bind()
+        bindViewModel()
     }
 
     func bind() {
         guard let viewModel else {
             return
         }
+        profileView.notificationButton.rx.tap
+            .bind {
+                viewModel.input.tapSetupNotification.onNext(())
+            }
+            .disposed(by: disposeBag)
         profileView.settingButton.rx.tap
             .bind {
                 viewModel.input.tapSetting.onNext(())
@@ -44,7 +50,18 @@ final class ProfileViewController: UIViewController, BaseViewController {
                 viewModel.input.tapWithdrawal.onNext(())
             }
             .disposed(by: disposeBag)
+    }
 
+    func bindViewModel() {
+        guard let viewModel else {
+            return
+        }
+        viewModel.input.tapSetupNotification
+            .withUnretained(self)
+            .bind { owner, _ in
+                owner.checkNotificationAuthorization()
+            }
+            .disposed(by: disposeBag)
         viewModel.input.tapSetting
             .withUnretained(self)
             .bind { owner, _ in
@@ -92,27 +109,61 @@ final class ProfileViewController: UIViewController, BaseViewController {
     func checkLocationAuthorization() {
         switch AppDataManager.shared.location.core.authorizationStatus {
         case .denied:
-            showRequestAuthorization()
+            showRequestLocationAuthorization()
         case .notDetermined, .restricted:
             AppDataManager.shared.location.core.requestWhenInUseAuthorization()
         default:
-            showAlreadyAllowed()
+            showLocationAlreadyAllowed()
             return
         }
     }
 
-    private func showAlreadyAllowed() {
+    func checkNotificationAuthorization() {
+        let current = UNUserNotificationCenter.current()
+        current.getNotificationSettings { setting in
+            switch setting.authorizationStatus {
+            case .authorized:
+                self.showNotificationAlreadyAllowed()
+            case .notDetermined, .denied, .ephemeral, .provisional:
+                self.showRequestNotificationAuthorization()
+            default:
+                self.showRequestNotificationAuthorization()
+                return
+            }
+        }
+    }
+
+    func requestNotificationPermission() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: { didAllow, _ in
+            if didAllow {
+                print("Push: 권한 허용")
+            } else {
+                print("Push: 권한 거부")
+            }
+        })
+    }
+
+    private func showLocationAlreadyAllowed() {
         let alertController = UIAlertController(title: "위치 권한", message: "이미 동의하셨습니다.", preferredStyle: .alert)
         let acceptAction = UIAlertAction(title: "확인", style: .default, handler: nil)
         alertController.addAction(acceptAction)
         present(alertController, animated: true, completion: nil)
     }
 
-    private func showRequestAuthorization() {
+    private func showNotificationAlreadyAllowed() {
+        let alertController = UIAlertController(title: "알림 권한", message: "이미 동의하셨습니다.", preferredStyle: .alert)
+        let acceptAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+        alertController.addAction(acceptAction)
+        DispatchQueue.main.async {
+            self.present(alertController, animated: true, completion: nil)
+        }
+    }
+
+    private func showRequestLocationAuthorization() {
         guard let url = URL(string: UIApplication.openSettingsURLString) else {
             return
         }
-        let alertController = UIAlertController(title: "위치 권한", message: "앱 설정에서 위치권한을 허용해주세요.", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "위치 권한", message: "앱 설정에서 위치 권한을 허용해주세요.", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let acceptAction = UIAlertAction(title: "OK", style: .default, handler: { _ in
             UIApplication.shared.open(url)
@@ -120,5 +171,21 @@ final class ProfileViewController: UIViewController, BaseViewController {
         alertController.addAction(cancelAction)
         alertController.addAction(acceptAction)
         present(alertController, animated: true, completion: nil)
+    }
+
+    private func showRequestNotificationAuthorization() {
+        guard let url = URL(string: UIApplication.openSettingsURLString) else {
+            return
+        }
+        let alertController = UIAlertController(title: "알림 권한", message: "앱 설정에서 알림 권한을 허용해주세요.", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let acceptAction = UIAlertAction(title: "OK", style: .default, handler: { _ in
+            UIApplication.shared.open(url)
+        })
+        alertController.addAction(cancelAction)
+        alertController.addAction(acceptAction)
+        DispatchQueue.main.async {
+            self.present(alertController, animated: true, completion: nil)
+        }
     }
 }
