@@ -20,6 +20,7 @@ final class ZoomableImageView: UIScrollView {
         super.init(frame: frame)
 
         configure()
+        addDoubleTapRecognizer()
         addSubViews()
         makeConstraints()
     }
@@ -48,6 +49,17 @@ final class ZoomableImageView: UIScrollView {
             $0.width.height.equalToSuperview()
             $0.center.equalToSuperview()
         }
+    }
+
+    private func addDoubleTapRecognizer() {
+        let doubleTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap(_:)))
+        doubleTapRecognizer.numberOfTapsRequired = 2
+        addGestureRecognizer(doubleTapRecognizer)
+    }
+
+    @objc private func handleDoubleTap(_ sender: UITapGestureRecognizer) {
+        let scale: CGFloat = zoomScale == 1 ? 2 : 1
+        setZoomScale(scale, animated: true)
     }
 }
 

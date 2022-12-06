@@ -9,7 +9,13 @@ import SnapKit
 import UIKit
 
 final class ZoomableImageCell: UICollectionViewCell {
-    private let zoomableImageView = ZoomableImageView()
+    let zoomableImageView = ZoomableImageView()
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        zoomableImageView.setZoomScale(1, animated: false)
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)

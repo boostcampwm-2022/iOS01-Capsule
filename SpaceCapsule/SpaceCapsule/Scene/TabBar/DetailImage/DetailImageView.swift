@@ -98,6 +98,7 @@ extension DetailImageView {
         section.orthogonalScrollingBehavior = .groupPagingCentered
         section.visibleItemsInvalidationHandler = { [weak self] _, offset, _ in
             let index = Int(offset.x / (self?.bounds.width ?? 1))
+
             if self?.currentIndex != index {
                 self?.currentIndex = index
             }
