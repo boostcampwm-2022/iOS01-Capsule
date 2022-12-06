@@ -24,6 +24,7 @@ final class CapsuleDetailView: UIView, BaseView {
         collectionView.register(DetailImageCell.self, forCellWithReuseIdentifier: DetailImageCell.identifier)
         collectionView.alwaysBounceHorizontal = true
         collectionView.backgroundColor = .clear
+        collectionView.alwaysBounceHorizontal = false
         collectionView.showsHorizontalScrollIndicator = false
         
         return collectionView
