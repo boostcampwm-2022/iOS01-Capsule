@@ -12,13 +12,28 @@ final class DetailImageViewModel: BaseViewModel {
     var disposeBag = DisposeBag()
     var coordinator: DetailImageCoordinator?
 
+    let input = Input()
     let output = Output()
+    
+    struct Input {
+        let tapClose = PublishSubject<Void>()
+    }
 
     struct Output {
         let imageData = PublishSubject<(data: [Data], index: Int)>()
     }
 
-    init() {}
+    init() {
+        bind()
+    }
+    
+    private func bind() {
+        input.tapClose
+            .subscribe(onNext: { [weak self] in
+                self?.coordinator?.finish()
+            })
+            .disposed(by: disposeBag)
+    }
 
     func fetchData() {
         guard let index = coordinator?.index,

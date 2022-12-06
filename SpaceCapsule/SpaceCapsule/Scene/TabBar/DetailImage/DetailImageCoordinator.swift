@@ -30,8 +30,12 @@ final class DetailImageCoordinator: Coordinator {
 
         viewController = detailImageViewController
 
-        navigationController?.pushViewController(detailImageViewController, animated: true)
-        navigationController?.isNavigationBarHidden = true
+        detailImageViewController.modalPresentationStyle = .fullScreen
+        navigationController?.present(detailImageViewController, animated: false)
+    }
+    
+    func finish() {
+        viewController?.dismiss(animated: true)
     }
 
 }

@@ -32,8 +32,10 @@ final class ZoomableImageView: UIScrollView {
     private func configure() {
         minimumZoomScale = 1
         maximumZoomScale = 3
+
         showsHorizontalScrollIndicator = false
         showsVerticalScrollIndicator = false
+
         delegate = self
     }
 
