@@ -23,6 +23,7 @@ final class CapsuleDetailViewController: UIViewController, BaseViewController {
         
         applyDataSource()
         bind()
+        
         viewModel?.input.frameWidth.onNext(view.frame.width)
     }
 

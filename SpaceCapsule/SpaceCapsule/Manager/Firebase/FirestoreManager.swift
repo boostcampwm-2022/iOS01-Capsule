@@ -184,4 +184,13 @@ class FirestoreManager {
                 }
             }
     }
+    
+    func incrementOpenCount(uuid: String) {
+        database
+            .collection("capsules")
+            .document(uuid)
+            .updateData([
+                "openCount" : FieldValue.increment(Int64(1))
+            ])
+    }
 }

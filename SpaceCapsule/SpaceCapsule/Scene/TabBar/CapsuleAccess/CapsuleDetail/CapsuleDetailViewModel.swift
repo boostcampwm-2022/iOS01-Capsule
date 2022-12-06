@@ -51,6 +51,9 @@ final class CapsuleDetailViewModel: BaseViewModel {
             return
         }
         
+        // MARK: 캡슐 연 횟수 업데이트
+        FirestoreManager.shared.incrementOpenCount(uuid: uuid)
+        
         // MARK: 캡슐 정보 업데이트
         output.capsuleData.accept([capsule])
         
