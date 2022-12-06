@@ -9,8 +9,6 @@ import SnapKit
 import UIKit
 
 final class HomeCapsuleCell: UICollectionViewCell {
-    static let cellIdentifier = "HomeCapsuleCell"
-
     var thumbnailImageView = ThemeThumbnailImageView(frame: .zero, width: FrameResource.homeCapsuleCellWidth)
 
     var descriptionLabel = {

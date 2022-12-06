@@ -19,7 +19,7 @@ final class HomeView: UIView, BaseView {
     lazy var capsuleCollectionView: UICollectionView = {
         let layout = CarouselCollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.register(HomeCapsuleCell.self, forCellWithReuseIdentifier: HomeCapsuleCell.cellIdentifier)
+        collectionView.register(HomeCapsuleCell.self, forCellWithReuseIdentifier: HomeCapsuleCell.identifier)
         collectionView.backgroundColor = .none
         collectionView.showsHorizontalScrollIndicator = false
         return collectionView
