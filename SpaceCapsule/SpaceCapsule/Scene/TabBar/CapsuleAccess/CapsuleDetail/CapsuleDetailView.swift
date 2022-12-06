@@ -9,6 +9,14 @@ import UIKit
 import MapKit
 
 final class CapsuleDetailView: UIView, BaseView {
+    let settingButton: UIButton = {
+        let button = UIButton()
+        button.setImage(.init(systemName: "ellipsis"), for: .normal)
+        button.tintColor = .themeBlack
+        
+        return button
+    }()
+
     private let mainStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
