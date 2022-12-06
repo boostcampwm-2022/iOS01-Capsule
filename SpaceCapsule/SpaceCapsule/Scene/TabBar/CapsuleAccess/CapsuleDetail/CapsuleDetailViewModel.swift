@@ -21,6 +21,7 @@ final class CapsuleDetailViewModel: BaseViewModel {
         
     struct Input {
         var frameWidth = PublishSubject<CGFloat>()
+        var deleteCapsule = PublishSubject<Void>()
     }
 
     struct Output {
@@ -40,6 +41,12 @@ final class CapsuleDetailViewModel: BaseViewModel {
             .subscribe(onNext: { owner, snapshotInfo in
                 let (width, coordinate) = (snapshotInfo.0, snapshotInfo.1)
                 owner.drawMapSnapshot(width: width, at: coordinate)
+            })
+            .disposed(by: disposeBag)
+        
+        input.deleteCapsule
+            .subscribe(onNext: {
+                print("캡슐 삭제")
             })
             .disposed(by: disposeBag)
     }

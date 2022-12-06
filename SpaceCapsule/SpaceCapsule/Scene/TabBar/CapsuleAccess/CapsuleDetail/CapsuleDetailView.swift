@@ -8,11 +8,16 @@
 import UIKit
 import MapKit
 
+import RxSwift
+import RxCocoa
+
 final class CapsuleDetailView: UIView, BaseView {
     let settingButton: UIButton = {
         let button = UIButton()
         button.setImage(.init(systemName: "ellipsis"), for: .normal)
         button.tintColor = .themeBlack
+        button.isUserInteractionEnabled = true
+        button.showsMenuAsPrimaryAction = true
         
         return button
     }()

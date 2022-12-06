@@ -20,9 +20,9 @@ final class CapsuleDetailViewController: UIViewController, BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        addSettingButton()
         applyDataSource()
         bind()
-        configure()
         viewModel?.input.frameWidth.onNext(view.frame.width)
     }
 
@@ -40,12 +40,6 @@ final class CapsuleDetailViewController: UIViewController, BaseViewController {
     }
 
     func bind() {
-        mainView.settingButton.rx.tap
-            .bind { [weak self] in
-//                self?.
-            }
-            .disposed(by: disposeBag)
-        
         viewModel?.output.imageCell
             .withUnretained(self)
             .subscribe(onNext: { owner, cells in
@@ -69,22 +63,24 @@ final class CapsuleDetailViewController: UIViewController, BaseViewController {
                 owner.mainView.mapView.image = mapImage.first
             })
             .disposed(by: disposeBag)
+        
     }
     
-    private func configure() {
-        let button = UIButton()
-        button.setImage(.init(systemName: "ellipsis"), for: .normal)
-        button.tintColor = .themeBlack
+    private func addSettingButton() {
+        mainView.settingButton.menu = getSettingsMenu()
         
-        let settingButton = UIBarButtonItem(customView: button)
-        settingButton.customView?.isUserInteractionEnabled = true
+        let settingButton = UIBarButtonItem(customView: mainView.settingButton)
         navigationItem.rightBarButtonItem = settingButton
+    }
+    
+    private func getSettingsMenu() -> UIMenu {
+        let deleteAction = UIAction(title: "캐슐 삭제") { [weak self] _ in
+            self?.viewModel?.input.deleteCapsule.onNext(())
+        }
         
-//        let deleteItem = UIAction(title: "캡슐 삭제") {
-//            print("캡슐 삭제 하시겠습니까?")
-//        }
-//
-//        let
+        let menu = UIMenu(options: .displayInline, children: [deleteAction])
+        
+        return menu
     }
 
     private func makeConstrinats() {
