@@ -28,11 +28,15 @@ final class HomeViewController: UIViewController, BaseViewController {
     
     // MARK: - Rx
     func bind() {
-        guard let viewModel else { return }
+        guard let viewModel else {
+            return
+        }
         
         viewModel.input.capsuleCellModels
             .bind(to: homeView.capsuleCollectionView.rx.items) { [weak self] (collectionView, index, element) in
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeCapsuleCell.identifier, for: IndexPath(item: index, section: 0)) as? HomeCapsuleCell else { return UICollectionViewCell() }
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeCapsuleCell.identifier, for: IndexPath(item: index, section: 0)) as? HomeCapsuleCell else {
+                    return UICollectionViewCell()
+                }
                 cell.configure(capsuleCellModel: element)
                 return cell
             }

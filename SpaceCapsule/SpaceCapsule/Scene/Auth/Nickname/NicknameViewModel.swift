@@ -50,7 +50,9 @@ final class NickNameViewModel: BaseViewModel {
         input.doneButtonTapped
             .withLatestFrom(input.nickname)
             .subscribe(onNext: { nickname in
-                guard let currentUser = FirebaseAuthManager.shared.currentUser else { return }
+                guard let currentUser = FirebaseAuthManager.shared.currentUser else {
+                    return
+                }
                 let userInfo = UserInfo(email: currentUser.email, nickname: nickname)
 
                 FirestoreManager.shared.registerUserInfo(uid: currentUser.uid, userInfo: userInfo) { [weak self] error in
