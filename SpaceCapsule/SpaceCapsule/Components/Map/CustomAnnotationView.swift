@@ -9,7 +9,12 @@ import MapKit
 import UIKit
 
 final class CustomAnnotationView: MKAnnotationView {
-    private let detailButton = UIButton(type: .detailDisclosure)
+    private let detailButton = {
+        let detailButton = UIButton(type: .detailDisclosure)
+        detailButton.setImage(UIImage.mapPin, for: .normal)
+        detailButton.tintColor = .red
+        return detailButton
+    }()
 
     override var annotation: MKAnnotation? {
         didSet {
@@ -19,7 +24,6 @@ final class CustomAnnotationView: MKAnnotationView {
 
     override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
-
         configure()
         update(for: annotation)
     }
@@ -31,9 +35,7 @@ final class CustomAnnotationView: MKAnnotationView {
 
     private func configure() {
         centerOffset = CGPoint(x: 0, y: -frame.size.height / 2)
-
         canShowCallout = true
-
         rightCalloutAccessoryView = detailButton
     }
 
