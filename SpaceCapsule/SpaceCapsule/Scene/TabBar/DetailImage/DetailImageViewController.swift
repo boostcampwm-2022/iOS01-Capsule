@@ -25,7 +25,7 @@ final class DetailImageViewController: UIViewController {
 
         bind()
         applyDataSource()
-        
+
         viewModel?.fetchData()
     }
 
@@ -34,6 +34,24 @@ final class DetailImageViewController: UIViewController {
             .subscribe(onNext: { [weak self] imageData in
                 let index = imageData.index
                 self?.applySnapshot(items: imageData.data)
+
+                self?.mainView.itemCount = imageData.data.count
+                self?.mainView.currentIndex = index
+
+                DispatchQueue.main.async {
+                    self?.mainView.collectionView.scrollToItem(
+                        at: IndexPath(item: index, section: 0),
+                        at: .top,
+                        animated: true
+                    )
+                }
+
+            })
+            .disposed(by: disposeBag)
+
+        mainView.closeButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel?.input.tapClose.onNext($0)
             })
             .disposed(by: disposeBag)
     }
