@@ -53,7 +53,6 @@ final class HomeView: UIView, BaseView {
             $0.top.equalTo(self.safeAreaLayoutGuide)
         }
         capsuleCollectionView.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
             $0.top.equalTo(mainLabel.snp.bottom)
             $0.bottom.equalTo(self.safeAreaLayoutGuide)
             $0.left.right.equalToSuperview()
