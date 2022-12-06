@@ -63,6 +63,12 @@
 		0DE43D24293DA8A5001F6C4F /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE43D23293DA8A5001F6C4F /* UIView+.swift */; };
 		0DE43D26293DAC06001F6C4F /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE43D25293DAC06001F6C4F /* DatePickerView.swift */; };
 		0DE786E1292BBDEC007EF260 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE786E0292BBDEC007EF260 /* DatePickerViewController.swift */; };
+		0DF9D29A293F09FE001C05DE /* ZoomableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF9D299293F09FE001C05DE /* ZoomableImageView.swift */; };
+		0DF9D29F293F0BA9001C05DE /* DetailImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF9D29E293F0BA9001C05DE /* DetailImageViewController.swift */; };
+		0DF9D2A1293F0C28001C05DE /* DetailImageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF9D2A0293F0C28001C05DE /* DetailImageCoordinator.swift */; };
+		0DF9D2A3293F0C2F001C05DE /* DetailImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF9D2A2293F0C2F001C05DE /* DetailImageViewModel.swift */; };
+		0DF9D2A5293F1CB3001C05DE /* DetailImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF9D2A4293F1CB3001C05DE /* DetailImageView.swift */; };
+		0DF9D2A7293F1DE0001C05DE /* ZoomableImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF9D2A6293F1DE0001C05DE /* ZoomableImageCell.swift */; };
 		2800F97A292F1F060069EE7F /* ListCapsuleCellItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2800F979292F1F060069EE7F /* ListCapsuleCellItem.swift */; };
 		2803EA3A29339B2C00589399 /* SortPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2803EA3929339B2C00589399 /* SortPolicy.swift */; };
 		28049CE529236EEC002389BD /* CapsuleAccessCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28049CE429236EEC002389BD /* CapsuleAccessCoordinator.swift */; };
@@ -225,6 +231,12 @@
 		0DE43D23293DA8A5001F6C4F /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		0DE43D25293DAC06001F6C4F /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
 		0DE786E0292BBDEC007EF260 /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
+		0DF9D299293F09FE001C05DE /* ZoomableImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomableImageView.swift; sourceTree = "<group>"; };
+		0DF9D29E293F0BA9001C05DE /* DetailImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImageViewController.swift; sourceTree = "<group>"; };
+		0DF9D2A0293F0C28001C05DE /* DetailImageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImageCoordinator.swift; sourceTree = "<group>"; };
+		0DF9D2A2293F0C2F001C05DE /* DetailImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImageViewModel.swift; sourceTree = "<group>"; };
+		0DF9D2A4293F1CB3001C05DE /* DetailImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImageView.swift; sourceTree = "<group>"; };
+		0DF9D2A6293F1DE0001C05DE /* ZoomableImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomableImageCell.swift; sourceTree = "<group>"; };
 		2800F979292F1F060069EE7F /* ListCapsuleCellItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCapsuleCellItem.swift; sourceTree = "<group>"; };
 		2803EA3929339B2C00589399 /* SortPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortPolicy.swift; sourceTree = "<group>"; };
 		28049CE429236EEC002389BD /* CapsuleAccessCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleAccessCoordinator.swift; sourceTree = "<group>"; };
@@ -233,9 +245,6 @@
 		28049CEA29237E96002389BD /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		28049CEC29238216002389BD /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
 		2807BC0A292C658000288A5D /* ListCapsuleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCapsuleCell.swift; sourceTree = "<group>"; };
-		2824555E293B105800DE03A1 /* SpaceCapsule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceCapsule.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		2824555F293B105800DE03A1 /* SpaceCapsuleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpaceCapsuleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		28245560293B105800DE03A1 /* SpaceCapsuleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpaceCapsuleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		28245561293B17B100DE03A1 /* UnOpenable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnOpenable.swift; sourceTree = "<group>"; };
 		2885A9FF293B6466003E5311 /* ProfileButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileButton.swift; sourceTree = "<group>"; };
 		288A8E912923244D000229D2 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
@@ -295,9 +304,6 @@
 		4A1FEFF7292F1F1200A935BB /* CustomAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
 		4A2449CC2936043E000EE58C /* DetailImageFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImageFlowLayout.swift; sourceTree = "<group>"; };
 		4A2449D029360669000EE58C /* DetailImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImageCell.swift; sourceTree = "<group>"; };
-		4A2449ED2939C63E000EE58C /* SpaceCapsule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceCapsule.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		4A2449EE2939C63E000EE58C /* SpaceCapsuleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpaceCapsuleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		4A2449EF2939C63E000EE58C /* SpaceCapsuleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpaceCapsuleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A9E9146292A2A5A00B7CC5C /* CLLocationManager+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationManager+Rx.swift"; sourceTree = "<group>"; };
 		4A9E9148292A383900B7CC5C /* MKMapView+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKMapView+Rx.swift"; sourceTree = "<group>"; };
 		4AF16AE6292B1F8400787C5C /* CustomAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotationView.swift; sourceTree = "<group>"; };
@@ -355,11 +361,11 @@
 		0D46DEFC2923E4800045400A /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				0D9A834C293788A300D00303 /* Map */,
 				0DA05E1C29308B8400B08FA5 /* CustomNavigationController.swift */,
 				0DD83D0E292F1BAD0020F15C /* CustomScrollView.swift */,
 				0DCB22922924CE58002CB095 /* CustomTabBarController.swift */,
 				0DD83D12292F51960020F15C /* LoadingIndicatorView.swift */,
+				0D9A834C293788A300D00303 /* Map */,
 				0DCB22942924CE61002CB095 /* Theme */,
 			);
 			path = Components;
@@ -517,6 +523,19 @@
 			path = Theme;
 			sourceTree = "<group>";
 		};
+		0DF9D29D293F0B90001C05DE /* DetailImage */ = {
+			isa = PBXGroup;
+			children = (
+				0DF9D2A0293F0C28001C05DE /* DetailImageCoordinator.swift */,
+				0DF9D2A4293F1CB3001C05DE /* DetailImageView.swift */,
+				0DF9D29E293F0BA9001C05DE /* DetailImageViewController.swift */,
+				0DF9D2A2293F0C2F001C05DE /* DetailImageViewModel.swift */,
+				0DF9D2A6293F1DE0001C05DE /* ZoomableImageCell.swift */,
+				0DF9D299293F09FE001C05DE /* ZoomableImageView.swift */,
+			);
+			path = DetailImage;
+			sourceTree = "<group>";
+		};
 		2800F976292E4BBB0069EE7F /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -632,12 +651,13 @@
 			isa = PBXGroup;
 			children = (
 				288A8EAF29235B46000229D2 /* TabBarCoordinator.swift */,
-				288A8EAB29235B1F000229D2 /* Home */,
-				288A8EAD29235B2C000229D2 /* CapsuleList */,
-				288A8ED129235C0B000229D2 /* CapsuleAdd */,
-				288A8EAC29235B25000229D2 /* CapsuleMap */,
-				288A8EAE29235B33000229D2 /* Profile */,
 				288A8EED29236013000229D2 /* CapsuleAccess */,
+				288A8ED129235C0B000229D2 /* CapsuleAdd */,
+				288A8EAD29235B2C000229D2 /* CapsuleList */,
+				288A8EAC29235B25000229D2 /* CapsuleMap */,
+				0DF9D29D293F0B90001C05DE /* DetailImage */,
+				288A8EAB29235B1F000229D2 /* Home */,
+				288A8EAE29235B33000229D2 /* Profile */,
 			);
 			path = TabBar;
 			sourceTree = "<group>";
@@ -1051,6 +1071,7 @@
 				0DE43D26293DAC06001F6C4F /* DatePickerView.swift in Sources */,
 				288A8ED729235C77000229D2 /* CapsuleCreateViewModel.swift in Sources */,
 				0D9D672E292486780038F529 /* ThemeLabel.swift in Sources */,
+				0DF9D2A3293F0C2F001C05DE /* DetailImageViewModel.swift in Sources */,
 				28C8C984292DF4EA005615BB /* SortPolicyHeaderView.swift in Sources */,
 				288A8EF32923607D000229D2 /* CapsuleOpenViewController.swift in Sources */,
 				4A1FEFF8292F1F1200A935BB /* CustomAnnotation.swift in Sources */,
@@ -1076,6 +1097,7 @@
 				0DD83D0F292F1BAD0020F15C /* CustomScrollView.swift in Sources */,
 				0D706137292C630D0077787E /* DatePickerViewModel.swift in Sources */,
 				0D90DAF929239A81000DCC84 /* UIImage+.swift in Sources */,
+				0DF9D2A5293F1CB3001C05DE /* DetailImageView.swift in Sources */,
 				0DE786E1292BBDEC007EF260 /* DatePickerViewController.swift in Sources */,
 				599C1A4C292CC99A00517E93 /* ImageCacheFactory.swift in Sources */,
 				288A8E9B29235A6E000229D2 /* SignInView.swift in Sources */,
@@ -1088,6 +1110,7 @@
 				288A8EEA29235FF1000229D2 /* CapsuleCloseViewModel.swift in Sources */,
 				0DCEED312932101B006EB2B4 /* UserInfo.swift in Sources */,
 				288A8EF92923609C000229D2 /* CapsuleDetailView.swift in Sources */,
+				0DF9D29F293F0BA9001C05DE /* DetailImageViewController.swift in Sources */,
 				28C8C982292DEECD005615BB /* SortPolicyCell.swift in Sources */,
 				2885AA00293B6466003E5311 /* ProfileButton.swift in Sources */,
 				0D9D67312924945D0038F529 /* FrameResource.swift in Sources */,
@@ -1095,8 +1118,10 @@
 				288A8EC429235BB7000229D2 /* CapsuleMapViewController.swift in Sources */,
 				0DB746AA292DE94B005FF249 /* FBAuthError.swift in Sources */,
 				2803EA3A29339B2C00589399 /* SortPolicy.swift in Sources */,
+				0DF9D2A7293F1DE0001C05DE /* ZoomableImageCell.swift in Sources */,
 				0DB746AE292DF8F6005FF249 /* Capsule.swift in Sources */,
 				288A8EC829235BCE000229D2 /* CapsuleMapCoordinator.swift in Sources */,
+				0DF9D29A293F09FE001C05DE /* ZoomableImageView.swift in Sources */,
 				599C19D2292B82D000517E93 /* LoadingViewController.swift in Sources */,
 				599C1A4A292CC99A00517E93 /* MemoryImageCache.swift in Sources */,
 				288A8E922923244D000229D2 /* Coordinator.swift in Sources */,
@@ -1109,6 +1134,7 @@
 				0DE43D24293DA8A5001F6C4F /* UIView+.swift in Sources */,
 				288A8EA129235AA1000229D2 /* SignInCoordinator.swift in Sources */,
 				0DA9F6932928E9CB00454932 /* AddImageCollectionView.swift in Sources */,
+				0DF9D2A1293F0C28001C05DE /* DetailImageCoordinator.swift in Sources */,
 				288A8ED929235C83000229D2 /* CapsuleCreateCoordinator.swift in Sources */,
 				288A8ECE29235BEF000229D2 /* HomeViewModel.swift in Sources */,
 				28049CE929237BB2002389BD /* BaseView.swift in Sources */,

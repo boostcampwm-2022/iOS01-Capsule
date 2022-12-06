@@ -86,6 +86,8 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
             .subscribe(onNext: { [weak self] indexPath in
                 if self?.mainView.imageCollectionView.cellForItem(at: indexPath) is AddImageButtonCell {
                     self?.checkAccessForPHPicker()
+                } else {
+                    self?.viewModel?.input.tapImage.onNext(indexPath.item)
                 }
             })
             .disposed(by: disposeBag)
@@ -167,7 +169,7 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
                 weakSelf.navigationItem.rightBarButtonItem?.isEnabled = state
             })
             .disposed(by: disposeBag)
-        
+
         viewModel?.fetchAddress()
     }
 
