@@ -185,6 +185,13 @@ class FirestoreManager {
             }
     }
     
+    func deleteCapsule(_ uuid: String) {
+        database
+            .collection("capsules")
+            .document(uuid)
+            .delete()
+    }
+    
     func incrementOpenCount(uuid: String) {
         database
             .collection("capsules")

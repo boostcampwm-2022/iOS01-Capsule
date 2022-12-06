@@ -18,6 +18,8 @@ final class CapsuleDetailViewModel: BaseViewModel {
     var output = Output()
     
     lazy var mapSnapshotInfo = Observable.zip(input.frameWidth, output.mapCoordinate)
+    
+    lazy var deleteCapsule = Observable.combineLatest(output.capsuleData, input.deleteCapsule)
         
     struct Input {
         var frameWidth = PublishSubject<CGFloat>()
@@ -47,6 +49,13 @@ final class CapsuleDetailViewModel: BaseViewModel {
         input.deleteCapsule
             .subscribe(onNext: {
                 print("캡슐 삭제")
+            })
+            .disposed(by: disposeBag)
+        
+        deleteCapsule
+            .subscribe(onNext: { capsuleData, _ in
+                let uuid = capsuleData.first!.uuid
+                FirestoreManager.shared.deleteCapsule(uuid)
             })
             .disposed(by: disposeBag)
     }
