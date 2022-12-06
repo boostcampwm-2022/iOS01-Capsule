@@ -20,7 +20,7 @@
 
 ## User Flow
 
-<img src="https://user-images.githubusercontent.com/55919701/205919850-eeca782e-68f3-475a-8cd0-66a59c784d44.png" width="300">
+<img src="https://user-images.githubusercontent.com/55919701/205919850-eeca782e-68f3-475a-8cd0-66a59c784d44.png">
 
 ## 애플 로그인
 
