@@ -47,8 +47,9 @@ final class CapsuleDetailViewModel: BaseViewModel {
             .disposed(by: disposeBag)
         
         deleteCapsule
-            .subscribe(onNext: { capsuleData, _ in
+            .subscribe(onNext: { [weak self] capsuleData, _ in
                 FirestoreManager.shared.deleteCapsule(capsuleData.uuid)
+                self?.coordinator?.finish()
             })
             .disposed(by: disposeBag)
     }
