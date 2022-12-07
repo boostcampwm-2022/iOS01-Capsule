@@ -22,37 +22,38 @@ final class HomeViewModel: BaseViewModel {
     }
     
     struct Output: ViewModelOutput {
-        var capsuleCellItems = PublishRelay<[HomeCapsuleCellItem]>()
         var mainLabelText = PublishRelay<String>()
-        var featuredCcapsuleCellItems = PublishRelay<[HomeCapsuleCellItem]>()
+        var featuredCapsuleCellItems = PublishRelay<[HomeCapsuleCellItem]>()
     }
     
     init() {
         bind()
     }
-    func fetchCapsuleList() {
+    
+    func bind() {
+        input.capsules
+            .withUnretained(self)
+            .subscribe(
+                onNext: { owner, capsuleList in
+                    owner.output.mainLabelText.accept(owner.makeMainLabel(capsuleCount: capsuleList.count))
+                    if capsuleList.isEmpty {
+                        return
+                    }
+                    owner.output.featuredCapsuleCellItems.accept(
+                        FeaturedCapsule.allCases
+                            .map { owner.getHomeCapsuleCellItem(capsules: capsuleList, type: $0) }
+                            .compactMap({ $0 })
+                    )
+                    
+                })
+            .disposed(by: disposeBag)
+        
         AppDataManager.shared.capsules
             .withUnretained(self)
             .subscribe(
                 onNext: { owner, capsuleList in
-                    let capsuleCellItems = capsuleList.map { capsule in
-                        HomeCapsuleCellItem(
-                            uuid: capsule.uuid,
-                            thumbnailImageURL: capsule.images.first,
-                            address: capsule.simpleAddress,
-                            closedDate: capsule.closedDate,
-                            memoryDate: capsule.memoryDate,
-                            openCount: capsule.openCount,
-                            coordinate: CLLocationCoordinate2D(
-                                latitude: capsule.geopoint.latitude,
-                                longitude: capsule.geopoint.longitude
-                            ),
-                            type: .closedOldest
-                        )
-                    }
                     owner.input.capsules.accept(capsuleList)
                     owner.makeMainLabel(capsuleCount: capsuleList.count)
-                    owner.output.capsuleCellItems.accept(capsuleCellItems)
                 },
                 onError: { error in
                     print(error.localizedDescription)
@@ -61,24 +62,11 @@ final class HomeViewModel: BaseViewModel {
             .disposed(by: disposeBag)
     }
     
-    func makeMainLabel(capsuleCount: Int) {
+    func makeMainLabel(capsuleCount: Int) -> String {
         let nickname = UserDefaultsManager<UserInfo>.loadData(key: .userInfo)?.nickname ?? "none"
-        output.mainLabelText.accept("\(nickname)님의 공간캡슐 \(capsuleCount)개")
+        return "\(nickname)님의 공간캡슐 \(capsuleCount)개"
     }
     
-    func bind() {
-        input.capsules
-            .withUnretained(self)
-            .subscribe(
-                onNext: { owner, capsuleList in
-                    if capsuleList.isEmpty {
-                        return
-                    }
-                    
-                    
-                })
-            .disposed(by: disposeBag)
-    }
     func getHomeCapsuleCellItem(capsules: [Capsule], type: FeaturedCapsule) -> HomeCapsuleCellItem? {
         switch type {
         case .closedOldest:
@@ -125,7 +113,6 @@ final class HomeViewModel: BaseViewModel {
     }
     
     func getClosedOldest(capsules: [Capsule]) -> Capsule? {
-//        capsules.sorted(by: { $0.closedDate < $1.closedDate }).first
         return capsules.min { $0.closedDate < $1.closedDate }
     }
     func getClosedNewest(capsules: [Capsule]) -> Capsule? {

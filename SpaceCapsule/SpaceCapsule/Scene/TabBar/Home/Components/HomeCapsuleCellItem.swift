@@ -8,7 +8,7 @@
 import UIKit
 import CoreLocation
 
-enum FeaturedCapsule {
+enum FeaturedCapsule: CaseIterable {
     case closedOldest
     case closedNewest
     case memoryOldest

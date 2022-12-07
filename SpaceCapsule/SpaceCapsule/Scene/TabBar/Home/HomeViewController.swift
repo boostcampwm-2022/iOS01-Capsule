@@ -27,7 +27,6 @@ final class HomeViewController: UIViewController, BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bind()
-        viewModel?.fetchCapsuleList()
     }
     
     // MARK: - Rx
@@ -36,7 +35,7 @@ final class HomeViewController: UIViewController, BaseViewController {
             return
         }
         
-        viewModel.output.capsuleCellItems
+        viewModel.output.featuredCapsuleCellItems
             .bind(to: homeView.capsuleCollectionView.rx.items) { [weak self] (collectionView, index, element) in
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeCapsuleCell.identifier, for: IndexPath(item: index, section: 0)) as? HomeCapsuleCell else {
                     return UICollectionViewCell()
