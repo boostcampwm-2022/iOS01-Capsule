@@ -41,6 +41,7 @@ final class CapsuleDetailCoordinator: Coordinator {
     func showCapsuleSettings() {
         let capsuleSettingsCooridnator = CapsuleSettingsCoordinator(navigationController: navigationController)
         capsuleSettingsCooridnator.parent = self
+        capsuleSettingsCooridnator.capsuleUUID = capsuleUUID
         capsuleSettingsCooridnator.start()
         
         children.append(capsuleSettingsCooridnator)

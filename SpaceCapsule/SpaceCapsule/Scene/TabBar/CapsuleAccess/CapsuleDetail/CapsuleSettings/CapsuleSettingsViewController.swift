@@ -16,10 +16,11 @@ final class CapsuleSettingsViewController: UIViewController, BaseViewController 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.backgroundColor = .themeBackground
+        
         addSubviews()
         makeConstraints()
+        bind()
     }
     
     override func viewDidLayoutSubviews() {
@@ -47,5 +48,16 @@ final class CapsuleSettingsViewController: UIViewController, BaseViewController 
     }
     
     func bind() {
+        settingsView.deleteButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel?.input.tapDelete.accept(())
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel?.output.uuid
+            .subscribe(onNext: { [weak self] uuid in
+                // 삭제하시겠습니까?
+            })
+            .disposed(by: disposeBag)
     }
 }
