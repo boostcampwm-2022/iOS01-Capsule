@@ -9,9 +9,6 @@ import SnapKit
 import UIKit
 
 final class EmptyView: UIView, BaseView {
-    let width = 135
-    let height = 210
-
     override init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -75,7 +72,7 @@ final class EmptyView: UIView, BaseView {
 
         container.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.centerY.equalToSuperview().offset(-50)
+            $0.centerY.equalToSuperview().offset(-FrameResource.bottomPadding)
             $0.width.equalTo(FrameResource.emptyCapsuleWidth)
             $0.height.equalTo(FrameResource.emptyCapsuleHeight)
         }
