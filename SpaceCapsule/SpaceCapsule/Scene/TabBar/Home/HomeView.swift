@@ -11,7 +11,6 @@ import UIKit
 final class HomeView: UIView, BaseView {
     // MARK: - UIComponents
     lazy var mainLabel: ThemeLabel = ThemeLabel(
-//        text: "\(UserDefaultsManager<UserInfo>.loadData(key: .userInfo)?.nickname ?? "none")님의 공간캡슐 \(AppDataManager.shared.capsules.count)개",
         text: "none님의 공간캡슐 10개",
         size: 32,
         color: .themeGray300
@@ -51,7 +50,7 @@ final class HomeView: UIView, BaseView {
     func makeConstraints() {
         mainLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(self.safeAreaLayoutGuide)
+            $0.top.equalTo(self.safeAreaLayoutGuide).offset(FrameResource.verticalPadding)
         }
         capsuleCollectionView.snp.makeConstraints {
             $0.top.equalTo(mainLabel.snp.bottom)
