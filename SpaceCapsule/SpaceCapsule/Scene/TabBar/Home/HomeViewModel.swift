@@ -83,22 +83,22 @@ final class HomeViewModel: BaseViewModel {
 //        capsules.sorted(by: { $0.closedDate < $1.closedDate }).first
         return capsules.min { $0.closedDate < $1.closedDate }
     }
-    func getClosedNewest() -> Capsule? {
+    func getClosedNewest(capsules: [Capsule]) -> Capsule? {
+        return capsules.max { $0.closedDate < $1.closedDate }
+    }
+    func getMemoryOldest(capsules: [Capsule]) -> Capsule? {
         
     }
-    func getMemoryOldest() -> Capsule? {
+    func getMemoryNewest(capsules: [Capsule]) -> Capsule? {
         
     }
-    func getMemoryNewest() -> Capsule? {
+    func getNearest(capsules: [Capsule]) -> Capsule? {
         
     }
-    func getNearest() -> Capsule? {
+    func getFarthest(capsules: [Capsule]) -> Capsule? {
         
     }
-    func getFarthest() -> Capsule? {
-        
-    }
-    func getLeastOpened() -> Capsule? {
+    func getLeastOpened(capsules: [Capsule]) -> Capsule? {
         
     }
 }
