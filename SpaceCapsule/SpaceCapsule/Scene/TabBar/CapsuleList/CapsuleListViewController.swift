@@ -12,19 +12,13 @@ import UIKit
 final class CapsuleListViewController: UIViewController, BaseViewController {
     var disposeBag = DisposeBag()
     var viewModel: CapsuleListViewModel?
-    let capsuleListView = CapsuleListView()
+    
+    private var emptyView: EmptyView?
+    private let capsuleListView = CapsuleListView()
     let refreshControl = UIRefreshControl()
 
     private var dataSource: UICollectionViewDiffableDataSource<Int, ListCapsuleCellItem>?
     private var snapshot = NSDiffableDataSourceSnapshot<Int, ListCapsuleCellItem>()
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-//        if let parent = viewModel?.coordinator?.parent as? TabBarCoordinator {
-//            parent.tabBarWillHide(false)
-//        }
-    }
 
     override func loadView() {
         view = capsuleListView
@@ -38,7 +32,7 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
         bind()
         bindViewModel()
     }
-
+    
     func bind() {
         guard let viewModel else {
             return
@@ -70,11 +64,18 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
         guard let viewModel else {
             return
         }
+
         viewModel.input.capsuleCellItems
             .withUnretained(self)
             .bind { owner, capsuleCellItems in
-                owner.applySnapshot(capsuleCellModels: capsuleCellItems)
-                owner.viewModel?.input.refreshLoading.accept(false)
+                if capsuleCellItems.isEmpty {
+                    owner.view = EmptyView()
+                } else {
+                    owner.emptyView = nil
+                    owner.view = owner.capsuleListView
+                    owner.applySnapshot(capsuleCellModels: capsuleCellItems)
+                    owner.viewModel?.input.refreshLoading.accept(false)
+                }
             }
             .disposed(by: disposeBag)
 

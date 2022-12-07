@@ -74,15 +74,15 @@ final class EmptyView: UIView, BaseView {
         }
 
         container.snp.makeConstraints {
-            $0.center.equalToSuperview()
+            $0.centerX.equalToSuperview()
+            $0.centerY.equalToSuperview().offset(-50)
             $0.width.equalTo(FrameResource.emptyCapsuleWidth)
             $0.height.equalTo(FrameResource.emptyCapsuleHeight)
         }
-        
+
         label.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(container.snp.bottom).offset(FrameResource.spacing200)
         }
     }
 }
-
