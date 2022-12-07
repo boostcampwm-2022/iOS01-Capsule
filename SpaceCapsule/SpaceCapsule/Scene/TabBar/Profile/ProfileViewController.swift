@@ -8,6 +8,7 @@
 import RxCocoa
 import RxSwift
 import UIKit
+import UserNotifications
 
 enum Authorization: String {
     case notification
@@ -32,8 +33,11 @@ final class ProfileViewController: UIViewController, BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         bind()
         bindViewModel()
+        NotificationManager.shared.userNotificationCenter.delegate = self
+        NotificationManager.shared.sendNotification(seconds: 4)
     }
 
     func bind() {
@@ -131,8 +135,7 @@ final class ProfileViewController: UIViewController, BaseViewController {
     }
 
     func checkNotificationAuthorization() {
-        let current = UNUserNotificationCenter.current()
-        current.getNotificationSettings { [weak self] setting in
+        NotificationManager.shared.userNotificationCenter.getNotificationSettings { [weak self] setting in
             switch setting.authorizationStatus {
             case .authorized:
                 self?.showAlreadyAllowed(type: .notification)
@@ -141,16 +144,6 @@ final class ProfileViewController: UIViewController, BaseViewController {
                 return
             }
         }
-    }
-
-    func requestNotificationPermission() {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: { didAllow, _ in
-            if didAllow {
-                print("Push: 권한 허용")
-            } else {
-                print("Push: 권한 거부")
-            }
-        })
     }
 
     private func showAlreadyAllowed(type: Authorization) {
@@ -176,5 +169,19 @@ final class ProfileViewController: UIViewController, BaseViewController {
         DispatchQueue.main.async { [weak self] in
             self?.present(alertController, animated: true, completion: nil)
         }
+    }
+}
+
+extension ProfileViewController: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                didReceive response: UNNotificationResponse,
+                                withCompletionHandler completionHandler: @escaping () -> Void) {
+        completionHandler()
+    }
+
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.badge, .sound, .banner])
     }
 }
