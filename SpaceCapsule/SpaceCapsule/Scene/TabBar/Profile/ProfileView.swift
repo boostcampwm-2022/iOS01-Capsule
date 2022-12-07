@@ -9,57 +9,54 @@ import SnapKit
 import UIKit
 
 final class ProfileView: UIView, BaseView {
-    lazy var profileImageView = {
+    let profileImageContainer: UIControl = {
+        let control = UIControl()
+        control.backgroundColor = .themeGray200
+        control.layer.cornerRadius = FrameResource.profileImageWidth / 2
+
+        return control
+    }()
+
+    private let profileImageView = {
         let profileImageView = UIImageView()
         profileImageView.contentMode = .scaleAspectFit
-        profileImageView.layer.cornerRadius = FrameResource.profileImageWidth / 2
         profileImageView.clipsToBounds = true
+
         return profileImageView
     }()
 
-    lazy var nicknameLabel = {
-        let nicknameLabel = ThemeLabel(size: FrameResource.fontSize120, color: .themeBlack)
-        return nicknameLabel
-    }()
+    private let nicknameLabel = ThemeLabel(size: FrameResource.fontSize120, color: .themeBlack)
 
-    lazy var topline = {
+    private let topline = {
         let line = UIView()
         line.layer.borderWidth = FrameResource.commonBorderWidth
         line.layer.borderColor = UIColor.themeGray400?.cgColor
+
         return line
     }()
 
-    lazy var bottomline = {
+    private let bottomline = {
         let line = UIView()
         line.layer.borderWidth = FrameResource.commonBorderWidth
         line.layer.borderColor = UIColor.themeGray400?.cgColor
+
         return line
     }()
 
-    lazy var stackView = {
+    private let stackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         return stackView
     }()
 
-    lazy var settingButton = {
-        let settingButton = ProfileButton(text: "위치정보 설정")
-        return settingButton
-    }()
-
-    lazy var signOutButton = {
-        let logOutButton = ProfileButton(text: "로그아웃")
-        return logOutButton
-    }()
-
-    lazy var withdrawalButton = {
-        let withdrawalButton = ProfileButton(text: "회원 탈퇴")
-        return withdrawalButton
-    }()
+    let settingButton = ProfileButton(text: "위치정보 설정")
+    let signOutButton = ProfileButton(text: "로그아웃")
+    let withdrawalButton = ProfileButton(text: "회원 탈퇴")
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .themeBackground
+
         configure()
         addSubViews()
         makeConstraints()
@@ -71,23 +68,40 @@ final class ProfileView: UIView, BaseView {
     }
 
     func configure() {
-        profileImageView.image = .logo
+        setUserImage()
+
         if let nickname = UserDefaultsManager<UserInfo>.loadData(key: .userInfo)?.nickname {
             nicknameLabel.text = nickname
         }
     }
 
     func addSubViews() {
+        profileImageContainer.addSubview(profileImageView)
+
         [settingButton, signOutButton, withdrawalButton].forEach {
             stackView.addArrangedSubview($0)
         }
-        [profileImageView, nicknameLabel, stackView, topline, bottomline].forEach {
+
+        [
+            profileImageContainer,
+            nicknameLabel,
+            stackView,
+            topline,
+            bottomline,
+        ].forEach {
             addSubview($0)
         }
     }
 
     func makeConstraints() {
         profileImageView.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(FrameResource.horizontalPadding)
+            $0.trailing.equalToSuperview().offset(-FrameResource.horizontalPadding)
+            $0.top.equalToSuperview().offset(FrameResource.horizontalPadding)
+            $0.bottom.equalToSuperview().offset(-FrameResource.horizontalPadding)
+        }
+
+        profileImageContainer.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(safeAreaLayoutGuide.snp.top).offset(FrameResource.bottomPadding)
             $0.height.width.equalTo(FrameResource.profileImageWidth)
@@ -95,11 +109,11 @@ final class ProfileView: UIView, BaseView {
 
         nicknameLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(profileImageView.snp.bottom).offset(FrameResource.verticalPadding)
+            $0.top.equalTo(profileImageContainer.snp.bottom).offset(FrameResource.verticalPadding)
         }
 
         topline.snp.makeConstraints {
-            $0.top.equalTo(nicknameLabel.snp.bottom).offset(FrameResource.verticalPadding)
+            $0.top.equalTo(nicknameLabel.snp.bottom).offset(FrameResource.bottomPadding)
             $0.leading.equalToSuperview().offset(FrameResource.horizontalPadding)
             $0.trailing.equalToSuperview().offset(-FrameResource.horizontalPadding)
             $0.height.equalTo(FrameResource.commonBorderWidth)
@@ -117,5 +131,9 @@ final class ProfileView: UIView, BaseView {
             $0.trailing.equalToSuperview().offset(-FrameResource.horizontalPadding)
             $0.height.equalTo(FrameResource.commonBorderWidth)
         }
+    }
+
+    func setUserImage() {
+        profileImageView.image = ProfileResource.randomEmoji
     }
 }

@@ -5,8 +5,6 @@
 //  Created by young june Park on 2022/12/03.
 //
 
-import RxCocoa
-import RxSwift
 import SnapKit
 import UIKit
 
@@ -57,8 +55,3 @@ class ProfileButton: UIControl {
     }
 }
 
-extension Reactive where Base: ProfileButton {
-    var tap: ControlEvent<Void> {
-        return controlEvent(.touchUpInside)
-    }
-}

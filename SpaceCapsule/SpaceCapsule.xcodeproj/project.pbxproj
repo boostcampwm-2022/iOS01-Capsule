@@ -71,6 +71,8 @@
 		0DF9D2A7293F1DE0001C05DE /* ZoomableImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF9D2A6293F1DE0001C05DE /* ZoomableImageCell.swift */; };
 		0DFF50DD29402E3100079FA6 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DFF50DC29402E3100079FA6 /* EmptyView.swift */; };
 		0DFF50DF2940587600079FA6 /* RefreshButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DFF50DE2940587600079FA6 /* RefreshButton.swift */; };
+		0DFF50E12940642500079FA6 /* ProfileResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DFF50E02940642500079FA6 /* ProfileResource.swift */; };
+		0DFF50E3294067E600079FA6 /* UIControl+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DFF50E2294067E600079FA6 /* UIControl+Rx.swift */; };
 		2800F97A292F1F060069EE7F /* ListCapsuleCellItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2800F979292F1F060069EE7F /* ListCapsuleCellItem.swift */; };
 		2803EA3A29339B2C00589399 /* SortPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2803EA3929339B2C00589399 /* SortPolicy.swift */; };
 		28049CE529236EEC002389BD /* CapsuleAccessCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28049CE429236EEC002389BD /* CapsuleAccessCoordinator.swift */; };
@@ -241,6 +243,8 @@
 		0DF9D2A6293F1DE0001C05DE /* ZoomableImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomableImageCell.swift; sourceTree = "<group>"; };
 		0DFF50DC29402E3100079FA6 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		0DFF50DE2940587600079FA6 /* RefreshButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshButton.swift; sourceTree = "<group>"; };
+		0DFF50E02940642500079FA6 /* ProfileResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileResource.swift; sourceTree = "<group>"; };
+		0DFF50E2294067E600079FA6 /* UIControl+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+Rx.swift"; sourceTree = "<group>"; };
 		2800F979292F1F060069EE7F /* ListCapsuleCellItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCapsuleCellItem.swift; sourceTree = "<group>"; };
 		2803EA3929339B2C00589399 /* SortPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortPolicy.swift; sourceTree = "<group>"; };
 		28049CE429236EEC002389BD /* CapsuleAccessCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleAccessCoordinator.swift; sourceTree = "<group>"; };
@@ -471,6 +475,7 @@
 				4A9E9148292A383900B7CC5C /* MKMapView+Rx.swift */,
 				0DA9F6962928EB9000454932 /* UICollectionReusableView+.swift */,
 				0D90DAF6292397CF000DCC84 /* UIColor+.swift */,
+				0DFF50E2294067E600079FA6 /* UIControl+Rx.swift */,
 				0D46DEF92923E1180045400A /* UIFont+.swift */,
 				0D90DAF829239A81000DCC84 /* UIImage+.swift */,
 				0DCEED2C29320B28006EB2B4 /* UILabel+.swift */,
@@ -503,6 +508,7 @@
 			children = (
 				0D9D67302924945D0038F529 /* FrameResource.swift */,
 				28A700D42938AE100049FAF8 /* AnimationResource.swift */,
+				0DFF50E02940642500079FA6 /* ProfileResource.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1061,6 +1067,7 @@
 				288A8ECA29235BDC000229D2 /* HomeView.swift in Sources */,
 				0DA9F6972928EB9000454932 /* UICollectionReusableView+.swift in Sources */,
 				28049CEB29237E96002389BD /* BaseViewModel.swift in Sources */,
+				0DFF50E12940642500079FA6 /* ProfileResource.swift in Sources */,
 				288A8EFF292360BC000229D2 /* CapsuleDetailCoordinator.swift in Sources */,
 				4AF16AE7292B1F8400787C5C /* CustomAnnotationView.swift in Sources */,
 				28C8C980292DC382005615BB /* SortPolicySelectionCoordinator.swift in Sources */,
@@ -1166,6 +1173,7 @@
 				4A05D1052925CF2A00A2EF50 /* NetworkError.swift in Sources */,
 				288A8E9F29235A91000229D2 /* SignInViewModel.swift in Sources */,
 				0D90DAF129238B85000DCC84 /* CapsuleLocateCoordinator.swift in Sources */,
+				0DFF50E3294067E600079FA6 /* UIControl+Rx.swift in Sources */,
 				288A8EA729235AF1000229D2 /* NicknameViewModel.swift in Sources */,
 				28245562293B17B100DE03A1 /* UnOpenable.swift in Sources */,
 				288A8ECC29235BE9000229D2 /* HomeViewController.swift in Sources */,
