@@ -13,8 +13,15 @@ final class HomeCapsuleCell: UICollectionViewCell {
     
     var thumbnailImageView = ThemeThumbnailImageView(frame: .zero, width: FrameResource.homeCapsuleCellWidth)
 
+    var titleLabel = {
+        let label = ThemeLabel(text: "가장 오래된 캡슐", size: FrameResource.fontSize120, color: .themeColor200)
+        label.numberOfLines = 1
+        label.textAlignment = .center
+        return label
+    }()
+    
     var descriptionLabel = {
-        let label = ThemeLabel(text: "xxxx년 x월 x일\nxx시 xx구에서", size: FrameResource.fontSize120, color: .themeBlack)
+        let label = ThemeLabel(text: "2017.10.23 서울시 성동구\nD+1784", size: FrameResource.fontSize120, color: .themeGray300)
         label.numberOfLines = 2
         label.textAlignment = .center
         return label
@@ -32,7 +39,7 @@ final class HomeCapsuleCell: UICollectionViewCell {
     }
 
     func addSubviews() {
-        [thumbnailImageView, descriptionLabel].forEach {
+        [thumbnailImageView, titleLabel, descriptionLabel].forEach {
             self.contentView.addSubview($0)
         }
     }
@@ -40,13 +47,18 @@ final class HomeCapsuleCell: UICollectionViewCell {
     func makeConstraints() {
         thumbnailImageView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.centerY.equalToSuperview().multipliedBy(0.8)
+            $0.top.equalToSuperview()
             $0.width.equalTo(FrameResource.homeCapsuleCellWidth)
-            $0.height.equalTo(FrameResource.homeCapsuleCellHeight)
+            $0.height.equalTo(FrameResource.homeCapsuleCellThumbnailHeight)
         }
-
-        descriptionLabel.snp.makeConstraints {
+        
+        titleLabel.snp.makeConstraints {
             $0.top.equalTo(thumbnailImageView.snp.bottom).offset(FrameResource.verticalPadding)
+            $0.centerX.equalToSuperview()
+        }
+        
+        descriptionLabel.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(FrameResource.verticalPadding)
             $0.centerX.equalToSuperview()
         }
     }
@@ -57,8 +69,8 @@ final class HomeCapsuleCell: UICollectionViewCell {
         if let thumbnailURL = capsuleCellModel.thumbnailImageURL {
             thumbnailImageView.imageView.kr.setImage(with: thumbnailURL, scale: FrameResource.openableImageScale)
         }
-
-        descriptionLabel.text = "\(capsuleCellModel.type.title)\n\(capsuleCellModel.description())"
+        titleLabel.text = capsuleCellModel.type.title
+        descriptionLabel.text = capsuleCellModel.description()
         
         if !capsuleCellModel.isOpenable() {
             applyUnOpenableEffect(closeDate: capsuleCellModel.closedDate.dateString)
