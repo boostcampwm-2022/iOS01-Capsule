@@ -129,6 +129,7 @@
 		4A1D1BBD2940260800F47ACB /* CapsuleSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1D1BBC2940260800F47ACB /* CapsuleSettingsViewController.swift */; };
 		4A1D1BBF2940286B00F47ACB /* CapsuleSettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1D1BBE2940286B00F47ACB /* CapsuleSettingsCoordinator.swift */; };
 		4A1D1BC12940292A00F47ACB /* CapsuleSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1D1BC02940292A00F47ACB /* CapsuleSettingsViewModel.swift */; };
+		4A1D1BC3294033C200F47ACB /* CapsuleSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1D1BC2294033C200F47ACB /* CapsuleSettingsView.swift */; };
 		4A1FEFF8292F1F1200A935BB /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1FEFF7292F1F1200A935BB /* CustomAnnotation.swift */; };
 		4A2449D129360669000EE58C /* DetailImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2449D029360669000EE58C /* DetailImageCell.swift */; };
 		4A9E9147292A2A5A00B7CC5C /* CLLocationManager+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E9146292A2A5A00B7CC5C /* CLLocationManager+Rx.swift */; };
@@ -294,6 +295,7 @@
 		4A1D1BBC2940260800F47ACB /* CapsuleSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleSettingsViewController.swift; sourceTree = "<group>"; };
 		4A1D1BBE2940286B00F47ACB /* CapsuleSettingsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleSettingsCoordinator.swift; sourceTree = "<group>"; };
 		4A1D1BC02940292A00F47ACB /* CapsuleSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleSettingsViewModel.swift; sourceTree = "<group>"; };
+		4A1D1BC2294033C200F47ACB /* CapsuleSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleSettingsView.swift; sourceTree = "<group>"; };
 		4A1FEFF7292F1F1200A935BB /* CustomAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
 		4A2449D029360669000EE58C /* DetailImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImageCell.swift; sourceTree = "<group>"; };
 		4A9E9146292A2A5A00B7CC5C /* CLLocationManager+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationManager+Rx.swift"; sourceTree = "<group>"; };
@@ -795,6 +797,7 @@
 				4A1D1BBC2940260800F47ACB /* CapsuleSettingsViewController.swift */,
 				4A1D1BBE2940286B00F47ACB /* CapsuleSettingsCoordinator.swift */,
 				4A1D1BC02940292A00F47ACB /* CapsuleSettingsViewModel.swift */,
+				4A1D1BC2294033C200F47ACB /* CapsuleSettingsView.swift */,
 			);
 			path = CapsuleSettings;
 			sourceTree = "<group>";
@@ -1143,6 +1146,7 @@
 				0D90DAF129238B85000DCC84 /* CapsuleLocateCoordinator.swift in Sources */,
 				288A8EA729235AF1000229D2 /* NicknameViewModel.swift in Sources */,
 				28245562293B17B100DE03A1 /* UnOpenable.swift in Sources */,
+				4A1D1BC3294033C200F47ACB /* CapsuleSettingsView.swift in Sources */,
 				288A8ECC29235BE9000229D2 /* HomeViewController.swift in Sources */,
 				0DA6610D292778BE00CF3563 /* ThemeTextField.swift in Sources */,
 				0DB88C712935E83600107DC3 /* AppDataManager.swift in Sources */,

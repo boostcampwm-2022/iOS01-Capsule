@@ -7,22 +7,45 @@
 
 import UIKit
 import RxSwift
+import SnapKit
 
 final class CapsuleSettingsViewController: UIViewController, BaseViewController {
     var disposeBag = DisposeBag()
     var viewModel: CapsuleSettingsViewModel?
+    let settingsView = CapsuleSettingsView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
+        
+        view.backgroundColor = .themeBackground
+        addSubviews()
+        makeConstraints()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         
         if let sheetPresentationController {
-            sheetPresentationController.detents = [.medium()]
+            let stackViewHeight = self.settingsView.mainStackView.frame.height
+            
+            sheetPresentationController.detents = [.custom { _ in
+                return CGFloat(stackViewHeight + FrameResource.detailSettingButtonPadding * 2)
+            }]
+            
             sheetPresentationController.prefersGrabberVisible = true
         }
     }
     
+    private func addSubviews() {
+        view.addSubview(settingsView)
+    }
+    
+    private func makeConstraints() {
+        settingsView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+    }
+    
     func bind() {
-        
     }
 }

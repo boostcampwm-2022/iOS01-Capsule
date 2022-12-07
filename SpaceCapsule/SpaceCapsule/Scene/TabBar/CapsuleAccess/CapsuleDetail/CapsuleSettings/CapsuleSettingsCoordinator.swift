@@ -11,6 +11,7 @@ final class CapsuleSettingsCoordinator: Coordinator {
     var parent: Coordinator?
     var children: [Coordinator] = []
     var navigationController: CustomNavigationController?
+    var capsuleUUID: String?
     
     var viewController: CapsuleSettingsViewController?
     

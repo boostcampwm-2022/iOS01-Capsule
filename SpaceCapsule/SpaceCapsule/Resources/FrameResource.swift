@@ -90,4 +90,7 @@ enum FrameResource {
 
     static let profileImageWidth: CGFloat = 100.0
     static let profileButtonHeight: CGFloat = 40.0
+    
+    static let detailSettingButtonHeight: CGFloat = 60.0
+    static let detailSettingButtonPadding: CGFloat = 10.0
 }
