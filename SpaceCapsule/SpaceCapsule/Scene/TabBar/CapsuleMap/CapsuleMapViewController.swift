@@ -56,6 +56,7 @@ final class CapsuleMapViewController: UIViewController, BaseViewController {
     }
 
     private func configure() {
+        view.backgroundColor = .themeBackground
         view.addSubview(mapView)
         mapView.delegate = self
     }

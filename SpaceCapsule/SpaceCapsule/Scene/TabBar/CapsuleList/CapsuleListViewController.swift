@@ -7,12 +7,13 @@
 
 import RxCocoa
 import RxSwift
+import SnapKit
 import UIKit
 
 final class CapsuleListViewController: UIViewController, BaseViewController {
     var disposeBag = DisposeBag()
     var viewModel: CapsuleListViewModel?
-    
+
     private var emptyView: EmptyView?
     private let capsuleListView = CapsuleListView()
     let refreshControl = UIRefreshControl()
@@ -20,19 +21,27 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
     private var dataSource: UICollectionViewDiffableDataSource<Int, ListCapsuleCellItem>?
     private var snapshot = NSDiffableDataSourceSnapshot<Int, ListCapsuleCellItem>()
 
-    override func loadView() {
-        view = capsuleListView
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        configureView()
         addSortBarButton()
         configureCollectionView()
         bind()
         bindViewModel()
     }
-    
+
+    private func configureView() {
+        view.backgroundColor = .themeBackground
+        
+        view.addSubview(capsuleListView)
+
+        capsuleListView.snp.makeConstraints {
+            $0.top.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+    }
+
     func bind() {
         guard let viewModel else {
             return
@@ -50,6 +59,13 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
             .bind { owner, sortPolicy in
                 owner.viewModel?.coordinator?.showSortPolicySelection(sortPolicy: sortPolicy)
             }
+            .disposed(by: disposeBag)
+
+        capsuleListView.refreshButton.rx.tap
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.viewModel?.refreshCapsule()
+            })
             .disposed(by: disposeBag)
 
         refreshControl.rx.controlEvent(.valueChanged)
@@ -72,7 +88,7 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
                     owner.view = EmptyView()
                 } else {
                     owner.emptyView = nil
-                    owner.view = owner.capsuleListView
+                    owner.configureView()
                     owner.applySnapshot(capsuleCellModels: capsuleCellItems)
                     owner.viewModel?.input.refreshLoading.accept(false)
                 }
