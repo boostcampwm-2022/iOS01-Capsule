@@ -75,7 +75,7 @@ extension CapsuleSettingsView {
         override init(frame: CGRect) {
             super.init(frame: frame)
             configuration = buttonConfiguration
-            titleLabel?.font = UIFont.themeFont(ofSize: 15)
+            titleLabel?.font = .themeFont(ofSize: FrameResource.spacing200)
             contentHorizontalAlignment = .left
             backgroundColor = .themeBackground
         }
@@ -87,7 +87,7 @@ extension CapsuleSettingsView {
         
         func addContents(text: String, image: UIImage?) {
             let attributes = [NSAttributedString.Key.font: UIFont.themeFont(ofSize: 20)]
-            let attributedText = NSAttributedString(string: text, attributes: attributes as [NSAttributedString.Key : Any])
+            let attributedText = NSAttributedString(string: text, attributes: attributes as [NSAttributedString.Key: Any])
             
             setAttributedTitle(attributedText, for: .normal)
             setImage(image, for: .normal)

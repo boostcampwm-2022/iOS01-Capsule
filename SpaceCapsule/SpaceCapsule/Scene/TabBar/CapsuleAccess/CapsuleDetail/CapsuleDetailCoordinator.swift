@@ -51,9 +51,9 @@ final class CapsuleDetailCoordinator: Coordinator {
         navigationController?.popViewController(animated: true)
     }
     
-    private func setupNavigationItem() {        
-        let backButton = UIBarButtonItem()
-        backButton.title = "목록"
-        navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+    private func setupNavigationItem() {
+        let backButtonItem = UIBarButtonItem()
+        backButtonItem.title = "목록"
+        navigationController?.navigationBar.topItem?.backBarButtonItem = backButtonItem
     }
 }

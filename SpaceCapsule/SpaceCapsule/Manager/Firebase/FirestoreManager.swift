@@ -208,7 +208,7 @@ class FirestoreManager {
             .collection("capsules")
             .document(uuid)
             .updateData([
-                "openCount" : FieldValue.increment(Int64(1))
+                "openCount": FieldValue.increment(Int64(1))
             ])
     }
 }
