@@ -43,31 +43,39 @@ final class HomeViewController: UIViewController, BaseViewController {
                 }
                 cell.configure(capsuleCellModel: element)
                 return cell
-            }
-            .disposed(by: disposeBag)
+            }.disposed(by: disposeBag)
         
-        homeView.capsuleCollectionView.rx.itemHighlighted.subscribe(onNext: { [weak self] indexPath in
-            if CGFloat(indexPath.item) == self?.centerIndex {
-                if let cell = self?.homeView.capsuleCollectionView.cellForItem(at: indexPath) as? HomeCapsuleCell {
-                    let pressedDownTransform = CGAffineTransform(scaleX: 0.96, y: 0.96)
-                    UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 10, options: [.curveEaseInOut], animations: { cell.transform = pressedDownTransform })
-                }
-            }
-        }).disposed(by: disposeBag)
+        homeView.capsuleCollectionView.rx.itemHighlighted
+            .withUnretained(self)
+            .subscribe(
+                onNext: { owner, indexPath in
+                    if CGFloat(indexPath.item) == owner.centerIndex {
+                        if let cell = owner.homeView.capsuleCollectionView.cellForItem(at: indexPath) as? HomeCapsuleCell {
+                            let pressedDownTransform = CGAffineTransform(scaleX: 0.96, y: 0.96)
+                            UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 10, options: [.curveEaseInOut], animations: { cell.transform = pressedDownTransform })
+                        }
+                    }
+                }).disposed(by: disposeBag)
         
-        homeView.capsuleCollectionView.rx.itemUnhighlighted.subscribe(onNext: { [weak self] indexPath in
-            if CGFloat(indexPath.item) == self?.centerIndex {
-                if let cell = self?.homeView.capsuleCollectionView.cellForItem(at: indexPath) as? HomeCapsuleCell {
-                    let originalTransform = CGAffineTransform(scaleX: 1, y: 1)
-                    UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 10, options: [.curveEaseInOut], animations: { cell.transform = originalTransform })
-                }
-            }
-        }).disposed(by: disposeBag)
+        homeView.capsuleCollectionView.rx.itemUnhighlighted
+            .withUnretained(self)
+            .subscribe(
+                onNext: { owner, indexPath in
+                    if CGFloat(indexPath.item) == owner.centerIndex {
+                        if let cell = owner.homeView.capsuleCollectionView.cellForItem(at: indexPath) as? HomeCapsuleCell {
+                            let originalTransform = CGAffineTransform(scaleX: 1, y: 1)
+                            UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 10, options: [.curveEaseInOut], animations: { cell.transform = originalTransform })
+                        }
+                    }
+                }).disposed(by: disposeBag)
         
-        homeView.capsuleCollectionView.rx.itemSelected.subscribe(onNext: { [weak self] indexPath in
-            if CGFloat(indexPath.item) != self?.centerIndex {
-                self?.homeView.capsuleCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-            }
-        }).disposed(by: disposeBag)
+        homeView.capsuleCollectionView.rx.itemSelected
+            .withUnretained(self)
+            .subscribe(
+                onNext: { owner, indexPath in
+                    if CGFloat(indexPath.item) != owner.centerIndex {
+                        owner.homeView.capsuleCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+                    }
+                }).disposed(by: disposeBag)
     }
 }
