@@ -48,7 +48,6 @@ final class CapsuleDetailCoordinator: Coordinator {
     }
     
     func finish() {
-        // TODO: 앱 매니저 데이터 다시 호출 필요
         navigationController?.popViewController(animated: true)
     }
     

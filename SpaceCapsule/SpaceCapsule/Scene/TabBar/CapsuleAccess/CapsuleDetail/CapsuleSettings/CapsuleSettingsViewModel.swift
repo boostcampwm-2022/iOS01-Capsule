@@ -35,7 +35,8 @@ final class CapsuleSettingsViewModel: BaseViewModel {
         input.tapDelete
             .subscribe(onNext: { [weak self] in
                 if let uuid = self?.coordinator?.capsuleUUID {
-                    // FirestoreManager.shared.deleteCapsule(uuid)
+                    FirestoreManager.shared.deleteCapsule(uuid)
+                    AppDataManager.shared.fetchCapsules()
                     self?.output.didDeleteCapsule.accept(())
                 }
             })
