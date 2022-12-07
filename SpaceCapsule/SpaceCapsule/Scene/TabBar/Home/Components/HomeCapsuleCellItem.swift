@@ -20,7 +20,7 @@ enum CapsuleType: CaseIterable {
     var title: String {
         switch self {
         case .closedOldest:
-            return "생성한지 가장 오래된 캡슐"
+            return "밀봉한지 가장 오래된 캡슐"
         case .closedNewest:
             return "가장 최근에 생성한 캡슐"
         case .memoryOldest:
@@ -61,5 +61,23 @@ struct HomeCapsuleCellItem: Hashable, Equatable {
     
     func distance() -> Double {
         return LocationManager.shared.distance(capsuleCoordinate: coordinate)
+    }
+    
+    func description() -> String {
+        switch type {
+        case .closedOldest, .closedNewest:
+            return "밀봉시간 : \(self.closedDate.dateTimeString)"
+        case .memoryOldest, .memoryNewest:
+            return "추억일자 : \(self.memoryDate.dateString)"
+        case .nearest, .farthest:
+            let distance = LocationManager.shared.distance(capsuleCoordinate: coordinate)
+            if distance > 1000 {
+                return "거리 : 약 \(String(format: "%.2f", (distance / 1000.0)))km"
+            } else {
+                return "거리 : 약 \(String(format: "%.2f", distance))m"
+            }
+        case .leastOpened:
+            return "개봉횟수 : \(openCount)번"
+        }
     }
 }

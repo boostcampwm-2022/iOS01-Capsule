@@ -58,7 +58,7 @@ final class HomeCapsuleCell: UICollectionViewCell {
             thumbnailImageView.imageView.kr.setImage(with: thumbnailURL, scale: FrameResource.openableImageScale)
         }
 
-        descriptionLabel.text = "\(capsuleCellModel.type.title)\n\(capsuleCellModel.address)에서"
+        descriptionLabel.text = "\(capsuleCellModel.type.title)\n\(capsuleCellModel.description())"
         
         if !capsuleCellModel.isOpenable() {
             applyUnOpenableEffect(closeDate: capsuleCellModel.closedDate.dateString)
