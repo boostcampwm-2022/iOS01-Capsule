@@ -12,9 +12,9 @@ final class NicknameView: UIView, BaseView {
     // MARK: - UIComponents
     let tapGesture = UITapGestureRecognizer()
     
-    let nicknameLabel = ThemeLabel(text: "닉네임", size: 20, color: .themeGray300)
+    let nicknameLabel = ThemeLabel(text: "닉네임", size: FrameResource.fontSize100, color: .themeGray300)
 
-    let nicknameTextField = ThemeTextField()
+    let nicknameTextField = ThemeTextField(placeholder: "닉네임을 입력해주세요")
 
     let doneButton: UIButton = {
         let button = UIButton()
@@ -22,6 +22,7 @@ final class NicknameView: UIView, BaseView {
         button.titleLabel?.font = .themeFont(ofSize: FrameResource.fontSize100)
         button.backgroundColor = .themeColor200
         button.layer.cornerRadius = FrameResource.commonCornerRadius
+        
         return button
     }()
 
@@ -74,15 +75,3 @@ final class NicknameView: UIView, BaseView {
         }
     }
 }
-
-#if canImport(SwiftUI) && DEBUG
-    import SwiftUI
-    struct NicknameViewPreview: PreviewProvider {
-        static var previews: some View {
-            UIViewPreview {
-                NicknameView()
-            }
-            .previewLayout(.sizeThatFits)
-        }
-    }
-#endif

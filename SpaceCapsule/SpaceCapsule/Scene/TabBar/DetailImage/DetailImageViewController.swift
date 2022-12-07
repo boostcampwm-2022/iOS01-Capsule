@@ -42,7 +42,7 @@ final class DetailImageViewController: UIViewController {
                     self?.mainView.collectionView.scrollToItem(
                         at: IndexPath(item: index, section: 0),
                         at: .top,
-                        animated: true
+                        animated: false
                     )
                 }
 
