@@ -87,7 +87,7 @@ final class HomeViewModel: BaseViewModel {
         return capsules.max { $0.closedDate < $1.closedDate }
     }
     func getMemoryOldest(capsules: [Capsule]) -> Capsule? {
-        
+        return capsules.min { $0.memoryDate < $1.memoryDate }
     }
     func getMemoryNewest(capsules: [Capsule]) -> Capsule? {
         
