@@ -28,14 +28,15 @@ final class CapsuleSettingsViewModel: BaseViewModel {
     }
     
     struct Output {
-        var uuid = PublishSubject<CapsuleUUID>()
+        var didDeleteCapsule = PublishRelay<Void>()
     }
     
     func bind() {
         input.tapDelete
             .subscribe(onNext: { [weak self] in
                 if let uuid = self?.coordinator?.capsuleUUID {
-                    self?.output.uuid.onNext(uuid)
+                    FirestoreManager.shared.deleteCapsule(uuid)
+                    
                 }
             })
             .disposed(by: disposeBag)

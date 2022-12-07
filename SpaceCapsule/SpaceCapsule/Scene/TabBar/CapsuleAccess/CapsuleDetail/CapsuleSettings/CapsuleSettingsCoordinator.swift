@@ -30,4 +30,11 @@ final class CapsuleSettingsCoordinator: Coordinator {
             navigationController?.present(viewController, animated: true)
         }
     }
+    
+    func finish() {
+        if let parent = parent as? CapsuleDetailCoordinator {
+            navigationController?.popViewController(animated: true)
+            parent.finish()
+        }
+    }
 }
