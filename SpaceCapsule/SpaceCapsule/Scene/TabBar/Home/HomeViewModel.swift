@@ -59,17 +59,27 @@ final class HomeViewModel: BaseViewModel {
             )
             .disposed(by: disposeBag)
     }
+    
     func makeMainLabel(capsuleCount: Int) {
         let nickname = UserDefaultsManager<UserInfo>.loadData(key: .userInfo)?.nickname ?? "none"
         output.mainLabelText.accept("\(nickname)님의 공간캡슐 \(capsuleCount)개")
     }
+    
     func bind() {
         input.capsules
             .withUnretained(self)
             .subscribe(
                 onNext: { owner, capsuleList in
+                    if capsuleList.isEmpty {
+                        return
+                    }
+                    
                     
                 })
             .disposed(by: disposeBag)
+    }
+    
+    func getClosedOldest(capsules: [Capsule]) -> Capsule? {
+        capsules.sorted(by: { $0.closedDate < $1.closedDate }).first
     }
 }
