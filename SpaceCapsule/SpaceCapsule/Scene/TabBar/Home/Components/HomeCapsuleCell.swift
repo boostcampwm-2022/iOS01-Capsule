@@ -9,6 +9,8 @@ import SnapKit
 import UIKit
 
 final class HomeCapsuleCell: UICollectionViewCell {
+    var uuid: String?
+    
     var thumbnailImageView = ThemeThumbnailImageView(frame: .zero, width: FrameResource.homeCapsuleCellWidth)
 
     var descriptionLabel = {
@@ -50,6 +52,8 @@ final class HomeCapsuleCell: UICollectionViewCell {
     }
 
     func configure(capsuleCellModel: HomeCapsuleCellItem) {
+        uuid = capsuleCellModel.uuid
+        
         if let thumbnailURL = capsuleCellModel.thumbnailImageURL {
             thumbnailImageView.imageView.kr.setImage(with: thumbnailURL, scale: FrameResource.openableImageScale)
         }

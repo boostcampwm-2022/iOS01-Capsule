@@ -18,12 +18,13 @@ final class HomeViewModel: BaseViewModel {
     var output = Output()
     
     struct Input: ViewModelInput {
-        var capsules = PublishRelay<[Capsule]>()
+        let capsules = PublishRelay<[Capsule]>()
+        let tapCapsule = PublishSubject<String>()
     }
     
     struct Output: ViewModelOutput {
-        var mainLabelText = PublishRelay<String>()
-        var featuredCapsuleCellItems = PublishRelay<[HomeCapsuleCellItem]>()
+        let mainLabelText = PublishRelay<String>()
+        let featuredCapsuleCellItems = PublishRelay<[HomeCapsuleCellItem]>()
     }
     
     init() {
@@ -46,6 +47,13 @@ final class HomeViewModel: BaseViewModel {
                     )
                     
                 })
+            .disposed(by: disposeBag)
+        
+        input.tapCapsule
+            .withUnretained(self)
+            .subscribe(onNext: { owner, uuid in
+                owner.coordinator?.moveToCapsuleAccess(uuid: uuid)
+            })
             .disposed(by: disposeBag)
         
         AppDataManager.shared.capsules

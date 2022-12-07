@@ -77,10 +77,22 @@ final class HomeViewController: UIViewController, BaseViewController {
             .subscribe(
                 onNext: { owner, indexPath in
                     if CGFloat(indexPath.item) == owner.centerIndex {
-//                        owner.viewModel.input.tapCapsule.onNext(uuid)
+                        if let cell = owner.homeView.capsuleCollectionView.cellForItem(at: indexPath) as? HomeCapsuleCell {
+                            guard let uuid = cell.uuid else {
+                                return
+                            }
+                            owner.viewModel?.input.tapCapsule.onNext(uuid)
+                        }
                     } else {
                         owner.homeView.capsuleCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
                     }
                 }).disposed(by: disposeBag)
+        
+//        homeView.capsuleCollectionView.rx.modelSelected(HomeCapsuleCellItem.self)
+//            .withUnretained(self)
+//            .subscribe(
+//                onNext: { owner, homeCapsuleCellItem in
+//                    owner.viewModel?.input.tapCapsule.onNext(homeCapsuleCellItem.uuid)
+//                }).disposed(by: disposeBag)
     }
 }
