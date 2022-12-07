@@ -18,11 +18,13 @@ final class HomeViewModel: BaseViewModel {
     var output = Output()
     
     struct Input: ViewModelInput {
+        var capsules = PublishRelay<[Capsule]>()
     }
     
     struct Output: ViewModelOutput {
-        var capsuleCellItems = PublishRelay<[ListCapsuleCellItem]>()
+        var capsuleCellItems = PublishRelay<[HomeCapsuleCellItem]>()
         var mainLabelText = PublishRelay<String>()
+        var featuredCcapsuleCellItems = PublishRelay<[HomeCapsuleCellItem]>()
     }
     
     init() {
@@ -34,17 +36,20 @@ final class HomeViewModel: BaseViewModel {
             .subscribe(
                 onNext: { owner, capsuleList in
                     let capsuleCellItems = capsuleList.map { capsule in
-                        ListCapsuleCellItem(uuid: capsule.uuid,
+                        HomeCapsuleCellItem(uuid: capsule.uuid,
                                             thumbnailImageURL: capsule.images.first,
                                             address: capsule.simpleAddress,
                                             closedDate: capsule.closedDate,
                                             memoryDate: capsule.memoryDate,
+                                            openCount: capsule.openCount,
                                             coordinate: CLLocationCoordinate2D(
                                                 latitude: capsule.geopoint.latitude,
                                                 longitude: capsule.geopoint.longitude
-                                            )
+                                            ),
+                                            type: .closedOldest
                         )
                     }
+                    owner.input.capsules.accept(capsuleList)
                     owner.makeMainLabel(capsuleCount: capsuleList.count)
                     owner.output.capsuleCellItems.accept(capsuleCellItems)
                 },
@@ -59,5 +64,12 @@ final class HomeViewModel: BaseViewModel {
         output.mainLabelText.accept("\(nickname)님의 공간캡슐 \(capsuleCount)개")
     }
     func bind() {
+        input.capsules
+            .withUnretained(self)
+            .subscribe(
+                onNext: { owner, capsuleList in
+                    
+                })
+            .disposed(by: disposeBag)
     }
 }

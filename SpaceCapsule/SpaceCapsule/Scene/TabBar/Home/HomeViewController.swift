@@ -77,7 +77,9 @@ final class HomeViewController: UIViewController, BaseViewController {
             .withUnretained(self)
             .subscribe(
                 onNext: { owner, indexPath in
-                    if CGFloat(indexPath.item) != owner.centerIndex {
+                    if CGFloat(indexPath.item) == owner.centerIndex {
+//                        owner.viewModel.input.tapCapsule.onNext(uuid)
+                    } else {
                         owner.homeView.capsuleCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
                     }
                 }).disposed(by: disposeBag)
