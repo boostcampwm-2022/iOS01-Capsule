@@ -42,6 +42,11 @@ final class ProfileView: UIView, BaseView {
         return stackView
     }()
 
+    lazy var notificationButton = {
+        let notificationButton = ProfileButton(text: "알림 설정")
+        return notificationButton
+    }()
+
     lazy var settingButton = {
         let settingButton = ProfileButton(text: "위치정보 설정")
         return settingButton
@@ -78,7 +83,7 @@ final class ProfileView: UIView, BaseView {
     }
 
     func addSubViews() {
-        [settingButton, signOutButton, withdrawalButton].forEach {
+        [notificationButton, settingButton, signOutButton, withdrawalButton].forEach {
             stackView.addArrangedSubview($0)
         }
         [profileImageView, nicknameLabel, stackView, topline, bottomline].forEach {
@@ -119,3 +124,4 @@ final class ProfileView: UIView, BaseView {
         }
     }
 }
+
