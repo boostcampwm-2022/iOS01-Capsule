@@ -10,7 +10,7 @@ import UIKit
 
 final class CustomAnnotation: MKPointAnnotation {
     let uuid: String?
-
+    let date: Date?
     weak var annotationView: CustomAnnotationView?
 
     var isOpenable: Bool = false {
@@ -23,11 +23,14 @@ final class CustomAnnotation: MKPointAnnotation {
         return isOpenable ? .openableCapsule : .unopenableCapsule
     }
 
-    required init(uuid: String?, latitude: Double, longitude: Double) {
+    required init(uuid: String?, memoryDate: Date?, latitude: Double, longitude: Double) {
         self.uuid = uuid
-
+        date = memoryDate
         super.init()
 
+        if let memoryDateString = memoryDate?.dateString {
+            title = memoryDateString
+        }
         coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     }
 }

@@ -54,6 +54,7 @@ final class CapsuleCreateViewModel: BaseViewModel {
         var tapDone = PublishSubject<Void>()
         var tapDatePicker = PublishSubject<Void>()
         var tapCapsuleLocate = PublishSubject<Void>()
+        var tapImage = PublishSubject<Int>()
 
         var title = PublishSubject<String>()
         var description = PublishSubject<String>()
@@ -170,6 +171,16 @@ final class CapsuleCreateViewModel: BaseViewModel {
         input.tapCapsuleLocate.asObservable()
             .subscribe(onNext: { [weak self] in
                 self?.coordinator?.showCapsuleLocate()
+            })
+            .disposed(by: disposeBag)
+
+        // 사진 클릭
+        input.tapImage
+            .withUnretained(self)
+            .subscribe(onNext: { owner, index in
+                let dataArray = owner.input.imageData.value.compactMap { $0.data }
+
+                owner.coordinator?.showDetailImage(index: index, dataArray: dataArray)
             })
             .disposed(by: disposeBag)
     }

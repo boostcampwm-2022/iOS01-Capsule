@@ -76,7 +76,7 @@ final class CapsuleLocateViewController: UIViewController, BaseViewController {
             .disposed(by: disposeBag)
 
         mainView.locateMap.rx.regionDidChangeAnimated
-            .subscribe(onNext: { [weak self] mapView, _ in
+            .subscribe(onNext: { [weak self] mapView in
                 let coordinate = mapView.centerCoordinate
                 
                 self?.viewModel?.output.geopoint.onNext(

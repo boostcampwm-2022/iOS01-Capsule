@@ -16,9 +16,9 @@ final class CapsuleDetailViewModel: BaseViewModel {
 
     var input = Input()
     var output = Output()
-    
+
     lazy var mapSnapshotInfo = Observable.zip(input.frameWidth, output.mapCoordinate)
-        
+
     struct Input {
         let frameWidth = PublishSubject<CGFloat>()
         let tapCapsuleSettings = PublishRelay<Void>()
@@ -30,11 +30,11 @@ final class CapsuleDetailViewModel: BaseViewModel {
         let mapCoordinate = PublishSubject<CLLocationCoordinate2D>()
         let mapSnapshot = PublishSubject<UIImage>()
     }
-    
+
     init() {
         bind()
     }
-    
+
     private func bind() {
         mapSnapshotInfo
             .withUnretained(self)
@@ -64,10 +64,12 @@ final class CapsuleDetailViewModel: BaseViewModel {
         output.capsuleData.onNext(capsule)
         
         // MARK: 캡슐 지도 업데이트
+
         output.mapCoordinate.onNext(CLLocationCoordinate2D(latitude: capsule.geopoint.latitude,
                                                            longitude: capsule.geopoint.longitude))
-        
+
         // MARK: 캡슐 이미지 업데이트
+
         guard let firstImageURL = capsule.images.first else {
             return
         }
@@ -75,10 +77,10 @@ final class CapsuleDetailViewModel: BaseViewModel {
         let firstCell = DetailImageCell.Cell(imageURL: firstImageURL,
                                              capsuleInfo: DetailImageCell.CapsuleInfo(address: capsule.simpleAddress,
                                                                                       date: capsule.memoryDate.dateString))
-        let otherCells = capsule.images[1..<capsule.images.count].map { DetailImageCell.Cell(imageURL: $0, capsuleInfo: nil) }
+        let otherCells = capsule.images[1 ..< capsule.images.count].map { DetailImageCell.Cell(imageURL: $0, capsuleInfo: nil) }
         output.imageCell.accept([firstCell] + otherCells)
     }
-    
+
     private func drawMapSnapshot(width: CGFloat, at center: CLLocationCoordinate2D) {
         let span = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
 
@@ -96,19 +98,19 @@ final class CapsuleDetailViewModel: BaseViewModel {
             if error != nil {
                 return
             }
- 
+
             if let drawImage = self?.drawAnnotation(with: center, on: snapshot) {
                 self?.output.mapSnapshot.onNext(drawImage)
             }
         }
     }
-    
+
     private func drawAnnotation(with center: CLLocationCoordinate2D, on snapshot: MKMapSnapshotter.Snapshot) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(snapshot.image.size, true, snapshot.image.scale)
         snapshot.image.draw(at: .zero)
 
         let point = snapshot.point(for: center)
-        let annotation = CustomAnnotation(uuid: nil, latitude: center.latitude, longitude: center.longitude)
+        let annotation = CustomAnnotation(uuid: nil, memoryDate: nil, latitude: center.latitude, longitude: center.longitude)
         annotation.isOpenable = true
         let annotationView = CustomAnnotationView(annotation: annotation, reuseIdentifier: "annotationView")
         let rect = CGRect(x: point.x - (annotationView.bounds.width / 2),
