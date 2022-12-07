@@ -17,7 +17,6 @@ final class CapsuleDetailView: UIView, BaseView {
         button.setImage(.init(systemName: "ellipsis"), for: .normal)
         button.tintColor = .themeBlack
         button.isUserInteractionEnabled = true
-        button.showsMenuAsPrimaryAction = true
         
         return button
     }()

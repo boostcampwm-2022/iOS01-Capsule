@@ -38,6 +38,14 @@ final class CapsuleDetailCoordinator: Coordinator {
         setupNavigationItem()
     }
     
+    func showCapsuleSettings() {
+        let capsuleSettingsCooridnator = CapsuleSettingsCoordinator(navigationController: navigationController)
+        capsuleSettingsCooridnator.parent = self
+        capsuleSettingsCooridnator.start()
+        
+        children.append(capsuleSettingsCooridnator)
+    }
+    
     func finish() {
         navigationController?.popViewController(animated: true)
     }

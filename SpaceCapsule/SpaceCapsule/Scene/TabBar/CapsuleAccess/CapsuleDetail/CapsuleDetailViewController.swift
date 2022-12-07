@@ -63,23 +63,17 @@ final class CapsuleDetailViewController: UIViewController, BaseViewController {
                 owner.mainView.mapView.image = mapImage
             })
             .disposed(by: disposeBag)
+        
+        mainView.settingButton.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                self?.viewModel?.input.tapCapsuleSettings.accept(())
+            })
+            .disposed(by: disposeBag)
     }
     
     private func addSettingButton() {
-        mainView.settingButton.menu = getSettingsMenu()
-        
         let settingButton = UIBarButtonItem(customView: mainView.settingButton)
         navigationItem.rightBarButtonItem = settingButton
-    }
-    
-    private func getSettingsMenu() -> UIMenu {
-        let deleteAction = UIAction(title: "캐슐 삭제") { [weak self] _ in
-            self?.viewModel?.input.deleteCapsuleTapped.onNext(())
-        }
-        
-        let menu = UIMenu(options: .displayInline, children: [deleteAction])
-        
-        return menu
     }
 
     private func makeConstrinats() {
