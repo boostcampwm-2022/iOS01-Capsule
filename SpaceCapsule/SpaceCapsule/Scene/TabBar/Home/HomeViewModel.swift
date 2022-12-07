@@ -18,7 +18,6 @@ final class HomeViewModel: BaseViewModel {
     var output = Output()
     
     struct Input: ViewModelInput {
-        var capsules: BehaviorRelay<[Capsule]> = AppDataManager.shared.capsules
     }
     
     struct Output: ViewModelOutput {
@@ -30,7 +29,7 @@ final class HomeViewModel: BaseViewModel {
         bind()
     }
     func fetchCapsuleList() {
-        input.capsules
+        AppDataManager.shared.capsules
             .withUnretained(self)
             .subscribe(
                 onNext: { owner, capsuleList in
