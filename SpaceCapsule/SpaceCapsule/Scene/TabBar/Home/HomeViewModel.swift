@@ -18,38 +18,34 @@ final class HomeViewModel: BaseViewModel {
     var output = Output()
     
     struct Input: ViewModelInput {
-        var capsuleCellModels = PublishSubject<[ListCapsuleCellItem]>()
+        var capsules: BehaviorRelay<[Capsule]> = AppDataManager.shared.capsules
     }
     
     struct Output: ViewModelOutput {
-        
+        var capsuleCellItems = PublishRelay<[ListCapsuleCellItem]>()
     }
     
     init() {
         bind()
     }
     func fetchCapsuleList() {
-        guard let currentUser = FirebaseAuthManager.shared.currentUser else {
-            return
-        }
-        
-        FirestoreManager.shared.fetchCapsuleList(of: currentUser.uid)
+        input.capsules
             .withUnretained(self)
             .subscribe(
                 onNext: { owner, capsuleList in
-                    let capsuleCellModels = capsuleList.map { capsule in
-                        return ListCapsuleCellItem(uuid: capsule.uuid,
-                                                   thumbnailImageURL: capsule.images.first,
-                                                   address: capsule.simpleAddress,
-                                                   closedDate: capsule.closedDate,
-                                                   memoryDate: capsule.memoryDate,
-                                                   coordinate: CLLocationCoordinate2D(
-                                                    latitude: capsule.geopoint.latitude,
-                                                    longitude: capsule.geopoint.longitude
-                                                   )
+                    let capsuleCellItems = capsuleList.map { capsule in
+                        ListCapsuleCellItem(uuid: capsule.uuid,
+                                            thumbnailImageURL: capsule.images.first,
+                                            address: capsule.simpleAddress,
+                                            closedDate: capsule.closedDate,
+                                            memoryDate: capsule.memoryDate,
+                                            coordinate: CLLocationCoordinate2D(
+                                                latitude: capsule.geopoint.latitude,
+                                                longitude: capsule.geopoint.longitude
+                                            )
                         )
                     }
-                    owner.input.capsuleCellModels.onNext(capsuleCellModels)
+                    owner.output.capsuleCellItems.accept(capsuleCellItems)
                 },
                 onError: { error in
                     print(error.localizedDescription)
