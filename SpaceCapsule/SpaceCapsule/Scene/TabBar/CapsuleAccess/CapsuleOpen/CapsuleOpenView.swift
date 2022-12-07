@@ -74,7 +74,7 @@ final class CapsuleOpenView: UIView, BaseView, UnOpenable {
 
     func configure(capsuleCellItem: ListCapsuleCellItem) {
         if let thumbnailURL = capsuleCellItem.thumbnailImageURL {
-            thumbnailImageView.imageView.kr.setImage(with: thumbnailURL, scale: FrameResource.openableImageScale)
+            thumbnailImageView.imageView.kr.setImage(with: thumbnailURL, placeholder: .empty, scale: FrameResource.openableImageScale)
         }
 
         descriptionLabel.text = """

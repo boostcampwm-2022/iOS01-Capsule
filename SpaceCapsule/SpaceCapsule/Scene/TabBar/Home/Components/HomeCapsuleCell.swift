@@ -53,11 +53,11 @@ final class HomeCapsuleCell: UICollectionViewCell {
 
     func configure(capsuleCellModel: ListCapsuleCellItem) {
         if let thumbnailURL = capsuleCellModel.thumbnailImageURL {
-            thumbnailImageView.imageView.kr.setImage(with: thumbnailURL, scale: FrameResource.openableImageScale)
+            thumbnailImageView.imageView.kr.setImage(with: thumbnailURL, placeholder: .empty, scale: FrameResource.openableImageScale)
         }
 
         descriptionLabel.text = "\(capsuleCellModel.memoryDate.dateString)\n\(capsuleCellModel.address)에서"
-        
+
         if !capsuleCellModel.isOpenable() {
             applyUnOpenableEffect(closeDate: capsuleCellModel.closedDate.dateString)
         }

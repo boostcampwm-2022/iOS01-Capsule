@@ -82,7 +82,7 @@ final class ListCapsuleCell: UICollectionViewCell, UnOpenable {
 
     func configure(capsuleCellItem: ListCapsuleCellItem) {
         if let thumbnailURL = capsuleCellItem.thumbnailImageURL {
-            thumbnailImageView.imageView.kr.setImage(with: thumbnailURL, scale: FrameResource.openableImageScale)
+            thumbnailImageView.imageView.kr.setImage(with: thumbnailURL, placeholder: .empty, scale: FrameResource.openableImageScale)
         }
         descriptionLabel.text = "\(capsuleCellItem.memoryDate.dateString)\n\(capsuleCellItem.address)에서"
         dateLabel.text = "밀봉시간:\(capsuleCellItem.closedDate.dateString)"

@@ -5,9 +5,9 @@
 //  Created by young june Park on 2022/11/15.
 //
 
+import MapKit
 import RxSwift
 import SnapKit
-import MapKit
 import UIKit
 
 final class CapsuleDetailViewController: UIViewController, BaseViewController {
@@ -20,7 +20,7 @@ final class CapsuleDetailViewController: UIViewController, BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         applyDataSource()
         bind()
         viewModel?.input.frameWidth.onNext(view.frame.width)
@@ -28,14 +28,14 @@ final class CapsuleDetailViewController: UIViewController, BaseViewController {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
+
         scrollView.frame = CGRect(origin: .zero, size: view.frame.size)
         scrollView.backgroundColor = .themeBackground
 
         view.addSubview(scrollView)
         scrollView.addSubview(mainView)
         mainView.backgroundColor = .themeBackground
-        
+
         if let detailLayout = mainView.imageCollectionView.collectionViewLayout as? DetailImageFlowLayout {
             detailLayout.sectionInset = UIEdgeInsets(top: 0.0,
                                                      left: (view.frame.width - FrameResource.detailImageViewWidth) / 2,
@@ -53,7 +53,7 @@ final class CapsuleDetailViewController: UIViewController, BaseViewController {
                 owner.applySnapshot(cells: cells)
             })
             .disposed(by: disposeBag)
-        
+
         viewModel?.output.capsuleData
             .withUnretained(self)
             .subscribe(onNext: { owner, data in
@@ -78,31 +78,31 @@ final class CapsuleDetailViewController: UIViewController, BaseViewController {
             $0.width.equalToSuperview()
         }
     }
-    
+
     func applyDataSource() {
-        self.imageDataSource = UICollectionViewDiffableDataSource<Int, DetailImageCell.Cell>(collectionView: self.mainView.imageCollectionView, cellProvider: { collectionView, indexPath, item in
-            
+        imageDataSource = UICollectionViewDiffableDataSource<Int, DetailImageCell.Cell>(collectionView: mainView.imageCollectionView, cellProvider: { collectionView, indexPath, item in
+
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DetailImageCell.identifier, for: indexPath) as? DetailImageCell else {
                 return UICollectionViewCell()
             }
-            
-            cell.imageView.kr.setImage(with: item.imageURL, scale: 1.0)
-            
+
+            cell.imageView.kr.setImage(with: item.imageURL, placeholder: .empty, scale: 1.0)
+
             if let info = item.capsuleInfo {
                 cell.addCapsuleInfo(info)
             }
-            
+
             return cell
         })
     }
-    
+
     func applySnapshot(cells: [DetailImageCell.Cell]) {
         var snapshot = NSDiffableDataSourceSnapshot<Int, DetailImageCell.Cell>()
         snapshot.appendSections([0])
         snapshot.appendItems(cells, toSection: 0)
         imageDataSource?.apply(snapshot)
     }
-    
+
     private func setUpNavigationTitle(_ title: String) {
         navigationItem.title = title
     }
