@@ -8,7 +8,7 @@
 import UIKit
 import CoreLocation
 
-enum FeaturedCapsule: CaseIterable {
+enum CapsuleType: CaseIterable {
     case closedOldest
     case closedNewest
     case memoryOldest
@@ -45,7 +45,7 @@ struct HomeCapsuleCellItem: Hashable, Equatable {
     let memoryDate: Date
     let openCount: Int
     let coordinate: CLLocationCoordinate2D
-    let type: FeaturedCapsule
+    let type: CapsuleType
     
     func isOpenable() -> Bool {
         return LocationManager.shared.isOpenable(capsuleCoordinate: coordinate) ? true : false

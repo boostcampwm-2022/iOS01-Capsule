@@ -40,7 +40,7 @@ final class HomeViewModel: BaseViewModel {
                         return
                     }
                     owner.output.featuredCapsuleCellItems.accept(
-                        FeaturedCapsule.allCases
+                        CapsuleType.allCases
                             .map { owner.getHomeCapsuleCellItem(capsules: capsuleList, type: $0) }
                             .compactMap({ $0 })
                     )
@@ -53,7 +53,6 @@ final class HomeViewModel: BaseViewModel {
             .subscribe(
                 onNext: { owner, capsuleList in
                     owner.input.capsules.accept(capsuleList)
-                    owner.makeMainLabel(capsuleCount: capsuleList.count)
                 },
                 onError: { error in
                     print(error.localizedDescription)
@@ -67,7 +66,7 @@ final class HomeViewModel: BaseViewModel {
         return "\(nickname)님의 공간캡슐 \(capsuleCount)개"
     }
     
-    func getHomeCapsuleCellItem(capsules: [Capsule], type: FeaturedCapsule) -> HomeCapsuleCellItem? {
+    func getHomeCapsuleCellItem(capsules: [Capsule], type: CapsuleType) -> HomeCapsuleCellItem? {
         switch type {
         case .closedOldest:
             let capsule = getClosedOldest(capsules: capsules)
@@ -93,7 +92,7 @@ final class HomeViewModel: BaseViewModel {
         }
     }
     
-    func makeHomeCapsuleCellItem(capsule: Capsule?, type: FeaturedCapsule) -> HomeCapsuleCellItem? {
+    func makeHomeCapsuleCellItem(capsule: Capsule?, type: CapsuleType) -> HomeCapsuleCellItem? {
         guard let capsule else {
             return nil
         }
