@@ -71,7 +71,7 @@ final class HomeViewModel: BaseViewModel {
     
     func makeMainLabel(capsuleCount: Int) -> String {
         let nickname = UserDefaultsManager<UserInfo>.loadData(key: .userInfo)?.nickname ?? "none"
-        return "\(nickname)님의 공간캡슐 \(capsuleCount)개"
+        return "\(nickname)님이 생성한 공간캡슐 \(capsuleCount)개"
     }
     
     func getHomeCapsuleCellItem(capsules: [Capsule], type: CapsuleType) -> HomeCapsuleCellItem? {
