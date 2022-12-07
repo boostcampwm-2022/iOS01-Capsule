@@ -8,7 +8,6 @@
 import RxCocoa
 import RxSwift
 import UIKit
-import UserNotifications
 
 enum Authorization: String {
     case notification
@@ -36,8 +35,6 @@ final class ProfileViewController: UIViewController, BaseViewController {
 
         bind()
         bindViewModel()
-        NotificationManager.shared.userNotificationCenter.delegate = self
-        NotificationManager.shared.sendNotification(seconds: 4)
     }
 
     func bind() {
@@ -172,16 +169,16 @@ final class ProfileViewController: UIViewController, BaseViewController {
     }
 }
 
-extension ProfileViewController: UNUserNotificationCenterDelegate {
-    func userNotificationCenter(_ center: UNUserNotificationCenter,
-                                didReceive response: UNNotificationResponse,
-                                withCompletionHandler completionHandler: @escaping () -> Void) {
-        completionHandler()
-    }
-
-    func userNotificationCenter(_ center: UNUserNotificationCenter,
-                                willPresent notification: UNNotification,
-                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        completionHandler([.badge, .sound, .banner])
-    }
-}
+// extension ProfileViewController: UNUserNotificationCenterDelegate {
+//    func userNotificationCenter(_ center: UNUserNotificationCenter,
+//                                didReceive response: UNNotificationResponse,
+//                                withCompletionHandler completionHandler: @escaping () -> Void) {
+//        completionHandler()
+//    }
+//
+//    func userNotificationCenter(_ center: UNUserNotificationCenter,
+//                                willPresent notification: UNNotification,
+//                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+//        completionHandler([.badge, .sound, .banner])
+//    }
+// }
