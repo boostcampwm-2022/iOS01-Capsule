@@ -90,7 +90,7 @@ final class HomeViewModel: BaseViewModel {
         return capsules.min { $0.memoryDate < $1.memoryDate }
     }
     func getMemoryNewest(capsules: [Capsule]) -> Capsule? {
-        
+        return capsules.max { $0.memoryDate < $1.memoryDate }
     }
     func getNearest(capsules: [Capsule]) -> Capsule? {
         
