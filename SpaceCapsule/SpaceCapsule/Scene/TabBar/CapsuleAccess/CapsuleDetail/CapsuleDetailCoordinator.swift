@@ -26,15 +26,11 @@ final class CapsuleDetailCoordinator: Coordinator {
     func moveToCapsuleDetail() {
         let capsuleDetailViewController = CapsuleDetailViewController()
         let capsuleDetailViewModel = CapsuleDetailViewModel()
-        
         capsuleDetailViewModel.coordinator = self
         capsuleDetailViewController.viewModel = capsuleDetailViewModel
         
-        capsuleDetailViewModel.fetchCapsule(with: capsuleUUID)
-        
         navigationController?.pushViewController(capsuleDetailViewController, animated: true)
         
-        // MARK: 목록으로 이동
         if let rootVC = navigationController?.viewControllers.first {
             navigationController?.viewControllers = [rootVC, capsuleDetailViewController]
         }
@@ -42,11 +38,22 @@ final class CapsuleDetailCoordinator: Coordinator {
         setupNavigationItem()
     }
     
-    private func setupNavigationItem() {
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.themeFont(ofSize: FrameResource.fontSize100) as Any]
+    func showCapsuleSettings() {
+        let capsuleSettingsCooridnator = CapsuleSettingsCoordinator(navigationController: navigationController)
+        capsuleSettingsCooridnator.parent = self
+        capsuleSettingsCooridnator.capsuleUUID = capsuleUUID
+        capsuleSettingsCooridnator.start()
         
-        let backButton = UIBarButtonItem()
-        backButton.title = "목록"
-        navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+        children.append(capsuleSettingsCooridnator)
+    }
+    
+    func finish() {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    private func setupNavigationItem() {
+        let backButtonItem = UIBarButtonItem()
+        backButtonItem.title = "목록"
+        navigationController?.navigationBar.topItem?.backBarButtonItem = backButtonItem
     }
 }

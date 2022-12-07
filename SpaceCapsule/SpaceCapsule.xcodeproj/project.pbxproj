@@ -132,8 +132,11 @@
 		28C8C984292DF4EA005615BB /* SortPolicyHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C8C983292DF4EA005615BB /* SortPolicyHeaderView.swift */; };
 		4A05D0EC2924C04200A2EF50 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A05D0EB2924C04200A2EF50 /* GoogleService-Info.plist */; };
 		4A05D1052925CF2A00A2EF50 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A05D1042925CF2A00A2EF50 /* NetworkError.swift */; };
+		4A1D1BBD2940260800F47ACB /* CapsuleSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1D1BBC2940260800F47ACB /* CapsuleSettingsViewController.swift */; };
+		4A1D1BBF2940286B00F47ACB /* CapsuleSettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1D1BBE2940286B00F47ACB /* CapsuleSettingsCoordinator.swift */; };
+		4A1D1BC12940292A00F47ACB /* CapsuleSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1D1BC02940292A00F47ACB /* CapsuleSettingsViewModel.swift */; };
+		4A1D1BC3294033C200F47ACB /* CapsuleSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1D1BC2294033C200F47ACB /* CapsuleSettingsView.swift */; };
 		4A1FEFF8292F1F1200A935BB /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1FEFF7292F1F1200A935BB /* CustomAnnotation.swift */; };
-		4A2449CD2936043E000EE58C /* DetailImageFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2449CC2936043E000EE58C /* DetailImageFlowLayout.swift */; };
 		4A2449D129360669000EE58C /* DetailImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2449D029360669000EE58C /* DetailImageCell.swift */; };
 		4A9E9147292A2A5A00B7CC5C /* CLLocationManager+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E9146292A2A5A00B7CC5C /* CLLocationManager+Rx.swift */; };
 		4A9E9149292A383900B7CC5C /* MKMapView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E9148292A383900B7CC5C /* MKMapView+Rx.swift */; };
@@ -301,8 +304,11 @@
 		28C8C983292DF4EA005615BB /* SortPolicyHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortPolicyHeaderView.swift; sourceTree = "<group>"; };
 		4A05D0EB2924C04200A2EF50 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4A05D1042925CF2A00A2EF50 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		4A1D1BBC2940260800F47ACB /* CapsuleSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleSettingsViewController.swift; sourceTree = "<group>"; };
+		4A1D1BBE2940286B00F47ACB /* CapsuleSettingsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleSettingsCoordinator.swift; sourceTree = "<group>"; };
+		4A1D1BC02940292A00F47ACB /* CapsuleSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleSettingsViewModel.swift; sourceTree = "<group>"; };
+		4A1D1BC2294033C200F47ACB /* CapsuleSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleSettingsView.swift; sourceTree = "<group>"; };
 		4A1FEFF7292F1F1200A935BB /* CustomAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
-		4A2449CC2936043E000EE58C /* DetailImageFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImageFlowLayout.swift; sourceTree = "<group>"; };
 		4A2449D029360669000EE58C /* DetailImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImageCell.swift; sourceTree = "<group>"; };
 		4A9E9146292A2A5A00B7CC5C /* CLLocationManager+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationManager+Rx.swift"; sourceTree = "<group>"; };
 		4A9E9148292A383900B7CC5C /* MKMapView+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKMapView+Rx.swift"; sourceTree = "<group>"; };
@@ -779,6 +785,7 @@
 		288A8EEF29236061000229D2 /* CapsuleDetail */ = {
 			isa = PBXGroup;
 			children = (
+				4A1D1BBB294025E500F47ACB /* CapsuleSettings */,
 				4A2449CB2936033B000EE58C /* Componenets */,
 				288A8EF82923609C000229D2 /* CapsuleDetailView.swift */,
 				288A8EFA292360A4000229D2 /* CapsuleDetailViewController.swift */,
@@ -810,10 +817,20 @@
 			path = Error;
 			sourceTree = "<group>";
 		};
+		4A1D1BBB294025E500F47ACB /* CapsuleSettings */ = {
+			isa = PBXGroup;
+			children = (
+				4A1D1BBC2940260800F47ACB /* CapsuleSettingsViewController.swift */,
+				4A1D1BBE2940286B00F47ACB /* CapsuleSettingsCoordinator.swift */,
+				4A1D1BC02940292A00F47ACB /* CapsuleSettingsViewModel.swift */,
+				4A1D1BC2294033C200F47ACB /* CapsuleSettingsView.swift */,
+			);
+			path = CapsuleSettings;
+			sourceTree = "<group>";
+		};
 		4A2449CB2936033B000EE58C /* Componenets */ = {
 			isa = PBXGroup;
 			children = (
-				4A2449CC2936043E000EE58C /* DetailImageFlowLayout.swift */,
 				4A2449D029360669000EE58C /* DetailImageCell.swift */,
 			);
 			path = Componenets;
@@ -1099,6 +1116,7 @@
 				0D90DAF929239A81000DCC84 /* UIImage+.swift in Sources */,
 				0DF9D2A5293F1CB3001C05DE /* DetailImageView.swift in Sources */,
 				0DE786E1292BBDEC007EF260 /* DatePickerViewController.swift in Sources */,
+				4A1D1BC12940292A00F47ACB /* CapsuleSettingsViewModel.swift in Sources */,
 				599C1A4C292CC99A00517E93 /* ImageCacheFactory.swift in Sources */,
 				288A8E9B29235A6E000229D2 /* SignInView.swift in Sources */,
 				288A8ED529235C6F000229D2 /* CapsuleCreateViewController.swift in Sources */,
@@ -1124,10 +1142,10 @@
 				0DF9D29A293F09FE001C05DE /* ZoomableImageView.swift in Sources */,
 				599C19D2292B82D000517E93 /* LoadingViewController.swift in Sources */,
 				599C1A4A292CC99A00517E93 /* MemoryImageCache.swift in Sources */,
+				4A1D1BBD2940260800F47ACB /* CapsuleSettingsViewController.swift in Sources */,
 				288A8E922923244D000229D2 /* Coordinator.swift in Sources */,
 				288A8EE829235FE2000229D2 /* CapsuleCloseViewController.swift in Sources */,
 				599C1A4F292CC99A00517E93 /* FirebaseAuthManager.swift in Sources */,
-				4A2449CD2936043E000EE58C /* DetailImageFlowLayout.swift in Sources */,
 				288A8EB429235B62000229D2 /* ProfileViewController.swift in Sources */,
 				0DCB22932924CE58002CB095 /* CustomTabBarController.swift in Sources */,
 				4A9E9147292A2A5A00B7CC5C /* CLLocationManager+Rx.swift in Sources */,
@@ -1160,6 +1178,7 @@
 				0D90DAF129238B85000DCC84 /* CapsuleLocateCoordinator.swift in Sources */,
 				288A8EA729235AF1000229D2 /* NicknameViewModel.swift in Sources */,
 				28245562293B17B100DE03A1 /* UnOpenable.swift in Sources */,
+				4A1D1BC3294033C200F47ACB /* CapsuleSettingsView.swift in Sources */,
 				288A8ECC29235BE9000229D2 /* HomeViewController.swift in Sources */,
 				0DA6610D292778BE00CF3563 /* ThemeTextField.swift in Sources */,
 				0DB88C712935E83600107DC3 /* AppDataManager.swift in Sources */,
@@ -1170,6 +1189,7 @@
 				0DA9F6912928E9B900454932 /* AddImageCell.swift in Sources */,
 				0D6CA335292216A300E02393 /* AppDelegate.swift in Sources */,
 				59D8CFB8293609D100FD9CF6 /* HomeCapsuleCell.swift in Sources */,
+				4A1D1BBF2940286B00F47ACB /* CapsuleSettingsCoordinator.swift in Sources */,
 				288A8EC029235BA5000229D2 /* CapsuleListCoordinator.swift in Sources */,
 				288A8EB829235B77000229D2 /* ProfileCoordinator.swift in Sources */,
 				2800F97A292F1F060069EE7F /* ListCapsuleCellItem.swift in Sources */,

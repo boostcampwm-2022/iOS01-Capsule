@@ -184,4 +184,31 @@ class FirestoreManager {
                 }
             }
     }
+    
+    func deleteCapsule(_ uuid: String) {
+        guard let uid = FirebaseAuthManager.shared.currentUser?.uid else {
+            return
+        }
+        
+        database
+            .collection("users")
+            .document(uid)
+            .updateData([
+                "capsules": FieldValue.arrayRemove([uuid])
+            ])
+        
+        database
+            .collection("capsules")
+            .document(uuid)
+            .delete()
+    }
+    
+    func incrementOpenCount(uuid: String) {
+        database
+            .collection("capsules")
+            .document(uuid)
+            .updateData([
+                "openCount": FieldValue.increment(Int64(1))
+            ])
+    }
 }

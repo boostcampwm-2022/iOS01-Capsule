@@ -16,14 +16,14 @@ final class CapsuleDetailViewController: UIViewController, BaseViewController {
     private var imageDataSource: UICollectionViewDiffableDataSource<Int, DetailImageCell.Cell>?
 
     private let scrollView = CustomScrollView()
-    private let mainView = CapsuleDetailView()
+    let mainView = CapsuleDetailView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        addSettingButton()
         applyDataSource()
         bind()
-        viewModel?.input.frameWidth.onNext(view.frame.width)
+        viewModel?.fetchCapsule()
     }
 
     override func viewDidLayoutSubviews() {
@@ -35,18 +35,23 @@ final class CapsuleDetailViewController: UIViewController, BaseViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(mainView)
         mainView.backgroundColor = .themeBackground
-        
-        if let detailLayout = mainView.imageCollectionView.collectionViewLayout as? DetailImageFlowLayout {
-            detailLayout.sectionInset = UIEdgeInsets(top: 0.0,
-                                                     left: (view.frame.width - FrameResource.detailImageViewWidth) / 2,
-                                                     bottom: 0.0,
-                                                     right: (view.frame.width - FrameResource.detailImageViewWidth) / 2)
-        }
 
         makeConstrinats()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        mainView.backgroundColor = .themeBackground
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        mainView.backgroundColor = UIColor.black.withAlphaComponent(0.7)
+    }
 
     func bind() {
+        viewModel?.input.frameWidth.onNext(view.frame.width)
+        
         viewModel?.output.imageCell
             .withUnretained(self)
             .subscribe(onNext: { owner, cells in
@@ -56,20 +61,29 @@ final class CapsuleDetailViewController: UIViewController, BaseViewController {
         
         viewModel?.output.capsuleData
             .withUnretained(self)
-            .subscribe(onNext: { owner, data in
-                if let capsule = data.first {
-                    owner.mainView.updateCapsuleData(capsule: capsule)
-                    owner.setUpNavigationTitle(capsule.title)
-                }
+            .subscribe(onNext: { owner, capsule in
+                owner.mainView.updateCapsuleData(capsule: capsule)
+                owner.setUpNavigationTitle(capsule.title)
             })
             .disposed(by: disposeBag)
 
         viewModel?.output.mapSnapshot
             .withUnretained(self)
             .subscribe(onNext: { owner, mapImage in
-                owner.mainView.mapView.image = mapImage.first
+                owner.mainView.mapView.image = mapImage
             })
             .disposed(by: disposeBag)
+        
+        mainView.settingButton.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                self?.viewModel?.input.tapCapsuleSettings.accept(())
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func addSettingButton() {
+        let settingButton = UIBarButtonItem(customView: mainView.settingButton)
+        navigationItem.rightBarButtonItem = settingButton
     }
 
     private func makeConstrinats() {
