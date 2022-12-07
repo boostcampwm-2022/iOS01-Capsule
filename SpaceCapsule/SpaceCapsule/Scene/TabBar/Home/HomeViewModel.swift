@@ -123,6 +123,6 @@ final class HomeViewModel: BaseViewModel {
         }
     }
     func getLeastOpened(capsules: [Capsule]) -> Capsule? {
-        
+        return capsules.min(by: { $0.openCount < $1.openCount })
     }
 }
