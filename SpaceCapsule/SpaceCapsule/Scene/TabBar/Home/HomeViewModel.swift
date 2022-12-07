@@ -108,7 +108,19 @@ final class HomeViewModel: BaseViewModel {
         }
     }
     func getFarthest(capsules: [Capsule]) -> Capsule? {
-        
+        return capsules.max { first, second in
+            let firstLocation = CLLocationCoordinate2D(
+                latitude: first.geopoint.latitude,
+                longitude: first.geopoint.longitude
+            )
+            let secondLocation = CLLocationCoordinate2D(
+                latitude: second.geopoint.latitude,
+                longitude: second.geopoint.longitude
+            )
+            let firstDistance = LocationManager.shared.distance(capsuleCoordinate: firstLocation)
+            let secondDistance = LocationManager.shared.distance(capsuleCoordinate: secondLocation)
+            return firstDistance < secondDistance
+        }
     }
     func getLeastOpened(capsules: [Capsule]) -> Capsule? {
         
