@@ -105,4 +105,3 @@ final class AddImageCollectionView: UICollectionView {
         return layout
     }
 }
-

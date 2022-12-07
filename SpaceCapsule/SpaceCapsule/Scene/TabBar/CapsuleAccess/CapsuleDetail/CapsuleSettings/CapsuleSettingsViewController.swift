@@ -17,7 +17,6 @@ final class CapsuleSettingsViewController: UIViewController, BaseViewController 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .themeBackground
-        
         addSubviews()
         makeConstraints()
         bind()

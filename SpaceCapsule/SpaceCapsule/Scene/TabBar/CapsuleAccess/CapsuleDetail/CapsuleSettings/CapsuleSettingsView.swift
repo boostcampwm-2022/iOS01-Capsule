@@ -20,8 +20,8 @@ final class CapsuleSettingsView: UIView, BaseView {
 
     lazy var deleteButton: SettingsButton = {
         let button = SettingsButton()
-        button.setTitle("캡슐 삭제", for: .normal)
-        button.setImage(.init(systemName: "trash"), for: .normal)
+        button.addContents(text: "캡슐 삭제",
+                           image: UIImage(systemName: "trash"))
 
         return button
     }()
@@ -83,6 +83,14 @@ extension CapsuleSettingsView {
         @available(*, unavailable)
         required init?(coder: NSCoder) {
             fatalError("init(coder:) has not been implemented")
+        }
+        
+        func addContents(text: String, image: UIImage?) {
+            let attributes = [NSAttributedString.Key.font: UIFont.themeFont(ofSize: 20)]
+            let attributedText = NSAttributedString(string: text, attributes: attributes as [NSAttributedString.Key : Any])
+            
+            setAttributedTitle(attributedText, for: .normal)
+            setImage(image, for: .normal)
         }
     }
 }

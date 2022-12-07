@@ -16,7 +16,7 @@ final class CapsuleDetailViewController: UIViewController, BaseViewController {
     private var imageDataSource: UICollectionViewDiffableDataSource<Int, DetailImageCell.Cell>?
 
     private let scrollView = CustomScrollView()
-    private let mainView = CapsuleDetailView()
+    let mainView = CapsuleDetailView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +37,16 @@ final class CapsuleDetailViewController: UIViewController, BaseViewController {
         mainView.backgroundColor = .themeBackground
 
         makeConstrinats()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        mainView.backgroundColor = .themeBackground
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        mainView.backgroundColor = UIColor.black.withAlphaComponent(0.7)
     }
 
     func bind() {
