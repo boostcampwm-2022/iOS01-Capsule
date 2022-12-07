@@ -63,7 +63,7 @@ final class CapsuleSettingsViewController: UIViewController, BaseViewController 
         )
 
         let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
-        let deleteAction = UIAlertAction(title: "삭제", style: .default) { [weak self] _ in
+        let deleteAction = UIAlertAction(title: "삭제", style: .destructive) { [weak self] _ in
             self?.viewModel?.input.tapDelete.accept(())
         }
 

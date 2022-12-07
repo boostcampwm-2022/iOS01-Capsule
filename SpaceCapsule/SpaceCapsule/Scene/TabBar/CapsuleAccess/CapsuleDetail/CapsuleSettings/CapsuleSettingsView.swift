@@ -26,14 +26,6 @@ final class CapsuleSettingsView: UIView, BaseView {
         return button
     }()
     
-    lazy var modifierButton: SettingsButton = {
-        let button = SettingsButton()
-        button.setTitle("캡슐 수정", for: .normal)
-        button.setImage(.init(systemName: "trash"), for: .normal)
-        
-        return button
-    }()
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -49,7 +41,7 @@ final class CapsuleSettingsView: UIView, BaseView {
     func configure() {}
 
     func addSubViews() {
-        [deleteButton, modifierButton].forEach {
+        [deleteButton].forEach {
             mainStackView.addArrangedSubview($0)
         }
         
@@ -57,8 +49,7 @@ final class CapsuleSettingsView: UIView, BaseView {
     }
 
     func makeConstraints() {
-        [deleteButton,
-         modifierButton].forEach { subview in
+        [deleteButton].forEach { subview in
             subview.snp.makeConstraints {
                 $0.height.equalTo(FrameResource.detailSettingButtonHeight)
             }
@@ -89,6 +80,7 @@ extension CapsuleSettingsView {
             backgroundColor = .themeBackground
         }
         
+        @available(*, unavailable)
         required init?(coder: NSCoder) {
             fatalError("init(coder:) has not been implemented")
         }

@@ -33,7 +33,6 @@ final class CapsuleSettingsCoordinator: Coordinator {
             })
             .disposed(by: disposeBag)
         
-        
         if let viewController {
             navigationController?.present(viewController, animated: true)
         }
