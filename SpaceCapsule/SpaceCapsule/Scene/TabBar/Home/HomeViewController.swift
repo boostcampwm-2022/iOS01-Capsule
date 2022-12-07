@@ -45,6 +45,10 @@ final class HomeViewController: UIViewController, BaseViewController {
                 return cell
             }.disposed(by: disposeBag)
         
+        viewModel.output.mainLabelText
+            .bind(to: homeView.mainLabel.rx.text)
+            .disposed(by: disposeBag)
+        
         homeView.capsuleCollectionView.rx.itemHighlighted
             .withUnretained(self)
             .subscribe(

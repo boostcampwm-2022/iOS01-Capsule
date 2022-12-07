@@ -23,6 +23,7 @@ final class HomeViewModel: BaseViewModel {
     
     struct Output: ViewModelOutput {
         var capsuleCellItems = PublishRelay<[ListCapsuleCellItem]>()
+        var mainLabelText = PublishRelay<String>()
     }
     
     init() {
@@ -45,6 +46,7 @@ final class HomeViewModel: BaseViewModel {
                                             )
                         )
                     }
+                    owner.makeMainLabel(capsuleCount: capsuleList.count)
                     owner.output.capsuleCellItems.accept(capsuleCellItems)
                 },
                 onError: { error in
@@ -53,7 +55,10 @@ final class HomeViewModel: BaseViewModel {
             )
             .disposed(by: disposeBag)
     }
-    
+    func makeMainLabel(capsuleCount: Int) {
+        let nickname = UserDefaultsManager<UserInfo>.loadData(key: .userInfo)?.nickname ?? "none"
+        output.mainLabelText.accept("\(nickname)님의 공간캡슐 \(capsuleCount)개")
+    }
     func bind() {
     }
 }

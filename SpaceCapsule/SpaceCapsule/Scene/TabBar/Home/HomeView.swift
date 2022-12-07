@@ -11,8 +11,9 @@ import UIKit
 final class HomeView: UIView, BaseView {
     // MARK: - UIComponents
     lazy var mainLabel: ThemeLabel = ThemeLabel(
-        text: "'\(UserDefaultsManager<UserInfo>.loadData(key: .userInfo)!.nickname!)'님의 공간캡슐 '10'개",
-        size: 22,
+//        text: "\(UserDefaultsManager<UserInfo>.loadData(key: .userInfo)?.nickname ?? "none")님의 공간캡슐 \(AppDataManager.shared.capsules.count)개",
+        text: "none님의 공간캡슐 10개",
+        size: 32,
         color: .themeGray300
     )
     
@@ -57,6 +58,5 @@ final class HomeView: UIView, BaseView {
             $0.bottom.equalTo(self.safeAreaLayoutGuide)
             $0.left.right.equalToSuperview()
         }
-        
     }
 }
