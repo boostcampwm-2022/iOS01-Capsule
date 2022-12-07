@@ -37,13 +37,20 @@ final class CapsuleDetailViewController: UIViewController, BaseViewController {
         mainView.backgroundColor = .themeBackground
 
         if let detailLayout = mainView.imageCollectionView.collectionViewLayout as? DetailImageFlowLayout {
-            detailLayout.sectionInset = UIEdgeInsets(top: 0.0,
-                                                     left: (view.frame.width - FrameResource.detailImageViewWidth) / 2,
-                                                     bottom: 0.0,
-                                                     right: (view.frame.width - FrameResource.detailImageViewWidth) / 2)
+            detailLayout.sectionInset = UIEdgeInsets(
+                top: 0.0,
+                left: (view.frame.width - FrameResource.detailImageViewWidth) / 2,
+                bottom: 0.0,
+                right: (view.frame.width - FrameResource.detailImageViewWidth) / 2
+            )
         }
 
         makeConstrinats()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        viewModel?.input.viewDidDisappear.onNext(())
+        super.viewDidDisappear(animated)
     }
 
     func bind() {

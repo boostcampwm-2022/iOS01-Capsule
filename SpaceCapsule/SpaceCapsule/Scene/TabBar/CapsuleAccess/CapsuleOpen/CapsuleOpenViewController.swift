@@ -29,7 +29,7 @@ final class CapsuleOpenViewController: UIViewController, BaseViewController {
     }
 
     override func viewDidDisappear(_ animated: Bool) {
-        viewModel?.input.popViewController.onNext(())
+        viewModel?.input.viewDidDisappear.onNext(())
         super.viewDidDisappear(animated)
     }
 
@@ -57,7 +57,7 @@ final class CapsuleOpenViewController: UIViewController, BaseViewController {
         }
         if capsuleCellItem.isOpenable() {
             capsuleOpenView.shakeAnimate()
-            viewModel?.coordinator?.moveToCapsuleDetail()
+            viewModel?.input.tapOpen.onNext(true)
         } else {
             showAlert()
         }
