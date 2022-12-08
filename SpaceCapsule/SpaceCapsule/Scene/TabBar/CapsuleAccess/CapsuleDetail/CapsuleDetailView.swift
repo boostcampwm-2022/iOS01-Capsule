@@ -37,6 +37,7 @@ final class CapsuleDetailView: UIView, BaseView {
         collectionView.alwaysBounceHorizontal = true
         collectionView.backgroundColor = .clear
         collectionView.alwaysBounceHorizontal = false
+        collectionView.alwaysBounceVertical = false
         collectionView.showsHorizontalScrollIndicator = false
 
         return collectionView
@@ -116,7 +117,8 @@ final class CapsuleDetailView: UIView, BaseView {
 
     func makeConstraints() {
         mainStackView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.left.right.equalToSuperview()
+            $0.top.bottom.equalToSuperview().inset(FrameResource.detailMainStackViewHPadding)
         }
 
         imageCollectionView.snp.makeConstraints {
@@ -139,12 +141,17 @@ final class CapsuleDetailView: UIView, BaseView {
     }
 
     private func createLayout() -> UICollectionViewLayout {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                              heightDimension: .fractionalHeight(1))
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .fractionalHeight(1)
+        )
 
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
-        let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(FrameResource.detailImageViewWidth), heightDimension: .absolute(FrameResource.detailImageViewHeight))
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .absolute(FrameResource.detailImageViewWidth),
+            heightDimension: .absolute(FrameResource.detailImageViewHeight)
+        )
 
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
 
