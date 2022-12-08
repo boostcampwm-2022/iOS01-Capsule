@@ -9,8 +9,6 @@ import SnapKit
 import UIKit
 
 final class ListCapsuleCell: UICollectionViewCell, UnOpenable {
-    static let cellIdentifier = "ListCapsuleCell"
-
     lazy var thumbnailImageView = ThemeThumbnailImageView(frame: .zero, width: FrameResource.listCapsuleCellWidth)
 
     lazy var descriptionLabel = {

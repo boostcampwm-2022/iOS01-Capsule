@@ -15,6 +15,14 @@ extension Date {
 
         return formatter
     }
+    
+    static var dotDateFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy.MM.dd"
+        formatter.locale = Locale(identifier: "ko_KR")
+
+        return formatter
+    }
 
     static var dateTimeFormatter: DateFormatter {
         let formatter = DateFormatter()
@@ -26,6 +34,10 @@ extension Date {
 
     var dateString: String {
         Date.dateFormatter.string(from: self)
+    }
+    
+    var dotDateString: String {
+        Date.dotDateFormatter.string(from: self)
     }
 
     var dateTimeString: String {

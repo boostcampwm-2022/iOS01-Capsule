@@ -42,7 +42,9 @@ final class AuthCoordinator: Coordinator {
     }
     
     func moveToTabBar() {
-        guard let parent = self.parent as? AppCoordinator else { return }
+        guard let parent = self.parent as? AppCoordinator else {
+            return
+        }
         parent.moveToTabBar()
     }
 }

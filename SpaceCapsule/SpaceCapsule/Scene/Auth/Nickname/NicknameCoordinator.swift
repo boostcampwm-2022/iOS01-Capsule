@@ -30,7 +30,9 @@ final class NicknameCoordinator: Coordinator {
     }
     
     func moveToTabBar() {
-        guard let parent = self.parent as? AuthCoordinator else { return }
+        guard let parent = self.parent as? AuthCoordinator else {
+            return
+        }
         parent.moveToTabBar()
     }
 }

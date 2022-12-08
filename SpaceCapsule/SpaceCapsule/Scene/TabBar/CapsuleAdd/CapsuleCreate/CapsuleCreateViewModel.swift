@@ -99,7 +99,9 @@ final class CapsuleCreateViewModel: BaseViewModel {
                 FirestoreManager.shared.uploadCapsule(uid: uid, capsule: capsule) { error in
                     weakSelf.output.indicatorState.onNext(false)
 
-                    guard error == nil else { return }
+                    guard error == nil else {
+                        return
+                    }
 
                     weakSelf.coordinator?.showCapsuleClose(capsule: capsule)
                 }

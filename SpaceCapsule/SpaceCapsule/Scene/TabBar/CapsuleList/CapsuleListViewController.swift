@@ -146,7 +146,7 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
 extension CapsuleListViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     private func configureCollectionView() {
         dataSource = UICollectionViewDiffableDataSource<Int, ListCapsuleCellItem>(collectionView: capsuleListView.collectionView, cellProvider: { collectionView, indexPath, capsuleCellItem in
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ListCapsuleCell.cellIdentifier, for: indexPath) as? ListCapsuleCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ListCapsuleCell.identifier, for: indexPath) as? ListCapsuleCell
             cell?.configure(capsuleCellItem: capsuleCellItem)
             return cell
         })

@@ -44,7 +44,7 @@ final class ThemeThumbnailImageView: UIView {
         backgroundColor = .themeGray100
         layer.shadowOffset = FrameResource.capsuleCellShadowOffset
         layer.shadowRadius = FrameResource.capsuleCellShadowRadius
-        layer.shadowOpacity = Float(FrameResource.capsuleCellShadowOpacity)
+        layer.shadowOpacity = FrameResource.capsuleCellShadowOpacity
         layer.cornerRadius = width / 2
     }
 

@@ -25,7 +25,7 @@ final class CapsuleListView: UIView, BaseView, Refreshable {
 
     let collectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
-        collectionView.register(ListCapsuleCell.self, forCellWithReuseIdentifier: ListCapsuleCell.cellIdentifier)
+        collectionView.register(ListCapsuleCell.self, forCellWithReuseIdentifier: ListCapsuleCell.identifier)
         collectionView.showsVerticalScrollIndicator = false
         return collectionView
     }()

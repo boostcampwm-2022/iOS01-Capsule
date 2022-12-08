@@ -27,7 +27,9 @@ final class NicknameViewController: UIViewController, BaseViewController {
     
     // MARK: - Rx
     func bind() {
-        guard let viewModel else { return }
+        guard let viewModel else {
+            return
+        }
         
         nicknameView
             .nicknameTextField.rx.text

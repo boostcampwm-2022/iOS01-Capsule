@@ -11,15 +11,15 @@ import UIKit
 final class HomeView: UIView, BaseView {
     // MARK: - UIComponents
     lazy var mainLabel: ThemeLabel = ThemeLabel(
-        text: "'\(UserDefaultsManager<UserInfo>.loadData(key: .userInfo)!.nickname!)'님의 공간캡슐 '10'개",
-        size: 22,
+        text: "none님의 공간캡슐 10개",
+        size: 32,
         color: .themeGray300
     )
     
     lazy var capsuleCollectionView: UICollectionView = {
         let layout = CarouselCollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.register(HomeCapsuleCell.self, forCellWithReuseIdentifier: HomeCapsuleCell.cellIdentifier)
+        collectionView.register(HomeCapsuleCell.self, forCellWithReuseIdentifier: HomeCapsuleCell.identifier)
         collectionView.backgroundColor = .none
         collectionView.showsHorizontalScrollIndicator = false
         return collectionView
@@ -50,14 +50,12 @@ final class HomeView: UIView, BaseView {
     func makeConstraints() {
         mainLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(self.safeAreaLayoutGuide)
+            $0.top.equalTo(self.safeAreaLayoutGuide).offset(FrameResource.verticalPadding)
         }
         capsuleCollectionView.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
             $0.top.equalTo(mainLabel.snp.bottom)
             $0.bottom.equalTo(self.safeAreaLayoutGuide)
             $0.left.right.equalToSuperview()
         }
-        
     }
 }

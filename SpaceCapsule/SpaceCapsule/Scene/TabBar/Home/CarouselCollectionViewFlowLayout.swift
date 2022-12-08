@@ -24,7 +24,9 @@ class CarouselCollectionViewFlowLayout: UICollectionViewFlowLayout {
     }
     
     private func setupLayout() {
-        guard let collectionView = self.collectionView else { return }
+        guard let collectionView = self.collectionView else {
+            return
+        }
         
         collectionView.decelerationRate = .fast
         
@@ -52,14 +54,18 @@ class CarouselCollectionViewFlowLayout: UICollectionViewFlowLayout {
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         guard let superAttributes = super.layoutAttributesForElements(in: rect),
               let attributes = NSArray(array: superAttributes, copyItems: true) as? [UICollectionViewLayoutAttributes]
-        else { return nil }
+        else {
+            return nil
+        }
         
         return attributes.map({ self.transformLayoutAttributes(attributes: $0) })
     }
     
     private func transformLayoutAttributes(attributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
         
-        guard let collectionView = self.collectionView else {return attributes}
+        guard let collectionView = self.collectionView else {
+            return attributes
+        }
         
         let collectionCenter = collectionView.frame.size.width / 2
         let contentOffset = collectionView.contentOffset.x
@@ -92,7 +98,9 @@ class CarouselCollectionViewFlowLayout: UICollectionViewFlowLayout {
         }
         
         let targetRect = CGRect(x: proposedContentOffset.x, y: 0, width: collectionView.frame.width, height: collectionView.frame.height)
-        guard let rectAttributes = super.layoutAttributesForElements(in: targetRect) else { return .zero }
+        guard let rectAttributes = super.layoutAttributesForElements(in: targetRect) else {
+            return .zero
+        }
         
         var offsetAdjustment = CGFloat.greatestFiniteMagnitude
         let horizontalCenter = proposedContentOffset.x + collectionView.frame.width / 2

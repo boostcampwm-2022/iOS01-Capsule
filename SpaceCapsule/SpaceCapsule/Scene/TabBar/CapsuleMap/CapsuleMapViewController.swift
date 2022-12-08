@@ -224,7 +224,9 @@ final class CapsuleMapViewController: UIViewController, BaseViewController {
     }
 
     private func markIfOpenable() {
-        guard let currentLocation = locationManager.location else { return }
+        guard let currentLocation = locationManager.location else {
+            return
+        }
 
         annotationsToMonitor
             .forEach {

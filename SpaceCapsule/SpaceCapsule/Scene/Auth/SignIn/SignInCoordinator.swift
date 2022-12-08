@@ -30,13 +30,17 @@ final class SignInCoordinator: Coordinator {
     }
     
     func moveToNickname() {
-        guard let parent = self.parent as? AuthCoordinator else { return }
+        guard let parent = self.parent as? AuthCoordinator else {
+            return
+        }
         parent.moveToNickname()
         navigationController?.navigationBar.isHidden = true
     }
     
     func moveToTabBar() {
-        guard let parent = self.parent as? AuthCoordinator else { return }
+        guard let parent = self.parent as? AuthCoordinator else {
+            return
+        }
         parent.moveToTabBar()
     }
 }
