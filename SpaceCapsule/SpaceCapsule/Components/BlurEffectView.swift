@@ -9,11 +9,9 @@ import UIKit
 
 final class CapsuleBlurEffectView: UIVisualEffectView {
     init() {
-        super.init(effect: UIBlurEffect(style: .regular))
-        // self.backgroundColor = .black.withAlphaComponent(0.2)
+        super.init(effect: UIBlurEffect(style: .systemUltraThinMaterialDark))
         self.layer.cornerRadius = FrameResource.listCapsuleCellWidth / 2
         self.clipsToBounds = true
-        // self.alpha = FrameResource.blurEffectAlpha
     }
     
     @available(*, unavailable)

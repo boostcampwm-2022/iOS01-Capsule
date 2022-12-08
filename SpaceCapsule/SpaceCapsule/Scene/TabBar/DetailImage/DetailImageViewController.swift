@@ -32,7 +32,6 @@ final class DetailImageViewController: UIViewController {
         viewModel?.output.imageSources
             .subscribe(onNext: { [weak self] imageData in
                 let index = imageData.index
-                print(index)
                 self?.applySnapshot(items: imageData.sources)
 
                 self?.mainView.itemCount = imageData.sources.count
