@@ -31,10 +31,6 @@ class CapsuleOpenCoordinator: Coordinator {
 
     func finish() {
         _ = parent?.children.popLast()
-
-        if let parent = parent as? CapsuleAccessCoordinator {
-            parent.finish()
-        }
     }
 
     func moveToCapsuleDetail() {
@@ -43,5 +39,13 @@ class CapsuleOpenCoordinator: Coordinator {
         }
  
         parent.moveToCapsuleDetail()
+    }
+    
+    func hideTabBar() {
+        guard let parent = parent as? CapsuleAccessCoordinator else {
+            return
+        }
+        
+        parent.hideTabBar()
     }
 }

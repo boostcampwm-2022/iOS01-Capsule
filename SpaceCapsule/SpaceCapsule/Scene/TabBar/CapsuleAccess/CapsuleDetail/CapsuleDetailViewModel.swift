@@ -20,6 +20,7 @@ final class CapsuleDetailViewModel: BaseViewModel {
     lazy var mapSnapshotInfo = Observable.zip(input.frameWidth, output.mapCoordinate)
 
     struct Input {
+        var viewWillAppear = PublishSubject<Void>()
         var viewDidDisappear = PublishSubject<Void>()
         var frameWidth = PublishSubject<CGFloat>()
     }
@@ -48,6 +49,13 @@ final class CapsuleDetailViewModel: BaseViewModel {
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 owner.coordinator?.finish()
+            })
+            .disposed(by: disposeBag)
+        
+        input.viewWillAppear
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.coordinator?.hideTabBar()
             })
             .disposed(by: disposeBag)
     }

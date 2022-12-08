@@ -20,6 +20,7 @@ final class CapsuleListViewModel: BaseViewModel {
         var capsuleCellItems = BehaviorRelay<[ListCapsuleCellItem]>(value: [])
         var sortPolicy = BehaviorRelay<SortPolicy>(value: .nearest)
         var refreshLoading = PublishRelay<Bool>()
+        var viewWillAppear = PublishSubject<Void>()
     }
 
     init() {
@@ -27,7 +28,15 @@ final class CapsuleListViewModel: BaseViewModel {
         fetchCapsuleList()
     }
 
-    private func bind() {}
+    private func bind() {
+        input.viewWillAppear
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.coordinator?.tabBarAppearance(isHidden: false)
+            })
+            .disposed(by: disposeBag)
+    }
+    
     func refreshCapsule() {
         AppDataManager.shared.fetchCapsules()
     }

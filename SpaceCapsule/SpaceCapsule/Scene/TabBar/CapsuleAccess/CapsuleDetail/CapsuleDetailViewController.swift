@@ -26,6 +26,16 @@ final class CapsuleDetailViewController: UIViewController, BaseViewController {
         viewModel?.input.frameWidth.onNext(view.frame.width)
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel?.input.viewWillAppear.onNext(())
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        viewModel?.input.viewDidDisappear.onNext(())
+        super.viewDidDisappear(animated)
+    }
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
@@ -46,11 +56,6 @@ final class CapsuleDetailViewController: UIViewController, BaseViewController {
         }
 
         makeConstrinats()
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        viewModel?.input.viewDidDisappear.onNext(())
-        super.viewDidDisappear(animated)
     }
 
     func bind() {

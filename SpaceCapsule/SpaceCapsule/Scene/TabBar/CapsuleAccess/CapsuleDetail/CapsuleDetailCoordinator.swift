@@ -58,4 +58,12 @@ final class CapsuleDetailCoordinator: Coordinator {
             parent.finish()
         }
     }
+    
+    func hideTabBar() {
+        guard let parent = parent as? CapsuleAccessCoordinator else {
+            return
+        }
+        
+        parent.hideTabBar()
+    }
 }

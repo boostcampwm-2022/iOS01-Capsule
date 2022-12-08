@@ -20,6 +20,7 @@ final class CapsuleMapViewModel: BaseViewModel {
     struct Input: ViewModelInput {
         let tapRefresh = PublishSubject<Void>()
         let tapCapsule = PublishSubject<String>()
+        var viewWillAppear = PublishSubject<Void>()
     }
 
     struct Output: ViewModelOutput {
@@ -48,6 +49,13 @@ final class CapsuleMapViewModel: BaseViewModel {
             .withUnretained(self)
             .subscribe(onNext: { owner, uuid in
                 owner.coordinator?.moveToCapsuleAccess(uuid: uuid)
+            })
+            .disposed(by: disposeBag)
+
+        input.viewWillAppear
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.coordinator?.tabBarAppearance(isHidden: false)
             })
             .disposed(by: disposeBag)
     }

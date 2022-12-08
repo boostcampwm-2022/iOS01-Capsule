@@ -46,6 +46,7 @@ final class CapsuleMapViewController: UIViewController, BaseViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        viewModel?.input.viewWillAppear.onNext(())
         locationManager.startUpdatingLocation()
     }
 

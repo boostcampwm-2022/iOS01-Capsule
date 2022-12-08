@@ -17,7 +17,8 @@ final class CapsuleOpenViewModel: BaseViewModel {
     var input = Input()
 
     struct Input {
-        let tapOpen = BehaviorSubject<Bool>(value: false)
+        let tapOpen = PublishSubject<Void>()
+        let viewWillAppear = PublishSubject<Void>()
         var viewDidDisappear = PublishSubject<Void>()
     }
 
@@ -26,22 +27,24 @@ final class CapsuleOpenViewModel: BaseViewModel {
     }
 
     private func bind() {
-        input.viewDidDisappear.asObservable()
-            .withLatestFrom(input.tapOpen)
+        input.viewWillAppear
             .withUnretained(self)
-            .subscribe(onNext: { owner, tapOpen in
-                if !tapOpen {
-                    owner.coordinator?.finish()
-                }
+            .subscribe(onNext: { owner, _ in
+                owner.coordinator?.hideTabBar()
+            })
+            .disposed(by: disposeBag)
+
+        input.viewDidDisappear.asObservable()
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.coordinator?.finish()
             })
             .disposed(by: disposeBag)
 
         input.tapOpen
             .withUnretained(self)
-            .subscribe(onNext: { owner, tapOpen in
-                if tapOpen {
-                    owner.coordinator?.moveToCapsuleDetail()
-                }
+            .subscribe(onNext: { owner, _ in
+                owner.coordinator?.moveToCapsuleDetail()
             })
             .disposed(by: disposeBag)
     }

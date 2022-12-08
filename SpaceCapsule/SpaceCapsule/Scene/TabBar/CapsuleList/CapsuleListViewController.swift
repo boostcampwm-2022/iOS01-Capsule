@@ -30,6 +30,11 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
         bind()
         bindViewModel()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel?.input.viewWillAppear.onNext(())
+    }
 
     private func configureView() {
         view.backgroundColor = .themeBackground

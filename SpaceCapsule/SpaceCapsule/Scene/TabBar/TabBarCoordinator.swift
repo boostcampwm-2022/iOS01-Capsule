@@ -33,8 +33,8 @@ final class TabBarCoordinator: Coordinator {
     }
 
     // tabBar 내 navigation 이동 시 숨김 or 표시
-    func tabBarWillHide(_ visible: Bool) {
-        tabBarController.tabBar.isHidden = visible
+    func tabBarAppearance(isHidden: Bool) {
+        tabBarController.tabBar.isHidden = isHidden
     }
 
     // 캡슐 추가 화면으로
