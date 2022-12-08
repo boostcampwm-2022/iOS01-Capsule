@@ -20,6 +20,7 @@ final class HomeViewModel: BaseViewModel {
     struct Input: ViewModelInput {
         let capsules = PublishRelay<[Capsule]>()
         let tapCapsule = PublishSubject<String>()
+        var viewWillAppear = PublishSubject<Void>()
     }
 
     struct Output: ViewModelOutput {
@@ -30,8 +31,15 @@ final class HomeViewModel: BaseViewModel {
     init() {
         bind()
     }
-    
+
     func bind() {
+        input.viewWillAppear
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.coordinator?.tabBarAppearance(isHidden: false)
+            })
+            .disposed(by: disposeBag)
+        
         input.capsules
             .withUnretained(self)
             .subscribe(
@@ -45,17 +53,17 @@ final class HomeViewModel: BaseViewModel {
                             .map { owner.getHomeCapsuleCellItem(capsules: capsuleList, type: $0) }
                             .compactMap({ $0 })
                     )
-                    
+
                 })
             .disposed(by: disposeBag)
-        
+
         input.tapCapsule
             .withUnretained(self)
             .subscribe(onNext: { owner, uuid in
                 owner.coordinator?.moveToCapsuleAccess(uuid: uuid)
             })
             .disposed(by: disposeBag)
-        
+
         AppDataManager.shared.capsules
             .withUnretained(self)
             .subscribe(
@@ -68,12 +76,12 @@ final class HomeViewModel: BaseViewModel {
             )
             .disposed(by: disposeBag)
     }
-    
+
     func makeMainLabel(capsuleCount: Int) -> String {
         let nickname = UserDefaultsManager<UserInfo>.loadData(key: .userInfo)?.nickname ?? "none"
         return "\(nickname)님이 생성한 공간캡슐 \(capsuleCount)개"
     }
-    
+
     func getHomeCapsuleCellItem(capsules: [Capsule], type: CapsuleType) -> HomeCapsuleCellItem? {
         switch type {
         case .closedOldest:
@@ -99,7 +107,7 @@ final class HomeViewModel: BaseViewModel {
             return makeHomeCapsuleCellItem(capsule: capsule, type: type)
         }
     }
-    
+
     func makeHomeCapsuleCellItem(capsule: Capsule?, type: CapsuleType) -> HomeCapsuleCellItem? {
         guard let capsule else {
             return nil
@@ -118,19 +126,23 @@ final class HomeViewModel: BaseViewModel {
             type: type
         )
     }
-    
+
     func getClosedOldest(capsules: [Capsule]) -> Capsule? {
         return capsules.min { $0.closedDate < $1.closedDate }
     }
+
     func getClosedNewest(capsules: [Capsule]) -> Capsule? {
         return capsules.max { $0.closedDate < $1.closedDate }
     }
+
     func getMemoryOldest(capsules: [Capsule]) -> Capsule? {
         return capsules.min { $0.memoryDate < $1.memoryDate }
     }
+
     func getMemoryNewest(capsules: [Capsule]) -> Capsule? {
         return capsules.max { $0.memoryDate < $1.memoryDate }
     }
+
     func getNearest(capsules: [Capsule]) -> Capsule? {
         return capsules.min { first, second in
             let firstLocation = CLLocationCoordinate2D(
@@ -146,6 +158,7 @@ final class HomeViewModel: BaseViewModel {
             return firstDistance < secondDistance
         }
     }
+
     func getFarthest(capsules: [Capsule]) -> Capsule? {
         return capsules.max { first, second in
             let firstLocation = CLLocationCoordinate2D(
@@ -161,6 +174,7 @@ final class HomeViewModel: BaseViewModel {
             return firstDistance < secondDistance
         }
     }
+
     func getLeastOpened(capsules: [Capsule]) -> Capsule? {
         return capsules.min(by: { $0.openCount < $1.openCount })
     }

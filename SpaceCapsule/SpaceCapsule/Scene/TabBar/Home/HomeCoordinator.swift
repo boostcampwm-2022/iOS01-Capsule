@@ -25,7 +25,7 @@ final class HomeCoordinator: Coordinator {
 
         navigationController?.setViewControllers([homeViewController], animated: true)
     }
-    
+
     func moveToCapsuleAccess(uuid: String) {
         let capsuleAccessCoordinator = CapsuleAccessCoordinator(navigationController: navigationController)
 
@@ -38,17 +38,25 @@ final class HomeCoordinator: Coordinator {
                 memoryDate: capsule.memoryDate,
                 coordinate: capsule.geopoint.coordinate
             )
-            
+
             capsuleAccessCoordinator.capsuleCellItem = capsuleCellItem
         }
-        
+
         capsuleAccessCoordinator.parent = self
         capsuleAccessCoordinator.start()
 
         children.append(capsuleAccessCoordinator)
 
         if let parent = parent as? TabBarCoordinator {
-            parent.tabBarWillHide(true)
+            parent.tabBarAppearance(isHidden: true)
         }
+    }
+
+    func tabBarAppearance(isHidden: Bool) {
+        guard let parent = parent as? TabBarCoordinator else {
+            return
+        }
+
+        parent.tabBarAppearance(isHidden: isHidden)
     }
 }

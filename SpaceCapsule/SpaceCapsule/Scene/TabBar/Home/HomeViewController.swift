@@ -34,6 +34,11 @@ final class HomeViewController: UIViewController, BaseViewController {
 
         title = "홈"
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel?.input.viewWillAppear.onNext(())
+    }
 
     // MARK: - Rx
 
@@ -42,7 +47,7 @@ final class HomeViewController: UIViewController, BaseViewController {
             return
         }
         
-        viewModel.input.capsuleCellModels
+        viewModel.output.featuredCapsuleCellItems
             .subscribe(onNext: { [weak self] in
                 if $0.isEmpty {
                     self?.view = EmptyView()
