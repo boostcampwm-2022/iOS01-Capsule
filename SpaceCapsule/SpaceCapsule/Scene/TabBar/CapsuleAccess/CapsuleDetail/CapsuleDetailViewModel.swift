@@ -19,11 +19,14 @@ final class CapsuleDetailViewModel: BaseViewModel {
 
     lazy var mapSnapshotInfo = Observable.zip(input.frameWidth, output.mapCoordinate)
 
+    lazy var detailImageData = Observable.combineLatest(input.tapImage, output.imageCell)
+
     struct Input {
         var viewWillAppear = PublishSubject<Void>()
         var viewDidDisappear = PublishSubject<Void>()
         let frameWidth = PublishSubject<CGFloat>()
         let tapCapsuleSettings = PublishRelay<Void>()
+        let tapImage = PublishSubject<Int>()
     }
 
     struct Output {
@@ -63,6 +66,13 @@ final class CapsuleDetailViewModel: BaseViewModel {
         input.tapCapsuleSettings
             .subscribe(onNext: { [weak self] in
                 self?.coordinator?.showCapsuleSettings()
+            })
+            .disposed(by: disposeBag)
+
+        detailImageData
+            .subscribe(onNext: { [weak self] (index: Int, imageCell: [DetailImageCell.Cell]) in
+                let urlArray = imageCell.compactMap { $0.imageURL }
+                self?.coordinator?.showDetailImage(index: index, urlArray: urlArray)
             })
             .disposed(by: disposeBag)
     }

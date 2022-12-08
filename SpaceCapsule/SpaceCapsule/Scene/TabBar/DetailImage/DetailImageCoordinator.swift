@@ -16,6 +16,7 @@ final class DetailImageCoordinator: Coordinator {
 
     var index: Int?
     var dataArray: [Data]?
+    var urlArray: [String]?
 
     init(navigationController: CustomNavigationController?) {
         self.navigationController = navigationController

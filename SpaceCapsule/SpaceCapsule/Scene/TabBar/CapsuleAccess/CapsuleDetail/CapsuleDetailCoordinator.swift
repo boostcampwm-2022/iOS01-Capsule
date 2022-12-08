@@ -47,10 +47,14 @@ final class CapsuleDetailCoordinator: Coordinator {
         children.append(capsuleSettingsCooridnator)
     }
 
-    private func setupNavigationItem() {
-        let backButtonItem = UIBarButtonItem()
-        backButtonItem.title = "목록"
-        navigationController?.navigationBar.topItem?.backBarButtonItem = backButtonItem
+    func showDetailImage(index: Int, urlArray: [String]) {
+        let detailImageCoordinator = DetailImageCoordinator(navigationController: navigationController)
+        detailImageCoordinator.parent = self
+        detailImageCoordinator.index = index
+        detailImageCoordinator.urlArray = urlArray
+        detailImageCoordinator.start()
+
+        children.append(detailImageCoordinator)
     }
 
     func finish() {
@@ -67,5 +71,11 @@ final class CapsuleDetailCoordinator: Coordinator {
         }
 
         parent.hideTabBar()
+    }
+
+    private func setupNavigationItem() {
+        let backButtonItem = UIBarButtonItem()
+        backButtonItem.title = "목록"
+        navigationController?.navigationBar.topItem?.backBarButtonItem = backButtonItem
     }
 }
