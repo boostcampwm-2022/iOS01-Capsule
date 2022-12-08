@@ -68,9 +68,9 @@ struct HomeCapsuleCellItem: Hashable, Equatable {
         case .closedOldest, .closedNewest:
             // TODO: D+Day 계산하는 방법 수정해야 할 듯
             if let dDay = Calendar.current.dateComponents([.day], from: closedDate, to: Date()).day {
-                return "\(closedDate.dotDateString) \(address)에서\nD+\(dDay)"
+                return "\(memoryDate.dotDateString) \(address)에서\nD+\(dDay)"
             } else {
-                return "\(closedDate.dotDateString) \(address)에서"
+                return "\(memoryDate.dotDateString) \(address)에서"
             }
         case .memoryOldest, .memoryNewest:
 //            return "추억일자 : \(memoryDate.dateString)"
@@ -82,12 +82,12 @@ struct HomeCapsuleCellItem: Hashable, Equatable {
         case .nearest, .farthest:
             let distance = LocationManager.shared.distance(capsuleCoordinate: coordinate)
             if distance > 1000 {
-                return "거리 : 약 \(String(format: "%.2f", (distance / 1000.0)))km"
+                return "\(memoryDate.dotDateString) \(address)에서\n약 \(String(format: "%.2f", (distance / 1000.0)))km"
             } else {
-                return "거리 : 약 \(String(format: "%.2f", distance))m"
+                return "\(memoryDate.dotDateString) \(address)에서\n약 \(String(format: "%.2f", distance))m"
             }
         case .leastOpened:
-            return "개봉횟수 : \(openCount)번"
+            return "\(memoryDate.dotDateString) \(address)에서\n\(openCount)번"
         }
     }
 }
