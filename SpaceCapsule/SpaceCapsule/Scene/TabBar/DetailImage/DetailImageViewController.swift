@@ -68,12 +68,11 @@ extension DetailImageViewController {
             switch item {
             case let .data(value):
                 cell.configure(data: value)
-
+                
             case let .url(value):
                 cell.configrue(url: value)
             }
-
-
+            
             return cell
         })
     }

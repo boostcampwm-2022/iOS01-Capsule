@@ -28,14 +28,10 @@ final class CapsuleDetailCoordinator: Coordinator {
         let capsuleDetailViewModel = CapsuleDetailViewModel()
         capsuleDetailViewModel.coordinator = self
         capsuleDetailViewController.viewModel = capsuleDetailViewModel
-
-        navigationController?.pushViewController(capsuleDetailViewController, animated: true)
-
+        
         if let rootVC = navigationController?.viewControllers.first {
-            navigationController?.viewControllers = [rootVC, capsuleDetailViewController]
+            navigationController?.setViewControllers([rootVC, capsuleDetailViewController], animated: true)
         }
-
-        setupNavigationItem()
     }
 
     func showCapsuleSettings() {
@@ -71,11 +67,5 @@ final class CapsuleDetailCoordinator: Coordinator {
         }
 
         parent.hideTabBar()
-    }
-
-    private func setupNavigationItem() {
-        let backButtonItem = UIBarButtonItem()
-        backButtonItem.title = "목록"
-        navigationController?.navigationBar.topItem?.backBarButtonItem = backButtonItem
     }
 }
