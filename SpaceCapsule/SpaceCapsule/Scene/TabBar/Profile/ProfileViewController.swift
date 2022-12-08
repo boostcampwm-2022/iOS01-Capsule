@@ -51,13 +51,13 @@ final class ProfileViewController: UIViewController, BaseViewController {
                 viewModel.input.tapSetting.onNext(())
             }
             .disposed(by: disposeBag)
-
+        
         profileView.signOutButton.rx.tap
             .bind {
                 viewModel.input.tapSignOut.onNext(())
             }
             .disposed(by: disposeBag)
-
+        
         profileView.deleteAccountButton.rx.tap
             .bind {
                 viewModel.input.tapWithdrawal.onNext(())
@@ -69,6 +69,7 @@ final class ProfileViewController: UIViewController, BaseViewController {
                 self?.profileView.setUserImage()
             })
             .disposed(by: disposeBag)
+    }
 
     func bindViewModel() {
         guard let viewModel else {

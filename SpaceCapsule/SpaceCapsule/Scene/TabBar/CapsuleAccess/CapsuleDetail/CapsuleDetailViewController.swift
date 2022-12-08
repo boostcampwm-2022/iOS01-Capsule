@@ -48,16 +48,6 @@ final class CapsuleDetailViewController: UIViewController, BaseViewController {
 
         makeConstrinats()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        mainView.backgroundColor = .themeBackground
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        mainView.backgroundColor = UIColor.black.withAlphaComponent(0.7)
-    }
 
     func bind() {
         viewModel?.input.frameWidth.onNext(view.frame.width)

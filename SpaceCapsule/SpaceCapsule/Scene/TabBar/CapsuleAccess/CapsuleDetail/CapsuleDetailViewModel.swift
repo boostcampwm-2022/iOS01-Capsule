@@ -57,6 +57,8 @@ final class CapsuleDetailViewModel: BaseViewModel {
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 owner.coordinator?.hideTabBar()
+            })
+            .disposed(by: disposeBag)
         
         input.tapCapsuleSettings
             .subscribe(onNext: { [weak self] in
@@ -64,6 +66,7 @@ final class CapsuleDetailViewModel: BaseViewModel {
             })
             .disposed(by: disposeBag)
     }
+                       
 
     func fetchCapsule() {
         guard let uuid = coordinator?.capsuleUUID,
