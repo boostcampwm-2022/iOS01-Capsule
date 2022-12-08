@@ -19,14 +19,7 @@ final class CapsuleOpenView: UIView, BaseView, UnOpenable {
         return label
     }()
 
-    lazy var blurEffectView = {
-        let blurEffect = UIBlurEffect(style: .dark)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.layer.cornerRadius = FrameResource.listCapsuleCellWidth / 2
-        blurEffectView.clipsToBounds = true
-        blurEffectView.alpha = FrameResource.blurEffectAlpha
-        return blurEffectView
-    }()
+    let blurEffectView = CapsuleBlurEffectView()
 
     lazy var lockImageView = {
         let lockImageView = UIImageView()
@@ -56,6 +49,7 @@ final class CapsuleOpenView: UIView, BaseView, UnOpenable {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         configure()
         addSubViews()
         makeConstraints()

@@ -12,7 +12,7 @@ final class CustomNavigationController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         applyThemeStyle()
     }
 
@@ -23,6 +23,7 @@ final class CustomNavigationController: UINavigationController {
 
         navigationBar.titleTextAttributes = [.font: UIFont.themeFont(ofSize: 25) as Any]
         navigationBar.tintColor = .themeBlack
+        navigationBar.topItem?.backButtonTitle = ""
     }
 
     func addIndicatorView() {

@@ -87,7 +87,7 @@ enum FrameResource {
     static let detailMapHeight: CGFloat = 200.0
     static let userTrackingButtonSize: CGFloat = 50.0
 
-    static let blurEffectAlpha: CGFloat = 0.5
+    static let blurEffectAlpha: CGFloat = 0.8
 
     static let profileImageWidth: CGFloat = 100.0
     static let profileButtonHeight: CGFloat = 40.0

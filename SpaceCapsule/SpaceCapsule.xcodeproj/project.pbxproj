@@ -143,6 +143,7 @@
 		4A1D1BBF2940286B00F47ACB /* CapsuleSettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1D1BBE2940286B00F47ACB /* CapsuleSettingsCoordinator.swift */; };
 		4A1D1BC12940292A00F47ACB /* CapsuleSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1D1BC02940292A00F47ACB /* CapsuleSettingsViewModel.swift */; };
 		4A1D1BC3294033C200F47ACB /* CapsuleSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1D1BC2294033C200F47ACB /* CapsuleSettingsView.swift */; };
+		4A1D1BC62941F3C500F47ACB /* BlurEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1D1BC52941F3C500F47ACB /* BlurEffectView.swift */; };
 		4A1FEFF8292F1F1200A935BB /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1FEFF7292F1F1200A935BB /* CustomAnnotation.swift */; };
 		4A2449D129360669000EE58C /* DetailImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2449D029360669000EE58C /* DetailImageCell.swift */; };
 		4A9E9147292A2A5A00B7CC5C /* CLLocationManager+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E9146292A2A5A00B7CC5C /* CLLocationManager+Rx.swift */; };
@@ -320,6 +321,7 @@
 		4A1D1BBE2940286B00F47ACB /* CapsuleSettingsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleSettingsCoordinator.swift; sourceTree = "<group>"; };
 		4A1D1BC02940292A00F47ACB /* CapsuleSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleSettingsViewModel.swift; sourceTree = "<group>"; };
 		4A1D1BC2294033C200F47ACB /* CapsuleSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleSettingsView.swift; sourceTree = "<group>"; };
+		4A1D1BC52941F3C500F47ACB /* BlurEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurEffectView.swift; sourceTree = "<group>"; };
 		4A1FEFF7292F1F1200A935BB /* CustomAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
 		4A2449D029360669000EE58C /* DetailImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImageCell.swift; sourceTree = "<group>"; };
 		4A9E9146292A2A5A00B7CC5C /* CLLocationManager+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationManager+Rx.swift"; sourceTree = "<group>"; };
@@ -387,6 +389,7 @@
 				0DFF50DE2940587600079FA6 /* RefreshButton.swift */,
 				0DFF50DC29402E3100079FA6 /* EmptyView.swift */,
 				0DD83D12292F51960020F15C /* LoadingIndicatorView.swift */,
+				4A1D1BC52941F3C500F47ACB /* BlurEffectView.swift */,
 				0D9A834C293788A300D00303 /* Map */,
 				0DCB22942924CE61002CB095 /* Theme */,
 			);
@@ -1228,6 +1231,7 @@
 				0D6CA337292216A300E02393 /* SceneDelegate.swift in Sources */,
 				59D8CFBA293609E000FD9CF6 /* HomeCapsuleCellItem.swift in Sources */,
 				599C1A4D292CC99A00517E93 /* DiskImageCache.swift in Sources */,
+				4A1D1BC62941F3C500F47ACB /* BlurEffectView.swift in Sources */,
 				0D90DAEF29238B77000DCC84 /* CapsuleLocateView.swift in Sources */,
 				28C8C97C292DC360005615BB /* SortPolicySelectionViewController.swift in Sources */,
 				4A2449D129360669000EE58C /* DetailImageCell.swift in Sources */,

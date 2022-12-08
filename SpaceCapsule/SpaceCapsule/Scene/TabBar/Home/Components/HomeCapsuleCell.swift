@@ -8,7 +8,7 @@
 import SnapKit
 import UIKit
 
-final class HomeCapsuleCell: UICollectionViewCell, UnOpenable {
+final class HomeCapsuleCell: UICollectionViewCell, UnOpenable {    
     var uuid: String?
     
     var thumbnailImageView = ThemeThumbnailImageView(frame: .zero, width: FrameResource.homeCapsuleCellWidth)
@@ -33,14 +33,7 @@ final class HomeCapsuleCell: UICollectionViewCell, UnOpenable {
         return dateLabel
     }()
     
-    var blurEffectView = {
-        let blurEffect = UIBlurEffect(style: .dark)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.layer.cornerRadius = FrameResource.listCapsuleCellWidth / 2
-        blurEffectView.clipsToBounds = true
-        blurEffectView.alpha = FrameResource.blurEffectAlpha
-        return blurEffectView
-    }()
+    var blurEffectView = CapsuleBlurEffectView()
     
     var lockImageView = {
         let lockImageView = UIImageView()
@@ -51,6 +44,7 @@ final class HomeCapsuleCell: UICollectionViewCell, UnOpenable {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         addSubviews()
         makeConstraints()
     }
