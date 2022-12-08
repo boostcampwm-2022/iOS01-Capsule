@@ -104,7 +104,7 @@ final class ProfileViewController: UIViewController, BaseViewController {
         viewModel.input.tapWithdrawal
             .withUnretained(self)
             .bind { owner, _ in
-                owner.showWithdrawalAlert()
+                owner.showDeleteAccountAlert()
             }
             .disposed(by: disposeBag)
     }
@@ -120,7 +120,7 @@ final class ProfileViewController: UIViewController, BaseViewController {
         present(alertController, animated: true, completion: nil)
     }
 
-    private func showWithdrawalAlert() {
+    private func showDeleteAccountAlert() {
         let alertController = UIAlertController(title: "회원 탈퇴", message: "탈퇴 하시겠습니까?", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let acceptAction = UIAlertAction(title: "OK", style: .destructive, handler: { [weak self] _ in
