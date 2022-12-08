@@ -8,7 +8,7 @@
 import SnapKit
 import UIKit
 
-final class HomeCapsuleCell: UICollectionViewCell {
+final class HomeCapsuleCell: UICollectionViewCell, UnOpenable {
     var uuid: String?
     
     var thumbnailImageView = ThemeThumbnailImageView(frame: .zero, width: FrameResource.homeCapsuleCellWidth)
@@ -26,7 +26,29 @@ final class HomeCapsuleCell: UICollectionViewCell {
         label.textAlignment = .center
         return label
     }()
-
+    
+    var dateLabel = {
+        let dateLabel = ThemeLabel(text: nil, size: FrameResource.fontSize120, color: .themeGray200)
+        dateLabel.textAlignment = .center
+        return dateLabel
+    }()
+    
+    var blurEffectView = {
+        let blurEffect = UIBlurEffect(style: .dark)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.layer.cornerRadius = FrameResource.listCapsuleCellWidth / 2
+        blurEffectView.clipsToBounds = true
+        blurEffectView.alpha = FrameResource.blurEffectAlpha
+        return blurEffectView
+    }()
+    
+    var lockImageView = {
+        let lockImageView = UIImageView()
+        lockImageView.image = .lock
+        lockImageView.tintColor = .themeGray200
+        return lockImageView
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubviews()
@@ -73,49 +95,7 @@ final class HomeCapsuleCell: UICollectionViewCell {
         descriptionLabel.text = capsuleCellModel.description()
         
         if !capsuleCellModel.isOpenable() {
-            applyUnOpenableEffect(closeDate: capsuleCellModel.closedDate.dateString)
-        }
-    }
-
-    func applyUnOpenableEffect(closeDate: String) {
-        applyBlurEffect()
-        applyLockImage()
-        applyCapsuleDate(closeDate: closeDate)
-    }
-
-    private func applyBlurEffect() {
-        let blurEffect = UIBlurEffect(style: .light)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.layer.cornerRadius = FrameResource.listCapsuleCellWidth / 2
-        blurEffectView.clipsToBounds = true
-        thumbnailImageView.imageView.addSubview(blurEffectView)
-
-        blurEffectView.snp.makeConstraints {
-            $0.center.equalToSuperview()
-            $0.width.height.equalToSuperview()
-        }
-    }
-
-    private func applyLockImage() {
-        let lockImageView = UIImageView()
-        lockImageView.image = UIImage(systemName: "lock.fill")
-        lockImageView.tintColor = .themeGray300
-        thumbnailImageView.imageView.addSubview(lockImageView)
-
-        lockImageView.snp.makeConstraints {
-            $0.center.equalToSuperview()
-            $0.width.height.equalTo(thumbnailImageView.imageView.snp.width).multipliedBy(0.3)
-        }
-    }
-
-    private func applyCapsuleDate(closeDate: String) {
-        let dateLabel = ThemeLabel(text: "밀봉시간:\(closeDate)", size: FrameResource.fontSize120, color: .themeGray300)
-        dateLabel.textAlignment = .center
-        thumbnailImageView.imageView.addSubview(dateLabel)
-
-        dateLabel.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.centerY.equalToSuperview().multipliedBy(1.4)
+            applyUnOpenableEffect()
         }
     }
 }
