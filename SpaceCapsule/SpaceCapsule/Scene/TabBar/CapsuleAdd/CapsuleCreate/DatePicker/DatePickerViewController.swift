@@ -24,7 +24,6 @@ final class DatePickerViewController: UIViewController {
         bind()
     }
 
-
     func configure(date: Date?) {
         view.backgroundColor = .white
         mainView.configure(date: date)

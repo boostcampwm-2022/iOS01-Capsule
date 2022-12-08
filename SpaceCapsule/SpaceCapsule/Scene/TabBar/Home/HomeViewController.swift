@@ -36,8 +36,11 @@ final class HomeViewController: UIViewController, BaseViewController {
         }
         
         viewModel.output.featuredCapsuleCellItems
-            .bind(to: homeView.capsuleCollectionView.rx.items) { [weak self] (collectionView, index, element) in
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeCapsuleCell.identifier, for: IndexPath(item: index, section: 0)) as? HomeCapsuleCell else {
+            .bind(to: homeView.capsuleCollectionView.rx.items) { collectionView, index, element in
+                guard let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: HomeCapsuleCell.identifier,
+                    for: IndexPath(item: index, section: 0)
+                ) as? HomeCapsuleCell else {
                     return UICollectionViewCell()
                 }
                 cell.configure(capsuleCellModel: element)
@@ -55,7 +58,14 @@ final class HomeViewController: UIViewController, BaseViewController {
                     if CGFloat(indexPath.item) == owner.centerIndex {
                         if let cell = owner.homeView.capsuleCollectionView.cellForItem(at: indexPath) as? HomeCapsuleCell {
                             let pressedDownTransform = CGAffineTransform(scaleX: 0.96, y: 0.96)
-                            UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 10, options: [.curveEaseInOut], animations: { cell.transform = pressedDownTransform })
+                            UIView.animate(
+                                withDuration: 0.2,
+                                delay: 0,
+                                usingSpringWithDamping: 0.4,
+                                initialSpringVelocity: 10,
+                                options: [.curveEaseInOut],
+                                animations: { cell.transform = pressedDownTransform }
+                            )
                         }
                     }
                 }).disposed(by: disposeBag)
@@ -67,7 +77,14 @@ final class HomeViewController: UIViewController, BaseViewController {
                     if CGFloat(indexPath.item) == owner.centerIndex {
                         if let cell = owner.homeView.capsuleCollectionView.cellForItem(at: indexPath) as? HomeCapsuleCell {
                             let originalTransform = CGAffineTransform(scaleX: 1, y: 1)
-                            UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 10, options: [.curveEaseInOut], animations: { cell.transform = originalTransform })
+                            UIView.animate(
+                                withDuration: 0.4,
+                                delay: 0,
+                                usingSpringWithDamping: 0.4,
+                                initialSpringVelocity: 10,
+                                options: [.curveEaseInOut],
+                                animations: { cell.transform = originalTransform }
+                            )
                         }
                     }
                 }).disposed(by: disposeBag)

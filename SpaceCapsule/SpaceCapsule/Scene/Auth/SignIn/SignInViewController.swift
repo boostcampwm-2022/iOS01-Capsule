@@ -49,7 +49,6 @@ final class SignInViewController: UIViewController, BaseViewController {
         authorizationController.performRequests()
     }
     
-    // TODO: @available << 이거 왜 표시하는 거임?
     @available(iOS 13, *)
     func createAppleIDRequest() -> ASAuthorizationAppleIDRequest {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
@@ -154,7 +153,6 @@ extension SignInViewController: ASAuthorizationControllerPresentationContextProv
 
 // MARK: - randomNonceString()
 extension SignInViewController {
-    // TODO: randomNonceString()는 어디에 두어야 하는 것인가? VC 안쪽? VC 바깥쪽?
     // Adapted from https://auth0.com/docs/api-auth/tutorials/nonce#generate-a-cryptographically-random-nonce
     private func randomNonceString(length: Int = 32) -> String {
         precondition(length > 0)
