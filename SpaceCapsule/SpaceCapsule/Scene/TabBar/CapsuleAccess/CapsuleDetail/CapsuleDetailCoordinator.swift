@@ -28,22 +28,22 @@ final class CapsuleDetailCoordinator: Coordinator {
         let capsuleDetailViewModel = CapsuleDetailViewModel()
         capsuleDetailViewModel.coordinator = self
         capsuleDetailViewController.viewModel = capsuleDetailViewModel
-        
+
         navigationController?.pushViewController(capsuleDetailViewController, animated: true)
-        
+
         if let rootVC = navigationController?.viewControllers.first {
             navigationController?.viewControllers = [rootVC, capsuleDetailViewController]
         }
 
         setupNavigationItem()
     }
-    
+
     func showCapsuleSettings() {
         let capsuleSettingsCooridnator = CapsuleSettingsCoordinator(navigationController: navigationController)
         capsuleSettingsCooridnator.parent = self
         capsuleSettingsCooridnator.capsuleUUID = capsuleUUID
         capsuleSettingsCooridnator.start()
-        
+
         children.append(capsuleSettingsCooridnator)
     }
 
@@ -60,12 +60,12 @@ final class CapsuleDetailCoordinator: Coordinator {
             parent.finish()
         }
     }
-    
+
     func hideTabBar() {
         guard let parent = parent as? CapsuleAccessCoordinator else {
             return
         }
-        
+
         parent.hideTabBar()
     }
 }

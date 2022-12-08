@@ -41,29 +41,31 @@ final class ProfileViewController: UIViewController, BaseViewController {
         guard let viewModel else {
             return
         }
+
         profileView.notificationButton.rx.tap
             .bind {
                 viewModel.input.tapSetupNotification.onNext(())
             }
             .disposed(by: disposeBag)
+
         profileView.settingButton.rx.tap
             .bind {
                 viewModel.input.tapSetting.onNext(())
             }
             .disposed(by: disposeBag)
-        
+
         profileView.signOutButton.rx.tap
             .bind {
                 viewModel.input.tapSignOut.onNext(())
             }
             .disposed(by: disposeBag)
-        
+
         profileView.deleteAccountButton.rx.tap
             .bind {
                 viewModel.input.tapWithdrawal.onNext(())
             }
             .disposed(by: disposeBag)
-        
+
         profileView.profileImageContainer.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.profileView.setUserImage()

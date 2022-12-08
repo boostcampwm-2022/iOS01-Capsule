@@ -15,15 +15,21 @@ final class CapsuleDetailViewController: UIViewController, BaseViewController {
     var viewModel: CapsuleDetailViewModel?
     private var imageDataSource: UICollectionViewDiffableDataSource<Int, DetailImageCell.Cell>?
 
-    private let scrollView = CustomScrollView()
+    private let scrollView = UIScrollView()
     let mainView = CapsuleDetailView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        view.backgroundColor = .themeBackground
+
         addSettingButton()
         applyDataSource()
         bind()
         viewModel?.fetchCapsule()
+
+        addSubViews()
+        makeConstraints()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -36,22 +42,9 @@ final class CapsuleDetailViewController: UIViewController, BaseViewController {
         super.viewDidDisappear(animated)
     }
 
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-
-        scrollView.frame = CGRect(origin: .zero, size: view.frame.size)
-        scrollView.backgroundColor = .themeBackground
-
-        view.addSubview(scrollView)
-        scrollView.addSubview(mainView)
-        mainView.backgroundColor = .themeBackground
-
-        makeConstrinats()
-    }
-
     func bind() {
         viewModel?.input.frameWidth.onNext(view.frame.width)
-        
+
         viewModel?.output.imageCell
             .withUnretained(self)
             .subscribe(onNext: { owner, cells in
@@ -73,24 +66,33 @@ final class CapsuleDetailViewController: UIViewController, BaseViewController {
                 owner.mainView.mapView.image = mapImage
             })
             .disposed(by: disposeBag)
-        
+
         mainView.settingButton.rx.tap
             .subscribe(onNext: { [weak self] _ in
                 self?.viewModel?.input.tapCapsuleSettings.accept(())
             })
             .disposed(by: disposeBag)
     }
-    
+
     private func addSettingButton() {
         let settingButton = UIBarButtonItem(customView: mainView.settingButton)
         navigationItem.rightBarButtonItem = settingButton
     }
 
-    private func makeConstrinats() {
+    private func makeConstraints() {
         mainView.snp.makeConstraints {
             $0.edges.equalToSuperview()
             $0.width.equalToSuperview()
         }
+
+        scrollView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+    }
+
+    private func addSubViews() {
+        view.addSubview(scrollView)
+        scrollView.addSubview(mainView)
     }
 
     func applyDataSource() {

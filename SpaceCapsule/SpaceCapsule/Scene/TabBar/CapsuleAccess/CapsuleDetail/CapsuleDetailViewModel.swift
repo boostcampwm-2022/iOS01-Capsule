@@ -52,34 +52,35 @@ final class CapsuleDetailViewModel: BaseViewModel {
                 owner.coordinator?.finish()
             })
             .disposed(by: disposeBag)
-        
+
         input.viewWillAppear
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 owner.coordinator?.hideTabBar()
             })
             .disposed(by: disposeBag)
-        
+
         input.tapCapsuleSettings
             .subscribe(onNext: { [weak self] in
                 self?.coordinator?.showCapsuleSettings()
             })
             .disposed(by: disposeBag)
     }
-                       
 
     func fetchCapsule() {
         guard let uuid = coordinator?.capsuleUUID,
               let capsule = AppDataManager.shared.capsule(uuid: uuid) else {
             return
         }
-        
+
         // MARK: 캡슐 연 횟수 업데이트
+
         FirestoreManager.shared.incrementOpenCount(uuid: uuid)
-        
+
         // MARK: 캡슐 정보 업데이트
+
         output.capsuleData.onNext(capsule)
-        
+
         // MARK: 캡슐 지도 업데이트
 
         output.mapCoordinate.onNext(
@@ -103,7 +104,7 @@ final class CapsuleDetailViewModel: BaseViewModel {
         let otherCells = capsule.images[1 ..< capsule.images.count].map {
             DetailImageCell.Cell(imageURL: $0, capsuleInfo: nil)
         }
-        
+
         output.imageCell.accept([firstCell] + otherCells)
     }
 
