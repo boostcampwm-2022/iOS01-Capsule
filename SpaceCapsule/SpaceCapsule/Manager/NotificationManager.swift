@@ -27,20 +27,14 @@ final class NotificationManager {
         })
     }
 
-    func sendNotification(seconds: Double) {
-        let notificationContent = UNMutableNotificationContent()
-
-        notificationContent.title = "알림 테스트"
-        notificationContent.body = "이것은 알림을 테스트 하는 것이다"
-
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: seconds, repeats: false)
-        let request = UNNotificationRequest(identifier: "testNotification",
-                                            content: notificationContent,
-                                            trigger: trigger)
-
-        userNotificationCenter.add(request) { error in
-            if let error = error {
-                print("Notification Error: ", error)
+    func checkNotificationAuthorization(completion: @escaping ((Bool) -> Void)) {
+        NotificationManager.shared.userNotificationCenter.getNotificationSettings { setting in
+            switch setting.authorizationStatus {
+            case .authorized:
+                completion(true)
+            default:
+                completion(false)
+                return
             }
         }
     }

@@ -42,25 +42,10 @@ final class ProfileView: UIView, BaseView {
         return stackView
     }()
 
-    lazy var notificationButton = {
-        let notificationButton = ProfileButton(text: "알림 설정")
-        return notificationButton
-    }()
-
-    lazy var settingButton = {
-        let settingButton = ProfileButton(text: "위치정보 설정")
-        return settingButton
-    }()
-
-    lazy var signOutButton = {
-        let logOutButton = ProfileButton(text: "로그아웃")
-        return logOutButton
-    }()
-
-    lazy var withdrawalButton = {
-        let withdrawalButton = ProfileButton(text: "회원 탈퇴")
-        return withdrawalButton
-    }()
+    let notificationButton = ProfileButton(text: "알림 설정")
+    let settingButton = ProfileButton(text: "위치정보 설정")
+    let signOutButton = ProfileButton(text: "로그아웃")
+    let deleteAccountButton = ProfileButton(text: "회원 탈퇴")
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -83,7 +68,7 @@ final class ProfileView: UIView, BaseView {
     }
 
     func addSubViews() {
-        [notificationButton, settingButton, signOutButton, withdrawalButton].forEach {
+        [notificationButton, settingButton, signOutButton, deleteAccountButton].forEach {
             stackView.addArrangedSubview($0)
         }
         [profileImageView, nicknameLabel, stackView, topline, bottomline].forEach {
@@ -124,4 +109,3 @@ final class ProfileView: UIView, BaseView {
         }
     }
 }
-

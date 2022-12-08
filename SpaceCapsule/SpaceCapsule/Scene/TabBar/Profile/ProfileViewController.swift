@@ -58,7 +58,7 @@ final class ProfileViewController: UIViewController, BaseViewController {
             }
             .disposed(by: disposeBag)
 
-        profileView.withdrawalButton.rx.tap
+        profileView.deleteAccountButton.rx.tap
             .bind {
                 viewModel.input.tapWithdrawal.onNext(())
             }
@@ -72,13 +72,25 @@ final class ProfileViewController: UIViewController, BaseViewController {
         viewModel.input.tapSetupNotification
             .withUnretained(self)
             .bind { owner, _ in
-                owner.checkNotificationAuthorization()
+                NotificationManager.shared.checkNotificationAuthorization { isAuthorized in
+                    if isAuthorized {
+                        owner.showAlreadyAllowed(type: .notification)
+                    } else {
+                        owner.showRequestAuthorization(type: .notification)
+                    }
+                }
             }
             .disposed(by: disposeBag)
         viewModel.input.tapSetting
             .withUnretained(self)
             .bind { owner, _ in
-                owner.checkLocationAuthorization()
+                LocationManager.shared.checkLocationAuthorization { isAuthorized in
+                    if isAuthorized {
+                        owner.showAlreadyAllowed(type: .location)
+                    } else {
+                        owner.showRequestAuthorization(type: .location)
+                    }
+                }
             }
             .disposed(by: disposeBag)
 
@@ -92,7 +104,7 @@ final class ProfileViewController: UIViewController, BaseViewController {
         viewModel.input.tapWithdrawal
             .withUnretained(self)
             .bind { owner, _ in
-                owner.showWithdrawalAlert()
+                owner.showDeleteAccountAlert()
             }
             .disposed(by: disposeBag)
     }
@@ -108,7 +120,7 @@ final class ProfileViewController: UIViewController, BaseViewController {
         present(alertController, animated: true, completion: nil)
     }
 
-    private func showWithdrawalAlert() {
+    private func showDeleteAccountAlert() {
         let alertController = UIAlertController(title: "회원 탈퇴", message: "탈퇴 하시겠습니까?", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let acceptAction = UIAlertAction(title: "OK", style: .destructive, handler: { [weak self] _ in
@@ -119,32 +131,8 @@ final class ProfileViewController: UIViewController, BaseViewController {
         present(alertController, animated: true, completion: nil)
     }
 
-    func checkLocationAuthorization() {
-        switch AppDataManager.shared.location.core.authorizationStatus {
-        case .denied:
-            showRequestAuthorization(type: .location)
-        case .notDetermined, .restricted:
-            AppDataManager.shared.location.core.requestWhenInUseAuthorization()
-        default:
-            showAlreadyAllowed(type: .location)
-            return
-        }
-    }
-
-    func checkNotificationAuthorization() {
-        NotificationManager.shared.userNotificationCenter.getNotificationSettings { [weak self] setting in
-            switch setting.authorizationStatus {
-            case .authorized:
-                self?.showAlreadyAllowed(type: .notification)
-            default:
-                self?.showRequestAuthorization(type: .notification)
-                return
-            }
-        }
-    }
-
     private func showAlreadyAllowed(type: Authorization) {
-        let alertController = UIAlertController(title: type.rawValue, message: "이미 동의하셨습니다.", preferredStyle: .alert)
+        let alertController = UIAlertController(title: type.description, message: "이미 동의하셨습니다.", preferredStyle: .alert)
         let acceptAction = UIAlertAction(title: "확인", style: .default, handler: nil)
         alertController.addAction(acceptAction)
         DispatchQueue.main.async { [weak self] in
@@ -156,7 +144,7 @@ final class ProfileViewController: UIViewController, BaseViewController {
         guard let url = URL(string: UIApplication.openSettingsURLString) else {
             return
         }
-        let alertController = UIAlertController(title: type.rawValue, message: "앱 설정에서 \(type.rawValue)을 허용해주세요.", preferredStyle: .alert)
+        let alertController = UIAlertController(title: type.description, message: "앱 설정에서 \(type.description)을 허용해주세요.", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let acceptAction = UIAlertAction(title: "OK", style: .default, handler: { _ in
             UIApplication.shared.open(url)
@@ -168,17 +156,3 @@ final class ProfileViewController: UIViewController, BaseViewController {
         }
     }
 }
-
-// extension ProfileViewController: UNUserNotificationCenterDelegate {
-//    func userNotificationCenter(_ center: UNUserNotificationCenter,
-//                                didReceive response: UNNotificationResponse,
-//                                withCompletionHandler completionHandler: @escaping () -> Void) {
-//        completionHandler()
-//    }
-//
-//    func userNotificationCenter(_ center: UNUserNotificationCenter,
-//                                willPresent notification: UNNotification,
-//                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-//        completionHandler([.badge, .sound, .banner])
-//    }
-// }
