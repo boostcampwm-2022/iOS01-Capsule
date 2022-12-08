@@ -72,6 +72,12 @@ final class CapsuleDetailViewController: UIViewController, BaseViewController {
                 self?.viewModel?.input.tapCapsuleSettings.accept(())
             })
             .disposed(by: disposeBag)
+        
+        mainView.imageCollectionView.rx.itemSelected
+            .subscribe(onNext: { [weak self] indexPath in
+                self?.viewModel?.input.tapImage.onNext(indexPath.item)
+            })
+            .disposed(by: disposeBag)
     }
 
     private func addSettingButton() {

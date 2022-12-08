@@ -32,6 +32,10 @@ final class ZoomableImageCell: UICollectionViewCell {
     func configure(data: Data) {
         zoomableImageView.imageView.image = UIImage(data: data)
     }
+    
+    func configrue(url: String) {
+        zoomableImageView.imageView.kr.setImage(with: url, resizing: false)
+    }
 
     private func addSubViews() {
         addSubview(zoomableImageView)

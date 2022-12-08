@@ -12,9 +12,8 @@ final class DetailImageViewController: UIViewController {
     var disposeBag = DisposeBag()
     var viewModel: DetailImageViewModel?
 
-//    private let mainView = ZoomableImageView()
     private let mainView = DetailImageView()
-    private var dataSource: UICollectionViewDiffableDataSource<Int, Data>?
+    private var dataSource: UICollectionViewDiffableDataSource<Int, ImageSource>?
 
     override func loadView() {
         view = mainView
@@ -30,12 +29,13 @@ final class DetailImageViewController: UIViewController {
     }
 
     private func bind() {
-        viewModel?.output.imageData
+        viewModel?.output.imageSources
             .subscribe(onNext: { [weak self] imageData in
                 let index = imageData.index
-                self?.applySnapshot(items: imageData.data)
+                print(index)
+                self?.applySnapshot(items: imageData.sources)
 
-                self?.mainView.itemCount = imageData.data.count
+                self?.mainView.itemCount = imageData.sources.count
                 self?.mainView.currentIndex = index
 
                 DispatchQueue.main.async {
@@ -66,14 +66,21 @@ extension DetailImageViewController {
                 return UICollectionViewCell()
             }
 
-            cell.configure(data: item)
+            switch item {
+            case let .data(value):
+                cell.configure(data: value)
+
+            case let .url(value):
+                cell.configrue(url: value)
+            }
+
 
             return cell
         })
     }
 
-    private func applySnapshot(items: [Data]) {
-        var snapshot = NSDiffableDataSourceSnapshot<Int, Data>()
+    private func applySnapshot(items: [ImageSource]) {
+        var snapshot = NSDiffableDataSourceSnapshot<Int, ImageSource>()
         snapshot.appendSections([0])
         snapshot.appendItems(items, toSection: 0)
         dataSource?.apply(snapshot)
