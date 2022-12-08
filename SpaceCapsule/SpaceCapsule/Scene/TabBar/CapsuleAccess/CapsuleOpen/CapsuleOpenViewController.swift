@@ -22,15 +22,20 @@ final class CapsuleOpenViewController: UIViewController, BaseViewController {
         }
         bind()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel?.input.viewWillAppear.onNext(())
+    }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         capsuleOpenView.animate()
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
-        viewModel?.input.popViewController.onNext(())
-        super.viewWillDisappear(animated)
+    override func viewDidDisappear(_ animated: Bool) {
+        viewModel?.input.viewDidDisappear.onNext(())
+        super.viewDidDisappear(animated)
     }
 
     func bind() {
@@ -57,7 +62,7 @@ final class CapsuleOpenViewController: UIViewController, BaseViewController {
         }
         if capsuleCellItem.isOpenable() {
             capsuleOpenView.shakeAnimate()
-            viewModel?.coordinator?.moveToCapsuleDetail()
+            viewModel?.input.tapOpen.onNext(())
         } else {
             showAlert()
         }

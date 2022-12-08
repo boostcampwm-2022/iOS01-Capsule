@@ -46,6 +46,7 @@ final class CapsuleMapViewController: UIViewController, BaseViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        viewModel?.input.viewWillAppear.onNext(())
         locationManager.startUpdatingLocation()
     }
 
@@ -56,6 +57,7 @@ final class CapsuleMapViewController: UIViewController, BaseViewController {
     }
 
     private func configure() {
+        view.backgroundColor = .themeBackground
         view.addSubview(mapView)
         mapView.delegate = self
     }
@@ -134,8 +136,12 @@ final class CapsuleMapViewController: UIViewController, BaseViewController {
         mapView.rx.calloutAccessoryControlTapped
             .asObservable()
             .withUnretained(self)
-            .subscribe(onNext: { owner, _ in
-                owner.presentToDetailAlert()
+            .subscribe(onNext: { owner, annotationView in
+                guard let annotation = annotationView.1.annotation as? CustomAnnotation,
+                      let uuid = annotation.uuid else {
+                    return
+                }
+                owner.viewModel?.input.tapCapsule.onNext(uuid)
             })
             .disposed(by: disposeBag)
 
@@ -157,22 +163,6 @@ final class CapsuleMapViewController: UIViewController, BaseViewController {
         mapView.setRegion(region, animated: true)
 
         resetMonitoringRegion(from: nil)
-    }
-
-    private func presentToDetailAlert() {
-        let alertController = UIAlertController(
-            title: "캡슐입니다",
-            message: "해당 캡슐로 이동할까요?",
-            preferredStyle: .alert
-        )
-
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        let acceptAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-
-        alertController.addAction(cancelAction)
-        alertController.addAction(acceptAction)
-
-        present(alertController, animated: true, completion: nil)
     }
 
     private func removeAllAnnotations() {
@@ -278,15 +268,5 @@ extension CapsuleMapViewController: MKMapViewDelegate {
         default:
             return nil
         }
-    }
-
-    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        guard let annotationView = view as? CustomAnnotationView,
-              let annotation = annotationView.annotation as? CustomAnnotation,
-              let uuid = annotation.uuid else {
-            return
-        }
-
-        viewModel?.input.tapCapsule.onNext(uuid)
     }
 }

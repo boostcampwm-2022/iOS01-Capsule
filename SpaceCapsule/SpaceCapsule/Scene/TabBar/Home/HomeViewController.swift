@@ -5,35 +5,53 @@
 //  Created by young june Park on 2022/11/15.
 //
 
-import UIKit
-import RxSwift
 import RxCocoa
+import RxSwift
+import UIKit
 
 final class HomeViewController: UIViewController, BaseViewController {
     // MARK: - Properties
-    private let homeView = HomeView()
+
     var viewModel: HomeViewModel?
     var disposeBag = DisposeBag()
-    
+
     var centerIndex: CGFloat {
         return homeView.capsuleCollectionView.contentOffset.x / (FrameResource.homeCapsuleCellWidth * 0.75 + 10)
     }
     
+    private var emptyView: EmptyView?
+    private let homeView = HomeView()
+
     // MARK: - Lifecycles
+
     override func loadView() {
         view = homeView
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         bind()
+
+        title = "홈"
     }
-    
+
     // MARK: - Rx
+
     func bind() {
         guard let viewModel else {
             return
         }
+        
+        viewModel.input.capsuleCellModels
+            .subscribe(onNext: { [weak self] in
+                if $0.isEmpty {
+                    self?.view = EmptyView()
+                } else {
+                    self?.emptyView = nil
+                    self?.view = self?.homeView
+                }
+            })
+            .disposed(by: disposeBag)
         
         viewModel.output.featuredCapsuleCellItems
             .bind(to: homeView.capsuleCollectionView.rx.items) { collectionView, index, element in

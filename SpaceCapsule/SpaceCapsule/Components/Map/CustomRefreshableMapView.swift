@@ -10,7 +10,7 @@ import SnapKit
 import UIKit
 
 final class CustomRefreshableMapView: CustomMapView, Refreshable {
-    let refreshButton = UIButton()
+    let refreshButton = RefreshButton()
 
     override init(frame: CGRect) {
         super.init(frame: frame)

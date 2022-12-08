@@ -16,6 +16,7 @@ extension UIImage {
     static let unopenableCapsule = UIImage(named: "unopenableCapsule")
     static let locate = UIImage(named: "locate")
     static let locateDisabled = UIImage(named: "locateDisabled")
+    static let empty = UIImage(named: "emptyImage")
 
     static let homeFill = UIImage(systemName: "house.fill")
     static let mapFill = UIImage(systemName: "map.fill")

@@ -20,6 +20,7 @@ final class CapsuleMapViewModel: BaseViewModel {
     struct Input: ViewModelInput {
         let tapRefresh = PublishSubject<Void>()
         let tapCapsule = PublishSubject<String>()
+        var viewWillAppear = PublishSubject<Void>()
     }
 
     struct Output: ViewModelOutput {
@@ -43,11 +44,18 @@ final class CapsuleMapViewModel: BaseViewModel {
                 AppDataManager.shared.fetchCapsules()
             })
             .disposed(by: disposeBag)
-        
+
         input.tapCapsule
             .withUnretained(self)
             .subscribe(onNext: { owner, uuid in
                 owner.coordinator?.moveToCapsuleAccess(uuid: uuid)
+            })
+            .disposed(by: disposeBag)
+
+        input.viewWillAppear
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.coordinator?.tabBarAppearance(isHidden: false)
             })
             .disposed(by: disposeBag)
     }
@@ -56,6 +64,7 @@ final class CapsuleMapViewModel: BaseViewModel {
         let annotations = capsules.map {
             CustomAnnotation(
                 uuid: $0.uuid,
+                memoryDate: $0.memoryDate,
                 latitude: $0.geopoint.latitude,
                 longitude: $0.geopoint.longitude
             )

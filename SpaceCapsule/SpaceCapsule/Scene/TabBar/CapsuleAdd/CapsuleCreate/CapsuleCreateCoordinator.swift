@@ -72,6 +72,16 @@ final class CapsuleCreateCoordinator: Coordinator {
         parent.showCapsuleClose(capsule: capsule)
     }
 
+    func showDetailImage(index: Int, dataArray: [Data]) {
+        let detailImageCoordinator = DetailImageCoordinator(navigationController: navigationController)
+        detailImageCoordinator.parent = self
+        detailImageCoordinator.index = index
+        detailImageCoordinator.dataArray = dataArray
+        detailImageCoordinator.start()
+
+        children.append(detailImageCoordinator)
+    }
+
     func finish() {
         parent?.navigationController?.dismiss(animated: true)
     }

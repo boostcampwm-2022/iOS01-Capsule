@@ -54,6 +54,7 @@ final class CapsuleCreateViewModel: BaseViewModel {
         var tapDone = PublishSubject<Void>()
         var tapDatePicker = PublishSubject<Void>()
         var tapCapsuleLocate = PublishSubject<Void>()
+        var tapImage = PublishSubject<Int>()
 
         var title = PublishSubject<String>()
         var description = PublishSubject<String>()
@@ -174,18 +175,30 @@ final class CapsuleCreateViewModel: BaseViewModel {
                 self?.coordinator?.showCapsuleLocate()
             })
             .disposed(by: disposeBag)
+
+        // 사진 클릭
+        input.tapImage
+            .withUnretained(self)
+            .subscribe(onNext: { owner, index in
+                let dataArray = owner.input.imageData.value.compactMap { $0.data }
+
+                owner.coordinator?.showDetailImage(index: index, dataArray: dataArray)
+            })
+            .disposed(by: disposeBag)
     }
 
-    func addImage(data: Data) {
+    func addImage(orderedData: [Data]) {
         var imageValues = input.imageData.value
 
         if imageValues.count > 10 {
             return
         }
 
-        if !imageValues.compactMap({ $0.data }).contains(data) {
-            imageValues.insert(contentsOf: [.image(data: data)], at: imageValues.count - 1)
-            input.imageData.accept(imageValues)
+        orderedData.forEach { data in
+            if !imageValues.compactMap({ $0.data }).contains(data) {
+                imageValues.insert(contentsOf: [.image(data: data)], at: imageValues.count - 1)
+                input.imageData.accept(imageValues)
+            }
         }
     }
 
@@ -201,6 +214,7 @@ final class CapsuleCreateViewModel: BaseViewModel {
                 return
             }
             self?.output.address.onNext(address)
+            self?.output.geopoint.onNext(point)
         }
     }
 }

@@ -7,36 +7,44 @@
 
 import RxCocoa
 import RxSwift
+import SnapKit
 import UIKit
 
 final class CapsuleListViewController: UIViewController, BaseViewController {
     var disposeBag = DisposeBag()
     var viewModel: CapsuleListViewModel?
-    let capsuleListView = CapsuleListView()
+
+    private var emptyView: EmptyView?
+    private let capsuleListView = CapsuleListView()
     let refreshControl = UIRefreshControl()
 
     private var dataSource: UICollectionViewDiffableDataSource<Int, ListCapsuleCellItem>?
     private var snapshot = NSDiffableDataSourceSnapshot<Int, ListCapsuleCellItem>()
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-//        if let parent = viewModel?.coordinator?.parent as? TabBarCoordinator {
-//            parent.tabBarWillHide(false)
-//        }
-    }
-
-    override func loadView() {
-        view = capsuleListView
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        configureView()
         addSortBarButton()
         configureCollectionView()
         bind()
         bindViewModel()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel?.input.viewWillAppear.onNext(())
+    }
+
+    private func configureView() {
+        view.backgroundColor = .themeBackground
+        
+        view.addSubview(capsuleListView)
+
+        capsuleListView.snp.makeConstraints {
+            $0.top.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
     }
 
     func bind() {
@@ -58,6 +66,13 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
             }
             .disposed(by: disposeBag)
 
+        capsuleListView.refreshButton.rx.tap
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.viewModel?.refreshCapsule()
+            })
+            .disposed(by: disposeBag)
+
         refreshControl.rx.controlEvent(.valueChanged)
             .withUnretained(self)
             .bind(onNext: { owner, _ in
@@ -70,11 +85,18 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
         guard let viewModel else {
             return
         }
+
         viewModel.input.capsuleCellItems
             .withUnretained(self)
             .bind { owner, capsuleCellItems in
-                owner.applySnapshot(capsuleCellModels: capsuleCellItems)
-                owner.viewModel?.input.refreshLoading.accept(false)
+                if capsuleCellItems.isEmpty {
+                    owner.view = EmptyView()
+                } else {
+                    owner.emptyView = nil
+                    owner.configureView()
+                    owner.applySnapshot(capsuleCellModels: capsuleCellItems)
+                    owner.viewModel?.input.refreshLoading.accept(false)
+                }
             }
             .disposed(by: disposeBag)
 

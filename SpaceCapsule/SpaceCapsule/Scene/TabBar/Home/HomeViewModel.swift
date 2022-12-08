@@ -13,20 +13,20 @@ import RxSwift
 final class HomeViewModel: BaseViewModel {
     weak var coordinator: HomeCoordinator?
     let disposeBag = DisposeBag()
-    
+
     var input = Input()
     var output = Output()
-    
+
     struct Input: ViewModelInput {
         let capsules = PublishRelay<[Capsule]>()
         let tapCapsule = PublishSubject<String>()
     }
-    
+
     struct Output: ViewModelOutput {
         let mainLabelText = PublishRelay<String>()
         let featuredCapsuleCellItems = PublishRelay<[HomeCapsuleCellItem]>()
     }
-    
+
     init() {
         bind()
     }

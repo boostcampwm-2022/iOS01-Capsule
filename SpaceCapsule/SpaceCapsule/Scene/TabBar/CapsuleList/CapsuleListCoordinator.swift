@@ -24,7 +24,7 @@ final class CapsuleListCoordinator: Coordinator {
     func start() {
         moveToCapsuleList()
     }
-    
+
     func moveToCapsuleList() {
         let capsuleListViewController = CapsuleListViewController()
         let capsuleListViewModel = CapsuleListViewModel()
@@ -33,10 +33,10 @@ final class CapsuleListCoordinator: Coordinator {
         capsuleListViewModel.input.sortPolicy = sortPolicyObserver
         capsuleListViewController.viewModel?.input.sortPolicy = sortPolicyObserver
         navigationController?.setViewControllers([capsuleListViewController], animated: true)
-        
+
         setUpNavigationItem()
     }
-    
+
     private func setUpNavigationItem() {
         navigationController?.navigationBar.topItem?.title = "목록"
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.themeFont(ofSize: FrameResource.fontSize120) as Any]
@@ -51,19 +51,8 @@ final class CapsuleListCoordinator: Coordinator {
         children.append(capsuleAccessCoordinator)
 
         if let parent = parent as? TabBarCoordinator {
-            parent.tabBarWillHide(true)
+            parent.tabBarAppearance(isHidden: true)
         }
-
-//        let capsuleOpenCoordinator = CapsuleOpenCoordinator(navigationController: navigationController)
-//        capsuleOpenCoordinator.capsuleCellModel = capsuleCellModel
-//        capsuleOpenCoordinator.parent = self
-//        capsuleOpenCoordinator.start()
-//
-//        children.append(capsuleOpenCoordinator)
-//
-//        if let parent = parent as? TabBarCoordinator {
-//            parent.tabBarWillHide(true)
-//        }
     }
 
     func showSortPolicySelection(sortPolicy: SortPolicy) {
@@ -74,5 +63,13 @@ final class CapsuleListCoordinator: Coordinator {
         sortPolicySelectionCoordinator.start()
 
         children.append(sortPolicySelectionCoordinator)
+    }
+
+    func tabBarAppearance(isHidden: Bool) {
+        guard let parent = parent as? TabBarCoordinator else {
+            return
+        }
+
+        parent.tabBarAppearance(isHidden: isHidden)
     }
 }

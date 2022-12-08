@@ -11,8 +11,8 @@ import RxSwift
 
 final class LocationManager {
     static let shared = LocationManager()
-    static let openableRange = 100.0
-    
+    static let openableRange = 10000.0
+
     private init() {}
 
     let core: CLLocationManager = {
@@ -100,5 +100,17 @@ final class LocationManager {
 
     func isOpenable(capsuleCoordinate: CLLocationCoordinate2D) -> Bool {
         return distance(capsuleCoordinate: capsuleCoordinate) <= LocationManager.openableRange ? true : false
+    }
+
+    func checkLocationAuthorization(completion: @escaping (Bool) -> Void) {
+        switch AppDataManager.shared.location.core.authorizationStatus {
+        case .denied:
+            completion(false)
+        case .notDetermined, .restricted:
+            AppDataManager.shared.location.core.requestWhenInUseAuthorization()
+        default:
+            completion(true)
+            return
+        }
     }
 }

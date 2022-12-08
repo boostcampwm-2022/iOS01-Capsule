@@ -8,11 +8,11 @@
 import UIKit
 
 class ThemeTextField: UITextField {
-    convenience init(placeholder: String?) {
+    convenience init(placeholder: String) {
         self.init()
         
         attributedPlaceholder = NSAttributedString(
-            string: placeholder ?? "",
+            string: placeholder,
             attributes: [.foregroundColor: UIColor.themeGray200 as Any]
         )
         

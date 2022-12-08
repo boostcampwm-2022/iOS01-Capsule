@@ -10,18 +10,13 @@ import SnapKit
 import UIKit
 
 protocol Refreshable: UIView {
-    var refreshButton: UIButton { get }
+    var refreshButton: RefreshButton { get }
 
     func addRefreshButton()
 }
 
 extension Refreshable {
     func addRefreshButton() {
-        refreshButton.backgroundColor = .white
-        refreshButton.tintColor = .themeBlack
-        refreshButton.setImage(.refresh, for: .normal)
-        refreshButton.layer.cornerRadius = FrameResource.userTrackingButtonSize / 2
-
         addSubview(refreshButton)
 
         refreshButton.snp.makeConstraints {

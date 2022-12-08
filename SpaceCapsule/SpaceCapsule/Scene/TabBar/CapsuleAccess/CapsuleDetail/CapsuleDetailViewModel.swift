@@ -16,24 +16,27 @@ final class CapsuleDetailViewModel: BaseViewModel {
 
     var input = Input()
     var output = Output()
-    
+
     lazy var mapSnapshotInfo = Observable.zip(input.frameWidth, output.mapCoordinate)
-        
+
     struct Input {
-        var frameWidth = PublishSubject<CGFloat>()
+        var viewWillAppear = PublishSubject<Void>()
+        var viewDidDisappear = PublishSubject<Void>()
+        let frameWidth = PublishSubject<CGFloat>()
+        let tapCapsuleSettings = PublishRelay<Void>()
     }
 
     struct Output {
-        var imageCell = BehaviorRelay<[DetailImageCell.Cell]>(value: [])
-        var capsuleData = BehaviorRelay<[Capsule]>(value: [])
-        var mapCoordinate = PublishSubject<CLLocationCoordinate2D>()
-        var mapSnapshot = BehaviorRelay<[UIImage]>(value: [])
+        let imageCell = BehaviorRelay<[DetailImageCell.Cell]>(value: [])
+        let capsuleData = PublishSubject<Capsule>()
+        let mapCoordinate = PublishSubject<CLLocationCoordinate2D>()
+        let mapSnapshot = PublishSubject<UIImage>()
     }
-    
+
     init() {
         bind()
     }
-    
+
     private func bind() {
         mapSnapshotInfo
             .withUnretained(self)
@@ -42,34 +45,69 @@ final class CapsuleDetailViewModel: BaseViewModel {
                 owner.drawMapSnapshot(width: width, at: coordinate)
             })
             .disposed(by: disposeBag)
+
+        input.viewDidDisappear
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.coordinator?.finish()
+            })
+            .disposed(by: disposeBag)
+
+        input.viewWillAppear
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.coordinator?.hideTabBar()
+            })
+            .disposed(by: disposeBag)
+
+        input.tapCapsuleSettings
+            .subscribe(onNext: { [weak self] in
+                self?.coordinator?.showCapsuleSettings()
+            })
+            .disposed(by: disposeBag)
     }
 
-    func fetchCapsule(with uuid: String?) {
-        
-        guard let uuid,
+    func fetchCapsule() {
+        guard let uuid = coordinator?.capsuleUUID,
               let capsule = AppDataManager.shared.capsule(uuid: uuid) else {
             return
         }
-        
+
+        // MARK: 캡슐 연 횟수 업데이트
+
+        FirestoreManager.shared.incrementOpenCount(uuid: uuid)
+
         // MARK: 캡슐 정보 업데이트
-        output.capsuleData.accept([capsule])
-        
+
+        output.capsuleData.onNext(capsule)
+
         // MARK: 캡슐 지도 업데이트
-        output.mapCoordinate.onNext(CLLocationCoordinate2D(latitude: capsule.geopoint.latitude,
-                                                           longitude: capsule.geopoint.longitude))
-        
+
+        output.mapCoordinate.onNext(
+            CLLocationCoordinate2D(latitude: capsule.geopoint.latitude, longitude: capsule.geopoint.longitude)
+        )
+
         // MARK: 캡슐 이미지 업데이트
+
         guard let firstImageURL = capsule.images.first else {
             return
         }
 
-        let firstCell = DetailImageCell.Cell(imageURL: firstImageURL,
-                                             capsuleInfo: DetailImageCell.CapsuleInfo(address: capsule.simpleAddress,
-                                                                                      date: capsule.memoryDate.dateString))
-        let otherCells = capsule.images[1..<capsule.images.count].map { DetailImageCell.Cell(imageURL: $0, capsuleInfo: nil) }
+        let firstCell = DetailImageCell.Cell(
+            imageURL: firstImageURL,
+            capsuleInfo: DetailImageCell.CapsuleInfo(
+                address: capsule.simpleAddress,
+                date: capsule.memoryDate.dateString
+            )
+        )
+
+        let otherCells = capsule.images[1 ..< capsule.images.count].map {
+            DetailImageCell.Cell(imageURL: $0, capsuleInfo: nil)
+        }
+
         output.imageCell.accept([firstCell] + otherCells)
     }
-    
+
     private func drawMapSnapshot(width: CGFloat, at center: CLLocationCoordinate2D) {
         let span = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
 
@@ -87,19 +125,19 @@ final class CapsuleDetailViewModel: BaseViewModel {
             if error != nil {
                 return
             }
- 
+
             if let drawImage = self?.drawAnnotation(with: center, on: snapshot) {
-                self?.output.mapSnapshot.accept([drawImage])
+                self?.output.mapSnapshot.onNext(drawImage)
             }
         }
     }
-    
+
     private func drawAnnotation(with center: CLLocationCoordinate2D, on snapshot: MKMapSnapshotter.Snapshot) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(snapshot.image.size, true, snapshot.image.scale)
         snapshot.image.draw(at: .zero)
 
         let point = snapshot.point(for: center)
-        let annotation = CustomAnnotation(uuid: nil, latitude: center.latitude, longitude: center.longitude)
+        let annotation = CustomAnnotation(uuid: nil, memoryDate: nil, latitude: center.latitude, longitude: center.longitude)
         annotation.isOpenable = true
         let annotationView = CustomAnnotationView(annotation: annotation, reuseIdentifier: "annotationView")
         let rect = CGRect(x: point.x - (annotationView.bounds.width / 2),

@@ -89,7 +89,7 @@ final class HomeCapsuleCell: UICollectionViewCell, UnOpenable {
         uuid = capsuleCellModel.uuid
         
         if let thumbnailURL = capsuleCellModel.thumbnailImageURL {
-            thumbnailImageView.imageView.kr.setImage(with: thumbnailURL, scale: FrameResource.openableImageScale)
+            thumbnailImageView.imageView.kr.setImage(with: thumbnailURL, placeholder: .empty, scale: FrameResource.openableImageScale)
         }
         dateLabel.text = "밀봉시간:\(capsuleCellModel.closedDate.dateString)"
         titleLabel.text = capsuleCellModel.type.title
