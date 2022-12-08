@@ -73,7 +73,6 @@ final class AppCoordinator: Coordinator {
         if isRegistered {
             moveToTabBar()
         } else {
-            // TODO: 중복 구독하면 어떡하나?
             FirestoreManager.shared.fetchUserInfo(of: uid)
                 .subscribe(
                     onNext: { [weak self] userInfo in
