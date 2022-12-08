@@ -45,13 +45,5 @@ final class NicknameViewController: UIViewController, BaseViewController {
                 self?.view.endEditing(true)
             })
             .disposed(by: disposeBag)
-        
-        // MARK: 이건 지워도 될 듯?
-        viewModel.input
-            .doneButtonTapped
-            .bind(onNext: {
-                
-            })
-            .disposed(by: disposeBag)
     }
 }

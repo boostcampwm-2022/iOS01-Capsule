@@ -20,6 +20,8 @@ final class CapsuleDetailViewModel: BaseViewModel {
     lazy var mapSnapshotInfo = Observable.zip(input.frameWidth, output.mapCoordinate)
 
     struct Input {
+        var viewWillAppear = PublishSubject<Void>()
+        var viewDidDisappear = PublishSubject<Void>()
         let frameWidth = PublishSubject<CGFloat>()
         let tapCapsuleSettings = PublishRelay<Void>()
     }
@@ -43,6 +45,18 @@ final class CapsuleDetailViewModel: BaseViewModel {
                 owner.drawMapSnapshot(width: width, at: coordinate)
             })
             .disposed(by: disposeBag)
+
+        input.viewDidDisappear
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.coordinator?.finish()
+            })
+            .disposed(by: disposeBag)
+        
+        input.viewWillAppear
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.coordinator?.hideTabBar()
         
         input.tapCapsuleSettings
             .subscribe(onNext: { [weak self] in
@@ -65,8 +79,9 @@ final class CapsuleDetailViewModel: BaseViewModel {
         
         // MARK: 캡슐 지도 업데이트
 
-        output.mapCoordinate.onNext(CLLocationCoordinate2D(latitude: capsule.geopoint.latitude,
-                                                           longitude: capsule.geopoint.longitude))
+        output.mapCoordinate.onNext(
+            CLLocationCoordinate2D(latitude: capsule.geopoint.latitude, longitude: capsule.geopoint.longitude)
+        )
 
         // MARK: 캡슐 이미지 업데이트
 
@@ -74,10 +89,18 @@ final class CapsuleDetailViewModel: BaseViewModel {
             return
         }
 
-        let firstCell = DetailImageCell.Cell(imageURL: firstImageURL,
-                                             capsuleInfo: DetailImageCell.CapsuleInfo(address: capsule.simpleAddress,
-                                                                                      date: capsule.memoryDate.dateString))
-        let otherCells = capsule.images[1 ..< capsule.images.count].map { DetailImageCell.Cell(imageURL: $0, capsuleInfo: nil) }
+        let firstCell = DetailImageCell.Cell(
+            imageURL: firstImageURL,
+            capsuleInfo: DetailImageCell.CapsuleInfo(
+                address: capsule.simpleAddress,
+                date: capsule.memoryDate.dateString
+            )
+        )
+
+        let otherCells = capsule.images[1 ..< capsule.images.count].map {
+            DetailImageCell.Cell(imageURL: $0, capsuleInfo: nil)
+        }
+        
         output.imageCell.accept([firstCell] + otherCells)
     }
 

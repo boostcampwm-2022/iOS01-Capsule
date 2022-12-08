@@ -8,7 +8,9 @@
 import SnapKit
 import UIKit
 
-final class CapsuleListView: UIView, BaseView {
+final class CapsuleListView: UIView, BaseView, Refreshable {
+    var refreshButton = RefreshButton()
+
     let sortBarButtonItem = {
         let button = UIButton()
         button.titleLabel?.font = .themeFont(ofSize: FrameResource.fontSize80)
@@ -33,6 +35,7 @@ final class CapsuleListView: UIView, BaseView {
         configure()
         addSubViews()
         makeConstraints()
+        addRefreshButton()
     }
 
     @available(*, unavailable)
@@ -43,6 +46,7 @@ final class CapsuleListView: UIView, BaseView {
     func configure() {
         backgroundColor = .themeBackground
         collectionView.backgroundColor = .themeBackground
+
         configureFlowLayout()
     }
 

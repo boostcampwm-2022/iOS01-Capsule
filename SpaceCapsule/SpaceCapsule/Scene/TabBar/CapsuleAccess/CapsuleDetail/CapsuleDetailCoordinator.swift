@@ -12,17 +12,17 @@ final class CapsuleDetailCoordinator: Coordinator {
     var parent: Coordinator?
     var children: [Coordinator] = []
     var navigationController: CustomNavigationController?
-    
+
     var capsuleUUID: String?
-    
+
     init(navigationController: CustomNavigationController?) {
         self.navigationController = navigationController
     }
-    
+
     func start() {
         moveToCapsuleDetail()
     }
-    
+
     func moveToCapsuleDetail() {
         let capsuleDetailViewController = CapsuleDetailViewController()
         let capsuleDetailViewModel = CapsuleDetailViewModel()
@@ -34,7 +34,7 @@ final class CapsuleDetailCoordinator: Coordinator {
         if let rootVC = navigationController?.viewControllers.first {
             navigationController?.viewControllers = [rootVC, capsuleDetailViewController]
         }
-        
+
         setupNavigationItem()
     }
     
@@ -55,5 +55,21 @@ final class CapsuleDetailCoordinator: Coordinator {
         let backButtonItem = UIBarButtonItem()
         backButtonItem.title = "목록"
         navigationController?.navigationBar.topItem?.backBarButtonItem = backButtonItem
+    }
+
+    func finish() {
+        _ = parent?.children.popLast()
+
+        if let parent = parent as? CapsuleAccessCoordinator {
+            parent.finish()
+        }
+    }
+    
+    func hideTabBar() {
+        guard let parent = parent as? CapsuleAccessCoordinator else {
+            return
+        }
+        
+        parent.hideTabBar()
     }
 }

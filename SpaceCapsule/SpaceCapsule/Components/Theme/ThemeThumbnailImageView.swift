@@ -9,9 +9,11 @@ import UIKit
 
 final class ThemeThumbnailImageView: UIView {
     // MARK: - Properties
+
     let width: CGFloat
-    
+
     // MARK: - UIComponents
+
     lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = width / 2
@@ -20,8 +22,9 @@ final class ThemeThumbnailImageView: UIView {
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
-    
+
     // MARK: - Lifecycles
+
     init(frame: CGRect, width: CGFloat) {
         self.width = width
         super.init(frame: frame)
@@ -29,14 +32,14 @@ final class ThemeThumbnailImageView: UIView {
         addSubViews()
         makeConstraints()
     }
-    
+
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     // MARK: - Methods
-    
+
     func configure() {
         backgroundColor = .themeGray100
         layer.shadowOffset = FrameResource.capsuleCellShadowOffset
@@ -44,13 +47,13 @@ final class ThemeThumbnailImageView: UIView {
         layer.shadowOpacity = Float(FrameResource.capsuleCellShadowOpacity)
         layer.cornerRadius = width / 2
     }
-    
+
     func addSubViews() {
         [imageView].forEach {
             addSubview($0)
         }
     }
-    
+
     func makeConstraints() {
         imageView.snp.makeConstraints {
             $0.edges.equalToSuperview()

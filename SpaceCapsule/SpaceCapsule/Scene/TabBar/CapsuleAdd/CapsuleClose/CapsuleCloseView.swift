@@ -106,7 +106,7 @@ final class CapsuleCloseView: UIView, BaseView {
             color: .themeGray400
         )
 
-        thumbnailImageView.kr.setImage(with: item.thumbnailImageURL, scale: FrameResource.closedImageScale)
+        thumbnailImageView.kr.setImage(with: item.thumbnailImageURL, placeholder: .empty, scale: FrameResource.closedImageScale)
     }
 
     func addSubViews() {

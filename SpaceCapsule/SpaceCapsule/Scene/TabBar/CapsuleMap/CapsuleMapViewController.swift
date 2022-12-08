@@ -46,6 +46,7 @@ final class CapsuleMapViewController: UIViewController, BaseViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        viewModel?.input.viewWillAppear.onNext(())
         locationManager.startUpdatingLocation()
     }
 
@@ -56,6 +57,7 @@ final class CapsuleMapViewController: UIViewController, BaseViewController {
     }
 
     private func configure() {
+        view.backgroundColor = .themeBackground
         view.addSubview(mapView)
         mapView.delegate = self
     }

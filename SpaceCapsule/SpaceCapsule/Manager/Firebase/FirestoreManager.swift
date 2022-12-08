@@ -101,40 +101,6 @@ class FirestoreManager {
             }
     }
 
-    // TODO: FBAuthError 이름 바꾸기
-    func fetchCapsuleList(of uid: String) -> Observable<[Capsule]> {
-        return Observable.create { emitter in
-            self.database
-                .collection("capsules")
-                .whereField("userId", isEqualTo: uid)
-                .getDocuments { querySnapshot, error in
-                    if let error = error {
-                        emitter.onError(error)
-                        return
-                    } else {
-                        guard let snapshots = querySnapshot?.documents else {
-                            emitter.onError(FBAuthError.noSnapshot)
-                            return
-                        }
-
-                        var capsuleList: [Capsule] = []
-
-                        for snapshot in snapshots {
-                            guard let capsule = self.dictionaryToCapsule(dictionary: snapshot.data()) else {
-                                emitter.onError(FBAuthError.decodeError)
-                                return
-                            }
-                            capsuleList.append(capsule)
-                        }
-
-                        emitter.onNext(capsuleList)
-                        // emitter.onCompleted() 이건 컴플리트 날릴 필요 없을 듯, 왜냐면 캡슐 목록 새로고침 기능 생길 가능성.
-                    }
-                }
-            return Disposables.create { }
-        }
-    }
-
     func fetchCapsules(completion: @escaping ([Capsule]?) -> Void) {
         guard let uid = FirebaseAuthManager.shared.currentUser?.uid else {
             return

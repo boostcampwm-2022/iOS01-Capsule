@@ -11,7 +11,7 @@ final class CapsuleAccessCoordinator: Coordinator {
     var parent: Coordinator?
     var children: [Coordinator] = []
     var navigationController: CustomNavigationController?
-    
+
     var capsuleCellItem: ListCapsuleCellItem?
 
     init(navigationController: CustomNavigationController?) {
@@ -35,13 +35,19 @@ final class CapsuleAccessCoordinator: Coordinator {
         capsuleDetailCoordinator.parent = self
         capsuleDetailCoordinator.capsuleUUID = capsuleCellItem?.uuid
         capsuleDetailCoordinator.start()
-        
+
         children.append(capsuleDetailCoordinator)
     }
-    
+
     func finish() {
-        if let parent = parent?.parent as? TabBarCoordinator {
-            parent.tabBarWillHide(false)
+        _ = parent?.children.popLast()
+    }
+    
+    func hideTabBar() {
+        guard let parent = parent?.parent as? TabBarCoordinator else {
+            return
         }
+        
+        parent.tabBarAppearance(isHidden: true)
     }
 }

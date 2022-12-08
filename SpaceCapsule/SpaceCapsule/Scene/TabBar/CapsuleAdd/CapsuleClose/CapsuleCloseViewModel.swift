@@ -33,6 +33,7 @@ class CapsuleCloseViewModel: BaseViewModel {
     private func bind() {
         input.tapClose
             .subscribe(onNext: { [weak self] in
+                AppDataManager.shared.fetchCapsules()
                 self?.coordinator?.finish()
             })
             .disposed(by: disposeBag)

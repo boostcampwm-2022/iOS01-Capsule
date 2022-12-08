@@ -201,6 +201,7 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
         var configuration = PHPickerConfiguration()
         configuration.selectionLimit = 10
         configuration.filter = .images
+        configuration.selection = .ordered
 
         imagePicker = PHPickerViewController(configuration: configuration)
         imagePicker?.delegate = self
@@ -242,24 +243,37 @@ extension CapsuleCreateViewController: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         picker.dismiss(animated: true)
 
-        results.forEach {
-            let itemProvider = $0.itemProvider
-            guard itemProvider.canLoadObject(ofClass: UIImage.self) else {
-                return
-            }
+        let dispatchGroup = DispatchGroup()
+        var dataDict: [Int: Data] = [:]
 
-            itemProvider.loadObject(ofClass: UIImage.self) { [weak self] image, _ in
-                DispatchQueue.global().async {
+        results
+            .map { $0.itemProvider }
+            .enumerated()
+            .forEach { index, itemProvider in
+                dispatchGroup.enter()
+
+                guard itemProvider.canLoadObject(ofClass: UIImage.self) else {
+                    return
+                }
+
+                itemProvider.loadObject(ofClass: UIImage.self) { [weak self] image, _ in
                     guard let selectedImage = image as? UIImage,
                           let data = selectedImage.jpegData(compressionQuality: 0.2) else {
+                        dispatchGroup.leave()
                         return
                     }
 
-                    DispatchQueue.main.async {
-                        self?.viewModel?.addImage(data: data)
-                    }
+                    dataDict[index] = data
+                    dispatchGroup.leave()
                 }
             }
+
+        dispatchGroup.notify(queue: .main) { [weak self] in
+            let orderedData = dataDict
+                .sorted(by: { $0.key < $1.key })
+                .compactMap { $0.value }
+            
+            self?.viewModel?.addImage(orderedData: orderedData)
         }
     }
 }

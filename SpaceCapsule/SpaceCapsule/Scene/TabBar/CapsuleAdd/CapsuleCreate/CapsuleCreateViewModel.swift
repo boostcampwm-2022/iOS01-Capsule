@@ -185,16 +185,18 @@ final class CapsuleCreateViewModel: BaseViewModel {
             .disposed(by: disposeBag)
     }
 
-    func addImage(data: Data) {
+    func addImage(orderedData: [Data]) {
         var imageValues = input.imageData.value
 
         if imageValues.count > 10 {
             return
         }
 
-        if !imageValues.compactMap({ $0.data }).contains(data) {
-            imageValues.insert(contentsOf: [.image(data: data)], at: imageValues.count - 1)
-            input.imageData.accept(imageValues)
+        orderedData.forEach { data in
+            if !imageValues.compactMap({ $0.data }).contains(data) {
+                imageValues.insert(contentsOf: [.image(data: data)], at: imageValues.count - 1)
+                input.imageData.accept(imageValues)
+            }
         }
     }
 
@@ -210,6 +212,7 @@ final class CapsuleCreateViewModel: BaseViewModel {
                 return
             }
             self?.output.address.onNext(address)
+            self?.output.geopoint.onNext(point)
         }
     }
 }

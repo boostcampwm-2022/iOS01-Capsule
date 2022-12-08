@@ -63,7 +63,12 @@ final class ProfileViewController: UIViewController, BaseViewController {
                 viewModel.input.tapWithdrawal.onNext(())
             }
             .disposed(by: disposeBag)
-    }
+        
+        profileView.profileImageContainer.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.profileView.setUserImage()
+            })
+            .disposed(by: disposeBag)
 
     func bindViewModel() {
         guard let viewModel else {

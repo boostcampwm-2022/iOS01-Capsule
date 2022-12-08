@@ -17,7 +17,9 @@ final class CapsuleOpenViewModel: BaseViewModel {
     var input = Input()
 
     struct Input {
-        var popViewController = PublishSubject<Void>()
+        let tapOpen = PublishSubject<Void>()
+        let viewWillAppear = PublishSubject<Void>()
+        var viewDidDisappear = PublishSubject<Void>()
     }
 
     init() {
@@ -25,10 +27,24 @@ final class CapsuleOpenViewModel: BaseViewModel {
     }
 
     private func bind() {
-        input.popViewController.asObservable()
+        input.viewWillAppear
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.coordinator?.hideTabBar()
+            })
+            .disposed(by: disposeBag)
+
+        input.viewDidDisappear.asObservable()
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 owner.coordinator?.finish()
+            })
+            .disposed(by: disposeBag)
+
+        input.tapOpen
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.coordinator?.moveToCapsuleDetail()
             })
             .disposed(by: disposeBag)
     }
