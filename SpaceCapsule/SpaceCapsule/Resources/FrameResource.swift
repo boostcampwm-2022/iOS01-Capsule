@@ -97,4 +97,5 @@ enum FrameResource {
     
     static let detailSettingButtonHeight: CGFloat = 60.0
     static let detailSettingButtonPadding: CGFloat = 10.0
+    static let detailMainStackViewHPadding: CGFloat = 30.0
 }

@@ -108,7 +108,7 @@ final class CapsuleDetailViewController: UIViewController, BaseViewController {
                 return UICollectionViewCell()
             }
 
-            cell.imageView.kr.setImage(with: item.imageURL, placeholder: .empty, scale: 2)
+            cell.imageView.kr.setImage(with: item.imageURL, placeholder: .empty, scale: FrameResource.openableImageScale)
 
             if let info = item.capsuleInfo {
                 cell.addCapsuleInfo(info)
