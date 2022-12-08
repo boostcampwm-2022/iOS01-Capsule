@@ -21,14 +21,14 @@ final class HomeCapsuleCell: UICollectionViewCell, UnOpenable {
     }()
     
     var descriptionLabel = {
-        let label = ThemeLabel(text: "2017.10.23 서울시 성동구\nD+1784", size: FrameResource.fontSize120, color: .themeGray300)
-        label.numberOfLines = 2
+        let label = ThemeLabel(text: "2017.10.23 서울시 성동구\nD+1784", size: FrameResource.fontSize100, color: .themeGray300)
+        label.numberOfLines = 3
         label.textAlignment = .center
         return label
     }()
     
     var dateLabel = {
-        let dateLabel = ThemeLabel(text: nil, size: FrameResource.fontSize120, color: .themeGray200)
+        let dateLabel = ThemeLabel(text: nil, size: FrameResource.fontSize100, color: .themeGray200)
         dateLabel.textAlignment = .center
         return dateLabel
     }()
@@ -75,7 +75,7 @@ final class HomeCapsuleCell: UICollectionViewCell, UnOpenable {
         }
         
         titleLabel.snp.makeConstraints {
-            $0.top.equalTo(thumbnailImageView.snp.bottom).offset(FrameResource.verticalPadding)
+            $0.top.equalTo(thumbnailImageView.snp.bottom).offset(FrameResource.verticalPadding * 2)
             $0.centerX.equalToSuperview()
         }
         
@@ -91,6 +91,7 @@ final class HomeCapsuleCell: UICollectionViewCell, UnOpenable {
         if let thumbnailURL = capsuleCellModel.thumbnailImageURL {
             thumbnailImageView.imageView.kr.setImage(with: thumbnailURL, scale: FrameResource.openableImageScale)
         }
+        dateLabel.text = "밀봉시간:\(capsuleCellModel.closedDate.dateString)"
         titleLabel.text = capsuleCellModel.type.title
         descriptionLabel.text = capsuleCellModel.description()
         
