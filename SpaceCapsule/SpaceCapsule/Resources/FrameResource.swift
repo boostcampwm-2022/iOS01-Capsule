@@ -93,4 +93,7 @@ enum FrameResource {
     
     static let emptyCapsuleWidth: CGFloat = 135.0 * 1.5
     static let emptyCapsuleHeight: CGFloat = 210.0 * 1.5
+    
+    static let detailSettingButtonHeight: CGFloat = 60.0
+    static let detailSettingButtonPadding: CGFloat = 10.0
 }

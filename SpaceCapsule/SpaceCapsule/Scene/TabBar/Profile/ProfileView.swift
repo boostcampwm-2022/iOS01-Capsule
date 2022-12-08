@@ -49,9 +49,10 @@ final class ProfileView: UIView, BaseView {
         return stackView
     }()
 
+    let notificationButton = ProfileButton(text: "알림 설정")
     let settingButton = ProfileButton(text: "위치정보 설정")
     let signOutButton = ProfileButton(text: "로그아웃")
-    let withdrawalButton = ProfileButton(text: "회원 탈퇴")
+    let deleteAccountButton = ProfileButton(text: "회원 탈퇴")
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -78,7 +79,7 @@ final class ProfileView: UIView, BaseView {
     func addSubViews() {
         profileImageContainer.addSubview(profileImageView)
 
-        [settingButton, signOutButton, withdrawalButton].forEach {
+        [notificationButton, settingButton, signOutButton, deleteAccountButton].forEach {
             stackView.addArrangedSubview($0)
         }
 

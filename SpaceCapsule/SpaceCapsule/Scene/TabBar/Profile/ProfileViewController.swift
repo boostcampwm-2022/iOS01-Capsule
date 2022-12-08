@@ -9,6 +9,18 @@ import RxCocoa
 import RxSwift
 import UIKit
 
+enum Authorization: String {
+    case notification
+    case location
+
+    var description: String {
+        switch self {
+        case .notification: return "알림 권한"
+        case .location: return "위치정보 권한"
+        }
+    }
+}
+
 final class ProfileViewController: UIViewController, BaseViewController {
     var disposeBag = DisposeBag()
     var viewModel: ProfileViewModel?
@@ -20,13 +32,20 @@ final class ProfileViewController: UIViewController, BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         bind()
+        bindViewModel()
     }
 
     func bind() {
         guard let viewModel else {
             return
         }
+        profileView.notificationButton.rx.tap
+            .bind {
+                viewModel.input.tapSetupNotification.onNext(())
+            }
+            .disposed(by: disposeBag)
         profileView.settingButton.rx.tap
             .bind {
                 viewModel.input.tapSetting.onNext(())
@@ -39,7 +58,7 @@ final class ProfileViewController: UIViewController, BaseViewController {
             }
             .disposed(by: disposeBag)
 
-        profileView.withdrawalButton.rx.tap
+        profileView.deleteAccountButton.rx.tap
             .bind {
                 viewModel.input.tapWithdrawal.onNext(())
             }
@@ -51,10 +70,32 @@ final class ProfileViewController: UIViewController, BaseViewController {
             })
             .disposed(by: disposeBag)
 
+    func bindViewModel() {
+        guard let viewModel else {
+            return
+        }
+        viewModel.input.tapSetupNotification
+            .withUnretained(self)
+            .bind { owner, _ in
+                NotificationManager.shared.checkNotificationAuthorization { isAuthorized in
+                    if isAuthorized {
+                        owner.showAlreadyAllowed(type: .notification)
+                    } else {
+                        owner.showRequestAuthorization(type: .notification)
+                    }
+                }
+            }
+            .disposed(by: disposeBag)
         viewModel.input.tapSetting
             .withUnretained(self)
             .bind { owner, _ in
-                owner.checkLocationAuthorization()
+                LocationManager.shared.checkLocationAuthorization { isAuthorized in
+                    if isAuthorized {
+                        owner.showAlreadyAllowed(type: .location)
+                    } else {
+                        owner.showRequestAuthorization(type: .location)
+                    }
+                }
             }
             .disposed(by: disposeBag)
 
@@ -68,7 +109,7 @@ final class ProfileViewController: UIViewController, BaseViewController {
         viewModel.input.tapWithdrawal
             .withUnretained(self)
             .bind { owner, _ in
-                owner.showWithdrawalAlert()
+                owner.showDeleteAccountAlert()
             }
             .disposed(by: disposeBag)
     }
@@ -84,7 +125,7 @@ final class ProfileViewController: UIViewController, BaseViewController {
         present(alertController, animated: true, completion: nil)
     }
 
-    private func showWithdrawalAlert() {
+    private func showDeleteAccountAlert() {
         let alertController = UIAlertController(title: "회원 탈퇴", message: "탈퇴 하시겠습니까?", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let acceptAction = UIAlertAction(title: "OK", style: .destructive, handler: { [weak self] _ in
@@ -95,36 +136,28 @@ final class ProfileViewController: UIViewController, BaseViewController {
         present(alertController, animated: true, completion: nil)
     }
 
-    func checkLocationAuthorization() {
-        switch AppDataManager.shared.location.core.authorizationStatus {
-        case .denied:
-            showRequestAuthorization()
-        case .notDetermined, .restricted:
-            AppDataManager.shared.location.core.requestWhenInUseAuthorization()
-        default:
-            showAlreadyAllowed()
-            return
+    private func showAlreadyAllowed(type: Authorization) {
+        let alertController = UIAlertController(title: type.description, message: "이미 동의하셨습니다.", preferredStyle: .alert)
+        let acceptAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+        alertController.addAction(acceptAction)
+        DispatchQueue.main.async { [weak self] in
+            self?.present(alertController, animated: true, completion: nil)
         }
     }
 
-    private func showAlreadyAllowed() {
-        let alertController = UIAlertController(title: "위치 권한", message: "이미 동의하셨습니다.", preferredStyle: .alert)
-        let acceptAction = UIAlertAction(title: "확인", style: .default, handler: nil)
-        alertController.addAction(acceptAction)
-        present(alertController, animated: true, completion: nil)
-    }
-
-    private func showRequestAuthorization() {
+    private func showRequestAuthorization(type: Authorization) {
         guard let url = URL(string: UIApplication.openSettingsURLString) else {
             return
         }
-        let alertController = UIAlertController(title: "위치 권한", message: "앱 설정에서 위치권한을 허용해주세요.", preferredStyle: .alert)
+        let alertController = UIAlertController(title: type.description, message: "앱 설정에서 \(type.description)을 허용해주세요.", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let acceptAction = UIAlertAction(title: "OK", style: .default, handler: { _ in
             UIApplication.shared.open(url)
         })
         alertController.addAction(cancelAction)
         alertController.addAction(acceptAction)
-        present(alertController, animated: true, completion: nil)
+        DispatchQueue.main.async { [weak self] in
+            self?.present(alertController, animated: true, completion: nil)
+        }
     }
 }
