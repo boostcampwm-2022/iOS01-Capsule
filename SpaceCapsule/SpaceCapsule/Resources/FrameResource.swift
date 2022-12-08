@@ -58,7 +58,7 @@ enum FrameResource {
     static let locationIconSize: CGFloat = 30.0
 
     static let homeCapsuleCellWidth: CGFloat = 216.0
-    static let homeCapsuleCellHeight: CGFloat = homeCapsuleCellThumbnailHeight + verticalPadding + 24 + verticalPadding + 48
+    static let homeCapsuleCellHeight: CGFloat = homeCapsuleCellThumbnailHeight + verticalPadding * 2 + 24 + verticalPadding + 40
     static let homeCapsuleCellThumbnailHeight: CGFloat = 336.0
     static let homeCapsuleHorizontalInset: CGFloat = 10.0
 
