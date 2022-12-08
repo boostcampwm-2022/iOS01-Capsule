@@ -10,7 +10,7 @@ import UIKit
 
 protocol UnOpenable: UIView {
     var thumbnailImageView: ThemeThumbnailImageView { get }
-    var blurEffectView: UIVisualEffectView { get }
+    var blurEffectView: CapsuleBlurEffectView { get }
     var lockImageView: UIImageView { get }
     var dateLabel: ThemeLabel {get} 
     func applyUnOpenableEffect()
