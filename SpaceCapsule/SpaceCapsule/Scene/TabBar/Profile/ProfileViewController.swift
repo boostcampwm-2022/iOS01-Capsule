@@ -84,7 +84,13 @@ final class ProfileViewController: UIViewController, BaseViewController {
         viewModel.input.tapSetting
             .withUnretained(self)
             .bind { owner, _ in
-                owner.checkLocationAuthorization()
+                LocationManager.shared.checkLocationAuthorization { isAuthorized in
+                    if isAuthorized {
+                        owner.showAlreadyAllowed(type: .location)
+                    } else {
+                        owner.showRequestAuthorization(type: .location)
+                    }
+                }
             }
             .disposed(by: disposeBag)
 
@@ -123,18 +129,6 @@ final class ProfileViewController: UIViewController, BaseViewController {
         alertController.addAction(cancelAction)
         alertController.addAction(acceptAction)
         present(alertController, animated: true, completion: nil)
-    }
-
-    func checkLocationAuthorization() {
-        switch AppDataManager.shared.location.core.authorizationStatus {
-        case .denied:
-            showRequestAuthorization(type: .location)
-        case .notDetermined, .restricted:
-            AppDataManager.shared.location.core.requestWhenInUseAuthorization()
-        default:
-            showAlreadyAllowed(type: .location)
-            return
-        }
     }
 
     private func showAlreadyAllowed(type: Authorization) {
