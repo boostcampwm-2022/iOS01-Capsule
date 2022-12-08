@@ -72,7 +72,13 @@ final class ProfileViewController: UIViewController, BaseViewController {
         viewModel.input.tapSetupNotification
             .withUnretained(self)
             .bind { owner, _ in
-                owner.checkNotificationAuthorization()
+                NotificationManager.shared.checkNotificationAuthorization { isAuthorized in
+                    if isAuthorized {
+                        owner.showAlreadyAllowed(type: .notification)
+                    } else {
+                        owner.showRequestAuthorization(type: .notification)
+                    }
+                }
             }
             .disposed(by: disposeBag)
         viewModel.input.tapSetting
@@ -131,18 +137,6 @@ final class ProfileViewController: UIViewController, BaseViewController {
         }
     }
 
-    func checkNotificationAuthorization() {
-        NotificationManager.shared.userNotificationCenter.getNotificationSettings { [weak self] setting in
-            switch setting.authorizationStatus {
-            case .authorized:
-                self?.showAlreadyAllowed(type: .notification)
-            default:
-                self?.showRequestAuthorization(type: .notification)
-                return
-            }
-        }
-    }
-
     private func showAlreadyAllowed(type: Authorization) {
         let alertController = UIAlertController(title: type.rawValue, message: "이미 동의하셨습니다.", preferredStyle: .alert)
         let acceptAction = UIAlertAction(title: "확인", style: .default, handler: nil)
@@ -168,17 +162,3 @@ final class ProfileViewController: UIViewController, BaseViewController {
         }
     }
 }
-
-// extension ProfileViewController: UNUserNotificationCenterDelegate {
-//    func userNotificationCenter(_ center: UNUserNotificationCenter,
-//                                didReceive response: UNNotificationResponse,
-//                                withCompletionHandler completionHandler: @escaping () -> Void) {
-//        completionHandler()
-//    }
-//
-//    func userNotificationCenter(_ center: UNUserNotificationCenter,
-//                                willPresent notification: UNNotification,
-//                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-//        completionHandler([.badge, .sound, .banner])
-//    }
-// }
