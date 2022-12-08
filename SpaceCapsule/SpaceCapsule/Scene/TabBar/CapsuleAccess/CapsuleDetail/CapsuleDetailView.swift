@@ -117,7 +117,8 @@ final class CapsuleDetailView: UIView, BaseView {
 
     func makeConstraints() {
         mainStackView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.left.right.equalToSuperview()
+            $0.top.bottom.equalToSuperview().inset(30)
         }
 
         imageCollectionView.snp.makeConstraints {
