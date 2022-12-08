@@ -132,7 +132,7 @@ final class ProfileViewController: UIViewController, BaseViewController {
     }
 
     private func showAlreadyAllowed(type: Authorization) {
-        let alertController = UIAlertController(title: type.rawValue, message: "이미 동의하셨습니다.", preferredStyle: .alert)
+        let alertController = UIAlertController(title: type.description, message: "이미 동의하셨습니다.", preferredStyle: .alert)
         let acceptAction = UIAlertAction(title: "확인", style: .default, handler: nil)
         alertController.addAction(acceptAction)
         DispatchQueue.main.async { [weak self] in
@@ -144,7 +144,7 @@ final class ProfileViewController: UIViewController, BaseViewController {
         guard let url = URL(string: UIApplication.openSettingsURLString) else {
             return
         }
-        let alertController = UIAlertController(title: type.rawValue, message: "앱 설정에서 \(type.rawValue)을 허용해주세요.", preferredStyle: .alert)
+        let alertController = UIAlertController(title: type.description, message: "앱 설정에서 \(type.description)을 허용해주세요.", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let acceptAction = UIAlertAction(title: "OK", style: .default, handler: { _ in
             UIApplication.shared.open(url)
