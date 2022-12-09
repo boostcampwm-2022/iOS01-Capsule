@@ -24,6 +24,23 @@ final class DetailImageView: UIView, BaseView {
 
     let indexLabel = ThemeLabel(size: FrameResource.fontSize100, color: .white)
 
+    private lazy var gradientView: UIView = {
+        let view = UIView()
+        view.clipsToBounds = true
+        view.alpha = 0.7
+        view.layer.insertSublayer(gradientLayer, at: 0)
+
+        return view
+    }()
+
+    private let gradientLayer: CAGradientLayer = {
+        let gradient = CAGradientLayer()
+        gradient.colors = [UIColor.black.cgColor, UIColor.clear.cgColor]
+        gradient.locations = [0.0, 0.13]
+
+        return gradient
+    }()
+
     var currentIndex: Int? {
         didSet {
             if let currentIndex, let itemCount {
@@ -42,6 +59,12 @@ final class DetailImageView: UIView, BaseView {
         makeConstraints()
     }
 
+    override func layoutSubviews() {
+        gradientLayer.frame = bounds
+
+        super.layoutSubviews()
+    }
+
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -57,7 +80,7 @@ final class DetailImageView: UIView, BaseView {
     }
 
     func addSubViews() {
-        [collectionView, closeButton, indexLabel].forEach {
+        [collectionView, gradientView, closeButton, indexLabel].forEach {
             addSubview($0)
         }
     }
@@ -76,6 +99,11 @@ final class DetailImageView: UIView, BaseView {
         indexLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.centerY.equalTo(closeButton.snp.centerY)
+        }
+
+        gradientView.snp.makeConstraints {
+            $0.top.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(closeButton.snp.bottom)
         }
     }
 }
