@@ -42,12 +42,10 @@ class FirebaseAuthManager {
         AppDataManager.shared.firestore.deleteUserInfo(uid: uid) { error in
             if let error = error {
                 print(error.localizedDescription)
-                return
-            }
-        }
-        auth.currentUser?.delete { error in
-            if let error = error {
                 completion(error)
+            } else {
+                self.auth.currentUser?.delete()
+                completion(nil)
             }
         }
     }

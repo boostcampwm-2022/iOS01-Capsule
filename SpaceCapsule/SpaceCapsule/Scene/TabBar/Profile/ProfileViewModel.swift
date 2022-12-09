@@ -45,9 +45,11 @@ final class ProfileViewModel: BaseViewModel {
                 print(error.localizedDescription)
                 UserDefaultsManager.saveData(data: true, key: .isRegistered)
                 return
+            } else {
+                UserDefaultsManager.saveData(data: false, key: .isRegistered)
+                self.signOut()
             }
         }
-        UserDefaultsManager.saveData(data: false, key: .isRegistered)
-        signOut()
+        
     }
 }
