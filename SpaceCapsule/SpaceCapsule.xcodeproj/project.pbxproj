@@ -806,12 +806,12 @@
 		288A8EEF29236061000229D2 /* CapsuleDetail */ = {
 			isa = PBXGroup;
 			children = (
-				4A1D1BBB294025E500F47ACB /* CapsuleSettings */,
-				4A2449CB2936033B000EE58C /* Componenets */,
+				288A8EFE292360BC000229D2 /* CapsuleDetailCoordinator.swift */,
 				288A8EF82923609C000229D2 /* CapsuleDetailView.swift */,
 				288A8EFA292360A4000229D2 /* CapsuleDetailViewController.swift */,
 				288A8EFC292360AB000229D2 /* CapsuleDetailViewModel.swift */,
-				288A8EFE292360BC000229D2 /* CapsuleDetailCoordinator.swift */,
+				4A1D1BBB294025E500F47ACB /* CapsuleSettings */,
+				4A2449CB2936033B000EE58C /* Componenets */,
 			);
 			path = CapsuleDetail;
 			sourceTree = "<group>";
