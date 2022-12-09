@@ -150,27 +150,27 @@ class FirestoreManager {
                 }
             }
     }
-    
+
     func deleteCapsule(_ uuid: String, completion: @escaping ((Error?) -> Void)) {
         guard let uid = FirebaseAuthManager.shared.currentUser?.uid else {
             return
         }
-        
+
         database
             .collection("users")
             .document(uid)
             .updateData([
-                "capsules": FieldValue.arrayRemove([uuid])
+                "capsules": FieldValue.arrayRemove([uuid]),
             ]) { error in
                 if let error = error {
                     completion(error)
                 }
             }
-        
+
         database
             .collection("capsules")
             .document(uuid)
-            .delete() { error in
+            .delete { error in
                 if let error = error {
                     completion(error)
                 } else {
@@ -178,14 +178,13 @@ class FirestoreManager {
                 }
             }
     }
-    
+
     func incrementOpenCount(uuid: String) {
         database
             .collection("capsules")
             .document(uuid)
             .updateData([
-                "openCount": FieldValue.increment(Int64(1))
+                "openCount": FieldValue.increment(Int64(1)),
             ])
     }
 }
-

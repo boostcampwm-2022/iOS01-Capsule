@@ -44,6 +44,7 @@ class FirebaseAuthManager {
                 print(error.localizedDescription)
                 completion(error)
             } else {
+                AppDataManager.shared.capsules.accept([])
                 self.auth.currentUser?.delete()
                 completion(nil)
             }

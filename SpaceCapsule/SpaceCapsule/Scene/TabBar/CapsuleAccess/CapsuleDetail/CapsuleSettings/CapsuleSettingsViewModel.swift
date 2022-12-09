@@ -7,30 +7,30 @@
 
 import Foundation
 
-import RxSwift
 import RxCocoa
+import RxSwift
 
 final class CapsuleSettingsViewModel: BaseViewModel {
     typealias CapsuleUUID = String
-    
+
     var disposeBag = DisposeBag()
     var coordinator: CapsuleSettingsCoordinator?
-    
+
     var input = Input()
     var output = Output()
-    
+
     init() {
         bind()
     }
-    
+
     struct Input {
         var tapDelete = PublishRelay<Void>()
     }
-    
+
     struct Output {
         var didDeleteCapsule = PublishRelay<Void>()
     }
-    
+
     func bind() {
         input.tapDelete
             .subscribe(onNext: { [weak self] in
