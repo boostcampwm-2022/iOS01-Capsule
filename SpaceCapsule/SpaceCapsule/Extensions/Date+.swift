@@ -43,5 +43,12 @@ extension Date {
     var dateTimeString: String {
         Date.dateTimeFormatter.string(from: self)
     }
-
+    
+    var epochIATTimeStamp: String {
+        String(Int(Date().timeIntervalSince1970))
+    }
+    
+    var epochEXPTimeStamp: String {
+        String(Int(Date().timeIntervalSince1970) + 300)
+    }
 }
