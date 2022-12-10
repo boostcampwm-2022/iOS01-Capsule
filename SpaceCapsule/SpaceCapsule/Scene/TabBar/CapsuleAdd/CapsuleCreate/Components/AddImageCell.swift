@@ -31,7 +31,7 @@ final class AddImageCell: UICollectionViewCell {
     }
 
     func configure(data: Data) {
-        imageView.kr.setImage(with: data, placeholder: .empty, size: frame.size.width)
+        imageView.kr.setImage(with: data, placeholder: .empty, width: frame.size.width)
     }
 
     private func addSubViews() {
