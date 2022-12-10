@@ -24,6 +24,7 @@
 		0D706137292C630D0077787E /* DatePickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D706136292C630D0077787E /* DatePickerViewModel.swift */; };
 		0D706139292C63140077787E /* DatePickerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D706138292C63140077787E /* DatePickerCoordinator.swift */; };
 		0D70613E292CD24D0077787E /* FirebaseStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D70613D292CD24D0077787E /* FirebaseStorageManager.swift */; };
+		0D752DB12944A643004A704C /* NSCache+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D752DB02944A643004A704C /* NSCache+.swift */; };
 		0D77D7C9292B5D490038D054 /* SelectButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D77D7C8292B5D490038D054 /* SelectButton.swift */; };
 		0D90DAEF29238B77000DCC84 /* CapsuleLocateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D90DAEE29238B77000DCC84 /* CapsuleLocateView.swift */; };
 		0D90DAF129238B85000DCC84 /* CapsuleLocateCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D90DAF029238B85000DCC84 /* CapsuleLocateCoordinator.swift */; };
@@ -203,6 +204,7 @@
 		0D706136292C630D0077787E /* DatePickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewModel.swift; sourceTree = "<group>"; };
 		0D706138292C63140077787E /* DatePickerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerCoordinator.swift; sourceTree = "<group>"; };
 		0D70613D292CD24D0077787E /* FirebaseStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorageManager.swift; sourceTree = "<group>"; };
+		0D752DB02944A643004A704C /* NSCache+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSCache+.swift"; sourceTree = "<group>"; };
 		0D77D7C8292B5D490038D054 /* SelectButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectButton.swift; sourceTree = "<group>"; };
 		0D90DAEE29238B77000DCC84 /* CapsuleLocateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleLocateView.swift; sourceTree = "<group>"; };
 		0D90DAF029238B85000DCC84 /* CapsuleLocateCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleLocateCoordinator.swift; sourceTree = "<group>"; };
@@ -907,6 +909,7 @@
 			isa = PBXGroup;
 			children = (
 				599C1A42292CC99900517E93 /* KingReceiver+UIImageView.swift */,
+				0D752DB02944A643004A704C /* NSCache+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1129,6 +1132,7 @@
 				599C1A4E292CC99A00517E93 /* KingReceiver+UIImageView.swift in Sources */,
 				288A8EA929235AFC000229D2 /* NicknameCoordinator.swift in Sources */,
 				288A8EE629235FD5000229D2 /* CapsuleCloseView.swift in Sources */,
+				0D752DB12944A643004A704C /* NSCache+.swift in Sources */,
 				0D90DAF7292397CF000DCC84 /* UIColor+.swift in Sources */,
 				599C1A4B292CC99A00517E93 /* NoneImageCache.swift in Sources */,
 				28049CE729237B2B002389BD /* BaseViewController.swift in Sources */,

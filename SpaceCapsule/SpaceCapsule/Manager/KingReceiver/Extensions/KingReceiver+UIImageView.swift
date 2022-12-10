@@ -62,6 +62,7 @@ extension KingReceiverWrapper where Base: UIImageView {
         }
 
         stop(indicator: indicator)
+        
         indicator.translatesAutoresizingMaskIntoConstraints = false
         base.addSubview(indicator)
 

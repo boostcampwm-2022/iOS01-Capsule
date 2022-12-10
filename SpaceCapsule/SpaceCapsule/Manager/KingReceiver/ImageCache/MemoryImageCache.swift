@@ -12,9 +12,7 @@ final class MemoryImageCache: ImageCache {
     private let cache = NSCache<NSString, NSData>()
 
     func fetch(with url: URL, completion: @escaping (Data?) -> Void) {
-        let key = url.absoluteString as NSString
-
-        if let data = cache.object(forKey: key) {
+        if let data = cache[url] {
             completion(data as Data)
             return
         }
@@ -25,12 +23,12 @@ final class MemoryImageCache: ImageCache {
                 return
             }
 
-            self?.save(data: data, with: key)
+            self?.save(data: data, with: url)
             completion(data)
         }
     }
 
-    func save(data: Data, with key: NSString) {
-        cache.setObject(data as NSData, forKey: key)
+    func save(data: Data, with url: URL) {
+        cache[url] = data as NSData
     }
 }
