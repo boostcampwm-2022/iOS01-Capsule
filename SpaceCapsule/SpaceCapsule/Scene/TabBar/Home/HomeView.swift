@@ -11,7 +11,7 @@ import UIKit
 final class HomeView: UIView, BaseView {
     // MARK: - UIComponents
     lazy var mainLabel: ThemeLabel = ThemeLabel(
-        text: "none님의 공간캡슐 10개",
+        text: "",
         size: 32,
         color: .themeGray300
     )
