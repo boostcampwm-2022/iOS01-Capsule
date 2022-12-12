@@ -80,10 +80,11 @@ final class CapsuleMapViewModel: BaseViewModel {
         guard let capsule = AppDataManager.shared.capsule(uuid: uuid) else {
             return nil
         }
+        
         let capsuleCellItem = ListCapsuleCellItem (
             uuid: capsule.uuid,
             thumbnailImageURL: capsule.images.first,
-            address: capsule.address,
+            address: capsule.simpleAddress,
             closedDate: capsule.closedDate,
             memoryDate: capsule.memoryDate,
             coordinate: capsule.geopoint.coordinate
