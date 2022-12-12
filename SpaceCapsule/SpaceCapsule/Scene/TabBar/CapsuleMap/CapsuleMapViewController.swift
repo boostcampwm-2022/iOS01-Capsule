@@ -264,7 +264,14 @@ extension CapsuleMapViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         switch annotation {
         case is CustomAnnotation:
-            return CustomAnnotationView(annotation: annotation, reuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
+            let annotationView = CustomAnnotationView(annotation: annotation, reuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
+            return annotationView
+            
+        case is MKUserLocation:
+            let userLocationview = MKUserLocationView(annotation: annotation, reuseIdentifier: "userLocation")
+            userLocationview.zPriority = .max
+            return userLocationview
+            
         default:
             return nil
         }
