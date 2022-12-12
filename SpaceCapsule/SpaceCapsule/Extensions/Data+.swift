@@ -16,16 +16,3 @@ extension Data {
             .replacingOccurrences(of: "=", with: "")
     }
 }
-
-struct Header: Encodable {
-    let alg = "ES256"
-    let kid = "4979Z7MUXJ"
-}
-
-struct Payload: Encodable {
-    let iss = "4G6ZD4247R"
-    let iat = Date().epochIATTimeStamp
-    let exp = Date().epochEXPTimeStamp
-    let aud = "https://appleid.apple.com"
-    let sub = "com.boostcamp.BoogieSpaceCapsule"
-}
