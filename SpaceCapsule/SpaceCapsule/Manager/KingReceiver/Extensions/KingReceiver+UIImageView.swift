@@ -46,13 +46,13 @@ extension KingReceiverWrapper where Base: UIImageView {
         }
     }
 
-    func setImage(with data: Data, placeholder: UIImage? = nil, size: CGFloat) {
-        guard let image = UIImage(data: data) else {
+    func setImage(with data: Data, placeholder: UIImage? = nil, width: CGFloat, scale: CGFloat = 1) {
+        guard let image = UIImage.resize(data: data, to: base.frame.size, scale: scale) else {
             base.image = placeholder
             return
         }
         
-        base.image = image.resize(size)
+        base.image = image
     }
 
     /// 로딩 indicator 시작
@@ -62,6 +62,7 @@ extension KingReceiverWrapper where Base: UIImageView {
         }
 
         stop(indicator: indicator)
+        
         indicator.translatesAutoresizingMaskIntoConstraints = false
         base.addSubview(indicator)
 
