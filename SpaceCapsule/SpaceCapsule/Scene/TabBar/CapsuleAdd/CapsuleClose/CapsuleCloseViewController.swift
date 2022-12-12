@@ -30,7 +30,7 @@ final class CapsuleCloseViewController: UIViewController, BaseViewController {
     }
 
     func bind() {
-        mainView.closeButton.rx.tap
+        mainView.bottomButton.rx.tap
             .withUnretained(self)
             .bind(onNext: { owner, _ in
                 owner.viewModel?.input.tapClose.onNext(())
@@ -43,10 +43,10 @@ final class CapsuleCloseViewController: UIViewController, BaseViewController {
             .subscribe(onNext: { owner, capsule in
                 owner.mainView.configure(item:
                     CapsuleCloseView.Item(
+                        thumbnailImageURL: capsule.images[safe: 0] ?? "",
                         closedDateString: capsule.closedDate.dateTimeString,
                         memoryDateString: capsule.memoryDate.dateString,
-                        simpleAddress: capsule.simpleAddress,
-                        thumbnailImageURL: capsule.images[safe: 0] ?? ""
+                        simpleAddress: capsule.simpleAddress
                     )
                 )
             })

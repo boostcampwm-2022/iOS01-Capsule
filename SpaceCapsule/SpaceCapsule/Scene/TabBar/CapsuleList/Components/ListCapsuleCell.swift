@@ -9,7 +9,7 @@ import SnapKit
 import UIKit
 
 final class ListCapsuleCell: UICollectionViewCell, UnOpenable {
-    lazy var thumbnailImageView = ThemeThumbnailImageView(frame: .zero, width: FrameResource.listCapsuleCellWidth)
+    lazy var thumbnailImageView = ThumbnailImageView(frame: .zero, width: FrameResource.listCapsuleCellWidth)
 
     lazy var descriptionLabel = {
         let label = ThemeLabel(text: nil, size: FrameResource.fontSize80, color: .themeBlack)
@@ -18,7 +18,7 @@ final class ListCapsuleCell: UICollectionViewCell, UnOpenable {
         return label
     }()
 
-    var blurEffectView = CapsuleBlurEffectView()
+    var blurEffectView = CapsuleBlurEffectView(width: FrameResource.listCapsuleCellWidth)
 
     lazy var lockImageView = {
         let lockImageView = UIImageView()
@@ -27,7 +27,7 @@ final class ListCapsuleCell: UICollectionViewCell, UnOpenable {
         return lockImageView
     }()
 
-    lazy var dateLabel = {
+    lazy var closedDateLabel = {
         let dateLabel = ThemeLabel(text: nil, size: FrameResource.fontSize80, color: .themeGray200)
         dateLabel.textAlignment = .center
         return dateLabel
@@ -77,9 +77,9 @@ final class ListCapsuleCell: UICollectionViewCell, UnOpenable {
             thumbnailImageView.imageView.kr.setImage(with: thumbnailURL, placeholder: .empty, scale: FrameResource.openableImageScale)
         }
         descriptionLabel.text = "\(capsuleCellItem.memoryDate.dateString)\n\(capsuleCellItem.address)에서"
-        dateLabel.text = "밀봉시간:\(capsuleCellItem.closedDate.dateString)"
+        closedDateLabel.text = "밀봉시간:\(capsuleCellItem.closedDate.dateString)"
         if !capsuleCellItem.isOpenable() {
-            applyUnOpenableEffect()
+//            applyUnOpenableEffect()
         }
     }
 }

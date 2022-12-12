@@ -10,7 +10,10 @@ import SnapKit
 import UIKit
 
 final class CapsuleOpenView: UIView, BaseView, UnOpenable {
-    var thumbnailImageView = ThemeThumbnailImageView(frame: .zero, width: UIScreen.main.bounds.width * FrameResource.capsuleThumbnailWidthRatio)
+    var thumbnailImageView = ThumbnailImageView(
+        frame: .zero,
+        width: UIScreen.main.bounds.width * FrameResource.capsuleThumbnailWidthRatio
+    )
 
     var descriptionLabel = {
         let label = ThemeLabel(text: nil, size: FrameResource.fontSize140, color: .themeGray300)
@@ -19,7 +22,7 @@ final class CapsuleOpenView: UIView, BaseView, UnOpenable {
         return label
     }()
 
-    let blurEffectView = CapsuleBlurEffectView()
+    let blurEffectView = CapsuleBlurEffectView(width: UIScreen.main.bounds.width * FrameResource.capsuleThumbnailWidthRatio)
 
     var lockImageView = {
         let lockImageView = UIImageView()
@@ -28,7 +31,7 @@ final class CapsuleOpenView: UIView, BaseView, UnOpenable {
         return lockImageView
     }()
 
-    var dateLabel = {
+    var closedDateLabel = {
         let dateLabel = ThemeLabel(text: nil, size: FrameResource.fontSize80, color: .themeGray200)
         dateLabel.textAlignment = .center
         return dateLabel
@@ -72,10 +75,10 @@ final class CapsuleOpenView: UIView, BaseView, UnOpenable {
             size: FrameResource.fontSize140,
             color: .themeGray400
         )
-        dateLabel.text = capsuleCellItem.closedDate.dateTimeString
+        closedDateLabel.text = capsuleCellItem.closedDate.dateTimeString
         if !capsuleCellItem.isOpenable() {
             openButton.isEnabled = false
-            applyUnOpenableEffect()
+//            applyUnOpenableEffect()
         }
     }
 

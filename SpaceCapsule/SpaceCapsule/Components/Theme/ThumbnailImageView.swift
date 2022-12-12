@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ThemeThumbnailImageView: UIView {
+final class ThumbnailImageView: UIView {
     // MARK: - Properties
 
     let width: CGFloat
@@ -20,6 +20,7 @@ final class ThemeThumbnailImageView: UIView {
         imageView.clipsToBounds = true
         imageView.backgroundColor = .white
         imageView.contentMode = .scaleAspectFill
+        
         return imageView
     }()
 
@@ -27,6 +28,7 @@ final class ThemeThumbnailImageView: UIView {
 
     init(frame: CGRect, width: CGFloat) {
         self.width = width
+        print(width)
         super.init(frame: frame)
         configure()
         addSubViews()
@@ -40,7 +42,7 @@ final class ThemeThumbnailImageView: UIView {
 
     // MARK: - Methods
 
-    func configure() {
+    private func configure() {
         backgroundColor = .themeGray100
         layer.shadowOffset = FrameResource.capsuleCellShadowOffset
         layer.shadowRadius = FrameResource.capsuleCellShadowRadius
@@ -48,13 +50,13 @@ final class ThemeThumbnailImageView: UIView {
         layer.cornerRadius = width / 2
     }
 
-    func addSubViews() {
+    private func addSubViews() {
         [imageView].forEach {
             addSubview($0)
         }
     }
 
-    func makeConstraints() {
+    private func makeConstraints() {
         imageView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }

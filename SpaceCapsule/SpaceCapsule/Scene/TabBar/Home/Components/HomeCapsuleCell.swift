@@ -11,7 +11,7 @@ import UIKit
 final class HomeCapsuleCell: UICollectionViewCell, UnOpenable {    
     var uuid: String?
     
-    var thumbnailImageView = ThemeThumbnailImageView(frame: .zero, width: FrameResource.homeCapsuleCellWidth)
+    var thumbnailImageView = ThumbnailImageView(frame: .zero, width: FrameResource.homeCapsuleCellWidth)
 
     var titleLabel = {
         let label = ThemeLabel(text: "가장 오래된 캡슐", size: FrameResource.fontSize120, color: .themeColor200)
@@ -27,13 +27,13 @@ final class HomeCapsuleCell: UICollectionViewCell, UnOpenable {
         return label
     }()
     
-    var dateLabel = {
+    var closedDateLabel = {
         let dateLabel = ThemeLabel(text: nil, size: FrameResource.fontSize100, color: .themeGray200)
         dateLabel.textAlignment = .center
         return dateLabel
     }()
     
-    var blurEffectView = CapsuleBlurEffectView()
+    var blurEffectView = CapsuleBlurEffectView(width: FrameResource.homeCapsuleCellWidth)
     
     var lockImageView = {
         let lockImageView = UIImageView()
@@ -92,12 +92,12 @@ final class HomeCapsuleCell: UICollectionViewCell, UnOpenable {
         if let thumbnailURL = capsuleCellModel.thumbnailImageURL {
             thumbnailImageView.imageView.kr.setImage(with: thumbnailURL, placeholder: .empty, scale: FrameResource.openableImageScale)
         }
-        dateLabel.text = "밀봉시간:\(capsuleCellModel.closedDate.dateString)"
+        closedDateLabel.text = "밀봉시간:\(capsuleCellModel.closedDate.dateString)"
         titleLabel.text = capsuleCellModel.type.title
         descriptionLabel.text = capsuleCellModel.description()
         
         if !capsuleCellModel.isOpenable() {
-            applyUnOpenableEffect()
+//            applyUnOpenableEffect()
         }
     }
 }
