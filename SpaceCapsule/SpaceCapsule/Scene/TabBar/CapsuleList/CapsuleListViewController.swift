@@ -52,7 +52,7 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
             return
         }
         capsuleListView.collectionView.rx.itemSelected
-            .withLatestFrom(viewModel.input.capsuleCellItems, resultSelector: { indexPath, capsuleCellItems in
+            .withLatestFrom(viewModel.output.capsuleCellItems, resultSelector: { indexPath, capsuleCellItems in
                 viewModel.coordinator?.moveToCapsuleAccess(capsuleCellItem: capsuleCellItems[indexPath.row])
             })
             .bind(onNext: {})
@@ -69,10 +69,8 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
         capsuleListView.refreshButton.rx.tap
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
+                owner.capsuleListView.rotateRefreshButton()
                 owner.viewModel?.refreshCapsule()
-                // TODO: 삭제 필요
-                owner.rotateRefreshButton()
-                
             })
             .disposed(by: disposeBag)
 
@@ -89,7 +87,7 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
             return
         }
 
-        viewModel.input.capsuleCellItems
+        viewModel.output.capsuleCellItems
             .withUnretained(self)
             .bind { owner, capsuleCellItems in
                 if capsuleCellItems.isEmpty {
@@ -100,6 +98,7 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
                     owner.applySnapshot(capsuleCellModels: capsuleCellItems)
                     owner.viewModel?.input.refreshLoading.accept(false)
                 }
+                owner.capsuleListView.stopRotatingRefreshButton()
             }
             .disposed(by: disposeBag)
 
@@ -107,7 +106,7 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
             .withUnretained(self)
             .bind { owner, sortPolicy in
                 owner.applyBarButton(sortPolicy: sortPolicy)
-                if let capsuleCellItems = owner.viewModel?.input.capsuleCellItems.value {
+                if let capsuleCellItems = owner.viewModel?.output.capsuleCellItems.value {
                     owner.viewModel?.sort(capsuleCellItems: capsuleCellItems, by: sortPolicy)
                 }
             }
@@ -143,16 +142,6 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
            let button = barItem.customView as? UIButton {
             button.setTitle(sortPolicy.description, for: .normal)
         }
-    }
-    
-    private func rotateRefreshButton() {
-        let rotateAnimation = CABasicAnimation(keyPath: "transform.rotation")
-        rotateAnimation.fromValue = 0.0
-        rotateAnimation.toValue = CGFloat(.pi * 2.0)
-        rotateAnimation.duration = 0.5
-        rotateAnimation.repeatCount = Float.greatestFiniteMagnitude
-        
-        capsuleListView.refreshButton.layer.add(rotateAnimation, forKey: "rotate")
     }
 }
 

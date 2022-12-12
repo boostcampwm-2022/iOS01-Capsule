@@ -33,7 +33,7 @@
 		0D90DAF7292397CF000DCC84 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D90DAF6292397CF000DCC84 /* UIColor+.swift */; };
 		0D90DAF929239A81000DCC84 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D90DAF829239A81000DCC84 /* UIImage+.swift */; };
 		0D90DAFE29239CA0000DCC84 /* OwnglyphHaesomChae.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0D90DAFD29239C9F000DCC84 /* OwnglyphHaesomChae.otf */; };
-		0D9A834E293788C100D00303 /* CustomRefreshableMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9A834D293788C100D00303 /* CustomRefreshableMapView.swift */; };
+		0D9A834E293788C100D00303 /* CapsuleMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9A834D293788C100D00303 /* CapsuleMapView.swift */; };
 		0D9D672E292486780038F529 /* ThemeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9D672D292486780038F529 /* ThemeLabel.swift */; };
 		0D9D67312924945D0038F529 /* FrameResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9D67302924945D0038F529 /* FrameResource.swift */; };
 		0DA05E1D29308B8400B08FA5 /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA05E1C29308B8400B08FA5 /* CustomNavigationController.swift */; };
@@ -214,7 +214,7 @@
 		0D90DAF6292397CF000DCC84 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		0D90DAF829239A81000DCC84 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		0D90DAFD29239C9F000DCC84 /* OwnglyphHaesomChae.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = OwnglyphHaesomChae.otf; sourceTree = "<group>"; };
-		0D9A834D293788C100D00303 /* CustomRefreshableMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRefreshableMapView.swift; sourceTree = "<group>"; };
+		0D9A834D293788C100D00303 /* CapsuleMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleMapView.swift; sourceTree = "<group>"; };
 		0D9D672D292486780038F529 /* ThemeLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeLabel.swift; sourceTree = "<group>"; };
 		0D9D67302924945D0038F529 /* FrameResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameResource.swift; sourceTree = "<group>"; };
 		0DA05E1C29308B8400B08FA5 /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
@@ -517,7 +517,7 @@
 				4A1FEFF7292F1F1200A935BB /* CustomAnnotation.swift */,
 				4AF16AE6292B1F8400787C5C /* CustomAnnotationView.swift */,
 				0DE28B892934B42C00446143 /* CustomMapView.swift */,
-				0D9A834D293788C100D00303 /* CustomRefreshableMapView.swift */,
+				0D9A834D293788C100D00303 /* CapsuleMapView.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -1193,7 +1193,7 @@
 				0D706139292C63140077787E /* DatePickerCoordinator.swift in Sources */,
 				599C1A50292CC99A00517E93 /* FirestoreManager.swift in Sources */,
 				288A8EFD292360AB000229D2 /* CapsuleDetailViewModel.swift in Sources */,
-				0D9A834E293788C100D00303 /* CustomRefreshableMapView.swift in Sources */,
+				0D9A834E293788C100D00303 /* CapsuleMapView.swift in Sources */,
 				0DFF50DD29402E3100079FA6 /* EmptyView.swift in Sources */,
 				28A700D52938AE100049FAF8 /* AnimationResource.swift in Sources */,
 				288A8EE229235E3F000229D2 /* CapsuleLocateViewModel.swift in Sources */,

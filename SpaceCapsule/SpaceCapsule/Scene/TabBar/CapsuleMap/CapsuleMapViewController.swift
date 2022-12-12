@@ -21,7 +21,7 @@ final class CapsuleMapViewController: UIViewController, BaseViewController {
     let disposeBag = DisposeBag()
     var viewModel: CapsuleMapViewModel?
 
-    private let mapView = CustomRefreshableMapView()
+    private let mapView = CapsuleMapView()
     private let locationManager = LocationManager.shared.core
     private var annotationsToMonitor = [CustomAnnotation]() {
         didSet { markIfOpenable() }

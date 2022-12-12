@@ -14,13 +14,17 @@ final class CapsuleListViewModel: BaseViewModel {
     var disposeBag = DisposeBag()
     var coordinator: CapsuleListCoordinator?
     var input = Input()
+    var output = Output()
 
     struct Input {
         var capsules: BehaviorRelay<[Capsule]> = AppDataManager.shared.capsules
-        var capsuleCellItems = BehaviorRelay<[ListCapsuleCellItem]>(value: [])
         var sortPolicy = BehaviorRelay<SortPolicy>(value: .nearest)
         var refreshLoading = PublishRelay<Bool>()
         var viewWillAppear = PublishSubject<Void>()
+    }
+    
+    struct Output {
+        var capsuleCellItems = BehaviorRelay<[ListCapsuleCellItem]>(value: [])
     }
 
     init() {
@@ -87,6 +91,6 @@ final class CapsuleListViewModel: BaseViewModel {
                 $0.memoryDate < $1.memoryDate
             }
         }
-        input.capsuleCellItems.accept(items)
+        output.capsuleCellItems.accept(items)
     }
 }
