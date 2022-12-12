@@ -9,8 +9,8 @@ import UIKit
 import CoreLocation
 
 enum CapsuleType: CaseIterable {
-    case closedOldest
-    case closedNewest
+    case closedLongest
+    case closedShortest
     case memoryOldest
     case memoryNewest
     case nearest
@@ -19,9 +19,9 @@ enum CapsuleType: CaseIterable {
     
     var title: String {
         switch self {
-        case .closedOldest:
+        case .closedLongest:
             return "밀봉한지 가장 오래된 캡슐"
-        case .closedNewest:
+        case .closedShortest:
             return "가장 최근에 생성한 캡슐"
         case .memoryOldest:
             return "가장 오래된 추억이 담긴 캡슐"
@@ -65,7 +65,7 @@ struct HomeCapsuleCellItem: Hashable, Equatable {
     
     func description() -> String {
         switch type {
-        case .closedOldest, .closedNewest:
+        case .closedLongest, .closedShortest:
             // TODO: D+Day 계산하는 방법 수정해야 할 듯
             if let dDay = Calendar.current.dateComponents([.day], from: closedDate, to: Date()).day {
                 return "\(memoryDate.dotDateString) \(address)에서\nD+\(dDay)"
