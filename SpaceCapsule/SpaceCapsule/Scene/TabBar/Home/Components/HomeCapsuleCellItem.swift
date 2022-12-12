@@ -16,6 +16,7 @@ enum CapsuleType: CaseIterable {
     case nearest
     case farthest
     case leastOpened
+    case mostOpened
     
     var title: String {
         switch self {
@@ -33,6 +34,8 @@ enum CapsuleType: CaseIterable {
             return "가장 먼 위치의 캡슐"
         case .leastOpened:
             return "열어본 횟수가 가장 적은 캡슐"
+        case .mostOpened:
+            return "열어본 횟수가 가장 많은 캡슐"
         }
     }
 }
@@ -86,7 +89,7 @@ struct HomeCapsuleCellItem: Hashable, Equatable {
             } else {
                 return "\(memoryDate.dotDateString) \(address)에서\n약 \(String(format: "%.2f", distance))m"
             }
-        case .leastOpened:
+        case .leastOpened, .mostOpened:
             return "\(memoryDate.dotDateString) \(address)에서\n\(openCount)번"
         }
     }

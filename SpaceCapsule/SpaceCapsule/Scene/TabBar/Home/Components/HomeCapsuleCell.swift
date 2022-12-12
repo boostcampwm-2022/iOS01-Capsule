@@ -53,7 +53,14 @@ final class HomeCapsuleCell: UICollectionViewCell, UnOpenable {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        thumbnailImageView.imageView.subviews.forEach {
+            $0.removeFromSuperview()
+        }
+    }
+    
     func addSubviews() {
         [thumbnailImageView, titleLabel, descriptionLabel].forEach {
             self.contentView.addSubview($0)

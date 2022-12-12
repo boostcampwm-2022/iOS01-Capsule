@@ -105,6 +105,9 @@ final class HomeViewModel: BaseViewModel {
         case .leastOpened:
             let capsule = getLeastOpened(capsules: capsules)
             return makeHomeCapsuleCellItem(capsule: capsule, type: type)
+        case .mostOpened:
+            let capsule = getMostOpened(capsules: capsules)
+            return makeHomeCapsuleCellItem(capsule: capsule, type: type)
         }
     }
 
@@ -177,5 +180,9 @@ final class HomeViewModel: BaseViewModel {
 
     func getLeastOpened(capsules: [Capsule]) -> Capsule? {
         return capsules.min(by: { $0.openCount < $1.openCount })
+    }
+    
+    func getMostOpened(capsules: [Capsule]) -> Capsule? {
+        return capsules.min(by: { $0.openCount > $1.openCount })
     }
 }
