@@ -41,31 +41,27 @@ final class ProfileViewController: UIViewController, BaseViewController {
     }
 
     func bind() {
-        guard let viewModel else {
-            return
-        }
-
         profileView.notificationButton.rx.tap
-            .bind {
-                viewModel.input.tapSetupNotification.onNext(())
+            .bind { [weak self] in
+                self?.viewModel?.input.tapSetupNotification.onNext(())
             }
             .disposed(by: disposeBag)
 
         profileView.settingButton.rx.tap
-            .bind {
-                viewModel.input.tapSetting.onNext(())
+            .bind { [weak self] in
+                self?.viewModel?.input.tapSetting.onNext(())
             }
             .disposed(by: disposeBag)
 
         profileView.signOutButton.rx.tap
-            .bind {
-                viewModel.input.tapSignOut.onNext(())
+            .bind { [weak self] in
+                self?.viewModel?.input.tapSignOut.onNext(())
             }
             .disposed(by: disposeBag)
 
         profileView.deleteAccountButton.rx.tap
-            .bind {
-                viewModel.input.tapDeleteAccount.onNext(())
+            .bind { [weak self] in
+                self?.viewModel?.input.tapWithdrawal.onNext(())
             }
             .disposed(by: disposeBag)
 
@@ -80,28 +76,18 @@ final class ProfileViewController: UIViewController, BaseViewController {
         guard let viewModel else {
             return
         }
+
         viewModel.input.tapSetupNotification
             .withUnretained(self)
             .bind { owner, _ in
-                NotificationManager.shared.checkNotificationAuthorization { isAuthorized in
-                    if isAuthorized {
-                        owner.showAlreadyAllowed(type: .notification)
-                    } else {
-                        owner.showRequestAuthorization(type: .notification)
-                    }
-                }
+                owner.showSettings(type: UIApplication.openNotificationSettingsURLString)
             }
             .disposed(by: disposeBag)
+
         viewModel.input.tapSetting
             .withUnretained(self)
             .bind { owner, _ in
-                LocationManager.shared.checkLocationAuthorization { isAuthorized in
-                    if isAuthorized {
-                        owner.showAlreadyAllowed(type: .location)
-                    } else {
-                        owner.showRequestAuthorization(type: .location)
-                    }
-                }
+                owner.showSettings(type: UIApplication.openSettingsURLString)
             }
             .disposed(by: disposeBag)
 
@@ -141,30 +127,13 @@ final class ProfileViewController: UIViewController, BaseViewController {
         alertController.addAction(acceptAction)
         present(alertController, animated: true, completion: nil)
     }
-
-    private func showAlreadyAllowed(type: Authorization) {
-        let alertController = UIAlertController(title: type.description, message: "이미 동의하셨습니다.", preferredStyle: .alert)
-        let acceptAction = UIAlertAction(title: "확인", style: .default, handler: nil)
-        alertController.addAction(acceptAction)
-        DispatchQueue.main.async { [weak self] in
-            self?.present(alertController, animated: true, completion: nil)
+    
+    private func showSettings(type: String) {
+        guard let url = URL(string: type) else {
+            return 
         }
-    }
-
-    private func showRequestAuthorization(type: Authorization) {
-        guard let url = URL(string: UIApplication.openSettingsURLString) else {
-            return
-        }
-        let alertController = UIAlertController(title: type.description, message: "앱 설정에서 \(type.description)을 허용해주세요.", preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        let acceptAction = UIAlertAction(title: "OK", style: .default, handler: { _ in
-            UIApplication.shared.open(url)
-        })
-        alertController.addAction(cancelAction)
-        alertController.addAction(acceptAction)
-        DispatchQueue.main.async { [weak self] in
-            self?.present(alertController, animated: true, completion: nil)
-        }
+        
+        UIApplication.shared.open(url)
     }
 
     func tapDeleteAccount() {

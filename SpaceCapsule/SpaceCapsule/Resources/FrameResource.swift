@@ -40,9 +40,11 @@ enum FrameResource {
     static let fontSize120: CGFloat = 24.0
     static let fontSize140: CGFloat = 28.0
 
-    static let capsuleThumbnailWidth: CGFloat = 267.0
-    static let capsuleThumbnailHeight: CGFloat = 440.0
+    static let capsuleThumbnailWidth: CGFloat = 260.0
+    static let capsuleThumbnailHeight: CGFloat = 400.0
     static let capsuleThumbnailCornerRadius: CGFloat = 120.0
+    static let capsuleThumbnailWidthRatio: CGFloat = 2.0 / 3.0
+    static let capsuleThumbnailHWRatio: CGFloat = 210.0 / 135.0
 
     static let shadowOffset: CGSize = .init(width: 4, height: 4)
     static let shadowRadius: CGFloat = 4
@@ -91,10 +93,10 @@ enum FrameResource {
 
     static let profileImageWidth: CGFloat = 100.0
     static let profileButtonHeight: CGFloat = 40.0
-    
+
     static let emptyCapsuleWidth: CGFloat = 135.0 * 1.5
     static let emptyCapsuleHeight: CGFloat = 210.0 * 1.5
-    
+
     static let detailSettingButtonHeight: CGFloat = 60.0
     static let detailSettingButtonPadding: CGFloat = 10.0
     static let detailMainStackViewHPadding: CGFloat = 30.0

@@ -44,12 +44,7 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
         setUpNavigation()
         addSubViews()
         makeConstraints()
-
-        mainView.imageCollectionView.applyDataSource()
-
-        addTapGestureRecognizer()
-        scrollView.addKeyboardNotification()
-
+        configure()
         bind()
     }
 
@@ -58,6 +53,13 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
 
         removeTapGestureRecognizer()
         scrollView.removeKeyboardNotification()
+    }
+
+    private func configure() {
+        mainView.titleTextField.delegate = self
+        mainView.imageCollectionView.applyDataSource()
+        addTapGestureRecognizer()
+        scrollView.addKeyboardNotification()
     }
 
     func bind() {
@@ -256,7 +258,7 @@ extension CapsuleCreateViewController: PHPickerViewControllerDelegate {
                     return
                 }
 
-                itemProvider.loadObject(ofClass: UIImage.self) { [weak self] image, _ in
+                itemProvider.loadObject(ofClass: UIImage.self) { image, _ in
                     guard let selectedImage = image as? UIImage,
                           let data = selectedImage.jpegData(compressionQuality: 0.2) else {
                         dispatchGroup.leave()
@@ -272,8 +274,20 @@ extension CapsuleCreateViewController: PHPickerViewControllerDelegate {
             let orderedData = dataDict
                 .sorted(by: { $0.key < $1.key })
                 .compactMap { $0.value }
-            
+
             self?.viewModel?.addImage(orderedData: orderedData)
         }
+    }
+}
+
+extension CapsuleCreateViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let textValue = textField.text else {
+            return false
+        }
+        let currentString = textValue as NSString
+        let newString = currentString.replacingCharacters(in: range, with: string) as NSString
+
+        return newString.length <= 15
     }
 }
