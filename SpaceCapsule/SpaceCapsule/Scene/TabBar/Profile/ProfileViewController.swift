@@ -61,7 +61,7 @@ final class ProfileViewController: UIViewController, BaseViewController {
 
         profileView.deleteAccountButton.rx.tap
             .bind { [weak self] in
-                self?.viewModel?.input.tapWithdrawal.onNext(())
+                self?.viewModel?.input.tapDeleteAccount.onNext(())
             }
             .disposed(by: disposeBag)
 
