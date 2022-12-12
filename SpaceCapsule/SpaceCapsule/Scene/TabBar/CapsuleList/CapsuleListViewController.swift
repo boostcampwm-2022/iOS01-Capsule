@@ -72,7 +72,41 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
             })
             .bind(onNext: {})
             .disposed(by: disposeBag)
-
+        
+        capsuleListView.collectionView.rx.itemHighlighted
+            .withUnretained(self)
+            .subscribe(
+                onNext: { owner, indexPath in
+                    if let cell = owner.capsuleListView.collectionView.cellForItem(at: indexPath) as? ListCapsuleCell {
+                        let pressedDownTransform = CGAffineTransform(scaleX: 0.96, y: 0.96)
+                        UIView.animate(
+                            withDuration: 0.2,
+                            delay: 0,
+                            usingSpringWithDamping: 0.4,
+                            initialSpringVelocity: 10,
+                            options: [.curveEaseInOut],
+                            animations: { cell.transform = pressedDownTransform }
+                        )
+                    }
+                }).disposed(by: disposeBag)
+        
+        capsuleListView.collectionView.rx.itemUnhighlighted
+            .withUnretained(self)
+            .subscribe(
+                onNext: { owner, indexPath in
+                    if let cell = owner.capsuleListView.collectionView.cellForItem(at: indexPath) as? ListCapsuleCell {
+                        let originalTransform = CGAffineTransform(scaleX: 1, y: 1)
+                        UIView.animate(
+                            withDuration: 0.4,
+                            delay: 0,
+                            usingSpringWithDamping: 0.4,
+                            initialSpringVelocity: 10,
+                            options: [.curveEaseInOut],
+                            animations: { cell.transform = originalTransform }
+                        )
+                    }
+                }).disposed(by: disposeBag)
+        
         capsuleListView.sortBarButtonItem.rx.tap
             .withLatestFrom(viewModel.input.sortPolicy)
             .withUnretained(self)
