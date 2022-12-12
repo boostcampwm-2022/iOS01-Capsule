@@ -9,7 +9,7 @@ import RxCocoa
 import RxSwift
 import UIKit
 
-final class CapsuleListCoordinator: Coordinator {
+final class CapsuleListCoordinator: Coordinator, MovableToCapsuleAccess {
     var parent: Coordinator?
     var children: [Coordinator] = []
     var navigationController: CustomNavigationController?
@@ -40,19 +40,6 @@ final class CapsuleListCoordinator: Coordinator {
     private func setUpNavigationItem() {
         navigationController?.navigationBar.topItem?.title = "목록"
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.themeFont(ofSize: FrameResource.fontSize120) as Any]
-    }
-
-    func moveToCapsuleAccess(capsuleCellItem: ListCapsuleCellItem) {
-        let capsuleAccessCoordinator = CapsuleAccessCoordinator(navigationController: navigationController)
-        capsuleAccessCoordinator.capsuleCellItem = capsuleCellItem
-        capsuleAccessCoordinator.parent = self
-        capsuleAccessCoordinator.start()
-
-        children.append(capsuleAccessCoordinator)
-
-        if let parent = parent as? TabBarCoordinator {
-            parent.tabBarAppearance(isHidden: true)
-        }
     }
 
     func showSortPolicySelection(sortPolicy: SortPolicy) {

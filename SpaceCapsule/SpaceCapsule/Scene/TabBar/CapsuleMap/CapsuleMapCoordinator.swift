@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CapsuleMapCoordinator: Coordinator {
+final class CapsuleMapCoordinator: Coordinator, MovableToCapsuleAccess {
     var parent: Coordinator?
     var children: [Coordinator] = []
     var navigationController: CustomNavigationController?
@@ -26,19 +26,6 @@ final class CapsuleMapCoordinator: Coordinator {
         navigationController?.setViewControllers([capsuleMapViewController], animated: true)
     }
 
-    func moveToCapsuleAccess(with capsuleCellItem: ListCapsuleCellItem) {
-        let capsuleAccessCoordinator = CapsuleAccessCoordinator(navigationController: navigationController)
-        capsuleAccessCoordinator.capsuleCellItem = capsuleCellItem
-
-        capsuleAccessCoordinator.parent = self
-        capsuleAccessCoordinator.start()
-
-        children.append(capsuleAccessCoordinator)
-
-        if let parent = parent as? TabBarCoordinator {
-            parent.tabBarAppearance(isHidden: true)
-        }
-    }
 
     func tabBarAppearance(isHidden: Bool) {
         guard let parent = parent as? TabBarCoordinator else {

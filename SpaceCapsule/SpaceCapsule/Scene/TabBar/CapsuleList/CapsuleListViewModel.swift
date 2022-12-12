@@ -44,7 +44,7 @@ final class CapsuleListViewModel: BaseViewModel, CapsuleCellNeedable {
         input.tapCapsule
             .withUnretained(self)
             .subscribe(onNext: { owner, capsuleCell in
-                owner.coordinator?.moveToCapsuleAccess(capsuleCellItem: capsuleCell)
+                owner.coordinator?.moveToCapsuleAccess(with: capsuleCell)
             })
     }
     

@@ -151,6 +151,7 @@
 		4A9E9147292A2A5A00B7CC5C /* CLLocationManager+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E9146292A2A5A00B7CC5C /* CLLocationManager+Rx.swift */; };
 		4A9E9149292A383900B7CC5C /* MKMapView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E9148292A383900B7CC5C /* MKMapView+Rx.swift */; };
 		4AA4C5B32947383900171D0D /* CapsuleCellItemNeedable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA4C5B22947383900171D0D /* CapsuleCellItemNeedable.swift */; };
+		4AA4C5B529473D8600171D0D /* MovableToCapsuleAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA4C5B429473D8600171D0D /* MovableToCapsuleAccess.swift */; };
 		4AF16AE7292B1F8400787C5C /* CustomAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF16AE6292B1F8400787C5C /* CustomAnnotationView.swift */; };
 		599C19D2292B82D000517E93 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C19D1292B82D000517E93 /* LoadingViewController.swift */; };
 		599C19D4292B838D00517E93 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C19D3292B838D00517E93 /* LoadingView.swift */; };
@@ -332,6 +333,7 @@
 		4A9E9146292A2A5A00B7CC5C /* CLLocationManager+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationManager+Rx.swift"; sourceTree = "<group>"; };
 		4A9E9148292A383900B7CC5C /* MKMapView+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKMapView+Rx.swift"; sourceTree = "<group>"; };
 		4AA4C5B22947383900171D0D /* CapsuleCellItemNeedable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleCellItemNeedable.swift; sourceTree = "<group>"; };
+		4AA4C5B429473D8600171D0D /* MovableToCapsuleAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovableToCapsuleAccess.swift; sourceTree = "<group>"; };
 		4AF16AE6292B1F8400787C5C /* CustomAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotationView.swift; sourceTree = "<group>"; };
 		599C19D1292B82D000517E93 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Loading\U0010ViewController.swift"; sourceTree = "<group>"; };
 		599C19D3292B838D00517E93 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
@@ -635,6 +637,7 @@
 				28049CF0292382C7002389BD /* ViewController */,
 				28049CEE2923825A002389BD /* ViewModel */,
 				0DD5C7C42938453300B23B69 /* Refreshable.swift */,
+				4AA4C5B429473D8600171D0D /* MovableToCapsuleAccess.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -1131,6 +1134,7 @@
 				0DB746B4292E268A005FF249 /* Date+.swift in Sources */,
 				288A8EE029235E36000229D2 /* CapsuleLocateViewController.swift in Sources */,
 				0DD5C7C52938453300B23B69 /* Refreshable.swift in Sources */,
+				4AA4C5B529473D8600171D0D /* MovableToCapsuleAccess.swift in Sources */,
 				28049CE529236EEC002389BD /* CapsuleAccessCoordinator.swift in Sources */,
 				0D46DEFA2923E1180045400A /* UIFont+.swift in Sources */,
 				288A8EBE29235B97000229D2 /* CapsuleListViewModel.swift in Sources */,
