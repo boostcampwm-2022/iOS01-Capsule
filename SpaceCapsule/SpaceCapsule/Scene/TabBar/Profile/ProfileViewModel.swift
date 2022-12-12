@@ -18,7 +18,7 @@ final class ProfileViewModel: BaseViewModel {
         var tapSetupNotification = PublishSubject<Void>()
         var tapSetting = PublishSubject<Void>()
         var tapSignOut = PublishSubject<Void>()
-        var tapWithdrawal = PublishSubject<Void>()
+        var tapDeleteAccount = PublishSubject<Void>()
     }
 
     init() {
@@ -50,6 +50,5 @@ final class ProfileViewModel: BaseViewModel {
                 self.signOut()
             }
         }
-        
     }
 }
