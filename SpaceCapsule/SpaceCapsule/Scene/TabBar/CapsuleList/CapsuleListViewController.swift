@@ -52,8 +52,8 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
             return
         }
         capsuleListView.collectionView.rx.itemSelected
-            .withLatestFrom(viewModel.output.capsuleCellItems, resultSelector: { indexPath, capsuleCellItems in
-                viewModel.coordinator?.moveToCapsuleAccess(capsuleCellItem: capsuleCellItems[indexPath.row])
+            .withLatestFrom(viewModel.output.capsuleCellItems, resultSelector: { [weak self] indexPath, capsuleCellItems in
+                self?.viewModel?.input.tapCapsule.onNext(capsuleCellItems[indexPath.row])
             })
             .bind(onNext: {})
             .disposed(by: disposeBag)

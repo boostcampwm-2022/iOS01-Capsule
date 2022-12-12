@@ -21,6 +21,7 @@ final class CapsuleListViewModel: BaseViewModel {
         var sortPolicy = BehaviorRelay<SortPolicy>(value: .nearest)
         var refreshLoading = PublishRelay<Bool>()
         var viewWillAppear = PublishSubject<Void>()
+        var tapCapsule = PublishSubject<ListCapsuleCellItem>()
     }
     
     struct Output {
@@ -39,6 +40,12 @@ final class CapsuleListViewModel: BaseViewModel {
                 owner.coordinator?.tabBarAppearance(isHidden: false)
             })
             .disposed(by: disposeBag)
+        
+        input.tapCapsule
+            .withUnretained(self)
+            .subscribe(onNext: { owner, capsuleCell in
+                owner.coordinator?.moveToCapsuleAccess(capsuleCellItem: capsuleCell)
+            })
     }
     
     func refreshCapsule() {
@@ -93,4 +100,18 @@ final class CapsuleListViewModel: BaseViewModel {
         }
         output.capsuleCellItems.accept(items)
     }
+    
+//    private func getCellItem(with uuid: String) -> ListCapsuleCellItem {
+//        let capsule = AppDataManager.shared.capsule(uuid: uuid)
+//        let capsuleCellItem = ListCapsuleCellItem (
+//            uuid: capsule.uuid,
+//            thumbnailImageURL: capsule.images.first,
+//            address: capsule.address,
+//            closedDate: capsule.closedDate,
+//            memoryDate: capsule.memoryDate,
+//            coordinate: capsule.geopoint.coordinate
+//        )
+//
+//        return capsuleCellItem
+//    }
 }
