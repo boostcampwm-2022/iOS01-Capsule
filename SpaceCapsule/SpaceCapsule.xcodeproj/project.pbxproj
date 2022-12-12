@@ -517,7 +517,6 @@
 				4A1FEFF7292F1F1200A935BB /* CustomAnnotation.swift */,
 				4AF16AE6292B1F8400787C5C /* CustomAnnotationView.swift */,
 				0DE28B892934B42C00446143 /* CustomMapView.swift */,
-				0D9A834D293788C100D00303 /* CapsuleMapView.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -709,6 +708,7 @@
 		288A8EAC29235B25000229D2 /* CapsuleMap */ = {
 			isa = PBXGroup;
 			children = (
+				0D9A834D293788C100D00303 /* CapsuleMapView.swift */,
 				288A8EC329235BB7000229D2 /* CapsuleMapViewController.swift */,
 				288A8EC529235BBD000229D2 /* CapsuleMapViewModel.swift */,
 				288A8EC729235BCE000229D2 /* CapsuleMapCoordinator.swift */,

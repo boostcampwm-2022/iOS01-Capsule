@@ -130,6 +130,7 @@ final class CapsuleMapViewController: UIViewController, BaseViewController {
             .bind { owner, annotations in
                 owner.removeAllAnnotations()
                 owner.addInitialAnnotations(annotations: annotations)
+                owner.mapView.stopRotatingRefreshButton()
             }
             .disposed(by: disposeBag)
 
@@ -148,6 +149,7 @@ final class CapsuleMapViewController: UIViewController, BaseViewController {
         mapView.refreshButton.rx.tap
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
+                owner.mapView.rotateRefreshButton()
                 owner.viewModel?.input.tapRefresh.onNext(())
             })
             .disposed(by: disposeBag)
