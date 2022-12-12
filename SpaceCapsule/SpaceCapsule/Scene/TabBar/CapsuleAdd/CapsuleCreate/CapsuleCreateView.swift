@@ -36,8 +36,7 @@ final class CapsuleCreateView: UIView, BaseView {
 
     let titleTextField: ThemeTextField = {
         let textField = ThemeTextField(placeholder: "추억하고 싶은 캡슐의 이름을 적어주세요 (최대 15자)")
-        
-        
+
         return textField
     }()
 

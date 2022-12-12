@@ -44,14 +44,7 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
         setUpNavigation()
         addSubViews()
         makeConstraints()
-        
-        mainView.titleTextField.delegate = self
-
-        mainView.imageCollectionView.applyDataSource()
-
-        addTapGestureRecognizer()
-        scrollView.addKeyboardNotification()
-
+        configure()
         bind()
     }
 
@@ -60,6 +53,13 @@ final class CapsuleCreateViewController: UIViewController, BaseViewController {
 
         removeTapGestureRecognizer()
         scrollView.removeKeyboardNotification()
+    }
+
+    private func configure() {
+        mainView.titleTextField.delegate = self
+        mainView.imageCollectionView.applyDataSource()
+        addTapGestureRecognizer()
+        scrollView.addKeyboardNotification()
     }
 
     func bind() {
