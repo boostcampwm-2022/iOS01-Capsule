@@ -70,6 +70,9 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 owner.viewModel?.refreshCapsule()
+                // TODO: 삭제 필요
+                owner.rotateRefreshButton()
+                
             })
             .disposed(by: disposeBag)
 
@@ -140,6 +143,16 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
            let button = barItem.customView as? UIButton {
             button.setTitle(sortPolicy.description, for: .normal)
         }
+    }
+    
+    private func rotateRefreshButton() {
+        let rotateAnimation = CABasicAnimation(keyPath: "transform.rotation")
+        rotateAnimation.fromValue = 0.0
+        rotateAnimation.toValue = CGFloat(.pi * 2.0)
+        rotateAnimation.duration = 0.5
+        rotateAnimation.repeatCount = Float.greatestFiniteMagnitude
+        
+        capsuleListView.refreshButton.layer.add(rotateAnimation, forKey: "rotate")
     }
 }
 
