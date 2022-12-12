@@ -12,6 +12,7 @@ enum UserDefaultsKeys: String {
     case isSignedIn
     case isRegistered
     case authorizationCode
+    case refreshToken
 }
 
 class UserDefaultsManager<T: Codable> {
