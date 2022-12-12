@@ -45,9 +45,6 @@ final class HomeViewModel: BaseViewModel {
             .subscribe(
                 onNext: { owner, capsuleList in
                     owner.output.mainLabelText.accept(owner.makeMainLabel(capsuleCount: capsuleList.count))
-                    if capsuleList.isEmpty {
-                        return
-                    }
                     owner.output.featuredCapsuleCellItems.accept(
                         CapsuleType.allCases.shuffled()
                             .map { owner.getHomeCapsuleCellItem(capsules: capsuleList, type: $0) }
