@@ -84,7 +84,7 @@ final class CapsuleOpenView: UIView, BaseView, UnOpenable {
         dateLabel.text = capsuleCellItem.closedDate.dateTimeString
         if !capsuleCellItem.isOpenable() {
             openButton.backgroundColor = .themeGray200
-            
+            openButton.isEnabled = false
             applyUnOpenableEffect()
         }
     }
