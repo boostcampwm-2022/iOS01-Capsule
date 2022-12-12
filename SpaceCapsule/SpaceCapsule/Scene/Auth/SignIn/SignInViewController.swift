@@ -110,8 +110,8 @@ extension SignInViewController: ASAuthorizationControllerDelegate {
                 return
             }
             if let authorizationCode = appleIDCredential.authorizationCode,
-                let codeString = String(data: authorizationCode, encoding: .utf8) {
-                UserDefaultsManager.saveData(data: codeString, key: .authorizationCode)
+               let codeString = String(data: authorizationCode, encoding: .utf8) {
+                UserDefaultsManager<String>.saveData(data: codeString, key: .authorizationCode)
             }
             // nonce와 IDToken을 사용하여 OAuth 공급자에게 방금 로그인한 사용자를 나타내는 자격증명을 생성하도록 요청
             // Initialize a Firebase credential.
@@ -140,6 +140,9 @@ extension SignInViewController: ASAuthorizationControllerDelegate {
                     print("애플 로그인 성공!", user.uid, user.email ?? "-")
                     UserDefaultsManager.saveData(data: true, key: .isSignedIn)
                     self.viewModel?.checkRegistration(uid: user.uid)
+                    if let refreshToken = user.refreshToken {
+                        UserDefaultsManager<String>.saveData(data: refreshToken, key: .refreshToken)
+                    }
                 }
             }
         }
