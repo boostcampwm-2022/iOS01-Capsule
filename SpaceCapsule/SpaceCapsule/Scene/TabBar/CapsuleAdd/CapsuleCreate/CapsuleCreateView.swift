@@ -34,7 +34,13 @@ final class CapsuleCreateView: UIView, BaseView {
     private let dateLabel = ThemeLabel(text: "추억 날짜", size: FrameResource.fontSize110, color: .themeGray300)
     private let descriptionLabel = ThemeLabel(text: "내용", size: FrameResource.fontSize110, color: .themeGray300)
 
-    let titleTextField = ThemeTextField(placeholder: "추억하고 싶은 캡슐의 이름을 적어주세요")
+    let titleTextField: ThemeTextField = {
+        let textField = ThemeTextField(placeholder: "추억하고 싶은 캡슐의 이름을 적어주세요 (최대 15자)")
+        
+        
+        return textField
+    }()
+
     let locationSelectView = SelectButton(text: "주소를 선택하세요")
     let dateSelectView = SelectButton(text: "날짜를 선택하세요")
 
