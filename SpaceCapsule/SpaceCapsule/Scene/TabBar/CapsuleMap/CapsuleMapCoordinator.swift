@@ -26,21 +26,9 @@ final class CapsuleMapCoordinator: Coordinator {
         navigationController?.setViewControllers([capsuleMapViewController], animated: true)
     }
 
-    func moveToCapsuleAccess(uuid: String) {
+    func moveToCapsuleAccess(with capsuleCellItem: ListCapsuleCellItem) {
         let capsuleAccessCoordinator = CapsuleAccessCoordinator(navigationController: navigationController)
-
-        if let capsule = AppDataManager.shared.capsule(uuid: uuid) {
-            let capsuleCellItem = ListCapsuleCellItem(
-                uuid: capsule.uuid,
-                thumbnailImageURL: capsule.images.first,
-                address: capsule.address,
-                closedDate: capsule.closedDate,
-                memoryDate: capsule.memoryDate,
-                coordinate: capsule.geopoint.coordinate
-            )
-
-            capsuleAccessCoordinator.capsuleCellItem = capsuleCellItem
-        }
+        capsuleAccessCoordinator.capsuleCellItem = capsuleCellItem
 
         capsuleAccessCoordinator.parent = self
         capsuleAccessCoordinator.start()

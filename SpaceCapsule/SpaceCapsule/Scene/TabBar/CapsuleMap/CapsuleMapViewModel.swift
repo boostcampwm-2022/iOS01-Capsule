@@ -48,7 +48,10 @@ final class CapsuleMapViewModel: BaseViewModel {
         input.tapCapsule
             .withUnretained(self)
             .subscribe(onNext: { owner, uuid in
-                owner.coordinator?.moveToCapsuleAccess(uuid: uuid)
+                guard let capsuleItemCell = owner.getCellItem(with: uuid) else {
+                    return
+                }
+                owner.coordinator?.moveToCapsuleAccess(with: capsuleItemCell)
             })
             .disposed(by: disposeBag)
 
@@ -71,5 +74,21 @@ final class CapsuleMapViewModel: BaseViewModel {
         }
 
         output.annotations.accept(annotations)
+    }
+    
+    private func getCellItem(with uuid: String) -> ListCapsuleCellItem? {
+        guard let capsule = AppDataManager.shared.capsule(uuid: uuid) else {
+            return nil
+        }
+        let capsuleCellItem = ListCapsuleCellItem (
+            uuid: capsule.uuid,
+            thumbnailImageURL: capsule.images.first,
+            address: capsule.address,
+            closedDate: capsule.closedDate,
+            memoryDate: capsule.memoryDate,
+            coordinate: capsule.geopoint.coordinate
+        )
+
+        return capsuleCellItem
     }
 }

@@ -101,17 +101,5 @@ final class CapsuleListViewModel: BaseViewModel {
         output.capsuleCellItems.accept(items)
     }
     
-//    private func getCellItem(with uuid: String) -> ListCapsuleCellItem {
-//        let capsule = AppDataManager.shared.capsule(uuid: uuid)
-//        let capsuleCellItem = ListCapsuleCellItem (
-//            uuid: capsule.uuid,
-//            thumbnailImageURL: capsule.images.first,
-//            address: capsule.address,
-//            closedDate: capsule.closedDate,
-//            memoryDate: capsule.memoryDate,
-//            coordinate: capsule.geopoint.coordinate
-//        )
-//
-//        return capsuleCellItem
-//    }
+
 }
