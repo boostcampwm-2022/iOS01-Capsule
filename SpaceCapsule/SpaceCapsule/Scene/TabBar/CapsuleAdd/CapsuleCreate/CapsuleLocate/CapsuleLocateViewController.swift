@@ -50,7 +50,6 @@ final class CapsuleLocateViewController: UIViewController, BaseViewController {
             .withUnretained(self)
             .subscribe(onNext: { owner, state in
                 owner.mainView.doneButton.isEnabled = state
-                owner.mainView.doneButton.backgroundColor = state ? .themeColor200 : .themeGray200
             })
             .disposed(by: disposeBag)
 

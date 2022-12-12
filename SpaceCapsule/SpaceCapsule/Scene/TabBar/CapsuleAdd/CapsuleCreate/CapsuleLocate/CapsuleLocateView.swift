@@ -53,16 +53,7 @@ final class CapsuleLocateView: UIView, BaseView {
 
     let locationLabel = ThemeLabel(size: FrameResource.fontSize110, color: .themeGray400)
 
-    let doneButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("완료", for: .normal)
-        button.titleLabel?.font = .themeFont(ofSize: FrameResource.fontSize100)
-        button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .themeColor200
-        button.layer.cornerRadius = FrameResource.commonCornerRadius
-
-        return button
-    }()
+    let doneButton = ThemeButton(title: "완료")
 
     // MARK: - Lifecycle
 

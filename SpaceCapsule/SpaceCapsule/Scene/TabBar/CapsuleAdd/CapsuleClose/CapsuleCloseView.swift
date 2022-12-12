@@ -17,7 +17,10 @@ final class CapsuleCloseView: UIView, BaseView, UnOpenable {
         let thumbnailImageURL: String
     }
 
-    var thumbnailImageView = ThemeThumbnailImageView(frame: .zero, width: UIScreen.main.bounds.width * FrameResource.capsuleThumbnailWidthRatio)
+    var thumbnailImageView = ThemeThumbnailImageView(
+        frame: .zero,
+        width: UIScreen.main.bounds.width * FrameResource.capsuleThumbnailWidthRatio
+    )
 
     let blurEffectView = CapsuleBlurEffectView()
 
@@ -41,15 +44,7 @@ final class CapsuleCloseView: UIView, BaseView, UnOpenable {
         return label
     }()
 
-    let closeButton = {
-        let button = UIButton()
-        button.titleLabel?.font = .themeFont(ofSize: FrameResource.fontSize100)
-        button.setTitle("완료", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .themeColor200
-        button.layer.cornerRadius = FrameResource.commonCornerRadius
-        return button
-    }()
+    let closeButton = ThemeButton(title: "완료")
 
     // MARK: - Lifecycle
 

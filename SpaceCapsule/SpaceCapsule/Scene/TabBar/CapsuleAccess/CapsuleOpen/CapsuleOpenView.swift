@@ -34,16 +34,7 @@ final class CapsuleOpenView: UIView, BaseView, UnOpenable {
         return dateLabel
     }()
 
-    var openButton = {
-        let button = UIButton()
-        button.titleLabel?.font = .themeFont(ofSize: FrameResource.fontSize100)
-        button.setTitle("열기", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .themeColor200
-        button.layer.cornerRadius = FrameResource.commonCornerRadius
-
-        return button
-    }()
+    var openButton = ThemeButton(title: "열기")
 
     // MARK: - Lifecycle
 
@@ -83,7 +74,6 @@ final class CapsuleOpenView: UIView, BaseView, UnOpenable {
         )
         dateLabel.text = capsuleCellItem.closedDate.dateTimeString
         if !capsuleCellItem.isOpenable() {
-            openButton.backgroundColor = .themeGray200
             openButton.isEnabled = false
             applyUnOpenableEffect()
         }

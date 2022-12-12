@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0D1331C7293842D300B2CD28 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1331C6293842D300B2CD28 /* Address.swift */; };
+		0D219825294730A600B7401B /* ThemeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D219824294730A600B7401B /* ThemeButton.swift */; };
 		0D46DEFA2923E1180045400A /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D46DEF92923E1180045400A /* UIFont+.swift */; };
 		0D4C11372927489D00B1C2B6 /* UIViewPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4C11362927489D00B1C2B6 /* UIViewPreview.swift */; };
 		0D4C11392927495900B1C2B6 /* UIViewControllerPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4C11382927495900B1C2B6 /* UIViewControllerPreview.swift */; };
@@ -192,6 +193,7 @@
 
 /* Begin PBXFileReference section */
 		0D1331C6293842D300B2CD28 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
+		0D219824294730A600B7401B /* ThemeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeButton.swift; sourceTree = "<group>"; };
 		0D2B7AB92934594400CE34E3 /* running.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = running.gpx; sourceTree = "<group>"; };
 		0D46DEF92923E1180045400A /* UIFont+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
 		0D4C11362927489D00B1C2B6 /* UIViewPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewPreview.swift; sourceTree = "<group>"; };
@@ -552,6 +554,7 @@
 			children = (
 				59D8CFBB29360A8900FD9CF6 /* ThemeThumbnailImageView.swift */,
 				0D9D672D292486780038F529 /* ThemeLabel.swift */,
+				0D219824294730A600B7401B /* ThemeButton.swift */,
 				0DA6610C292778BE00CF3563 /* ThemeTextField.swift */,
 				0D77D7C8292B5D490038D054 /* SelectButton.swift */,
 				2885A9FF293B6466003E5311 /* ProfileButton.swift */,
@@ -1223,6 +1226,7 @@
 				0DFF50E3294067E600079FA6 /* UIControl+Rx.swift in Sources */,
 				288A8EA729235AF1000229D2 /* NicknameViewModel.swift in Sources */,
 				28245562293B17B100DE03A1 /* UnOpenable.swift in Sources */,
+				0D219825294730A600B7401B /* ThemeButton.swift in Sources */,
 				4A1D1BC3294033C200F47ACB /* CapsuleSettingsView.swift in Sources */,
 				288A8ECC29235BE9000229D2 /* HomeViewController.swift in Sources */,
 				0DA6610D292778BE00CF3563 /* ThemeTextField.swift in Sources */,

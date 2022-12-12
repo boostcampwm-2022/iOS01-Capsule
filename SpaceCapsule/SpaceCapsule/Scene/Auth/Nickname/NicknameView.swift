@@ -16,15 +16,7 @@ final class NicknameView: UIView, BaseView {
 
     let nicknameTextField = ThemeTextField(placeholder: "닉네임을 입력해주세요")
 
-    let doneButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("완료", for: .normal)
-        button.titleLabel?.font = .themeFont(ofSize: FrameResource.fontSize100)
-        button.backgroundColor = .themeColor200
-        button.layer.cornerRadius = FrameResource.commonCornerRadius
-        
-        return button
-    }()
+    let doneButton = ThemeButton(title: "완료")
 
     // MARK: - Lifecycles
     

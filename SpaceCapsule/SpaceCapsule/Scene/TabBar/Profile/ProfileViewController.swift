@@ -29,6 +29,7 @@ final class ProfileViewController: UIViewController, BaseViewController {
     var viewModel: ProfileViewModel?
     let profileView = ProfileView()
     fileprivate var currentNonce: String?
+    
     override func loadView() {
         view = profileView
     }

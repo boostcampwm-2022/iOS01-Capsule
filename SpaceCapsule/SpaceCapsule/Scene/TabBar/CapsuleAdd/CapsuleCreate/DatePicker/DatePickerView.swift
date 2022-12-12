@@ -32,18 +32,9 @@ final class DatePickerView: UIView {
         return button
     }()
 
-    let doneButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("완료", for: .normal)
-        button.titleLabel?.font = .themeFont(ofSize: FrameResource.fontSize100)
-        button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .themeColor200
-        button.layer.cornerRadius = FrameResource.commonCornerRadius
-
-        return button
-    }()
-
-    let titleLabel = ThemeLabel(text: "추억 날짜 선택", size: FrameResource.fontSize120, color: .themeBlack)
+    let doneButton = ThemeButton(title: "완료")
+    
+    private let titleLabel = ThemeLabel(text: "추억 날짜 선택", size: FrameResource.fontSize120, color: .themeBlack)
 
     override init(frame: CGRect) {
         super.init(frame: frame)
