@@ -134,6 +134,9 @@
 		288A8EFF292360BC000229D2 /* CapsuleDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288A8EFE292360BC000229D2 /* CapsuleDetailCoordinator.swift */; };
 		288A8F03292362CC000229D2 /* CapsuleAddCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288A8F02292362CC000229D2 /* CapsuleAddCoordinator.swift */; };
 		288A8F0529236505000229D2 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288A8F0429236505000229D2 /* AppCoordinator.swift */; };
+		2894CBA02947301A00E8F5FE /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2894CB9F2947301A00E8F5FE /* Header.swift */; };
+		2894CBA22947303800E8F5FE /* Payload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2894CBA12947303800E8F5FE /* Payload.swift */; };
+		2894CBA52947307900E8F5FE /* RefreshTokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2894CBA42947307900E8F5FE /* RefreshTokenResponse.swift */; };
 		28A700BB29358F0F0049FAF8 /* GeoPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A700BA29358F0F0049FAF8 /* GeoPoint.swift */; };
 		28A700D52938AE100049FAF8 /* AnimationResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A700D42938AE100049FAF8 /* AnimationResource.swift */; };
 		28C8C97C292DC360005615BB /* SortPolicySelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C8C97B292DC35F005615BB /* SortPolicySelectionViewController.swift */; };
@@ -315,6 +318,9 @@
 		288A8EFE292360BC000229D2 /* CapsuleDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleDetailCoordinator.swift; sourceTree = "<group>"; };
 		288A8F02292362CC000229D2 /* CapsuleAddCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleAddCoordinator.swift; sourceTree = "<group>"; };
 		288A8F0429236505000229D2 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		2894CB9F2947301A00E8F5FE /* Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
+		2894CBA12947303800E8F5FE /* Payload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Payload.swift; sourceTree = "<group>"; };
+		2894CBA42947307900E8F5FE /* RefreshTokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenResponse.swift; sourceTree = "<group>"; };
 		28A700BA29358F0F0049FAF8 /* GeoPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoPoint.swift; sourceTree = "<group>"; };
 		28A700D42938AE100049FAF8 /* AnimationResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationResource.swift; sourceTree = "<group>"; };
 		28C8C97B292DC35F005615BB /* SortPolicySelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortPolicySelectionViewController.swift; sourceTree = "<group>"; };
@@ -825,6 +831,23 @@
 			path = CapsuleDetail;
 			sourceTree = "<group>";
 		};
+		2894CB9E29472FEC00E8F5FE /* JWT */ = {
+			isa = PBXGroup;
+			children = (
+				2894CB9F2947301A00E8F5FE /* Header.swift */,
+				2894CBA12947303800E8F5FE /* Payload.swift */,
+			);
+			path = JWT;
+			sourceTree = "<group>";
+		};
+		2894CBA32947305C00E8F5FE /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				2894CBA42947307900E8F5FE /* RefreshTokenResponse.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
 		28C8C97A292DC2C0005615BB /* SortPolicySelection */ = {
 			isa = PBXGroup;
 			children = (
@@ -869,10 +892,12 @@
 		4A9E91402925D51B00B7CC5C /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				0DB746AD292DF8F6005FF249 /* Capsule.swift */,
-				0DCEED302932101B006EB2B4 /* UserInfo.swift */,
-				28A700BA29358F0F0049FAF8 /* GeoPoint.swift */,
 				0D1331C6293842D300B2CD28 /* Address.swift */,
+				0DB746AD292DF8F6005FF249 /* Capsule.swift */,
+				28A700BA29358F0F0049FAF8 /* GeoPoint.swift */,
+				0DCEED302932101B006EB2B4 /* UserInfo.swift */,
+				2894CBA32947305C00E8F5FE /* Response */,
+				2894CB9E29472FEC00E8F5FE /* JWT */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1160,6 +1185,7 @@
 				288A8E9B29235A6E000229D2 /* SignInView.swift in Sources */,
 				288A8ED529235C6F000229D2 /* CapsuleCreateViewController.swift in Sources */,
 				0DCEED3529324188006EB2B4 /* LocationError.swift in Sources */,
+				2894CBA02947301A00E8F5FE /* Header.swift in Sources */,
 				288A8EC629235BBD000229D2 /* CapsuleMapViewModel.swift in Sources */,
 				28A700BB29358F0F0049FAF8 /* GeoPoint.swift in Sources */,
 				0D77D7C9292B5D490038D054 /* SelectButton.swift in Sources */,
@@ -1208,8 +1234,10 @@
 				0D752DB32944A964004A704C /* UIImage+resize.swift in Sources */,
 				0D4C11372927489D00B1C2B6 /* UIViewPreview.swift in Sources */,
 				288A8EB229235B5A000229D2 /* ProfileView.swift in Sources */,
+				2894CBA22947303800E8F5FE /* Payload.swift in Sources */,
 				28419EA52944C8BD00266AB6 /* Data+.swift in Sources */,
 				599C1A48292CC99A00517E93 /* KingReceiver.swift in Sources */,
+				2894CBA52947307900E8F5FE /* RefreshTokenResponse.swift in Sources */,
 				599C1A49292CC99A00517E93 /* ImageCache.swift in Sources */,
 				0DA05E1D29308B8400B08FA5 /* CustomNavigationController.swift in Sources */,
 				288A8ED029235BF9000229D2 /* HomeCoordinator.swift in Sources */,

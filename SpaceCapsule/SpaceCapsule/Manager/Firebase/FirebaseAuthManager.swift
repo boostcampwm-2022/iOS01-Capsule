@@ -10,39 +10,7 @@ import FirebaseAuth
 import Foundation
 import SwiftJWT
 
-struct Header: Encodable {
-    let alg = "ES256"
-    let kid = "4979Z7MUXJ"
-}
-
-struct Payload: Claims {
-    var iss = "4G6ZD4247R"
-    var iat = Date().epochIATTimeStamp
-    var exp = Date().epochEXPTimeStamp
-    var aud = "https://appleid.apple.com"
-    var sub = "com.boostcamp.BoogieSpaceCapsule"
-}
-
-struct RefreshTokenResponse: Decodable {
-    let accessToken: String?
-    let refreshToken: String?
-    let idToken: String?
-
-    init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        accessToken = try? values.decode(String.self, forKey: .accessToken)
-        refreshToken = try? values.decode(String.self, forKey: .refreshToken)
-        idToken = try? values.decode(String.self, forKey: .idToken)
-    }
-
-    enum CodingKeys: String, CodingKey {
-        case accessToken = "access_token"
-        case refreshToken = "refresh_token"
-        case idToken = "id_token"
-    }
-}
-
-class FirebaseAuthManager {
+final class FirebaseAuthManager {
     static let shared = FirebaseAuthManager()
     let auth = Auth.auth()
 
