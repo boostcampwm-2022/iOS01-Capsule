@@ -47,12 +47,12 @@ extension KingReceiverWrapper where Base: UIImageView {
     }
 
     func setImage(with data: Data, placeholder: UIImage? = nil, width: CGFloat, scale: CGFloat = 1) {
-        guard let image = UIImage(data: data) else {
+        guard let image = UIImage.resize(data: data, to: base.frame.size, scale: scale) else {
             base.image = placeholder
             return
         }
         
-        base.image = image.resize(newWidth: width, scale: scale)
+        base.image = image
     }
 
     /// 로딩 indicator 시작
