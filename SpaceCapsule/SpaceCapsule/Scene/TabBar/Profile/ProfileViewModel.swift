@@ -18,7 +18,7 @@ final class ProfileViewModel: BaseViewModel {
         var tapSetupNotification = PublishSubject<Void>()
         var tapSetting = PublishSubject<Void>()
         var tapSignOut = PublishSubject<Void>()
-        var tapWithdrawal = PublishSubject<Void>()
+        var tapDeleteAccount = PublishSubject<Void>()
     }
 
     init() {
@@ -45,9 +45,10 @@ final class ProfileViewModel: BaseViewModel {
                 print(error.localizedDescription)
                 UserDefaultsManager.saveData(data: true, key: .isRegistered)
                 return
+            } else {
+                UserDefaultsManager.saveData(data: false, key: .isRegistered)
+                self.signOut()
             }
         }
-        UserDefaultsManager.saveData(data: false, key: .isRegistered)
-        signOut()
     }
 }

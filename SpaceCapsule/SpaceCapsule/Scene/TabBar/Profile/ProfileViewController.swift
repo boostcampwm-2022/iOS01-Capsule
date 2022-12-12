@@ -5,6 +5,9 @@
 //  Created by young june Park on 2022/11/15.
 //
 
+import AuthenticationServices
+import CryptoKit
+import FirebaseAuth
 import RxCocoa
 import RxSwift
 import UIKit
@@ -25,7 +28,7 @@ final class ProfileViewController: UIViewController, BaseViewController {
     var disposeBag = DisposeBag()
     var viewModel: ProfileViewModel?
     let profileView = ProfileView()
-
+    fileprivate var currentNonce: String?
     override func loadView() {
         view = profileView
     }
@@ -95,7 +98,7 @@ final class ProfileViewController: UIViewController, BaseViewController {
             }
             .disposed(by: disposeBag)
 
-        viewModel.input.tapWithdrawal
+        viewModel.input.tapDeleteAccount
             .withUnretained(self)
             .bind { owner, _ in
                 owner.showDeleteAccountAlert()
@@ -118,7 +121,7 @@ final class ProfileViewController: UIViewController, BaseViewController {
         let alertController = UIAlertController(title: "회원 탈퇴", message: "탈퇴 하시겠습니까?", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let acceptAction = UIAlertAction(title: "OK", style: .destructive, handler: { [weak self] _ in
-            self?.viewModel?.deleteAccount()
+            self?.tapDeleteAccount()
         })
         alertController.addAction(cancelAction)
         alertController.addAction(acceptAction)
@@ -131,5 +134,88 @@ final class ProfileViewController: UIViewController, BaseViewController {
         }
         
         UIApplication.shared.open(url)
+    }
+
+    func tapDeleteAccount() {
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        let request = appleIDProvider.createRequest()
+        request.requestedScopes = [.fullName, .email]
+
+        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        authorizationController.delegate = self
+        authorizationController.presentationContextProvider = self
+        authorizationController.performRequests()
+    }
+}
+
+extension ProfileViewController: ASAuthorizationControllerDelegate {
+    func authorizationController(
+        controller: ASAuthorizationController,
+        didCompleteWithAuthorization authorization: ASAuthorization
+    ) {
+        if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
+            if let authorizationCode = appleIDCredential.authorizationCode,
+               let codeString = String(data: authorizationCode, encoding: .utf8) {
+                UserDefaultsManager<String>.saveData(data: codeString, key: .authorizationCode)
+                viewModel?.deleteAccount()
+            }
+        }
+    }
+
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        print("Sign in with Apple errored: \(error)")
+    }
+}
+
+extension ProfileViewController: ASAuthorizationControllerPresentationContextProviding {
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return view.window ?? ASPresentationAnchor()
+    }
+}
+
+extension ProfileViewController {
+    private func sha256(_ input: String) -> String {
+        let inputData = Data(input.utf8)
+        let hashedData = SHA256.hash(data: inputData)
+        let hashString = hashedData.compactMap {
+            String(format: "%02x", $0)
+        }.joined()
+
+        return hashString
+    }
+
+    // Adapted from https://auth0.com/docs/api-auth/tutorials/nonce#generate-a-cryptographically-random-nonce
+    private func randomNonceString(length: Int = 32) -> String {
+        precondition(length > 0)
+        let charset: [Character] =
+            Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
+        var result = ""
+        var remainingLength = length
+
+        while remainingLength > 0 {
+            let randoms: [UInt8] = (0 ..< 16).map { _ in
+                var random: UInt8 = 0
+                let errorCode = SecRandomCopyBytes(kSecRandomDefault, 1, &random)
+                if errorCode != errSecSuccess {
+                    fatalError(
+                        "Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)"
+                    )
+                }
+                return random
+            }
+
+            randoms.forEach { random in
+                if remainingLength == 0 {
+                    return
+                }
+
+                if random < charset.count {
+                    result.append(charset[Int(random)])
+                    remainingLength -= 1
+                }
+            }
+        }
+
+        return result
     }
 }
