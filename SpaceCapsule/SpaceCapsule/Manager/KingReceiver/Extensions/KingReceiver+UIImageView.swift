@@ -46,8 +46,13 @@ extension KingReceiverWrapper where Base: UIImageView {
         }
     }
 
-    func setImage(with data: Data, placeholder: UIImage? = nil, width: CGFloat, scale: CGFloat = 1) {
-        guard let image = UIImage.resize(data: data, to: base.frame.size, scale: scale) else {
+    func setImage(
+        with data: Data,
+        placeholder: UIImage? = nil,
+        to targetSize: CGSize,
+        scale: CGFloat = 1
+    ) {
+        guard let image = UIImage.resize(data: data, to: targetSize, scale: scale) else {
             base.image = placeholder
             return
         }
