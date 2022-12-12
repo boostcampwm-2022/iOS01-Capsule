@@ -10,7 +10,7 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-final class CapsuleMapViewModel: BaseViewModel {
+final class CapsuleMapViewModel: BaseViewModel, CapsuleCellNeedable {
     var disposeBag: DisposeBag = DisposeBag()
     var coordinator: CapsuleMapCoordinator?
 
@@ -74,22 +74,5 @@ final class CapsuleMapViewModel: BaseViewModel {
         }
 
         output.annotations.accept(annotations)
-    }
-    
-    private func getCellItem(with uuid: String) -> ListCapsuleCellItem? {
-        guard let capsule = AppDataManager.shared.capsule(uuid: uuid) else {
-            return nil
-        }
-        
-        let capsuleCellItem = ListCapsuleCellItem (
-            uuid: capsule.uuid,
-            thumbnailImageURL: capsule.images.first,
-            address: capsule.simpleAddress,
-            closedDate: capsule.closedDate,
-            memoryDate: capsule.memoryDate,
-            coordinate: capsule.geopoint.coordinate
-        )
-
-        return capsuleCellItem
     }
 }

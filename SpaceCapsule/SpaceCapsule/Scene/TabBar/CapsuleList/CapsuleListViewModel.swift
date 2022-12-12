@@ -10,7 +10,7 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-final class CapsuleListViewModel: BaseViewModel {
+final class CapsuleListViewModel: BaseViewModel, CapsuleCellNeedable {
     var disposeBag = DisposeBag()
     var coordinator: CapsuleListCoordinator?
     var input = Input()
@@ -57,18 +57,7 @@ final class CapsuleListViewModel: BaseViewModel {
             .withUnretained(self)
             .subscribe(
                 onNext: { owner, capsuleList in
-                    let capsuleCellItems = capsuleList.map { capsule in
-                        ListCapsuleCellItem(uuid: capsule.uuid,
-                                            thumbnailImageURL: capsule.images.first,
-                                            address: capsule.simpleAddress,
-                                            closedDate: capsule.closedDate,
-                                            memoryDate: capsule.memoryDate,
-                                            coordinate: CLLocationCoordinate2D(
-                                                latitude: capsule.geopoint.latitude,
-                                                longitude: capsule.geopoint.longitude
-                                            )
-                        )
-                    }
+                    let capsuleCellItems = capsuleList.compactMap { owner.getCellItem(with: $0.uuid) }
                     owner.sort(capsuleCellItems: capsuleCellItems, by: owner.input.sortPolicy.value)
                 },
                 onError: { error in
@@ -100,6 +89,4 @@ final class CapsuleListViewModel: BaseViewModel {
         }
         output.capsuleCellItems.accept(items)
     }
-    
-
 }
