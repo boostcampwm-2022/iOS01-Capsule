@@ -63,6 +63,11 @@ final class HomeViewController: UIViewController, BaseViewController {
         }
     }
     
+    private func getIndexRange(index: Int) -> ClosedRange<CGFloat> {
+        let index = CGFloat(index)
+        return (index - 0.1)...(index + 0.1)
+    }
+    
     // MARK: - Rx
 
     func bind() {
@@ -103,8 +108,7 @@ final class HomeViewController: UIViewController, BaseViewController {
             .withUnretained(self)
             .subscribe(
                 onNext: { owner, indexPath in
-                    let index = CGFloat(indexPath.item)
-                    if (index - 0.1)...(index + 0.1) ~= owner.centerIndex {
+                    if owner.getIndexRange(index: indexPath.item) ~= owner.centerIndex {
                         if let cell = owner.homeView.capsuleCollectionView.cellForItem(at: indexPath) as? HomeCapsuleCell {
                             let pressedDownTransform = CGAffineTransform(scaleX: 0.96, y: 0.96)
                             UIView.animate(
@@ -123,8 +127,7 @@ final class HomeViewController: UIViewController, BaseViewController {
             .withUnretained(self)
             .subscribe(
                 onNext: { owner, indexPath in
-                    let index = CGFloat(indexPath.item)
-                    if (index - 0.1)...(index + 0.1) ~= owner.centerIndex {
+                    if owner.getIndexRange(index: indexPath.item) ~= owner.centerIndex {
                         if let cell = owner.homeView.capsuleCollectionView.cellForItem(at: indexPath) as? HomeCapsuleCell {
                             let originalTransform = CGAffineTransform(scaleX: 1, y: 1)
                             UIView.animate(
@@ -143,9 +146,7 @@ final class HomeViewController: UIViewController, BaseViewController {
             .withUnretained(self)
             .subscribe(
                 onNext: { owner, indexPath in
-                    let index = CGFloat(indexPath.item)
-                    print(owner.centerIndex)
-                    if (index - 0.1)...(index + 0.1) ~= owner.centerIndex {
+                    if owner.getIndexRange(index: indexPath.item) ~= owner.centerIndex {
                         if let cell = owner.homeView.capsuleCollectionView.cellForItem(at: indexPath) as? HomeCapsuleCell {
                             guard let uuid = cell.uuid else {
                                 return
