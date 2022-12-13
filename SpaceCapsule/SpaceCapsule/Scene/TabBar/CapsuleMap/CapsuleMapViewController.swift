@@ -105,10 +105,6 @@ final class CapsuleMapViewController: UIViewController, BaseViewController {
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 owner.markIfOpenable()
-
-                if let currentLocation = owner.locationManager.location?.coordinate {
-                    owner.addCircleLocation(at: currentLocation)
-                }
             })
             .disposed(by: disposeBag)
 
@@ -209,7 +205,7 @@ final class CapsuleMapViewController: UIViewController, BaseViewController {
         let newRegion = CLCircularRegion(
             center: currentLocation,
             radius: Settings.monitoringUpdateRange,
-            identifier: "regionsToMonitor" // TODO: ??
+            identifier: "regionsToMonitor"
         )
 
         newRegion.notifyOnExit = true
@@ -239,34 +235,18 @@ final class CapsuleMapViewController: UIViewController, BaseViewController {
     }
 }
 
-// TODO: Overlay 필요없을 때 삭제
 extension CapsuleMapViewController: MKMapViewDelegate {
-    private func addCircleLocation(at center: CLLocationCoordinate2D) {
-//        if let previousOverlay = smallOverlay {
-//            mapView.removeOverlay(previousOverlay)
-//        }
-
-//        let circle = MKCircle(center: center, radius: Settings.openableRange)
-//        mapView.addOverlay(circle)
-//        smallOverlay = circle
-    }
-
-    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        if let circleOverlay = overlay as? MKCircle {
-            let circleRenderer = MKCircleRenderer(overlay: circleOverlay)
-            circleRenderer.fillColor = .white
-            circleRenderer.alpha = 0.2
-            circleRenderer.strokeColor = .black
-            return circleRenderer
-        }
-
-        return MKOverlayRenderer(overlay: overlay)
-    }
-
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         switch annotation {
         case is CustomAnnotation:
-            return CustomAnnotationView(annotation: annotation, reuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
+            let annotationView = CustomAnnotationView(annotation: annotation, reuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
+            return annotationView
+
+        case is MKUserLocation:
+            let userLocationview = MKUserLocationView(annotation: annotation, reuseIdentifier: "userLocation")
+            userLocationview.zPriority = .max
+            return userLocationview
+
         default:
             return nil
         }

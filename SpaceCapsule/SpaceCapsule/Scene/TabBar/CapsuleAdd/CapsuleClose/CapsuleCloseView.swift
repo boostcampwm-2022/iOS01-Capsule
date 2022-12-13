@@ -9,7 +9,7 @@ import AVFoundation
 import SnapKit
 import UIKit
 
-final class CapsuleCloseView: UIView, BaseView {
+final class CapsuleCloseView: UIView, BaseView, UnOpenable {
     struct Item {
         let closedDateString: String
         let memoryDateString: String
@@ -17,36 +17,24 @@ final class CapsuleCloseView: UIView, BaseView {
         let thumbnailImageURL: String
     }
 
-    private let thumbnailImageView = {
-        let imageView = UIImageView()
-        imageView.layer.cornerRadius = FrameResource.capsuleThumbnailWidth / 2
-        imageView.clipsToBounds = true
-        imageView.contentMode = .scaleAspectFill
-        return imageView
+    var thumbnailImageView = ThemeThumbnailImageView(frame: .zero, width: UIScreen.main.bounds.width * FrameResource.capsuleThumbnailWidthRatio)
+
+    let blurEffectView = CapsuleBlurEffectView()
+
+    var lockImageView = {
+        let lockImageView = UIImageView()
+        lockImageView.image = .lock
+        lockImageView.tintColor = .themeGray200
+        return lockImageView
     }()
 
-    private let thumbnailImageContainerView = {
-        let view = UIView()
-        view.layer.shadowOffset = FrameResource.shadowOffset
-        view.layer.shadowRadius = FrameResource.shadowRadius
-        view.layer.shadowOpacity = FrameResource.shadowOpacity
-        view.layer.cornerRadius = FrameResource.capsuleThumbnailWidth / 2
-        return view
+    var dateLabel = {
+        let dateLabel = ThemeLabel(text: nil, size: FrameResource.fontSize80, color: .themeGray200)
+        dateLabel.textAlignment = .center
+        return dateLabel
     }()
 
-    private let blurEffectView = CapsuleBlurEffectView()
-
-    private let closedImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = .lock
-        imageView.tintColor = .themeGray200
-
-        return imageView
-    }()
-
-    private let closedDateLabel = ThemeLabel(size: FrameResource.fontSize90, color: .themeGray200)
-
-    private let descriptionLabel = {
+    var descriptionLabel = {
         let label = ThemeLabel(size: FrameResource.fontSize140, color: .themeGray300)
         label.numberOfLines = 3
         label.textAlignment = .center
@@ -60,7 +48,6 @@ final class CapsuleCloseView: UIView, BaseView {
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .themeColor200
         button.layer.cornerRadius = FrameResource.commonCornerRadius
-
         return button
     }()
 
@@ -85,7 +72,7 @@ final class CapsuleCloseView: UIView, BaseView {
     }
 
     func configure(item: Item) {
-        closedDateLabel.text = "밀봉시간: \(item.closedDateString)"
+        dateLabel.text = "밀봉시간: \(item.closedDateString)"
 
         descriptionLabel.text = """
         \(item.memoryDateString)
@@ -99,64 +86,46 @@ final class CapsuleCloseView: UIView, BaseView {
             color: .themeGray400
         )
 
-        thumbnailImageView.kr.setImage(with: item.thumbnailImageURL, placeholder: .empty, scale: FrameResource.closedImageScale)
+        thumbnailImageView.imageView.kr.setImage(with: item.thumbnailImageURL, placeholder: .empty, scale: FrameResource.closedImageScale)
+
+        applyUnOpenableEffect()
     }
 
     func addSubViews() {
-        [blurEffectView, closedImageView, closedDateLabel].forEach {
-            thumbnailImageView.addSubview($0)
-        }
-
-        [thumbnailImageContainerView, descriptionLabel, closeButton].forEach {
+        [thumbnailImageView, descriptionLabel, closeButton].forEach {
             addSubview($0)
         }
-
-        thumbnailImageContainerView.addSubview(thumbnailImageView)
     }
 
     func makeConstraints() {
-        blurEffectView.snp.makeConstraints {
-            $0.center.equalToSuperview()
-            $0.width.height.equalToSuperview()
-        }
-
-        closedImageView.snp.makeConstraints {
-            $0.center.equalToSuperview()
-            $0.width.height.equalTo(FrameResource.closedIconSize)
-        }
-
-        closedDateLabel.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.top.equalTo(closedImageView.snp.bottom).offset(FrameResource.closedDateOffset)
-        }
-
-        thumbnailImageContainerView.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.centerY.equalToSuperview().multipliedBy(0.8)
-            $0.width.equalTo(FrameResource.capsuleThumbnailWidth)
-            $0.height.equalTo(FrameResource.capsuleThumbnailHeight)
-        }
-
         thumbnailImageView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.centerX.equalToSuperview()
+            $0.centerY.equalToSuperview().multipliedBy(0.7)
+            $0.width.equalTo(UIScreen.main.bounds.width * FrameResource.capsuleThumbnailWidthRatio)
+            $0.height.equalTo(UIScreen.main.bounds.width * FrameResource.capsuleThumbnailWidthRatio * FrameResource.capsuleThumbnailHWRatio)
         }
 
         descriptionLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.bottom.equalTo(closeButton.snp.top).offset(-FrameResource.buttonHeight)
+            $0.top.equalTo(self.snp.centerY).multipliedBy(0.7)
+                .offset(FrameResource.capsuleThumbnailHeight / 2 + AnimationResource.capsuleMoveHeight)
+            $0.bottom.equalTo(closeButton.snp.top).offset(-FrameResource.spacing200).priority(999)
         }
 
         closeButton.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(FrameResource.horizontalPadding)
             $0.trailing.equalToSuperview().offset(-FrameResource.horizontalPadding)
-            $0.bottom.equalToSuperview().offset(-FrameResource.buttonHeight)
+            $0.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-FrameResource.spacing200)
             $0.height.equalTo(FrameResource.buttonHeight)
         }
     }
 
     func animate() {
-        UIView.animate(withDuration: 1, delay: 0, options: [.repeat, .autoreverse]) {
-            self.thumbnailImageContainerView.transform = .init(translationX: 0, y: FrameResource.floatingOffsetY)
+        UIView.animate(withDuration: AnimationResource.capsuleMoveDuration,
+                       delay: 0,
+                       options: [.repeat, .autoreverse]
+        ) {
+            self.thumbnailImageView.transform = .init(translationX: 0, y: AnimationResource.capsuleMoveHeight)
         }
     }
 }

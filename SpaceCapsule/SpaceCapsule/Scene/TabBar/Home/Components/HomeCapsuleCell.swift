@@ -14,21 +14,21 @@ final class HomeCapsuleCell: UICollectionViewCell, UnOpenable {
     var thumbnailImageView = ThemeThumbnailImageView(frame: .zero, width: FrameResource.homeCapsuleCellWidth)
 
     var titleLabel = {
-        let label = ThemeLabel(text: "가장 오래된 캡슐", size: FrameResource.fontSize120, color: .themeColor200)
+        let label = ThemeLabel(size: FrameResource.fontSize120, color: .themeColor200)
         label.numberOfLines = 1
         label.textAlignment = .center
         return label
     }()
     
     var descriptionLabel = {
-        let label = ThemeLabel(text: "2017.10.23 서울시 성동구\nD+1784", size: FrameResource.fontSize100, color: .themeGray300)
+        let label = ThemeLabel(size: FrameResource.fontSize100, color: .themeGray300)
         label.numberOfLines = 3
         label.textAlignment = .center
         return label
     }()
     
     var dateLabel = {
-        let dateLabel = ThemeLabel(text: nil, size: FrameResource.fontSize100, color: .themeGray200)
+        let dateLabel = ThemeLabel(size: FrameResource.fontSize80, color: .themeGray200)
         dateLabel.textAlignment = .center
         return dateLabel
     }()
@@ -53,7 +53,14 @@ final class HomeCapsuleCell: UICollectionViewCell, UnOpenable {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        thumbnailImageView.imageView.subviews.forEach {
+            $0.removeFromSuperview()
+        }
+    }
+    
     func addSubviews() {
         [thumbnailImageView, titleLabel, descriptionLabel].forEach {
             self.contentView.addSubview($0)
@@ -85,7 +92,7 @@ final class HomeCapsuleCell: UICollectionViewCell, UnOpenable {
         if let thumbnailURL = capsuleCellModel.thumbnailImageURL {
             thumbnailImageView.imageView.kr.setImage(with: thumbnailURL, placeholder: .empty, scale: FrameResource.openableImageScale)
         }
-        dateLabel.text = "밀봉시간:\(capsuleCellModel.closedDate.dateString)"
+        dateLabel.text = "밀봉시간: \(capsuleCellModel.closedDate.dateTimeString)"
         titleLabel.text = capsuleCellModel.type.title
         descriptionLabel.text = capsuleCellModel.description()
         

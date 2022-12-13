@@ -56,7 +56,6 @@ final class HomeViewModel: BaseViewModel, CapsuleCellNeedable {
                     if capsuleList.isEmpty {
                         return
                     }
-                    
                     owner.output.featuredCapsuleCellItems.accept(
                         CapsuleType.allCases.shuffled()
                             .map { owner.getHomeCapsuleCellItem(capsules: capsuleList, type: $0) }
@@ -143,5 +142,9 @@ final class HomeViewModel: BaseViewModel, CapsuleCellNeedable {
             return firstDistance < secondDistance
         }
         return orderedCapsules
+    }
+    
+    func getMostOpened(capsules: [Capsule]) -> Capsule? {
+        return capsules.min(by: { $0.openCount > $1.openCount })
     }
 }

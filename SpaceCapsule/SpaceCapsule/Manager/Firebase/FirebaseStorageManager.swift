@@ -42,4 +42,16 @@ final class FirebaseStorageManager {
             return Disposables.create {}
         }
     }
+
+    func downloadAuthP8(urlString: String, completion: @escaping (Data?) -> Void) {
+        let storageReference = storage.reference(forURL: urlString)
+        let megaByte = Int64(1 * 1024 * 1024)
+        storageReference.getData(maxSize: megaByte) { data, _ in
+            guard let data = data else {
+                completion(nil)
+                return
+            }
+            completion(data)
+        }
+    }
 }

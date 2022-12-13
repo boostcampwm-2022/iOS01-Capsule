@@ -25,8 +25,7 @@ final class CapsuleMapCoordinator: Coordinator, MovableToCapsuleAccess {
 
         navigationController?.setViewControllers([capsuleMapViewController], animated: true)
     }
-
-
+    
     func tabBarAppearance(isHidden: Bool) {
         guard let parent = parent as? TabBarCoordinator else {
             return

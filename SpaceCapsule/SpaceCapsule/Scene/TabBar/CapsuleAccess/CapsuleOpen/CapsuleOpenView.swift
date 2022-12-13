@@ -10,9 +10,9 @@ import SnapKit
 import UIKit
 
 final class CapsuleOpenView: UIView, BaseView, UnOpenable {
-    lazy var thumbnailImageView = ThemeThumbnailImageView(frame: .zero, width: FrameResource.capsuleThumbnailWidth)
+    var thumbnailImageView = ThemeThumbnailImageView(frame: .zero, width: UIScreen.main.bounds.width * FrameResource.capsuleThumbnailWidthRatio)
 
-    lazy var descriptionLabel = {
+    var descriptionLabel = {
         let label = ThemeLabel(text: nil, size: FrameResource.fontSize140, color: .themeGray300)
         label.numberOfLines = 3
         label.textAlignment = .center
@@ -21,14 +21,14 @@ final class CapsuleOpenView: UIView, BaseView, UnOpenable {
 
     let blurEffectView = CapsuleBlurEffectView()
 
-    lazy var lockImageView = {
+    var lockImageView = {
         let lockImageView = UIImageView()
         lockImageView.image = .lock
         lockImageView.tintColor = .themeGray200
         return lockImageView
     }()
 
-    lazy var dateLabel = {
+    var dateLabel = {
         let dateLabel = ThemeLabel(text: nil, size: FrameResource.fontSize80, color: .themeGray200)
         dateLabel.textAlignment = .center
         return dateLabel
@@ -49,7 +49,7 @@ final class CapsuleOpenView: UIView, BaseView, UnOpenable {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
         configure()
         addSubViews()
         makeConstraints()
@@ -81,9 +81,11 @@ final class CapsuleOpenView: UIView, BaseView, UnOpenable {
             size: FrameResource.fontSize140,
             color: .themeGray400
         )
-        dateLabel.text = capsuleCellItem.closedDate.dateTimeString
+        dateLabel.text = "밀봉시간: \(capsuleCellItem.closedDate.dateTimeString)"
+        
         if !capsuleCellItem.isOpenable() {
             openButton.backgroundColor = .themeGray200
+//            openButton.isEnabled = false
             applyUnOpenableEffect()
         }
     }
@@ -98,19 +100,21 @@ final class CapsuleOpenView: UIView, BaseView, UnOpenable {
         thumbnailImageView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.centerY.equalToSuperview().multipliedBy(AnimationResource.fromOriginY)
-            $0.width.equalTo(FrameResource.capsuleThumbnailWidth)
-            $0.height.equalTo(FrameResource.capsuleThumbnailHeight)
+            $0.width.equalTo(UIScreen.main.bounds.width * FrameResource.capsuleThumbnailWidthRatio)
+            $0.height.equalTo(UIScreen.main.bounds.width * FrameResource.capsuleThumbnailWidthRatio * FrameResource.capsuleThumbnailHWRatio)
         }
 
         descriptionLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(self.snp.centerY).multipliedBy(0.8).offset(FrameResource.openCapsuleVerticalPadding + FrameResource.capsuleThumbnailHeight / 2)
+            $0.top.equalTo(self.snp.centerY).multipliedBy(0.7)
+                .offset(FrameResource.capsuleThumbnailHeight / 2 + AnimationResource.capsuleMoveHeight)
+            $0.bottom.equalTo(openButton.snp.top).offset(-FrameResource.spacing200).priority(999)
         }
 
         openButton.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(FrameResource.horizontalPadding)
             $0.trailing.equalToSuperview().offset(-FrameResource.horizontalPadding)
-            $0.bottom.equalTo(safeAreaLayoutGuide.snp.bottom)
+            $0.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-FrameResource.spacing200)
             $0.height.equalTo(FrameResource.buttonHeight)
         }
     }
@@ -131,7 +135,8 @@ final class CapsuleOpenView: UIView, BaseView, UnOpenable {
 
     func shakeAnimate() {
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
-        let keyPath = "shake"
+        
+        let keyPath = "position"
         let animation = CABasicAnimation(keyPath: keyPath)
         animation.duration = AnimationResource.capsuleShakeDuration
         animation.repeatCount = AnimationResource.capsuleShakeRepeat
@@ -144,6 +149,9 @@ final class CapsuleOpenView: UIView, BaseView, UnOpenable {
             x: thumbnailImageView.center.x + AnimationResource.capsuleShakeWidth,
             y: thumbnailImageView.center.y
         )
+        animation.isRemovedOnCompletion = true
+        
         thumbnailImageView.layer.add(animation, forKey: keyPath)
+
     }
 }

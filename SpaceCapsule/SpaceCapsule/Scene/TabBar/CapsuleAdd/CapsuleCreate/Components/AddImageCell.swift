@@ -11,16 +11,17 @@ import UIKit
 final class AddImageCell: UICollectionViewCell {
     let imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
 
         return imageView
     }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
         backgroundColor = .themeBlack
-        
+
         addSubViews()
         makeConstraints()
     }
@@ -31,7 +32,12 @@ final class AddImageCell: UICollectionViewCell {
     }
 
     func configure(data: Data) {
-        imageView.kr.setImage(with: data, placeholder: .empty, width: frame.size.width)
+        imageView.kr.setImage(
+            with: data,
+            placeholder: .empty,
+            to: frame.size,
+            scale: FrameResource.openableImageScale
+        )
     }
 
     private func addSubViews() {

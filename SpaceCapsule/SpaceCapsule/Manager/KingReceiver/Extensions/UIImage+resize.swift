@@ -21,8 +21,9 @@ extension UIImage {
             kCGImageSourceCreateThumbnailWithTransform: true,
             kCGImageSourceThumbnailMaxPixelSize: maxDimension,
         ] as CFDictionary
-
+        
         guard let resizedImage = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, resizingOptions) else {
+            print("resized error")
             return nil
         }
 

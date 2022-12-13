@@ -45,11 +45,11 @@ final class CustomAnnotationView: MKAnnotationView {
             return
         }
 
-        let newWidth: CGFloat = 40
+        let newWidth: CGFloat = FrameResource.annotationSize
         let ratio = newWidth / pinImage.size.width
         let newHeight = pinImage.size.height * ratio
         let size = CGSize(width: newWidth, height: newHeight)
 
-        image = UIImage.resize(data: imageData, to: size, scale: 1)
+        image = UIImage.resize(data: imageData, to: size, scale: FrameResource.openableImageScale)
     }
 }

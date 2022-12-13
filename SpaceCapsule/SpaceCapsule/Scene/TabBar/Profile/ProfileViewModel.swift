@@ -13,19 +13,71 @@ final class ProfileViewModel: BaseViewModel {
     weak var coordinator: ProfileCoordinator?
 
     var input = Input()
+    var output = Output()
 
     struct Input {
         var tapSetupNotification = PublishSubject<Void>()
         var tapSetting = PublishSubject<Void>()
         var tapSignOut = PublishSubject<Void>()
-        var tapWithdrawal = PublishSubject<Void>()
+        var tapDeleteAccount = PublishSubject<Void>()
+    }
+
+    struct Output {
+        var clientSecret = PublishSubject<String>()
+        var refreshToken = PublishSubject<String>()
+        var revokeToken = PublishSubject<Void>()
+        var deleteUserFromFireStore = PublishSubject<Void>()
+        var deleteUserFromAuth = PublishSubject<Void>()
     }
 
     init() {
         bind()
     }
 
-    func bind() {}
+    func bind() {
+        output.refreshToken.bind { refreshToken in
+            AppDataManager.shared.auth.revokeToken(refreshToken: refreshToken) { [weak self] error in
+                if let error = error {
+                    print(error.localizedDescription)
+                } else {
+                    self?.output.revokeToken.onNext(())
+                }
+            }
+        }.disposed(by: disposeBag)
+        
+        output.revokeToken.bind { [weak self] _ in
+            AppDataManager.shared.auth.deleteAccountFromFirestore { [weak self] error in
+                if let error = error {
+                    print(error.localizedDescription)
+                } else {
+                    self?.output.deleteUserFromFireStore.onNext(())
+                }
+            }
+        }.disposed(by: disposeBag)
+        
+        output.deleteUserFromFireStore.bind { [weak self] _ in
+            AppDataManager.shared.auth.deleteAccountFromFirestore { [weak self] error in
+                if let error = error {
+                    print(error.localizedDescription)
+                } else {
+                    self?.output.deleteUserFromAuth.onNext(())
+                }
+            }
+        }.disposed(by: disposeBag)
+        
+        output.deleteUserFromAuth.bind { [weak self] _ in
+            AppDataManager.shared.auth.deleteAccountFromAuth { [weak self] error in
+                if let error = error {
+                    print(error.localizedDescription)
+                    UserDefaultsManager.saveData(data: true, key: .isRegistered)
+                    return
+                } else {
+                    UserDefaultsManager.saveData(data: false, key: .isRegistered)
+                    self?.signOut()
+                }
+            }
+        }.disposed(by: disposeBag)
+    }
 
     func signOut() {
         AppDataManager.shared.auth.signOut { error in
@@ -40,14 +92,10 @@ final class ProfileViewModel: BaseViewModel {
     }
 
     func deleteAccount() {
-        AppDataManager.shared.auth.deleteAccount { error in
-            if let error = error {
-                print(error.localizedDescription)
-                UserDefaultsManager.saveData(data: true, key: .isRegistered)
-                return
+        AppDataManager.shared.auth.refreshToken { [weak self] refreshToken in
+            if let refreshToken = refreshToken {
+                self?.output.refreshToken.onNext(refreshToken)
             }
         }
-        UserDefaultsManager.saveData(data: false, key: .isRegistered)
-        signOut()
     }
 }

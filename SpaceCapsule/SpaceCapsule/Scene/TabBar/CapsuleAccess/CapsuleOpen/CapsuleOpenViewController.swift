@@ -17,12 +17,14 @@ final class CapsuleOpenViewController: UIViewController, BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view = capsuleOpenView
+
         if let capsuleCellItem = viewModel?.capsuleCellItem {
             capsuleOpenView.configure(capsuleCellItem: capsuleCellItem)
         }
+
         bind()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel?.input.viewWillAppear.onNext(())
@@ -47,24 +49,15 @@ final class CapsuleOpenViewController: UIViewController, BaseViewController {
             .disposed(by: disposeBag)
     }
 
-    private func showAlert() {
-        let alertController = UIAlertController(title: "캡슐 알림", message: "열 수 없는 캡슐입니다", preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        let acceptAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-        alertController.addAction(cancelAction)
-        alertController.addAction(acceptAction)
-        present(alertController, animated: true, completion: nil)
-    }
-
     func handleOpenButtonTap() {
         guard let capsuleCellItem = viewModel?.capsuleCellItem else {
             return
         }
+        
         if capsuleCellItem.isOpenable() {
-            capsuleOpenView.shakeAnimate()
             viewModel?.input.tapOpen.onNext(())
         } else {
-            showAlert()
+            capsuleOpenView.shakeAnimate()
         }
     }
 }
