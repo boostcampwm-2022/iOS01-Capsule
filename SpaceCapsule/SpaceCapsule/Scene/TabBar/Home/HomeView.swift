@@ -10,8 +10,8 @@ import UIKit
 
 final class HomeView: UIView, BaseView {
     // MARK: - UIComponents
-    lazy var mainLabel: ThemeLabel = ThemeLabel(
-        text: "none님의 공간캡슐 10개",
+    lazy var mainStatusLabel: StatusLabel = StatusLabel(
+        text: nil,
         size: 32,
         color: .themeGray300
     )
@@ -43,17 +43,17 @@ final class HomeView: UIView, BaseView {
         backgroundColor = .themeBackground
     }
     func addSubViews() {
-        [capsuleCollectionView, mainLabel].forEach {
+        [capsuleCollectionView, mainStatusLabel].forEach {
             addSubview($0)
         }
     }
     func makeConstraints() {
-        mainLabel.snp.makeConstraints {
+        mainStatusLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(self.safeAreaLayoutGuide).offset(FrameResource.verticalPadding)
         }
         capsuleCollectionView.snp.makeConstraints {
-            $0.top.equalTo(mainLabel.snp.bottom)
+            $0.top.equalTo(mainStatusLabel.snp.bottom)
             $0.bottom.equalTo(self.safeAreaLayoutGuide)
             $0.left.right.equalToSuperview()
         }

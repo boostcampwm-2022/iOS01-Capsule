@@ -11,6 +11,11 @@ import RxCocoa
 import RxSwift
 
 final class HomeViewModel: BaseViewModel, CapsuleCellNeedable {
+    struct UserCapsuleStatus {
+        let nickname: String
+        let capsuleCounts: Int
+    }
+    
     weak var coordinator: HomeCoordinator?
     let disposeBag = DisposeBag()
 
@@ -24,8 +29,8 @@ final class HomeViewModel: BaseViewModel, CapsuleCellNeedable {
     }
 
     struct Output: ViewModelOutput {
-        let mainLabelText = PublishRelay<String>()
         let featuredCapsuleCellItems = PublishRelay<[HomeCapsuleCellItem]>()
+        let userInfo = PublishRelay<UserCapsuleStatus>()
     }
 
     init() {
@@ -44,10 +49,14 @@ final class HomeViewModel: BaseViewModel, CapsuleCellNeedable {
             .withUnretained(self)
             .subscribe(
                 onNext: { owner, capsuleList in
-                    owner.output.mainLabelText.accept(owner.makeMainLabel(capsuleCount: capsuleList.count))
+                    let nickname = UserDefaultsManager<UserInfo>.loadData(key: .userInfo)?.nickname ?? "none"
+                    let status = UserCapsuleStatus(nickname: nickname, capsuleCounts: capsuleList.count)
+                    owner.output.userInfo.accept(status)
+                    
                     if capsuleList.isEmpty {
                         return
                     }
+                    
                     owner.output.featuredCapsuleCellItems.accept(
                         CapsuleType.allCases.shuffled()
                             .map { owner.getHomeCapsuleCellItem(capsules: capsuleList, type: $0) }
@@ -78,11 +87,6 @@ final class HomeViewModel: BaseViewModel, CapsuleCellNeedable {
                 }
             )
             .disposed(by: disposeBag)
-    }
-
-    private func makeMainLabel(capsuleCount: Int) -> String {
-        let nickname = UserDefaultsManager<UserInfo>.loadData(key: .userInfo)?.nickname ?? "none"
-        return "\(nickname)님이 생성한 공간캡슐 \(capsuleCount)개"
     }
 
     private func getHomeCapsuleCellItem(capsules: [Capsule], type: CapsuleType) -> HomeCapsuleCellItem? {
