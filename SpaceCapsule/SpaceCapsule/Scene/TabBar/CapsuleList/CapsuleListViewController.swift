@@ -14,7 +14,7 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
     var disposeBag = DisposeBag()
     var viewModel: CapsuleListViewModel?
 
-    private var emptyView: EmptyView?
+    private var emptyView: EmptyView? = EmptyView()
     private let capsuleListView = CapsuleListView()
     let refreshControl = UIRefreshControl()
 
@@ -23,7 +23,7 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         configureView()
         addSortBarButton()
         configureCollectionView()
@@ -35,16 +35,31 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
         super.viewWillAppear(animated)
         viewModel?.input.viewWillAppear.onNext(())
     }
-
+    
     private func configureView() {
         view.backgroundColor = .themeBackground
-        
-        view.addSubview(capsuleListView)
+    }
 
+    private func showEmptyView() {
+        emptyView = EmptyView()
+        guard let emptyView = emptyView else {
+            return
+        }
+        view.addSubview(emptyView)
+        
+        emptyView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+    }
+    
+    private func showCollectionView() {
+        view.addSubview(capsuleListView)
+        
         capsuleListView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(view.safeAreaLayoutGuide)
         }
+        viewModel?.input.refreshLoading.accept(false)
     }
 
     func bind() {
@@ -57,7 +72,41 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
             })
             .bind(onNext: {})
             .disposed(by: disposeBag)
-
+        
+        capsuleListView.collectionView.rx.itemHighlighted
+            .withUnretained(self)
+            .subscribe(
+                onNext: { owner, indexPath in
+                    if let cell = owner.capsuleListView.collectionView.cellForItem(at: indexPath) as? ListCapsuleCell {
+                        let pressedDownTransform = CGAffineTransform(scaleX: 0.96, y: 0.96)
+                        UIView.animate(
+                            withDuration: 0.2,
+                            delay: 0,
+                            usingSpringWithDamping: 0.4,
+                            initialSpringVelocity: 10,
+                            options: [.curveEaseInOut],
+                            animations: { cell.transform = pressedDownTransform }
+                        )
+                    }
+                }).disposed(by: disposeBag)
+        
+        capsuleListView.collectionView.rx.itemUnhighlighted
+            .withUnretained(self)
+            .subscribe(
+                onNext: { owner, indexPath in
+                    if let cell = owner.capsuleListView.collectionView.cellForItem(at: indexPath) as? ListCapsuleCell {
+                        let originalTransform = CGAffineTransform(scaleX: 1, y: 1)
+                        UIView.animate(
+                            withDuration: 0.4,
+                            delay: 0,
+                            usingSpringWithDamping: 0.4,
+                            initialSpringVelocity: 10,
+                            options: [.curveEaseInOut],
+                            animations: { cell.transform = originalTransform }
+                        )
+                    }
+                }).disposed(by: disposeBag)
+        
         capsuleListView.sortBarButtonItem.rx.tap
             .withLatestFrom(viewModel.input.sortPolicy)
             .withUnretained(self)
@@ -89,13 +138,13 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
         viewModel.input.capsuleCellItems
             .withUnretained(self)
             .bind { owner, capsuleCellItems in
+                owner.view.subviews.forEach({ $0.removeFromSuperview() })
                 if capsuleCellItems.isEmpty {
-                    owner.view = EmptyView()
+                    owner.showEmptyView()
                 } else {
                     owner.emptyView = nil
-                    owner.configureView()
+                    owner.showCollectionView()
                     owner.applySnapshot(capsuleCellModels: capsuleCellItems)
-                    owner.viewModel?.input.refreshLoading.accept(false)
                 }
             }
             .disposed(by: disposeBag)

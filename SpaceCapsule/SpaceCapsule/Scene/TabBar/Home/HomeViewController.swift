@@ -7,6 +7,7 @@
 
 import RxCocoa
 import RxSwift
+import SnapKit
 import UIKit
 
 final class HomeViewController: UIViewController, BaseViewController {
@@ -24,12 +25,9 @@ final class HomeViewController: UIViewController, BaseViewController {
 
     // MARK: - Lifecycles
 
-    override func loadView() {
-        view = homeView
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureView()
         bind()
 
         title = "홈"
@@ -39,7 +37,31 @@ final class HomeViewController: UIViewController, BaseViewController {
         super.viewWillAppear(animated)
         viewModel?.input.viewWillAppear.onNext(())
     }
-
+    
+    private func configureView() {
+        view.backgroundColor = .themeBackground
+    }
+    
+    private func showEmptyView() {
+        emptyView = EmptyView()
+        guard let emptyView = emptyView else {
+            return
+        }
+        view.addSubview(emptyView)
+        
+        emptyView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+    }
+    
+    private func showHomeView() {
+        view.addSubview(homeView)
+        
+        homeView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+    }
+    
     // MARK: - Rx
 
     func bind() {
@@ -48,14 +70,16 @@ final class HomeViewController: UIViewController, BaseViewController {
         }
         
         viewModel.output.featuredCapsuleCellItems
-            .subscribe(onNext: { [weak self] in
-                if $0.isEmpty {
-                    self?.view = EmptyView()
+            .withUnretained(self)
+            .bind { owner, capsuleCellItems in
+                owner.view.subviews.forEach({ $0.removeFromSuperview() })
+                if capsuleCellItems.isEmpty {
+                    owner.showEmptyView()
                 } else {
-                    self?.emptyView = nil
-                    self?.view = self?.homeView
+                    owner.emptyView = nil
+                    owner.showHomeView()
                 }
-            })
+            }
             .disposed(by: disposeBag)
         
         viewModel.output.featuredCapsuleCellItems
