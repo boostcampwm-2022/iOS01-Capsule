@@ -136,7 +136,7 @@ final class CapsuleDetailView: UIView, BaseView {
     }
 
     func updateCapsuleData(capsule: Capsule) {
-        closedDateLabel.text = "밀봉시간: \(capsule.closedDate.dateString)"
+        closedDateLabel.text = "밀봉시간: \(capsule.closedDate.dateTimeString)"
         descriptionView.text = capsule.description
     }
 

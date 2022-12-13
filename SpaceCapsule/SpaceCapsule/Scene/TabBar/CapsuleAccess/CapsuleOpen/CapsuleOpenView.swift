@@ -81,7 +81,7 @@ final class CapsuleOpenView: UIView, BaseView, UnOpenable {
             size: FrameResource.fontSize140,
             color: .themeGray400
         )
-        dateLabel.text = capsuleCellItem.closedDate.dateTimeString
+        dateLabel.text = "밀봉시간: \(capsuleCellItem.closedDate.dateTimeString)"
         if !capsuleCellItem.isOpenable() {
             openButton.backgroundColor = .themeGray200
             openButton.isEnabled = false

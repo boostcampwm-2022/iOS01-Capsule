@@ -12,7 +12,7 @@ final class ListCapsuleCell: UICollectionViewCell, UnOpenable {
     lazy var thumbnailImageView = ThemeThumbnailImageView(frame: .zero, width: FrameResource.listCapsuleCellWidth)
 
     lazy var descriptionLabel = {
-        let label = ThemeLabel(text: nil, size: FrameResource.fontSize80, color: .themeBlack)
+        let label = ThemeLabel(size: FrameResource.fontSize80, color: .themeBlack)
         label.numberOfLines = 2
         label.textAlignment = .center
         return label
@@ -28,7 +28,7 @@ final class ListCapsuleCell: UICollectionViewCell, UnOpenable {
     }()
 
     lazy var dateLabel = {
-        let dateLabel = ThemeLabel(text: nil, size: FrameResource.fontSize80, color: .themeGray200)
+        let dateLabel = ThemeLabel( size: 12, color: .themeGray200)
         dateLabel.textAlignment = .center
         return dateLabel
     }()
@@ -77,7 +77,7 @@ final class ListCapsuleCell: UICollectionViewCell, UnOpenable {
             thumbnailImageView.imageView.kr.setImage(with: thumbnailURL, placeholder: .empty, scale: FrameResource.openableImageScale)
         }
         descriptionLabel.text = "\(capsuleCellItem.memoryDate.dateString)\n\(capsuleCellItem.address)에서"
-        dateLabel.text = "밀봉시간:\(capsuleCellItem.closedDate.dateString)"
+        dateLabel.text = "밀봉시간: \(capsuleCellItem.closedDate.dateTimeString)"
         if !capsuleCellItem.isOpenable() {
             applyUnOpenableEffect()
         }
