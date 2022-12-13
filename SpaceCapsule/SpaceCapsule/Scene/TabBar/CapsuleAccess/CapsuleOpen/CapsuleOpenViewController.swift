@@ -17,9 +17,11 @@ final class CapsuleOpenViewController: UIViewController, BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view = capsuleOpenView
+
         if let capsuleCellItem = viewModel?.capsuleCellItem {
             capsuleOpenView.configure(capsuleCellItem: capsuleCellItem)
         }
+
         bind()
     }
 
@@ -51,9 +53,11 @@ final class CapsuleOpenViewController: UIViewController, BaseViewController {
         guard let capsuleCellItem = viewModel?.capsuleCellItem else {
             return
         }
+        
         if capsuleCellItem.isOpenable() {
-            capsuleOpenView.shakeAnimate()
             viewModel?.input.tapOpen.onNext(())
+        } else {
+            capsuleOpenView.shakeAnimate()
         }
     }
 }
