@@ -43,7 +43,6 @@ final class HomeViewController: UIViewController, BaseViewController {
         AppDataManager.shared.fetchCapsules()
     }
     
-    
     private func configureView() {
         view.backgroundColor = .themeBackground
     }
