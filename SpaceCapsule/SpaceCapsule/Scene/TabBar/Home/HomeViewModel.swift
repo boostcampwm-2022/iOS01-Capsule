@@ -53,9 +53,6 @@ final class HomeViewModel: BaseViewModel, CapsuleCellNeedable {
                     let status = UserCapsuleStatus(nickname: nickname, capsuleCounts: capsuleList.count)
                     owner.output.userCapsuleStatus.accept(status)
                     
-                    if capsuleList.isEmpty {
-                        return
-                    }
                     owner.output.featuredCapsuleCellItems.accept(
                         CapsuleType.allCases
                             .map { owner.getHomeCapsuleCellItem(capsules: capsuleList, type: $0) }
