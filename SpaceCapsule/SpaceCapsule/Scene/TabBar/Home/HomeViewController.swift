@@ -27,11 +27,9 @@ final class HomeViewController: UIViewController, BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        configure()
+        title = "홈"
         configureView()
         bind()
-
-        title = "홈"
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -39,12 +37,23 @@ final class HomeViewController: UIViewController, BaseViewController {
         viewModel?.input.viewWillAppear.onNext(())
     }
     
-    private func configure() {
-        AppDataManager.shared.fetchCapsules()
-    }
-    
     private func configureView() {
         view.backgroundColor = .themeBackground
+                
+        viewModel?.output.featuredCapsuleCellItems
+            .withUnretained(self)
+            .bind { owner, capsuleCellItems in
+                owner.view.subviews.forEach({ $0.removeFromSuperview() })
+                if capsuleCellItems.isEmpty {
+                    owner.showEmptyView()
+                } else {
+                    owner.emptyView = nil
+                    owner.showHomeView()
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        AppDataManager.shared.fetchCapsules()
     }
     
     private func showEmptyView() {
@@ -78,19 +87,6 @@ final class HomeViewController: UIViewController, BaseViewController {
         guard let viewModel else {
             return
         }
-        
-        viewModel.output.featuredCapsuleCellItems
-            .withUnretained(self)
-            .bind { owner, capsuleCellItems in
-                owner.view.subviews.forEach({ $0.removeFromSuperview() })
-                if capsuleCellItems.isEmpty {
-                    owner.showEmptyView()
-                } else {
-                    owner.emptyView = nil
-                    owner.showHomeView()
-                }
-            }
-            .disposed(by: disposeBag)
         
         viewModel.output.featuredCapsuleCellItems
             .bind(to: homeView.capsuleCollectionView.rx.items) { collectionView, index, element in
