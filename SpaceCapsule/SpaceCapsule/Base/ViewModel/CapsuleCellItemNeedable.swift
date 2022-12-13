@@ -15,7 +15,7 @@ extension CapsuleCellNeedable {
             return nil
         }
         
-        let capsuleCellItem = ListCapsuleCellItem (
+        let capsuleCellItem = ListCapsuleCellItem(
             uuid: capsule.uuid,
             thumbnailImageURL: capsule.images.first,
             address: capsule.simpleAddress,

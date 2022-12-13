@@ -35,4 +35,3 @@ extension UIImage {
     static let locationFill = UIImage(systemName: "location.fill")
     static let refresh = UIImage(systemName: "arrow.clockwise")
 }
-

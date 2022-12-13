@@ -27,7 +27,7 @@ final class StatusLabel: ThemeLabel {
         let attrs2 = [NSAttributedString.Key.foregroundColor: UIColor.themeGray300]
         
         let nicknameText = NSMutableAttributedString(string: nickname, attributes: attrs1 as [NSAttributedString.Key: Any])
-        let explanationText = NSMutableAttributedString(string: "님이 생성한 공간캡슐 ", attributes: attrs2 as [NSAttributedString.Key : Any])
+        let explanationText = NSMutableAttributedString(string: "님이 생성한 공간캡슐 ", attributes: attrs2 as [NSAttributedString.Key: Any])
         let capsuleCount = NSMutableAttributedString(string: capsuleCounts, attributes: attrs1 as [NSAttributedString.Key: Any])
         let explanationText2 = NSMutableAttributedString(string: "개", attributes: attrs2 as [NSAttributedString.Key: Any])
         
