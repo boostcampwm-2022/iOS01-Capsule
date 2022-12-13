@@ -155,12 +155,5 @@ final class HomeViewController: UIViewController, BaseViewController {
                         owner.homeView.capsuleCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
                     }
                 }).disposed(by: disposeBag)
-        
-//        homeView.capsuleCollectionView.rx.modelSelected(HomeCapsuleCellItem.self)
-//            .withUnretained(self)
-//            .subscribe(
-//                onNext: { owner, homeCapsuleCellItem in
-//                    owner.viewModel?.input.tapCapsule.onNext(homeCapsuleCellItem.uuid)
-//                }).disposed(by: disposeBag)
     }
 }
