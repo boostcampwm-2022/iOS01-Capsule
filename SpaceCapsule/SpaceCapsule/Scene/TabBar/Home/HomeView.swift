@@ -10,6 +10,8 @@ import UIKit
 
 final class HomeView: UIView, BaseView {
     // MARK: - UIComponents
+    
+    // TODO: StatusLabel text값 nil값일 때 에러 발생
     lazy var mainStatusLabel: StatusLabel = StatusLabel(
         text: nil,
         size: 32,

@@ -66,14 +66,12 @@ struct HomeCapsuleCellItem: Hashable, Equatable {
     func description() -> String {
         switch type {
         case .closedLongest, .closedShortest:
-            // TODO: D+Day 계산하는 방법 수정해야 할 듯
-            if let dDay = Calendar.current.dateComponents([.day], from: closedDate, to: Date()).day {
+            if let dDay = Calendar.current.numberOfDaysBetween(closedDate, and: Date()) {
                 return "\(memoryDate.dotDateString) \(address)에서\nD+\(dDay)"
             } else {
                 return "\(memoryDate.dotDateString) \(address)에서"
             }
         case .memoryOldest, .memoryNewest:
-//            return "추억일자 : \(memoryDate.dateString)"
             if let dDay = Calendar.current.dateComponents([.day], from: memoryDate, to: Date()).day {
                 return "\(memoryDate.dotDateString) \(address)에서\nD+\(dDay)"
             } else {
