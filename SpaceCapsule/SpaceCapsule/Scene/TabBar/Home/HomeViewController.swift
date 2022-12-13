@@ -58,8 +58,7 @@ final class HomeViewController: UIViewController, BaseViewController {
         view.addSubview(homeView)
         
         homeView.snp.makeConstraints {
-            $0.top.leading.trailing.equalToSuperview()
-            $0.bottom.equalTo(view.safeAreaLayoutGuide)
+            $0.edges.equalToSuperview()
         }
     }
     
