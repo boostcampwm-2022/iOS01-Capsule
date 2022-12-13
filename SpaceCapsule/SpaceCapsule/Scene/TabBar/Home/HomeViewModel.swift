@@ -57,7 +57,7 @@ final class HomeViewModel: BaseViewModel, CapsuleCellNeedable {
                         return
                     }
                     owner.output.featuredCapsuleCellItems.accept(
-                        CapsuleType.allCases.shuffled()
+                        CapsuleType.allCases
                             .map { owner.getHomeCapsuleCellItem(capsules: capsuleList, type: $0) }
                             .compactMap({ $0 })
                     )
