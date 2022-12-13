@@ -9,29 +9,29 @@ import UIKit
 import CoreLocation
 
 enum CapsuleType: CaseIterable {
-    case closedLongest
-    case closedShortest
-    case memoryOldest
-    case memoryNewest
     case nearest
     case farthest
+    case closedShortest
+    case closedLongest
+    case memoryNewest
+    case memoryOldest
     case leastOpened
     case mostOpened
     
     var title: String {
         switch self {
-        case .closedLongest:
-            return "밀봉한지 가장 오래된 캡슐"
-        case .closedShortest:
-            return "가장 최근에 생성한 캡슐"
-        case .memoryOldest:
-            return "가장 오래된 추억이 담긴 캡슐"
-        case .memoryNewest:
-            return "가장 최근 추억이 담긴 캡슐"
         case .nearest:
             return "가장 가까운 위치의 캡슐"
         case .farthest:
             return "가장 먼 위치의 캡슐"
+        case .closedShortest:
+            return "가장 최근에 생성한 캡슐"
+        case .closedLongest:
+            return "가장 오래전 생성한 캡슐"
+        case .memoryNewest:
+            return "가장 최근 추억이 담긴 캡슐"
+        case .memoryOldest:
+            return "가장 오랜 추억이 담긴 캡슐"
         case .leastOpened:
             return "열어본 횟수가 가장 적은 캡슐"
         case .mostOpened:
