@@ -5,7 +5,6 @@
 //  Created by 김민중 on 2022/11/17.
 //
 import CryptoKit
-import CryptorECC
 import FirebaseAuth
 import Foundation
 import SwiftJWT
@@ -36,124 +35,29 @@ final class FirebaseAuthManager {
         }
     }
 
-    func deleteAccount(completion: @escaping ((Error?) -> Void)) {
-        refreshToken { error in
-            if let error = error {
-                print(error.localizedDescription)
-                completion(error)
-            } else {
-                guard let uid = FirebaseAuthManager.shared.currentUser?.uid else {
-                    return
-                }
-                AppDataManager.shared.firestore.deleteUserCapsules()
-                AppDataManager.shared.firestore.deleteUserInfo(uid: uid) { error in
-                    if let error = error {
-                        print(error.localizedDescription)
-                        completion(error)
-                    } else {
-                        AppDataManager.shared.capsules.accept([])
-                        self.auth.currentUser?.delete()
-                        completion(nil)
-                    }
-                }
-            }
-        }
-    }
-
-    private func revokeToken(refreshToken: String, completion: @escaping ((Error?) -> Void)) {
-        guard let url = URL(string: "https://appleid.apple.com/auth/revoke"),
-              let clientSecret = clientSecret() else {
+    func deleteAccountFromFirestore(completion: @escaping ((FBAuthError?) -> Void)) {
+        guard let uid = FirebaseAuthManager.shared.currentUser?.uid else {
             return
         }
-        let header: [String: String] = [
-            "Content-Type": "application/x-www-form-urlencoded",
-        ]
-        print("refresh", refreshToken)
-        print("cli sec", clientSecret)
-        var requestBodyComponents = URLComponents()
-        requestBodyComponents.queryItems = [
-            URLQueryItem(name: "token", value: refreshToken),
-            URLQueryItem(name: "client_id", value: "com.boostcamp.BoogieSpaceCapsule"),
-            URLQueryItem(name: "client_secret", value: clientSecret),
-            URLQueryItem(name: "token_type_hint", value: "refresh_token"),
-        ]
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.allHTTPHeaderFields = header
-        request.httpBody = requestBodyComponents.query?.data(using: .utf8)
-
-        let task = URLSession.shared.dataTask(with: request) { _, response, error in
-            if let error = error {
-                print(error.localizedDescription)
-                return
-            }
-            if let response = response as? HTTPURLResponse {
-                print(response.description)
-                if response.statusCode == 200 {
-                    completion(nil)
-                    return
-                } else {
-                    completion(ECError.failedEvpInit) // TODO:
-                    return
-                }
-            }
-            if let error = error {
-                print(error.localizedDescription)
-                completion(error)
+        AppDataManager.shared.firestore.deleteUserCapsules()
+        AppDataManager.shared.firestore.deleteUserInfo(uid: uid) { error in
+            if error != nil {
+                completion(FBAuthError.deleteUserFromFireStoreError)
             } else {
                 completion(nil)
             }
         }
-        task.resume()
     }
 
-    private func refreshToken(completion: @escaping ((Error?) -> Void)) {
-        guard let authorizationCode = UserDefaultsManager<String>.loadData(key: .authorizationCode),
-              let url = URL(string: "https://appleid.apple.com/auth/token"),
-              let clientSecret = clientSecret() else {
-            return
+    func deleteAccountFromAuth(completion: @escaping ((FBAuthError?) -> Void)) {
+        AppDataManager.shared.capsules.accept([])
+        auth.currentUser?.delete { error in
+            if error != nil {
+                completion(FBAuthError.deleteUserFromAuthError)
+            } else {
+                completion(nil)
+            }
         }
-        let header: [String: String] = [
-            "Content-Type": "application/x-www-form-urlencoded",
-        ]
-        var requestBodyComponents = URLComponents()
-        requestBodyComponents.queryItems = [
-            URLQueryItem(name: "code", value: authorizationCode),
-            URLQueryItem(name: "client_id", value: "com.boostcamp.BoogieSpaceCapsule"),
-            URLQueryItem(name: "client_secret", value: clientSecret),
-            URLQueryItem(name: "grant_type", value: "authorization_code"),
-        ]
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.allHTTPHeaderFields = header
-        request.httpBody = requestBodyComponents.query?.data(using: .utf8)
-
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            if let response = response {
-                print(response.description)
-            }
-            if let error = error {
-                print(error.localizedDescription)
-                return
-            }
-            guard let data = data else {
-                print("Empty data")
-                return
-            }
-            guard let refreshTokenResponse = try? JSONDecoder().decode(RefreshTokenResponse.self, from: data),
-                  let refreshToken = refreshTokenResponse.refreshToken else {
-                print("decode Error")
-                return
-            }
-            self.revokeToken(refreshToken: refreshToken) { error in
-                if let error = error {
-                    print(error.localizedDescription)
-                    completion(error)
-                } else {
-                    completion(nil)
-                }
-            }
-        }.resume()
     }
 
     private func clientSecret() -> String? {
@@ -176,5 +80,80 @@ final class FirebaseAuthManager {
         }
 
         return signedJWT
+    }
+
+    func refreshToken(completion: @escaping ((String?) -> Void)) {
+        guard let authorizationCode = UserDefaultsManager<String>.loadData(key: .authorizationCode),
+              let url = URL(string: "https://appleid.apple.com/auth/token"),
+              let clientSecret = clientSecret() else {
+            return
+        }
+        let header: [String: String] = [
+            "Content-Type": "application/x-www-form-urlencoded",
+        ]
+        var requestBodyComponents = URLComponents()
+        requestBodyComponents.queryItems = [
+            URLQueryItem(name: "code", value: authorizationCode),
+            URLQueryItem(name: "client_id", value: "com.boostcamp.BoogieSpaceCapsule"),
+            URLQueryItem(name: "client_secret", value: clientSecret),
+            URLQueryItem(name: "grant_type", value: "authorization_code"),
+        ]
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.allHTTPHeaderFields = header
+        request.httpBody = requestBodyComponents.query?.data(using: .utf8)
+
+        URLSession.shared.dataTask(with: request) { data, _, _ in
+            guard let data = data else {
+                print(NetworkError.refreshTokenError.errorDescription)
+                completion(nil)
+                return
+            }
+            guard let refreshTokenResponse = try? JSONDecoder().decode(RefreshTokenResponse.self, from: data),
+                  let refreshToken = refreshTokenResponse.refreshToken else {
+                print(NetworkError.decodingError.errorDescription)
+                completion(nil)
+                return
+            }
+            completion(refreshToken)
+        }.resume()
+    }
+
+    func revokeToken(refreshToken: String, completion: @escaping ((NetworkError?) -> Void)) {
+        guard let url = URL(string: "https://appleid.apple.com/auth/revoke"),
+              let clientSecret = clientSecret() else {
+            return
+        }
+        let header: [String: String] = [
+            "Content-Type": "application/x-www-form-urlencoded",
+        ]
+        print("refresh", refreshToken)
+        print("cli sec", clientSecret)
+        var requestBodyComponents = URLComponents()
+        requestBodyComponents.queryItems = [
+            URLQueryItem(name: "token", value: refreshToken),
+            URLQueryItem(name: "client_id", value: "com.boostcamp.BoogieSpaceCapsule"),
+            URLQueryItem(name: "client_secret", value: clientSecret),
+            URLQueryItem(name: "token_type_hint", value: "refresh_token"),
+        ]
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.allHTTPHeaderFields = header
+        request.httpBody = requestBodyComponents.query?.data(using: .utf8)
+
+        let task = URLSession.shared.dataTask(with: request) { _, response, _ in
+            guard let response = response as? HTTPURLResponse else {
+                completion(NetworkError.revokeTokenError)
+                return
+            }
+            if response.statusCode == 200 {
+                completion(nil)
+                return
+            } else {
+                completion(NetworkError.revokeTokenError)
+                return
+            }
+        }
+        task.resume()
     }
 }
