@@ -51,7 +51,7 @@ final class HomeViewModel: BaseViewModel, CapsuleCellNeedable {
                 onNext: { owner, capsuleList in
                     let nickname = UserDefaultsManager<UserInfo>.loadData(key: .userInfo)?.nickname ?? "none"
                     let status = UserCapsuleStatus(nickname: nickname, capsuleCounts: capsuleList.count)
-                    owner.output.userInfo.accept(status)
+                    owner.output.userCapsuleStatus.accept(status)
                     
                     if capsuleList.isEmpty {
                         return

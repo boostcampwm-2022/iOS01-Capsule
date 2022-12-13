@@ -70,7 +70,7 @@ final class HomeViewController: UIViewController, BaseViewController {
                 return cell
             }.disposed(by: disposeBag)
         
-        viewModel.output.userInfo
+        viewModel.output.userCapsuleStatus
             .subscribe(onNext: { [weak self] status in
                 self?.homeView.mainStatusLabel.updateUserCapsuleStatus(
                     nickname: status.nickname,
