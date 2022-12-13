@@ -124,6 +124,8 @@ final class HomeViewModel: BaseViewModel, CapsuleCellNeedable {
             return orderCapsulesByDistance(capsules).last
         case .leastOpened:
             return capsules.min(by: { $0.openCount < $1.openCount })
+        case .mostOpened:
+            return capsules.max(by: { $0.openCount < $1.openCount })
         }
     }
     
