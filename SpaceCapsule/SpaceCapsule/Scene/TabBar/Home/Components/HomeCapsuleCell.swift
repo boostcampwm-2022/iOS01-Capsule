@@ -28,7 +28,7 @@ final class HomeCapsuleCell: UICollectionViewCell, UnOpenable {
     }()
     
     var dateLabel = {
-        let dateLabel = ThemeLabel(size: FrameResource.fontSize100, color: .themeGray200)
+        let dateLabel = ThemeLabel(size: FrameResource.fontSize80, color: .themeGray200)
         dateLabel.textAlignment = .center
         return dateLabel
     }()
