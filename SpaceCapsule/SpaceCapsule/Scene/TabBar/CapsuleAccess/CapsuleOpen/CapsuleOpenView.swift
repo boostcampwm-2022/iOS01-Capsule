@@ -82,9 +82,10 @@ final class CapsuleOpenView: UIView, BaseView, UnOpenable {
             color: .themeGray400
         )
         dateLabel.text = "밀봉시간: \(capsuleCellItem.closedDate.dateTimeString)"
+        
         if !capsuleCellItem.isOpenable() {
             openButton.backgroundColor = .themeGray200
-            openButton.isEnabled = false
+//            openButton.isEnabled = false
             applyUnOpenableEffect()
         }
     }
@@ -134,19 +135,23 @@ final class CapsuleOpenView: UIView, BaseView, UnOpenable {
 
     func shakeAnimate() {
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
-        let keyPath = "shake"
+        
+        let keyPath = "position"
         let animation = CABasicAnimation(keyPath: keyPath)
         animation.duration = AnimationResource.capsuleShakeDuration
         animation.repeatCount = AnimationResource.capsuleShakeRepeat
         animation.autoreverses = true
         animation.fromValue = CGPoint(
-            x: thumbnailImageView.center.x - AnimationResource.capsuleShakeWidth,
+            x: thumbnailImageView.center.x - 4.0,
             y: thumbnailImageView.center.y
         )
         animation.toValue = CGPoint(
             x: thumbnailImageView.center.x + AnimationResource.capsuleShakeWidth,
             y: thumbnailImageView.center.y
         )
+        animation.isRemovedOnCompletion = true
+        
         thumbnailImageView.layer.add(animation, forKey: keyPath)
+
     }
 }
