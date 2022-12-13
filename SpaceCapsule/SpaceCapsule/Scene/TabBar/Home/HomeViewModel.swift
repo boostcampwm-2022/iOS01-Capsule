@@ -30,7 +30,7 @@ final class HomeViewModel: BaseViewModel, CapsuleCellNeedable {
 
     struct Output: ViewModelOutput {
         let featuredCapsuleCellItems = PublishRelay<[HomeCapsuleCellItem]>()
-        let userInfo = PublishRelay<UserCapsuleStatus>()
+        let userCapsuleStatus = PublishRelay<UserCapsuleStatus>()
     }
 
     init() {
