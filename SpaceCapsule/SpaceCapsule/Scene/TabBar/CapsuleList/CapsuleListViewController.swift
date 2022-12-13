@@ -67,8 +67,8 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
             return
         }
         capsuleListView.collectionView.rx.itemSelected
-            .withLatestFrom(viewModel.input.capsuleCellItems, resultSelector: { indexPath, capsuleCellItems in
-                viewModel.coordinator?.moveToCapsuleAccess(capsuleCellItem: capsuleCellItems[indexPath.row])
+            .withLatestFrom(viewModel.output.capsuleCellItems, resultSelector: { [weak self] indexPath, capsuleCellItems in
+                self?.viewModel?.input.tapCapsule.onNext(capsuleCellItems[indexPath.row])
             })
             .bind(onNext: {})
             .disposed(by: disposeBag)
@@ -118,6 +118,7 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
         capsuleListView.refreshButton.rx.tap
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
+                owner.capsuleListView.rotateRefreshButton()
                 owner.viewModel?.refreshCapsule()
             })
             .disposed(by: disposeBag)
@@ -135,7 +136,7 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
             return
         }
 
-        viewModel.input.capsuleCellItems
+        viewModel.output.capsuleCellItems
             .withUnretained(self)
             .bind { owner, capsuleCellItems in
                 owner.view.subviews.forEach({ $0.removeFromSuperview() })
@@ -146,6 +147,7 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
                     owner.showCollectionView()
                     owner.applySnapshot(capsuleCellModels: capsuleCellItems)
                 }
+                owner.capsuleListView.stopRotatingRefreshButton()
             }
             .disposed(by: disposeBag)
 
@@ -153,7 +155,7 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
             .withUnretained(self)
             .bind { owner, sortPolicy in
                 owner.applyBarButton(sortPolicy: sortPolicy)
-                if let capsuleCellItems = owner.viewModel?.input.capsuleCellItems.value {
+                if let capsuleCellItems = owner.viewModel?.output.capsuleCellItems.value {
                     owner.viewModel?.sort(capsuleCellItems: capsuleCellItems, by: sortPolicy)
                 }
             }

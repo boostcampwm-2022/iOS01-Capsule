@@ -10,7 +10,12 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-final class HomeViewModel: BaseViewModel {
+final class HomeViewModel: BaseViewModel, CapsuleCellNeedable {
+    struct UserCapsuleStatus {
+        let nickname: String
+        let capsuleCounts: Int
+    }
+    
     weak var coordinator: HomeCoordinator?
     let disposeBag = DisposeBag()
 
@@ -24,8 +29,8 @@ final class HomeViewModel: BaseViewModel {
     }
 
     struct Output: ViewModelOutput {
-        let mainLabelText = PublishRelay<String>()
         let featuredCapsuleCellItems = PublishRelay<[HomeCapsuleCellItem]>()
+        let userCapsuleStatus = PublishRelay<UserCapsuleStatus>()
     }
 
     init() {
@@ -44,7 +49,13 @@ final class HomeViewModel: BaseViewModel {
             .withUnretained(self)
             .subscribe(
                 onNext: { owner, capsuleList in
-                    owner.output.mainLabelText.accept(owner.makeMainLabel(capsuleCount: capsuleList.count))
+                    let nickname = UserDefaultsManager<UserInfo>.loadData(key: .userInfo)?.nickname ?? "none"
+                    let status = UserCapsuleStatus(nickname: nickname, capsuleCounts: capsuleList.count)
+                    owner.output.userCapsuleStatus.accept(status)
+                    
+                    if capsuleList.isEmpty {
+                        return
+                    }
                     owner.output.featuredCapsuleCellItems.accept(
                         CapsuleType.allCases.shuffled()
                             .map { owner.getHomeCapsuleCellItem(capsules: capsuleList, type: $0) }
@@ -57,7 +68,10 @@ final class HomeViewModel: BaseViewModel {
         input.tapCapsule
             .withUnretained(self)
             .subscribe(onNext: { owner, uuid in
-                owner.coordinator?.moveToCapsuleAccess(uuid: uuid)
+                guard let capsuleItemCell = owner.getCellItem(with: uuid) else {
+                    return
+                }
+                owner.coordinator?.moveToCapsuleAccess(with: capsuleItemCell)
             })
             .disposed(by: disposeBag)
 
@@ -74,44 +88,11 @@ final class HomeViewModel: BaseViewModel {
             .disposed(by: disposeBag)
     }
 
-    func makeMainLabel(capsuleCount: Int) -> String {
-        let nickname = UserDefaultsManager<UserInfo>.loadData(key: .userInfo)?.nickname ?? "none"
-        return "\(nickname)님이 생성한 공간캡슐 \(capsuleCount)개"
-    }
-
-    func getHomeCapsuleCellItem(capsules: [Capsule], type: CapsuleType) -> HomeCapsuleCellItem? {
-        switch type {
-        case .closedOldest:
-            let capsule = getClosedOldest(capsules: capsules)
-            return makeHomeCapsuleCellItem(capsule: capsule, type: type)
-        case .closedNewest:
-            let capsule = getClosedNewest(capsules: capsules)
-            return makeHomeCapsuleCellItem(capsule: capsule, type: type)
-        case .memoryOldest:
-            let capsule = getMemoryOldest(capsules: capsules)
-            return makeHomeCapsuleCellItem(capsule: capsule, type: type)
-        case .memoryNewest:
-            let capsule = getMemoryNewest(capsules: capsules)
-            return makeHomeCapsuleCellItem(capsule: capsule, type: type)
-        case .nearest:
-            let capsule = getNearest(capsules: capsules)
-            return makeHomeCapsuleCellItem(capsule: capsule, type: type)
-        case .farthest:
-            let capsule = getFarthest(capsules: capsules)
-            return makeHomeCapsuleCellItem(capsule: capsule, type: type)
-        case .leastOpened:
-            let capsule = getLeastOpened(capsules: capsules)
-            return makeHomeCapsuleCellItem(capsule: capsule, type: type)
-        case .mostOpened:
-            let capsule = getMostOpened(capsules: capsules)
-            return makeHomeCapsuleCellItem(capsule: capsule, type: type)
-        }
-    }
-
-    func makeHomeCapsuleCellItem(capsule: Capsule?, type: CapsuleType) -> HomeCapsuleCellItem? {
-        guard let capsule else {
+    private func getHomeCapsuleCellItem(capsules: [Capsule], type: CapsuleType) -> HomeCapsuleCellItem? {
+        guard let capsule = getCapsule(in: capsules, by: type) else {
             return nil
         }
+        
         return HomeCapsuleCellItem(
             uuid: capsule.uuid,
             thumbnailImageURL: capsule.images.first,
@@ -126,25 +107,28 @@ final class HomeViewModel: BaseViewModel {
             type: type
         )
     }
-
-    func getClosedOldest(capsules: [Capsule]) -> Capsule? {
-        return capsules.min { $0.closedDate < $1.closedDate }
+    
+    private func getCapsule(in capsules: [Capsule], by type: CapsuleType) -> Capsule? {
+        switch type {
+        case .closedLongest:
+            return capsules.min { $0.closedDate < $1.closedDate }
+        case .closedShortest:
+            return capsules.max { $0.closedDate < $1.closedDate }
+        case .memoryOldest:
+            return capsules.min { $0.memoryDate < $1.memoryDate }
+        case .memoryNewest:
+            return capsules.max { $0.memoryDate < $1.memoryDate }
+        case .nearest:
+            return orderCapsulesByDistance(capsules).first
+        case .farthest:
+            return orderCapsulesByDistance(capsules).last
+        case .leastOpened:
+            return capsules.min(by: { $0.openCount < $1.openCount })
+        }
     }
-
-    func getClosedNewest(capsules: [Capsule]) -> Capsule? {
-        return capsules.max { $0.closedDate < $1.closedDate }
-    }
-
-    func getMemoryOldest(capsules: [Capsule]) -> Capsule? {
-        return capsules.min { $0.memoryDate < $1.memoryDate }
-    }
-
-    func getMemoryNewest(capsules: [Capsule]) -> Capsule? {
-        return capsules.max { $0.memoryDate < $1.memoryDate }
-    }
-
-    func getNearest(capsules: [Capsule]) -> Capsule? {
-        return capsules.min { first, second in
+    
+    private func orderCapsulesByDistance(_ capsules: [Capsule]) -> [Capsule] {
+        let orderedCapsules = capsules.sorted { first, second in
             let firstLocation = CLLocationCoordinate2D(
                 latitude: first.geopoint.latitude,
                 longitude: first.geopoint.longitude
@@ -157,26 +141,7 @@ final class HomeViewModel: BaseViewModel {
             let secondDistance = LocationManager.shared.distance(capsuleCoordinate: secondLocation)
             return firstDistance < secondDistance
         }
-    }
-
-    func getFarthest(capsules: [Capsule]) -> Capsule? {
-        return capsules.max { first, second in
-            let firstLocation = CLLocationCoordinate2D(
-                latitude: first.geopoint.latitude,
-                longitude: first.geopoint.longitude
-            )
-            let secondLocation = CLLocationCoordinate2D(
-                latitude: second.geopoint.latitude,
-                longitude: second.geopoint.longitude
-            )
-            let firstDistance = LocationManager.shared.distance(capsuleCoordinate: firstLocation)
-            let secondDistance = LocationManager.shared.distance(capsuleCoordinate: secondLocation)
-            return firstDistance < secondDistance
-        }
-    }
-
-    func getLeastOpened(capsules: [Capsule]) -> Capsule? {
-        return capsules.min(by: { $0.openCount < $1.openCount })
+        return orderedCapsules
     }
     
     func getMostOpened(capsules: [Capsule]) -> Capsule? {

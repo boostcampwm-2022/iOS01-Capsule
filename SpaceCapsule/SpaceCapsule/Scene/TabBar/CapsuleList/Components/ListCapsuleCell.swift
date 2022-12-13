@@ -47,6 +47,7 @@ final class ListCapsuleCell: UICollectionViewCell, UnOpenable {
 
     override func prepareForReuse() {
         super.prepareForReuse()
+        thumbnailImageView.imageView.image = nil
         thumbnailImageView.imageView.subviews.forEach {
             $0.removeFromSuperview()
         }

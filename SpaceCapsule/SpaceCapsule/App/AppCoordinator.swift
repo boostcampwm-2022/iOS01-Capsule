@@ -78,7 +78,6 @@ final class AppCoordinator: Coordinator {
                     onNext: { [weak self] userInfo in
                         UserDefaultsManager.saveData(data: true, key: .isRegistered)
                         UserDefaultsManager.saveData(data: userInfo, key: .userInfo)
-                        print(userInfo)
                         self?.moveToTabBar()
                     },
                     onError: { [weak self] _ in

@@ -47,7 +47,6 @@ final class SignInViewController: UIViewController, BaseViewController {
     func appleSignInButtonDidTap() {
         let request = createAppleIDRequest()
         let authorizationController = ASAuthorizationController(authorizationRequests: [request])
-        print("애플로그인")
         authorizationController.delegate = self
         authorizationController.presentationContextProvider = self
         authorizationController.performRequests()
@@ -126,7 +125,6 @@ extension SignInViewController: ASAuthorizationControllerDelegate {
                 }
 
                 if let user = authResult?.user {
-                    print("애플 로그인 성공!", user.uid, user.email ?? "-")
                     UserDefaultsManager.saveData(data: true, key: .isSignedIn)
                     self.viewModel?.checkRegistration(uid: user.uid)
                     if let refreshToken = user.refreshToken {

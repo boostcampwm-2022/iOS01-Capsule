@@ -33,7 +33,6 @@ final class SignInViewModel: BaseViewModel {
                 onNext: { [weak self] userInfo in
                     UserDefaultsManager.saveData(data: true, key: .isRegistered)
                     UserDefaultsManager.saveData(data: userInfo, key: .userInfo)
-                    print(userInfo)
                     self?.coordinator?.moveToTabBar()
                 },
                 onError: { [weak self] _ in

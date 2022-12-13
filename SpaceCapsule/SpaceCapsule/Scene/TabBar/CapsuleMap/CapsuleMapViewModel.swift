@@ -10,7 +10,7 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-final class CapsuleMapViewModel: BaseViewModel {
+final class CapsuleMapViewModel: BaseViewModel, CapsuleCellNeedable {
     var disposeBag: DisposeBag = DisposeBag()
     var coordinator: CapsuleMapCoordinator?
 
@@ -48,7 +48,10 @@ final class CapsuleMapViewModel: BaseViewModel {
         input.tapCapsule
             .withUnretained(self)
             .subscribe(onNext: { owner, uuid in
-                owner.coordinator?.moveToCapsuleAccess(uuid: uuid)
+                guard let capsuleItemCell = owner.getCellItem(with: uuid) else {
+                    return
+                }
+                owner.coordinator?.moveToCapsuleAccess(with: capsuleItemCell)
             })
             .disposed(by: disposeBag)
 

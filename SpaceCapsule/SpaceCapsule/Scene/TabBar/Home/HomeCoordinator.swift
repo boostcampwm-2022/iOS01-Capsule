@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class HomeCoordinator: Coordinator {
+final class HomeCoordinator: Coordinator, MovableToCapsuleAccess {
     var parent: Coordinator?
     var children: [Coordinator] = []
     var navigationController: CustomNavigationController?
@@ -24,32 +24,6 @@ final class HomeCoordinator: Coordinator {
         homeViewController.viewModel = homeViewModel
 
         navigationController?.setViewControllers([homeViewController], animated: true)
-    }
-
-    func moveToCapsuleAccess(uuid: String) {
-        let capsuleAccessCoordinator = CapsuleAccessCoordinator(navigationController: navigationController)
-
-        if let capsule = AppDataManager.shared.capsule(uuid: uuid) {
-            let capsuleCellItem = ListCapsuleCellItem(
-                uuid: capsule.uuid,
-                thumbnailImageURL: capsule.images.first,
-                address: capsule.address,
-                closedDate: capsule.closedDate,
-                memoryDate: capsule.memoryDate,
-                coordinate: capsule.geopoint.coordinate
-            )
-
-            capsuleAccessCoordinator.capsuleCellItem = capsuleCellItem
-        }
-
-        capsuleAccessCoordinator.parent = self
-        capsuleAccessCoordinator.start()
-
-        children.append(capsuleAccessCoordinator)
-
-        if let parent = parent as? TabBarCoordinator {
-            parent.tabBarAppearance(isHidden: true)
-        }
     }
 
     func tabBarAppearance(isHidden: Bool) {

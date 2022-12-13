@@ -21,7 +21,7 @@ final class CapsuleMapViewController: UIViewController, BaseViewController {
     let disposeBag = DisposeBag()
     var viewModel: CapsuleMapViewModel?
 
-    private let mapView = CustomRefreshableMapView()
+    private let mapView = CapsuleMapView()
     private let locationManager = LocationManager.shared.core
     private var annotationsToMonitor = [CustomAnnotation]() {
         didSet { markIfOpenable() }
@@ -126,6 +126,7 @@ final class CapsuleMapViewController: UIViewController, BaseViewController {
             .bind { owner, annotations in
                 owner.removeAllAnnotations()
                 owner.addInitialAnnotations(annotations: annotations)
+                owner.mapView.stopRotatingRefreshButton()
             }
             .disposed(by: disposeBag)
 
@@ -144,6 +145,7 @@ final class CapsuleMapViewController: UIViewController, BaseViewController {
         mapView.refreshButton.rx.tap
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
+                owner.mapView.rotateRefreshButton()
                 owner.viewModel?.input.tapRefresh.onNext(())
             })
             .disposed(by: disposeBag)

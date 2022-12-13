@@ -100,8 +100,13 @@ final class HomeViewController: UIViewController, BaseViewController {
                 return cell
             }.disposed(by: disposeBag)
         
-        viewModel.output.mainLabelText
-            .bind(to: homeView.mainLabel.rx.text)
+        viewModel.output.userCapsuleStatus
+            .subscribe(onNext: { [weak self] status in
+                self?.homeView.mainStatusLabel.updateUserCapsuleStatus(
+                    nickname: status.nickname,
+                    capsuleCounts: String(status.capsuleCounts)
+                )
+            })
             .disposed(by: disposeBag)
         
         homeView.capsuleCollectionView.rx.itemHighlighted
