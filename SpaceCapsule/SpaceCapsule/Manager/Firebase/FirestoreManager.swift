@@ -134,11 +134,6 @@ class FirestoreManager {
         }
 
         database
-            .collection("users")
-            .document(uid)
-            .updateData(["capsules": []])
-
-        database
             .collection("capsules")
             .whereField("userId", isEqualTo: uid)
             .getDocuments { snapshot, _ in
