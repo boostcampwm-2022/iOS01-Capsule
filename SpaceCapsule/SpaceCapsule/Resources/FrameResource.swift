@@ -33,6 +33,7 @@ enum FrameResource {
     static let addCapsuleButtonSize: CGFloat = 50.0
     static let addImageViewSize: CGFloat = 250.0
 
+    static let fontSize60: CGFloat = 12.0
     static let fontSize80: CGFloat = 16.0
     static let fontSize90: CGFloat = 18.0
     static let fontSize100: CGFloat = 20.0
@@ -100,4 +101,6 @@ enum FrameResource {
     static let detailSettingButtonHeight: CGFloat = 60.0
     static let detailSettingButtonPadding: CGFloat = 10.0
     static let detailMainStackViewHPadding: CGFloat = 30.0
+    
+    static let annotationSize: CGFloat = 10.0
 }

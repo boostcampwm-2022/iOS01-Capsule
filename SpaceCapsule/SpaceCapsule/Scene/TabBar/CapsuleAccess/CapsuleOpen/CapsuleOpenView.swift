@@ -142,7 +142,7 @@ final class CapsuleOpenView: UIView, BaseView, UnOpenable {
         animation.repeatCount = AnimationResource.capsuleShakeRepeat
         animation.autoreverses = true
         animation.fromValue = CGPoint(
-            x: thumbnailImageView.center.x - 4.0,
+            x: thumbnailImageView.center.x - AnimationResource.capsuleShakeWidth,
             y: thumbnailImageView.center.y
         )
         animation.toValue = CGPoint(

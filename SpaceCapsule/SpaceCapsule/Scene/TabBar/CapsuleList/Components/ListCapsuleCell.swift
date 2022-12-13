@@ -28,14 +28,14 @@ final class ListCapsuleCell: UICollectionViewCell, UnOpenable {
     }()
 
     lazy var dateLabel = {
-        let dateLabel = ThemeLabel( size: 12, color: .themeGray200)
+        let dateLabel = ThemeLabel(size: FrameResource.fontSize60, color: .themeGray200)
         dateLabel.textAlignment = .center
         return dateLabel
     }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
         addSubviews()
         makeConstraints()
     }
