@@ -35,6 +35,7 @@ final class HomeViewController: UIViewController, BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        AppDataManager.shared.fetchCapsules()
         viewModel?.input.viewWillAppear.onNext(())
     }
     
