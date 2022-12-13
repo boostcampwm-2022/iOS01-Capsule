@@ -27,6 +27,7 @@ final class HomeViewController: UIViewController, BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        configure()
         configureView()
         bind()
 
@@ -36,6 +37,9 @@ final class HomeViewController: UIViewController, BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel?.input.viewWillAppear.onNext(())
+    }
+    
+    private func configure() {
         AppDataManager.shared.fetchCapsules()
     }
     
