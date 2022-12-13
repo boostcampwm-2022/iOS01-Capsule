@@ -100,7 +100,7 @@ final class CapsuleCloseView: UIView, BaseView, UnOpenable {
     func makeConstraints() {
         thumbnailImageView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.centerY.equalToSuperview().multipliedBy(AnimationResource.fromOriginY)
+            $0.centerY.equalToSuperview().multipliedBy(0.7)
             $0.width.equalTo(UIScreen.main.bounds.width * FrameResource.capsuleThumbnailWidthRatio)
             $0.height.equalTo(UIScreen.main.bounds.width * FrameResource.capsuleThumbnailWidthRatio * FrameResource.capsuleThumbnailHWRatio)
         }
@@ -121,16 +121,11 @@ final class CapsuleCloseView: UIView, BaseView, UnOpenable {
     }
 
     func animate() {
-        UIView.animate(withDuration: AnimationResource.capsuleMoveDuration, animations: {
-            self.layoutIfNeeded()
-            self.thumbnailImageView.center.y = (self.frame.height * AnimationResource.destinationHeightRatio)
-        }, completion: { _ in
-            UIView.animate(withDuration: AnimationResource.capsuleMoveDuration,
-                           delay: 0,
-                           options: [.repeat, .autoreverse]
-            ) {
-                self.thumbnailImageView.transform = .init(translationX: 0, y: AnimationResource.capsuleMoveHeight)
-            }
-        })
+        UIView.animate(withDuration: AnimationResource.capsuleMoveDuration,
+                       delay: 0,
+                       options: [.repeat, .autoreverse]
+        ) {
+            self.thumbnailImageView.transform = .init(translationX: 0, y: AnimationResource.capsuleMoveHeight)
+        }
     }
 }
