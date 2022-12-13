@@ -9,12 +9,12 @@ import UIKit
 import CoreLocation
 
 enum CapsuleType: CaseIterable {
-    case closedLongest
-    case closedShortest
-    case memoryOldest
-    case memoryNewest
     case nearest
     case farthest
+    case closedShortest
+    case closedLongest
+    case memoryNewest
+    case memoryOldest
     case leastOpened
     case mostOpened
     
