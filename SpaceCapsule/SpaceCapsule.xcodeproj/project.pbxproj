@@ -137,6 +137,7 @@
 		2894CBA02947301A00E8F5FE /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2894CB9F2947301A00E8F5FE /* Header.swift */; };
 		2894CBA22947303800E8F5FE /* Payload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2894CBA12947303800E8F5FE /* Payload.swift */; };
 		2894CBA52947307900E8F5FE /* RefreshTokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2894CBA42947307900E8F5FE /* RefreshTokenResponse.swift */; };
+		2894CBA7294772F300E8F5FE /* CryptoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2894CBA6294772F300E8F5FE /* CryptoManager.swift */; };
 		28A700BB29358F0F0049FAF8 /* GeoPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A700BA29358F0F0049FAF8 /* GeoPoint.swift */; };
 		28A700D52938AE100049FAF8 /* AnimationResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A700D42938AE100049FAF8 /* AnimationResource.swift */; };
 		28C8C97C292DC360005615BB /* SortPolicySelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C8C97B292DC35F005615BB /* SortPolicySelectionViewController.swift */; };
@@ -321,6 +322,7 @@
 		2894CB9F2947301A00E8F5FE /* Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
 		2894CBA12947303800E8F5FE /* Payload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Payload.swift; sourceTree = "<group>"; };
 		2894CBA42947307900E8F5FE /* RefreshTokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenResponse.swift; sourceTree = "<group>"; };
+		2894CBA6294772F300E8F5FE /* CryptoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoManager.swift; sourceTree = "<group>"; };
 		28A700BA29358F0F0049FAF8 /* GeoPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoPoint.swift; sourceTree = "<group>"; };
 		28A700D42938AE100049FAF8 /* AnimationResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationResource.swift; sourceTree = "<group>"; };
 		28C8C97B292DC35F005615BB /* SortPolicySelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortPolicySelectionViewController.swift; sourceTree = "<group>"; };
@@ -906,6 +908,7 @@
 			isa = PBXGroup;
 			children = (
 				0DB88C702935E83600107DC3 /* AppDataManager.swift */,
+				2894CBA6294772F300E8F5FE /* CryptoManager.swift */,
 				0DCEED322932177F006EB2B4 /* LocationManager.swift */,
 				599C1A38292CC99900517E93 /* UserDefaultsManager.swift */,
 				28419E5E294028DE00266AB6 /* NotificationManager.swift */,
@@ -1242,6 +1245,7 @@
 				0DA05E1D29308B8400B08FA5 /* CustomNavigationController.swift in Sources */,
 				288A8ED029235BF9000229D2 /* HomeCoordinator.swift in Sources */,
 				0D4C11392927495900B1C2B6 /* UIViewControllerPreview.swift in Sources */,
+				2894CBA7294772F300E8F5FE /* CryptoManager.swift in Sources */,
 				288A8EA529235AE8000229D2 /* NicknameViewController.swift in Sources */,
 				288A8EF129236075000229D2 /* CapsuleOpenView.swift in Sources */,
 				2807BC0B292C658000288A5D /* ListCapsuleCell.swift in Sources */,
