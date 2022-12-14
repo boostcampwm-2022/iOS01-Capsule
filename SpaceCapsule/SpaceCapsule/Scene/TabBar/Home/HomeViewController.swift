@@ -10,12 +10,29 @@ import RxSwift
 import SnapKit
 import UIKit
 
-final class HomeViewController: UIViewController, BaseViewController {
+final class HomeViewController: UIViewController, BaseViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return datasource.isEmpty ? 0 : Int.max
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: HomeCapsuleCell.identifier,
+            for: indexPath
+        ) as? HomeCapsuleCell else {
+            return UICollectionViewCell()
+        }
+        cell.configure(capsuleCellModel: datasource[indexPath.item % 8])
+        return cell
+    }
+    
     // MARK: - Properties
 
     var viewModel: HomeViewModel?
     var disposeBag = DisposeBag()
-
+    
+    var datasource: [HomeCapsuleCellItem] = []
+    
     var centerIndex: CGFloat {
         return homeView.capsuleCollectionView.contentOffset.x / (FrameResource.homeCapsuleCellWidth * 0.75 + 10)
     }
@@ -30,6 +47,7 @@ final class HomeViewController: UIViewController, BaseViewController {
         title = "홈"
         configureView()
         bind()
+        homeView.capsuleCollectionView.dataSource = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,6 +67,11 @@ final class HomeViewController: UIViewController, BaseViewController {
                 } else {
                     owner.emptyView = nil
                     owner.showHomeView()
+                    owner.datasource = capsuleCellItems
+                    owner.homeView.capsuleCollectionView.reloadData()
+                    DispatchQueue.main.async {
+                        owner.homeView.capsuleCollectionView.scrollToItem(at: IndexPath(item: 1000000000, section: 0), at: .centeredHorizontally, animated: false)
+                    }
                 }
             }
             .disposed(by: disposeBag)
@@ -88,17 +111,21 @@ final class HomeViewController: UIViewController, BaseViewController {
             return
         }
         
-        viewModel.output.featuredCapsuleCellItems
-            .bind(to: homeView.capsuleCollectionView.rx.items) { collectionView, index, element in
-                guard let cell = collectionView.dequeueReusableCell(
-                    withReuseIdentifier: HomeCapsuleCell.identifier,
-                    for: IndexPath(item: index, section: 0)
-                ) as? HomeCapsuleCell else {
-                    return UICollectionViewCell()
-                }
-                cell.configure(capsuleCellModel: element)
-                return cell
-            }.disposed(by: disposeBag)
+        
+//        viewModel.output.featuredCapsuleCellItems
+//            .bind(to: homeView.capsuleCollectionView.rx.items) { collectionView, index, element in
+//
+//
+//
+//                guard let cell = collectionView.dequeueReusableCell(
+//                    withReuseIdentifier: HomeCapsuleCell.ident ifier,
+//                    for: IndexPath(item: index, section: 0)
+//                ) as? HomeCapsuleCell else {
+//                    return UICollectionViewCell()
+//                }
+//                cell.configure(capsuleCellModel: element)
+//                return cell
+//            }.disposed(by: disposeBag)
         
         viewModel.output.userCapsuleStatus
             .subscribe(onNext: { [weak self] status in
@@ -151,6 +178,7 @@ final class HomeViewController: UIViewController, BaseViewController {
             .withUnretained(self)
             .subscribe(
                 onNext: { owner, indexPath in
+                    print(owner.centerIndex)
                     if owner.getIndexRange(index: indexPath.item) ~= owner.centerIndex {
                         if let cell = owner.homeView.capsuleCollectionView.cellForItem(at: indexPath) as? HomeCapsuleCell {
                             guard let uuid = cell.uuid else {
