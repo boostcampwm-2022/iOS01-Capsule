@@ -55,8 +55,9 @@ final class HomeViewController: UIViewController, BaseViewController {
                     owner.homeView.capsuleCollectionView.reloadData()
                     DispatchQueue.main.async {
                         Thread.sleep(forTimeInterval: 0.01)
+                        var randomInt = Int.random(in: 1000000..<1000008)
                         owner.homeView.capsuleCollectionView.scrollToItem(
-                            at: IndexPath(item: 10000000, section: 0),
+                            at: IndexPath(item: randomInt, section: 0),
                             at: .centeredHorizontally, animated: false
                         )
                     }
