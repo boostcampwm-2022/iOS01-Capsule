@@ -47,7 +47,6 @@ final class SignInViewController: UIViewController, BaseViewController {
     func appleSignInButtonDidTap() {
         let request = createAppleIDRequest()
         let authorizationController = ASAuthorizationController(authorizationRequests: [request])
-        print("애플로그인")
         authorizationController.delegate = self
         authorizationController.presentationContextProvider = self
         authorizationController.performRequests()
@@ -60,22 +59,11 @@ final class SignInViewController: UIViewController, BaseViewController {
         // 애플로그인은 사용자에게서 2가지 정보를 요구함
         appleIDRequest.requestedScopes = [.fullName, .email]
 
-        let nonce = randomNonceString()
-        appleIDRequest.nonce = sha256(nonce)
+        let nonce = CryptoManager.shared.randomNonceString()
+        appleIDRequest.nonce = CryptoManager.shared.sha256(nonce)
         currentNonce = nonce
 
         return appleIDRequest
-    }
-
-    @available(iOS 13, *)
-    private func sha256(_ input: String) -> String {
-        let inputData = Data(input.utf8)
-        let hashedData = SHA256.hash(data: inputData)
-        let hashString = hashedData.compactMap {
-            String(format: "%02x", $0)
-        }.joined()
-
-        return hashString
     }
 
     // MARK: - @objc Functions
@@ -137,7 +125,6 @@ extension SignInViewController: ASAuthorizationControllerDelegate {
                 }
 
                 if let user = authResult?.user {
-                    print("애플 로그인 성공!", user.uid, user.email ?? "-")
                     UserDefaultsManager.saveData(data: true, key: .isSignedIn)
                     self.viewModel?.checkRegistration(uid: user.uid)
                     if let refreshToken = user.refreshToken {
@@ -160,44 +147,5 @@ extension SignInViewController: ASAuthorizationControllerPresentationContextProv
     // presentation context UI를 어디에 띄울지 가장 적합한 뷰 앵커를 반환한다.
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         return view.window ?? ASPresentationAnchor()
-    }
-}
-
-// MARK: - randomNonceString()
-
-extension SignInViewController {
-    // Adapted from https://auth0.com/docs/api-auth/tutorials/nonce#generate-a-cryptographically-random-nonce
-    private func randomNonceString(length: Int = 32) -> String {
-        precondition(length > 0)
-        let charset: [Character] =
-            Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
-        var result = ""
-        var remainingLength = length
-
-        while remainingLength > 0 {
-            let randoms: [UInt8] = (0 ..< 16).map { _ in
-                var random: UInt8 = 0
-                let errorCode = SecRandomCopyBytes(kSecRandomDefault, 1, &random)
-                if errorCode != errSecSuccess {
-                    fatalError(
-                        "Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)"
-                    )
-                }
-                return random
-            }
-
-            randoms.forEach { random in
-                if remainingLength == 0 {
-                    return
-                }
-
-                if random < charset.count {
-                    result.append(charset[Int(random)])
-                    remainingLength -= 1
-                }
-            }
-        }
-
-        return result
     }
 }

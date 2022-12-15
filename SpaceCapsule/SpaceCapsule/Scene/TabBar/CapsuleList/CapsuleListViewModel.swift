@@ -10,17 +10,22 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-final class CapsuleListViewModel: BaseViewModel {
+final class CapsuleListViewModel: BaseViewModel, CapsuleCellNeedable {
     var disposeBag = DisposeBag()
     var coordinator: CapsuleListCoordinator?
     var input = Input()
+    var output = Output()
 
     struct Input {
         var capsules: BehaviorRelay<[Capsule]> = AppDataManager.shared.capsules
-        var capsuleCellItems = BehaviorRelay<[ListCapsuleCellItem]>(value: [])
         var sortPolicy = BehaviorRelay<SortPolicy>(value: .nearest)
         var refreshLoading = PublishRelay<Bool>()
         var viewWillAppear = PublishSubject<Void>()
+        var tapCapsule = PublishSubject<ListCapsuleCellItem>()
+    }
+    
+    struct Output {
+        var capsuleCellItems = BehaviorRelay<[ListCapsuleCellItem]>(value: [])
     }
 
     init() {
@@ -35,6 +40,12 @@ final class CapsuleListViewModel: BaseViewModel {
                 owner.coordinator?.tabBarAppearance(isHidden: false)
             })
             .disposed(by: disposeBag)
+        
+        input.tapCapsule
+            .withUnretained(self)
+            .subscribe(onNext: { owner, capsuleCell in
+                owner.coordinator?.moveToCapsuleAccess(with: capsuleCell)
+            })
     }
 
     func refreshCapsule() {
@@ -46,20 +57,7 @@ final class CapsuleListViewModel: BaseViewModel {
             .withUnretained(self)
             .subscribe(
                 onNext: { owner, capsuleList in
-                    
-                    let capsuleCellItems = capsuleList.map { capsule in
-                        ListCapsuleCellItem(
-                            uuid: capsule.uuid,
-                            thumbnailImageURL: capsule.images.first ?? "",
-                            address: capsule.simpleAddress,
-                            closedDate: capsule.closedDate,
-                            memoryDate: capsule.memoryDate,
-                            coordinate: CLLocationCoordinate2D(
-                                latitude: capsule.geopoint.latitude,
-                                longitude: capsule.geopoint.longitude
-                            )
-                        )
-                    }
+                    let capsuleCellItems = capsuleList.compactMap { owner.getCellItem(with: $0.uuid) }
                     owner.sort(capsuleCellItems: capsuleCellItems, by: owner.input.sortPolicy.value)
                 },
                 onError: { error in
@@ -89,6 +87,6 @@ final class CapsuleListViewModel: BaseViewModel {
                 $0.memoryDate < $1.memoryDate
             }
         }
-        input.capsuleCellItems.accept(items)
+        output.capsuleCellItems.accept(items)
     }
 }

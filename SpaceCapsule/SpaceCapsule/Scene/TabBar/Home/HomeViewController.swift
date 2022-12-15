@@ -7,6 +7,7 @@
 
 import RxCocoa
 import RxSwift
+import SnapKit
 import UIKit
 
 final class HomeViewController: UIViewController, BaseViewController {
@@ -24,39 +25,68 @@ final class HomeViewController: UIViewController, BaseViewController {
 
     // MARK: - Lifecycles
 
-    override func loadView() {
-        view = homeView
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        bind()
-
         title = "홈"
+        configureView()
+        bind()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel?.input.viewWillAppear.onNext(())
     }
-
+    
+    private func configureView() {
+        view.backgroundColor = .themeBackground
+                
+        viewModel?.output.featuredCapsuleCellItems
+            .withUnretained(self)
+            .bind { owner, capsuleCellItems in
+                owner.view.subviews.forEach({ $0.removeFromSuperview() })
+                if capsuleCellItems.isEmpty {
+                    owner.showEmptyView()
+                } else {
+                    owner.emptyView = nil
+                    owner.showHomeView()
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        AppDataManager.shared.fetchCapsules()
+    }
+    
+    private func showEmptyView() {
+        emptyView = EmptyView()
+        guard let emptyView = emptyView else {
+            return
+        }
+        view.addSubview(emptyView)
+        
+        emptyView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+    }
+    
+    private func showHomeView() {
+        view.addSubview(homeView)
+        
+        homeView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+    }
+    
+    private func getIndexRange(index: Int) -> ClosedRange<CGFloat> {
+        let index = CGFloat(index)
+        return (index - 0.1)...(index + 0.1)
+    }
+    
     // MARK: - Rx
 
     func bind() {
         guard let viewModel else {
             return
         }
-        
-        viewModel.output.featuredCapsuleCellItems
-            .subscribe(onNext: { [weak self] in
-                if $0.isEmpty {
-                    self?.view = EmptyView()
-                } else {
-                    self?.emptyView = nil
-                    self?.view = self?.homeView
-                }
-            })
-            .disposed(by: disposeBag)
         
         viewModel.output.featuredCapsuleCellItems
             .bind(to: homeView.capsuleCollectionView.rx.items) { collectionView, index, element in
@@ -70,15 +100,20 @@ final class HomeViewController: UIViewController, BaseViewController {
                 return cell
             }.disposed(by: disposeBag)
         
-        viewModel.output.mainLabelText
-            .bind(to: homeView.mainLabel.rx.text)
+        viewModel.output.userCapsuleStatus
+            .subscribe(onNext: { [weak self] status in
+                self?.homeView.mainStatusLabel.updateUserCapsuleStatus(
+                    nickname: status.nickname,
+                    capsuleCounts: String(status.capsuleCounts)
+                )
+            })
             .disposed(by: disposeBag)
         
         homeView.capsuleCollectionView.rx.itemHighlighted
             .withUnretained(self)
             .subscribe(
                 onNext: { owner, indexPath in
-                    if CGFloat(indexPath.item) == owner.centerIndex {
+                    if owner.getIndexRange(index: indexPath.item) ~= owner.centerIndex {
                         if let cell = owner.homeView.capsuleCollectionView.cellForItem(at: indexPath) as? HomeCapsuleCell {
                             let pressedDownTransform = CGAffineTransform(scaleX: 0.96, y: 0.96)
                             UIView.animate(
@@ -97,7 +132,7 @@ final class HomeViewController: UIViewController, BaseViewController {
             .withUnretained(self)
             .subscribe(
                 onNext: { owner, indexPath in
-                    if CGFloat(indexPath.item) == owner.centerIndex {
+                    if owner.getIndexRange(index: indexPath.item) ~= owner.centerIndex {
                         if let cell = owner.homeView.capsuleCollectionView.cellForItem(at: indexPath) as? HomeCapsuleCell {
                             let originalTransform = CGAffineTransform(scaleX: 1, y: 1)
                             UIView.animate(
@@ -116,7 +151,7 @@ final class HomeViewController: UIViewController, BaseViewController {
             .withUnretained(self)
             .subscribe(
                 onNext: { owner, indexPath in
-                    if CGFloat(indexPath.item) == owner.centerIndex {
+                    if owner.getIndexRange(index: indexPath.item) ~= owner.centerIndex {
                         if let cell = owner.homeView.capsuleCollectionView.cellForItem(at: indexPath) as? HomeCapsuleCell {
                             guard let uuid = cell.uuid else {
                                 return
@@ -127,12 +162,5 @@ final class HomeViewController: UIViewController, BaseViewController {
                         owner.homeView.capsuleCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
                     }
                 }).disposed(by: disposeBag)
-        
-//        homeView.capsuleCollectionView.rx.modelSelected(HomeCapsuleCellItem.self)
-//            .withUnretained(self)
-//            .subscribe(
-//                onNext: { owner, homeCapsuleCellItem in
-//                    owner.viewModel?.input.tapCapsule.onNext(homeCapsuleCellItem.uuid)
-//                }).disposed(by: disposeBag)
     }
 }

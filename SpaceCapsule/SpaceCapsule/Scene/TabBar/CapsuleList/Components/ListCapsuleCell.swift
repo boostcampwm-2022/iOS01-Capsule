@@ -12,7 +12,7 @@ final class ListCapsuleCell: UICollectionViewCell, UnOpenable {
     lazy var thumbnailImageView = ThumbnailImageView(frame: .zero, width: FrameResource.listCapsuleCellWidth)
 
     lazy var descriptionLabel = {
-        let label = ThemeLabel(text: nil, size: FrameResource.fontSize80, color: .themeBlack)
+        let label = ThemeLabel(size: FrameResource.fontSize80, color: .themeBlack)
         label.numberOfLines = 2
         label.textAlignment = .center
         return label
@@ -20,13 +20,7 @@ final class ListCapsuleCell: UICollectionViewCell, UnOpenable {
 
     var blurEffectView = CapsuleBlurEffectView(width: FrameResource.listCapsuleCellWidth)
 
-    lazy var lockImageView = {
-        let lockImageView = UIImageView()
-        lockImageView.image = .lock
-        lockImageView.tintColor = .themeGray200
-        return lockImageView
-    }()
-
+    lazy var lockImageView = LockImageView()
     lazy var closedDateLabel = {
         let dateLabel = ThemeLabel(size: FrameResource.fontSize80, color: .themeGray200)
         dateLabel.textAlignment = .center

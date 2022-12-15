@@ -17,8 +17,8 @@ enum SortPolicy: String, CustomStringConvertible, CaseIterable {
         switch self {
         case .nearest: return "가까운 순"
         case .furthest: return "멀리 있는 순"
-        case .latest: return "최신 순"
-        case .oldest: return "오래된 순"
+        case .latest: return "최근 추억 순"
+        case .oldest: return "오랜 추억 순"
         }
     }
 }

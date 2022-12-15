@@ -9,7 +9,7 @@ import MapKit
 import SnapKit
 import UIKit
 
-final class CustomRefreshableMapView: CustomMapView, Refreshable {
+final class CapsuleMapView: CustomMapView, Refreshable {
     let refreshButton = RefreshButton()
 
     override init(frame: CGRect) {

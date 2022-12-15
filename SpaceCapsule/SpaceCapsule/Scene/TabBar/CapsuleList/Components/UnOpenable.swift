@@ -10,7 +10,7 @@ import UIKit
 
 protocol UnOpenable: UIView {
     var blurEffectView: CapsuleBlurEffectView { get }
-    var lockImageView: UIImageView { get }
+    var lockImageView: LockImageView { get }
     var closedDateLabel: ThemeLabel { get }
 
     func applyUnopenableEffect(superview: UIView)
@@ -41,7 +41,7 @@ extension UnOpenable {
 
     func removeUnopenableEffect(superview: UIView) {
         superview.subviews.forEach {
-            if $0 is CapsuleBlurEffectView {
+            if $0 is CapsuleBlurEffectView || $0 is LockImageView || $0 is ThemeLabel {
                 $0.removeFromSuperview()
             }
         }

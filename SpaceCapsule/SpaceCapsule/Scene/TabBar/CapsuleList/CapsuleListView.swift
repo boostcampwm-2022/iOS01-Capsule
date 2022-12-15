@@ -12,7 +12,7 @@ final class CapsuleListView: UIView, BaseView, Refreshable {
     var refreshButton = RefreshButton()
 
     let sortBarButtonItem = {
-        let button = UIButton()
+        let button = SortButton()
         button.titleLabel?.font = .themeFont(ofSize: FrameResource.fontSize80)
         button.setTitle(SortPolicy.nearest.description, for: .normal)
         button.setTitleColor(.themeBlack, for: .normal)

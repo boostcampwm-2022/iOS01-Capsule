@@ -10,8 +10,8 @@ import UIKit
 
 final class HomeView: UIView, BaseView {
     // MARK: - UIComponents
-    lazy var mainLabel: ThemeLabel = ThemeLabel(
-        text: "",
+    lazy var mainStatusLabel: StatusLabel = StatusLabel(
+        text: " ",
         size: 32,
         color: .themeGray300
     )
@@ -43,18 +43,18 @@ final class HomeView: UIView, BaseView {
         backgroundColor = .themeBackground
     }
     func addSubViews() {
-        [capsuleCollectionView, mainLabel].forEach {
+        [capsuleCollectionView, mainStatusLabel].forEach {
             addSubview($0)
         }
     }
     func makeConstraints() {
-        mainLabel.snp.makeConstraints {
+        mainStatusLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(self.safeAreaLayoutGuide).offset(FrameResource.verticalPadding)
+            $0.top.equalTo(self.safeAreaLayoutGuide).offset(UIScreen.main.bounds.height * 0.05)
         }
         capsuleCollectionView.snp.makeConstraints {
-            $0.top.equalTo(mainLabel.snp.bottom)
-            $0.bottom.equalTo(self.safeAreaLayoutGuide)
+            $0.top.equalTo(mainStatusLabel.snp.bottom).offset(UIScreen.main.bounds.height * 0.025)
+            $0.bottom.equalTo(self.safeAreaLayoutGuide).offset(-UIScreen.main.bounds.height * 0.03)
             $0.left.right.equalToSuperview()
         }
     }

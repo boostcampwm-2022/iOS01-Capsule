@@ -14,7 +14,7 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
     var disposeBag = DisposeBag()
     var viewModel: CapsuleListViewModel?
 
-    private var emptyView: EmptyView?
+    private var emptyView: EmptyView? = EmptyView()
     private let capsuleListView = CapsuleListView()
     let refreshControl = UIRefreshControl()
 
@@ -30,7 +30,7 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
         bind()
         bindViewModel()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel?.input.viewWillAppear.onNext(())
@@ -38,13 +38,28 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
 
     private func configureView() {
         view.backgroundColor = .themeBackground
-        
+    }
+
+    private func showEmptyView() {
+        emptyView = EmptyView()
+        guard let emptyView = emptyView else {
+            return
+        }
+        view.addSubview(emptyView)
+
+        emptyView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+    }
+
+    private func showCollectionView() {
         view.addSubview(capsuleListView)
 
         capsuleListView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(view.safeAreaLayoutGuide)
         }
+        viewModel?.input.refreshLoading.accept(false)
     }
 
     func bind() {
@@ -52,11 +67,45 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
             return
         }
         capsuleListView.collectionView.rx.itemSelected
-            .withLatestFrom(viewModel.input.capsuleCellItems, resultSelector: { indexPath, capsuleCellItems in
-                viewModel.coordinator?.moveToCapsuleAccess(capsuleCellItem: capsuleCellItems[indexPath.row])
+            .withLatestFrom(viewModel.output.capsuleCellItems, resultSelector: { [weak self] indexPath, capsuleCellItems in
+                self?.viewModel?.input.tapCapsule.onNext(capsuleCellItems[indexPath.row])
             })
             .bind(onNext: {})
             .disposed(by: disposeBag)
+
+        capsuleListView.collectionView.rx.itemHighlighted
+            .withUnretained(self)
+            .subscribe(
+                onNext: { owner, indexPath in
+                    if let cell = owner.capsuleListView.collectionView.cellForItem(at: indexPath) as? ListCapsuleCell {
+                        let pressedDownTransform = CGAffineTransform(scaleX: 0.96, y: 0.96)
+                        UIView.animate(
+                            withDuration: 0.2,
+                            delay: 0,
+                            usingSpringWithDamping: 0.4,
+                            initialSpringVelocity: 10,
+                            options: [.curveEaseInOut],
+                            animations: { cell.transform = pressedDownTransform }
+                        )
+                    }
+                }).disposed(by: disposeBag)
+
+        capsuleListView.collectionView.rx.itemUnhighlighted
+            .withUnretained(self)
+            .subscribe(
+                onNext: { owner, indexPath in
+                    if let cell = owner.capsuleListView.collectionView.cellForItem(at: indexPath) as? ListCapsuleCell {
+                        let originalTransform = CGAffineTransform(scaleX: 1, y: 1)
+                        UIView.animate(
+                            withDuration: 0.4,
+                            delay: 0,
+                            usingSpringWithDamping: 0.4,
+                            initialSpringVelocity: 10,
+                            options: [.curveEaseInOut],
+                            animations: { cell.transform = originalTransform }
+                        )
+                    }
+                }).disposed(by: disposeBag)
 
         capsuleListView.sortBarButtonItem.rx.tap
             .withLatestFrom(viewModel.input.sortPolicy)
@@ -69,6 +118,7 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
         capsuleListView.refreshButton.rx.tap
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
+                owner.capsuleListView.rotateRefreshButton()
                 owner.viewModel?.refreshCapsule()
             })
             .disposed(by: disposeBag)
@@ -86,17 +136,18 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
             return
         }
 
-        viewModel.input.capsuleCellItems
+        viewModel.output.capsuleCellItems
             .withUnretained(self)
             .bind { owner, capsuleCellItems in
+                owner.view.subviews.forEach({ $0.removeFromSuperview() })
                 if capsuleCellItems.isEmpty {
-                    owner.view = EmptyView()
+                    owner.showEmptyView()
                 } else {
                     owner.emptyView = nil
-                    owner.configureView()
+                    owner.showCollectionView()
                     owner.applySnapshot(capsuleCellModels: capsuleCellItems)
-                    owner.viewModel?.input.refreshLoading.accept(false)
                 }
+                owner.capsuleListView.stopRotatingRefreshButton()
             }
             .disposed(by: disposeBag)
 
@@ -104,7 +155,7 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
             .withUnretained(self)
             .bind { owner, sortPolicy in
                 owner.applyBarButton(sortPolicy: sortPolicy)
-                if let capsuleCellItems = owner.viewModel?.input.capsuleCellItems.value {
+                if let capsuleCellItems = owner.viewModel?.output.capsuleCellItems.value {
                     owner.viewModel?.sort(capsuleCellItems: capsuleCellItems, by: sortPolicy)
                 }
             }

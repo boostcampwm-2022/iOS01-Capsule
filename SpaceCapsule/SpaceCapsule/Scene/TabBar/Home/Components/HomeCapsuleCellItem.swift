@@ -9,29 +9,29 @@ import CoreLocation
 import UIKit
 
 enum CapsuleType: CaseIterable {
-    case closedOldest
-    case closedNewest
-    case memoryOldest
-    case memoryNewest
     case nearest
     case farthest
+    case closedShortest
+    case closedLongest
+    case memoryNewest
+    case memoryOldest
     case leastOpened
     case mostOpened
 
     var title: String {
         switch self {
-        case .closedOldest:
-            return "밀봉한지 가장 오래된 캡슐"
-        case .closedNewest:
-            return "가장 최근에 생성한 캡슐"
-        case .memoryOldest:
-            return "가장 오래된 추억이 담긴 캡슐"
-        case .memoryNewest:
-            return "가장 최근 추억이 담긴 캡슐"
         case .nearest:
             return "가장 가까운 위치의 캡슐"
         case .farthest:
             return "가장 먼 위치의 캡슐"
+        case .closedShortest:
+            return "가장 최근에 생성한 캡슐"
+        case .closedLongest:
+            return "가장 오래전 생성한 캡슐"
+        case .memoryNewest:
+            return "가장 최근 추억이 담긴 캡슐"
+        case .memoryOldest:
+            return "가장 오랜 추억이 담긴 캡슐"
         case .leastOpened:
             return "열어본 횟수가 가장 적은 캡슐"
         case .mostOpened:
@@ -41,10 +41,10 @@ enum CapsuleType: CaseIterable {
 
     func capsule(from capsules: [Capsule]) -> Capsule? {
         switch self {
-        case .closedOldest:
+        case .closedLongest:
             return capsules.min { $0.closedDate < $1.closedDate }
 
-        case .closedNewest:
+        case .closedShortest:
             return capsules.min { $0.closedDate > $1.closedDate }
 
         case .memoryOldest:
@@ -94,9 +94,8 @@ struct HomeCapsuleCellItem {
 
     var description: String {
         switch type {
-        case .closedOldest, .closedNewest:
-            // TODO: D+Day 계산하는 방법 수정해야 할 듯
-            if let dDay = Calendar.current.dateComponents([.day], from: closedDate, to: Date()).day {
+        case .closedLongest, .closedShortest:
+            if let dDay = Calendar.current.numberOfDaysBetween(closedDate, and: Date()) {
                 return "\(memoryDate.dotDateString) \(address)에서\nD+\(dDay)"
             } else {
                 return "\(memoryDate.dotDateString) \(address)에서"

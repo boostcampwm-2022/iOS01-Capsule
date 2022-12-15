@@ -12,12 +12,7 @@ import UIKit
 final class CapsuleOpenView: CapsuleThumbnailView, BaseView, UnOpenable {
     let blurEffectView = CapsuleBlurEffectView(width: UIScreen.main.bounds.width * FrameResource.capsuleThumbnailWidthRatio)
 
-    var lockImageView = {
-        let lockImageView = UIImageView()
-        lockImageView.image = .lock
-        lockImageView.tintColor = .themeGray200
-        return lockImageView
-    }()
+    var lockImageView = LockImageView()
 
     var closedDateLabel = {
         let dateLabel = ThemeLabel(size: FrameResource.fontSize80, color: .themeGray200)
@@ -80,7 +75,9 @@ final class CapsuleOpenView: CapsuleThumbnailView, BaseView, UnOpenable {
             x: thumbnailImageView.center.x + AnimationResource.capsuleShakeWidth,
             y: thumbnailImageView.center.y
         )
-
+        animation.isRemovedOnCompletion = true
+        
         thumbnailImageView.layer.add(animation, forKey: keyPath)
+
     }
 }

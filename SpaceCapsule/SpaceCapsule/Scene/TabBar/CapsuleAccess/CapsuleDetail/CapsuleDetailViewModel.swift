@@ -151,7 +151,7 @@ final class CapsuleDetailViewModel: BaseViewModel {
         annotation.isOpenable = true
         let annotationView = CustomAnnotationView(annotation: annotation, reuseIdentifier: "annotationView")
         let rect = CGRect(x: point.x - (annotationView.bounds.width / 2),
-                          y: point.y - (annotationView.bounds.height),
+                          y: point.y - (annotationView.bounds.height / 2),
                           width: annotationView.bounds.width,
                           height: annotationView.bounds.height)
 

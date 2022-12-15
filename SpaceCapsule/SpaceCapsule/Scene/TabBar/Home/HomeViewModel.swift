@@ -10,7 +10,12 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-final class HomeViewModel: BaseViewModel {
+final class HomeViewModel: BaseViewModel, CapsuleCellNeedable {
+    struct UserCapsuleStatus {
+        let nickname: String
+        let capsuleCounts: Int
+    }
+    
     weak var coordinator: HomeCoordinator?
     let disposeBag = DisposeBag()
 
@@ -24,8 +29,8 @@ final class HomeViewModel: BaseViewModel {
     }
 
     struct Output: ViewModelOutput {
-        let mainLabelText = PublishRelay<String>()
         let featuredCapsuleCellItems = PublishRelay<[HomeCapsuleCellItem]>()
+        let userCapsuleStatus = PublishRelay<UserCapsuleStatus>()
     }
 
     init() {
@@ -44,10 +49,10 @@ final class HomeViewModel: BaseViewModel {
             .withUnretained(self)
             .subscribe(
                 onNext: { owner, capsuleList in
-                    owner.output.mainLabelText.accept(owner.makeMainLabel(capsuleCount: capsuleList.count))
-                    if capsuleList.isEmpty {
-                        return
-                    }
+                    let nickname = UserDefaultsManager<UserInfo>.loadData(key: .userInfo)?.nickname ?? "none"
+                    let status = UserCapsuleStatus(nickname: nickname, capsuleCounts: capsuleList.count)
+                    owner.output.userCapsuleStatus.accept(status)
+                    
                     owner.output.featuredCapsuleCellItems.accept(
                         CapsuleType.allCases.shuffled()
                             .map { owner.homeCapsuleCellItem(capsules: capsuleList, type: $0) }
@@ -60,7 +65,10 @@ final class HomeViewModel: BaseViewModel {
         input.tapCapsule
             .withUnretained(self)
             .subscribe(onNext: { owner, uuid in
-                owner.coordinator?.moveToCapsuleAccess(uuid: uuid)
+                guard let capsuleItemCell = owner.getCellItem(with: uuid) else {
+                    return
+                }
+                owner.coordinator?.moveToCapsuleAccess(with: capsuleItemCell)
             })
             .disposed(by: disposeBag)
 
@@ -75,11 +83,6 @@ final class HomeViewModel: BaseViewModel {
                 }
             )
             .disposed(by: disposeBag)
-    }
-
-    func makeMainLabel(capsuleCount: Int) -> String {
-        let nickname = UserDefaultsManager<UserInfo>.loadData(key: .userInfo)?.nickname ?? "none"
-        return "\(nickname)님이 생성한 공간캡슐 \(capsuleCount)개"
     }
 
     func homeCapsuleCellItem(capsules: [Capsule], type: CapsuleType) -> HomeCapsuleCellItem? {

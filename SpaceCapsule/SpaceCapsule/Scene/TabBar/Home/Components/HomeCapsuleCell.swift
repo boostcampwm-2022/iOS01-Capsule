@@ -14,33 +14,29 @@ final class HomeCapsuleCell: UICollectionViewCell, UnOpenable {
     var thumbnailImageView = ThumbnailImageView(frame: .zero, width: FrameResource.homeCapsuleCellWidth)
 
     var titleLabel = {
-        let label = ThemeLabel(text: "가장 오래된 캡슐", size: FrameResource.fontSize120, color: .themeColor200)
+        let label = ThemeLabel(size: FrameResource.fontSize120, color: .themeColor200)
         label.numberOfLines = 1
         label.textAlignment = .center
         return label
     }()
 
     var descriptionLabel = {
-        let label = ThemeLabel(text: "2017.10.23 서울시 성동구\nD+1784", size: FrameResource.fontSize100, color: .themeGray300)
+        let label = ThemeLabel(size: FrameResource.fontSize100, color: .themeGray300)
         label.numberOfLines = 3
         label.textAlignment = .center
         return label
     }()
 
     var closedDateLabel = {
-        let dateLabel = ThemeLabel(text: nil, size: FrameResource.fontSize100, color: .themeGray200)
+        let dateLabel = ThemeLabel(size: FrameResource.fontSize100, color: .themeGray200)
         dateLabel.textAlignment = .center
+
         return dateLabel
     }()
 
     var blurEffectView = CapsuleBlurEffectView(width: FrameResource.homeCapsuleCellWidth)
 
-    var lockImageView = {
-        let lockImageView = UIImageView()
-        lockImageView.image = .lock
-        lockImageView.tintColor = .themeGray200
-        return lockImageView
-    }()
+    var lockImageView = LockImageView()
 
     override init(frame: CGRect) {
         super.init(frame: frame)

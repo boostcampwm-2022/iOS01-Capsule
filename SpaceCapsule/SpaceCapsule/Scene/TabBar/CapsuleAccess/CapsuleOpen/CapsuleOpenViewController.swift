@@ -18,7 +18,6 @@ final class CapsuleOpenViewController: UIViewController, BaseViewController {
         super.viewDidLoad()
         view = capsuleOpenView
         if let item = viewModel?.capsuleCellItem {
-//            capsuleOpenView.configure(capsuleCellItem: capsuleCellItem)
             capsuleOpenView.configure(
                 item: CapsuleThumbnailView.Item(
                     thumbnailImageURL: item.thumbnailImageURL ?? "",
@@ -29,6 +28,7 @@ final class CapsuleOpenViewController: UIViewController, BaseViewController {
                 isOpenable: item.isOpenable
             )
         }
+
         bind()
     }
 
@@ -63,6 +63,8 @@ final class CapsuleOpenViewController: UIViewController, BaseViewController {
         if capsuleCellItem.isOpenable {
             capsuleOpenView.shakeAnimate()
             viewModel?.input.tapOpen.onNext(())
+        } else {
+            capsuleOpenView.shakeAnimate()
         }
     }
 }
