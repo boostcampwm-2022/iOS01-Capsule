@@ -117,7 +117,7 @@ final class HomeViewModel: BaseViewModel {
         }
         return HomeCapsuleCellItem(
             uuid: capsule.uuid,
-            thumbnailImageURL: capsule.images.first,
+            thumbnailImageURL: capsule.images.first ?? "",
             address: capsule.simpleAddress,
             closedDate: capsule.closedDate,
             memoryDate: capsule.memoryDate,

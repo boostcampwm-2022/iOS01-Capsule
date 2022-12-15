@@ -26,7 +26,7 @@ final class CapsuleOpenViewController: UIViewController, BaseViewController {
                     memoryDateString: item.memoryDate.dateString,
                     simpleAddress: item.address
                 ),
-                isOpenable: item.isOpenable()
+                isOpenable: item.isOpenable
             )
         }
         bind()
@@ -60,7 +60,7 @@ final class CapsuleOpenViewController: UIViewController, BaseViewController {
         guard let capsuleCellItem = viewModel?.capsuleCellItem else {
             return
         }
-        if capsuleCellItem.isOpenable() {
+        if capsuleCellItem.isOpenable {
             capsuleOpenView.shakeAnimate()
             viewModel?.input.tapOpen.onNext(())
         }

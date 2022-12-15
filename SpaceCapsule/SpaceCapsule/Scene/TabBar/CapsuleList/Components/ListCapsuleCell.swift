@@ -81,7 +81,7 @@ final class ListCapsuleCell: UICollectionViewCell, UnOpenable {
         descriptionLabel.text = "\(capsuleCellItem.memoryDate.dateString)\n\(capsuleCellItem.address)에서"
         closedDateLabel.text = "밀봉시간:\(capsuleCellItem.closedDate.dateString)"
 
-        if !capsuleCellItem.isOpenable() {
+        if !capsuleCellItem.isOpenable {
             applyUnopenableEffect(superview: thumbnailImageView)
         }
     }

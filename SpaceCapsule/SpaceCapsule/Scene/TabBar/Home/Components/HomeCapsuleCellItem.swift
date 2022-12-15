@@ -5,8 +5,8 @@
 //  Created by 김민중 on 2022/11/29.
 //
 
-import UIKit
 import CoreLocation
+import UIKit
 
 enum CapsuleType: CaseIterable {
     case closedOldest
@@ -17,7 +17,7 @@ enum CapsuleType: CaseIterable {
     case farthest
     case leastOpened
     case mostOpened
-    
+
     var title: String {
         switch self {
         case .closedOldest:
@@ -40,33 +40,21 @@ enum CapsuleType: CaseIterable {
     }
 }
 
-struct HomeCapsuleCellItem: Hashable, Equatable {
+struct HomeCapsuleCellItem {
     let uuid: String
-    let thumbnailImageURL: String?
+    let thumbnailImageURL: String
     let address: String
     let closedDate: Date
     let memoryDate: Date
     let openCount: Int
     let coordinate: CLLocationCoordinate2D
     let type: CapsuleType
-    
-    func isOpenable() -> Bool {
-        return LocationManager.shared.isOpenable(capsuleCoordinate: coordinate) ? true : false
+
+    var isOpenable: Bool {
+        LocationManager.shared.isOpenable(capsuleCoordinate: coordinate)
     }
-    
-    static func == (lhs: Self, rhs: Self) -> Bool {
-        return lhs.uuid == rhs.uuid
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(uuid)
-    }
-    
-    func distance() -> Double {
-        return LocationManager.shared.distance(capsuleCoordinate: coordinate)
-    }
-    
-    func description() -> String {
+
+    var description: String {
         switch type {
         case .closedOldest, .closedNewest:
             // TODO: D+Day 계산하는 방법 수정해야 할 듯
@@ -76,7 +64,6 @@ struct HomeCapsuleCellItem: Hashable, Equatable {
                 return "\(memoryDate.dotDateString) \(address)에서"
             }
         case .memoryOldest, .memoryNewest:
-//            return "추억일자 : \(memoryDate.dateString)"
             if let dDay = Calendar.current.dateComponents([.day], from: memoryDate, to: Date()).day {
                 return "\(memoryDate.dotDateString) \(address)에서\nD+\(dDay)"
             } else {
@@ -85,12 +72,22 @@ struct HomeCapsuleCellItem: Hashable, Equatable {
         case .nearest, .farthest:
             let distance = LocationManager.shared.distance(capsuleCoordinate: coordinate)
             if distance > 1000 {
-                return "\(memoryDate.dotDateString) \(address)에서\n약 \(String(format: "%.2f", (distance / 1000.0)))km"
+                return "\(memoryDate.dotDateString) \(address)에서\n약 \(String(format: "%.2f", distance / 1000.0))km"
             } else {
                 return "\(memoryDate.dotDateString) \(address)에서\n약 \(String(format: "%.2f", distance))m"
             }
         case .leastOpened, .mostOpened:
             return "\(memoryDate.dotDateString) \(address)에서\n\(openCount)번"
         }
+    }
+}
+
+extension HomeCapsuleCellItem: Hashable {
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        return lhs.uuid == rhs.uuid
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(uuid)
     }
 }
