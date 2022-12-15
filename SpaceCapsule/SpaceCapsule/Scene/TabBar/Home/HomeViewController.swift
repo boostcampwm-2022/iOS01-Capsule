@@ -10,22 +10,7 @@ import RxSwift
 import SnapKit
 import UIKit
 
-final class HomeViewController: UIViewController, BaseViewController, UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return datasource.isEmpty ? 0 : Int.max
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: HomeCapsuleCell.identifier,
-            for: indexPath
-        ) as? HomeCapsuleCell else {
-            return UICollectionViewCell()
-        }
-        cell.configure(capsuleCellModel: datasource[indexPath.item % 8])
-        return cell
-    }
-    
+final class HomeViewController: UIViewController, BaseViewController{
     // MARK: - Properties
 
     var viewModel: HomeViewModel?
@@ -190,5 +175,22 @@ final class HomeViewController: UIViewController, BaseViewController, UICollecti
                         owner.homeView.capsuleCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
                     }
                 }).disposed(by: disposeBag)
+    }
+}
+
+extension HomeViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return datasource.isEmpty ? 0 : Int.max
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: HomeCapsuleCell.identifier,
+            for: indexPath
+        ) as? HomeCapsuleCell else {
+            return UICollectionViewCell()
+        }
+        cell.configure(capsuleCellModel: datasource[indexPath.item % 8])
+        return cell
     }
 }
