@@ -10,7 +10,7 @@ import RxSwift
 import SnapKit
 import UIKit
 
-final class HomeViewController: UIViewController, BaseViewController{
+final class HomeViewController: UIViewController, BaseViewController {
     // MARK: - Properties
 
     var viewModel: HomeViewModel?
@@ -177,7 +177,7 @@ extension HomeViewController: UICollectionViewDataSource {
         ) as? HomeCapsuleCell else {
             return UICollectionViewCell()
         }
-        cell.configure(capsuleCellModel: datasource[indexPath.item % 8])
+        cell.configure(capsuleCellModel: datasource[indexPath.item % datasource.count])
         return cell
     }
 }
