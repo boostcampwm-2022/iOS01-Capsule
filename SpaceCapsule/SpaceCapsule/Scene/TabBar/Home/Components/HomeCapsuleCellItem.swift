@@ -38,6 +38,44 @@ enum CapsuleType: CaseIterable {
             return "열어본 횟수가 가장 많은 캡슐"
         }
     }
+
+    func capsule(from capsules: [Capsule]) -> Capsule? {
+        switch self {
+        case .closedOldest:
+            return capsules.min { $0.closedDate < $1.closedDate }
+
+        case .closedNewest:
+            return capsules.min { $0.closedDate > $1.closedDate }
+
+        case .memoryOldest:
+            return capsules.min { $0.memoryDate < $1.memoryDate }
+
+        case .memoryNewest:
+            return capsules.min { $0.memoryDate > $1.memoryDate }
+
+        case .leastOpened:
+            return capsules.min { $0.openCount < $1.openCount }
+
+        case .mostOpened:
+            return capsules.min { $0.openCount > $1.openCount }
+
+        case .nearest:
+            return capsules.min {
+                let first = LocationManager.shared.distance(capsuleCoordinate: $0.geopoint.coordinate)
+                let second = LocationManager.shared.distance(capsuleCoordinate: $1.geopoint.coordinate)
+
+                return first < second
+            }
+
+        case .farthest:
+            return capsules.min {
+                let first = LocationManager.shared.distance(capsuleCoordinate: $0.geopoint.coordinate)
+                let second = LocationManager.shared.distance(capsuleCoordinate: $1.geopoint.coordinate)
+
+                return first > second
+            }
+        }
+    }
 }
 
 struct HomeCapsuleCellItem {

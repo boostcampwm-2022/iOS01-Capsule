@@ -93,8 +93,10 @@ final class LocationManager {
         guard let currentCoordinate = coordinate else {
             return 0.0
         }
+        
         let currentLocation = location(currentCoordinate)
         let capsuleLocation = location(capsuleCoordinate)
+        
         return currentLocation.distance(from: capsuleLocation)
     }
 
