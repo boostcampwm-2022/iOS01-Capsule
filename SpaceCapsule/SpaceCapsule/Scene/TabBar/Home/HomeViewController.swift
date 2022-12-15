@@ -15,9 +15,7 @@ final class HomeViewController: UIViewController, BaseViewController {
 
     var viewModel: HomeViewModel?
     var disposeBag = DisposeBag()
-    
-    var datasource: [HomeCapsuleCellItem] = []
-    
+        
     var centerIndex: CGFloat {
         return homeView.capsuleCollectionView.contentOffset.x / (FrameResource.homeCapsuleCellWidth * 0.75 + 10)
     }
@@ -54,11 +52,13 @@ final class HomeViewController: UIViewController, BaseViewController {
                 } else {
                     owner.emptyView = nil
                     owner.showHomeView()
-                    owner.datasource = capsuleCellItems
                     owner.homeView.capsuleCollectionView.reloadData()
                     DispatchQueue.main.async {
                         Thread.sleep(forTimeInterval: 0.01)
-                        owner.homeView.capsuleCollectionView.scrollToItem(at: IndexPath(item: 10000000, section: 0), at: .centeredHorizontally, animated: false)
+                        owner.homeView.capsuleCollectionView.scrollToItem(
+                            at: IndexPath(item: 10000000, section: 0),
+                            at: .centeredHorizontally, animated: false
+                        )
                     }
                 }
             }
@@ -167,7 +167,10 @@ final class HomeViewController: UIViewController, BaseViewController {
 
 extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return datasource.isEmpty ? 0 : Int.max
+        guard let featuredCapsules = viewModel?.output.featuredCapsules else {
+            return 0
+        }
+        return featuredCapsules.isEmpty ? 0 : Int.max
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -177,7 +180,10 @@ extension HomeViewController: UICollectionViewDataSource {
         ) as? HomeCapsuleCell else {
             return UICollectionViewCell()
         }
-        cell.configure(capsuleCellModel: datasource[indexPath.item % datasource.count])
+        guard let featuredCapsules = viewModel?.output.featuredCapsules else {
+            return cell
+        }
+        cell.configure(capsuleCellModel: featuredCapsules[indexPath.item % featuredCapsules.count])
         return cell
     }
 }
