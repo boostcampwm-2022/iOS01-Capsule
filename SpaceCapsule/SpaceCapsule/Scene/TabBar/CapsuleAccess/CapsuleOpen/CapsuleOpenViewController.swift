@@ -17,8 +17,17 @@ final class CapsuleOpenViewController: UIViewController, BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view = capsuleOpenView
-        if let capsuleCellItem = viewModel?.capsuleCellItem {
-            capsuleOpenView.configure(capsuleCellItem: capsuleCellItem)
+        if let item = viewModel?.capsuleCellItem {
+//            capsuleOpenView.configure(capsuleCellItem: capsuleCellItem)
+            capsuleOpenView.configure(
+                item: CapsuleThumbnailView.Item(
+                    thumbnailImageURL: item.thumbnailImageURL ?? "",
+                    closedDateString: item.closedDate.dateTimeString,
+                    memoryDateString: item.memoryDate.dateString,
+                    simpleAddress: item.address
+                ),
+                isOpenable: item.isOpenable()
+            )
         }
         bind()
     }
@@ -39,7 +48,7 @@ final class CapsuleOpenViewController: UIViewController, BaseViewController {
     }
 
     func bind() {
-        capsuleOpenView.openButton.rx.tap
+        capsuleOpenView.bottomButton.rx.tap
             .withUnretained(self)
             .bind { owner, _ in
                 owner.handleOpenButtonTap()
