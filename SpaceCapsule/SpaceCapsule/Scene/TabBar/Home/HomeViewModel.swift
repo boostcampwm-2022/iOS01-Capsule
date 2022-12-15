@@ -55,8 +55,7 @@ final class HomeViewModel: BaseViewModel, CapsuleCellNeedable {
                     owner.output.userCapsuleStatus.accept(status)
                     
                     let featuredCapsules = CapsuleType.allCases
-                        .map { owner.getHomeCapsuleCellItem(capsules: capsuleList, type: $0) }
-                        .compactMap({ $0 })
+                        .compactMap { owner.getHomeCapsuleCellItem(capsules: capsuleList, type: $0) }
                     owner.output.featuredCapsules = featuredCapsules
                     owner.output.featuredCapsuleCellItems.accept(
                         featuredCapsules
