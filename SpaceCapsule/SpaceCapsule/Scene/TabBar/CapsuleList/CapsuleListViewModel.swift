@@ -36,7 +36,7 @@ final class CapsuleListViewModel: BaseViewModel {
             })
             .disposed(by: disposeBag)
     }
-    
+
     func refreshCapsule() {
         AppDataManager.shared.fetchCapsules()
     }
@@ -46,16 +46,18 @@ final class CapsuleListViewModel: BaseViewModel {
             .withUnretained(self)
             .subscribe(
                 onNext: { owner, capsuleList in
+                    
                     let capsuleCellItems = capsuleList.map { capsule in
-                        ListCapsuleCellItem(uuid: capsule.uuid,
-                                            thumbnailImageURL: capsule.images.first,
-                                            address: capsule.simpleAddress,
-                                            closedDate: capsule.closedDate,
-                                            memoryDate: capsule.memoryDate,
-                                            coordinate: CLLocationCoordinate2D(
-                                                latitude: capsule.geopoint.latitude,
-                                                longitude: capsule.geopoint.longitude
-                                            )
+                        ListCapsuleCellItem(
+                            uuid: capsule.uuid,
+                            thumbnailImageURL: capsule.images.first ?? "",
+                            address: capsule.simpleAddress,
+                            closedDate: capsule.closedDate,
+                            memoryDate: capsule.memoryDate,
+                            coordinate: CLLocationCoordinate2D(
+                                latitude: capsule.geopoint.latitude,
+                                longitude: capsule.geopoint.longitude
+                            )
                         )
                     }
                     owner.sort(capsuleCellItems: capsuleCellItems, by: owner.input.sortPolicy.value)

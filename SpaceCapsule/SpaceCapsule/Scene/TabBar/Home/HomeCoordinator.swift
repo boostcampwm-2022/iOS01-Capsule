@@ -32,7 +32,7 @@ final class HomeCoordinator: Coordinator {
         if let capsule = AppDataManager.shared.capsule(uuid: uuid) {
             let capsuleCellItem = ListCapsuleCellItem(
                 uuid: capsule.uuid,
-                thumbnailImageURL: capsule.images.first,
+                thumbnailImageURL: capsule.images.first ?? "",
                 address: capsule.address,
                 closedDate: capsule.closedDate,
                 memoryDate: capsule.memoryDate,

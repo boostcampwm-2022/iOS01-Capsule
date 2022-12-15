@@ -9,13 +9,12 @@ import SnapKit
 import UIKit
 
 protocol UnOpenable: UIView {
-//    var thumbnailImageView: ThumbnailImageView { get }
     var blurEffectView: CapsuleBlurEffectView { get }
     var lockImageView: UIImageView { get }
     var closedDateLabel: ThemeLabel { get }
 
-//    func applyUnOpenableEffect()
     func applyUnopenableEffect(superview: UIView)
+    func removeUnopenableEffect(superview: UIView)
 }
 
 extension UnOpenable {
@@ -40,4 +39,11 @@ extension UnOpenable {
         }
     }
 
+    func removeUnopenableEffect(superview: UIView) {
+        superview.subviews.forEach {
+            if $0 is CapsuleBlurEffectView {
+                $0.removeFromSuperview()
+            }
+        }
+    }
 }

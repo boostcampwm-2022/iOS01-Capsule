@@ -14,7 +14,7 @@ final class ThemeButton: UIButton {
         }
     }
 
-    convenience init(title: String = "") {
+    convenience init(title: String = " ") {
         self.init()
 
         setTitle(title, for: .normal)

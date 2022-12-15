@@ -22,7 +22,7 @@ final class CapsuleCloseView: CapsuleThumbnailView, BaseView, UnOpenable {
         let dateLabel = ThemeLabel(size: FrameResource.fontSize80, color: .themeGray200)
         dateLabel.textAlignment = .center
         dateLabel.numberOfLines = 0
-        
+
         return dateLabel
     }()
 
@@ -44,13 +44,13 @@ final class CapsuleCloseView: CapsuleThumbnailView, BaseView, UnOpenable {
 
     override func configure(item: Item) {
         bottomButton.setTitle("완료", for: .normal)
-        
+
         descriptionLabel.text = """
         \(item.memoryDateString)
         \(item.simpleAddress) 에서의
         추억이 담긴 캡슐을 보관하였습니다.
         """
-        
+
         closedDateLabel.text = "밀봉시간 \(item.closedDateString)"
 
         applyUnopenableEffect(superview: thumbnailImageView)

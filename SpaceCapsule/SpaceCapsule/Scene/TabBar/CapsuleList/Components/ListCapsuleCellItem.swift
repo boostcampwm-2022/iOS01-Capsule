@@ -10,7 +10,7 @@ import UIKit
 
 struct ListCapsuleCellItem: Hashable, Equatable {
     let uuid: String
-    let thumbnailImageURL: String?
+    let thumbnailImageURL: String
     let address: String
     let closedDate: Date
     let memoryDate: Date
