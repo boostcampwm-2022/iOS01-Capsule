@@ -96,22 +96,6 @@ final class HomeViewController: UIViewController, BaseViewController{
             return
         }
         
-        
-//        viewModel.output.featuredCapsuleCellItems
-//            .bind(to: homeView.capsuleCollectionView.rx.items) { collectionView, index, element in
-//
-//
-//
-//                guard let cell = collectionView.dequeueReusableCell(
-//                    withReuseIdentifier: HomeCapsuleCell.ident ifier,
-//                    for: IndexPath(item: index, section: 0)
-//                ) as? HomeCapsuleCell else {
-//                    return UICollectionViewCell()
-//                }
-//                cell.configure(capsuleCellModel: element)
-//                return cell
-//            }.disposed(by: disposeBag)
-        
         viewModel.output.userCapsuleStatus
             .subscribe(onNext: { [weak self] status in
                 self?.homeView.mainStatusLabel.updateUserCapsuleStatus(
