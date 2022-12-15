@@ -40,6 +40,8 @@ final class HomeViewController: UIViewController, BaseViewController{
         viewModel?.input.viewWillAppear.onNext(())
     }
     
+    // MARK: - Functions
+    
     private func configureView() {
         view.backgroundColor = .themeBackground
                 
@@ -55,7 +57,8 @@ final class HomeViewController: UIViewController, BaseViewController{
                     owner.datasource = capsuleCellItems
                     owner.homeView.capsuleCollectionView.reloadData()
                     DispatchQueue.main.async {
-                        owner.homeView.capsuleCollectionView.scrollToItem(at: IndexPath(item: 1000000000, section: 0), at: .centeredHorizontally, animated: false)
+                        Thread.sleep(forTimeInterval: 0.01)
+                        owner.homeView.capsuleCollectionView.scrollToItem(at: IndexPath(item: 10000000, section: 0), at: .centeredHorizontally, animated: false)
                     }
                 }
             }
