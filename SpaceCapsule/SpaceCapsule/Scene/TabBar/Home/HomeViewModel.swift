@@ -29,6 +29,7 @@ final class HomeViewModel: BaseViewModel, CapsuleCellNeedable {
     }
 
     struct Output: ViewModelOutput {
+        var featuredCapsules = [HomeCapsuleCellItem]()
         let featuredCapsuleCellItems = PublishRelay<[HomeCapsuleCellItem]>()
         let userCapsuleStatus = PublishRelay<UserCapsuleStatus>()
     }
@@ -53,10 +54,12 @@ final class HomeViewModel: BaseViewModel, CapsuleCellNeedable {
                     let status = UserCapsuleStatus(nickname: nickname, capsuleCounts: capsuleList.count)
                     owner.output.userCapsuleStatus.accept(status)
                     
+                    let featuredCapsules = CapsuleType.allCases
+                        .map { owner.getHomeCapsuleCellItem(capsules: capsuleList, type: $0) }
+                        .compactMap({ $0 })
+                    owner.output.featuredCapsules = featuredCapsules
                     owner.output.featuredCapsuleCellItems.accept(
-                        CapsuleType.allCases
-                            .map { owner.getHomeCapsuleCellItem(capsules: capsuleList, type: $0) }
-                            .compactMap({ $0 }) // + Array(repeating: nil, count: Int.max)
+                        featuredCapsules
                     )
 
                 })
