@@ -23,19 +23,19 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         configureView()
         addSortBarButton()
         configureCollectionView()
         bind()
         bindViewModel()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel?.input.viewWillAppear.onNext(())
     }
-    
+
     private func configureView() {
         view.backgroundColor = .themeBackground
     }
@@ -46,15 +46,15 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
             return
         }
         view.addSubview(emptyView)
-        
+
         emptyView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
     }
-    
+
     private func showCollectionView() {
         view.addSubview(capsuleListView)
-        
+
         capsuleListView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(view.safeAreaLayoutGuide)
@@ -72,7 +72,7 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
             })
             .bind(onNext: {})
             .disposed(by: disposeBag)
-        
+
         capsuleListView.collectionView.rx.itemHighlighted
             .withUnretained(self)
             .subscribe(
@@ -89,7 +89,7 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
                         )
                     }
                 }).disposed(by: disposeBag)
-        
+
         capsuleListView.collectionView.rx.itemUnhighlighted
             .withUnretained(self)
             .subscribe(
@@ -106,7 +106,7 @@ final class CapsuleListViewController: UIViewController, BaseViewController {
                         )
                     }
                 }).disposed(by: disposeBag)
-        
+
         capsuleListView.sortBarButtonItem.rx.tap
             .withLatestFrom(viewModel.input.sortPolicy)
             .withUnretained(self)
