@@ -145,6 +145,7 @@
 		28C8C980292DC382005615BB /* SortPolicySelectionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C8C97F292DC382005615BB /* SortPolicySelectionCoordinator.swift */; };
 		28C8C982292DEECD005615BB /* SortPolicyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C8C981292DEECD005615BB /* SortPolicyCell.swift */; };
 		28C8C984292DF4EA005615BB /* SortPolicyHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C8C983292DF4EA005615BB /* SortPolicyHeaderView.swift */; };
+		28E68BE0294AB58C009D608E /* SortButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E68BDF294AB58C009D608E /* SortButton.swift */; };
 		4A05D0EC2924C04200A2EF50 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A05D0EB2924C04200A2EF50 /* GoogleService-Info.plist */; };
 		4A05D1052925CF2A00A2EF50 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A05D1042925CF2A00A2EF50 /* NetworkError.swift */; };
 		4A1D1BBD2940260800F47ACB /* CapsuleSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1D1BBC2940260800F47ACB /* CapsuleSettingsViewController.swift */; };
@@ -333,6 +334,7 @@
 		28C8C97F292DC382005615BB /* SortPolicySelectionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortPolicySelectionCoordinator.swift; sourceTree = "<group>"; };
 		28C8C981292DEECD005615BB /* SortPolicyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortPolicyCell.swift; sourceTree = "<group>"; };
 		28C8C983292DF4EA005615BB /* SortPolicyHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortPolicyHeaderView.swift; sourceTree = "<group>"; };
+		28E68BDF294AB58C009D608E /* SortButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortButton.swift; sourceTree = "<group>"; };
 		4A05D0EB2924C04200A2EF50 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4A05D1042925CF2A00A2EF50 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		4A1D1BBC2940260800F47ACB /* CapsuleSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleSettingsViewController.swift; sourceTree = "<group>"; };
@@ -602,6 +604,7 @@
 				2807BC0A292C658000288A5D /* ListCapsuleCell.swift */,
 				2800F979292F1F060069EE7F /* ListCapsuleCellItem.swift */,
 				28245561293B17B100DE03A1 /* UnOpenable.swift */,
+				28E68BDF294AB58C009D608E /* SortButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1181,6 +1184,7 @@
 				288A8EA929235AFC000229D2 /* NicknameCoordinator.swift in Sources */,
 				288A8EE629235FD5000229D2 /* CapsuleCloseView.swift in Sources */,
 				0D752DB12944A643004A704C /* NSCache+subscript.swift in Sources */,
+				28E68BE0294AB58C009D608E /* SortButton.swift in Sources */,
 				0D90DAF7292397CF000DCC84 /* UIColor+.swift in Sources */,
 				599C1A4B292CC99A00517E93 /* NoneImageCache.swift in Sources */,
 				28049CE729237B2B002389BD /* BaseViewController.swift in Sources */,
