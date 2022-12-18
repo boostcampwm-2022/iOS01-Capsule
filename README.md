@@ -22,9 +22,6 @@
 
 <img src="https://user-images.githubusercontent.com/55919701/205919850-eeca782e-68f3-475a-8cd0-66a59c784d44.png">
 
-## 애플 로그인
-
-
 ## 캡슐 추가
 
 <img src="https://user-images.githubusercontent.com/55919701/205920762-deb3b5f4-fe43-4e0b-9db6-5d932a56d7f9.PNG" width="300">
