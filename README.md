@@ -129,10 +129,10 @@
 
 # 시연 영상
 
-[![공간캡슐 시연영상](https://youtu.be/yiHOi-m3Stk/0.jpg)](https://youtu.be/yiHOi-m3Stk)
+[![공간캡슐 시연영상](https://user-images.githubusercontent.com/55919701/208301412-82b2c0dc-639b-49b4-b0e9-7b9d32fd1b37.png)](https://youtu.be/yiHOi-m3Stk)
 
 # 발표 영상
 
-[![공간캡슐 발표영상](https://youtu.be/acyWvWpLJVc/0.jpg)](https://youtu.be/acyWvWpLJVc)
+[![공간캡슐 발표영상](https://user-images.githubusercontent.com/55919701/208301484-517aabf3-b87c-4938-9271-40fc5864a582.jpg)](https://youtu.be/acyWvWpLJVc)
 
 
