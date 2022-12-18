@@ -84,34 +84,6 @@
 - 짧은 기간 내에 구현할 수 있는 사용자 인증, 데이터베이스 등의 기능이 필요해 Firebase 를 사용했습니다.
 - NoSQL 데이터베이스로 수정과 확장이 용이해 사용하게 되었습니다.
 
-# 🤔 고민과 해결
-
-## 거리 계산 방식
-
-<img src="https://user-images.githubusercontent.com/55919701/205921093-c21c6233-d1a3-4f43-ac5c-b4b638ebdb1a.png" width="300">
-
-- 지도 위 개봉 가능한 캡슐은 초록색, 개봉 불가능한 캡슐은 회색으로 표시합니다.
-- 사용자 위치 기준 반경 100m 이내에 있는 캡슐은 개봉 가능한 캡슐입니다.
-- 사용자가 이동할때마다 사용자와 모든 캡슐과의 거리를 계산하는 것은 너무 큰 오버헤드라고 판단했습니다.
-
-<img src="https://user-images.githubusercontent.com/55919701/205921172-382e4f14-152e-4c44-a624-d752b14fe846.png" width="300">
-
-- 위와 같은 문제점 때문에 일부 캡슐들만 감시하기 위한 영역을 지정하기로 했습니다.
-- 사용자가 이동할때마다 반경 1km 이내에 있는 캡슐들만의 개봉 가능 여부를 판단합니다.
-- 사용자 반경 1km 외에 있는 캡슐들과의 거리는 계산하지 않습니다.
-
-<img src="https://user-images.githubusercontent.com/55919701/205921236-808037c3-3ade-4a60-8b54-7fa08195fb0a.png" width="300">
-
-- 항상 감시하는 영역을 (이미지상 큰 원) 업데이트 하는 경우는 사용자가 해당 영역의 가장자리에 가까워졌을 때입니다.
-- 이는 사용자가 이동한 거리가 900m 를 넘어갔을 때이며, 감시하는 영역 밖에 개봉할 수 있는 캡슐이 있을 수도 있다는 뜻입니다.
-
-<img src="https://user-images.githubusercontent.com/55919701/205921296-3d3f070f-1db3-47c1-9ccd-678f11f2fb73.png" width="300">
-
-- 사용자가 항상 감시하는 영역의 중심으로부터 850m 이동할 시 새롭게 감시할 영역을 업데이트 합니다.
-    - 감시 영역을 업데이트 할 거리인 900m에 오차 범위를 고려해 850m로 지정했습니다.
-- 위 과정을 반복하며 캡슐 개봉 가능 여부에 관한 계산과 지도 어노테이션을 다시 그리는데 드는 오버헤드를 감소시키고자 하였습니다.
-- 이를 통해 약 25% 의 성능 향상이라는 성과를 내었습니다.
-
 # 🤝 협업 방식
 
 ## Git
@@ -127,12 +99,19 @@
 
 [공간캡슐 디자인 Figma](https://www.figma.com/embed?embed_host=notion&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FYwaNiUE96rBMVXcvPBuFdK%2F%25EA%25B3%25B5%25EA%25B0%2584%25EC%25BA%25A1%25EC%258A%2590%3Fnode-id%3D0%253A1%26t%3DfDT2tIlg3PwqbJCH-1)
 
-# 시연 영상
+# 🎤 추가 자료
+
+## 발표 PPT
+[발표 PPT](https://drive.google.com/file/d/1oNFPfUN7wIxCxqa4GIHoRZXegH-E51mI/view?usp=sharing)
+
+## 발표 영상
+
+[![공간캡슐 발표영상](https://user-images.githubusercontent.com/55919701/208301484-517aabf3-b87c-4938-9271-40fc5864a582.jpg)](https://youtu.be/acyWvWpLJVc)
+
+## 시연 영상
 
 [![공간캡슐 시연영상](https://user-images.githubusercontent.com/55919701/208301412-82b2c0dc-639b-49b4-b0e9-7b9d32fd1b37.png)](https://youtu.be/yiHOi-m3Stk)
 
-# 발표 영상
 
-[![공간캡슐 발표영상](https://user-images.githubusercontent.com/55919701/208301484-517aabf3-b87c-4938-9271-40fc5864a582.jpg)](https://youtu.be/acyWvWpLJVc)
 
 
