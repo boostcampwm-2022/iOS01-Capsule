@@ -127,3 +127,12 @@
 
 [공간캡슐 디자인 Figma](https://www.figma.com/embed?embed_host=notion&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FYwaNiUE96rBMVXcvPBuFdK%2F%25EA%25B3%25B5%25EA%25B0%2584%25EC%25BA%25A1%25EC%258A%2590%3Fnode-id%3D0%253A1%26t%3DfDT2tIlg3PwqbJCH-1)
 
+# 시연 영상
+
+[![공간캡슐 시연영상](https://youtu.be/yiHOi-m3Stk/0.jpg)](https://youtu.be/yiHOi-m3Stk)
+
+# 발표 영상
+
+[![공간캡슐 발표영상](https://youtu.be/acyWvWpLJVc/0.jpg)](https://youtu.be/acyWvWpLJVc)
+
+
