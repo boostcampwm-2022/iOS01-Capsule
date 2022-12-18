@@ -97,20 +97,25 @@
 
 ## Figma
 
-[공간캡슐 디자인 Figma](https://www.figma.com/embed?embed_host=notion&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FYwaNiUE96rBMVXcvPBuFdK%2F%25EA%25B3%25B5%25EA%25B0%2584%25EC%25BA%25A1%25EC%258A%2590%3Fnode-id%3D0%253A1%26t%3DfDT2tIlg3PwqbJCH-1)
+- [공간캡슐 디자인 Figma](https://www.figma.com/embed?embed_host=notion&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FYwaNiUE96rBMVXcvPBuFdK%2F%25EA%25B3%25B5%25EA%25B0%2584%25EC%25BA%25A1%25EC%258A%2590%3Fnode-id%3D0%253A1%26t%3DfDT2tIlg3PwqbJCH-1)
 
 # 🎤 추가 자료
 
-## 발표 PPT
-[발표 PPT](https://drive.google.com/file/d/1oNFPfUN7wIxCxqa4GIHoRZXegH-E51mI/view?usp=sharing)
+### 발표 자료
+- [발표 PPT](https://github.com/boostcampwm-2022/iOS01-Capsule/blob/develop/%EB%B0%9C%ED%91%9C%EC%9E%90%EB%A3%8C.md)
+- 기술적 고민
+    - [Apple Token Revoke](https://github.com/boostcampwm-2022/iOS01-Capsule/blob/develop/%EB%B0%9C%ED%91%9C%EC%9E%90%EB%A3%8C.md#apple-token-revoke)
+    - [이미지 처리 및 캐싱 모듈](https://github.com/boostcampwm-2022/iOS01-Capsule/blob/develop/%EB%B0%9C%ED%91%9C%EC%9E%90%EB%A3%8C.md#%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%B2%98%EB%A6%AC-%EB%B0%8F-%EC%BA%90%EC%8B%B1-%EB%AA%A8%EB%93%88)
+    - [캡슐 개봉 가능 여부 계산 로직](https://github.com/boostcampwm-2022/iOS01-Capsule/blob/develop/%EB%B0%9C%ED%91%9C%EC%9E%90%EB%A3%8C.md#%EC%BA%A1%EC%8A%90-%EA%B0%9C%EB%B4%89-%EA%B0%80%EB%8A%A5-%EC%97%AC%EB%B6%80-%EA%B3%84%EC%82%B0-%EB%A1%9C%EC%A7%81)
+    - [3D Carousel CollectionView](https://github.com/boostcampwm-2022/iOS01-Capsule/blob/develop/%EB%B0%9C%ED%91%9C%EC%9E%90%EB%A3%8C.md#3d-carousel-collectionview)
 
-## 발표 영상
+### 발표 영상
 
-[![공간캡슐 발표영상](https://user-images.githubusercontent.com/55919701/208301484-517aabf3-b87c-4938-9271-40fc5864a582.jpg)](https://youtu.be/acyWvWpLJVc)
+- [공간캡슐 발표 영상](https://youtu.be/acyWvWpLJVc)
 
-## 시연 영상
+### 시연 영상
 
-[![공간캡슐 시연영상](https://user-images.githubusercontent.com/55919701/208301412-82b2c0dc-639b-49b4-b0e9-7b9d32fd1b37.png)](https://youtu.be/yiHOi-m3Stk)
+- [공간캡슐 시연 영상](https://youtu.be/yiHOi-m3Stk)
 
 
 
