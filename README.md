@@ -32,6 +32,7 @@
 <img src="https://user-images.githubusercontent.com/77015330/208330060-a7b15f34-cb90-4e3c-b12e-af600a1e1f6a.jpeg" width="300">
 
 - 3D Carousel CollectionView로 구성하였습니다.
+- 좌우로 무한 스크롤이 가능합니다.
 - 특정 기준에 맞는 캡슐을 보여줍니다.
     - 생성한지 가장 오래된 캡슐
     - 가장 최근에 생성한 캡슐
