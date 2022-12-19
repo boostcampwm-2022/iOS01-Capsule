@@ -1,3 +1,8 @@
+# 📣 네트워킹데이 공간캡슐에게 질문을 남겨주세요!
+- 공간캡슐 프로젝트에 관한 질문을 남겨주세요.
+- 저희가 하나하나 답변을 드리도록 하겠습니다!
+- [질문 바로가기](https://asked.kr/boogie1219)
+
 # 💬 프로젝트 소개
 
 <img src="https://user-images.githubusercontent.com/77015330/204082594-357cce14-0df3-450a-ab7d-0ad4dce34c26.png" width="300">
@@ -21,6 +26,21 @@
 ## User Flow
 
 <img src="https://user-images.githubusercontent.com/55919701/205919850-eeca782e-68f3-475a-8cd0-66a59c784d44.png">
+
+## 캡슐 홈
+
+<img src="https://user-images.githubusercontent.com/77015330/208330060-a7b15f34-cb90-4e3c-b12e-af600a1e1f6a.jpeg" width="300">
+
+- 3D Carousel CollectionView로 구성하였습니다.
+- 특정 기준에 맞는 캡슐을 보여줍니다.
+    - 생성한지 가장 오래된 캡슐
+    - 가장 최근에 생성한 캡슐
+    - 가장 오래된 추억이 담긴 캡슐
+    - 가장 최근 추억이 담긴 캡슐
+    - 가장 가까운 위치의 캡슐
+    - 가장 먼 위치의 캡슐
+    - 열어본 횟수가 가장 적은 캡슐
+    - 열어본 횟수가 가장 많은 캡슐
 
 ## 캡슐 추가
 
