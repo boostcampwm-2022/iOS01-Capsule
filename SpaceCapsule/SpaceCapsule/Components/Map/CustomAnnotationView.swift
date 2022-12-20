@@ -5,6 +5,7 @@
 //  Created by jisu on 2022/11/21.
 //
 
+import KingReceiver
 import MapKit
 import UIKit
 

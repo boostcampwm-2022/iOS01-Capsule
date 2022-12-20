@@ -6,6 +6,7 @@
 //
 
 import AVFoundation
+import KingReceiver
 import SnapKit
 import UIKit
 
@@ -82,7 +83,7 @@ final class CapsuleOpenView: UIView, BaseView, UnOpenable {
             color: .themeGray400
         )
         dateLabel.text = "밀봉시간: \(capsuleCellItem.closedDate.dateTimeString)"
-        
+
         if !capsuleCellItem.isOpenable() {
             openButton.backgroundColor = .themeGray200
 //            openButton.isEnabled = false
@@ -135,7 +136,7 @@ final class CapsuleOpenView: UIView, BaseView, UnOpenable {
 
     func shakeAnimate() {
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
-        
+
         let keyPath = "position"
         let animation = CABasicAnimation(keyPath: keyPath)
         animation.duration = AnimationResource.capsuleShakeDuration
@@ -150,8 +151,7 @@ final class CapsuleOpenView: UIView, BaseView, UnOpenable {
             y: thumbnailImageView.center.y
         )
         animation.isRemovedOnCompletion = true
-        
-        thumbnailImageView.layer.add(animation, forKey: keyPath)
 
+        thumbnailImageView.layer.add(animation, forKey: keyPath)
     }
 }

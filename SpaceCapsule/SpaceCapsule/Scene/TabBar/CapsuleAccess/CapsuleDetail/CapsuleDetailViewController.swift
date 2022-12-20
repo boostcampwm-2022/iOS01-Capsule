@@ -5,6 +5,7 @@
 //  Created by young june Park on 2022/11/15.
 //
 
+import KingReceiver
 import MapKit
 import RxSwift
 import SnapKit
@@ -72,7 +73,7 @@ final class CapsuleDetailViewController: UIViewController, BaseViewController {
                 self?.viewModel?.input.tapCapsuleSettings.accept(())
             })
             .disposed(by: disposeBag)
-        
+
         mainView.imageCollectionView.rx.itemSelected
             .subscribe(onNext: { [weak self] indexPath in
                 self?.viewModel?.input.tapImage.onNext(indexPath.item)
