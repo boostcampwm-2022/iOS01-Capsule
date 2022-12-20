@@ -1,8 +1,3 @@
-# 📣 네트워킹데이 공간캡슐에게 질문을 남겨주세요!
-- 공간캡슐 프로젝트에 관한 질문을 남겨주세요.
-- 저희가 하나하나 답변을 드리도록 하겠습니다!
-- [질문 바로가기](https://asked.kr/boogie1219)
-
 # 💬 프로젝트 소개
 
 <img src="https://user-images.githubusercontent.com/77015330/204082594-357cce14-0df3-450a-ab7d-0ad4dce34c26.png" width="300">
