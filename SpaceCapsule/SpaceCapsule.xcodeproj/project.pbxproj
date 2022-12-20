@@ -24,8 +24,6 @@
 		0D706137292C630D0077787E /* DatePickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D706136292C630D0077787E /* DatePickerViewModel.swift */; };
 		0D706139292C63140077787E /* DatePickerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D706138292C63140077787E /* DatePickerCoordinator.swift */; };
 		0D70613E292CD24D0077787E /* FirebaseStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D70613D292CD24D0077787E /* FirebaseStorageManager.swift */; };
-		0D752DB12944A643004A704C /* NSCache+subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D752DB02944A643004A704C /* NSCache+subscript.swift */; };
-		0D752DB32944A964004A704C /* UIImage+resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D752DB22944A964004A704C /* UIImage+resize.swift */; };
 		0D77D7C9292B5D490038D054 /* SelectButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D77D7C8292B5D490038D054 /* SelectButton.swift */; };
 		0D90DAEF29238B77000DCC84 /* CapsuleLocateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D90DAEE29238B77000DCC84 /* CapsuleLocateView.swift */; };
 		0D90DAF129238B85000DCC84 /* CapsuleLocateCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D90DAF029238B85000DCC84 /* CapsuleLocateCoordinator.swift */; };
@@ -47,6 +45,7 @@
 		0DB746AE292DF8F6005FF249 /* Capsule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB746AD292DF8F6005FF249 /* Capsule.swift */; };
 		0DB746B4292E268A005FF249 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB746B3292E268A005FF249 /* Date+.swift */; };
 		0DB88C712935E83600107DC3 /* AppDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB88C702935E83600107DC3 /* AppDataManager.swift */; };
+		0DBD20A629519E3500C74F4F /* KingReceiver in Frameworks */ = {isa = PBXBuildFile; productRef = 0DBD20A529519E3500C74F4F /* KingReceiver */; };
 		0DCB22932924CE58002CB095 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCB22922924CE58002CB095 /* CustomTabBarController.swift */; };
 		0DCEED2D29320B28006EB2B4 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCEED2C29320B28006EB2B4 /* UILabel+.swift */; };
 		0DCEED2F29320EAB006EB2B4 /* CustomCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCEED2E29320EAB006EB2B4 /* CustomCodable.swift */; };
@@ -165,13 +164,6 @@
 		599C19D4292B838D00517E93 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C19D3292B838D00517E93 /* LoadingView.swift */; };
 		599C1A2C292C9F5B00517E93 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 599C1A2B292C9F5B00517E93 /* .swiftlint.yml */; };
 		599C1A47292CC99A00517E93 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C1A38292CC99900517E93 /* UserDefaultsManager.swift */; };
-		599C1A48292CC99A00517E93 /* KingReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C1A3A292CC99900517E93 /* KingReceiver.swift */; };
-		599C1A49292CC99A00517E93 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C1A3C292CC99900517E93 /* ImageCache.swift */; };
-		599C1A4A292CC99A00517E93 /* MemoryImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C1A3D292CC99900517E93 /* MemoryImageCache.swift */; };
-		599C1A4B292CC99A00517E93 /* NoneImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C1A3E292CC99900517E93 /* NoneImageCache.swift */; };
-		599C1A4C292CC99A00517E93 /* ImageCacheFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C1A3F292CC99900517E93 /* ImageCacheFactory.swift */; };
-		599C1A4D292CC99A00517E93 /* DiskImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C1A40292CC99900517E93 /* DiskImageCache.swift */; };
-		599C1A4E292CC99A00517E93 /* KingReceiver+UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C1A42292CC99900517E93 /* KingReceiver+UIImageView.swift */; };
 		599C1A4F292CC99A00517E93 /* FirebaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C1A43292CC99900517E93 /* FirebaseAuthManager.swift */; };
 		599C1A50292CC99A00517E93 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C1A44292CC99900517E93 /* FirestoreManager.swift */; };
 		599C1A51292CCB4500517E93 /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288A8E96292359CF000229D2 /* AuthCoordinator.swift */; };
@@ -215,8 +207,6 @@
 		0D706136292C630D0077787E /* DatePickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewModel.swift; sourceTree = "<group>"; };
 		0D706138292C63140077787E /* DatePickerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerCoordinator.swift; sourceTree = "<group>"; };
 		0D70613D292CD24D0077787E /* FirebaseStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorageManager.swift; sourceTree = "<group>"; };
-		0D752DB02944A643004A704C /* NSCache+subscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSCache+subscript.swift"; sourceTree = "<group>"; };
-		0D752DB22944A964004A704C /* UIImage+resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+resize.swift"; sourceTree = "<group>"; };
 		0D77D7C8292B5D490038D054 /* SelectButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectButton.swift; sourceTree = "<group>"; };
 		0D90DAEE29238B77000DCC84 /* CapsuleLocateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleLocateView.swift; sourceTree = "<group>"; };
 		0D90DAF029238B85000DCC84 /* CapsuleLocateCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleLocateCoordinator.swift; sourceTree = "<group>"; };
@@ -354,13 +344,6 @@
 		599C19D3292B838D00517E93 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		599C1A2B292C9F5B00517E93 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		599C1A38292CC99900517E93 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
-		599C1A3A292CC99900517E93 /* KingReceiver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KingReceiver.swift; sourceTree = "<group>"; };
-		599C1A3C292CC99900517E93 /* ImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
-		599C1A3D292CC99900517E93 /* MemoryImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryImageCache.swift; sourceTree = "<group>"; };
-		599C1A3E292CC99900517E93 /* NoneImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoneImageCache.swift; sourceTree = "<group>"; };
-		599C1A3F292CC99900517E93 /* ImageCacheFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCacheFactory.swift; sourceTree = "<group>"; };
-		599C1A40292CC99900517E93 /* DiskImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiskImageCache.swift; sourceTree = "<group>"; };
-		599C1A42292CC99900517E93 /* KingReceiver+UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KingReceiver+UIImageView.swift"; sourceTree = "<group>"; };
 		599C1A43292CC99900517E93 /* FirebaseAuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseAuthManager.swift; sourceTree = "<group>"; };
 		599C1A44292CC99900517E93 /* FirestoreManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		59D8CFB42935FDAC00FD9CF6 /* CarouselCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarouselCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
@@ -379,6 +362,7 @@
 				0D6CA368292218EB00E02393 /* RxSwift in Frameworks */,
 				28419EA12941BD6400266AB6 /* FirebaseMessaging in Frameworks */,
 				0D6CA366292218EB00E02393 /* RxCocoa in Frameworks */,
+				0DBD20A629519E3500C74F4F /* KingReceiver in Frameworks */,
 				28419E9D2941BD6400266AB6 /* FirebaseFirestore in Frameworks */,
 				28419EA32941BD6400266AB6 /* FirebaseStorage in Frameworks */,
 				28419E9B2941BD6400266AB6 /* FirebaseAuth in Frameworks */,
@@ -925,41 +909,8 @@
 				599C1A38292CC99900517E93 /* UserDefaultsManager.swift */,
 				28419E5E294028DE00266AB6 /* NotificationManager.swift */,
 				0D70613C292CD23A0077787E /* Firebase */,
-				599C1A39292CC99900517E93 /* KingReceiver */,
 			);
 			path = Manager;
-			sourceTree = "<group>";
-		};
-		599C1A39292CC99900517E93 /* KingReceiver */ = {
-			isa = PBXGroup;
-			children = (
-				599C1A3A292CC99900517E93 /* KingReceiver.swift */,
-				599C1A3B292CC99900517E93 /* ImageCache */,
-				599C1A41292CC99900517E93 /* Extensions */,
-			);
-			path = KingReceiver;
-			sourceTree = "<group>";
-		};
-		599C1A3B292CC99900517E93 /* ImageCache */ = {
-			isa = PBXGroup;
-			children = (
-				599C1A3C292CC99900517E93 /* ImageCache.swift */,
-				599C1A3D292CC99900517E93 /* MemoryImageCache.swift */,
-				599C1A3E292CC99900517E93 /* NoneImageCache.swift */,
-				599C1A3F292CC99900517E93 /* ImageCacheFactory.swift */,
-				599C1A40292CC99900517E93 /* DiskImageCache.swift */,
-			);
-			path = ImageCache;
-			sourceTree = "<group>";
-		};
-		599C1A41292CC99900517E93 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				599C1A42292CC99900517E93 /* KingReceiver+UIImageView.swift */,
-				0D752DB02944A643004A704C /* NSCache+subscript.swift */,
-				0D752DB22944A964004A704C /* UIImage+resize.swift */,
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 		59D8CFB6293609B300FD9CF6 /* Components */ = {
@@ -998,6 +949,7 @@
 				28419EA02941BD6400266AB6 /* FirebaseMessaging */,
 				28419EA22941BD6400266AB6 /* FirebaseStorage */,
 				28419EAD2944F59000266AB6 /* SwiftJWT */,
+				0DBD20A529519E3500C74F4F /* KingReceiver */,
 			);
 			productName = SpaceCapsule;
 			productReference = 0DA72BDF2939F7D700DF6E69 /* SpaceCapsule.app */;
@@ -1076,6 +1028,7 @@
 				0D6CA3692922197D00E02393 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				28419E992941BD6400266AB6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				28419EAC2944F58F00266AB6 /* XCRemoteSwiftPackageReference "Swift-JWT" */,
+				0DBD20A429519E3400C74F4F /* XCRemoteSwiftPackageReference "KingReceiver" */,
 			);
 			productRefGroup = 0D6CA328292216A300E02393;
 			projectDirPath = "";
@@ -1180,13 +1133,10 @@
 				0D46DEFA2923E1180045400A /* UIFont+.swift in Sources */,
 				288A8EBE29235B97000229D2 /* CapsuleListViewModel.swift in Sources */,
 				59D8CFB52935FDAC00FD9CF6 /* CarouselCollectionViewFlowLayout.swift in Sources */,
-				599C1A4E292CC99A00517E93 /* KingReceiver+UIImageView.swift in Sources */,
 				288A8EA929235AFC000229D2 /* NicknameCoordinator.swift in Sources */,
 				288A8EE629235FD5000229D2 /* CapsuleCloseView.swift in Sources */,
-				0D752DB12944A643004A704C /* NSCache+subscript.swift in Sources */,
 				28E68BE0294AB58C009D608E /* SortButton.swift in Sources */,
 				0D90DAF7292397CF000DCC84 /* UIColor+.swift in Sources */,
-				599C1A4B292CC99A00517E93 /* NoneImageCache.swift in Sources */,
 				28049CE729237B2B002389BD /* BaseViewController.swift in Sources */,
 				0D90DAF329238B90000DCC84 /* CapsuleCloseCoordinator.swift in Sources */,
 				288A8ED329235C65000229D2 /* CapsuleCreateView.swift in Sources */,
@@ -1198,7 +1148,6 @@
 				0DF9D2A5293F1CB3001C05DE /* DetailImageView.swift in Sources */,
 				0DE786E1292BBDEC007EF260 /* DatePickerViewController.swift in Sources */,
 				4A1D1BC12940292A00F47ACB /* CapsuleSettingsViewModel.swift in Sources */,
-				599C1A4C292CC99A00517E93 /* ImageCacheFactory.swift in Sources */,
 				288A8E9B29235A6E000229D2 /* SignInView.swift in Sources */,
 				288A8ED529235C6F000229D2 /* CapsuleCreateViewController.swift in Sources */,
 				4AA4C5B72948729200171D0D /* Calendar+.swift in Sources */,
@@ -1224,7 +1173,6 @@
 				288A8EC829235BCE000229D2 /* CapsuleMapCoordinator.swift in Sources */,
 				0DF9D29A293F09FE001C05DE /* ZoomableImageView.swift in Sources */,
 				599C19D2292B82D000517E93 /* LoadingViewController.swift in Sources */,
-				599C1A4A292CC99A00517E93 /* MemoryImageCache.swift in Sources */,
 				4A1D1BBD2940260800F47ACB /* CapsuleSettingsViewController.swift in Sources */,
 				288A8E922923244D000229D2 /* Coordinator.swift in Sources */,
 				288A8EE829235FE2000229D2 /* CapsuleCloseViewController.swift in Sources */,
@@ -1249,14 +1197,11 @@
 				28A700D52938AE100049FAF8 /* AnimationResource.swift in Sources */,
 				288A8EE229235E3F000229D2 /* CapsuleLocateViewModel.swift in Sources */,
 				59D8CFBC29360A8900FD9CF6 /* ThemeThumbnailImageView.swift in Sources */,
-				0D752DB32944A964004A704C /* UIImage+resize.swift in Sources */,
 				0D4C11372927489D00B1C2B6 /* UIViewPreview.swift in Sources */,
 				288A8EB229235B5A000229D2 /* ProfileView.swift in Sources */,
 				2894CBA22947303800E8F5FE /* Payload.swift in Sources */,
 				28419EA52944C8BD00266AB6 /* Data+.swift in Sources */,
-				599C1A48292CC99A00517E93 /* KingReceiver.swift in Sources */,
 				2894CBA52947307900E8F5FE /* RefreshTokenResponse.swift in Sources */,
-				599C1A49292CC99A00517E93 /* ImageCache.swift in Sources */,
 				0DA05E1D29308B8400B08FA5 /* CustomNavigationController.swift in Sources */,
 				288A8ED029235BF9000229D2 /* HomeCoordinator.swift in Sources */,
 				0D4C11392927495900B1C2B6 /* UIViewControllerPreview.swift in Sources */,
@@ -1294,7 +1239,6 @@
 				288A8EF72923608F000229D2 /* CapsuleOpenCoordinator.swift in Sources */,
 				0D6CA337292216A300E02393 /* SceneDelegate.swift in Sources */,
 				59D8CFBA293609E000FD9CF6 /* HomeCapsuleCellItem.swift in Sources */,
-				599C1A4D292CC99A00517E93 /* DiskImageCache.swift in Sources */,
 				4A1D1BC62941F3C500F47ACB /* BlurEffectView.swift in Sources */,
 				0D90DAEF29238B77000DCC84 /* CapsuleLocateView.swift in Sources */,
 				28C8C97C292DC360005615BB /* SortPolicySelectionViewController.swift in Sources */,
@@ -1672,6 +1616,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		0DBD20A429519E3400C74F4F /* XCRemoteSwiftPackageReference "KingReceiver" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/trumanfromkorea/KingReceiver.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		28419E992941BD6400266AB6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -1705,6 +1657,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0D6CA3692922197D00E02393 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		0DBD20A529519E3500C74F4F /* KingReceiver */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0DBD20A429519E3400C74F4F /* XCRemoteSwiftPackageReference "KingReceiver" */;
+			productName = KingReceiver;
 		};
 		28419E9A2941BD6400266AB6 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;

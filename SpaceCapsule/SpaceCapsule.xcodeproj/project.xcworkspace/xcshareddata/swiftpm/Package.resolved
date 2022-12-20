@@ -100,6 +100,15 @@
       }
     },
     {
+      "identity" : "kingreceiver",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/trumanfromkorea/KingReceiver.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "fc840dec1f236230177e639e056b5dd8e166fa2b"
+      }
+    },
+    {
       "identity" : "kituracontracts",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Kitura/KituraContracts.git",
