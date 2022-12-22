@@ -54,6 +54,7 @@ final class FirebaseStorageManager {
             completion(data)
         }
     }
+
     func deleteImagesInCapsule(capsules: [Capsule], completion: @escaping (Error?) -> Void) {
         for capsule in capsules {
             capsule.images.forEach { url in
@@ -67,7 +68,7 @@ final class FirebaseStorageManager {
             }
         }
     }
-    
+
     func delete(forURL: String, completion: @escaping (Error?) -> Void) {
         let storageReference = storage.reference(forURL: forURL)
         storageReference.delete { error in
