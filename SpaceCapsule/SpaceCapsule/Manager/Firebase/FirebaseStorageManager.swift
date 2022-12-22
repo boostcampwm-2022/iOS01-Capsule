@@ -59,11 +59,11 @@ final class FirebaseStorageManager {
         for capsule in capsules {
             capsule.images.forEach { url in
                 delete(forURL: url) { error in
-                    if let error = error {
-                        completion(FBStorageError.failedDeleteData)
+                    guard error != nil else {
+                        completion(nil)
                         return
                     }
-                    completion(nil)
+                    completion(FBStorageError.failedDeleteData)
                 }
             }
         }
