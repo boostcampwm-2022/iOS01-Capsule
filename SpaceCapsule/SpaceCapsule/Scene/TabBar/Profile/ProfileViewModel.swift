@@ -92,10 +92,16 @@ final class ProfileViewModel: BaseViewModel {
     }
 
     func deleteAccount() {
-        AppDataManager.shared.auth.refreshToken { [weak self] refreshToken in
-            if let refreshToken = refreshToken {
-                self?.output.refreshToken.onNext(refreshToken)
+        FirebaseStorageManager.shared.deleteImagesInCapsule(capsules: AppDataManager.shared.capsules.value) { error in
+            if let error = error {
+                print(error.localizedDescription)
+                return
             }
         }
+//        AppDataManager.shared.auth.refreshToken { [weak self] refreshToken in
+//            if let refreshToken = refreshToken {
+//                self?.output.refreshToken.onNext(refreshToken)
+//            }
+//        }
     }
 }
