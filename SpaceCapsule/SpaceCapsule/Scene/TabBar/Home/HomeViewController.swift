@@ -15,7 +15,7 @@ final class HomeViewController: UIViewController, BaseViewController {
 
     var viewModel: HomeViewModel?
     var disposeBag = DisposeBag()
-
+        
     var centerIndex: CGFloat {
         return homeView.capsuleCollectionView.contentOffset.x / (FrameResource.homeCapsuleCellWidth * 0.75 + 10)
     }
@@ -28,8 +28,12 @@ final class HomeViewController: UIViewController, BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "홈"
+        
+        homeView.capsuleCollectionView.dataSource = self
+        
         configureView()
         bind()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -37,9 +41,11 @@ final class HomeViewController: UIViewController, BaseViewController {
         viewModel?.input.viewWillAppear.onNext(())
     }
     
+    // MARK: - Functions
+    
     private func configureView() {
         view.backgroundColor = .themeBackground
-                
+        
         viewModel?.output.featuredCapsuleCellItems
             .withUnretained(self)
             .bind { owner, capsuleCellItems in
@@ -49,11 +55,21 @@ final class HomeViewController: UIViewController, BaseViewController {
                 } else {
                     owner.emptyView = nil
                     owner.showHomeView()
+                    owner.homeView.capsuleCollectionView.reloadDataWithCompletion {
+                        guard let featuredCapsules = owner.viewModel?.output.featuredCapsules else {
+                            return
+                        }
+                        let startIndex = 100_000_000
+                        let randomInt = Int.random(in: startIndex..<(startIndex + featuredCapsules.count))
+                        owner.homeView.capsuleCollectionView.scrollToItem(
+                            at: IndexPath(item: randomInt, section: 0),
+                            at: .centeredHorizontally,
+                            animated: false
+                        )
+                    }
                 }
             }
             .disposed(by: disposeBag)
-        
-        AppDataManager.shared.fetchCapsules()
     }
     
     private func showEmptyView() {
@@ -87,18 +103,6 @@ final class HomeViewController: UIViewController, BaseViewController {
         guard let viewModel else {
             return
         }
-        
-        viewModel.output.featuredCapsuleCellItems
-            .bind(to: homeView.capsuleCollectionView.rx.items) { collectionView, index, element in
-                guard let cell = collectionView.dequeueReusableCell(
-                    withReuseIdentifier: HomeCapsuleCell.identifier,
-                    for: IndexPath(item: index, section: 0)
-                ) as? HomeCapsuleCell else {
-                    return UICollectionViewCell()
-                }
-                cell.configure(capsuleCellModel: element)
-                return cell
-            }.disposed(by: disposeBag)
         
         viewModel.output.userCapsuleStatus
             .subscribe(onNext: { [weak self] status in
@@ -162,5 +166,28 @@ final class HomeViewController: UIViewController, BaseViewController {
                         owner.homeView.capsuleCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
                     }
                 }).disposed(by: disposeBag)
+    }
+}
+
+extension HomeViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        guard let featuredCapsules = viewModel?.output.featuredCapsules else {
+            return 0
+        }
+        return featuredCapsules.isEmpty ? 0 : Int.max
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: HomeCapsuleCell.identifier,
+            for: indexPath
+        ) as? HomeCapsuleCell else {
+            return UICollectionViewCell()
+        }
+        guard let featuredCapsules = viewModel?.output.featuredCapsules else {
+            return cell
+        }
+        cell.configure(capsuleCellModel: featuredCapsules[indexPath.item % featuredCapsules.count])
+        return cell
     }
 }
