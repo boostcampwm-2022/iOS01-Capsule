@@ -29,6 +29,7 @@ final class ProfileViewModel: BaseViewModel {
         var deleteUserFromFireStore = PublishSubject<Void>()
         var deleteUserFromAuth = PublishSubject<Void>()
         var deleteImagesFromStorage = PublishSubject<Void>()
+        var loadingIndicator = PublishSubject<Bool>()
     }
 
     init() {
@@ -73,13 +74,14 @@ final class ProfileViewModel: BaseViewModel {
                     print(error.localizedDescription)
                     return
                 }
+                self?.output.loadingIndicator.onNext(false)
                 AppDataManager.shared.capsules.accept([])
                 UserDefaultsManager.saveData(data: false, key: .isRegistered)
                 self?.signOut()
             }
         }.disposed(by: disposeBag)
 
-        output.deleteImagesFromStorage.bind { [weak self] _ in
+        output.deleteImagesFromStorage.bind { _ in
             FirebaseStorageManager.shared.deleteImagesInCapsule(capsules: AppDataManager.shared.capsules.value) { error in
                 if let error = error {
                     print(error.localizedDescription)
@@ -102,6 +104,7 @@ final class ProfileViewModel: BaseViewModel {
     }
 
     func deleteAccount() {
+        output.loadingIndicator.onNext(true)
         AppDataManager.shared.auth.refreshToken { [weak self] refreshToken in
             if let refreshToken = refreshToken {
                 self?.output.refreshToken.onNext(refreshToken)
