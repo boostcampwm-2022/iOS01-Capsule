@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MyCollectionView: UICollectionView {
+class CustomCollectionView: UICollectionView {
 
     private var reloadDataCompletionBlock: (() -> Void)?
     
