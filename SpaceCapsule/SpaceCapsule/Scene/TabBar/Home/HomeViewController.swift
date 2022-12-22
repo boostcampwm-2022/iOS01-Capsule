@@ -28,9 +28,12 @@ final class HomeViewController: UIViewController, BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "홈"
+        
+        homeView.capsuleCollectionView.dataSource = self
+        
         configureView()
         bind()
-        homeView.capsuleCollectionView.dataSource = self
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -42,7 +45,7 @@ final class HomeViewController: UIViewController, BaseViewController {
     
     private func configureView() {
         view.backgroundColor = .themeBackground
-                
+        
         viewModel?.output.featuredCapsuleCellItems
             .withUnretained(self)
             .bind { owner, capsuleCellItems in
@@ -52,20 +55,21 @@ final class HomeViewController: UIViewController, BaseViewController {
                 } else {
                     owner.emptyView = nil
                     owner.showHomeView()
-                    owner.homeView.capsuleCollectionView.reloadData()
-                    DispatchQueue.main.async {
-                        Thread.sleep(forTimeInterval: 0.01)
-                        var randomInt = Int.random(in: 1000000..<1000008)
+                    owner.homeView.capsuleCollectionView.reloadDataWithCompletion {
+                        guard let featuredCapsules = owner.viewModel?.output.featuredCapsules else {
+                            return
+                        }
+                        let startIndex = 100_000_000
+                        let randomInt = Int.random(in: startIndex..<(startIndex + featuredCapsules.count))
                         owner.homeView.capsuleCollectionView.scrollToItem(
                             at: IndexPath(item: randomInt, section: 0),
-                            at: .centeredHorizontally, animated: false
+                            at: .centeredHorizontally,
+                            animated: false
                         )
                     }
                 }
             }
             .disposed(by: disposeBag)
-        
-        AppDataManager.shared.fetchCapsules()
     }
     
     private func showEmptyView() {
@@ -151,7 +155,6 @@ final class HomeViewController: UIViewController, BaseViewController {
             .withUnretained(self)
             .subscribe(
                 onNext: { owner, indexPath in
-                    print(owner.centerIndex)
                     if owner.getIndexRange(index: indexPath.item) ~= owner.centerIndex {
                         if let cell = owner.homeView.capsuleCollectionView.cellForItem(at: indexPath) as? HomeCapsuleCell {
                             guard let uuid = cell.uuid else {
