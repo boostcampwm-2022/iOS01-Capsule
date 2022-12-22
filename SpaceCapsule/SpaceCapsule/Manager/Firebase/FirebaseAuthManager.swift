@@ -50,7 +50,6 @@ final class FirebaseAuthManager {
     }
 
     func deleteAccountFromAuth(completion: @escaping ((FBAuthError?) -> Void)) {
-        AppDataManager.shared.capsules.accept([])
         auth.currentUser?.delete { error in
             if error != nil {
                 completion(FBAuthError.deleteUserFromAuthError)
@@ -127,8 +126,6 @@ final class FirebaseAuthManager {
         let header: [String: String] = [
             "Content-Type": "application/x-www-form-urlencoded",
         ]
-        print("refresh", refreshToken)
-        print("cli sec", clientSecret)
         var requestBodyComponents = URLComponents()
         requestBodyComponents.queryItems = [
             URLQueryItem(name: "token", value: refreshToken),

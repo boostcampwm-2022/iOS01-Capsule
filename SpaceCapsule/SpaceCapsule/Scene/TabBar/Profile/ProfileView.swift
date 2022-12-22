@@ -9,6 +9,8 @@ import SnapKit
 import UIKit
 
 final class ProfileView: UIView, BaseView {
+    let loadingIndicator = LoadingIndicatorView()
+
     let profileImageContainer: UIControl = {
         let control = UIControl()
         control.backgroundColor = .themeGray200
@@ -136,5 +138,17 @@ final class ProfileView: UIView, BaseView {
 
     func setUserImage() {
         profileImageView.image = ProfileResource.randomEmoji
+    }
+
+    func applyLoadingIndicator() {
+        addSubview(loadingIndicator)
+        loadingIndicator.snp.makeConstraints {
+            $0.center.equalToSuperview()
+        }
+    }
+
+    func stopLoadingIndicator() {
+        loadingIndicator.indicator.stopAnimating()
+        loadingIndicator.removeFromSuperview()
     }
 }
