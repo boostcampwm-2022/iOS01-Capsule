@@ -160,6 +160,7 @@
 		4AA4C5B529473D8600171D0D /* MovableToCapsuleAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA4C5B429473D8600171D0D /* MovableToCapsuleAccess.swift */; };
 		4AA4C5B72948729200171D0D /* Calendar+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA4C5B62948729200171D0D /* Calendar+.swift */; };
 		4AF16AE7292B1F8400787C5C /* CustomAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF16AE6292B1F8400787C5C /* CustomAnnotationView.swift */; };
+		594C6A8F295462D400B42815 /* MyCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594C6A8E295462D400B42815 /* MyCollectionView.swift */; };
 		599C19D2292B82D000517E93 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C19D1292B82D000517E93 /* LoadingViewController.swift */; };
 		599C19D4292B838D00517E93 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C19D3292B838D00517E93 /* LoadingView.swift */; };
 		599C1A2C292C9F5B00517E93 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 599C1A2B292C9F5B00517E93 /* .swiftlint.yml */; };
@@ -348,6 +349,7 @@
 		4AA4C5B429473D8600171D0D /* MovableToCapsuleAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovableToCapsuleAccess.swift; sourceTree = "<group>"; };
 		4AA4C5B62948729200171D0D /* Calendar+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Calendar+.swift"; sourceTree = "<group>"; };
 		4AF16AE6292B1F8400787C5C /* CustomAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotationView.swift; sourceTree = "<group>"; };
+		594C6A8E295462D400B42815 /* MyCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCollectionView.swift; sourceTree = "<group>"; };
 		599C19D1292B82D000517E93 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Loading\U0010ViewController.swift"; sourceTree = "<group>"; };
 		599C19D3292B838D00517E93 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		599C1A2B292C9F5B00517E93 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
@@ -722,6 +724,7 @@
 				288A8ECB29235BE9000229D2 /* HomeViewController.swift */,
 				288A8ECD29235BEF000229D2 /* HomeViewModel.swift */,
 				59D8CFB42935FDAC00FD9CF6 /* CarouselCollectionViewFlowLayout.swift */,
+				594C6A8E295462D400B42815 /* MyCollectionView.swift */,
 				59D8CFB6293609B300FD9CF6 /* Components */,
 			);
 			path = Home;
@@ -1190,6 +1193,7 @@
 				0DD83D13292F51960020F15C /* LoadingIndicatorView.swift in Sources */,
 				0DD83D0F292F1BAD0020F15C /* CustomScrollView.swift in Sources */,
 				0D706137292C630D0077787E /* DatePickerViewModel.swift in Sources */,
+				594C6A8F295462D400B42815 /* MyCollectionView.swift in Sources */,
 				0D90DAF929239A81000DCC84 /* UIImage+.swift in Sources */,
 				0DF9D2A5293F1CB3001C05DE /* DetailImageView.swift in Sources */,
 				0DE786E1292BBDEC007EF260 /* DatePickerViewController.swift in Sources */,
