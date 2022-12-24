@@ -6,50 +6,20 @@
 //
 
 import KingReceiver
-import AVFoundation
 import SnapKit
 import UIKit
 
-final class CapsuleCloseView: UIView, BaseView, UnOpenable {
-    struct Item {
-        let closedDateString: String
-        let memoryDateString: String
-        let simpleAddress: String
-        let thumbnailImageURL: String
-    }
+final class CapsuleCloseView: CapsuleThumbnailView, BaseView, UnOpenable {
+    let blurEffectView = CapsuleBlurEffectView(width: UIScreen.main.bounds.width * FrameResource.capsuleThumbnailWidthRatio)
 
-    var thumbnailImageView = ThemeThumbnailImageView(frame: .zero, width: UIScreen.main.bounds.width * FrameResource.capsuleThumbnailWidthRatio)
+    var lockImageView = LockImageView()
 
-    let blurEffectView = CapsuleBlurEffectView()
-
-    var lockImageView = {
-        let lockImageView = UIImageView()
-        lockImageView.image = .lock
-        lockImageView.tintColor = .themeGray200
-        return lockImageView
-    }()
-
-    var dateLabel = {
-        let dateLabel = ThemeLabel(text: nil, size: FrameResource.fontSize80, color: .themeGray200)
+    var closedDateLabel = {
+        let dateLabel = ThemeLabel(size: FrameResource.fontSize80, color: .themeGray200)
         dateLabel.textAlignment = .center
+        dateLabel.numberOfLines = 0
+
         return dateLabel
-    }()
-
-    var descriptionLabel = {
-        let label = ThemeLabel(size: FrameResource.fontSize140, color: .themeGray300)
-        label.numberOfLines = 3
-        label.textAlignment = .center
-        return label
-    }()
-
-    let closeButton = {
-        let button = UIButton()
-        button.titleLabel?.font = .themeFont(ofSize: FrameResource.fontSize100)
-        button.setTitle("완료", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .themeColor200
-        button.layer.cornerRadius = FrameResource.commonCornerRadius
-        return button
     }()
 
     // MARK: - Lifecycle
@@ -68,12 +38,8 @@ final class CapsuleCloseView: UIView, BaseView, UnOpenable {
 
     // MARK: - Methods
 
-    func configure() {
-        backgroundColor = .themeBackground
-    }
-
-    func configure(item: Item) {
-        dateLabel.text = "밀봉시간: \(item.closedDateString)"
+    override func configure(item: Item) {
+        bottomButton.setTitle("완료", for: .normal)
 
         descriptionLabel.text = """
         \(item.memoryDateString)
@@ -81,52 +47,10 @@ final class CapsuleCloseView: UIView, BaseView, UnOpenable {
         추억이 담긴 캡슐을 보관하였습니다.
         """
 
-        descriptionLabel.asFontColor(
-            targetStringList: [item.memoryDateString, item.simpleAddress],
-            size: FrameResource.fontSize140,
-            color: .themeGray400
-        )
+        closedDateLabel.text = "밀봉시간 \(item.closedDateString)"
 
-        thumbnailImageView.imageView.kr.setImage(with: item.thumbnailImageURL, placeholder: .empty, scale: FrameResource.closedImageScale)
+        applyUnopenableEffect(superview: thumbnailImageView)
 
-        applyUnOpenableEffect()
-    }
-
-    func addSubViews() {
-        [thumbnailImageView, descriptionLabel, closeButton].forEach {
-            addSubview($0)
-        }
-    }
-
-    func makeConstraints() {
-        thumbnailImageView.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.centerY.equalToSuperview().multipliedBy(0.7)
-            $0.width.equalTo(UIScreen.main.bounds.width * FrameResource.capsuleThumbnailWidthRatio)
-            $0.height.equalTo(UIScreen.main.bounds.width * FrameResource.capsuleThumbnailWidthRatio * FrameResource.capsuleThumbnailHWRatio)
-        }
-
-        descriptionLabel.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.top.equalTo(self.snp.centerY).multipliedBy(0.7)
-                .offset(FrameResource.capsuleThumbnailHeight / 2 + AnimationResource.capsuleMoveHeight)
-            $0.bottom.equalTo(closeButton.snp.top).offset(-FrameResource.spacing200).priority(999)
-        }
-
-        closeButton.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(FrameResource.horizontalPadding)
-            $0.trailing.equalToSuperview().offset(-FrameResource.horizontalPadding)
-            $0.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-FrameResource.spacing200)
-            $0.height.equalTo(FrameResource.buttonHeight)
-        }
-    }
-
-    func animate() {
-        UIView.animate(withDuration: AnimationResource.capsuleMoveDuration,
-                       delay: 0,
-                       options: [.repeat, .autoreverse]
-        ) {
-            self.thumbnailImageView.transform = .init(translationX: 0, y: AnimationResource.capsuleMoveHeight)
-        }
+        super.configure(item: item)
     }
 }

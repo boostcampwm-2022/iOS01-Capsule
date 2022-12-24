@@ -47,7 +47,7 @@ final class CapsuleListViewModel: BaseViewModel, CapsuleCellNeedable {
                 owner.coordinator?.moveToCapsuleAccess(with: capsuleCell)
             })
     }
-    
+
     func refreshCapsule() {
         AppDataManager.shared.fetchCapsules()
     }

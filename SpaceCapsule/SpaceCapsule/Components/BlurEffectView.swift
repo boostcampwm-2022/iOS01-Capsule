@@ -8,9 +8,9 @@
 import UIKit
 
 final class CapsuleBlurEffectView: UIVisualEffectView {
-    init() {
+    init(width: CGFloat) {
         super.init(effect: UIBlurEffect(style: .systemUltraThinMaterialDark))
-        self.layer.cornerRadius = FrameResource.listCapsuleCellWidth / 2
+        self.layer.cornerRadius = width / 2
         self.clipsToBounds = true
     }
     

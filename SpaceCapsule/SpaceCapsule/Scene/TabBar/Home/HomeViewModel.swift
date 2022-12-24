@@ -44,7 +44,7 @@ final class HomeViewModel: BaseViewModel, CapsuleCellNeedable {
                 owner.coordinator?.tabBarAppearance(isHidden: false)
             })
             .disposed(by: disposeBag)
-        
+
         input.capsules
             .withUnretained(self)
             .subscribe(
@@ -54,8 +54,8 @@ final class HomeViewModel: BaseViewModel, CapsuleCellNeedable {
                     owner.output.userCapsuleStatus.accept(status)
                     
                     owner.output.featuredCapsuleCellItems.accept(
-                        CapsuleType.allCases
-                            .map { owner.getHomeCapsuleCellItem(capsules: capsuleList, type: $0) }
+                        CapsuleType.allCases.shuffled()
+                            .map { owner.homeCapsuleCellItem(capsules: capsuleList, type: $0) }
                             .compactMap({ $0 })
                     )
 
@@ -85,65 +85,20 @@ final class HomeViewModel: BaseViewModel, CapsuleCellNeedable {
             .disposed(by: disposeBag)
     }
 
-    private func getHomeCapsuleCellItem(capsules: [Capsule], type: CapsuleType) -> HomeCapsuleCellItem? {
-        guard let capsule = getCapsule(in: capsules, by: type) else {
+    func homeCapsuleCellItem(capsules: [Capsule], type: CapsuleType) -> HomeCapsuleCellItem? {
+        guard let capsule = type.capsule(from: capsules) else {
             return nil
         }
-        
+
         return HomeCapsuleCellItem(
             uuid: capsule.uuid,
-            thumbnailImageURL: capsule.images.first,
+            thumbnailImageURL: capsule.images.first ?? "",
             address: capsule.simpleAddress,
             closedDate: capsule.closedDate,
             memoryDate: capsule.memoryDate,
             openCount: capsule.openCount,
-            coordinate: CLLocationCoordinate2D(
-                latitude: capsule.geopoint.latitude,
-                longitude: capsule.geopoint.longitude
-            ),
+            coordinate: capsule.geopoint.coordinate,
             type: type
         )
-    }
-    
-    private func getCapsule(in capsules: [Capsule], by type: CapsuleType) -> Capsule? {
-        switch type {
-        case .closedLongest:
-            return capsules.min { $0.closedDate < $1.closedDate }
-        case .closedShortest:
-            return capsules.max { $0.closedDate < $1.closedDate }
-        case .memoryOldest:
-            return capsules.min { $0.memoryDate < $1.memoryDate }
-        case .memoryNewest:
-            return capsules.max { $0.memoryDate < $1.memoryDate }
-        case .nearest:
-            return orderCapsulesByDistance(capsules).first
-        case .farthest:
-            return orderCapsulesByDistance(capsules).last
-        case .leastOpened:
-            return capsules.min(by: { $0.openCount < $1.openCount })
-        case .mostOpened:
-            return capsules.max(by: { $0.openCount < $1.openCount })
-        }
-    }
-    
-    private func orderCapsulesByDistance(_ capsules: [Capsule]) -> [Capsule] {
-        let orderedCapsules = capsules.sorted { first, second in
-            let firstLocation = CLLocationCoordinate2D(
-                latitude: first.geopoint.latitude,
-                longitude: first.geopoint.longitude
-            )
-            let secondLocation = CLLocationCoordinate2D(
-                latitude: second.geopoint.latitude,
-                longitude: second.geopoint.longitude
-            )
-            let firstDistance = LocationManager.shared.distance(capsuleCoordinate: firstLocation)
-            let secondDistance = LocationManager.shared.distance(capsuleCoordinate: secondLocation)
-            return firstDistance < secondDistance
-        }
-        return orderedCapsules
-    }
-    
-    func getMostOpened(capsules: [Capsule]) -> Capsule? {
-        return capsules.min(by: { $0.openCount > $1.openCount })
     }
 }
