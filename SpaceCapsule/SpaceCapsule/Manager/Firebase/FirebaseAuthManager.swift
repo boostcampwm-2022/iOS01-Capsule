@@ -60,18 +60,9 @@ final class FirebaseAuthManager {
     }
 
     private func clientSecret() -> String? {
-        guard let privateKey =
-            """
-            -----BEGIN PRIVATE KEY-----
-            MIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQgBu59KBTVAYoS7A9A
-            SDr09NemKkFxu44brOzjfeo7YaGgCgYIKoZIzj0DAQehRANCAAS8nCVjRqbbQkU6
-            w3jDMFAzLKYlZzWYN/QOS/hANnIOic1GMPKC2N98Fz4EDO52iWLsyl5pq7O3Wh2O
-            79TSHEtE
-            -----END PRIVATE KEY-----
-            """.data(using: .utf8) else {
+        guard let privateKey = Bundle.main.authKey.data(using: .utf8) else {
             return nil
         }
-
         var myJWT = JWT(claims: Payload())
         let jwtSigner = JWTSigner.es256(privateKey: privateKey)
         guard let signedJWT = try? myJWT.sign(using: jwtSigner) else {
