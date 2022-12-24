@@ -19,7 +19,6 @@ extension Bundle {
         guard let key = resource["AuthKey"] as? String else {
             fatalError("AuthKey.plist에 authKey를 등록하세요")
         }
-        print(key)
         return key
     }
 }
