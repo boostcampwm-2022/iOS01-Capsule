@@ -6,6 +6,7 @@
 //
 
 import AVFoundation
+import KingReceiver
 import SnapKit
 import UIKit
 
@@ -76,8 +77,7 @@ final class CapsuleOpenView: CapsuleThumbnailView, BaseView, UnOpenable {
             y: thumbnailImageView.center.y
         )
         animation.isRemovedOnCompletion = true
-        
-        thumbnailImageView.layer.add(animation, forKey: keyPath)
 
+        thumbnailImageView.layer.add(animation, forKey: keyPath)
     }
 }

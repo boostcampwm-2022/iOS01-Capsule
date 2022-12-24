@@ -105,6 +105,17 @@ final class ProfileViewController: UIViewController, BaseViewController {
                 owner.showDeleteAccountAlert()
             }
             .disposed(by: disposeBag)
+
+        viewModel.output.loadingIndicator
+            .withUnretained(self)
+            .bind { owner, isLoading in
+                if isLoading {
+                    owner.profileView.applyLoadingIndicator()
+                } else {
+                    owner.profileView.stopLoadingIndicator()
+                }
+            }
+            .disposed(by: disposeBag)
     }
 
     private func showSignOutAlert() {

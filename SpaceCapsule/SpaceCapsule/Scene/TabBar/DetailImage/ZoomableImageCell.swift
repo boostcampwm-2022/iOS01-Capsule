@@ -5,6 +5,7 @@
 //  Created by 장재훈 on 2022/12/06.
 //
 
+import KingReceiver
 import SnapKit
 import UIKit
 

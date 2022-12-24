@@ -10,6 +10,7 @@ import Foundation
 enum FBStorageError: LocalizedError {
     case failedPutData
     case failedDownloadURL
+    case failedDeleteData
     
     var errorDescription: String {
         switch self {
@@ -17,6 +18,8 @@ enum FBStorageError: LocalizedError {
             return "데이터 업로드 실패"
         case .failedDownloadURL:
             return "데이터 URL 다운로드 실패"
+        case .failedDeleteData:
+            return "데이터 삭제 실패"
         }
     }
 }

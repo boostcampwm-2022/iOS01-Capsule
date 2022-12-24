@@ -22,8 +22,21 @@
 
 <img src="https://user-images.githubusercontent.com/55919701/205919850-eeca782e-68f3-475a-8cd0-66a59c784d44.png">
 
-## 애플 로그인
+## 캡슐 홈
 
+<img src="https://user-images.githubusercontent.com/77015330/208330060-a7b15f34-cb90-4e3c-b12e-af600a1e1f6a.jpeg" width="300">
+
+- 3D Carousel CollectionView로 구성하였습니다.
+- 좌우로 무한 스크롤이 가능합니다.
+- 특정 기준에 맞는 캡슐을 보여줍니다.
+    - 생성한지 가장 오래된 캡슐
+    - 가장 최근에 생성한 캡슐
+    - 가장 오래된 추억이 담긴 캡슐
+    - 가장 최근 추억이 담긴 캡슐
+    - 가장 가까운 위치의 캡슐
+    - 가장 먼 위치의 캡슐
+    - 열어본 횟수가 가장 적은 캡슐
+    - 열어본 횟수가 가장 많은 캡슐
 
 ## 캡슐 추가
 
@@ -84,34 +97,6 @@
 - 짧은 기간 내에 구현할 수 있는 사용자 인증, 데이터베이스 등의 기능이 필요해 Firebase 를 사용했습니다.
 - NoSQL 데이터베이스로 수정과 확장이 용이해 사용하게 되었습니다.
 
-# 🤔 고민과 해결
-
-## 거리 계산 방식
-
-<img src="https://user-images.githubusercontent.com/55919701/205921093-c21c6233-d1a3-4f43-ac5c-b4b638ebdb1a.png" width="300">
-
-- 지도 위 개봉 가능한 캡슐은 초록색, 개봉 불가능한 캡슐은 회색으로 표시합니다.
-- 사용자 위치 기준 반경 100m 이내에 있는 캡슐은 개봉 가능한 캡슐입니다.
-- 사용자가 이동할때마다 사용자와 모든 캡슐과의 거리를 계산하는 것은 너무 큰 오버헤드라고 판단했습니다.
-
-<img src="https://user-images.githubusercontent.com/55919701/205921172-382e4f14-152e-4c44-a624-d752b14fe846.png" width="300">
-
-- 위와 같은 문제점 때문에 일부 캡슐들만 감시하기 위한 영역을 지정하기로 했습니다.
-- 사용자가 이동할때마다 반경 1km 이내에 있는 캡슐들만의 개봉 가능 여부를 판단합니다.
-- 사용자 반경 1km 외에 있는 캡슐들과의 거리는 계산하지 않습니다.
-
-<img src="https://user-images.githubusercontent.com/55919701/205921236-808037c3-3ade-4a60-8b54-7fa08195fb0a.png" width="300">
-
-- 항상 감시하는 영역을 (이미지상 큰 원) 업데이트 하는 경우는 사용자가 해당 영역의 가장자리에 가까워졌을 때입니다.
-- 이는 사용자가 이동한 거리가 900m 를 넘어갔을 때이며, 감시하는 영역 밖에 개봉할 수 있는 캡슐이 있을 수도 있다는 뜻입니다.
-
-<img src="https://user-images.githubusercontent.com/55919701/205921296-3d3f070f-1db3-47c1-9ccd-678f11f2fb73.png" width="300">
-
-- 사용자가 항상 감시하는 영역의 중심으로부터 850m 이동할 시 새롭게 감시할 영역을 업데이트 합니다.
-    - 감시 영역을 업데이트 할 거리인 900m에 오차 범위를 고려해 850m로 지정했습니다.
-- 위 과정을 반복하며 캡슐 개봉 가능 여부에 관한 계산과 지도 어노테이션을 다시 그리는데 드는 오버헤드를 감소시키고자 하였습니다.
-- 이를 통해 약 25% 의 성능 향상이라는 성과를 내었습니다.
-
 # 🤝 협업 방식
 
 ## Git
@@ -125,5 +110,26 @@
 
 ## Figma
 
-[공간캡슐 디자인 Figma](https://www.figma.com/embed?embed_host=notion&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FYwaNiUE96rBMVXcvPBuFdK%2F%25EA%25B3%25B5%25EA%25B0%2584%25EC%25BA%25A1%25EC%258A%2590%3Fnode-id%3D0%253A1%26t%3DfDT2tIlg3PwqbJCH-1)
+- [공간캡슐 디자인 Figma](https://www.figma.com/embed?embed_host=notion&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FYwaNiUE96rBMVXcvPBuFdK%2F%25EA%25B3%25B5%25EA%25B0%2584%25EC%25BA%25A1%25EC%258A%2590%3Fnode-id%3D0%253A1%26t%3DfDT2tIlg3PwqbJCH-1)
+
+# 🎤 추가 자료
+
+### 발표 자료
+- [발표 PPT](https://github.com/boostcampwm-2022/iOS01-Capsule/blob/develop/%EB%B0%9C%ED%91%9C%EC%9E%90%EB%A3%8C.md)
+- 기술적 고민
+    - [Apple Token Revoke](https://github.com/boostcampwm-2022/iOS01-Capsule/blob/develop/%EB%B0%9C%ED%91%9C%EC%9E%90%EB%A3%8C.md#apple-token-revoke)
+    - [이미지 처리 및 캐싱 모듈](https://github.com/boostcampwm-2022/iOS01-Capsule/blob/develop/%EB%B0%9C%ED%91%9C%EC%9E%90%EB%A3%8C.md#%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%B2%98%EB%A6%AC-%EB%B0%8F-%EC%BA%90%EC%8B%B1-%EB%AA%A8%EB%93%88)
+    - [캡슐 개봉 가능 여부 계산 로직](https://github.com/boostcampwm-2022/iOS01-Capsule/blob/develop/%EB%B0%9C%ED%91%9C%EC%9E%90%EB%A3%8C.md#%EC%BA%A1%EC%8A%90-%EA%B0%9C%EB%B4%89-%EA%B0%80%EB%8A%A5-%EC%97%AC%EB%B6%80-%EA%B3%84%EC%82%B0-%EB%A1%9C%EC%A7%81)
+    - [3D Carousel CollectionView](https://github.com/boostcampwm-2022/iOS01-Capsule/blob/develop/%EB%B0%9C%ED%91%9C%EC%9E%90%EB%A3%8C.md#3d-carousel-collectionview)
+
+### 발표 영상
+
+- [공간캡슐 발표 영상](https://youtu.be/acyWvWpLJVc)
+
+### 시연 영상
+
+- [공간캡슐 시연 영상](https://youtu.be/yiHOi-m3Stk)
+
+
+
 
