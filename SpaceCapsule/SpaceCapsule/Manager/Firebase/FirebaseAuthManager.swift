@@ -50,7 +50,11 @@ final class FirebaseAuthManager {
     }
 
     func deleteAccountFromAuth(completion: @escaping ((FBAuthError?) -> Void)) {
-        auth.currentUser?.delete { error in
+        guard let currentUser = auth.currentUser else {
+            completion(nil)
+            return
+        }
+        currentUser.delete { error in
             if error != nil {
                 completion(FBAuthError.deleteUserFromAuthError)
             } else {
