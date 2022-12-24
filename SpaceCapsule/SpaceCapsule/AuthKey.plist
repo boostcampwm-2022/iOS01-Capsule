@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AuthKey</key>
+	<string>-----BEGIN PRIVATE KEY-----
+            MIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQgBu59KBTVAYoS7A9A
+            SDr09NemKkFxu44brOzjfeo7YaGgCgYIKoZIzj0DAQehRANCAAS8nCVjRqbbQkU6
+            w3jDMFAzLKYlZzWYN/QOS/hANnIOic1GMPKC2N98Fz4EDO52iWLsyl5pq7O3Wh2O
+            79TSHEtE
+            -----END PRIVATE KEY-----</string>
+</dict>
+</plist>

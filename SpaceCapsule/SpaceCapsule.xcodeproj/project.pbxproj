@@ -88,6 +88,8 @@
 		28419EA32941BD6400266AB6 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 28419EA22941BD6400266AB6 /* FirebaseStorage */; };
 		28419EA52944C8BD00266AB6 /* Data+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28419EA42944C8BD00266AB6 /* Data+.swift */; };
 		28419EAE2944F59000266AB6 /* SwiftJWT in Frameworks */ = {isa = PBXBuildFile; productRef = 28419EAD2944F59000266AB6 /* SwiftJWT */; };
+		287C9BE82956D35400435EC5 /* AuthKey.plist in Resources */ = {isa = PBXBuildFile; fileRef = 287C9BE72956D35400435EC5 /* AuthKey.plist */; };
+		287C9BEA2956D42400435EC5 /* SpaceCapsule+Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287C9BE92956D42400435EC5 /* SpaceCapsule+Bundle.swift */; };
 		2885AA00293B6466003E5311 /* ProfileButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2885A9FF293B6466003E5311 /* ProfileButton.swift */; };
 		288A8E922923244D000229D2 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288A8E912923244D000229D2 /* Coordinator.swift */; };
 		288A8E9B29235A6E000229D2 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288A8E9A29235A6E000229D2 /* SignInView.swift */; };
@@ -267,6 +269,8 @@
 		28245561293B17B100DE03A1 /* UnOpenable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnOpenable.swift; sourceTree = "<group>"; };
 		28419E5E294028DE00266AB6 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		28419EA42944C8BD00266AB6 /* Data+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+.swift"; sourceTree = "<group>"; };
+		287C9BE72956D35400435EC5 /* AuthKey.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AuthKey.plist; sourceTree = "<group>"; };
+		287C9BE92956D42400435EC5 /* SpaceCapsule+Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SpaceCapsule+Bundle.swift"; sourceTree = "<group>"; };
 		2885A9FF293B6466003E5311 /* ProfileButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileButton.swift; sourceTree = "<group>"; };
 		288A8E912923244D000229D2 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		288A8E96292359CF000229D2 /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
@@ -432,6 +436,7 @@
 				59F567F72923BE1E00F756B2 /* SpaceCapsule.entitlements */,
 				4A05D0EB2924C04200A2EF50 /* GoogleService-Info.plist */,
 				0D6CA342292216A400E02393 /* Info.plist */,
+				287C9BE72956D35400435EC5 /* AuthKey.plist */,
 				0D2B7AB92934594400CE34E3 /* running.gpx */,
 				0D6CA33D292216A400E02393 /* Assets.xcassets */,
 				0D6CA33F292216A400E02393 /* LaunchScreen.storyboard */,
@@ -505,6 +510,7 @@
 				0DD83D10292F2EC80020F15C /* UIViewController+.swift */,
 				4AA4C5B62948729200171D0D /* Calendar+.swift */,
 				28419EA42944C8BD00266AB6 /* Data+.swift */,
+				287C9BE92956D42400435EC5 /* SpaceCapsule+Bundle.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1046,6 +1052,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				287C9BE82956D35400435EC5 /* AuthKey.plist in Resources */,
 				599C1A2C292C9F5B00517E93 /* .swiftlint.yml in Resources */,
 				0D6CA341292216A400E02393 /* LaunchScreen.storyboard in Resources */,
 				0D6CA33E292216A400E02393 /* Assets.xcassets in Resources */,
@@ -1201,6 +1208,7 @@
 				288A8EB229235B5A000229D2 /* ProfileView.swift in Sources */,
 				2894CBA22947303800E8F5FE /* Payload.swift in Sources */,
 				28419EA52944C8BD00266AB6 /* Data+.swift in Sources */,
+				287C9BEA2956D42400435EC5 /* SpaceCapsule+Bundle.swift in Sources */,
 				2894CBA52947307900E8F5FE /* RefreshTokenResponse.swift in Sources */,
 				0DA05E1D29308B8400B08FA5 /* CustomNavigationController.swift in Sources */,
 				288A8ED029235BF9000229D2 /* HomeCoordinator.swift in Sources */,
