@@ -60,7 +60,7 @@ final class FirebaseAuthManager {
     }
 
     private func clientSecret() -> String? {
-        guard let privateKey = Bundle.main.authKey.data(using: .utf8) else {
+        guard let privateKey = Bundle.main.authKey?.data(using: .utf8) else {
             return nil
         }
         var myJWT = JWT(claims: Payload())

@@ -8,17 +8,13 @@
 import Foundation
 
 extension Bundle {
-    var authKey: String {
-        guard let file = path(forResource: "AuthKey", ofType: "plist") else {
-            return ""
+    var authKey: String? {
+        guard let file = path(forResource: "AuthKey", ofType: "plist"),
+              let resource = try? NSDictionary(contentsOf: NSURL(fileURLWithPath: file) as URL, error: ()),
+              let key = resource["AuthKey"] as? String else {
+            return nil
         }
-
-        guard let resource = try? NSDictionary(contentsOf: NSURL(fileURLWithPath: file) as URL, error: ()) else {
-            return ""
-        }
-        guard let key = resource["AuthKey"] as? String else {
-            fatalError("AuthKey.plist에 authKey를 등록하세요")
-        }
+        
         return key
     }
 }
