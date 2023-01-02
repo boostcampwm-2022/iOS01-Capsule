@@ -43,17 +43,20 @@ final class FirebaseStorageManager {
         }
     }
 
-    func deleteImagesInCapsule(capsules: [Capsule], completion: @escaping (Error?) -> Void) {
-        for capsule in capsules {
-            capsule.images.forEach { url in
-                delete(forURL: url) { error in
-                    guard error != nil else {
-                        completion(nil)
-                        return
+    func deleteImagesInCapsule(capsules: [Capsule]) -> Observable<Void> {
+        return Observable.create { emitter in
+            for capsule in capsules {
+                capsule.images.forEach { [weak self] url in
+                    self?.delete(forURL: url) { error in
+                        if let error = error {
+                            emitter.onError(FBStorageError.failedDeleteData)
+                            return
+                        }
                     }
-                    completion(FBStorageError.failedDeleteData)
                 }
             }
+            emitter.onCompleted()
+            return Disposables.create()
         }
     }
 

@@ -38,56 +38,60 @@ final class ProfileViewModel: BaseViewModel {
 
     func bind() {
         output.refreshToken.bind { refreshToken in
-            AppDataManager.shared.auth.revokeToken(refreshToken: refreshToken) { [weak self] error in
-                if let error = error {
-                    print(error.localizedDescription)
-                } else {
+            AppDataManager.shared.auth.revokeToken(refreshToken: refreshToken).subscribe(
+                onNext: { [weak self] _ in
                     self?.output.revokeToken.onNext(())
+                },
+                onError: { error in
+                    print(error.localizedDescription)
                 }
-            }
+            ).disposed(by: self.disposeBag)
+
         }.disposed(by: disposeBag)
 
-        output.revokeToken.bind { [weak self] _ in
-            AppDataManager.shared.auth.deleteAccountFromFirestore { [weak self] error in
-                if let error = error {
-                    print(error.localizedDescription)
-                } else {
+        output.revokeToken.bind { _ in
+            AppDataManager.shared.auth.deleteAccountFromFirestore().subscribe(
+                onNext: { [weak self] _ in
                     self?.output.deleteUserFromFireStore.onNext(())
+                },
+                onError: { error in
+                    print(error.localizedDescription)
                 }
-            }
+            ).disposed(by: self.disposeBag)
         }.disposed(by: disposeBag)
 
-        output.deleteUserFromFireStore.bind { [weak self] _ in
-            AppDataManager.shared.auth.deleteAccountFromFirestore { [weak self] error in
-                if let error = error {
-                    print(error.localizedDescription)
-                } else {
+        output.deleteUserFromFireStore.bind { _ in
+            AppDataManager.shared.auth.deleteAccountFromFirestore().subscribe(
+                onNext: { [weak self] _ in
                     self?.output.deleteUserFromAuth.onNext(())
                     self?.output.deleteImagesFromStorage.onNext(())
+                },
+                onError: { error in
+                    print(error.localizedDescription)
                 }
-            }
+            ).disposed(by: self.disposeBag)
         }.disposed(by: disposeBag)
 
-        output.deleteUserFromAuth.bind { [weak self] _ in
-            AppDataManager.shared.auth.deleteAccountFromAuth { [weak self] error in
-                if let error = error {
+        output.deleteUserFromAuth.bind { _ in
+            AppDataManager.shared.auth.deleteAccountFromAuth().subscribe(
+                onNext: { [weak self] _ in
+                    self?.output.loadingIndicator.onNext(false)
+                    AppDataManager.shared.capsules.accept([])
+                    UserDefaultsManager.saveData(data: false, key: .isRegistered)
+                    self?.signOut()
+                },
+                onError: { error in
                     print(error.localizedDescription)
-                    return
                 }
-                self?.output.loadingIndicator.onNext(false)
-                AppDataManager.shared.capsules.accept([])
-                UserDefaultsManager.saveData(data: false, key: .isRegistered)
-                self?.signOut()
-            }
+            ).disposed(by: self.disposeBag)
         }.disposed(by: disposeBag)
 
         output.deleteImagesFromStorage.bind { _ in
-            FirebaseStorageManager.shared.deleteImagesInCapsule(capsules: AppDataManager.shared.capsules.value) { error in
-                if let error = error {
+            FirebaseStorageManager.shared.deleteImagesInCapsule(capsules: AppDataManager.shared.capsules.value).subscribe(
+                onError: { error in
                     print(error.localizedDescription)
-                    return
                 }
-            }
+            ).disposed(by: self.disposeBag)
         }.disposed(by: disposeBag)
     }
 
@@ -105,10 +109,13 @@ final class ProfileViewModel: BaseViewModel {
 
     func deleteAccount() {
         output.loadingIndicator.onNext(true)
-        AppDataManager.shared.auth.refreshToken { [weak self] refreshToken in
-            if let refreshToken = refreshToken {
+        AppDataManager.shared.auth.refreshToken().subscribe(
+            onNext: { [weak self] refreshToken in
                 self?.output.refreshToken.onNext(refreshToken)
+            },
+            onError: { error in
+                print(error.localizedDescription)
             }
-        }
+        ).disposed(by: disposeBag)
     }
 }
