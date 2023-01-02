@@ -87,12 +87,11 @@ final class ProfileViewModel: BaseViewModel {
         }.disposed(by: disposeBag)
 
         output.deleteImagesFromStorage.bind { _ in
-            FirebaseStorageManager.shared.deleteImagesInCapsule(capsules: AppDataManager.shared.capsules.value) { error in
-                if let error = error {
+            FirebaseStorageManager.shared.deleteImagesInCapsule(capsules: AppDataManager.shared.capsules.value).subscribe(
+                onError: { error in
                     print(error.localizedDescription)
-                    return
                 }
-            }
+            ).disposed(by: self.disposeBag)
         }.disposed(by: disposeBag)
     }
 
