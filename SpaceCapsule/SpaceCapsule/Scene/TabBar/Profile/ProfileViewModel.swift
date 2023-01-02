@@ -105,10 +105,13 @@ final class ProfileViewModel: BaseViewModel {
 
     func deleteAccount() {
         output.loadingIndicator.onNext(true)
-        AppDataManager.shared.auth.refreshToken { [weak self] refreshToken in
-            if let refreshToken = refreshToken {
+        AppDataManager.shared.auth.refreshToken().subscribe(
+            onNext: { [weak self] refreshToken in
                 self?.output.refreshToken.onNext(refreshToken)
+            },
+            onError: { error in
+                print(error.localizedDescription)
             }
-        }
+        ).disposed(by: disposeBag)
     }
 }
