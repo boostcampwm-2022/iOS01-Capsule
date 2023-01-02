@@ -36,17 +36,21 @@ final class FirebaseAuthManager {
         }
     }
 
-    func deleteAccountFromFirestore(completion: @escaping ((FBAuthError?) -> Void)) {
-        guard let uid = FirebaseAuthManager.shared.currentUser?.uid else {
-            return
-        }
-        AppDataManager.shared.firestore.deleteUserCapsules()
-        AppDataManager.shared.firestore.deleteUserInfo(uid: uid) { error in
-            if error != nil {
-                completion(FBAuthError.deleteUserFromFireStoreError)
-            } else {
-                completion(nil)
+    func deleteAccountFromFirestore() -> Observable<Void> {
+        return Observable.create { emitter in
+            guard let uid = FirebaseAuthManager.shared.currentUser?.uid else {
+                return Disposables.create()
             }
+            AppDataManager.shared.firestore.deleteUserCapsules()
+            AppDataManager.shared.firestore.deleteUserInfo(uid: uid) { error in
+                if error != nil {
+                    emitter.onError(FBAuthError.deleteUserFromFireStoreError)
+                } else {
+                    emitter.onNext(())
+                    emitter.onCompleted()
+                }
+            }
+            return Disposables.create()
         }
     }
 

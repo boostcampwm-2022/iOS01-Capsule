@@ -49,25 +49,27 @@ final class ProfileViewModel: BaseViewModel {
 
         }.disposed(by: disposeBag)
 
-        output.revokeToken.bind { [weak self] _ in
-            AppDataManager.shared.auth.deleteAccountFromFirestore { [weak self] error in
-                if let error = error {
-                    print(error.localizedDescription)
-                } else {
+        output.revokeToken.bind { _ in
+            AppDataManager.shared.auth.deleteAccountFromFirestore().subscribe(
+                onNext: { [weak self] _ in
                     self?.output.deleteUserFromFireStore.onNext(())
+                },
+                onError: { error in
+                    print(error.localizedDescription)
                 }
-            }
+            ).disposed(by: self.disposeBag)
         }.disposed(by: disposeBag)
 
-        output.deleteUserFromFireStore.bind { [weak self] _ in
-            AppDataManager.shared.auth.deleteAccountFromFirestore { [weak self] error in
-                if let error = error {
-                    print(error.localizedDescription)
-                } else {
+        output.deleteUserFromFireStore.bind { _ in
+            AppDataManager.shared.auth.deleteAccountFromFirestore().subscribe(
+                onNext: { [weak self] _ in
                     self?.output.deleteUserFromAuth.onNext(())
                     self?.output.deleteImagesFromStorage.onNext(())
+                },
+                onError: { error in
+                    print(error.localizedDescription)
                 }
-            }
+            ).disposed(by: self.disposeBag)
         }.disposed(by: disposeBag)
 
         output.deleteUserFromAuth.bind { [weak self] _ in
