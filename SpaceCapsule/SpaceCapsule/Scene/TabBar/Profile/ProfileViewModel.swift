@@ -38,13 +38,15 @@ final class ProfileViewModel: BaseViewModel {
 
     func bind() {
         output.refreshToken.bind { refreshToken in
-            AppDataManager.shared.auth.revokeToken(refreshToken: refreshToken) { [weak self] error in
-                if let error = error {
-                    print(error.localizedDescription)
-                } else {
+            AppDataManager.shared.auth.revokeToken(refreshToken: refreshToken).subscribe(
+                onNext: { [weak self] _ in
                     self?.output.revokeToken.onNext(())
+                },
+                onError: { error in
+                    print(error.localizedDescription)
                 }
-            }
+            ).disposed(by: self.disposeBag)
+
         }.disposed(by: disposeBag)
 
         output.revokeToken.bind { [weak self] _ in
