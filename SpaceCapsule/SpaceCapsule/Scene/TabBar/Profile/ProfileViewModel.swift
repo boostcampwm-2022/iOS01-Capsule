@@ -72,17 +72,18 @@ final class ProfileViewModel: BaseViewModel {
             ).disposed(by: self.disposeBag)
         }.disposed(by: disposeBag)
 
-        output.deleteUserFromAuth.bind { [weak self] _ in
-            AppDataManager.shared.auth.deleteAccountFromAuth { [weak self] error in
-                if let error = error {
+        output.deleteUserFromAuth.bind { _ in
+            AppDataManager.shared.auth.deleteAccountFromAuth().subscribe(
+                onNext: { [weak self] _ in
+                    self?.output.loadingIndicator.onNext(false)
+                    AppDataManager.shared.capsules.accept([])
+                    UserDefaultsManager.saveData(data: false, key: .isRegistered)
+                    self?.signOut()
+                },
+                onError: { error in
                     print(error.localizedDescription)
-                    return
                 }
-                self?.output.loadingIndicator.onNext(false)
-                AppDataManager.shared.capsules.accept([])
-                UserDefaultsManager.saveData(data: false, key: .isRegistered)
-                self?.signOut()
-            }
+            ).disposed(by: self.disposeBag)
         }.disposed(by: disposeBag)
 
         output.deleteImagesFromStorage.bind { _ in
