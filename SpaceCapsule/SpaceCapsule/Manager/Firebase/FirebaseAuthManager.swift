@@ -13,6 +13,7 @@ import SwiftJWT
 final class FirebaseAuthManager {
     static let shared = FirebaseAuthManager()
     let auth = Auth.auth()
+    let disposeBag = DisposeBag()
 
     var currentUser: User? {
         return auth.currentUser
@@ -87,12 +88,11 @@ final class FirebaseAuthManager {
     func refreshToken() -> Observable<String> {
         return Observable.create { emitter in
             guard let authorizationCode = UserDefaultsManager<String>.loadData(key: .authorizationCode),
-                  let url = URL(string: "https://appleid.apple.com/auth/token"),
                   let clientSecret = self.clientSecret() else {
                 emitter.onError(NetworkError.refreshTokenError)
                 return Disposables.create()
             }
-            let header: [String: String] = [
+            let headerFields: [String: String] = [
                 "Content-Type": "application/x-www-form-urlencoded",
             ]
             var requestBodyComponents = URLComponents()
@@ -102,26 +102,24 @@ final class FirebaseAuthManager {
                 URLQueryItem(name: "client_secret", value: clientSecret),
                 URLQueryItem(name: "grant_type", value: "authorization_code"),
             ]
-            var request = URLRequest(url: url)
-            request.httpMethod = "POST"
-            request.allHTTPHeaderFields = header
-            request.httpBody = requestBodyComponents.query?.data(using: .utf8)
+            var aaRequest = AppleAccountRequest(endPoint: .auth,
+                                                pathComponents: ["token"],
+                                                queryParameters: [],
+                                                headerFields: headerFields,
+                                                httpMethod: .post,
+                                                requestBodyComponents: requestBodyComponents)
 
-            URLSession.shared.dataTask(with: request) { data, _, _ in
-                guard let data = data else {
-                    print(NetworkError.refreshTokenError.errorDescription)
-                    emitter.onError(NetworkError.refreshTokenError)
-                    return
+            AppleAccountService.shared.execute(aaRequest, expecting: RefreshTokenResponse.self).subscribe(
+                onNext: { refreshTokenResponse in
+                    if let refreshToken = refreshTokenResponse.refreshToken {
+                        emitter.onNext(refreshToken)
+                        emitter.onCompleted()
+                    }
+                },
+                onError: { error in
+                    emitter.onError(error)
                 }
-                guard let refreshTokenResponse = try? JSONDecoder().decode(RefreshTokenResponse.self, from: data),
-                      let refreshToken = refreshTokenResponse.refreshToken else {
-                    print(NetworkError.decodingError.errorDescription)
-                    emitter.onError(NetworkError.refreshTokenError)
-                    return
-                }
-                emitter.onNext(refreshToken)
-                emitter.onCompleted()
-            }.resume()
+            ).disposed(by: self.disposeBag)
 
             return Disposables.create()
         }
