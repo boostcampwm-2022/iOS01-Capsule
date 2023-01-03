@@ -47,8 +47,8 @@
 		0DB746AE292DF8F6005FF249 /* Capsule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB746AD292DF8F6005FF249 /* Capsule.swift */; };
 		0DB746B4292E268A005FF249 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB746B3292E268A005FF249 /* Date+.swift */; };
 		0DB88C712935E83600107DC3 /* AppDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB88C702935E83600107DC3 /* AppDataManager.swift */; };
-		0DC27FA0294B5F240019FD71 /* LockImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC27F9F294B5F240019FD71 /* LockImageView.swift */; };
 		0DBD20A629519E3500C74F4F /* KingReceiver in Frameworks */ = {isa = PBXBuildFile; productRef = 0DBD20A529519E3500C74F4F /* KingReceiver */; };
+		0DC27FA0294B5F240019FD71 /* LockImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC27F9F294B5F240019FD71 /* LockImageView.swift */; };
 		0DCB22932924CE58002CB095 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCB22922924CE58002CB095 /* CustomTabBarController.swift */; };
 		0DCEED2D29320B28006EB2B4 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCEED2C29320B28006EB2B4 /* UILabel+.swift */; };
 		0DCEED2F29320EAB006EB2B4 /* CustomCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCEED2E29320EAB006EB2B4 /* CustomCodable.swift */; };
@@ -149,6 +149,8 @@
 		28C8C980292DC382005615BB /* SortPolicySelectionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C8C97F292DC382005615BB /* SortPolicySelectionCoordinator.swift */; };
 		28C8C982292DEECD005615BB /* SortPolicyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C8C981292DEECD005615BB /* SortPolicyCell.swift */; };
 		28C8C984292DF4EA005615BB /* SortPolicyHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C8C983292DF4EA005615BB /* SortPolicyHeaderView.swift */; };
+		28C9FAB22964205B00F89367 /* AppleAccountService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C9FAB12964205A00F89367 /* AppleAccountService.swift */; };
+		28C9FAB52964212B00F89367 /* AppleAccountRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C9FAB42964212B00F89367 /* AppleAccountRequest.swift */; };
 		28E68BE0294AB58C009D608E /* SortButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E68BDF294AB58C009D608E /* SortButton.swift */; };
 		4A05D0EC2924C04200A2EF50 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A05D0EB2924C04200A2EF50 /* GoogleService-Info.plist */; };
 		4A05D1052925CF2A00A2EF50 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A05D1042925CF2A00A2EF50 /* NetworkError.swift */; };
@@ -334,6 +336,8 @@
 		28C8C97F292DC382005615BB /* SortPolicySelectionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortPolicySelectionCoordinator.swift; sourceTree = "<group>"; };
 		28C8C981292DEECD005615BB /* SortPolicyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortPolicyCell.swift; sourceTree = "<group>"; };
 		28C8C983292DF4EA005615BB /* SortPolicyHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortPolicyHeaderView.swift; sourceTree = "<group>"; };
+		28C9FAB12964205A00F89367 /* AppleAccountService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleAccountService.swift; sourceTree = "<group>"; };
+		28C9FAB42964212B00F89367 /* AppleAccountRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleAccountRequest.swift; sourceTree = "<group>"; };
 		28E68BDF294AB58C009D608E /* SortButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortButton.swift; sourceTree = "<group>"; };
 		4A05D0EB2924C04200A2EF50 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4A05D1042925CF2A00A2EF50 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
@@ -458,6 +462,7 @@
 				0D4C11352927489200B1C2B6 /* Preview */,
 				0D9D672F292493F00038F529 /* Resources */,
 				288A8E9429235989000229D2 /* Scene */,
+				28C9FAB02964202400F89367 /* Service */,
 			);
 			path = SpaceCapsule;
 			sourceTree = "<group>";
@@ -872,6 +877,22 @@
 			path = SortPolicySelection;
 			sourceTree = "<group>";
 		};
+		28C9FAB02964202400F89367 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				28C9FAB12964205A00F89367 /* AppleAccountService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		28C9FAB32964210600F89367 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				28C9FAB42964212B00F89367 /* AppleAccountRequest.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
 		4A05D1032925CF1800A2EF50 /* Error */ = {
 			isa = PBXGroup;
 			children = (
@@ -910,6 +931,7 @@
 				28A700BA29358F0F0049FAF8 /* GeoPoint.swift */,
 				0DCEED302932101B006EB2B4 /* UserInfo.swift */,
 				2894CBA32947305C00E8F5FE /* Response */,
+				28C9FAB32964210600F89367 /* Request */,
 				2894CB9E29472FEC00E8F5FE /* JWT */,
 			);
 			path = Model;
@@ -1123,6 +1145,7 @@
 				4AF16AE7292B1F8400787C5C /* CustomAnnotationView.swift in Sources */,
 				28C8C980292DC382005615BB /* SortPolicySelectionCoordinator.swift in Sources */,
 				288A8EFB292360A4000229D2 /* CapsuleDetailViewController.swift in Sources */,
+				28C9FAB52964212B00F89367 /* AppleAccountRequest.swift in Sources */,
 				0DCEED2D29320B28006EB2B4 /* UILabel+.swift in Sources */,
 				288A8EF529236086000229D2 /* CapsuleOpenViewModel.swift in Sources */,
 				0DB746AC292DE965005FF249 /* FBStorageError.swift in Sources */,
@@ -1149,6 +1172,7 @@
 				0D46DEFA2923E1180045400A /* UIFont+.swift in Sources */,
 				288A8EBE29235B97000229D2 /* CapsuleListViewModel.swift in Sources */,
 				59D8CFB52935FDAC00FD9CF6 /* CarouselCollectionViewFlowLayout.swift in Sources */,
+				28C9FAB22964205B00F89367 /* AppleAccountService.swift in Sources */,
 				288A8EA929235AFC000229D2 /* NicknameCoordinator.swift in Sources */,
 				288A8EE629235FD5000229D2 /* CapsuleCloseView.swift in Sources */,
 				28E68BE0294AB58C009D608E /* SortButton.swift in Sources */,
@@ -1164,7 +1188,6 @@
 				0DF9D2A5293F1CB3001C05DE /* DetailImageView.swift in Sources */,
 				0DE786E1292BBDEC007EF260 /* DatePickerViewController.swift in Sources */,
 				4A1D1BC12940292A00F47ACB /* CapsuleSettingsViewModel.swift in Sources */,
-				599C1A4C292CC99A00517E93 /* ImageCacheFactory.swift in Sources */,
 				0DC27FA0294B5F240019FD71 /* LockImageView.swift in Sources */,
 				288A8E9B29235A6E000229D2 /* SignInView.swift in Sources */,
 				288A8ED529235C6F000229D2 /* CapsuleCreateViewController.swift in Sources */,
@@ -1215,8 +1238,7 @@
 				28A700D52938AE100049FAF8 /* AnimationResource.swift in Sources */,
 				288A8EE229235E3F000229D2 /* CapsuleLocateViewModel.swift in Sources */,
 				59D8CFBC29360A8900FD9CF6 /* ThumbnailImageView.swift in Sources */,
-				0D752DB32944A964004A704C /* UIImage+resize.swift in Sources */,
-				59D8CFBC29360A8900FD9CF6 /* ThemeThumbnailImageView.swift in Sources */,
+				59D8CFBC29360A8900FD9CF6 /* ThumbnailImageView.swift in Sources */,
 				0D4C11372927489D00B1C2B6 /* UIViewPreview.swift in Sources */,
 				288A8EB229235B5A000229D2 /* ProfileView.swift in Sources */,
 				2894CBA22947303800E8F5FE /* Payload.swift in Sources */,
