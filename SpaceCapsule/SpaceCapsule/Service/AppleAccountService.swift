@@ -36,6 +36,29 @@ final class AppleAccountService {
             return Disposables.create()
         }
     }
+    func execute(_ request: AppleAccountRequest) -> Observable<Void> {
+        return Observable.create { [weak self] emitter in
+            guard let request = self?.request(from: request) else {
+                return Disposables.create()
+            }
+            URLSession.shared.dataTask(with: request) { _, response, _ in
+                guard let response = response as? HTTPURLResponse else {
+                    emitter.onError(NetworkError.revokeTokenError)
+                    return
+                }
+                if response.statusCode == 200 {
+                    emitter.onNext(())
+                    emitter.onCompleted()
+                    return
+                } else {
+                    emitter.onError(NetworkError.revokeTokenError)
+                    return
+                }
+            }.resume()
+
+            return Disposables.create()
+        }
+    }
 
     private func request(from aaRequest: AppleAccountRequest) -> URLRequest? {
         guard let url = aaRequest.url else {

@@ -126,12 +126,13 @@ final class FirebaseAuthManager {
     }
 
     func revokeToken(refreshToken: String) -> Observable<Void> {
-        return Observable.create { [weak self] emitter in
+        return Observable.create { emitter in
             guard let url = URL(string: "https://appleid.apple.com/auth/revoke"),
-                  let clientSecret = self?.clientSecret() else {
+                  let clientSecret = self.clientSecret() else {
                 return Disposables.create()
             }
-            let header: [String: String] = [
+
+            let headerFields: [String: String] = [
                 "Content-Type": "application/x-www-form-urlencoded",
             ]
             var requestBodyComponents = URLComponents()
@@ -141,26 +142,23 @@ final class FirebaseAuthManager {
                 URLQueryItem(name: "client_secret", value: clientSecret),
                 URLQueryItem(name: "token_type_hint", value: "refresh_token"),
             ]
-            var request = URLRequest(url: url)
-            request.httpMethod = "POST"
-            request.allHTTPHeaderFields = header
-            request.httpBody = requestBodyComponents.query?.data(using: .utf8)
+            var aaRequest = AppleAccountRequest(endPoint: .auth,
+                                                pathComponents: ["revoke"],
+                                                queryParameters: [],
+                                                headerFields: headerFields,
+                                                httpMethod: .post,
+                                                requestBodyComponents: requestBodyComponents)
 
-            let task = URLSession.shared.dataTask(with: request) { _, response, _ in
-                guard let response = response as? HTTPURLResponse else {
-                    emitter.onError(NetworkError.revokeTokenError)
-                    return
-                }
-                if response.statusCode == 200 {
+            AppleAccountService.shared.execute(aaRequest).subscribe(
+                onNext: { _ in
                     emitter.onNext(())
                     emitter.onCompleted()
-                    return
-                } else {
-                    emitter.onError(NetworkError.revokeTokenError)
-                    return
+                },
+                onError: { error in
+                    emitter.onError(error)
                 }
-            }
-            task.resume()
+            ).disposed(by: self.disposeBag)
+
             return Disposables.create()
         }
     }
