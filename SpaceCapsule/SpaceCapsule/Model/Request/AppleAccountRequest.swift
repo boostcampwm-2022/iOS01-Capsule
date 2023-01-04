@@ -24,7 +24,7 @@ enum AppleAccountEndPoint: String {
     }
 }
 
-final class AppleAccountRequest {
+struct AppleAccountRequest {
     private struct Constant {
         static let baseURL: String = "https://appleid.apple.com"
     }
