@@ -17,7 +17,7 @@
 		0D6CA337292216A300E02393 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D6CA336292216A300E02393 /* SceneDelegate.swift */; };
 		0D6CA33E292216A400E02393 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D6CA33D292216A400E02393 /* Assets.xcassets */; };
 		0D6CA341292216A400E02393 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D6CA33F292216A400E02393 /* LaunchScreen.storyboard */; };
-		0D6CA34C292216A400E02393 /* SpaceCapsuleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D6CA34B292216A400E02393 /* SpaceCapsuleTests.swift */; };
+		0D6CA34C292216A400E02393 /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D6CA34B292216A400E02393 /* BaseTestCase.swift */; };
 		0D6CA356292216A400E02393 /* SpaceCapsuleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D6CA355292216A400E02393 /* SpaceCapsuleUITests.swift */; };
 		0D6CA358292216A400E02393 /* SpaceCapsuleUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D6CA357292216A400E02393 /* SpaceCapsuleUITestsLaunchTests.swift */; };
 		0D6CA366292218EB00E02393 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 0D6CA365292218EB00E02393 /* RxCocoa */; };
@@ -27,6 +27,9 @@
 		0D706139292C63140077787E /* DatePickerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D706138292C63140077787E /* DatePickerCoordinator.swift */; };
 		0D70613E292CD24D0077787E /* FirebaseStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D70613D292CD24D0077787E /* FirebaseStorageManager.swift */; };
 		0D77D7C9292B5D490038D054 /* SelectButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D77D7C8292B5D490038D054 /* SelectButton.swift */; };
+		0D8D2D22296BFC9800DF713E /* RxTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8D2D21296BFC9800DF713E /* RxTestCase.swift */; };
+		0D8D2D25296BFD5F00DF713E /* RxTest in Frameworks */ = {isa = PBXBuildFile; productRef = 0D8D2D24296BFD5F00DF713E /* RxTest */; };
+		0D8D2D27296C2F8A00DF713E /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 0D8D2D26296C2F8A00DF713E /* RxCocoa */; };
 		0D90DAEF29238B77000DCC84 /* CapsuleLocateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D90DAEE29238B77000DCC84 /* CapsuleLocateView.swift */; };
 		0D90DAF129238B85000DCC84 /* CapsuleLocateCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D90DAF029238B85000DCC84 /* CapsuleLocateCoordinator.swift */; };
 		0D90DAF329238B90000DCC84 /* CapsuleCloseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D90DAF229238B90000DCC84 /* CapsuleCloseCoordinator.swift */; };
@@ -210,13 +213,14 @@
 		0D6CA33D292216A400E02393 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0D6CA340292216A400E02393 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0D6CA342292216A400E02393 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0D6CA34B292216A400E02393 /* SpaceCapsuleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceCapsuleTests.swift; sourceTree = "<group>"; };
+		0D6CA34B292216A400E02393 /* BaseTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTestCase.swift; sourceTree = "<group>"; };
 		0D6CA355292216A400E02393 /* SpaceCapsuleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceCapsuleUITests.swift; sourceTree = "<group>"; };
 		0D6CA357292216A400E02393 /* SpaceCapsuleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceCapsuleUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		0D706136292C630D0077787E /* DatePickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewModel.swift; sourceTree = "<group>"; };
 		0D706138292C63140077787E /* DatePickerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerCoordinator.swift; sourceTree = "<group>"; };
 		0D70613D292CD24D0077787E /* FirebaseStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorageManager.swift; sourceTree = "<group>"; };
 		0D77D7C8292B5D490038D054 /* SelectButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectButton.swift; sourceTree = "<group>"; };
+		0D8D2D21296BFC9800DF713E /* RxTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxTestCase.swift; sourceTree = "<group>"; };
 		0D90DAEE29238B77000DCC84 /* CapsuleLocateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleLocateView.swift; sourceTree = "<group>"; };
 		0D90DAF029238B85000DCC84 /* CapsuleLocateCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleLocateCoordinator.swift; sourceTree = "<group>"; };
 		0D90DAF229238B90000DCC84 /* CapsuleCloseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleCloseCoordinator.swift; sourceTree = "<group>"; };
@@ -389,6 +393,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D8D2D27296C2F8A00DF713E /* RxCocoa in Frameworks */,
+				0D8D2D25296BFD5F00DF713E /* RxTest in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,6 +444,7 @@
 				0DA72BDF2939F7D700DF6E69 /* SpaceCapsule.app */,
 				0DA72BE02939F7D700DF6E69 /* SpaceCapsuleTests.xctest */,
 				0DA72BE12939F7D700DF6E69 /* SpaceCapsuleUITests.xctest */,
+				0D8D2D23296BFD5F00DF713E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -470,7 +477,8 @@
 		0D6CA34A292216A400E02393 /* SpaceCapsuleTests */ = {
 			isa = PBXGroup;
 			children = (
-				0D6CA34B292216A400E02393 /* SpaceCapsuleTests.swift */,
+				0D6CA34B292216A400E02393 /* BaseTestCase.swift */,
+				0D8D2D21296BFC9800DF713E /* RxTestCase.swift */,
 			);
 			path = SpaceCapsuleTests;
 			sourceTree = "<group>";
@@ -503,6 +511,13 @@
 				0D70613D292CD24D0077787E /* FirebaseStorageManager.swift */,
 			);
 			path = Firebase;
+			sourceTree = "<group>";
+		};
+		0D8D2D23296BFD5F00DF713E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		0D90DAF5292397BF000DCC84 /* Extensions */ = {
@@ -1006,6 +1021,10 @@
 				0D6CA349292216A400E02393 /* PBXTargetDependency */,
 			);
 			name = SpaceCapsuleTests;
+			packageProductDependencies = (
+				0D8D2D24296BFD5F00DF713E /* RxTest */,
+				0D8D2D26296C2F8A00DF713E /* RxCocoa */,
+			);
 			productName = SpaceCapsuleTests;
 			productReference = 0DA72BE02939F7D700DF6E69 /* SpaceCapsuleTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -1295,7 +1314,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0D6CA34C292216A400E02393 /* SpaceCapsuleTests.swift in Sources */,
+				0D6CA34C292216A400E02393 /* BaseTestCase.swift in Sources */,
+				0D8D2D22296BFC9800DF713E /* RxTestCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1702,6 +1722,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0D6CA3692922197D00E02393 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		0D8D2D24296BFD5F00DF713E /* RxTest */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0D6CA364292218EB00E02393 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxTest;
+		};
+		0D8D2D26296C2F8A00DF713E /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0D6CA364292218EB00E02393 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
 		};
 		0DBD20A529519E3500C74F4F /* KingReceiver */ = {
 			isa = XCSwiftPackageProductDependency;
