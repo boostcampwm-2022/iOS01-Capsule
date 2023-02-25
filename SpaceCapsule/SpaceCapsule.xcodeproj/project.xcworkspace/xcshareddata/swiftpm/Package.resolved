@@ -102,10 +102,10 @@
     {
       "identity" : "kingreceiver",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/trumanfromkorea/KingReceiver.git",
+      "location" : "https://github.com/trumanfromkorea/KingReceiver",
       "state" : {
-        "branch" : "main",
-        "revision" : "fc840dec1f236230177e639e056b5dd8e166fa2b"
+        "branch" : "versionTest",
+        "revision" : "013bf5c4fb0791d16ff9dace09ef3428797a9210"
       }
     },
     {

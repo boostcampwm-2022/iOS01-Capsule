@@ -47,7 +47,6 @@
 		0DB746AE292DF8F6005FF249 /* Capsule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB746AD292DF8F6005FF249 /* Capsule.swift */; };
 		0DB746B4292E268A005FF249 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB746B3292E268A005FF249 /* Date+.swift */; };
 		0DB88C712935E83600107DC3 /* AppDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB88C702935E83600107DC3 /* AppDataManager.swift */; };
-		0DBD20A629519E3500C74F4F /* KingReceiver in Frameworks */ = {isa = PBXBuildFile; productRef = 0DBD20A529519E3500C74F4F /* KingReceiver */; };
 		0DC27FA0294B5F240019FD71 /* LockImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC27F9F294B5F240019FD71 /* LockImageView.swift */; };
 		0DCB22932924CE58002CB095 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCB22922924CE58002CB095 /* CustomTabBarController.swift */; };
 		0DCEED2D29320B28006EB2B4 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCEED2C29320B28006EB2B4 /* UILabel+.swift */; };
@@ -161,6 +160,7 @@
 		4A1D1BC62941F3C500F47ACB /* BlurEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1D1BC52941F3C500F47ACB /* BlurEffectView.swift */; };
 		4A1FEFF8292F1F1200A935BB /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1FEFF7292F1F1200A935BB /* CustomAnnotation.swift */; };
 		4A2449D129360669000EE58C /* DetailImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2449D029360669000EE58C /* DetailImageCell.swift */; };
+		4A330BCC29A9E6C800D34D55 /* KingReceiver in Frameworks */ = {isa = PBXBuildFile; productRef = 4A330BCB29A9E6C800D34D55 /* KingReceiver */; };
 		4A9E9147292A2A5A00B7CC5C /* CLLocationManager+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E9146292A2A5A00B7CC5C /* CLLocationManager+Rx.swift */; };
 		4A9E9149292A383900B7CC5C /* MKMapView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9E9148292A383900B7CC5C /* MKMapView+Rx.swift */; };
 		4AA4C5B32947383900171D0D /* CapsuleCellItemNeedable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA4C5B22947383900171D0D /* CapsuleCellItemNeedable.swift */; };
@@ -376,7 +376,7 @@
 				0D6CA368292218EB00E02393 /* RxSwift in Frameworks */,
 				28419EA12941BD6400266AB6 /* FirebaseMessaging in Frameworks */,
 				0D6CA366292218EB00E02393 /* RxCocoa in Frameworks */,
-				0DBD20A629519E3500C74F4F /* KingReceiver in Frameworks */,
+				4A330BCC29A9E6C800D34D55 /* KingReceiver in Frameworks */,
 				28419E9D2941BD6400266AB6 /* FirebaseFirestore in Frameworks */,
 				28419EA32941BD6400266AB6 /* FirebaseStorage in Frameworks */,
 				28419E9B2941BD6400266AB6 /* FirebaseAuth in Frameworks */,
@@ -986,7 +986,7 @@
 				28419EA02941BD6400266AB6 /* FirebaseMessaging */,
 				28419EA22941BD6400266AB6 /* FirebaseStorage */,
 				28419EAD2944F59000266AB6 /* SwiftJWT */,
-				0DBD20A529519E3500C74F4F /* KingReceiver */,
+				4A330BCB29A9E6C800D34D55 /* KingReceiver */,
 			);
 			productName = SpaceCapsule;
 			productReference = 0DA72BDF2939F7D700DF6E69 /* SpaceCapsule.app */;
@@ -1065,7 +1065,7 @@
 				0D6CA3692922197D00E02393 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				28419E992941BD6400266AB6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				28419EAC2944F58F00266AB6 /* XCRemoteSwiftPackageReference "Swift-JWT" */,
-				0DBD20A429519E3400C74F4F /* XCRemoteSwiftPackageReference "KingReceiver" */,
+				4A330BCA29A9E6C800D34D55 /* XCRemoteSwiftPackageReference "KingReceiver" */,
 			);
 			productRefGroup = 0D6CA328292216A300E02393;
 			projectDirPath = "";
@@ -1385,7 +1385,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1439,7 +1439,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1661,14 +1661,6 @@
 				minimumVersion = 5.0.0;
 			};
 		};
-		0DBD20A429519E3400C74F4F /* XCRemoteSwiftPackageReference "KingReceiver" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/trumanfromkorea/KingReceiver.git";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 		28419E992941BD6400266AB6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -1683,6 +1675,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 4.0.0;
+			};
+		};
+		4A330BCA29A9E6C800D34D55 /* XCRemoteSwiftPackageReference "KingReceiver" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/trumanfromkorea/KingReceiver";
+			requirement = {
+				branch = versionTest;
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -1702,11 +1702,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0D6CA3692922197D00E02393 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
-		};
-		0DBD20A529519E3500C74F4F /* KingReceiver */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0DBD20A429519E3400C74F4F /* XCRemoteSwiftPackageReference "KingReceiver" */;
-			productName = KingReceiver;
 		};
 		28419E9A2941BD6400266AB6 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -1737,6 +1732,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 28419EAC2944F58F00266AB6 /* XCRemoteSwiftPackageReference "Swift-JWT" */;
 			productName = SwiftJWT;
+		};
+		4A330BCB29A9E6C800D34D55 /* KingReceiver */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4A330BCA29A9E6C800D34D55 /* XCRemoteSwiftPackageReference "KingReceiver" */;
+			productName = KingReceiver;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
