@@ -143,19 +143,19 @@ final class CapsuleDetailViewModel: BaseViewModel {
     }
 
     private func drawAnnotation(with center: CLLocationCoordinate2D, on snapshot: MKMapSnapshotter.Snapshot) -> UIImage? {
-        UIGraphicsBeginImageContextWithOptions(snapshot.image.size, true, snapshot.image.scale)
-        snapshot.image.draw(at: .zero)
-
-        let point = snapshot.point(for: center)
-        let annotation = CustomAnnotation(uuid: nil, memoryDate: nil, latitude: center.latitude, longitude: center.longitude)
-        annotation.isOpenable = true
-        let annotationView = CustomAnnotationView(annotation: annotation, reuseIdentifier: "annotationView")
-        let rect = CGRect(x: point.x - (annotationView.bounds.width / 2),
-                          y: point.y - (annotationView.bounds.height / 2),
-                          width: annotationView.bounds.width,
-                          height: annotationView.bounds.height)
-
-        annotationView.drawHierarchy(in: rect, afterScreenUpdates: true)
-        return UIGraphicsGetImageFromCurrentImageContext()
+        
+        return UIGraphicsImageRenderer(size: snapshot.image.size).image { _ in
+            snapshot.image.draw(at: .zero)
+            let point = snapshot.point(for: center)
+            let annotation = CustomAnnotation(uuid: nil, memoryDate: nil, latitude: center.latitude, longitude: center.longitude)
+            annotation.isOpenable = true
+            let annotationView = CustomAnnotationView(annotation: annotation, reuseIdentifier: "annotationView")
+            let rect = CGRect(x: point.x - (annotationView.bounds.width / 2),
+                              y: point.y - (annotationView.bounds.height / 2),
+                              width: annotationView.bounds.width,
+                              height: annotationView.bounds.height)
+            
+            annotationView.drawHierarchy(in: rect, afterScreenUpdates: true)
+        }
     }
 }

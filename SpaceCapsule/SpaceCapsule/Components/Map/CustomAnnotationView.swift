@@ -50,7 +50,6 @@ final class CustomAnnotationView: MKAnnotationView {
         let ratio = newWidth / pinImage.size.width
         let newHeight = pinImage.size.height * ratio
         let size = CGSize(width: newWidth, height: newHeight)
-
         image = UIImage.resize(data: imageData, to: size, scale: FrameResource.openableImageScale)
     }
 }
