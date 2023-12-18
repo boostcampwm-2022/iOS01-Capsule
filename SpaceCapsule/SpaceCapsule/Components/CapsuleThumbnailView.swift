@@ -74,7 +74,7 @@ class CapsuleThumbnailView: UIView {
     }
 
     func makeConstraints() {
-        thumbnailImageView.snp.makeConstraints {
+        thumbnailImageView.snp.remakeConstraints {
             $0.centerX.equalToSuperview()
             $0.centerY.equalToSuperview().multipliedBy(AnimationResource.fromOriginY)
             $0.width.equalTo(UIScreen.main.bounds.width * FrameResource.capsuleThumbnailWidthRatio)

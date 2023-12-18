@@ -17,6 +17,7 @@ final class CapsuleOpenViewController: UIViewController, BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view = capsuleOpenView
+        
         if let item = viewModel?.capsuleCellItem {
             capsuleOpenView.configure(
                 item: CapsuleThumbnailView.Item(

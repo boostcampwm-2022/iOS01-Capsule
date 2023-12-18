@@ -27,9 +27,6 @@ final class CapsuleOpenView: CapsuleThumbnailView, BaseView, UnOpenable {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configure()
-        addSubViews()
-        makeConstraints()
     }
 
     @available(*, unavailable)

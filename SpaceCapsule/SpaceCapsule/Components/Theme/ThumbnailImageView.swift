@@ -28,7 +28,6 @@ final class ThumbnailImageView: UIView {
 
     init(frame: CGRect, width: CGFloat) {
         self.width = width
-        print(width)
         super.init(frame: frame)
         configure()
         addSubViews()
